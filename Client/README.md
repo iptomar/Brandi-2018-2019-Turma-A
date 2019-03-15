@@ -16,8 +16,7 @@ Executar o seguinte comando, na diretoria da pasta Client:
   Representa o formulário de registo
   
   ## AlertMsg
-  Representa uma mensagem informativa ao utilizador
-  Para definição deste componente, existem os seguintes states anexos ao componente:
+  Representa uma mensagem informativa ao utilizador. Para definição deste componente, existem os seguintes states anexos:
   
   alertText: Representa a mensagem a apresentar ao utilizador
     

@@ -1,3 +1,4 @@
 # my_brandi-a
-# npm install ;para instalar os modulos
-# npm run dev ;para iniciar front end e back end servers
+# 1-Entrar na pasta "code" pela cmd
+# 2- npm install - para instalar os módulos
+# 3- node server.js - para iniciar o servidor

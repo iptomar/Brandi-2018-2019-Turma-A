@@ -80,7 +80,6 @@ class Login extends Component {
             <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor}/>
             <button type="submit" className="btn btn-primary">Entrar</button>
           </form>
-          <div className="feedback alert" />
         </div>
       </div>
     );

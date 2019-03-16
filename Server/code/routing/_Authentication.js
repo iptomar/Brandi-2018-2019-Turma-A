@@ -63,6 +63,7 @@ exports.postRegistration = async function(bd, dados) {
   //sucesso
   else if (resposta_bd.stat === 0) {
     mensagem.resposta = "UserRegisted";
+    mensagem.stat=0;
   }
   //ocorreu um erro com a base de dados
   else {

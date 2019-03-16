@@ -1,12 +1,12 @@
 # my_brandi-a
-# 1-Entrar na pasta "code" pela cmd
-# 2- npm install - para instalar os módulos
-# 3- node server.js - para iniciar o servidor
+## 1-Entrar na pasta "code" pela cmd
+## 2- npm install - para instalar os módulos
+## 3- node server.js - para iniciar o servidor
 # Webservices da api
-# GET /api/index
-# recebe:
+## GET /api/index
+### **recebe:**
  -nada
-# devolve: 
+### **devolve:** 
 se com sucesso http code 200
 {
   "status": "Authenticated"
@@ -21,10 +21,10 @@ se sem sucesso
   "status":"NotAuthenticated"
   "response":{}
 }
-# POST /auth/register
-# recebe :
+## POST /auth/register
+### **recebe:**
 -login , -password, -email
-# devolve:
+### **devolve:**
 se com sucesso HTTP CODE 201
 {
   "status":"Registed"
@@ -40,10 +40,10 @@ se não houver conexão com a base de dados devolver HTTP CODE 500
   "status":"DatabaseError" -a alterar
   "response":{}
 }
-# POST /auth/login
-# recebe :
+## POST /auth/login
+### **recebe:**
 - login , -password
-# devolve :
+### **devolve:**
 se com sucesso HTTP CODE 200
 {
   STATUS: "authenticated"

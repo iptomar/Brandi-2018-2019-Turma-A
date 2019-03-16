@@ -6,7 +6,7 @@ const Joi = require("joi");
  * Rota do Index
  */
 exports.indexRoute = async (app, _bd) => {
-  app.get("/api/index", async (req, res) => {
+  app.get("/api/index", async (req, resp) => {
     //HTTP CODE OK
     let code = 200;
     //procurar se existe token no cabeçalho do broswer
@@ -18,7 +18,7 @@ exports.indexRoute = async (app, _bd) => {
       try {
         //verificar se o token não foi alterado
         const decode = jwt.verify(token, "ABCD");
-        server_response.status = "TokenValid";
+        server_response.status = "Authenticated";
         //dados publicos do utilizador
         server_response.response = decode;
       } catch (error) {

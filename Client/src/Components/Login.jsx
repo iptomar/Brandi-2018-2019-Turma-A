@@ -41,16 +41,16 @@ class Login extends Component {
     });
     //Aguardar API
     await response.json().then( resp =>{
-      let stat = resp.stat;
-      switch(stat) {
-        case 0:
+      let status = resp.status;
+      switch(status) {
+        case "Authenticated":
         this.setState({
           alertText: "Autenticado com sucesso",
           alertisNotVisible: false,
           alertColor: 'primary'
         });
           break;
-        case 1:
+        case "NotAutheticated":
           this.setState({
             alertText: "Utilizador ou palavra-passe erradas",
             alertisNotVisible: false,

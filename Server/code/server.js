@@ -9,7 +9,7 @@ const rooter = require("./routing/Router");
 let bd = new _basedeDados.BasedeDados(
   "localhost",
   "root",
-  "123qwe.",
+  "root",
   "5",
   "brandi_a"
 );

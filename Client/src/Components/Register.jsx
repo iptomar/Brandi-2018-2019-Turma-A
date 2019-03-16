@@ -13,7 +13,10 @@ class Register extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-    if (document.getElementById("pass").value !== document.getElementById("passConfirmer").value) {
+    if (
+      document.getElementById("pass").value !==
+      document.getElementById("passConfirmer").value
+    ) {
       this.setState({
         alertText: "As palavras-passe não são iguais",
         alertisNotVisible: false,
@@ -50,21 +53,27 @@ class Register extends Component {
     });
     //Aguardar API
     await response.json().then(resp => {
-      console.log(resp);
-      let stat = resp.stat;
-      switch (stat) {
-        case 0:
+      let status = resp.status;
+      switch (status) {
+        case "Registed":
           this.setState({
             alertText: "Registado com sucesso",
             alertisNotVisible: false,
             alertColor: "success"
           });
           break;
-        case 1:
+        case "FieldError":
           this.setState({
-            alertText: "Erro",
+            alertText: "Utilizador já registado",
             alertisNotVisible: false,
             alertColor: "warning"
+          });
+          break;
+        case "DatabaseError":
+          this.setState({
+            alertText: "De momento não é possível realizar esta ação. Tente novamente mais tade",
+            alertisNotVisible: false,
+            alertColor: "danger"
           });
           break;
         default:

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import Header from './Header';
-import Register from './Register';
-import Footer from './Footer';
+import Header from '../Components/Header';
+import Register from '../Components/Register';
+import Footer from '../Components/Footer';
 
 class RegisterPage extends Component {
     render() {

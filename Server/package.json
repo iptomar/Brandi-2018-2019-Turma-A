@@ -10,9 +10,9 @@
     "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",
     "express": "^4.16.2",
-    "express-session": "^1.15.6",
     "joi": "^14.3.1",
-    "mariadb": "^2.0.3",
+    "jsonwebtoken": "^8.5.0",
+    "mysql": "^2.16.0",
     "nodemon": "^1.18.10"
   },
   "devDependencies": {

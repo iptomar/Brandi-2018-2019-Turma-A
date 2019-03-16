@@ -4,8 +4,8 @@ import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-import RegisterPage from './Components/RegisterPage';
-import LoginPage from './Components/LoginPage';
+import RegisterPage from './MasterComponents/RegisterPage';
+import LoginPage from './MasterComponents/LoginPage';
 
 ReactDOM.render(
     <BrowserRouter>

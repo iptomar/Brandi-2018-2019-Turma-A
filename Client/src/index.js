@@ -6,12 +6,14 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import RegisterPage from './MasterComponents/RegisterPage';
 import LoginPage from './MasterComponents/LoginPage';
+import CreateFichaTecnica from './MasterComponents/CreateFichaTecnica';
 
 ReactDOM.render(
     <BrowserRouter>
         <Switch>
             <Route path="/" exact={true} component={LoginPage} />
             <Route path="/registar" component={RegisterPage} />
+            <Route path="/fichaTecnica/criar" component={CreateFichaTecnica}/>
         </Switch>
     </ BrowserRouter>
     , document.getElementById('root')

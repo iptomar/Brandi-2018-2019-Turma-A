@@ -127,3 +127,87 @@ exports.registerRoute = async (app, bd) => {
     resp.status(code).json(server_response);
   });
 };
+
+/**
+ * Rota de todas as fichas técnicas
+ */
+exports.listarFichasTecnicasRoute = async (app, bd) => {
+  app.get("/api/fichastecnicas", async (req, resp) => {
+    //HTTP CODE OK
+    let code = 200;
+    //procurar se existe token no cabeçalho do broswer
+    let token = req.header("x-auth-token");
+    //resposta do servidor
+    let server_response = { status: "NotAutheticated", response: {} }; //mensagem de resposta para o cliente
+    //se existe token
+    if (token) {
+      try {
+        //verificar se o token não foi alterado
+        const decode = jwt.verify(token, "ABCD");
+        server_response.status = "Authenticated";
+        let resposta_bd = await bd.query("Select * from tbl_fichas");
+        //lista das fichas
+        server_response.response = resposta_bd;
+      } catch (error) {
+        server_response.status = "NotAuthenticated";
+      }
+    }
+    resp.status(code).json(server_response);
+  });
+};
+
+//Rota para criar fichas tecnicas
+exports.inserirFichasTecnicasRoute = async (app, bd) => {
+  app.post("/api/fichastecnicas/create", async (req, resp) => {
+    //http code ok
+    let code = 200;
+    //resposta do servidor
+    let server_response = { status: "NotRegisted", response: {} };
+    //criar um utilizador
+    let fichaTecnica = {
+      nome: req.body.nome,
+      numero: req.body.numero,
+      texto: req.body.texto,
+      cena: req.body.cena
+    };
+
+    //verificar se os campos login email e password estão preenchidos
+    if (
+      fichaTecnica.nome &&
+      fichaTecnica.numero &&
+      fichaTecnica.texto &&
+      fichaTecnica.cena
+    ) {
+      //registar na base de dados
+      let inserirFicha = await bd.query(
+        "Insert into tbl_fichas( nome, numero, texto, cena) VALUES(?,?,?,?)",
+        [
+          fichaTecnica.nome,
+          fichaTecnica.numero,
+          fichaTecnica.texto,
+          fichaTecnica.cena
+        ]
+      );
+      //se não houve problema a registar utilizador na base de dados
+      if (inserirFicha.stat === 0) {
+        //created http code CREATED
+        code = 201;
+        server_response.status = "Ficha inserida";
+        server_response.response = inserirFicha.resposta;
+      }
+      //campos duplicados
+      else if (inserirFicha.stat === 2) {
+        //http bad request
+        code = 400;
+        server_response.status = "FieldError";
+        server_response.response = inserirFicha;
+      } else {
+        // internal server error
+        code = 500;
+        //ocorreu um erro ao registar utilizador na base de dados
+        server_response.status = "DatabaseError";
+      }
+    }
+    resp.status(code).json(server_response);
+  });
+};

@@ -17,11 +17,16 @@ class Create extends Component {
 
     //Objeto data
     const data = {
-      // CAMPOS
+      nome: document.getElementById('dobjeto').value,
+      numero:  document.getElementById('nprocLCRM').value,
+      texto: document.getElementById('coordenacao').value,
+      cena: document.getElementById('coordenacao').value
     };
 
+    console.log(JSON.stringify(data));
+
     //Enviar pedidos
-    const response = await fetch("/fichaTecnica/create", {
+    const response = await fetch("/api/fichastecnicas/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -32,20 +37,20 @@ class Create extends Component {
     await response.json().then(resp => {
       let status = resp.status;
       switch (status) {
-        case "Success":
+        case "DatabaseError":
           this.setState({
-            alertText: "Criado com sucesso",
+            alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
             alertisNotVisible: false,
-            alertColor: "primary"
+            alertColor: "danger"
           });
           break;
-        // case "INSUCESS":
-        //   this.setState({
-        //     alertText: "Utilizador ou palavra-passe erradas",
-        //     alertisNotVisible: false,
-        //     alertColor: 'danger'
-        //   });
-        //   break;
+        case "Ficha inserida":
+          this.setState({
+            alertText: "Ficha inserida",
+               alertisNotVisible: false,
+             alertColor: 'success'
+         });
+         break;
         default:
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
       }
@@ -62,14 +67,14 @@ class Create extends Component {
     return (
         <div className="Inicio container">
             <p className="h4">Ficha Técnica</p>
-            <form>
+            <form className="py-3" onSubmit={this.handleSubmit}>
                 <div className="form-group row">
                     <label className="col-form-label col-md-2">Descrição do objeto:</label>
-                    <input type="text" id="dobjeto" className="form-control col-md-10" placeholder="Descrição do objeto"/>
+                    <input type="text" id="dobjeto" className="form-control col-md-10" placeholder="Descrição do objeto" required/>
                 </div>
                 <div className="form-group row">
                     <label className="col-form-label col-md-2">Processo LCRM N.º:</label>
-                    <input type="number" id="nprocLCRM" className="form-control col-md-1" placeholder="N.º"/>
+                    <input type="number" id="nprocLCRM" className="form-control col-md-1" placeholder="N.º" required/>
                     <label className="col-form-label col-md">Data de entrada:</label>
                     <input type="date" id="dataprocLCRM" className="form-control col"/>
                     <label className="col-form-label col-md-3">Data de abertura de processo:</label>
@@ -85,7 +90,7 @@ class Create extends Component {
                 </div>
                 <div className="form-group row">
                   <label className="col-form-label col-md-4">Coordenação/Direção Técnica da Intervenção:</label>
-                  <input type="text" id="coordenacao" className="form-control col-md-8" placeholder="Coordenador/Diretor técnico"/>
+                  <input type="text" id="coordenacao" className="form-control col-md-8" placeholder="Coordenador/Diretor técnico" required/>
                 </div>
                 <div className="form-group">
                   <label className="h5 ">Registo fotográfico identificativo do objeto</label>

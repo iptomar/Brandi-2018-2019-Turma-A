@@ -8,6 +8,8 @@ import RegisterPage from './MasterComponents/RegisterPage';
 import LoginPage from './MasterComponents/LoginPage';
 import CreateFichaTecnica from './MasterComponents/CreateFichaTecnica';
 import ReadFichaTecnica from './MasterComponents/ReadFichaTecnica';
+import IndexFichaTecnica from './MasterComponents/IndexFichaTecnica';
+
 
 ReactDOM.render(
     <BrowserRouter>
@@ -16,6 +18,7 @@ ReactDOM.render(
             <Route path="/registar" component={RegisterPage} />
             <Route path="/fichaTecnica/criar" component={CreateFichaTecnica}/>
             <Route path="/fichaTecnica/ler" component={ReadFichaTecnica}/>
+            <Route path="/fichaTecnica" component={IndexFichaTecnica}/>
         </Switch>
     </ BrowserRouter>
     , document.getElementById('root')

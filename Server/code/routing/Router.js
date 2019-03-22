@@ -160,7 +160,7 @@ exports.listarFichasTecnicasRoute = async (app, bd) => {
 };
 
 exports.listarFichasTecnicasPorIdRoute = async (app, bd) => {
-  app.get("/api/fichastecnicas/detalhes/:fichaID", async (req, resp) => {
+  app.get("/api/fichastecnicas/:fichaID", async (req, resp) => {
     //HTTP CODE OK
     let code = 200;
     //procurar se existe token no cabeçalho do broswer
@@ -191,7 +191,7 @@ exports.listarFichasTecnicasPorIdRoute = async (app, bd) => {
 };
 //rota para editar ficha
 exports.editFichaTecnicaRoute = async (app, bd) => {
-  app.post("/api/fichastecnicas/:id", async (req, resp) => {
+  app.post("/api/fichastecnicas/:id/edit", async (req, resp) => {
     //http code accepted
     let code = 202;
     let server_response = { status: "NotRegisted", response: {} };

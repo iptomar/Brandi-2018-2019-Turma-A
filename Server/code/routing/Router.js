@@ -1,4 +1,5 @@
 const _authentication = require("./_Authentication.js");
+const _fichasTecnicas = require("./_fichasTecnicas.js");
 const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 
@@ -145,9 +146,42 @@ exports.listarFichasTecnicasRoute = async (app, bd) => {
         //verificar se o token não foi alterado
         const decode = jwt.verify(token, "ABCD");
         server_response.status = "Authenticated";
-        let resposta_bd = await bd.query("Select * from tbl_fichas");
+
+        let resultado = await _fichasTecnicas.listarFichas(bd);
+
         //lista das fichas
-        server_response.response = resposta_bd;
+        server_response.response = resultado;
+      } catch (error) {
+        server_response.status = "NotAuthenticated";
+      }
+    }
+    resp.status(code).json(server_response);
+  });
+};
+
+exports.listarFichasTecnicasPorIdRoute = async (app, bd) => {
+  app.get("/api/fichastecnicas/detalhes/:fichaID", async (req, resp) => {
+    //HTTP CODE OK
+    let code = 200;
+    //procurar se existe token no cabeçalho do broswer
+    let token = req.header("x-auth-token");
+    //resposta do servidor
+    let server_response = { status: "NotAutheticated", response: {} }; //mensagem de resposta para o cliente
+
+    let dados = {
+      fichaID: req.params.fichaID
+    };
+    //se existe token
+    if (token) {
+      try {
+        //verificar se o token não foi alterado
+        const decode = jwt.verify(token, "ABCD");
+        server_response.status = "Authenticated";
+
+        let resultado = await _fichasTecnicas.listarFichaPorId(bd, dados);
+
+        //lista das fichas
+        server_response.response = resultado;
       } catch (error) {
         server_response.status = "NotAuthenticated";
       }
@@ -179,15 +213,7 @@ exports.inserirFichasTecnicasRoute = async (app, bd) => {
       fichaTecnica.cena
     ) {
       //registar na base de dados
-      let inserirFicha = await bd.query(
-        "Insert into tbl_fichas( nome, numero, texto, cena) VALUES(?,?,?,?)",
-        [
-          fichaTecnica.nome,
-          fichaTecnica.numero,
-          fichaTecnica.texto,
-          fichaTecnica.cena
-        ]
-      );
+      let inserirFicha = await _fichasTecnicas.criarFicha(bd, fichaTecnica);
       //se não houve problema a registar utilizador na base de dados
       if (inserirFicha.stat === 0) {
         //created http code CREATED

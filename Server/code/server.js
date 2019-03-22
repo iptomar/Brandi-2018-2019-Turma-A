@@ -25,4 +25,5 @@ rooter.loginRoute(app, bd);
 rooter.registerRoute(app, bd);
 rooter.listarFichasTecnicasRoute(app, bd);
 rooter.inserirFichasTecnicasRoute(app, bd);
+rooter.listarFichasTecnicasPorIdRoute(app, bd);
 app.listen(port, () => console.log("Listening na porta", port));

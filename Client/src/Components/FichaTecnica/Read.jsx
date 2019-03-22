@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import AlertMsg from "../AlertMsg";
 
 class Create extends Component {
   constructor(props) {
@@ -8,103 +7,72 @@ class Create extends Component {
       alertText: "",
       alertisNotVisible: true,
       alertColor: "",
-      showRegFotografico: false
+      style: {
+        height: '300px',
+        width: '600px',
+        border: '1px solid black'
+      }
     };
   }
 
-  handleSubmit = async e => {
-    e.preventDefault();
-
-    //Objeto data
-    const data = {
-      // CAMPOS
-    };
-
-    //Enviar pedidos
-    const response = await fetch("/fichaTecnica/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
-    //Aguardar API
-    await response.json().then(resp => {
-      let status = resp.status;
-      switch (status) {
-        case "Success":
-          this.setState({
-            alertText: "Criado com sucesso",
-            alertisNotVisible: false,
-            alertColor: "primary"
-          });
-          break;
-        // case "INSUCESS":
-        //   this.setState({
-        //     alertText: "Utilizador ou palavra-passe erradas",
-        //     alertisNotVisible: false,
-        //     alertColor: 'danger'
-        //   });
-        //   break;
-        default:
-          console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
-      }
-    });
-  };
-
-  hideOrShow(){
-    this.setState({
-      showRegFotografico: !this.state.showRegFotografico
-    })
-  };
-
   render() {
     return (
-        <div className="Inicio container">
-            <p className="h4">Ficha Técnica</p>
-                <div className="form-group row">
-                    <label className="col-form-label col-md-2">Descrição do objeto:</label>
-                    <label className="col-form-label col-md-10">Descrição</label>
+        <div className="Read container">
+          <div className="row mb-4">
+            <div className="col-md-4">
+                <p className="h4">Ficha Técnica</p>
+            </div>
+            <div className="ReadOptions col-md-8" align="right">
+              <button type="submit" className="btn col-md-2 mr-2 btn-primary">Editar</button>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalApagar">Apagar</button>
+            </div>
+          </div>          
+          <div className="form-group" align="center">
+            <div className="foto" style={this.state.style}></div>               
+          </div>
+          <div className="form-group row">
+              <label className="font-weight-bold col-md-2">Descrição do objeto:</label>
+              <label className="col-md-10">Descrição</label>
+          </div>
+          <div className="form-group row">
+              <label className="font-weight-bold col-md-2">Processo LCRM N.º:</label>
+              <label className="col-md-1">255</label>
+              <label className="font-weight-bold col-md">Data de entrada:</label>
+              <label className="col">20/01/2018</label>
+              <label className="font-weight-bold col-md-3">Data de abertura de processo:</label>
+              <label className="col-md-2">25/01/2018</label>
+          </div>
+          <div className="form-group row">
+              <label className="font-weight-bold col-md-2">Processo CEARC N.º:</label>
+              <label className="col-md-1">25945875</label>
+              <label className="font-weight-bold col-md">Data de entrada:</label>
+              <label className="col">02/05/2018</label>
+              <label className="font-weight-bold col-md-3">Data de abertura de processo:</label>
+              <label className="col-md-2">02/05/2018</label>
+          </div>
+          <div className="form-group row">
+            <label className="font-weight-bold col-md-4">Coordenação/Direção Técnica da Intervenção:</label>
+            <label className="col-md-8">António Matias</label>
+          </div>
+          <div class="modal fade" id="modalApagar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Apagar Ficha Técnica</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 </div>
-                <div className="form-group row">
-                    <label className="col-form-label col-md-2">Processo LCRM N.º:</label>
-                    <label className="col-form-label col-md-1">255</label>
-                    <label className="col-form-label col-md">Data de entrada:</label>
-                    <label className="col-form-label col">20/01/2018</label>
-                    <label className="col-form-label col-md-3">Data de abertura de processo:</label>
-                    <label className="col-form-label col-md-2">25/01/2018</label>
+                <div class="modal-body">
+                  Tem a certeza que pretende apagar esta ficha técnica?
                 </div>
-                <div className="form-group row">
-                    <label className="col-form-label col-md-2">Processo CEARC N.º:</label>
-                    <label type="number" id="nprocCEARC" className="form-control col-md-1" placeholder="N.º"/>
-                    <label className="col-form-label col-md">Data de entrada:</label>
-                    <input type="date" id="dataprocCEARC" className="form-control col"/>
-                    <label className="col-form-label col-md-3">Data de abertura de processo:</label>
-                  <input type="date" id="dataprocCEARC" className="form-control col-md-2"/>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
+                  <button type="button" class="btn btn-danger">Sim</button>
                 </div>
-                <div className="form-group row">
-                  <label className="col-form-label col-md-4">Coordenação/Direção Técnica da Intervenção:</label>
-                  <input type="text" id="coordenacao" className="form-control col-md-8" placeholder="Coordenador/Diretor técnico"/>
-                </div>
-                <div className="form-group">
-                  <label className="h5 ">Registo fotográfico identificativo do objeto</label>
-                  <a style={{cursor:"pointer"}} onClick={()=>this.hideOrShow()}>
-                    <i className="fas fa-3x fa-plus-square m-3"/>
-                  </a>
-                  {
-                    this.state.showRegFotografico ?
-
-                    <div className="form-group row col-md-6">
-                      <label className="col-form-label col-md-3">Fotografia:</label>
-                      <input type="file" id="foto" className="col-form form-control-file col-md-9" accept="image/*" onChange=""/>
-                    </div>
-
-                    :null
-                  }
-                  
-                </div>
-                <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor}/>
-                <button type="submit" className="btn btn-primary">Criar</button>
+              </div>
+            </div>
+          </div>
         </div>
     );
   }

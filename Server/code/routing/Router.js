@@ -189,6 +189,96 @@ exports.listarFichasTecnicasPorIdRoute = async (app, bd) => {
     resp.status(code).json(server_response);
   });
 };
+//rota para editar ficha
+exports.editFichaTecnicaRoute = async (app, bd) => {
+  app.post("/api/fichastecnicas/:id", async (req, resp) => {
+    //http code accepted
+    let code = 202;
+    let server_response = { status: "NotRegisted", response: {} };
+    let fichaTecnica = {
+      nome: req.body.nome,
+      numero: req.body.numero,
+      texto: req.body.texto,
+      cena: req.body.cena
+    };
+    try {
+      let ficha;
+      //verificar se existe id
+      if (req.params.id !== null) {
+        ficha = await bd.query(
+          "Select * from tbl_fichas where id = ? limit 1",
+          [req.params.id]
+        );
+      } else {
+        code = 400;
+      }
+      //verificar se existe ficha
+      if (ficha.resposta.length === 0) {
+        code = 400;
+      } else {
+        if (
+          fichaTecnica.nome &&
+          fichaTecnica.numero &&
+          fichaTecnica.texto &&
+          fichaTecnica.cena
+        ) {
+          ficha = await bd.query(
+            "Update tbl_fichas set nome = ?, numero = ? , texto = ? , cena = ?, visible = true where id = ?",
+            [
+              fichaTecnica.nome,
+              fichaTecnica.numero,
+              fichaTecnica.texto,
+              fichaTecnica.cena,
+              req.params.id
+            ]
+          );
+          code = 202;
+          server_response.status = "Updated";
+          server_response.response = ficha.resposta;
+        } else {
+          code = 400;
+          server_response.status = "NotUpdated";
+          server_response.response = "Missing Fields";
+        }
+      }
+    } catch (error) {
+      server_response.status = "NotUpdated";
+      server_response.response = error;
+      code = 400;
+    }
+    resp.status(code).json(server_response);
+  });
+};
+
+exports.deleteFichaTecnicaRoute = async (app, bd) => {
+  app.post("/api/fichastecnicas/:id/delete", async (req, resp) => {
+    //http code accepted
+    let code = 202;
+    let server_response = { status: "NotRegisted", response: {} };
+    if (req.params.id === null) {
+      code = 400;
+      server_response.status = "IDMissing";
+    } else {
+      let ficha = await bd.query("Select * from tbl_fichas where id = ?", [
+        req.params.id
+      ]);
+
+      if (ficha.resposta.length === 0) {
+        code = 400;
+        server_response.status = "InvalidFicha";
+      } else {
+        ficha = await bd.query(
+          "Update tbl_fichas set visible = false where id =?",
+          [req.params.id]
+        );
+        code = 202;
+        server_response.response = ficha.resposta;
+        server_response.status = "Deleted";
+      }
+    }
+    resp.status(code).json(server_response);
+  });
+};
 
 //Rota para criar fichas tecnicas
 exports.inserirFichasTecnicasRoute = async (app, bd) => {

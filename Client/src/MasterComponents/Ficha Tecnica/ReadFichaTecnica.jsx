@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
-import Create from "../Components/FichaTecnica/Create";
+import Header from "../../Components/Header";
+import Footer from "../../Components/Footer";
+import Read from "../../Components/FichaTecnica/Read";
 
 class CreateFichaTecnica extends Component {
   render() {
     return (
-      <div className="LoginPage">
+      <div className="ReadFichaTecnica">
         <Header />
-        <Create />
+        <Read />
         <Footer />
       </div>
     );

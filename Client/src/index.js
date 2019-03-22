@@ -6,9 +6,9 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import RegisterPage from './MasterComponents/RegisterPage';
 import LoginPage from './MasterComponents/LoginPage';
-import CreateFichaTecnica from './MasterComponents/CreateFichaTecnica';
-import ReadFichaTecnica from './MasterComponents/ReadFichaTecnica';
-import IndexFichaTecnica from './MasterComponents/IndexFichaTecnica';
+import CreateFichaTecnica from './MasterComponents/Ficha Tecnica/CreateFichaTecnica';
+import ReadFichaTecnica from './MasterComponents/Ficha Tecnica/ReadFichaTecnica';
+import IndexFichaTecnica from './MasterComponents/Ficha Tecnica/IndexFichaTecnica';
 
 
 ReactDOM.render(

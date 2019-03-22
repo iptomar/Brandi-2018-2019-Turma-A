@@ -7,6 +7,10 @@ class Index extends Component {
     this.state = {
       list: ""
     };
+    this.getFichasTecn();
+  }
+
+  async getFichasTecn() {
     //Enviar pedido
     const response = await fetch("/api/fichastecnicas", {
       method: "GET",
@@ -16,7 +20,8 @@ class Index extends Component {
     });
     //Aguardar API
     await response.json().then(resp => { this.state.list = resp; });
-  }
+  };
+
 
   render() {
     var visualList = "";

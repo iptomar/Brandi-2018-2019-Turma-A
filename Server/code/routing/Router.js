@@ -1,4 +1,5 @@
 const _authentication = require("./_Authentication.js");
+const _fichasTecnicas = require("./_fichasTecnicas.js");
 const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 
@@ -145,11 +146,134 @@ exports.listarFichasTecnicasRoute = async (app, bd) => {
         //verificar se o token não foi alterado
         const decode = jwt.verify(token, "ABCD");
         server_response.status = "Authenticated";
-        let resposta_bd = await bd.query("Select * from tbl_fichas");
+
+        let resultado = await _fichasTecnicas.listarFichas(bd);
+
         //lista das fichas
-        server_response.response = resposta_bd;
+        server_response.response = resultado;
       } catch (error) {
         server_response.status = "NotAuthenticated";
+      }
+    }
+    resp.status(code).json(server_response);
+  });
+};
+
+exports.listarFichasTecnicasPorIdRoute = async (app, bd) => {
+  app.get("/api/fichastecnicas/detalhes/:fichaID", async (req, resp) => {
+    //HTTP CODE OK
+    let code = 200;
+    //procurar se existe token no cabeçalho do broswer
+    let token = req.header("x-auth-token");
+    //resposta do servidor
+    let server_response = { status: "NotAutheticated", response: {} }; //mensagem de resposta para o cliente
+
+    let dados = {
+      fichaID: req.params.fichaID
+    };
+    //se existe token
+    if (token) {
+      try {
+        //verificar se o token não foi alterado
+        const decode = jwt.verify(token, "ABCD");
+        server_response.status = "Authenticated";
+
+        let resultado = await _fichasTecnicas.listarFichaPorId(bd, dados);
+
+        //lista das fichas
+        server_response.response = resultado;
+      } catch (error) {
+        server_response.status = "NotAuthenticated";
+      }
+    }
+    resp.status(code).json(server_response);
+  });
+};
+//rota para editar ficha
+exports.editFichaTecnicaRoute = async (app, bd) => {
+  app.post("/api/fichastecnicas/:id", async (req, resp) => {
+    //http code accepted
+    let code = 202;
+    let server_response = { status: "NotRegisted", response: {} };
+    let fichaTecnica = {
+      nome: req.body.nome,
+      numero: req.body.numero,
+      texto: req.body.texto,
+      cena: req.body.cena
+    };
+    try {
+      let ficha;
+      //verificar se existe id
+      if (req.params.id !== null) {
+        ficha = await bd.query(
+          "Select * from tbl_fichas where id = ? limit 1",
+          [req.params.id]
+        );
+      } else {
+        code = 400;
+      }
+      //verificar se existe ficha
+      if (ficha.resposta.length === 0) {
+        code = 400;
+      } else {
+        if (
+          fichaTecnica.nome &&
+          fichaTecnica.numero &&
+          fichaTecnica.texto &&
+          fichaTecnica.cena
+        ) {
+          ficha = await bd.query(
+            "Update tbl_fichas set nome = ?, numero = ? , texto = ? , cena = ?, visible = true where id = ?",
+            [
+              fichaTecnica.nome,
+              fichaTecnica.numero,
+              fichaTecnica.texto,
+              fichaTecnica.cena,
+              req.params.id
+            ]
+          );
+          code = 202;
+          server_response.status = "Updated";
+          server_response.response = ficha.resposta;
+        } else {
+          code = 400;
+          server_response.status = "NotUpdated";
+          server_response.response = "Missing Fields";
+        }
+      }
+    } catch (error) {
+      server_response.status = "NotUpdated";
+      server_response.response = error;
+      code = 400;
+    }
+    resp.status(code).json(server_response);
+  });
+};
+
+exports.deleteFichaTecnicaRoute = async (app, bd) => {
+  app.post("/api/fichastecnicas/:id/delete", async (req, resp) => {
+    //http code accepted
+    let code = 202;
+    let server_response = { status: "NotRegisted", response: {} };
+    if (req.params.id === null) {
+      code = 400;
+      server_response.status = "IDMissing";
+    } else {
+      let ficha = await bd.query("Select * from tbl_fichas where id = ?", [
+        req.params.id
+      ]);
+
+      if (ficha.resposta.length === 0) {
+        code = 400;
+        server_response.status = "InvalidFicha";
+      } else {
+        ficha = await bd.query(
+          "Update tbl_fichas set visible = false where id =?",
+          [req.params.id]
+        );
+        code = 202;
+        server_response.response = ficha.resposta;
+        server_response.status = "Deleted";
       }
     }
     resp.status(code).json(server_response);
@@ -179,15 +303,7 @@ exports.inserirFichasTecnicasRoute = async (app, bd) => {
       fichaTecnica.cena
     ) {
       //registar na base de dados
-      let inserirFicha = await bd.query(
-        "Insert into tbl_fichas( nome, numero, texto, cena) VALUES(?,?,?,?)",
-        [
-          fichaTecnica.nome,
-          fichaTecnica.numero,
-          fichaTecnica.texto,
-          fichaTecnica.cena
-        ]
-      );
+      let inserirFicha = await _fichasTecnicas.criarFicha(bd, fichaTecnica);
       //se não houve problema a registar utilizador na base de dados
       if (inserirFicha.stat === 0) {
         //created http code CREATED

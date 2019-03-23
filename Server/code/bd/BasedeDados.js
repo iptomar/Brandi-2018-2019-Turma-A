@@ -26,7 +26,6 @@ class BasedeDados {
       resposta: {}
     };
     try {
-      //ter que melhorar este bocado de código
       connection = await new Promise(async (resolve, reject) => {
         await this._pool.query(quer, params, async (error, results, fields) => {
           if (error) reject(error);
@@ -38,7 +37,7 @@ class BasedeDados {
     } catch (ex) {
       if (ex.code === "ECONNREFUSED") response.stat = 1;
       if (ex.code === "ER_DUP_ENTRY") response.stat = 2;
-      response.resposta = "Ocorreu um erro";
+      response.resposta = ex;
     } finally {
       return response;
     }

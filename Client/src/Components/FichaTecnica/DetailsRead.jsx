@@ -45,25 +45,6 @@ class Create extends Component {
             <label className="font-weight-bold col-md-4">Coordenação/Direção Técnica da Intervenção:</label>
             <label className="col-md-8">António Matias</label>
           </div>
-          <div class="modal fade" id="modalApagar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Apagar Ficha Técnica</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  Tem a certeza que pretende apagar esta ficha técnica?
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
-                  <button type="button" class="btn btn-danger">Sim</button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
     );
   }

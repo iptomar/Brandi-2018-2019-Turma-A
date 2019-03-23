@@ -8,8 +8,9 @@ class Create extends Component {
       alertText: "",
       alertisNotVisible: true,
       alertColor: "",
-      showRegFotografico: false
-    };
+      file: null
+    }
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleSubmit = async e => {
@@ -46,9 +47,9 @@ class Create extends Component {
           break;
         case "Ficha inserida":
           this.setState({
-            alertText: "Ficha inserida",
-               alertisNotVisible: false,
-             alertColor: 'success'
+            alertText: "Ficha técnica inserida com sucesso",
+            alertisNotVisible: false,
+            alertColor: 'success'
          });
          break;
         default:
@@ -57,10 +58,17 @@ class Create extends Component {
     });
   };
 
-  hideOrShow(){
+  handleChange(event) {
     this.setState({
-      showRegFotografico: !this.state.showRegFotografico
+      file: URL.createObjectURL(event.target.files[0])
     })
+  }
+
+  onImgLoad = ({ target: img }) => {
+    this.setState({
+      width: img.width,
+      height: img.height,
+    });
   };
 
   render() {
@@ -93,28 +101,24 @@ class Create extends Component {
                   <input type="text" id="coordenacao" className="form-control col-md-8" placeholder="Coordenador/Diretor técnico" required/>
                 </div>
                 <div className="form-group">
-                  <label className="h5 ">Registo fotográfico identificativo do objeto</label>
-                  <a style={{cursor:"pointer"}} onClick={()=>this.hideOrShow()}>
-                    <i className="fas fa-3x fa-plus-square m-3"/>
-                  </a>
-                  {
-                    this.state.showRegFotografico ?
-
-                    <div className="form-group row col-md-6">
+                  <button className="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Registo fotográfico identificativo do objeto
+                  </button>
+                  <div className="py-3 collapse" id="collapseExample">
+                    <div className="row">
                       <label className="col-form-label col-md-3">Fotografia:</label>
-                      <input type="file" id="foto" className="col-form form-control-file col-md-9" accept="image/*" onChange=""/>
+                      <input type="file" id="fotoTemplate" className="col-form form-control-file col-md-3" accept="image/*" onChange={this.handleChange}/>          
                     </div>
-
-                    :null
-                  }
-                  
+                    <div className="text-center">
+                      <img src={this.state.file} onLoad={this.onImgLoad} className="rounded img-thumbnail" alt="Pré-visualização da fotografia carregada..."/>
+                    </div>
+                  </div>
                 </div>
                 <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor}/>
                 <button type="submit" className="btn btn-primary">Criar</button>
             </form>
-        </div>
+        </div>        
     );
   }
 }
-
 export default Create;

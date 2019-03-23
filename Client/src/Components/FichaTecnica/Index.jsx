@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AlertMsg from "../AlertMsg";
+// import AlertMsg from "../AlertMsg";
 
 class Index extends Component {
   constructor(props) {
@@ -26,13 +26,13 @@ class Index extends Component {
   render() {
     var visualList = "";
     for (let index = 0; index < this.state.list.length; index++) {
-      visualList += `<div class="card" style="width: 18rem;"><img src="..." class="card-img-top" ><div class="card-body"><a href="/fichaTecnica/${this.state.list[index].id}/details" class="card-title">${this.state.list[index].descricao}</a></div></div>`;
+      visualList += `<div className="card" style="width: 18rem;"><img src="..." className="card-img-top" ><div className="card-body"><a href="/fichaTecnica/${this.state.list[index].id}/details" className="card-title">${this.state.list[index].descricao}</a></div></div>`;
     }
 
     return (
       <div className="Inicio container">
         <p className="h4">Ficha Técnica</p>
-        <div class="card-deck">
+        <div className="card-deck">
           {visualList}
         </div>
       </div>

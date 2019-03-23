@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import AlertMsg from './AlertMsg';
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       alertText: '',
       alertisNotVisible: true,
@@ -47,6 +47,7 @@ class Login extends Component {
       switch (status) {
         case "Authenticated":
           //Armazenar o token
+          
           sessionStorage.setItem('token', response.headers.get('x-auth-token'));
           //Armazenar os dados do utilizador
           sessionStorage.setItem('nome', resp.response.login);
@@ -67,7 +68,10 @@ class Login extends Component {
   };
 
   render() {
-    if (sessionStorage.getItem('token') !== null) window.location = '/fichaTecnica';
+    if (sessionStorage.getItem('token') !== null){
+      window.location = '/fichaTecnica';
+      return null;
+    } 
     else {
       return (
         <div className="Login">

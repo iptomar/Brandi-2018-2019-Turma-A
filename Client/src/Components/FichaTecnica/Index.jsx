@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import AlertMsg from "../AlertMsg";
 
 class Index extends Component {
   constructor(props) {
@@ -25,18 +24,27 @@ class Index extends Component {
 
   render() {
     var visualList = "";
-    for (let index = 0; index < this.state.list.length; index++) {
-      visualList += `<div className="card" style="width: 18rem;"><img src="..." className="card-img-top" ><div className="card-body"><a href="/fichaTecnica/${this.state.list[index].id}/details" className="card-title">${this.state.list[index].descricao}</a></div></div>`;
+    //Verifica se existe o token
+    if (sessionStorage.getItem('token') == null) {
+      window.location = '/';
+    } else {
+      //Carrega e calcula os novos objetos da página
+      if(this.state.list.length != 0){
+        visualList+=`<div className="card-deck">`;
+      for (let index = 0; index < this.state.list.length; index++) {
+        visualList += `<div className="card" style="width: 18rem;"><img src="..." className="card-img-top" ><div className="card-body"><a href="/fichaTecnica/${this.state.list[index].id}/details" className="card-title">${this.state.list[index].descricao}</a></div></div>`;
+      }
+      visualList+=`</div>`;
+    }else{
+      visualList += `<div><h5>Ainda não existe nenhuma ficha técnica</h5><h6><a href="/fichaTecnica/criar">Adicione</a> já uma ficha</h6></div>`
     }
-
-    return (
-      <div className="Inicio container">
-        <p className="h4">Ficha Técnica</p>
-        <div className="card-deck">
-          {visualList}
+      return (
+        <div className="Inicio container">
+          <p className="h4">Fichas Técnicas</p>
+          <div dangerouslySetInnerHTML={{__html: visualList}}></div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 

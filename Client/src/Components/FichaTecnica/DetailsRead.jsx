@@ -17,16 +17,7 @@ class Create extends Component {
 
   render() {
     return (
-        <div className="Read container">
-          <div className="row mb-4">
-            <div className="col-md-4">
-                <p className="h4">Ficha Técnica</p>
-            </div>
-            <div className="ReadOptions col-md-8" align="right">
-              <button type="submit" className="btn col-md-2 mr-2 btn-primary">Editar</button>
-              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalApagar">Apagar</button>
-            </div>
-          </div>          
+        <div className="Read container">  
           <div className="form-group" align="center">
             <div className="foto" style={this.state.style}></div>               
           </div>

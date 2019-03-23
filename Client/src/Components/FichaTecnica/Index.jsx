@@ -29,7 +29,7 @@ class Index extends Component {
       window.location = '/';
     } else {
       //Carrega e calcula os novos objetos da página
-      if(this.state.list.length != 0){
+      if(this.state.list.length !== 0){
         visualList+=`<div className="card-deck">`;
       for (let index = 0; index < this.state.list.length; index++) {
         visualList += `<div className="card" style="width: 18rem;"><img src="..." className="card-img-top" ><div className="card-body"><a href="/fichaTecnica/${this.state.list[index].id}/details" className="card-title">${this.state.list[index].descricao}</a></div></div>`;

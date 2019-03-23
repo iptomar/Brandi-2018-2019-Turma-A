@@ -42,12 +42,15 @@ class Login extends Component {
     });
     //Aguardar API
     await response.json().then(resp => {
-      //Armazenar o token
-      sessionStorage.setItem('token', response.headers.get('x-auth-token'));
       //Verificar o estado da resposta da API
       let status = resp.status;
       switch (status) {
         case "Authenticated":
+          //Armazenar o token
+          sessionStorage.setItem('token', response.headers.get('x-auth-token'));
+          //Armazenar os dados do utilizador
+          sessionStorage.setItem('nome', resp.response.login);
+          //Redirect
           window.location = '/fichaTecnica';
           break;
         case "NotAutheticated":
@@ -64,7 +67,7 @@ class Login extends Component {
   };
 
   render() {
-    if (sessionStorage.getItem('token') != null) window.location = '/fichaTecnica';
+    if (sessionStorage.getItem('token') !== null) window.location = '/fichaTecnica';
     else {
       return (
         <div className="Login">

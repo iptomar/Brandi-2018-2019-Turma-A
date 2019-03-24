@@ -85,7 +85,7 @@ exports.registerRoute = async (app, bd) => {
       //HTTP CODE BAD REQUEST
       code = 400;
       resposta_servidor.status = "NotAuthenticated";
-      resposta_servidor.resposta = "Utilizador não authenticado";
+      resposta_servidor.resposta = "Utilizador não autenticado";
     }
     //erro ao descodificar token
     else if (token.name) {

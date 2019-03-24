@@ -36,13 +36,14 @@ exports.createFichaTecnica = async (bd, dados) => {
     dados.interessadoFK
   ) {
     let resposta_bd = await bd.query(
-      "INSERT INTO tbl_fichasRegistos (visible,designacao,processoLCRM,processoCEARC,dataEntrada,coordenacao,direcaoTecnica,localidade,interessadoFK,dataSaida) VALUES(?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO tbl_fichasRegistos (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataSaida) VALUES(?,?,?,?,?,?,?,?,?,?)",
       [
         dados.visible,
         dados.designacao,
         dados.processoLCRM,
         dados.processoCEARC,
         dados.dataEntrada,
+        dados.dataConclusao,
         dados.coordenacao,
         dados.direcaoTecnica,
         dados.localidade,
@@ -96,13 +97,14 @@ exports.updateFichaTecnica = async (bd, dados) => {
     dados.interessadoFK
   ) {
     let resposta_bd = await bd.query(
-      "update tbl_fichasRegistos set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?,dataSaida=?, coordenacao =? ,direcaoTecnica=?,localidade=?,interessadoFK =?  where fichaRegistoID = ?",
+      "update tbl_fichasRegistos set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataSaida=?, coordenacao =? ,direcaoTecnica=?,localidade=?,interessadoFK =?  where fichaRegistoID = ?",
       [
         dados.visible,
         dados.designacao,
         dados.processoLCRM,
         dados.processoCEARC,
         dados.dataEntrada,
+        dados.dataConclusao,
         dados.dataSaida,
         dados.coordenacao,
         dados.direcaoTecnica,

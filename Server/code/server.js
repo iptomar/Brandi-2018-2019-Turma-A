@@ -35,4 +35,6 @@ fichaTecnicaRouter.updateFichaTecnicaRoute(app, bd);
 fichaTecnicaRouter.readFichaTecnicaRoute(app, bd);
 //rota para apagar uma ficha tecnica
 fichaTecnicaRouter.deleteFichaTecnicaRoute(app, bd);
+//rota que devolve todas as fichas tecnicas
+fichaTecnicaRouter.getTodasFichasTecnicasRoute(app, bd);
 app.listen(port, () => console.log("Listening na porta", port));

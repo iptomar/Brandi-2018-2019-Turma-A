@@ -12,6 +12,9 @@ exports.getAllFichas = async bd => {
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
     resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;
+  } else {
+    resultadofinal.stat = resposta_bd.stat;
+    resultadofinal.resposta = resposta_bd.resposta;
   }
   return resultadofinal;
 };
@@ -36,13 +39,14 @@ exports.createFichaTecnica = async (bd, dados) => {
     dados.interessadoFK
   ) {
     let resposta_bd = await bd.query(
-      "INSERT INTO tbl_fichasRegistos (visible,designacao,processoLCRM,processoCEARC,dataEntrada,coordenacao,direcaoTecnica,localidade,interessadoFK,dataSaida) VALUES(?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO tbl_fichasRegistos (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataSaida) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
       [
         dados.visible,
         dados.designacao,
         dados.processoLCRM,
         dados.processoCEARC,
         dados.dataEntrada,
+        dados.dataConclusao,
         dados.coordenacao,
         dados.direcaoTecnica,
         dados.localidade,
@@ -53,6 +57,9 @@ exports.createFichaTecnica = async (bd, dados) => {
     //conseguio inserir na base de dados
     if (resposta_bd.stat === 0) {
       resultadofinal.stat = 0;
+      resultadofinal.resposta = resposta_bd.resposta;
+    } else {
+      resultadofinal.stat = resposta_bd.stat;
       resultadofinal.resposta = resposta_bd.resposta;
     }
   }
@@ -96,13 +103,14 @@ exports.updateFichaTecnica = async (bd, dados) => {
     dados.interessadoFK
   ) {
     let resposta_bd = await bd.query(
-      "update tbl_fichasRegistos set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?,dataSaida=?, coordenacao =? ,direcaoTecnica=?,localidade=?,interessadoFK =?  where fichaRegistoID = ?",
+      "update tbl_fichasRegistos set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataSaida=?, coordenacao =? ,direcaoTecnica=?,localidade=?,interessadoFK =?  where fichaRegistoID = ?",
       [
         dados.visible,
         dados.designacao,
         dados.processoLCRM,
         dados.processoCEARC,
         dados.dataEntrada,
+        dados.dataConclusao,
         dados.dataSaida,
         dados.coordenacao,
         dados.direcaoTecnica,
@@ -114,6 +122,9 @@ exports.updateFichaTecnica = async (bd, dados) => {
     //conseguio inserir na base de dados
     if (resposta_bd.stat === 0) {
       resultadofinal.stat = 0;
+      resultadofinal.resposta = resposta_bd.resposta;
+    } else {
+      resultadofinal.stat = resposta_bd.stat;
       resultadofinal.resposta = resposta_bd.resposta;
     }
   }
@@ -130,7 +141,7 @@ exports.deleteFichaTenica = async (bd, id) => {
   );
   if (resposta_bd.stat === 0) {
     resultadofinal.stat = 0;
-    resultadofinal.resposta = resposta_bd.resposta[0];
+    resultadofinal.resposta = resposta_bd.resposta;
   } else {
     resultadofinal.stat = resposta_bd.stat;
     resultadofinal.resposta = resposta_bd.resposta;

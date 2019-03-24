@@ -1,12 +1,20 @@
 import React, { Component } from "react";
-import DetailsRead from "../../Components/FichaTecnica/DetailsRead";
+import Read from "./Read";
+import Edit from "./Edit";
 
 class Create extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+      edit: false
     };
+    this.toggleEdit = this.toggleEdit.bind(this);
+  }
+
+  toggleEdit() {
+    this.setState(state => ({
+      edit: !state.edit
+    }));
   }
 
   render() {
@@ -17,11 +25,16 @@ class Create extends Component {
                 <p className="h4">Ficha Técnica</p>
             </div>
             <div className="ReadOptions col-md-8" align="right">
-              <button type="submit" className="btn col-md-2 mr-2 btn-primary">Editar</button>
+              <button type="button" className="btn col-md-2 mr-2 btn-primary" onClick={this.toggleEdit}>Editar</button>
               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalApagar">Apagar</button>
             </div>
           </div>
-          <DetailsRead />
+          {
+            !this.state.edit?
+              <Read />
+            :
+              <Edit />
+          }
           <div class="modal fade" id="modalApagar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">

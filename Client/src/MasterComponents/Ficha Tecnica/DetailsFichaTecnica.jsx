@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
-import Details from "../../Components/FichaTecnica/Details";
+import Details from "../../Components/FichaTecnica/Details/Details";
 
-class CreateFichaTecnica extends Component {
+class DetailsFichaTecnica extends Component {
   render() {
     return (
       <div className="ReadFichaTecnica">
@@ -15,4 +15,4 @@ class CreateFichaTecnica extends Component {
   }
 }
 
-export default CreateFichaTecnica;
+export default DetailsFichaTecnica;

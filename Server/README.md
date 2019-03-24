@@ -46,20 +46,85 @@ se não houver conexão com a base de dados devolver HTTP CODE 500
 ### **devolve:**
 se com sucesso HTTP CODE 200
 {
-  STATUS: "authenticated"
-  response:{
-    userID:1
-    login:"utilizadorTeste"
-    email"UtilizadorTeste@ipt.pt"
-  }
+    "status": "Authenticated",
+    "resposta": {
+        "userID": 1,
+        "login": "admin",
+        "email": "admin@mail.com",
+        "roleFK": 1
+    }
 }
 se falha conexão com base de dados HTTP CODE 500
 { 
   STATUS: "NotAuthenticated"
   response:"Ocorreu um erro"
 }
-se os campos estiverem incorretos
+se os campos estiverem incorretos CODE 400 
 {
-  status:"NotAuthenticated"
-  response:{}
+    "status": "NotAuthenticated",
+    "resposta": "Campos inválidos"
 }
+
+## GET /api/roles
+### **recebe:**
+### **devolve:**
+se com sucesso HTTP CODE 200 OK
+{
+    "stat": "Authenticated",
+    "resposta": [
+        {
+            "roleID": 1,
+            "role": "Admin"
+        },
+        {
+            "roleID": 2,
+            "role": "Aluno"
+        }
+    ]
+}
+
+se falha conexão com base de dados 500 Internal Server Error
+{
+    "stat": "Authenticated",
+    "resposta": {}
+}
+   
+  
+## GET /api/fichatecnica/create
+### **recebe:**
+
+ -designacao, -processoLCRM, -processoCEARC, -dataEntrada, -dataConclusao, -dataSaida, -coordenacao, 
+ -direcaoTecnica, -localidade, -interessadoFK
+ 
+### **devolve:** 
+se com sucesso HTTP CODE 201 CREATED
+   {
+    "stat": "Registed",
+    "resposta": {
+        "fieldCount": 0,
+        "affectedRows": 1,
+        "insertId": 4,
+        "serverStatus": 2,
+        "warningCount": 0,
+        "message": "",
+        "protocol41": true,
+        "changedRows": 0
+    }
+}
+se falha conexão com base de dados 
+
+se os campos estiverem incorretos CODE 400   
+
+## 
+### **recebe:**
+### **devolve:**
+
+## 
+### **recebe:**
+### **devolve:**
+
+## 
+### **recebe:**
+### **devolve:**
+
+

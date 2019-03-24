@@ -141,7 +141,7 @@ exports.deleteFichaTenica = async (bd, id) => {
   );
   if (resposta_bd.stat === 0) {
     resultadofinal.stat = 0;
-    resultadofinal.resposta = resposta_bd.resposta[0];
+    resultadofinal.resposta = resposta_bd.resposta;
   } else {
     resultadofinal.stat = resposta_bd.stat;
     resultadofinal.resposta = resposta_bd.resposta;

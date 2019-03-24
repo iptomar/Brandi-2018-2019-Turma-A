@@ -45,6 +45,9 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
         if (resposta_bd.stat === 0) {
           resposta_servidor.stat = "Registed";
           resposta_servidor.resposta = resposta_bd.resposta;
+        } else {
+          resposta_servidor.stat = "Erro na criação";
+          resposta_servidor.resposta = resposta_bd.resposta;
         }
       }
       //nao e administrador
@@ -155,6 +158,9 @@ exports.readFichaTecnicaRoute = async (app, bd) => {
           code = 201;
           resposta_servidor.stat = "Accepted";
           resposta_servidor.resposta = resposta_bd.resposta;
+        } else {
+          resposta_servidor.stat = resposta_bd.stat;
+          resposta_servidor.resposta = resposta_bd.resposta;
         }
       }
       //nao e administrador
@@ -202,6 +208,9 @@ exports.deleteFichaTecnicaRoute = async (app, bd) => {
         );
         if (resposta_bd.stat === 0) {
           resposta_servidor.stat = "Deleted";
+          resposta_servidor.resposta = resposta_bd.resposta;
+        } else {
+          resposta_servidor.stat = resposta_bd.stat;
           resposta_servidor.resposta = resposta_bd.resposta;
         }
       }

@@ -12,6 +12,9 @@ exports.getAllFichas = async bd => {
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
     resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;
+  } else {
+    resultadofinal.stat = resposta_bd.stat;
+    resultadofinal.resposta = resposta_bd.resposta;
   }
   return resultadofinal;
 };
@@ -54,6 +57,9 @@ exports.createFichaTecnica = async (bd, dados) => {
     //conseguio inserir na base de dados
     if (resposta_bd.stat === 0) {
       resultadofinal.stat = 0;
+      resultadofinal.resposta = resposta_bd.resposta;
+    } else {
+      resultadofinal.stat = resposta_bd.stat;
       resultadofinal.resposta = resposta_bd.resposta;
     }
   }
@@ -116,6 +122,9 @@ exports.updateFichaTecnica = async (bd, dados) => {
     //conseguio inserir na base de dados
     if (resposta_bd.stat === 0) {
       resultadofinal.stat = 0;
+      resultadofinal.resposta = resposta_bd.resposta;
+    } else {
+      resultadofinal.stat = resposta_bd.stat;
       resultadofinal.resposta = resposta_bd.resposta;
     }
   }

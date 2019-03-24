@@ -1,5 +1,20 @@
 const fichaTecnica = require("../CRUDS/FichaTecnica");
 const getToken = require("../Auxiliares/Token");
+
+/**
+ * Rota que retorna todas as fichas técnicas
+ */
+exports.getTodasFichasTecnicasRoute = async (app, bd) => {
+  app.get("/api/fichatecnica", async (req, resp) => {
+    let resposta_servidor = await fichaTecnica.getAllFichas(bd);
+    let code = 200;
+    if (resposta_servidor.stat === 1) {
+      code = 400;
+    }
+    resp.status(code).json(resposta_servidor.resposta);
+  });
+};
+
 /**
  * Rota para criar uam ficha tecnica
  */
@@ -134,7 +149,7 @@ exports.readFichaTecnicaRoute = async (app, bd) => {
   app.get("/api/fichatecnica/:id", async (req, resp) => {
     let resposta_servidor = { stat: "Authenticated", resposta: {} };
     //HTTP CODE ACCEPTED
-    let code = 201;
+    let code = 200;
     //token
     let token;
     //getToken
@@ -155,7 +170,7 @@ exports.readFichaTecnicaRoute = async (app, bd) => {
       if (token.roleFK === 1) {
         let resposta_bd = await fichaTecnica.getFichaTecnica(bd, req.params.id);
         if (resposta_bd.stat === 0) {
-          code = 201;
+          code = 200;
           resposta_servidor.stat = "Accepted";
           resposta_servidor.resposta = resposta_bd.resposta;
         } else {

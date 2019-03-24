@@ -39,7 +39,7 @@ exports.createFichaTecnica = async (bd, dados) => {
     dados.interessadoFK
   ) {
     let resposta_bd = await bd.query(
-      "INSERT INTO tbl_fichasRegistos (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataSaida) VALUES(?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO tbl_fichasRegistos (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataSaida) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
       [
         dados.visible,
         dados.designacao,

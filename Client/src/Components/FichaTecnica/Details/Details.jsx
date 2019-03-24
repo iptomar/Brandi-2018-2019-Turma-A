@@ -26,10 +26,11 @@ class Create extends Component {
             </div>
             <div className="ReadOptions col-md-8" align="right">
               <button type="button" className="btn col-md-2 mr-2 btn-primary" onClick={this.toggleEdit}>Editar</button>
-              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalApagar">Apagar</button>
+              <button type="button" className="btn col-md-2 btn-danger" data-toggle="modal" data-target="#modalApagar">Apagar</button>
             </div>
           </div>
           {
+            // Caso o botão editar seja clicado
             !this.state.edit?
               <Read />
             :

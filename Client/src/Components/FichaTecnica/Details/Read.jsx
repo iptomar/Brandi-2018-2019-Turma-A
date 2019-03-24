@@ -4,9 +4,6 @@ class Create extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      alertText: "",
-      alertisNotVisible: true,
-      alertColor: "",
       style: {
         height: '300px',
         width: '600px',

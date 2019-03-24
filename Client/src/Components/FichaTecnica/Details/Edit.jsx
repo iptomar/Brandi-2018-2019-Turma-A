@@ -14,7 +14,6 @@ class Create extends Component {
   render() {
     return (
         <div className="Inicio container">
-            <p className="h4">Ficha Técnica</p>
             <form className="py-3" onSubmit={this.handleSubmit}>
                 <div className="form-group row">
                     <label className="col-form-label col-md-2">Descrição do objeto:</label>
@@ -55,7 +54,7 @@ class Create extends Component {
                   </div>
                 </div>
                 <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor}/>
-                <button type="submit" className="btn btn-primary">Criar</button>
+                <button type="submit" className="btn btn-primary">Guardar</button>
             </form>
         </div>        
     );

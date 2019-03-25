@@ -5,9 +5,9 @@ class Create extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      alertText: "",
+      alertText: "Ficha técnica inserida com sucesso",
       alertisNotVisible: true,
-      alertColor: "",
+      alertColor: "success",
       file: null
     }
     this.handleChange = this.handleChange.bind(this);
@@ -18,16 +18,20 @@ class Create extends Component {
 
     //Objeto data
     const data = {
-      nome: document.getElementById('dobjeto').value,
-      numero:  document.getElementById('nprocLCRM').value,
-      texto: document.getElementById('coordenacao').value,
-      cena: document.getElementById('coordenacao').value
+      designacao: document.getElementById('dobjeto').value,
+      processoLCRM: document.getElementById('nprocLCRM').value,
+      processoCEARC: document.getElementById('nprocCEARC').value,
+      dataEntrada: null,
+      dataConclusao: null,
+      dataSaida: null,
+      coordenacao: document.getElementById('coordenacao').value,
+      direcaoTecnica: document.getElementById('coordenacao').value,
+      localidade: null,
+      interessadoFK: null
     };
 
-    console.log(JSON.stringify(data));
-
     //Enviar pedidos
-    const response = await fetch("/api/fichastecnicas/create", {
+    const response = await fetch("/api/fichatecnica/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -47,9 +51,7 @@ class Create extends Component {
           break;
         case "Ficha inserida":
           this.setState({
-            alertText: "Ficha técnica inserida com sucesso",
-            alertisNotVisible: false,
-            alertColor: 'success'
+            alertisNotVisible: false
          });
          break;
         default:
@@ -90,7 +92,7 @@ class Create extends Component {
                 </div>
                 <div className="form-group row">
                     <label className="col-form-label col-md-2">Processo CEARC N.º:</label>
-                    <input type="number" id="nprocCEARC" className="form-control col-md-1" placeholder="N.º"/>
+                    <input type="number" id="nprocCEARC" className="form-control col-md-1" placeholder="N.º" required/>
                     <label className="col-form-label col-md">Data de entrada:</label>
                     <input type="date" id="dataprocCEARC" className="form-control col"/>
                     <label className="col-form-label col-md-3">Data de abertura de processo:</label>
@@ -107,7 +109,7 @@ class Create extends Component {
                   <div className="py-3 collapse" id="collapseExample">
                     <div className="row">
                       <label className="col-form-label col-md-3">Fotografia:</label>
-                      <input type="file" id="fotoTemplate" className="col-form form-control-file col-md-3" accept="image/*" onChange={this.handleChange}/>          
+                      <input type="file" id="fotoTemplate" className="col-form form-control-file col-md-3" accept="image/*" onChange={this.handleChange}/>
                     </div>
                     <div className="text-center">
                       <img src={this.state.file} onLoad={this.onImgLoad} className="rounded img-thumbnail" alt="Pré-visualização da fotografia carregada..."/>

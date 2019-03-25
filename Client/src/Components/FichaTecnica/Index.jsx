@@ -11,7 +11,7 @@ class Index extends Component {
 
   async getFichasTecn() {
     //Enviar pedido
-    const response = await fetch("/api/fichastecnicas", {
+    const response = await fetch("/api/fichatecnica", {
       method: "GET",
       headers: {
         "Content-Type": "application/json"

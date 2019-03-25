@@ -52,9 +52,9 @@ class Login extends Component {
           //Armazenar os dados do utilizador
           sessionStorage.setItem('nome', resp.resposta.login);
           //Redirect
-          //window.location = '/fichaTecnica';
+          window.location = '/fichaTecnica';
           break;
-        case "NotAutheticated":
+        case "NotAuthenticated":
           this.setState({
             alertText: "Utilizador ou palavra-passe erradas",
             alertisNotVisible: false,
@@ -69,7 +69,7 @@ class Login extends Component {
 
   render() {
     if (sessionStorage.getItem('token') !== null){
-     // window.location = '/fichaTecnica';
+      window.location = '/fichaTecnica';
       return null;
     } 
     else {

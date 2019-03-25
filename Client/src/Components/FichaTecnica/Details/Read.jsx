@@ -8,58 +8,74 @@ class Create extends Component {
         height: '300px',
         width: '600px',
         border: '1px solid black'
-      }
+      },
+      responseAPI: "",
+      loading: true
     };
   }
 
   componentDidMount(){
-   this.getAPI(); 
+   this.getAPI();
   }
 
   getAPI = async e => {
-    const request = await fetch('/api/fichatecnica/1', {
+    const request = await fetch('/api/fichatecnica/7', {
       headers: {
         'x-auth-token': sessionStorage.getItem('token')
       }
-    }
-    );
-    request.json().then( resp => {
-      console.log(resp);
     });
-    console.log('token',sessionStorage.getItem('token'));
+    request.json().then( resp => {
+      // Guardar a resposta no state
+      this.setState({
+        responseAPI: resp.resposta,
+        loading: false
+      });
+    });
   }
 
   render() {
     return (
-        <div className="Read container">  
-          <div className="form-group" align="center">
-            <div className="foto" style={this.state.style}></div>               
+        this.state.loading?
+
+          // Animação Loading
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status" style={{width: '5rem', height: '5rem'}}>
+              <span class="sr-only">Loading...</span>
+            </div>
           </div>
-          <div className="form-group row">
-              <label className="font-weight-bold col-md-2">Descrição do objeto:</label>
-              <label className="col-md-10">Descrição</label>
+          
+        : // else
+
+          // Conteudo do Read
+          <div className="Read container">  
+            <div className="form-group" align="center">
+              <div className="foto" style={{height: '300px', width: '600px', border: '1px solid black'}}></div>               
+            </div>
+            <div className="form-group row">
+                <label className="font-weight-bold col-md-2">Descrição do objeto:</label>
+                <label className="col-md-10">{this.state.responseAPI.designacao}</label>
+            </div>
+            <div className="form-group row">
+                <label className="font-weight-bold col-md-2">Processo LCRM N.º:</label>
+                <label className="col-md-2">{this.state.responseAPI.processoLCRM}</label>
+                <label className="font-weight-bold col-md-2">Data de entrada:</label>
+                <label className="col-md-2">20/01/2018</label>
+                <label className="font-weight-bold col-md-2">Data de abertura de processo:</label>
+                <label className="col-md-2">25/01/2018</label>
+            </div>
+            <div className="form-group row">
+                <label className="font-weight-bold col-md-2">Processo CEARC N.º:</label>
+                <label className="col-md-2">{this.state.responseAPI.processoCEARC}</label>
+                <label className="font-weight-bold col-md-2">Data de entrada:</label>
+                <label className="col-md-2">02/05/2018</label>
+                <label className="font-weight-bold col-md-2">Data de abertura de processo:</label>
+                <label className="col-md-2">{this.state.responseAPI.coordenacao}</label>
+            </div>
+            <div className="form-group row">
+              <label className="font-weight-bold col-md-4">Coordenação/Direção Técnica da Intervenção:</label>
+              <label className="col-md-8">{this.state.responseAPI.coordenacao}</label>
+            </div>
           </div>
-          <div className="form-group row">
-              <label className="font-weight-bold col-md-2">Processo LCRM N.º:</label>
-              <label className="col-md-1">255</label>
-              <label className="font-weight-bold col-md">Data de entrada:</label>
-              <label className="col">20/01/2018</label>
-              <label className="font-weight-bold col-md-3">Data de abertura de processo:</label>
-              <label className="col-md-2">25/01/2018</label>
-          </div>
-          <div className="form-group row">
-              <label className="font-weight-bold col-md-2">Processo CEARC N.º:</label>
-              <label className="col-md-1">25945875</label>
-              <label className="font-weight-bold col-md">Data de entrada:</label>
-              <label className="col">02/05/2018</label>
-              <label className="font-weight-bold col-md-3">Data de abertura de processo:</label>
-              <label className="col-md-2">02/05/2018</label>
-          </div>
-          <div className="form-group row">
-            <label className="font-weight-bold col-md-4">Coordenação/Direção Técnica da Intervenção:</label>
-            <label className="col-md-8">António Matias</label>
-          </div>
-        </div>
     );
   }
 }

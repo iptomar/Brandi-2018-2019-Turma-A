@@ -1,20 +1,41 @@
 import React, { Component } from "react";
 import Read from "./Read";
 import Edit from "./Edit";
+import AlertMsg from '../../AlertMsg';
 
 class Create extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      edit: false
+      edit: false,
+      alertText: '',
+      alertisNotVisible: true,
+      alertColor: ''
     };
     this.toggleEdit = this.toggleEdit.bind(this);
+    this.delete = this.delete.bind(this);
   }
 
   toggleEdit() {
     this.setState(state => ({
       edit: !state.edit
     }));
+  }
+
+  delete = async e => {
+    const request = await fetch('/api/fichatecnica/7/delete', {
+      method: 'POST',
+      headers: {
+        'x-auth-token': sessionStorage.getItem('token')
+      }
+    });
+    request.json().then( resp => {
+      this.setState({
+        alertText: "A ficha foi removida com sucesso.",
+        alertisNotVisible: false,
+        alertColor: 'danger'
+      });
+    });
   }
 
   render() {
@@ -29,6 +50,7 @@ class Create extends Component {
               <button type="button" className="btn col-md-2 btn-danger" data-toggle="modal" data-target="#modalApagar">Apagar</button>
             </div>
           </div>
+          <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
           {
             // Caso o botão editar seja clicado
             !this.state.edit?
@@ -50,7 +72,7 @@ class Create extends Component {
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
-                  <button type="button" class="btn btn-danger">Sim</button>
+                  <button type="button" class="btn btn-danger" onClick={this.delete} data-dismiss="modal">Sim</button>
                 </div>
               </div>
             </div>

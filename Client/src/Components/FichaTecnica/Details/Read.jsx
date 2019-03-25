@@ -12,6 +12,23 @@ class Create extends Component {
     };
   }
 
+  componentDidMount(){
+   this.getAPI(); 
+  }
+
+  getAPI = async e => {
+    const request = await fetch('/api/fichatecnica/1', {
+      headers: {
+        'x-auth-token': sessionStorage.getItem('token')
+      }
+    }
+    );
+    request.json().then( resp => {
+      console.log(resp);
+    });
+    console.log('token',sessionStorage.getItem('token'));
+  }
+
   render() {
     return (
         <div className="Read container">  

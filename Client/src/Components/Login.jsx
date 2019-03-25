@@ -50,9 +50,9 @@ class Login extends Component {
           
           sessionStorage.setItem('token', response.headers.get('x-auth-token'));
           //Armazenar os dados do utilizador
-          sessionStorage.setItem('nome', resp.response.login);
+          sessionStorage.setItem('nome', resp.resposta.login);
           //Redirect
-          window.location = '/fichaTecnica';
+          //window.location = '/fichaTecnica';
           break;
         case "NotAutheticated":
           this.setState({
@@ -69,7 +69,7 @@ class Login extends Component {
 
   render() {
     if (sessionStorage.getItem('token') !== null){
-      window.location = '/fichaTecnica';
+     // window.location = '/fichaTecnica';
       return null;
     } 
     else {

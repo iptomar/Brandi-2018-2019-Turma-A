@@ -19,7 +19,7 @@ class Create extends Component {
   }
 
   getAPI = async e => {
-    const request = await fetch('/api/fichatecnica/7', {
+    const request = await fetch(`/api/fichatecnica/${this.props.id}`, {
       headers: {
         'x-auth-token': sessionStorage.getItem('token')
       }

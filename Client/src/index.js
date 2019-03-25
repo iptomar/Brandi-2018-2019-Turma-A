@@ -17,7 +17,7 @@ ReactDOM.render(
             <Route path="/" exact={true} component={LoginPage} />
             <Route path="/registar" component={RegisterPage} />
             <Route path="/fichaTecnica/criar" component={CreateFichaTecnica}/>
-            <Route path="/fichaTecnica/ler" component={DetailsFichaTecnica}/>
+            <Route path="/fichaTecnica/details/:id" component={DetailsFichaTecnica} />
             <Route path="/fichaTecnica" component={IndexFichaTecnica}/>
         </Switch>
     </ BrowserRouter>

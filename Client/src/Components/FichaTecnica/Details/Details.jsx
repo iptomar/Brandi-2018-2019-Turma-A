@@ -4,16 +4,20 @@ import Edit from "./Edit";
 import AlertMsg from '../../AlertMsg';
 
 class Create extends Component {
-  constructor(props) {
+  constructor(props, {match}) {
     super(props);
+    // recolher id do url
+    let href = window.location.href.toString().split("/");
     this.state = {
       edit: false,
       alertText: '',
       alertisNotVisible: true,
-      alertColor: ''
+      alertColor: '',
+      id: href[5]
     };
     this.toggleEdit = this.toggleEdit.bind(this);
     this.delete = this.delete.bind(this);
+    console.log(match);
   }
 
   toggleEdit() {
@@ -23,7 +27,7 @@ class Create extends Component {
   }
 
   delete = async e => {
-    const request = await fetch('/api/fichatecnica/7/delete', {
+    const request = await fetch(`/api/fichatecnica/${this.state.id}/delete`, {
       method: 'POST',
       headers: {
         'x-auth-token': sessionStorage.getItem('token')
@@ -54,7 +58,7 @@ class Create extends Component {
           {
             // Caso o botão editar seja clicado
             !this.state.edit?
-              <Read />
+              <Read id={this.state.id} />
             :
               <Edit />
           }

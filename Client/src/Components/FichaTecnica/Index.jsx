@@ -14,11 +14,13 @@ class Index extends Component {
     const response = await fetch("/api/fichatecnica", {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        'x-auth-token': sessionStorage.getItem('token')
       }
     });
     //Aguardar API
-    await response.json().then(resp => { this.state.list = resp; });
+    await response.json().then(resp => this.setState({list: resp}));
+    console.log(this.state.list[0].designacao);
   };
 
 
@@ -32,7 +34,7 @@ class Index extends Component {
       if(this.state.list.length !== 0){
         visualList+=`<div className="card-deck">`;
       for (let index = 0; index < this.state.list.length; index++) {
-        visualList += `<div className="card" style="width: 18rem;"><img src="..." className="card-img-top" ><div className="card-body"><a href="/fichaTecnica/${this.state.list[index].id}/details" className="card-title">${this.state.list[index].descricao}</a></div></div>`;
+        visualList += `<div className="card" style="width: 18rem;"><img src="..." className="card-img-top" ><div className="card-body"><a href="/fichaTecnica/details/${this.state.list[index].fichaRegistoID}" className="card-title">${this.state.list[index].designacao}</a></div></div>`;
       }
       visualList+=`</div>`;
     }else{

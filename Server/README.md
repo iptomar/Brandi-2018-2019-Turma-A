@@ -90,7 +90,7 @@ se falha conexão com base de dados 500 Internal Server Error
 }
    
   
-## GET /api/fichatecnica/create
+## POST /api/fichatecnica/create
 ### **recebe:**
 
  -designacao, -processoLCRM, -processoCEARC, -dataEntrada, -dataConclusao, -dataSaida, -coordenacao, 

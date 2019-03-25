@@ -1,16 +1,16 @@
 import React, { Component } from "react";
+import AlertMsg from '../../AlertMsg';
 
 class Create extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      style: {
-        height: '300px',
-        width: '600px',
-        border: '1px solid black'
-      },
+      alertText: '',
+      alertisNotVisible: true,
+      alertColor: '',
       responseAPI: "",
-      loading: true
+      loading: true,
+      error: false
     };
   }
 
@@ -30,6 +30,13 @@ class Create extends Component {
         responseAPI: resp.resposta,
         loading: false
       });
+    }).catch( resp => {
+      this.setState({
+        error: true,
+        alertText: 'Não existe conexão com o servidor.',
+        alertisNotVisible: false,
+        alertColor: 'danger'
+      });
     });
   }
 
@@ -37,6 +44,9 @@ class Create extends Component {
     return (
         this.state.loading?
 
+          this.state.error? 
+            <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
+          :
           // Animação Loading
           <div class="d-flex justify-content-center">
             <div class="spinner-border" role="status" style={{width: '5rem', height: '5rem'}}>

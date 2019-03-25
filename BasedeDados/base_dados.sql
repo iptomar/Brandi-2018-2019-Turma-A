@@ -31,20 +31,35 @@ CREATE TABLE tbl_tecnicos
     PRIMARY KEY(tecnicoID),
     FOREIGN KEY(userFK) REFERENCES tbl_utilizadores(userID)
 );
-DROP TABLE IF EXISTS tbl_processos;
-CREATE TABLE tbl_processos
+DROP TABLE IF EXISTS tbl_interessados;
+CREATE TABLE tbl_interessados
 (
-    processoID INT NOT NULL AUTO_INCREMENT,
-	fichaRegisto INT,
-	objeto INT,
-    dataAberturaLCRM DATE NOT NULL,
-    dataEntradaLCRM DATE NOT NULL,
-    dataAberturaCEARC DATE NOT NULL,
-    dataEntradaCEARC DATE NOT NULL,	
-    FOREIGN KEY(fichaRegisto) REFERENCES tbl_fichasRegistos(fichaRegistoID),
-    FOREIGN KEY(objeto) REFERENCES tbl_objetos(objetoID),
-    PRIMARY KEY(processoID)
+    interessadoID INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    enderecoPostal VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    tipo VARCHAR(255) NOT NULL,
+    PRIMARY KEY(interessadoID)
 );
+DROP TABLE IF EXISTS tbl_fichasRegistos;
+CREATE TABLE tbl_fichasRegistos
+(
+    fichaRegistoID INT NOT NULL AUTO_INCREMENT,
+	visible bool not null, #EXTRA
+    designacao VARCHAR(255) NOT NULL,
+    processoLCRM VARCHAR(255) NOT NULL UNIQUE,
+    processoCEARC VARCHAR(255) NOT NULL UNIQUE,
+    dataEntrada DATE NOT NULL,
+    dataConclusao DATE,
+    dataSaida DATE,
+    coordenacao VARCHAR(255) NOT NULL,
+    direcaoTecnica VARCHAR(255) NOT NULL,
+    localidade VARCHAR(255) NOT NULL,
+    interessadoFK INT,
+    PRIMARY KEY(fichaRegistoID),
+    FOREIGN KEY(interessadoFK) REFERENCES tbl_interessados(interessadoID)
+);
+
 DROP TABLE IF EXISTS tbl_folhasDeObra;
 CREATE TABLE tbl_folhasDeObra
 (
@@ -58,14 +73,7 @@ CREATE TABLE tbl_folhasDeObra
     PRIMARY KEY(folhaDeObraID),
     FOREIGN KEY(processoCEARCFK) REFERENCES tbl_fichasRegistos(processoCEARC)
 );
-DROP TABLE IF EXISTS tbl_equipas;
-CREATE TABLE tbl_equipas
-(
-    equipaID INT NOT NULL AUTO_INCREMENT,
-    processoFK INT,
-    PRIMARY KEY(equipaID),
-    FOREIGN KEY(processoFK) REFERENCES tbl_processos(processoID)
-);
+
 DROP TABLE IF EXISTS tbl_equipasTecnicos;
 CREATE TABLE tbl_equipasTecnicos
 (
@@ -105,34 +113,8 @@ CREATE TABLE tbl_folhasDeObraMateriais
     FOREIGN KEY(folhaDeObraFK) REFERENCES tbl_folhasDeObra(folhaDeObraID),
     FOREIGN KEY(materialFK) REFERENCES tbl_materiais(materialID)
 );
-DROP TABLE IF EXISTS tbl_interessados;
-CREATE TABLE tbl_interessados
-(
-    interessadoID INT NOT NULL AUTO_INCREMENT,
-    nome VARCHAR(255) NOT NULL,
-    enderecoPostal VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    tipo VARCHAR(255) NOT NULL,
-    PRIMARY KEY(interessadoID)
-);
-DROP TABLE IF EXISTS tbl_fichasRegistos;
-CREATE TABLE tbl_fichasRegistos
-(
-    fichaRegistoID INT NOT NULL AUTO_INCREMENT,
-	visible bool not null, #EXTRA
-    designacao VARCHAR(255) NOT NULL,
-    processoLCRM VARCHAR(255) NOT NULL UNIQUE,
-    processoCEARC VARCHAR(255) NOT NULL UNIQUE,
-    dataEntrada DATE NOT NULL,
-    dataConclusao DATE,
-    dataSaida DATE,
-    coordenacao VARCHAR(255) NOT NULL,
-    direcaoTecnica VARCHAR(255) NOT NULL,
-    localidade VARCHAR(255) NOT NULL,
-    interessadoFK INT,
-    PRIMARY KEY(fichaRegistoID),
-    FOREIGN KEY(interessadoFK) REFERENCES tbl_interessados(interessadoID)
-);
+
+
 DROP TABLE IF EXISTS tbl_registoTecnicos;
 CREATE TABLE tbl_registoTecnicos
 (
@@ -458,6 +440,28 @@ CREATE TABLE tbl_objetos(
     FOREIGN KEY(documentoProduzidoFK) REFERENCES tbl_documentacaoProduzida(documentoProduzidoID),
     FOREIGN KEY(fonteFK) REFERENCES tbl_fontes(fonteID)
 );
+DROP TABLE IF EXISTS tbl_processos;
+CREATE TABLE tbl_processos
+(
+    processoID INT NOT NULL AUTO_INCREMENT,
+	fichaRegisto INT,
+	objeto INT,
+    dataAberturaLCRM DATE NOT NULL,
+    dataEntradaLCRM DATE NOT NULL,
+    dataAberturaCEARC DATE NOT NULL,
+    dataEntradaCEARC DATE NOT NULL,	
+    FOREIGN KEY(fichaRegisto) REFERENCES tbl_fichasRegistos(fichaRegistoID),
+    FOREIGN KEY(objeto) REFERENCES tbl_objetos(objetoID),
+    PRIMARY KEY(processoID)
+);DROP TABLE IF EXISTS tbl_equipas;
+CREATE TABLE tbl_equipas
+(
+    equipaID INT NOT NULL AUTO_INCREMENT,
+    processoFK INT,
+    PRIMARY KEY(equipaID),
+    FOREIGN KEY(processoFK) REFERENCES tbl_processos(processoID)
+);
+
 #ADICIONEI MAIS ISTO
 INSERT INTO TBL_ROLES (role) values("Admin");
 INSERT INTO TBL_ROLES (role) values("Aluno");

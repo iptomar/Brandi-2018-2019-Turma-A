@@ -77,5 +77,5 @@ INSERT INTO TBL_ROLES (role) values("Aluno");
 INSERT INTO tbl_utilizadores (login, email, password, salt, roleFK) values ("admin", "admin@mail.com", "$2b$10$WgipzU.uVvoM1nliHmhWu.dDrMuqJzm72yUk248ogM.Y9KLKgtdoS", "$2b$10$WgipzU.uVvoM1nliHmhWu.", 1); # password = admin
 INSERT INTO tbl_tecnicos (nome, habilitacoes, nivelProfissional, userFK) values ("Aníbal Teste", "Bom em tudo", 10, 1);
 INSERT INTO tbl_interessados (nome, enderecoPostal, email, tipo) values ("Esdrubal Teste", "2220-012", "EsdrubalTeste@mail.com", "Proprietário");
-INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao. processoLCRM, processoCEARC, dataEntrada, dataConclusao, dataEntrega, coordenacao, direcaoTecnica, localidade, interessadoFK) values (true, "Cadeira de madeira", "1234", "1234", "2018-03-26", "", "", "Mário Teste", "Maria Teste", "Tomar", 1);
+INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, interessadoFK) values (true, "Cadeira de madeira", "1234", "1234", "2018-03-26", "Mário Teste", "Maria Teste", "Tomar", 1);
 INSERT INTO tbl_registoTecnicos (fichaRegistoFK, tecnicoFK) values (1, 1);

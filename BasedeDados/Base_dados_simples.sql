@@ -27,7 +27,7 @@ CREATE TABLE tbl_tecnicos
     nome VARCHAR(255) NOT NULL,
     habilitacoes VARCHAR(255) NOT NULL,
     nivelProfissional INT NOT NULL,
-    userFK INT,
+    userFK INT NOT NULL,
     PRIMARY KEY(tecnicoID),
     FOREIGN KEY(userFK) REFERENCES tbl_utilizadores(userID)
 );
@@ -55,7 +55,7 @@ CREATE TABLE tbl_fichaRegistoIdentificacao
     coordenacao VARCHAR(255) NOT NULL,
     direcaoTecnica VARCHAR(255) NOT NULL,
     localidade VARCHAR(255) NOT NULL,
-    interessadoFK INT,
+    interessadoFK INT NOT NULL,
     PRIMARY KEY(fichaRegistoID),
     FOREIGN KEY(interessadoFK) REFERENCES tbl_interessados(interessadoID)
 );
@@ -64,8 +64,8 @@ DROP TABLE IF EXISTS tbl_registoTecnicos;
 CREATE TABLE tbl_registoTecnicos
 (
     registoTecnicoID INT NOT NULL AUTO_INCREMENT,
-    fichaRegistoFK INT,
-    tecnicoFK INT,
+    fichaRegistoFK INT NOT NULL,
+    tecnicoFK INT NOT NULL,
     PRIMARY KEY(registoTecnicoID),
     FOREIGN KEY(fichaRegistoFK) REFERENCES tbl_fichaRegistoIdentificacao(fichaRegistoID),
     FOREIGN KEY(tecnicoFK) REFERENCES tbl_tecnicos(tecnicoID)

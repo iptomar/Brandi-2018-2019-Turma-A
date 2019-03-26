@@ -41,7 +41,7 @@ CREATE TABLE tbl_interessados
     tipo VARCHAR(255) NOT NULL,
     PRIMARY KEY(interessadoID)
 );
-DROP TABLE IF EXISTS tbl_fichasRegistos;
+DROP TABLE IF EXISTS tbl_fichaRegistoIdentificacao;
 CREATE TABLE tbl_fichaRegistoIdentificacao
 (
     fichaRegistoID INT NOT NULL AUTO_INCREMENT,

@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import AlertMsg from './AlertMsg';
+import '../CssComponents/login.css';
 
 class Login extends Component {
   constructor() {
     super();
     this.state = {
-      alertText: '',
+      alertText: 'Utilizador ou palavra-passe erradas',
       alertisNotVisible: true,
-      alertColor: ''
+      alertColor: 'danger'
     };
 
   }
@@ -42,12 +43,12 @@ class Login extends Component {
     });
     //Aguardar API
     await response.json().then(resp => {
+      ;
       //Verificar o estado da resposta da API
       let status = resp.status;
       switch (status) {
         case "Authenticated":
           //Armazenar o token
-          
           sessionStorage.setItem('token', response.headers.get('x-auth-token'));
           //Armazenar os dados do utilizador
           sessionStorage.setItem('nome', resp.resposta.login);
@@ -55,11 +56,7 @@ class Login extends Component {
           window.location = '/fichaTecnica';
           break;
         case "NotAuthenticated":
-          this.setState({
-            alertText: "Utilizador ou palavra-passe erradas",
-            alertisNotVisible: false,
-            alertColor: 'danger'
-          });
+          this.setState({ alertisNotVisible: false });
           break;
         default:
           console.log("A API ESTÁ A ARDER,  DARIOOOOOOOOOOOOOOOOOOOOOO");
@@ -68,28 +65,31 @@ class Login extends Component {
   };
 
   render() {
-    if (sessionStorage.getItem('token') !== null){
+    if (sessionStorage.getItem('token') !== null) {
       window.location = '/fichaTecnica';
       return null;
-    } 
+    }
     else {
       return (
-        <div className="Login">
-          <div className="container form-login">
-            <p className="h4">Autenticação</p>
-            <form className="py-3" onSubmit={this.handleSubmit}>
-              <div className="form-group">
-                <label>Nome de utilizador:</label>
-                <input id="user" type="text" className="form-control" placeholder="Nome de utilizador" spellCheck="false" required />
-              </div>
-              <div className="form-group">
-                <label>Palavra-passe:</label>
-                <input id="pass" type="password" className="form-control" placeholder="Palavra-passe" required />
-              </div>
-              <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
-              <button type="submit" className="btn btn-primary">Entrar</button>
-            </form>
-          </div>
+        <div className="center">
+          
+          <form className="form-entrar" onSubmit={this.handleSubmit}>
+            <div className="text-center mb-4">
+              <img className="mb-4" src="favicon.ico" alt="" width="72" height="72" />
+              <h1 className="h3 mb-5 font-weight-normal">Entrar</h1>
+            </div>
+            <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
+            <div className="form-label-group">
+              <input type="text" id="user" className="form-control" placeholder="Utilizador" required autoFocus />
+              <label>Utilizador</label>
+            </div>
+            <div className="form-label-group">
+              <input type="password" id="pass" className="form-control" placeholder="Password" required />
+              <label>Password</label>
+            </div>
+            
+            <button className="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+          </form>
         </div>
       );
     }

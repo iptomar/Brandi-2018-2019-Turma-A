@@ -14,7 +14,7 @@ import IndexFichaTecnica from './MasterComponents/Ficha Tecnica/IndexFichaTecnic
 ReactDOM.render(
     <BrowserRouter>
         <Switch>
-            <Route path="/" exact={true} component={LoginPage} />
+            <Route path="/" exact={true} component={LoginPage}/>
             <Route path="/registar" component={RegisterPage} />
             <Route path="/fichaTecnica/criar" component={CreateFichaTecnica}/>
             <Route path="/fichaTecnica/details/:id" component={DetailsFichaTecnica} />

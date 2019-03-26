@@ -34,7 +34,8 @@ class Create extends Component {
     const response = await fetch("/api/fichatecnica/create", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        'x-auth-token': sessionStorage.getItem('token')
       },
       body: JSON.stringify(data)
     });

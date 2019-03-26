@@ -1,11 +1,19 @@
+.img-logo-ipt{
+  padding-top: 30px;
+}
+
+.form-control:focus{
+  box-shadow: 0 0 10px #40d632;
+  border-color: #40d632;
+}
+
 .form-entrar {
   width: 100%;
   max-width: 420px;
-  padding-top: 120px;
+  padding-top: 150px;
   padding-bottom: 40px;
   margin: auto;
 }
-
 
 .form-label-group {
   position: relative;

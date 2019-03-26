@@ -5,12 +5,12 @@ import '../CssComponents/login.css';
 class Login extends Component {
   constructor() {
     super();
+    document.body.style = 'background: rgb(235, 235, 235);'
     this.state = {
       alertText: 'Utilizador ou palavra-passe erradas',
       alertisNotVisible: true,
       alertColor: 'danger'
     };
-
   }
 
   handleSubmit = async e => {
@@ -72,11 +72,11 @@ class Login extends Component {
     else {
       return (
         <div className="center">
-          
+        <img src="http://portal2.ipt.pt/img/logo.png" className="img-logo-ipt" alt="" align="right"/>
           <form className="form-entrar" onSubmit={this.handleSubmit}>
             <div className="text-center mb-4">
               <img className="mb-4" src="favicon.ico" alt="" width="72" height="72" />
-              <h1 className="h3 mb-5 font-weight-normal">Entrar</h1>
+              <h1 className="h2 mb-5 font-weight-normal">Entrar</h1>
             </div>
             <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
             <div className="form-label-group">
@@ -88,7 +88,7 @@ class Login extends Component {
               <label>Password</label>
             </div>
             
-            <button className="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+            <button className="btn btn-lg btn-success btn-block" type="submit">Entrar</button>
           </form>
         </div>
       );

@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const roleRouter = require("./modulos/Routers/RolesUtilizadorRoutes");
 const userRouter = require("./modulos/Routers/UtilizadoresRouter");
 const fichaTecnicaRouter = require("./modulos/Routers/FichaTecnicaRouter");
+const processosRouter = require("./modulos/Routers/ProcessosRouter");
 //cria ligacao à base de dados
 let bd = new _basedeDados.BasedeDados(
   "localhost",
@@ -37,4 +38,10 @@ fichaTecnicaRouter.readFichaTecnicaRoute(app, bd);
 fichaTecnicaRouter.deleteFichaTecnicaRoute(app, bd);
 //rota que devolve todas as fichas tecnicas
 fichaTecnicaRouter.getTodasFichasTecnicasRoute(app, bd);
+//rota que devolve um processo
+processosRouter.readProcessoRoute(app, bd);
+//rota que cria um processo
+processosRouter.createProcessoRoute(app, bd);
+//rota que edita um processo
+processosRouter.updateProcessoRoute(app, bd);
 app.listen(port, () => console.log("Listening na porta", port));

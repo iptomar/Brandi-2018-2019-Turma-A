@@ -2,7 +2,7 @@
   padding-top: 30px;
 }
 
-.form-control:focus{
+.form-entrar > .form-label-group > .form-control:focus{
   box-shadow: 0 0 10px #40d632;
   border-color: #40d632;
 }

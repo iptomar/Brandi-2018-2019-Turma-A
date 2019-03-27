@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import AlertMsg from './AlertMsg';
 import '../CssComponents/login.css';
+import iptlogo from '../Images/ipt.png';
+import lcrlogo from '../Images/lcr_ipt.png';
+import cesarebrandi from '../Images/brandi.jpg';
 
 class Login extends Component {
   constructor() {
@@ -33,6 +36,7 @@ class Login extends Component {
       login: document.getElementById('user').value,
       password: hexCodes.join('')
     };
+    console.log(loginData.password);
     //Enviar pedidos
     const response = await fetch('/auth/login', {
       method: 'POST',
@@ -74,16 +78,16 @@ class Login extends Component {
 
         <div className="center">
           <a href="http://www.cr.estt.ipt.pt/" target="_blank" rel="noopener noreferrer">
-            <img src="http://www.cr.estt.ipt.pt/labs/lcr_C_2a.jpg" className="img-logo-ipt" alt="" width="170px" align="left"/>
+            <img src={lcrlogo}className="img-logo-ipt" alt="" width="170px" align="left"/>
           </a>
           <a href="http://portal2.ipt.pt/" target="_blank" rel="noopener noreferrer">
-            <img src="http://portal2.ipt.pt/img/logo.png" className="img-logo-ipt" alt="" align="right"/>
+            <img src={iptlogo} className="img-logo-ipt" alt="" align="right"/>
           </a>
           
           <form className="form-entrar" onSubmit={this.handleSubmit}>
             <div className="text-center mb-4">
               <a href="https://en.wikipedia.org/wiki/Cesare_Brandi" target="_blank" rel="noopener noreferrer">
-                <img className="mb-4" src="https://nomundodosmuseus.files.wordpress.com/2007/05/cesare-brandi.jpg" alt="" width="90"/>
+                <img className="mb-4" src={cesarebrandi} alt="" height="180" width="280"/>
               </a>
               <h1 className="h2 mb-5 font-weight-normal">Brandi</h1>
             </div>

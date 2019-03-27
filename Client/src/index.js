@@ -11,8 +11,9 @@ import ContactPage from './MasterComponents/ContactPage';
 import CreateFichaTecnica from './MasterComponents/Ficha Tecnica/CreateFichaTecnica';
 import DetailsFichaTecnica from './MasterComponents/Ficha Tecnica/DetailsFichaTecnica';
 import IndexFichaTecnica from './MasterComponents/Ficha Tecnica/IndexFichaTecnica';
-import CreateFichaRI from './MasterComponents/FichaRegistoIdentificacao/CreateFichaRI';
 import DetailsFichaRI from './MasterComponents/FichaRegistoIdentificacao/DetailsFichaRI';
+import CreateFichaRI from './MasterComponents/FichaRegistoIdentificacao/CreateFichaRI';
+import IndexFichaRI from './MasterComponents/FichaRegistoIdentificacao/IndexFichaRI';
 
 
 ReactDOM.render(
@@ -26,6 +27,7 @@ ReactDOM.render(
             <Route path="/fichaTecnica/details/:id" component={DetailsFichaTecnica} />
             <Route path="/fichaTecnica" component={IndexFichaTecnica}/>
             {/* Ficha Registo Identificacao */}
+            <Route path="/fichaRI/" component={IndexFichaRI}/>
             <Route path="/fichaRI/criar" component={CreateFichaRI}/>
             <Route path="/fichaRI/:id" component={DetailsFichaRI}/>
         </Switch>

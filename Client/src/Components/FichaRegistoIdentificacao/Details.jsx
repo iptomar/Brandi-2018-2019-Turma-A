@@ -38,9 +38,9 @@ class Details extends Component {
   };
 
   render() {
-    // if (sessionStorage.getItem('token') == null) {
-    //   window.location = '/';
-    // } else {
+    if (sessionStorage.getItem('token') == null) {
+       window.location = '/';
+    } else {
       return (
         //Verifica se existe o token
         <div className="Inicio container">
@@ -129,7 +129,7 @@ class Details extends Component {
           </div>
         </div>
       );
-    // }
+    }
   }
 }
 export default Details;

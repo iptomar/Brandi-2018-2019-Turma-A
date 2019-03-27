@@ -57,7 +57,7 @@ class Login extends Component {
           //Armazenar os dados do utilizador
           sessionStorage.setItem('nome', resp.resposta.login);
           //Redirect
-          window.location = '/fichaTecnica';
+          window.location = '/fichaRI';
           break;
         case "NotAuthenticated":
           this.setState({ alertisNotVisible: false });

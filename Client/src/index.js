@@ -8,12 +8,15 @@ import RegisterPage from './MasterComponents/RegisterPage';
 import LoginPage from './MasterComponents/LoginPage';
 import AboutPage from './MasterComponents/AboutPage';
 import ContactPage from './MasterComponents/ContactPage';
+// FICHAS TÉCNICAS
 import CreateFichaTecnica from './MasterComponents/Ficha Tecnica/CreateFichaTecnica';
 import DetailsFichaTecnica from './MasterComponents/Ficha Tecnica/DetailsFichaTecnica';
 import IndexFichaTecnica from './MasterComponents/Ficha Tecnica/IndexFichaTecnica';
-import DetailsFichaRI from './MasterComponents/FichaRegistoIdentificacao/DetailsFichaRI';
-import CreateFichaRI from './MasterComponents/FichaRegistoIdentificacao/CreateFichaRI';
+// FICHAS RI
 import IndexFichaRI from './MasterComponents/FichaRegistoIdentificacao/IndexFichaRI';
+import CreateFichaRI from './MasterComponents/FichaRegistoIdentificacao/CreateFichaRI';
+import DetailsFichaRI from './MasterComponents/FichaRegistoIdentificacao/DetailsFichaRI';
+
 
 
 ReactDOM.render(
@@ -23,19 +26,17 @@ ReactDOM.render(
             <Route path="/registar" component={RegisterPage} />
             <Route path="/sobre" component={AboutPage} />
             <Route path="/contactos" component={ContactPage} />
+            {/* FICHA TÉCNICA */}
+            {/* <Route path="/fichaTecnica" component={IndexFichaTecnica}/>
             <Route path="/fichaTecnica/criar" component={CreateFichaTecnica}/>
-            <Route path="/fichaTecnica/details/:id" component={DetailsFichaTecnica} />
-            <Route path="/fichaTecnica" component={IndexFichaTecnica}/>
+            <Route path="/fichaTecnica/details/:id" component={DetailsFichaTecnica} /> */}
             {/* Ficha Registo Identificacao */}
-            <Route path="/fichaRI/" component={IndexFichaRI}/>
             <Route path="/fichaRI/criar" component={CreateFichaRI}/>
             <Route path="/fichaRI/:id" component={DetailsFichaRI}/>
+            <Route path="/fichaRI/" component={IndexFichaRI}/>
         </Switch>
     </ BrowserRouter>
     , document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();

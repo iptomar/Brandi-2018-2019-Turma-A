@@ -70,7 +70,7 @@ class Login extends Component {
 
   render() {
     if (sessionStorage.getItem('token') !== null) {
-      window.location = '/fichaTecnica';
+      window.location = '/fichaRI';
       return null;
     }
     else {

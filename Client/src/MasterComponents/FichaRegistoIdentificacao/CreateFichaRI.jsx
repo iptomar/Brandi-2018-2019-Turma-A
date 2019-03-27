@@ -6,7 +6,7 @@ import Create from "../../Components/FichaRegistoIdentificacao/Create";
 class CreateFichaTecnica extends Component {
   render() {
     return (
-      <div className="LoginPage">
+      <div className="CreateRIPage">
         <Header />
         <Create />
         <Footer />

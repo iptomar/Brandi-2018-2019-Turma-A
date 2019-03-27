@@ -3,10 +3,10 @@ import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import Index from "../../Components/FichaRegistoIdentificacao/Index";
 
-class IndexFichaTecnica extends Component {
+class IndexFichaRI extends Component {
   render() {
     return (
-      <div className="LoginPage">
+      <div className="IndexFichaRIPage">
         <Header />
         <Index />
         <Footer />
@@ -15,4 +15,4 @@ class IndexFichaTecnica extends Component {
   }
 }
 
-export default IndexFichaTecnica;
+export default IndexFichaRI;

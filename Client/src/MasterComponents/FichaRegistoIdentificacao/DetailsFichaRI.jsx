@@ -6,7 +6,7 @@ import Details from "../../Components/FichaRegistoIdentificacao/Details";
 class DetailsFichaTecnica extends Component {
   render() {
     return (
-      <div className="LoginPage">
+      <div className="DetailsRIPage">
         <Header />
         <Details />
         <Footer />

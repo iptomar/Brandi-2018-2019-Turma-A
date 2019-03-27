@@ -46,20 +46,134 @@ se não houver conexão com a base de dados devolver HTTP CODE 500
 ### **devolve:**
 se com sucesso HTTP CODE 200
 {
-  STATUS: "authenticated"
-  response:{
-    userID:1
-    login:"utilizadorTeste"
-    email"UtilizadorTeste@ipt.pt"
-  }
+    "status": "Authenticated",
+    "resposta": {
+        "userID": 1,
+        "login": "admin",
+        "email": "admin@mail.com",
+        "roleFK": 1
+    }
 }
 se falha conexão com base de dados HTTP CODE 500
 { 
   STATUS: "NotAuthenticated"
   response:"Ocorreu um erro"
 }
+se os campos estiverem incorretos CODE 400 
+{
+    "status": "NotAuthenticated",
+    "resposta": "Campos inválidos"
+}
+
+## GET /api/roles
+### **recebe:**
+### **devolve:**
+se com sucesso HTTP CODE 200 OK
+{
+    "stat": "Authenticated",
+    "resposta": [
+        {
+            "roleID": 1,
+            "role": "Admin"
+        },
+        {
+            "roleID": 2,
+            "role": "Aluno"
+        }
+    ]
+}
+
+se falha conexão com base de dados 500 Internal Server Error
+{
+    "stat": "Authenticated",
+    "resposta": {}
+}
+   
+  
+## POST /api/fichatecnica/create
+### **recebe:**
+
+ -designacao, -processoLCRM, -processoCEARC, -dataEntrada, -dataConclusao, -dataSaida, -coordenacao, 
+ -direcaoTecnica, -localidade, -interessadoFK
+ 
+### **devolve:** 
+se com sucesso HTTP CODE 201 CREATED
+   {
+    "stat": "Registed",
+    "resposta": {
+        "fieldCount": 0,
+        "affectedRows": 1,
+        "insertId": 4,
+        "serverStatus": 2,
+        "warningCount": 0,
+        "message": "",
+        "protocol41": true,
+        "changedRows": 0
+    }
+}
+se falha conexão com base de dados 
+
+se os campos estiverem incorretos CODE 400   
+
+## POST /api/fichatecnica/:id/edit
+### **recebe:**
+ -designacao, -processoLCRM, -processoCEARC, -dataEntrada, -dataConclusao, -dataSaida, -coordenacao, 
+ -direcaoTecnica, -localidade, -interessadoFK, -fichaRegistoID
+### **devolve:**
+se com sucesso HTTP CODE 201 created
+
+{
+    "stat": "Updated",
+    "resposta": {
+        "fieldCount": 0,
+        "affectedRows": 1,
+        "insertId": 0,
+        "serverStatus": 2,
+        "warningCount": 0,
+        "message": "(Rows matched: 1  Changed: 1  Warnings: 0",
+        "protocol41": true,
+        "changedRows": 1
+    }
+}
+se falha conexão com base de dados
+{
+    "stat": "NotUpdated",
+    "resposta": {}
+}
 se os campos estiverem incorretos
 {
-  status:"NotAuthenticated"
-  response:{}
+    "stat": "NotUpdated",
+    "resposta": {}
 }
+
+## GET /api/fichatecnica/:id
+### **recebe:**
+### **devolve:**
+se com sucesso HTTP CODE 200 created
+{
+    "stat": "Accepted",
+    "resposta": {
+        "fichaRegistoID": 5,
+        "visible": 1,
+        "designacao": "teste1",
+        "processoLCRM": "teste1",
+        "processoCEARC": "teste1",
+        "dataEntrada": "2000-01-01T00:00:00.000Z",
+        "dataConclusao": null,
+        "dataSaida": "2000-01-03T00:00:00.000Z",
+        "coordenacao": "7",
+        "direcaoTecnica": "8",
+        "localidade": "9",
+        "interessadoFK": 1
+    }
+}
+
+
+## POST /api/fichatecnica/:id/delete
+### **recebe:**
+### **devolve:**
+se com sucesso HTTP CODE 200 created
+{
+    "stat": "Deleted"
+}
+

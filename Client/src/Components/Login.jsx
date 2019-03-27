@@ -1,3 +1,5 @@
+// 2 | teste | teste          | $2b$10$CwkTD5D9Ez02Uomn0kQcJ.fUZMDCQEL1hAkP6kSILXBRV8Ax/FgTK | $2b$10$CwkTD5D9Ez02Uomn0kQcJ. |      1 |
+
 import React, { Component } from "react";
 import AlertMsg from './AlertMsg';
 import '../CssComponents/login.css';
@@ -7,7 +9,6 @@ import lcrlogo from '../Images/lcr_ipt.png';
 class Login extends Component {
   constructor() {
     super();
-    document.body.style = 'background: rgb(235, 235, 235);'
     this.state = {
       alertText: 'Utilizador ou palavra-passe erradas',
       alertisNotVisible: true,

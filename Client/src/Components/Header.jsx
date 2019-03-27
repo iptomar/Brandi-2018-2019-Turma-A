@@ -13,7 +13,7 @@ class Header extends Component {
   render() {
     return (
       <div className="Header">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light">
           <a className="navbar-brand" href="/">
             <img
               src={favicon}

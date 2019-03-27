@@ -23,7 +23,6 @@ class Index extends Component {
     console.log(this.state.list[0].designacao);
   };
 
-
   render() {
     var visualList = "";
     //Verifica se existe o token

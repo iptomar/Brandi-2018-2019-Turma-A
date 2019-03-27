@@ -47,7 +47,8 @@ class Register extends Component {
     const response = await fetch("/auth/register", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        'x-auth-token': sessionStorage.getItem('token')
       },
       body: JSON.stringify(registerData)
     });
@@ -83,66 +84,71 @@ class Register extends Component {
   };
 
   render() {
-    return (
-      <div className="Login">
-        <div className="container form-login">
-          <p className="h4">Registar novo utilizador</p>
-          <form className="py-3" onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <label>Nome de utilizador:</label>
-              <input
-                id="user"
-                type="text"
-                className="form-control"
-                placeholder="Nome de utilizador"
-                spellCheck="false"
-                required
+    //Verifica se existe o token
+    if (sessionStorage.getItem('token') == null) {
+      window.location = '/';
+    } else {
+      return (
+        <div className="Login">
+          <div className="container form-login">
+            <p className="h4">Registar novo utilizador</p>
+            <form className="py-3" onSubmit={this.handleSubmit}>
+              <div className="form-group">
+                <label>Nome de utilizador:</label>
+                <input
+                  id="user"
+                  type="text"
+                  className="form-control"
+                  placeholder="Nome de utilizador"
+                  spellCheck="false"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Email</label>
+                <input
+                  id="email"
+                  type="text"
+                  className="form-control"
+                  placeholder="Email"
+                  spellCheck="false"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Palavra-passe:</label>
+                <input
+                  id="pass"
+                  type="password"
+                  className="form-control"
+                  placeholder="Palavra-passe"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Confirmar palavra-passe:</label>
+                <input
+                  id="passConfirmer"
+                  type="password"
+                  className="form-control"
+                  placeholder="Confirmar palavra-passe"
+                  required
+                />
+              </div>
+              <AlertMsg
+                text={this.state.alertText}
+                isNotVisible={this.state.alertisNotVisible}
+                alertColor={this.state.alertColor}
               />
-            </div>
-            <div className="form-group">
-              <label>Email</label>
-              <input
-                id="email"
-                type="text"
-                className="form-control"
-                placeholder="Email"
-                spellCheck="false"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label>Palavra-passe:</label>
-              <input
-                id="pass"
-                type="password"
-                className="form-control"
-                placeholder="Palavra-passe"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label>Confirmar palavra-passe:</label>
-              <input
-                id="passConfirmer"
-                type="password"
-                className="form-control"
-                placeholder="Confirmar palavra-passe"
-                required
-              />
-            </div>
-            <AlertMsg
-              text={this.state.alertText}
-              isNotVisible={this.state.alertisNotVisible}
-              alertColor={this.state.alertColor}
-            />
-            <button type="submit" className="btn btn-primary">
-              Registar
+              <button type="submit" className="btn btn-primary">
+                Registar
             </button>
-          </form>
-          <div className="feedback alert" />
+            </form>
+            <div className="feedback alert" />
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 

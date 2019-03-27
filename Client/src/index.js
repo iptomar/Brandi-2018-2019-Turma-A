@@ -9,6 +9,7 @@ import LoginPage from './MasterComponents/LoginPage';
 import CreateFichaTecnica from './MasterComponents/Ficha Tecnica/CreateFichaTecnica';
 import DetailsFichaTecnica from './MasterComponents/Ficha Tecnica/DetailsFichaTecnica';
 import IndexFichaTecnica from './MasterComponents/Ficha Tecnica/IndexFichaTecnica';
+import CreateFichaRI from './MasterComponents/FichaRegistoIdentificacao/CreateFichaRI';
 
 
 ReactDOM.render(
@@ -19,6 +20,8 @@ ReactDOM.render(
             <Route path="/fichaTecnica/criar" component={CreateFichaTecnica}/>
             <Route path="/fichaTecnica/details/:id" component={DetailsFichaTecnica} />
             <Route path="/fichaTecnica" component={IndexFichaTecnica}/>
+            {/* Ficha Registo Identificacao */}
+            <Route path="/fichaRI/criar" component={CreateFichaRI}/>
         </Switch>
     </ BrowserRouter>
     , document.getElementById('root')

@@ -1,0 +1,197 @@
+{
+	"info": {
+		"_postman_id": "8a97a710-8921-4286-a03b-d8fdeae856b4",
+		"name": "Testes Login e Registo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Registo de utilizador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b232aaae-cc98-462e-8538-baa900a331b1",
+						"exec": [
+							" var reqBody = request.data;",
+							" pm.globals.set(\"email_global\", reqBody.email);",
+							" ",
+							" pm.globals.set(\"login_global\", reqBody.login);",
+							"",
+							"if(pm.response.code == 201){",
+							"    pm.test(\"Registo efetuado com sucesso\", function () {",
+							"        pm.response.to.have.status(201);",
+							"    });",
+							"}else if(pm.response.code == 400){",
+							"    pm.test(\"Existem campos repetidos\", function () {",
+							"        pm.response.to.have.status(201);",
+							"    });",
+							"}else if(pm.response.code == 500) {",
+							"     pm.test(\"Erro na base de dados\", function () {",
+							"        pm.response.to.have.status(201);",
+							"    });",
+							"}",
+							"",
+							"pm.test(\"Resposta de status = Registed\", function () {",
+							" var jsonData = pm.response.json();",
+							" pm.expect(jsonData.status).to.eql(\"Registed\");",
+							"});",
+							"",
+							"pm.test(\"Resposta de 'response' = UserRegisted\", function () {",
+							" var jsonData = pm.response.json();",
+							" pm.expect(jsonData.response).to.eql(\"UserRegisted\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "login",
+							"value": "teste",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "teste@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "teste",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login de utilizador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5ffe2622-fed2-40d5-8bf1-99cada18e056",
+						"exec": [
+							"if(pm.response.code == 200){",
+							"    pm.test(\"Ligação à API efetuada com sucesso\", function () {",
+							"        pm.response.to.have.status(200);",
+							"    });",
+							"}else if(pm.response.code == 500){",
+							"    pm.test(\"Falha de conexão com a base de dados\", function () {",
+							"        pm.response.to.have.status(200);",
+							"    });",
+							"}",
+							"",
+							"pm.test(\"Resposta de status = Authenticated\", function () {",
+							" var jsonData = pm.response.json();",
+							" pm.expect(jsonData.status).to.eql(\"Authenticated\");",
+							"});",
+							"",
+							"pm.test(\"Login correto\", function () {",
+							" var reqBody = request.data;",
+							" var jsonData = pm.response.json();",
+							" pm.expect(jsonData.response.login).to.eql(reqBody.login);",
+							"});",
+							"",
+							"pm.test(\"Email correto\", function () {",
+							" var reqBody = request.data;",
+							" var jsonData = pm.response.json();",
+							" pm.expect(jsonData.response.email).to.eql(pm.globals.get(\"email_global\"));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "login",
+							"value": "teste",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "teste",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "2ddaffd1-7b2f-4389-a1ca-3c7a89a6f82b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "d644e39d-bd58-4176-879b-8849ce5df759",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

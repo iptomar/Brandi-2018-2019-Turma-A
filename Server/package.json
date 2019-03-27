@@ -1,0 +1,21 @@
+{
+  "name": "node-react",
+  "version": "1.0.0",
+  "scripts": {
+    "client": "cd client && npm start",
+    "server": "cd server && nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+  },
+  "dependencies": {
+    "bcrypt": "^3.0.4",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.2",
+    "joi": "^14.3.1",
+    "jsonwebtoken": "^8.5.0",
+    "mysql": "^2.16.0",
+    "nodemon": "^1.18.10"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0"
+  }
+}

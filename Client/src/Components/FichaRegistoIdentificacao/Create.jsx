@@ -29,7 +29,7 @@ class Create extends Component {
       coordenacao: document.getElementById("coord").value,
       direcaoTecnica: document.getElementById("dirTecn").value,
       localidade: document.getElementById("endPostLocal").value,
-      interessadoFK: 0
+      interessadoFK: 1
     };
 
     //Enviar pedidos
@@ -43,6 +43,7 @@ class Create extends Component {
     });
     //Aguardar API
     await response.json().then(resp => {
+      console.log(resp);
       let status = resp.stat;
       switch (status) {
         case "DatabaseError":
@@ -52,7 +53,7 @@ class Create extends Component {
             alertColor: "danger"
           });
           break;
-        case "Ficha inserida":
+        case "Registed":
           this.setState({
             alertisNotVisible: false
           });

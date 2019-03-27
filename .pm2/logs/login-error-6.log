@@ -1,0 +1,131 @@
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+TypeError: Cannot read property 'length' of undefined
+    at Query.<anonymous> (/home/operador/brandiB/Backend/NodeJS/login.js:40:16)
+    at Query.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:502:10)
+    at Query._callback (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:468:16)
+    at Query.Sequence.end (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/sequences/Sequence.js:83:24)
+    at Query.ErrorPacket (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/sequences/Query.js:90:8)
+    at Protocol._parsePacket (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Protocol.js:278:23)
+    at Parser.write (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Parser.js:76:12)
+    at Protocol.write (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Protocol.js:38:16)
+    at Socket.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:91:28)
+    at Socket.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:502:10)
+TypeError: Cannot read property 'length' of undefined
+    at Query.<anonymous> (/home/operador/brandiB/Backend/NodeJS/login.js:40:16)
+    at Query.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:502:10)
+    at Query._callback (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:468:16)
+    at Query.Sequence.end (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/sequences/Sequence.js:83:24)
+    at Query.ErrorPacket (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/sequences/Query.js:90:8)
+    at Protocol._parsePacket (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Protocol.js:278:23)
+    at Parser.write (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Parser.js:76:12)
+    at Protocol.write (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Protocol.js:38:16)
+    at Socket.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:91:28)
+    at Socket.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:502:10)
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+TypeError: Cannot read property 'length' of undefined
+    at Query.<anonymous> (/home/operador/brandiB/Backend/NodeJS/login.js:40:16)
+    at Query.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:502:10)
+    at Query._callback (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:468:16)
+    at Query.Sequence.end (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/sequences/Sequence.js:83:24)
+    at Query.ErrorPacket (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/sequences/Query.js:90:8)
+    at Protocol._parsePacket (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Protocol.js:278:23)
+    at Parser.write (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Parser.js:76:12)
+    at Protocol.write (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Protocol.js:38:16)
+    at Socket.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:91:28)
+    at Socket.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:502:10)
+TypeError: Cannot read property 'length' of undefined
+    at Query.<anonymous> (/home/operador/brandiB/Backend/NodeJS/login.js:40:16)
+    at Query.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:502:10)
+    at Query._callback (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:468:16)
+    at Query.Sequence.end (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/sequences/Sequence.js:83:24)
+    at Query.ErrorPacket (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/sequences/Query.js:90:8)
+    at Protocol._parsePacket (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Protocol.js:278:23)
+    at Parser.write (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Parser.js:76:12)
+    at Protocol.write (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Protocol.js:38:16)
+    at Socket.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:91:28)
+    at Socket.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:502:10)
+TypeError: Cannot read property 'length' of undefined
+    at Query.<anonymous> (/home/operador/brandiB/Backend/NodeJS/login.js:40:16)
+    at Query.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:502:10)
+    at Query._callback (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:468:16)
+    at Query.Sequence.end (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/sequences/Sequence.js:83:24)
+    at Query.ErrorPacket (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/sequences/Query.js:90:8)
+    at Protocol._parsePacket (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Protocol.js:278:23)
+    at Parser.write (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Parser.js:76:12)
+    at Protocol.write (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Protocol.js:38:16)
+    at Socket.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:91:28)
+    at Socket.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:502:10)
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+TypeError: Cannot read property 'length' of undefined
+    at Query.<anonymous> (/home/operador/brandiB/Backend/NodeJS/login.js:40:16)
+    at Query.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:502:10)
+    at Query._callback (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:468:16)
+    at Query.Sequence.end (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/sequences/Sequence.js:83:24)
+    at Query.ErrorPacket (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/sequences/Query.js:90:8)
+    at Protocol._parsePacket (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Protocol.js:278:23)
+    at Parser.write (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Parser.js:76:12)
+    at Protocol.write (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Protocol.js:38:16)
+    at Socket.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:91:28)
+    at Socket.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:502:10)
+TypeError: Cannot read property 'length' of undefined
+    at Query.<anonymous> (/home/operador/brandiB/Backend/NodeJS/login.js:40:16)
+    at Query.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:502:10)
+    at Query._callback (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:468:16)
+    at Query.Sequence.end (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/sequences/Sequence.js:83:24)
+    at Query.ErrorPacket (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/sequences/Query.js:90:8)
+    at Protocol._parsePacket (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Protocol.js:278:23)
+    at Parser.write (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Parser.js:76:12)
+    at Protocol.write (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Protocol.js:38:16)
+    at Socket.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:91:28)
+    at Socket.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:502:10)
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+Error: ENOENT: no such file or directory, stat '/home/operador/brandiB/Frontend/public/index.html'
+TypeError: Cannot read property 'length' of undefined
+    at Query.<anonymous> (/home/operador/brandiB/Backend/NodeJS/login.js:40:16)
+    at Query.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:502:10)
+    at Query._callback (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:468:16)
+    at Query.Sequence.end (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/sequences/Sequence.js:83:24)
+    at Query.ErrorPacket (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/sequences/Query.js:90:8)
+    at Protocol._parsePacket (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Protocol.js:278:23)
+    at Parser.write (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Parser.js:76:12)
+    at Protocol.write (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Protocol.js:38:16)
+    at Socket.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:91:28)
+    at Socket.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:502:10)
+Error: Connection lost: The server closed the connection.
+    at Protocol.end (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/protocol/Protocol.js:112:13)
+    at Socket.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:97:28)
+    at Socket.<anonymous> (/home/operador/brandiB/Backend/NodeJS/node_modules/mysql/lib/Connection.js:502:10)
+    at emitNone (events.js:111:20)
+    at Socket.emit (events.js:208:7)
+    at endReadableNT (_stream_readable.js:1064:12)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickDomainCallback (internal/process/next_tick.js:218:9)

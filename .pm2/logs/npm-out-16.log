@@ -1,0 +1,15 @@
+
+> notes-app-client@0.1.0 start /home/operador/brandiB/Frontend/notes-app-client
+> PORT=44000 react-scripts start
+
+Starting the development server...
+
+Compiled successfully!
+
+You can now view notes-app-client in the browser.
+
+  http://localhost:44000/
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+

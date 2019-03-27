@@ -86,7 +86,7 @@ class Register extends Component {
   render() {
     //Verifica se existe o token
     if (sessionStorage.getItem('token') == null) {
-      window.location = '/';
+       window.location = '/';
     } else {
       return (
         <div className="Login">

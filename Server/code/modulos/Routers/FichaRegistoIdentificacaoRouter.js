@@ -1,12 +1,14 @@
-const fichaTecnica = require("../CRUDS/FichaTecnica");
+const fichaRegistoIdentificacao = require("../CRUDS/FichaRegistoIdentificacao");
 const getToken = require("../Auxiliares/Token");
 
 /**
- * Rota que retorna todas as fichas técnicas
+ * Rota que retorna todas as fichas RegistoIdentificacao
  */
-exports.getTodasFichasTecnicasRoute = async (app, bd) => {
-  app.get("/api/fichatecnica", async (req, resp) => {
-    let resposta_servidor = await fichaTecnica.getAllFichas(bd);
+exports.getTodasFichasRegistoIdentificacaoRoute = async (app, bd) => {
+  app.get("/api/fichaRegistoIdentificacao", async (req, resp) => {
+    let resposta_servidor = await fichaRegistoIdentificacao.getAllFichasRegistoIdentificacao(
+      bd
+    );
     let code = 200;
     if (resposta_servidor.stat === 1) {
       code = 400;
@@ -16,10 +18,10 @@ exports.getTodasFichasTecnicasRoute = async (app, bd) => {
 };
 
 /**
- * Rota para criar uam ficha tecnica
+ * Rota para criar uam ficha RegistoIdentificacao
  */
-exports.createFichaTecnicaRoute = async (app, bd) => {
-  app.post("/api/fichatecnica/create", async (req, resp) => {
+exports.createfichaRegistoIdentificacaoRoute = async (app, bd) => {
+  app.post("/api/fichaRegistoIdentificacao/create", async (req, resp) => {
     let resposta_servidor = { stat: "Authenticated", resposta: {} };
     //HTTP CODE ACCEPTED
     let code = 201;
@@ -48,20 +50,23 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
           processoCEARC: req.body.processoCEARC,
           dataEntrada: req.body.dataEntrada,
           dataConclusao: req.body.dataConclusao,
-          dataSaida: req.body.dataSaida,
+          dataEntrega: req.body.dataEntrega,
           coordenacao: req.body.coordenacao,
           direcaoTecnica: req.body.direcaoTecnica,
           localidade: req.body.localidade,
           interessadoFK: req.body.interessadoFK
         };
 
-        let resposta_bd = await fichaTecnica.createFichaTecnica(bd, ficha);
+        let resposta_bd = await fichaRegistoIdentificacao.createFichaRegistoIdentificacao(
+          bd,
+          ficha
+        );
 
         if (resposta_bd.stat === 0) {
           resposta_servidor.stat = "Registed";
           resposta_servidor.resposta = resposta_bd.resposta;
         } else {
-          resposta_servidor.stat = "Erro na criação";
+          resposta_servidor.stat = "NotRegisted";
           resposta_servidor.resposta = resposta_bd.resposta;
         }
       }
@@ -81,8 +86,8 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
 /**
  * Rota para alterar uma ficha tecnica
  */
-exports.updateFichaTecnicaRoute = async (app, bd) => {
-  app.post("/api/fichatecnica/:id/edit", async (req, resp) => {
+exports.updatefichaRegistoIdentificacaoRoute = async (app, bd) => {
+  app.post("/api/fichaRegistoIdentificacao/:id/edit", async (req, resp) => {
     let resposta_servidor = { stat: "Authenticated", resposta: {} };
     //HTTP CODE ACCEPTED
     let code = 201;
@@ -105,21 +110,23 @@ exports.updateFichaTecnicaRoute = async (app, bd) => {
       //admin
       if (token.roleFK === 1) {
         let ficha = {
-          visible: true,
+          visible: req.body.visible,
           designacao: req.body.designacao,
           processoLCRM: req.body.processoLCRM,
           processoCEARC: req.body.processoCEARC,
           dataEntrada: req.body.dataEntrada,
           dataConclusao: req.body.dataConclusao,
-          dataSaida: req.body.dataSaida,
+          dataEntrega: req.body.dataEntrega,
           coordenacao: req.body.coordenacao,
           direcaoTecnica: req.body.direcaoTecnica,
           localidade: req.body.localidade,
           interessadoFK: req.body.interessadoFK,
           fichaRegistoID: req.params.id
         };
-
-        let resposta_bd = await fichaTecnica.updateFichaTecnica(bd, ficha);
+        let resposta_bd = await fichaRegistoIdentificacao.updateFichaRegistoIdentificacao(
+          bd,
+          ficha
+        );
         if (resposta_bd.stat === 0) {
           resposta_servidor.stat = "Updated";
           resposta_servidor.resposta = resposta_bd.resposta;
@@ -145,8 +152,8 @@ exports.updateFichaTecnicaRoute = async (app, bd) => {
 /**
  * Rota para ler uma ficha tecnica
  */
-exports.readFichaTecnicaRoute = async (app, bd) => {
-  app.get("/api/fichatecnica/:id", async (req, resp) => {
+exports.readfichaRegistoIdentificacaoRoute = async (app, bd) => {
+  app.get("/api/fichaRegistoIdentificacao/:id", async (req, resp) => {
     let resposta_servidor = { stat: "Authenticated", resposta: {} };
     //HTTP CODE ACCEPTED
     let code = 200;
@@ -168,10 +175,13 @@ exports.readFichaTecnicaRoute = async (app, bd) => {
     else {
       //admin
       if (token.roleFK === 1) {
-        let resposta_bd = await fichaTecnica.getFichaTecnica(bd, req.params.id);
+        let resposta_bd = await fichaRegistoIdentificacao.getFichaRegistoIdentificacao(
+          bd,
+          req.params.id
+        );
         if (resposta_bd.stat === 0) {
           code = 200;
-          resposta_servidor.stat = "Accepted";
+          resposta_servidor.stat = "Authenticated";
           resposta_servidor.resposta = resposta_bd.resposta;
         } else {
           resposta_servidor.stat = resposta_bd.stat;
@@ -194,8 +204,8 @@ exports.readFichaTecnicaRoute = async (app, bd) => {
 /**
  * Rota para apagar uam ficha tecnica
  */
-exports.deleteFichaTecnicaRoute = async (app, bd) => {
-  app.post("/api/fichatecnica/:id/delete", async (req, resp) => {
+exports.deletefichaRegistoIdentificacaoRoute = async (app, bd) => {
+  app.post("/api/fichaRegistoIdentificacao/:id/delete", async (req, resp) => {
     let resposta_servidor = { stat: "Authenticated", resposta: {} };
     //HTTP CODE ACCEPTED
     let code = 201;
@@ -217,7 +227,7 @@ exports.deleteFichaTecnicaRoute = async (app, bd) => {
     else {
       //admin
       if (token.roleFK === 1) {
-        let resposta_bd = await fichaTecnica.deleteFichaTenica(
+        let resposta_bd = await fichaRegistoIdentificacao.deleteFichaRegistoIdentificacao(
           bd,
           req.params.id
         );

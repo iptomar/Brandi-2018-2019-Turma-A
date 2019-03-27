@@ -10,6 +10,7 @@ import CreateFichaTecnica from './MasterComponents/Ficha Tecnica/CreateFichaTecn
 import DetailsFichaTecnica from './MasterComponents/Ficha Tecnica/DetailsFichaTecnica';
 import IndexFichaTecnica from './MasterComponents/Ficha Tecnica/IndexFichaTecnica';
 import CreateFichaRI from './MasterComponents/FichaRegistoIdentificacao/CreateFichaRI';
+import DetailsFichaRI from './MasterComponents/FichaRegistoIdentificacao/DetailsFichaRI';
 
 
 ReactDOM.render(
@@ -22,6 +23,7 @@ ReactDOM.render(
             <Route path="/fichaTecnica" component={IndexFichaTecnica}/>
             {/* Ficha Registo Identificacao */}
             <Route path="/fichaRI/criar" component={CreateFichaRI}/>
+            <Route path="/fichaRI/:id" component={DetailsFichaRI}/>
         </Switch>
     </ BrowserRouter>
     , document.getElementById('root')

@@ -89,11 +89,11 @@ class Login extends Component {
             </div>
             <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
             <div className="form-label-group">
-              <input type="text" id="user" className="form-control" placeholder="Utilizador" required autoFocus />
+              <input type="text" id="user" className="form-control" placeholder=" " required autoFocus />
               <label>Utilizador</label>
             </div>
             <div className="form-label-group">
-              <input type="password" id="pass" className="form-control" placeholder="Password" required />
+              <input type="password" id="pass" className="form-control" placeholder=" " required />
               <label>Password</label>
             </div>
             <button className="btn btn-lg btn-success btn-block" type="submit">Entrar</button>

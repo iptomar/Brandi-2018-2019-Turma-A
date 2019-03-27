@@ -1,0 +1,31 @@
+You have triggered an unhandledRejection, you may have forgotten to catch a Promise rejection:
+Error: ENOENT: no such file or directory, uv_cwd
+    at module.exports (/home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/serve/node_modules/serve-handler/src/index.js:522:22)
+    at Server.http.createServer (/home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/serve/bin/serve.js:178:10)
+    at <anonymous>
+    at process._tickDomainCallback (internal/process/next_tick.js:228:7)
+(node:12026) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, uv_cwd
+    at module.exports (/home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/serve/node_modules/serve-handler/src/index.js:522:22)
+    at Server.http.createServer (/home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/serve/bin/serve.js:178:10)
+    at <anonymous>
+    at process._tickDomainCallback (internal/process/next_tick.js:228:7)
+(node:12026) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 4)
+(node:12026) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:12026) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, uv_cwd
+    at module.exports (/home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/serve/node_modules/serve-handler/src/index.js:522:22)
+    at Server.http.createServer (/home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/serve/bin/serve.js:178:10)
+    at <anonymous>
+    at process._tickDomainCallback (internal/process/next_tick.js:228:7)
+(node:12026) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 6)
+(node:12026) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, uv_cwd
+    at module.exports (/home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/serve/node_modules/serve-handler/src/index.js:522:22)
+    at Server.http.createServer (/home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/serve/bin/serve.js:178:10)
+    at <anonymous>
+    at process._tickDomainCallback (internal/process/next_tick.js:228:7)
+(node:12026) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 8)
+(node:12026) UnhandledPromiseRejectionWarning: Error: ENOENT: no such file or directory, uv_cwd
+    at module.exports (/home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/serve/node_modules/serve-handler/src/index.js:522:22)
+    at Server.http.createServer (/home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/serve/bin/serve.js:178:10)
+    at <anonymous>
+    at process._tickDomainCallback (internal/process/next_tick.js:228:7)
+(node:12026) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 10)

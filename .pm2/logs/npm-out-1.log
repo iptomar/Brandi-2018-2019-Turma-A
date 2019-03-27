@@ -1,0 +1,613 @@
+
+> psiTeamC-frontend@1.0.0 start /Brandi/Frontend
+> npm run dev
+
+
+> psiTeamC-frontend@1.0.0 dev /Brandi/Frontend
+> webpack-dev-server --inline --progress --config build/webpack.dev.conf.js
+
+
+> psiTeamC-frontend@1.0.0 start /Brandi/Frontend
+> npm run dev
+
+
+> psiTeamC-frontend@1.0.0 dev /Brandi/Frontend
+> webpack-dev-server --inline --progress --config build/webpack.dev.conf.js
+
+
+> psiTeamC-frontend@1.0.0 start /Brandi/Frontend
+> npm run dev
+
+
+> psiTeamC-frontend@1.0.0 dev /Brandi/Frontend
+> webpack-dev-server --inline --progress --config build/webpack.dev.conf.js
+
+
+> psiTeamC-frontend@1.0.0 start /Brandi/Frontend
+> npm run dev
+
+
+> psiTeamC-frontend@1.0.0 dev /Brandi/Frontend
+> webpack-dev-server --inline --progress --config build/webpack.dev.conf.js
+
+
+> psiTeamC-frontend@1.0.0 start /Brandi/Frontend
+> npm run dev
+
+
+> psiTeamC-frontend@1.0.0 dev /Brandi/Frontend
+> webpack-dev-server --inline --progress --config build/webpack.dev.conf.js
+
+
+> psiTeamC-frontend@1.0.0 start /Brandi/Frontend
+> npm run dev
+
+
+> psiTeamC-frontend@1.0.0 dev /Brandi/Frontend
+> webpack-dev-server --inline --progress --config build/webpack.dev.conf.js
+
+
+> psiTeamC-frontend@1.0.0 start /Brandi/Frontend
+> npm run dev
+
+
+> psiTeamC-frontend@1.0.0 dev /Brandi/Frontend
+> webpack-dev-server --inline --progress --config build/webpack.dev.conf.js
+
+
+> psiTeamC-frontend@1.0.0 start /Brandi/Frontend
+> npm run dev
+
+
+> psiTeamC-frontend@1.0.0 dev /Brandi/Frontend
+> webpack-dev-server --inline --progress --config build/webpack.dev.conf.js
+
+
+> psiTeamC-frontend@1.0.0 start /Brandi/Frontend
+> npm run dev
+
+
+> psiTeamC-frontend@1.0.0 dev /Brandi/Frontend
+> webpack-dev-server --inline --progress --config build/webpack.dev.conf.js
+
+
+> psiTeamC-frontend@1.0.0 start /Brandi/Frontend
+> npm run dev
+
+
+> psiTeamC-frontend@1.0.0 dev /Brandi/Frontend
+> webpack-dev-server --inline --progress --config build/webpack.dev.conf.js
+
+
+> psiTeamC-frontend@1.0.0 start /Brandi/Frontend
+> npm run dev
+
+
+> psiTeamC-frontend@1.0.0 dev /Brandi/Frontend
+> webpack-dev-server --inline --progress --config build/webpack.dev.conf.js
+
+
+> psiTeamC-frontend@1.0.0 start /Brandi/Frontend
+> npm run dev
+
+
+> psiTeamC-frontend@1.0.0 dev /Brandi/Frontend
+> webpack-dev-server --inline --progress --config build/webpack.dev.conf.js
+
+
+> psiTeamC-frontend@1.0.0 start /Brandi/Frontend
+> npm run dev
+
+
+> psiTeamC-frontend@1.0.0 dev /Brandi/Frontend
+> webpack-dev-server --inline --progress --config build/webpack.dev.conf.js
+
+
+> psiTeamC-frontend@1.0.0 start /Brandi/Frontend
+> npm run dev
+
+
+> psiTeamC-frontend@1.0.0 dev /Brandi/Frontend
+> webpack-dev-server --inline --progress --config build/webpack.dev.conf.js
+
+
+> psiTeamC-frontend@1.0.0 start /Brandi/Frontend
+> npm run dev
+
+
+> psiTeamC-frontend@1.0.0 dev /Brandi/Frontend
+> webpack-dev-server --inline --progress --config build/webpack.dev.conf.js
+
+
+> psiTeamC-frontend@1.0.0 start /Brandi/Frontend
+> npm run dev
+
+
+> psiTeamC-frontend@1.0.0 dev /Brandi/Frontend
+> webpack-dev-server --inline --progress --config build/webpack.dev.conf.js
+
+
+> psiTeamC-frontend@1.0.0 start /Brandi/Frontend
+> npm run dev
+
+
+> psiTeamC-frontend@1.0.0 dev /Brandi/Frontend
+> webpack-dev-server --inline --progress --config build/webpack.dev.conf.js
+
+Unable to open browser. If you are running in a headless environment, please do not use the open flag.
+ DONE  Compiled successfully in 14409ms09:10:55
+
+ I  Your application is running here: http://localhost:8080
+ WAIT  Compiling...09:13:36
+
+ ERROR  Failed to compile with 4 errors09:13:37
+
+ error  in (webpack)-dev-server/client?http://localhost:8080
+
+Module build failed: Error: ENOENT: no such file or directory, open '/Brandi/Frontend/.babelrc'
+    at Object.fs.openSync (fs.js:646:18)
+    at Object.fs.readFileSync (fs.js:551:33)
+    at ConfigChainBuilder.addConfig (/Brandi/Frontend/node_modules/babel-core/lib/transformation/file/options/build-config-chain.js:146:32)
+    at ConfigChainBuilder.findConfigs (/Brandi/Frontend/node_modules/babel-core/lib/transformation/file/options/build-config-chain.js:96:16)
+    at buildConfigChain (/Brandi/Frontend/node_modules/babel-core/lib/transformation/file/options/build-config-chain.js:61:13)
+    at OptionManager.init (/Brandi/Frontend/node_modules/babel-core/lib/transformation/file/options/option-manager.js:354:58)
+    at File.initOptions (/Brandi/Frontend/node_modules/babel-core/lib/transformation/file/index.js:212:65)
+    at new File (/Brandi/Frontend/node_modules/babel-core/lib/transformation/file/index.js:135:24)
+    at Pipeline.transform (/Brandi/Frontend/node_modules/babel-core/lib/transformation/pipeline.js:46:16)
+    at transpile (/Brandi/Frontend/node_modules/babel-loader/lib/index.js:50:20)
+    at Object.module.exports (/Brandi/Frontend/node_modules/babel-loader/lib/index.js:173:20)
+
+ @ multi (webpack)-dev-server/client?http://localhost:8080 webpack/hot/dev-server ./src/main.js
+
+ error  in ./node_modules/events/events.js
+
+Module build failed: Error: ENOENT: no such file or directory, open '/Brandi/Frontend/node_modules/events/events.js'
+
+ @ (webpack)/hot/emitter.js 1:19-36
+ @ (webpack)/hot/dev-server.js
+ @ multi (webpack)-dev-server/client?http://localhost:8080 webpack/hot/dev-server ./src/main.js
+
+ error  in ./src/main.js
+
+Module build failed: Error: ENOENT: no such file or directory, open '/Brandi/Frontend/src/main.js'
+
+ @ multi (webpack)-dev-server/client?http://localhost:8080 webpack/hot/dev-server ./src/main.js
+
+ error  
+
+
+ ERROR  Failed to compile with 4 errors09:13:38
+
+ error  in (webpack)-dev-server/client?http://localhost:8080
+
+Module build failed: Error: ENOENT: no such file or directory, open '/Brandi/Frontend/node_modules/webpack-dev-server/client/index.js'
+
+ @ multi (webpack)-dev-server/client?http://localhost:8080 webpack/hot/dev-server ./src/main.js
+
+ error  in (webpack)/hot/dev-server.js
+
+Module build failed: Error: ENOENT: no such file or directory, open '/Brandi/Frontend/node_modules/webpack/hot/dev-server.js'
+
+ @ multi (webpack)-dev-server/client?http://localhost:8080 webpack/hot/dev-server ./src/main.js
+
+ error  in ./src/main.js
+
+Module build failed: Error: ENOENT: no such file or directory, open '/Brandi/Frontend/src/main.js'
+
+ @ multi (webpack)-dev-server/client?http://localhost:8080 webpack/hot/dev-server ./src/main.js
+
+ error  
+
+
+
+> psiTeamC-frontend@1.0.0 start /Brandi/Brandi-Frontend
+> npm run dev
+
+
+> psiTeamC-frontend@1.0.0 dev /Brandi/Brandi-Frontend
+> webpack-dev-server --inline --progress --config build/webpack.dev.conf.js
+
+Unable to open browser. If you are running in a headless environment, please do not use the open flag.
+ DONE  Compiled successfully in 15808ms09:56:30
+
+ I  Your application is running here: http://localhost:8080
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, adduser, bin, bugs, c, cache, completion, config,
+    ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
+    explore, get, help, help-search, i, init, install,
+    install-test, it, link, list, ln, login, logout, ls,
+    outdated, owner, pack, ping, prefix, profile, prune,
+    publish, rb, rebuild, repo, restart, root, run, run-script,
+    s, se, search, set, shrinkwrap, star, stars, start, stop, t,
+    team, test, token, tst, un, uninstall, unpublish, unstar,
+    up, update, v, version, view, whoami
+
+npm <command> -h     quick help on <command>
+npm -l           display full usage info
+npm help <term>  search for help on <term>
+npm help npm     involved overview
+
+Specify configs in the ini-formatted file:
+    /home/operador/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@5.6.0 /home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/npm
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, adduser, bin, bugs, c, cache, completion, config,
+    ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
+    explore, get, help, help-search, i, init, install,
+    install-test, it, link, list, ln, login, logout, ls,
+    outdated, owner, pack, ping, prefix, profile, prune,
+    publish, rb, rebuild, repo, restart, root, run, run-script,
+    s, se, search, set, shrinkwrap, star, stars, start, stop, t,
+    team, test, token, tst, un, uninstall, unpublish, unstar,
+    up, update, v, version, view, whoami
+
+npm <command> -h     quick help on <command>
+npm -l           display full usage info
+npm help <term>  search for help on <term>
+npm help npm     involved overview
+
+Specify configs in the ini-formatted file:
+    /home/operador/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@5.6.0 /home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/npm
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, adduser, bin, bugs, c, cache, completion, config,
+    ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
+    explore, get, help, help-search, i, init, install,
+    install-test, it, link, list, ln, login, logout, ls,
+    outdated, owner, pack, ping, prefix, profile, prune,
+    publish, rb, rebuild, repo, restart, root, run, run-script,
+    s, se, search, set, shrinkwrap, star, stars, start, stop, t,
+    team, test, token, tst, un, uninstall, unpublish, unstar,
+    up, update, v, version, view, whoami
+
+npm <command> -h     quick help on <command>
+npm -l           display full usage info
+npm help <term>  search for help on <term>
+npm help npm     involved overview
+
+Specify configs in the ini-formatted file:
+    /home/operador/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@5.6.0 /home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/npm
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, adduser, bin, bugs, c, cache, completion, config,
+    ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
+    explore, get, help, help-search, i, init, install,
+    install-test, it, link, list, ln, login, logout, ls,
+    outdated, owner, pack, ping, prefix, profile, prune,
+    publish, rb, rebuild, repo, restart, root, run, run-script,
+    s, se, search, set, shrinkwrap, star, stars, start, stop, t,
+    team, test, token, tst, un, uninstall, unpublish, unstar,
+    up, update, v, version, view, whoami
+
+npm <command> -h     quick help on <command>
+npm -l           display full usage info
+npm help <term>  search for help on <term>
+npm help npm     involved overview
+
+Specify configs in the ini-formatted file:
+    /home/operador/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@5.6.0 /home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/npm
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, adduser, bin, bugs, c, cache, completion, config,
+    ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
+    explore, get, help, help-search, i, init, install,
+    install-test, it, link, list, ln, login, logout, ls,
+    outdated, owner, pack, ping, prefix, profile, prune,
+    publish, rb, rebuild, repo, restart, root, run, run-script,
+    s, se, search, set, shrinkwrap, star, stars, start, stop, t,
+    team, test, token, tst, un, uninstall, unpublish, unstar,
+    up, update, v, version, view, whoami
+
+npm <command> -h     quick help on <command>
+npm -l           display full usage info
+npm help <term>  search for help on <term>
+npm help npm     involved overview
+
+Specify configs in the ini-formatted file:
+    /home/operador/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@5.6.0 /home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/npm
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, adduser, bin, bugs, c, cache, completion, config,
+    ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
+    explore, get, help, help-search, i, init, install,
+    install-test, it, link, list, ln, login, logout, ls,
+    outdated, owner, pack, ping, prefix, profile, prune,
+    publish, rb, rebuild, repo, restart, root, run, run-script,
+    s, se, search, set, shrinkwrap, star, stars, start, stop, t,
+    team, test, token, tst, un, uninstall, unpublish, unstar,
+    up, update, v, version, view, whoami
+
+npm <command> -h     quick help on <command>
+npm -l           display full usage info
+npm help <term>  search for help on <term>
+npm help npm     involved overview
+
+Specify configs in the ini-formatted file:
+    /home/operador/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@5.6.0 /home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/npm
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, adduser, bin, bugs, c, cache, completion, config,
+    ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
+    explore, get, help, help-search, i, init, install,
+    install-test, it, link, list, ln, login, logout, ls,
+    outdated, owner, pack, ping, prefix, profile, prune,
+    publish, rb, rebuild, repo, restart, root, run, run-script,
+    s, se, search, set, shrinkwrap, star, stars, start, stop, t,
+    team, test, token, tst, un, uninstall, unpublish, unstar,
+    up, update, v, version, view, whoami
+
+npm <command> -h     quick help on <command>
+npm -l           display full usage info
+npm help <term>  search for help on <term>
+npm help npm     involved overview
+
+Specify configs in the ini-formatted file:
+    /home/operador/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@5.6.0 /home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/npm
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, adduser, bin, bugs, c, cache, completion, config,
+    ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
+    explore, get, help, help-search, i, init, install,
+    install-test, it, link, list, ln, login, logout, ls,
+    outdated, owner, pack, ping, prefix, profile, prune,
+    publish, rb, rebuild, repo, restart, root, run, run-script,
+    s, se, search, set, shrinkwrap, star, stars, start, stop, t,
+    team, test, token, tst, un, uninstall, unpublish, unstar,
+    up, update, v, version, view, whoami
+
+npm <command> -h     quick help on <command>
+npm -l           display full usage info
+npm help <term>  search for help on <term>
+npm help npm     involved overview
+
+Specify configs in the ini-formatted file:
+    /home/operador/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@5.6.0 /home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/npm
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, adduser, bin, bugs, c, cache, completion, config,
+    ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
+    explore, get, help, help-search, i, init, install,
+    install-test, it, link, list, ln, login, logout, ls,
+    outdated, owner, pack, ping, prefix, profile, prune,
+    publish, rb, rebuild, repo, restart, root, run, run-script,
+    s, se, search, set, shrinkwrap, star, stars, start, stop, t,
+    team, test, token, tst, un, uninstall, unpublish, unstar,
+    up, update, v, version, view, whoami
+
+npm <command> -h     quick help on <command>
+npm -l           display full usage info
+npm help <term>  search for help on <term>
+npm help npm     involved overview
+
+Specify configs in the ini-formatted file:
+    /home/operador/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@5.6.0 /home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/npm
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, adduser, bin, bugs, c, cache, completion, config,
+    ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
+    explore, get, help, help-search, i, init, install,
+    install-test, it, link, list, ln, login, logout, ls,
+    outdated, owner, pack, ping, prefix, profile, prune,
+    publish, rb, rebuild, repo, restart, root, run, run-script,
+    s, se, search, set, shrinkwrap, star, stars, start, stop, t,
+    team, test, token, tst, un, uninstall, unpublish, unstar,
+    up, update, v, version, view, whoami
+
+npm <command> -h     quick help on <command>
+npm -l           display full usage info
+npm help <term>  search for help on <term>
+npm help npm     involved overview
+
+Specify configs in the ini-formatted file:
+    /home/operador/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@5.6.0 /home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/npm
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, adduser, bin, bugs, c, cache, completion, config,
+    ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
+    explore, get, help, help-search, i, init, install,
+    install-test, it, link, list, ln, login, logout, ls,
+    outdated, owner, pack, ping, prefix, profile, prune,
+    publish, rb, rebuild, repo, restart, root, run, run-script,
+    s, se, search, set, shrinkwrap, star, stars, start, stop, t,
+    team, test, token, tst, un, uninstall, unpublish, unstar,
+    up, update, v, version, view, whoami
+
+npm <command> -h     quick help on <command>
+npm -l           display full usage info
+npm help <term>  search for help on <term>
+npm help npm     involved overview
+
+Specify configs in the ini-formatted file:
+    /home/operador/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@5.6.0 /home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/npm
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, adduser, bin, bugs, c, cache, completion, config,
+    ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
+    explore, get, help, help-search, i, init, install,
+    install-test, it, link, list, ln, login, logout, ls,
+    outdated, owner, pack, ping, prefix, profile, prune,
+    publish, rb, rebuild, repo, restart, root, run, run-script,
+    s, se, search, set, shrinkwrap, star, stars, start, stop, t,
+    team, test, token, tst, un, uninstall, unpublish, unstar,
+    up, update, v, version, view, whoami
+
+npm <command> -h     quick help on <command>
+npm -l           display full usage info
+npm help <term>  search for help on <term>
+npm help npm     involved overview
+
+Specify configs in the ini-formatted file:
+    /home/operador/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@5.6.0 /home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/npm
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, adduser, bin, bugs, c, cache, completion, config,
+    ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
+    explore, get, help, help-search, i, init, install,
+    install-test, it, link, list, ln, login, logout, ls,
+    outdated, owner, pack, ping, prefix, profile, prune,
+    publish, rb, rebuild, repo, restart, root, run, run-script,
+    s, se, search, set, shrinkwrap, star, stars, start, stop, t,
+    team, test, token, tst, un, uninstall, unpublish, unstar,
+    up, update, v, version, view, whoami
+
+npm <command> -h     quick help on <command>
+npm -l           display full usage info
+npm help <term>  search for help on <term>
+npm help npm     involved overview
+
+Specify configs in the ini-formatted file:
+    /home/operador/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@5.6.0 /home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/npm
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, adduser, bin, bugs, c, cache, completion, config,
+    ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
+    explore, get, help, help-search, i, init, install,
+    install-test, it, link, list, ln, login, logout, ls,
+    outdated, owner, pack, ping, prefix, profile, prune,
+    publish, rb, rebuild, repo, restart, root, run, run-script,
+    s, se, search, set, shrinkwrap, star, stars, start, stop, t,
+    team, test, token, tst, un, uninstall, unpublish, unstar,
+    up, update, v, version, view, whoami
+
+npm <command> -h     quick help on <command>
+npm -l           display full usage info
+npm help <term>  search for help on <term>
+npm help npm     involved overview
+
+Specify configs in the ini-formatted file:
+    /home/operador/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@5.6.0 /home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/npm
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, adduser, bin, bugs, c, cache, completion, config,
+    ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
+    explore, get, help, help-search, i, init, install,
+    install-test, it, link, list, ln, login, logout, ls,
+    outdated, owner, pack, ping, prefix, profile, prune,
+    publish, rb, rebuild, repo, restart, root, run, run-script,
+    s, se, search, set, shrinkwrap, star, stars, start, stop, t,
+    team, test, token, tst, un, uninstall, unpublish, unstar,
+    up, update, v, version, view, whoami
+
+npm <command> -h     quick help on <command>
+npm -l           display full usage info
+npm help <term>  search for help on <term>
+npm help npm     involved overview
+
+Specify configs in the ini-formatted file:
+    /home/operador/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@5.6.0 /home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/npm
+
+Usage: npm <command>
+
+where <command> is one of:
+    access, adduser, bin, bugs, c, cache, completion, config,
+    ddp, dedupe, deprecate, dist-tag, docs, doctor, edit,
+    explore, get, help, help-search, i, init, install,
+    install-test, it, link, list, ln, login, logout, ls,
+    outdated, owner, pack, ping, prefix, profile, prune,
+    publish, rb, rebuild, repo, restart, root, run, run-script,
+    s, se, search, set, shrinkwrap, star, stars, start, stop, t,
+    team, test, token, tst, un, uninstall, unpublish, unstar,
+    up, update, v, version, view, whoami
+
+npm <command> -h     quick help on <command>
+npm -l           display full usage info
+npm help <term>  search for help on <term>
+npm help npm     involved overview
+
+Specify configs in the ini-formatted file:
+    /home/operador/.npmrc
+or on the command line via: npm <command> --key value
+Config info can be viewed via: npm help config
+
+npm@5.6.0 /home/operador/.nvm/versions/node/v8.11.3/lib/node_modules/npm

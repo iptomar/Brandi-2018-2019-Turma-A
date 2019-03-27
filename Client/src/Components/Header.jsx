@@ -33,15 +33,16 @@ class Header extends Component {
               <a class="nav-link" href="#">Contactos</a>
             </li>
           </ul>
+
           {/* LOGOUT */}
           
             <ul className="navbar-nav">
-            <li className="nav-item dropdown">
-            <a className="nav-link" href="#.." id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{sessionStorage.getItem('nome')}</a>
-            <div className="dropdown-menu" aria-labelledby="navbarDropdown" >
-              <button className="dropdown-item" onClick={this.out}>Sair</button>
-            </div>
-            </li>
+              <li className="nav-item dropdown">
+                <a className="nav-link" href="#abc" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{sessionStorage.getItem('nome')}</a>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdown" >
+                  <button className="dropdown-item" onClick={this.out}>Sair</button>
+                </div>
+              </li>
             </ul>
           </div>
 

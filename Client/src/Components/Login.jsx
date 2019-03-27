@@ -43,7 +43,7 @@ class Login extends Component {
     });
     //Aguardar API
     await response.json().then(resp => {
-      ;
+      
       //Verificar o estado da resposta da API
       let status = resp.status;
       switch (status) {
@@ -59,7 +59,7 @@ class Login extends Component {
           this.setState({ alertisNotVisible: false });
           break;
         default:
-          console.log("A API ESTÁ A ARDER,  DARIOOOOOOOOOOOOOOOOOOOOOO");
+          console.log("A API ESTÁ A ARDER, DÁRIOOOOOOOOOOOOOOOOOOOOOO");
       }
     });
   };
@@ -71,12 +71,21 @@ class Login extends Component {
     }
     else {
       return (
+
         <div className="center">
-        <img src="http://portal2.ipt.pt/img/logo.png" className="img-logo-ipt" alt="" align="right"/>
+          <a href="http://www.cr.estt.ipt.pt/" target="_blank" rel="noopener noreferrer">
+            <img src="http://www.cr.estt.ipt.pt/labs/lcr_C_2a.jpg" className="img-logo-ipt" alt="" width="170px" align="left"/>
+          </a>
+          <a href="http://portal2.ipt.pt/" target="_blank" rel="noopener noreferrer">
+            <img src="http://portal2.ipt.pt/img/logo.png" className="img-logo-ipt" alt="" align="right"/>
+          </a>
+          
           <form className="form-entrar" onSubmit={this.handleSubmit}>
             <div className="text-center mb-4">
-              <img className="mb-4" src="favicon.ico" alt="" width="72" height="72" />
-              <h1 className="h2 mb-5 font-weight-normal">Entrar</h1>
+              <a href="https://en.wikipedia.org/wiki/Cesare_Brandi" target="_blank" rel="noopener noreferrer">
+                <img className="mb-4" src="https://nomundodosmuseus.files.wordpress.com/2007/05/cesare-brandi.jpg" alt="" width="90"/>
+              </a>
+              <h1 className="h2 mb-5 font-weight-normal">Brandi</h1>
             </div>
             <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
             <div className="form-label-group">
@@ -87,7 +96,6 @@ class Login extends Component {
               <input type="password" id="pass" className="form-control" placeholder=" " required />
               <label>Password</label>
             </div>
-            
             <button className="btn btn-lg btn-success btn-block" type="submit">Entrar</button>
           </form>
         </div>

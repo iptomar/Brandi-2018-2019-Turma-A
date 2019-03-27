@@ -3,7 +3,6 @@ import AlertMsg from './AlertMsg';
 import '../CssComponents/login.css';
 import iptlogo from '../Images/ipt.png';
 import lcrlogo from '../Images/lcr_ipt.png';
-import cesarebrandi from '../Images/brandi.jpg';
 
 class Login extends Component {
   constructor() {
@@ -86,10 +85,7 @@ class Login extends Component {
           
           <form className="form-entrar" onSubmit={this.handleSubmit}>
             <div className="text-center mb-4">
-              <a href="https://en.wikipedia.org/wiki/Cesare_Brandi" target="_blank" rel="noopener noreferrer">
-                <img className="mb-4" src={cesarebrandi} alt="" height="180" width="280"/>
-              </a>
-              <h1 className="h2 mb-5 font-weight-normal">Brandi</h1>
+              <h1 className="h1 mb-5 font-weight-normal">Brandi</h1>
             </div>
             <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
             <div className="form-label-group">

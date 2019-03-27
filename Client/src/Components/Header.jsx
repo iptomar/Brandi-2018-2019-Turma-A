@@ -25,6 +25,16 @@ class Header extends Component {
             {" "}Brandi
           </a>
           <div className="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/sobre">Sobre</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Contactos</a>
+            </li>
+          </ul>
+          {/* LOGOUT */}
+          
             <ul className="navbar-nav">
             <li className="nav-item dropdown">
             <a className="nav-link" href="#.." id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{sessionStorage.getItem('nome')}</a>
@@ -34,8 +44,8 @@ class Header extends Component {
             </li>
             </ul>
           </div>
+
         </nav>
-        <br></br>
       </div>
     );
   }

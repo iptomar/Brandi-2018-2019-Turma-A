@@ -7,12 +7,12 @@ class Details extends Component {
     this.state = {
       data: null
     }
-    this.getFichasTecn();
+    this.getFichaRI(props.id);
   }
 
-  async getFichasTecn() {
+  async getFichaRI(id) {
     //Enviar pedido
-    const response = await fetch("/api/fichatecnica/0", {
+    const response = await fetch("/api/fichaRegistoIdentificacao/" + id, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -22,114 +22,121 @@ class Details extends Component {
     //Aguardar API
     await response.json().then(resp => {
       let status = resp.stat;
-      console.log(status);
       switch (status) {
-        case "????":
-          this.setState({ data: resp });
+        case "Authenticated":
+          this.setState({ data: resp.resposta });
           break;
         default:
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
       }
-
-
-
-
     });
   };
 
   render() {
+    console.log(this.state.data);
     if (sessionStorage.getItem('token') == null) {
-       window.location = '/';
+      window.location = '/';
     } else {
-      return (
-        //Verifica se existe o token
-        <div className="Inicio container">
-          <div className="container">
-            <div className="py-3 text-center">
-              <h2>Ficha de Registo e Identificação</h2>
-            </div>
-            <div className="row">
-              <div className="col-md-12 mb-3">
-                <img src="..." alt="..." />
+      if (this.state.data != null) {
+        return (
+          //Verifica se existe o token
+          <div className="Inicio container">
+            <div className="container">
+              <div className="py-3 text-center">
+                <h2>Ficha de Registo e Identificação</h2>
               </div>
-            </div>
-            <hr className="mb-4" />
-            <div className="row">
-              <div className="col-md-12 order-md-1">
-                <form className="">
-                  <div className="row">
-                    <div className="col-md-12 mb-3">
-                      <label>Designação do Objeto</label>
-                      {/* <label>{this.state.data}</label> */}
+              <div className="row">
+                <div className="col-md-12 mb-3">
+                  <img src="..." alt="..." />
+                </div>
+              </div>
+              <hr className="mb-4" />
+              <div className="row">
+                <div className="col-md-12 order-md-1">
+                    <div className="row">
+                      <div className="col-md-12 mb-3">
+                        <label>Designação do Objeto: </label>
+                        {" "}
+                        <label>{this.state.data.designacao}</label>
+                      </div>
                     </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-6 mb-3">
-                      <label>Processo LCRM</label>
-                      <input type="number" className="form-control" id="procLCRM" placeholder="Processo LCRM" required />
+                    <div className="row">
+                      <div className="col-md-6 mb-3">
+                        <label>Processo LCRM: </label>
+                        {" "}
+                        <label>{this.state.data.processoLCRM}</label>
+                      </div>
+                      <div className="col-md-6 mb-3">
+                        <label>Processo CEARC: </label>
+                        {" "}
+                        <label>{this.state.data.processoCEARC}</label>
+                      </div>
                     </div>
-                    <div className="col-md-6 mb-3">
-                      <label>Processo CEARC</label>
-                      <input type="number" className="form-control" id="procCEARC" placeholder="Processo CEARC" required />
+                    <div className="row">
+                      <div className="col-md-4 mb-3">
+                        <label>Data de Entrada: </label>
+                        {" "}
+                        <label>{this.state.data.dataEntrada}</label>
+                      </div>
+                      <div className="col-md-4 mb-3">
+                        <label>Data de Conclusão: </label>
+                        {" "}
+                        <label>{this.state.data.dataConclusao}</label>
+                      </div>
+                      <div className="col-md-4 mb-3">
+                        <label>Data de Entrega: </label>
+                        {" "}
+                        <label>{this.state.data.dataEntrega}</label>
+                      </div>
                     </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-4 mb-3">
-                      <label>Data de Entrada</label>
-                      <input type="date" className="form-control" id="dateEntrada" required />
+                    <div className="row">
+                      <div className="col-md-6 mb-3">
+                        <label>Coordenação: </label>
+                        {" "}
+                        <label>{this.state.data.coordenacao}</label>
+                      </div>
+                      <div className="col-md-6 mb-3">
+                        <label>Direção Técnica: </label>
+                        {" "}
+                        <label>{this.state.data.direcaoTecnica}</label>
+                      </div>
                     </div>
-                    <div className="col-md-4 mb-3">
-                      <label>Data de Conclusão</label>
-                      <input type="date" className="form-control" id="dateConclusão" />
+                    <div className="row">
+                      <div className="col-md-12 mb-3">
+                        <label>Técnico(s) Responsável(eis): </label>
+                        {" "}
+                        <label>SEM INFORMACAO</label>>
+                      </div>
                     </div>
-                    <div className="col-md-4 mb-3">
-                      <label>Data de Entrega</label>
-                      <input type="date" className="form-control" id="dateEntrega" />
+                    <div className="row">
+                      <div className="col-md-12 mb-3">
+                        <label>Proprietário | Dono da Obra: </label>
+                        {" "}
+                        <label>SEM INFORMACAO</label>
+                      </div>
                     </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-6 mb-3">
-                      <label>Coordenação</label>
-                      <input type="text" className="form-control" id="coord" placeholder="Coordenação" required />
+                    <div className="row">
+                      <div className="col-md-12 mb-3">
+                        <label>Contacto(s): </label>
+                        {" "}
+                        <label>SEM INFORMACAO</label>
+                      </div>
                     </div>
-                    <div className="col-md-6 mb-3">
-                      <label>Direção Técnica</label>
-                      <input type="text" className="form-control" id="dirTecn" placeholder="Direção Técnica" required />
+                    <div className="row">
+                      <div className="col-md-12 mb-3">
+                        <label>Endereço Postal | Localidade: </label>
+                        {" "}
+                        <label>{this.state.data.localidade}</label>
+                      </div>
                     </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-12 mb-3">
-                      <label>Técnico(s) Responsável(eis)</label>
-                      <input type="text" className="form-control" id="tecResp" placeholder="Técnico(s) Responsável(eis)" required />
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-12 mb-3">
-                      <label>Proprietário | Dono da Obra</label>
-                      <input type="text" className="form-control" id="propDonObra" placeholder="Proprietário | Dono da Obra" required />
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-12 mb-3">
-                      <label>Contacto(s)</label>
-                      <input type="text" className="form-control" id="contact" placeholder="Contacto(s)" />
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-12 mb-3">
-                      <label>Endereço Postal | Localidade</label>
-                      <input type="text" className="form-control" id="endPostLocal" placeholder="Endereço Postal | Localidade" />
-                    </div>
-                  </div>
-                  <hr className="mb-4" />
-                  <button className="btn btn-success btn-lg btn-block mb-5" type="submit">Criar</button>
-                </form>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      );
+        );
+      }else return null;
     }
   }
 }
+
 export default Details;

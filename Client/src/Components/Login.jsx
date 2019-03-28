@@ -47,7 +47,6 @@ class Login extends Component {
     });
     //Aguardar API
     await response.json().then(resp => {
-      
       //Verificar o estado da resposta da API
       let status = resp.status;
       switch (status) {

@@ -22,7 +22,7 @@ import DetailsFichaRI from './MasterComponents/FichaRegistoIdentificacao/Details
 ReactDOM.render(
     <BrowserRouter>
         <Switch>
-            <Route path="/" exact={true} component={LoginPage}/>
+            <Route path="/" exact={true} component={LoginPage} />
             <Route path="/registar" component={RegisterPage} />
             <Route path="/sobre" component={AboutPage} />
             <Route path="/contactos" component={ContactPage} />
@@ -31,9 +31,9 @@ ReactDOM.render(
             <Route path="/fichaTecnica/criar" component={CreateFichaTecnica}/>
             <Route path="/fichaTecnica/details/:id" component={DetailsFichaTecnica} /> */}
             {/* Ficha Registo Identificacao */}
-            <Route path="/fichaRI/criar" component={CreateFichaRI}/>
-            <Route path="/fichaRI/:id" component={DetailsFichaRI}/>
-            <Route path="/fichaRI/" component={IndexFichaRI}/>
+            <Route path="/fichaRI/criar" component={CreateFichaRI} />
+            <Route path="/fichaRI/:id/detalhes" component={(r) => <DetailsFichaRI id={r.match.params.id}/>} />
+            <Route path="/fichaRI/" component={IndexFichaRI } />
         </Switch>
     </ BrowserRouter>
     , document.getElementById('root')

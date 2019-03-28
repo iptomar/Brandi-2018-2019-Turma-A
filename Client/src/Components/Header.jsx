@@ -25,12 +25,12 @@ class Header extends Component {
             {" "}Brandi
           </a>
           <div className="collapse navbar-collapse justify-content-end" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/sobre">Sobre</a>
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item active">
+              <a className="nav-link" href="/sobre">Sobre</a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Contactos</a>
+            <li className="nav-item active">
+              <a className="nav-link" href="#">Contactos</a>
             </li>
           </ul>
 

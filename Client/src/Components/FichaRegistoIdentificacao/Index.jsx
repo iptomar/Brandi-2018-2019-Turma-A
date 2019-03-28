@@ -33,7 +33,7 @@ class Index extends Component {
         visualList += '<div class="row">'
         for (let index = 0; index < this.state.list.length; index++) {
           visualList += '<div class="col-md-3" style="max-width: 26%;">';
-          visualList += `<a href="/fichaRI/detalhes/${this.state.list[index].fichaRegistoID}">`;
+          visualList += `<a href="/fichaRI/${this.state.list[index].fichaRegistoID}/detalhes">`;
           visualList += '<div class="card mb-3 text-center" style="width: 18rem; height:12rem;">';
           visualList += '<img src="http://portal2.ipt.pt/img/logo.png" class="card-img-top img-fluid" style="height:100%; width:100%;"/>'
           visualList += `<div class="card-footer text-muted">${this.state.list[index].designacao}</div>`;

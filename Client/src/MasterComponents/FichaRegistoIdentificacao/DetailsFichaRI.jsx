@@ -8,7 +8,7 @@ class DetailsFichaTecnica extends Component {
     return (
       <div className="DetailsRIPage">
         <Header />
-        <Details />
+        <Details id={this.props.id}/>
         <Footer />
       </div>
     );

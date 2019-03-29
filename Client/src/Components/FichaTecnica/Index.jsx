@@ -20,9 +20,7 @@ class Index extends Component {
     });
     //Aguardar API
     await response.json().then(resp => this.setState({list: resp}));
-    console.log(this.state.list[0].designacao);
   };
-
 
   render() {
     var visualList = "";

@@ -55,7 +55,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
         dados.interessadoFK,
         dados.dataEntrega
       ]
-    );
+   );
     //conseguio inserir na base de dados
     if (resposta_bd.stat === 0) {
       resultadofinal.stat = 0;

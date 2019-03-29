@@ -13,8 +13,8 @@ class Header extends Component {
   render() {
     return (
       <div className="Header">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <a className="navbar-brand" href="/">
+        <nav className="navbar navbar-expand-lg navbar-light">
+          <a className="navbar-brand" href="/" style={{paddingLeft:'35px'}}>
             <img
               src={favicon}
               width="30"
@@ -25,17 +25,29 @@ class Header extends Component {
             {" "}Brandi
           </a>
           <div className="collapse navbar-collapse justify-content-end" id="navbarCollapse">
-            <ul className="navbar-nav">
-            <li className="nav-item dropdown">
-            <a className="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{sessionStorage.getItem('nome')}</a>
-            <div className="dropdown-menu" aria-labelledby="navbarDropdown" >
-              <button className="dropdown-item">Sair</button>
-            </div>
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item active">
+              <a className="nav-link" href="/sobre">Sobre</a>
+            </li>
+            <li className="nav-item active">
+              <a className="nav-link" href="/contactos">Contactos</a>
             </li>
             </ul>
+            {/* LOGOUT */}
+            <ul className="navbar-nav">
+              <li className="nav-item dropdown" style={{paddingLeft:'50px', paddingRight:'35px'}}>
+                <a className="nav-link active dropdown-toggle" href="#.#" id="navbardrop" data-toggle="dropdown">
+                  {sessionStorage.getItem('nome')}
+                </a>
+                <div className="dropdown-menu">
+                  <a className="dropdown-item" style={{cursor:'pointer'}} href="#.#">Perfil</a>
+                  <a className="dropdown-item" style={{cursor:'pointer'}} href="#.#" onClick={this.out}>Sair</a>
+                </div>
+              </li>
+            </ul>
+          
           </div>
         </nav>
-        <br></br>
       </div>
     );
   }

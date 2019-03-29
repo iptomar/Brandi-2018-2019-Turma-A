@@ -3,12 +3,14 @@
  */
 
 /**
- * Método que devolve todas as fichas tecnicas
+ * Método que devolve todas as fichas RegistoIdentificacao
  * @param bd - base de dados para fazer query
  */
-exports.getAllFichas = async bd => {
+exports.getAllFichasRegistoIdentificacao = async bd => {
   let resultadofinal = { stat: 1, resposta: {} };
-  let resposta_bd = await bd.query("Select * from tbl_fichasRegistos");
+  let resposta_bd = await bd.query(
+    "Select * from tbl_fichaRegistoIdentificacao where visible = true"
+  );
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
     resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;
@@ -20,12 +22,12 @@ exports.getAllFichas = async bd => {
 };
 
 /**
- * Método para criar fichasTecnicas
+ * Método para criar fichas RegistoIdentificacao
  * @param bd - base de dados para fazer querys
  * @param dados - dados para realizar a query
  * @return {object} stat: 1<erro> 0<sucess> resposta: resposta da base de dados
  */
-exports.createFichaTecnica = async (bd, dados) => {
+exports.createFichaRegistoIdentificacao = async (bd, dados) => {
   let resultadofinal = { stat: 1, resposta: {} };
   //verificar se os campos estao preenchidos
   if (
@@ -39,7 +41,7 @@ exports.createFichaTecnica = async (bd, dados) => {
     dados.interessadoFK
   ) {
     let resposta_bd = await bd.query(
-      "INSERT INTO tbl_fichasRegistos (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataSaida) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
       [
         dados.visible,
         dados.designacao,
@@ -51,7 +53,7 @@ exports.createFichaTecnica = async (bd, dados) => {
         dados.direcaoTecnica,
         dados.localidade,
         dados.interessadoFK,
-        dados.dataSaida
+        dados.dataEntrega
       ]
     );
     //conseguio inserir na base de dados
@@ -66,19 +68,30 @@ exports.createFichaTecnica = async (bd, dados) => {
   return resultadofinal;
 };
 /**
- * Metodo que retorna uma ficha tecnica
- * @param id - id da ficha tecnica
+ * Metodo que retorna uma ficha RegistoIdentificacao
+ * @param id - id da ficha RegistoIdentificacao
  * @param bd - base de dados para querys
  */
-exports.getFichaTecnica = async (bd, id) => {
+exports.getFichaRegistoIdentificacao = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: {} };
   let resposta_bd = await bd.query(
-    "Select * from tbl_fichasRegistos where fichaRegistoID = ? limit 1",
+    "Select * from tbl_fichaRegistoIdentificacao where fichaRegistoID = ? and visible = true limit 1",
     [id]
   );
   if (resposta_bd.stat === 0) {
     resultadofinal.stat = 0;
     resultadofinal.resposta = resposta_bd.resposta[0];
+    //procurar os tecnicos da ficha RegistoIdentificacao
+    let resposta_bd2 = await bd.query(
+      "Select * from tbl_registoTecnicos where fichaRegistoFK = ?",
+      [id]
+    );
+    if (resposta_bd2.stat == 0 && resposta_bd.resposta[0] !== undefined) {
+      resultadofinal.resposta.tecnicos = resposta_bd2.resposta[0];
+    } else if (resposta_bd2.stat === 1) {
+      resultadofinal.stat = resposta_bd2.stat;
+      resultadofinal.resposta = resposta_bd2.resposta;
+    }
   } else {
     resultadofinal.stat = resposta_bd.stat;
     resultadofinal.resposta = resposta_bd.resposta;
@@ -86,11 +99,10 @@ exports.getFichaTecnica = async (bd, id) => {
   return resultadofinal;
 };
 /**
- * Metodo para alterar uma ficha tecnica
+ * Metodo para alterar uma ficha RegistoIdentificacao
  */
-exports.updateFichaTecnica = async (bd, dados) => {
-  let resultadofinal = { stat: 1, resposta: {} };
-
+exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
+  let resultadofinal = { stat: 1, resposta: "Missing Fields" };
   //verificar se os campos estao preenchidos
   if (
     dados.designacao &&
@@ -103,7 +115,7 @@ exports.updateFichaTecnica = async (bd, dados) => {
     dados.interessadoFK
   ) {
     let resposta_bd = await bd.query(
-      "update tbl_fichasRegistos set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataSaida=?, coordenacao =? ,direcaoTecnica=?,localidade=?,interessadoFK =?  where fichaRegistoID = ?",
+      "update tbl_fichaRegistoIdentificacao set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataEntrega=?, coordenacao =? ,direcaoTecnica=?,localidade=?,interessadoFK =?  where fichaRegistoID = ?",
       [
         dados.visible,
         dados.designacao,
@@ -111,7 +123,7 @@ exports.updateFichaTecnica = async (bd, dados) => {
         dados.processoCEARC,
         dados.dataEntrada,
         dados.dataConclusao,
-        dados.dataSaida,
+        dados.dataEntrega,
         dados.coordenacao,
         dados.direcaoTecnica,
         dados.localidade,
@@ -133,10 +145,10 @@ exports.updateFichaTecnica = async (bd, dados) => {
 /**
  * Metodo para remover umam ficha tecnica
  */
-exports.deleteFichaTenica = async (bd, id) => {
+exports.deleteFichaRegistoIdentificacao = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: {} };
   let resposta_bd = await bd.query(
-    "Update tbl_fichasRegistos set visible = false where fichaRegistoID=?",
+    "Update tbl_fichaRegistoIdentificacao set visible = false where fichaRegistoID=?",
     [id]
   );
   if (resposta_bd.stat === 0) {

@@ -3,8 +3,8 @@ import Read from "./Read";
 import Edit from "./Edit";
 import AlertMsg from '../../AlertMsg';
 
-class Create extends Component {
-  constructor(props, {match}) {
+class Details extends Component {
+  constructor(props) {
     super(props);
     // recolher id do url
     let href = window.location.href.toString().split("/");
@@ -17,7 +17,6 @@ class Create extends Component {
     };
     this.toggleEdit = this.toggleEdit.bind(this);
     this.delete = this.delete.bind(this);
-    console.log(match);
   }
 
   toggleEdit() {
@@ -86,4 +85,4 @@ class Create extends Component {
   }
 }
 
-export default Create;
+export default Details;

@@ -1,15 +1,19 @@
+// 2 | teste | teste          | $2b$10$CwkTD5D9Ez02Uomn0kQcJ.fUZMDCQEL1hAkP6kSILXBRV8Ax/FgTK | $2b$10$CwkTD5D9Ez02Uomn0kQcJ. |      1 |
+
 import React, { Component } from "react";
 import AlertMsg from './AlertMsg';
+import '../CssComponents/login.css';
+import iptlogo from '../Images/ipt.png';
+import lcrlogo from '../Images/lcr_ipt.png';
 
 class Login extends Component {
   constructor() {
     super();
     this.state = {
-      alertText: '',
+      alertText: 'Utilizador ou palavra-passe erradas',
       alertisNotVisible: true,
-      alertColor: ''
+      alertColor: 'danger'
     };
-
   }
 
   handleSubmit = async e => {
@@ -32,6 +36,7 @@ class Login extends Component {
       login: document.getElementById('user').value,
       password: hexCodes.join('')
     };
+    console.log(loginData.password);
     //Enviar pedidos
     const response = await fetch('/auth/login', {
       method: 'POST',
@@ -47,49 +52,52 @@ class Login extends Component {
       switch (status) {
         case "Authenticated":
           //Armazenar o token
-          
           sessionStorage.setItem('token', response.headers.get('x-auth-token'));
           //Armazenar os dados do utilizador
           sessionStorage.setItem('nome', resp.resposta.login);
           //Redirect
-          window.location = '/fichaTecnica';
+          window.location = '/fichaRI';
           break;
         case "NotAuthenticated":
-          this.setState({
-            alertText: "Utilizador ou palavra-passe erradas",
-            alertisNotVisible: false,
-            alertColor: 'danger'
-          });
+          this.setState({ alertisNotVisible: false });
           break;
         default:
-          console.log("A API ESTÁ A ARDER,  DARIOOOOOOOOOOOOOOOOOOOOOO");
+          console.log("A API ESTÁ A ARDER, DÁRIOOOOOOOOOOOOOOOOOOOOOO");
       }
     });
   };
 
   render() {
-    if (sessionStorage.getItem('token') !== null){
-      window.location = '/fichaTecnica';
+    if (sessionStorage.getItem('token') !== null) {
+      window.location = '/fichaRI';
       return null;
-    } 
+    }
     else {
       return (
-        <div className="Login">
-          <div className="container form-login">
-            <p className="h4">Autenticação</p>
-            <form className="py-3" onSubmit={this.handleSubmit}>
-              <div className="form-group">
-                <label>Nome de utilizador:</label>
-                <input id="user" type="text" className="form-control" placeholder="Nome de utilizador" spellCheck="false" required />
-              </div>
-              <div className="form-group">
-                <label>Palavra-passe:</label>
-                <input id="pass" type="password" className="form-control" placeholder="Palavra-passe" required />
-              </div>
-              <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
-              <button type="submit" className="btn btn-primary">Entrar</button>
-            </form>
-          </div>
+
+        <div className="center">
+          <a href="http://www.cr.estt.ipt.pt/" target="_blank" rel="noopener noreferrer">
+            <img src={lcrlogo}className="img-logo-ipt" alt="" width="170px" align="left"/>
+          </a>
+          <a href="http://portal2.ipt.pt/" target="_blank" rel="noopener noreferrer">
+            <img src={iptlogo} className="img-logo-ipt" alt="" align="right"/>
+          </a>
+          
+          <form className="form-entrar" onSubmit={this.handleSubmit}>
+            <div className="text-center mb-4">
+              <h1 className="h1 mb-5 font-weight-normal">Brandi</h1>
+            </div>
+            <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
+            <div className="form-label-group">
+              <input type="text" id="user" className="form-control" placeholder=" " required autoFocus />
+              <label>Utilizador</label>
+            </div>
+            <div className="form-label-group">
+              <input type="password" id="pass" className="form-control" placeholder=" " required />
+              <label>Password</label>
+            </div>
+            <button className="btn btn-lg btn-success btn-block" type="submit">Entrar</button>
+          </form>
         </div>
       );
     }

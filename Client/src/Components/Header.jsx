@@ -14,7 +14,7 @@ class Header extends Component {
     return (
       <div className="Header">
         <nav className="navbar navbar-expand-lg navbar-light">
-          <a className="navbar-brand" href="/">
+          <a className="navbar-brand" href="/" style={{paddingLeft:'35px'}}>
             <img
               src={favicon}
               width="30"
@@ -30,22 +30,23 @@ class Header extends Component {
               <a className="nav-link" href="/sobre">Sobre</a>
             </li>
             <li className="nav-item active">
-              <a className="nav-link" href="#">Contactos</a>
+              <a className="nav-link" href="/contactos">Contactos</a>
             </li>
-          </ul>
-
-          {/* LOGOUT */}
-          
+            </ul>
+            {/* LOGOUT */}
             <ul className="navbar-nav">
-              <li className="nav-item dropdown">
-                <a className="nav-link" href="#abc" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{sessionStorage.getItem('nome')}</a>
-                <div className="dropdown-menu" aria-labelledby="navbarDropdown" >
-                  <button className="dropdown-item" onClick={this.out}>Sair</button>
+              <li className="nav-item dropdown" style={{paddingLeft:'50px', paddingRight:'35px'}}>
+                <a className="nav-link active dropdown-toggle" href="#.#" id="navbardrop" data-toggle="dropdown">
+                  {sessionStorage.getItem('nome')}
+                </a>
+                <div className="dropdown-menu">
+                  <a className="dropdown-item" style={{cursor:'pointer'}} href="#.#">Perfil</a>
+                  <a className="dropdown-item" style={{cursor:'pointer'}} href="#.#" onClick={this.out}>Sair</a>
                 </div>
               </li>
             </ul>
+          
           </div>
-
         </nav>
       </div>
     );

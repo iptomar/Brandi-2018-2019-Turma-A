@@ -7,9 +7,9 @@ class Create extends Component {
     document.body.style = 'background: rgb(235, 235, 235)';
 
     this.state = {
-      alertText: "Ficha inserida com sucesso",
+      alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
       alertisNotVisible: true,
-      alertColor: "success",
+      alertColor: "danger",
       file: null
     }
     this.handleChange = this.handleChange.bind(this);
@@ -54,15 +54,11 @@ class Create extends Component {
           });
           break;
         case "Registed":
-          this.setState({
-            alertisNotVisible: false
-          });
+          window.location = '/fichaRI';
           break;
         case "NotRegisted":
           this.setState({
-            alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
-            alertisNotVisible: false,
-            alertColor: "danger"
+            alertisNotVisible: false
           });
           break;
         default:
@@ -108,11 +104,11 @@ class Create extends Component {
                   <div className="row">
                     <div className="col-md-6 mb-3">
                       <label>Processo LCRM</label>
-                      <input type="number" className="form-control" id="procLCRM" placeholder="Processo LCRM" required />
+                      <input type="text" className="form-control" id="procLCRM" placeholder="Processo LCRM" required />
                     </div>
                     <div className="col-md-6 mb-3">
                       <label>Processo CEARC</label>
-                      <input type="number" className="form-control" id="procCEARC" placeholder="Processo CEARC" required />
+                      <input type="text" className="form-control" id="procCEARC" placeholder="Processo CEARC" required />
                     </div>
                   </div>
                   <div className="row">

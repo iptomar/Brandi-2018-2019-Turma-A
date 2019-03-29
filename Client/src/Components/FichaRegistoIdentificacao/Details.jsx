@@ -47,10 +47,9 @@ class Details extends Component {
               </div>
               <div className="row">
                 <div className="col-md-12 mb-3">
-                  <img src="..." alt="..." />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Michelangelo_-_Creation_of_Adam_%28cropped%29.jpg" alt="Imagem" className="img-fluid"/>
                 </div>
               </div>
-              <hr className="mb-4" />
               <div className="row">
                 <div className="col-md-12 order-md-1">
                     <div className="row">

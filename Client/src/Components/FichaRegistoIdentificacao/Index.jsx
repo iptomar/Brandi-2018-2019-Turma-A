@@ -4,7 +4,7 @@ class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: ""
+      list: []
     };
     this.getFichasRI();
   }
@@ -15,48 +15,69 @@ class Index extends Component {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        'x-auth-token': sessionStorage.getItem('token')
+        "x-auth-token": sessionStorage.getItem("token")
       }
     });
     //Aguardar API
-    await response.json().then(resp => this.setState({ list: resp }));
-  };
+    await response.json().then(resp => {
+      this.setState({ list: resp });
+    });
+  }
 
   render() {
-    var visualList = "";
     //Verifica se existe o token
-    if (sessionStorage.getItem('token') == null) {
-      window.location = '/';
+    if (sessionStorage.getItem("token") == null) {
+      window.location = "/";
     } else {
-      //Carrega e calcula os novos objetos da página
-      if (this.state.list.length !== 0) {
-        visualList += '<div class="row">'
-        for (let index = 0; index < this.state.list.length; index++) {
-          visualList += '<div class="col-md-3" style="max-width: 26%;">';
-          visualList += `<a href="/fichaRI/${this.state.list[index].fichaRegistoID}/detalhes">`;
-          visualList += '<div class="card mb-3 text-center" style="width: 18rem; height:12rem;">';
-          visualList += '<img src="http://portal2.ipt.pt/img/logo.png" class="card-img-top img-fluid" style="height:100%; width:100%;"/>'
-          visualList += `<div class="card-footer text-muted">${this.state.list[index].designacao}</div>`;
-          visualList += `</div>`;
-          visualList += '</a>';
-          visualList += `</div>`;
-        }
-        visualList += '</div>';
-      } else {
-        visualList += `<div><h5>Ainda não existe nenhuma ficha técnica</h5><h6><a href="/fichaRI/criar">Adicione</a> já uma ficha</h6></div>`
-      }
       return (
         <div className="Inicio container">
           <div className="row">
-            <div className="col-md-10"><h2 className="py-3 mb-3 text-center">Fichas de Registo e Identificação</h2></div>
-            <div style={{ display: "inline" }}>
-              <a href="/fichaRI/criar" className="mt-3 btn btn-success">
-                <i class="fas fa-plus fa-white"></i>Adicionar Ficha
-            </a>
+            <div className="col-md-9">
+              <h2 className="py-3 mb-3 text-center">
+                Fichas de Registo e Identificação
+              </h2>
             </div>
-
+            <div className="col-md-3" style={{ display: "inline" }}>
+              <a href="/fichaRI/criar" className="mt-3 btn btn-success">
+                <i className="fas fa-plus fa-white" /> Adicionar Ficha
+              </a>
+            </div>
           </div>
-          <div dangerouslySetInnerHTML={{ __html: visualList }}></div>
+
+          <div className="row">
+           
+          </div>
+
+          <div className="row">
+            {!this.state.Emptylist ? (
+              this.state.list.map(function(obj) {
+                let href = "/fichaRI/" + obj.fichaRegistoID + "/detalhes";
+                return (
+
+                  <div className="col-sm-3 mb-3" key={obj.fichaRegistoID}>
+                    <a href={href}>
+                      <div className="card">
+                      <div className="card-body p-0">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Michelangelo_-_Creation_of_Adam_%28cropped%29.jpg" alt="Imagem" className="card-img-top img-fluid" 
+                      style={{ objectFit: "cover", height: "200px", width: "300px"}}/>
+                        <div className="card-footer text-muted text-center">
+                          {obj.designacao}
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                );
+              })
+            ) : (
+              <div>
+                <h5>Ainda não existe nenhuma ficha técnica</h5>
+                <h6>
+                  <a href="/fichaRI/criar">Adicione</a> já uma ficha
+                </h6>
+              </div>
+            )}
+          </div>
         </div>
       );
     }

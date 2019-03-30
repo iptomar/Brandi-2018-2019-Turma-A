@@ -17,7 +17,10 @@ class BasedeDados {
    * @param {string} quer query
    * @param {object[]} params parametros da query
    * @returns {JSON} {stat:0<sem erro>, 1<ECONNREFUSED>, 2<ER_DUP_ENTRY>,resposta: {<resposta base de dados>}}
-   * erro na base de dados resposta = Ocorreu um erro
+   * erros:
+   * -1 connecao com a base de dados
+   * -2 campos duplicados
+   * -3 foreign keys nao existentes
    */
   async query(quer, params) {
     let connection;
@@ -35,8 +38,12 @@ class BasedeDados {
       response.stat = 0;
       response.resposta = connection;
     } catch (ex) {
+      //database conneciton
       if (ex.code === "ECONNREFUSED") response.stat = 1;
+      //duplicate field
       if (ex.code === "ER_DUP_ENTRY") response.stat = 2;
+      //foreign key error
+      if (ex.code === "ER_NO_REFERENCED_ROW_2") response.stat = 3;
       response.resposta = ex;
     } finally {
       return response;

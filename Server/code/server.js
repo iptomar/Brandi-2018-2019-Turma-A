@@ -26,6 +26,10 @@ userRouter.registerRoute(app, bd);
 userRouter.loginRoute(app, bd);
 //rota de todos os utilizadores, testes
 userRouter.alluserRoute(app, bd);
+//rota para os detalhes de um utilizador
+userRouter.getUserDetails(app, bd);
+//rota para alterar os detalhes de um utilizador
+userRouter.changeUserDetails(app, bd);
 //rota para todas as roles de utilizadores, testes
 roleRouter.listAllRolesRoute(app, bd);
 //rota para criacao de umam ficha tecnica

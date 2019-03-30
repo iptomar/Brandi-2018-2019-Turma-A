@@ -6,14 +6,38 @@ const getToken = require("../Auxiliares/Token");
  */
 exports.getTodasFichasRegistoIdentificacaoRoute = async (app, bd) => {
   app.get("/api/fichaRegistoIdentificacao", async (req, resp) => {
-    let resposta_servidor = await fichaRegistoIdentificacao.getAllFichasRegistoIdentificacao(
+    let token;
+    let resposta_servidor = { status: "NotAuthenticated", resposta: {} };
+    let resposta_bd = await fichaRegistoIdentificacao.getAllFichasRegistoIdentificacao(
       bd
     );
     let code = 200;
-    if (resposta_servidor.stat === 1) {
+    token = await getToken.getToken(req);
+    if (token === null) {
       code = 400;
+    } else if (token.name) {
+      code = 400;
+      resposta_servidor.status = "InvalidToken";
+    } else {
+      if (
+        resposta_bd.stat === 1 &&
+        resposta_bd.resposta === "DBConnectionError"
+      ) {
+        code = 500;
+        resposta_servidor.resposta = resposta_bd.resposta;
+      } else if (resposta_bd.stat === 0) {
+        resposta_servidor.resposta = resposta_bd.resposta;
+        resposta_servidor.status = "Authenticated";
+      } else if (resposta_bd.stat === 1) {
+        code = 400;
+        resposta_servidor.resposta = resposta_bd.resposta;
+      }
+      token = await getToken.generateToken(token);
     }
-    resp.status(code).json(resposta_servidor.resposta);
+    resp
+      .status(code)
+      .header("x-auth-token", token)
+      .json(resposta_servidor);
   });
 };
 
@@ -56,12 +80,10 @@ exports.createfichaRegistoIdentificacaoRoute = async (app, bd) => {
           localidade: req.body.localidade,
           interessadoFK: req.body.interessadoFK
         };
-
         let resposta_bd = await fichaRegistoIdentificacao.createFichaRegistoIdentificacao(
           bd,
           ficha
         );
-
         if (resposta_bd.stat === 0) {
           resposta_servidor.stat = "Registed";
           resposta_servidor.resposta = resposta_bd.resposta;
@@ -75,7 +97,7 @@ exports.createfichaRegistoIdentificacaoRoute = async (app, bd) => {
         code = 400;
         resposta_servidor.stat = "NotAuthenticated";
       }
-      token = getToken.generateToken(token);
+      token = await getToken.generateToken(token);
     }
     resp
       .status(code)
@@ -140,7 +162,7 @@ exports.updatefichaRegistoIdentificacaoRoute = async (app, bd) => {
         code = 400;
         resposta_servidor.stat = "NotAuthenticated";
       }
-      token = getToken.generateToken(token);
+      token = await getToken.generateToken(token);
     }
     resp
       .status(code)
@@ -193,7 +215,7 @@ exports.readfichaRegistoIdentificacaoRoute = async (app, bd) => {
         code = 400;
         resposta_servidor.stat = "NotAuthenticated";
       }
-      token = getToken.generateToken(token);
+      token = await getToken.generateToken(token);
     }
     resp
       .status(code)
@@ -235,7 +257,7 @@ exports.deletefichaRegistoIdentificacaoRoute = async (app, bd) => {
           resposta_servidor.stat = "Deleted";
           resposta_servidor.resposta = resposta_bd.resposta;
         } else {
-          resposta_servidor.stat = resposta_bd.stat;
+          resposta_servidor.stat = "NotDeleted";
           resposta_servidor.resposta = resposta_bd.resposta;
         }
       }
@@ -244,7 +266,7 @@ exports.deletefichaRegistoIdentificacaoRoute = async (app, bd) => {
         code = 400;
         resposta_servidor.stat = "NotAuthenticated";
       }
-      token = getToken.generateToken(token);
+      token = await getToken.generateToken(token);
     }
     resp
       .status(code)

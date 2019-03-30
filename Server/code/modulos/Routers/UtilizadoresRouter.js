@@ -17,7 +17,6 @@ exports.loginRoute = async (app, bd) => {
     let resposta_servidor = { status: "NotAuthenticated", resposta: {} };
     //verificar se existe token no cabecalho do browser
     token = await getToken.getToken(req);
-
     //nao existe token
     if (token === null) {
       let utilizador = {
@@ -142,15 +141,118 @@ exports.registerRoute = async (app, bd) => {
   });
 };
 /**
- * Rota para testes para ir buscar todos os utilizadores
+ * Rota  para ir buscar todos os utilizadores
  */
 exports.alluserRoute = async (app, bd) => {
   app.get("/api/users", async (req, resp) => {
-    let resposta_servidor = await authentication.getAllUsers(bd);
+    let resposta_bd = await authentication.getAllUsers(bd);
+    let resposta_servidor = { status: 1, resposta: {} };
     let code = 200;
-    if (resposta_servidor.stat === 1) {
-      code = 400;
+    if (resposta_bd.stat === 1) {
+      code = 500;
+      resposta_servidor.resposta = resposta_bd.resposta;
+    } else {
+      resposta_servidor.status = 0;
+      resposta_servidor.resposta = resposta_bd.resposta;
     }
-    resp.status(code).json(resposta_servidor.resposta);
+    resp.status(code).json(resposta_servidor);
+  });
+};
+/**
+ * Rota para ir buscar os detalhes de 1 utilizador
+ */
+exports.getUserDetails = async (app, bd) => {
+  app.get("/api/users/:id", async (req, resp) => {
+    let resposta_servidor = { stat: 1, resposta: {} };
+    let code = 200;
+    let token;
+    token = await getToken.getToken(req);
+    if (token === null) {
+      //HTTP CODE BAD REQUEST
+      code = 400;
+      resposta_servidor.stat = "NotAuthenticated";
+      resposta_servidor.resposta = "Utilizador não autenticado";
+    } else if (token.name) {
+      //HTTP CODE BAD REQUEST
+      code = 400;
+      resposta_servidor.stat = "InvalidToken";
+    } else {
+      //buscar dados do utilizador
+      let resposta_bd = await authentication.getUser(bd, token.roleFK);
+      //busca dos dados com sucesso
+      if (resposta_bd.stat === 0) {
+        resposta_servidor.stat = "Authenticated";
+        resposta_servidor.resposta = resposta_bd.resposta;
+      }
+      //erro na pesquisa dos dados do utilizador
+      else if (resposta_bd.stat === 1) {
+        resposta_servidor.stat = "Authenticated";
+        resposta_servidor.resposta = resposta_bd.resposta;
+      }
+      //gerar novamente o token
+      token = await getToken.generateToken(token);
+    }
+    //resposta do servidor
+    resp
+      .status(code)
+      .header("x-auth-token", token)
+      .json(resposta_servidor);
+  });
+};
+/**
+ * Rota de alterar dados de um utilizador
+ */
+exports.changeUserDetails = async (app, bd) => {
+  app.post("/api/users/:id/edit", async (req, resp) => {
+    let code = 201;
+    let token;
+    let resposta_servidor = { status: "NotAuthenticated", resposta: {} };
+    token = await getToken.getToken(req);
+    if (token === null) {
+      //HTTP CODE BAD REQUEST
+      code = 400;
+      resposta_servidor.status = "NotAuthenticated";
+      resposta_servidor.resposta = "Utilizador não autenticado";
+    } else if (token.name) {
+      //HTTP CODE BAD REQUEST
+      code = 400;
+      resposta_servidor.status = "InvalidToken";
+    } else {
+      //verificar se e administrador
+      if (token.roleFK === 1) {
+        //criar um utilizador
+        let utilizador = {
+          login: req.body.login,
+          email: req.body.email,
+          userID: req.params.id,
+          roleFK: req.body.roleFK
+        };
+        //tentar alterar os de um utilizador
+        let resposta_bd = await authentication.changeUser(bd, utilizador);
+        //alterações  com sucesso
+        if (resposta_bd.stat === 0) {
+          resposta_servidor.status = "Updated";
+          resposta_servidor.resposta = resposta_bd.resposta;
+        }
+        //algum erro com a base de dados
+        else {
+          //HTTP BAD REQUEST
+          code = 400;
+          resposta_servidor.status = "NotUpdated";
+          resposta_servidor.resposta = resposta_bd.resposta;
+        }
+        //gerar novamente o token
+        token = await getToken.generateToken(token);
+      }
+      //nao tem permissoes
+      else {
+        resposta_servidor.resposta = "NotAuthorized";
+      }
+    }
+    //resposta do servidor
+    resp
+      .status(code)
+      .header("x-auth-token", token)
+      .json(resposta_servidor);
   });
 };

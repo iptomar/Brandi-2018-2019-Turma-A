@@ -14,8 +14,9 @@ exports.getAllFichasRegistoIdentificacao = async bd => {
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
     resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;
+  } else if (resposta_bd.stat === 1) {
+    resultadofinal.resposta = "DBConnectionError";
   } else {
-    resultadofinal.stat = resposta_bd.stat;
     resultadofinal.resposta = resposta_bd.resposta;
   }
   return resultadofinal;
@@ -56,11 +57,13 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
         dados.dataEntrega
       ]
     );
-    //conseguio inserir na base de dados
+    //inserçao bem sucedida na base de dados
     if (resposta_bd.stat === 0) {
       resultadofinal.stat = 0;
       resultadofinal.resposta = resposta_bd.resposta;
-    } else {
+    }
+    //ocorreu um erro na inserção
+    else {
       resultadofinal.stat = resposta_bd.stat;
       resultadofinal.resposta = resposta_bd.resposta;
     }
@@ -86,9 +89,12 @@ exports.getFichaRegistoIdentificacao = async (bd, id) => {
       "Select * from tbl_registoTecnicos where fichaRegistoFK = ?",
       [id]
     );
+    //encontrou tecnicos associados a ficha e a ficha e visivel
     if (resposta_bd2.stat == 0 && resposta_bd.resposta[0] !== undefined) {
       resultadofinal.resposta.tecnicos = resposta_bd2.resposta[0];
-    } else if (resposta_bd2.stat === 1) {
+    }
+    //erro de conecao com a base de dados
+    else if (resposta_bd2.stat === 1) {
       resultadofinal.stat = resposta_bd2.stat;
       resultadofinal.resposta = resposta_bd2.resposta;
     }

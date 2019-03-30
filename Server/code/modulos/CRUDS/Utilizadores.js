@@ -35,7 +35,7 @@ exports.authenticateUser = async (bd, dados) => {
       }
     } else {
       // erro de conecao com base de dados
-      if (resposta_bd.stat === 2) {
+      if (resposta_bd.stat === 1) {
         resultadofinal.resposta = "DBConnectionError";
       }
     }
@@ -68,7 +68,7 @@ exports.registerUser = async (bd, dados) => {
       "Select * from tbl_utilizadores where login = ?",
       [dados.login]
     );
-    //campo login
+    //login ja existente na base de dados
     if (resposta_bd2.resposta.length > 0) {
       resultadofinal.resposta = "Já existe um utilizador com esse login";
     }
@@ -78,6 +78,7 @@ exports.registerUser = async (bd, dados) => {
         "Select * from tbl_utilizadores where email = ?",
         [dados.email]
       );
+      //emails ja existente na base de dados
       if (resposta_bd2.resposta.length > 0) {
         resultadofinal.resposta = "Já existe um utilizador com esse email";
       }
@@ -86,6 +87,10 @@ exports.registerUser = async (bd, dados) => {
   //erro na conecao com a base de dados
   else if (resposta_bd.stat === 1) {
     resultadofinal.resposta = "DBConnectionError";
+  }
+  //Role nao existente
+  else if (resposta_bd.stat === 3) {
+    resultadofinal.resposta = "UnknowRole";
   }
   //utilizador registado com sucesso
   else {
@@ -105,6 +110,75 @@ exports.getAllUsers = async bd => {
   let resposta_bd = await bd.query("Select * from tbl_utilizadores");
   if (resposta_bd.stat === 0) {
     resultadofinal.stat = 0;
+    //ocultar os campos salt e password
+    for (i = 0; i < resposta_bd.resposta.length; i++) {
+      resposta_bd.resposta[i].salt = undefined;
+      resposta_bd.resposta[i].password = undefined;
+    }
+    resultadofinal.resposta = resposta_bd.resposta;
+  } else if (resposta_bd.stat === 1) {
+    resultadofinal.stat = 1;
+    resultadofinal.resposta = "DBConnectionError";
+  }
+  return resultadofinal;
+};
+
+/**
+ * Método que permite alterar dados de um utilizador
+ */
+exports.changeUser = async (bd, dados) => {
+  let resultadofinal = { stat: 1, resposta: {} };
+  //verificar se os dados estao introduzidos
+  if (dados.userID && dados.login && dados.email && dados.roleFK) {
+    //query a base de dados
+    let resposta_bd = await bd.query(
+      "update tbl_utilizadores set login= ? , email = ? , roleFK = ?  where userID = ?",
+      [dados.login, dados.email, dados.roleFK, dados.userID]
+    );
+    //query bem sucedida
+    if (resposta_bd.stat === 0) {
+      resultadofinal.stat = resposta_bd.stat;
+      resultadofinal.resposta = resposta_bd.resposta;
+    }
+    //erro de role nao existente
+    else if (resposta_bd.stat === 3) {
+      resultadofinal.resposta = "UnknowRole";
+    }
+    //erro de camplos duplos na base de dados
+    else if (resposta_bd.stat === 2) {
+      resultadofinal.resposta = "InvalidField";
+    }
+    //erro de connecao
+    else if (resposta_bd.stat === 1) {
+      resultadofinal.resposta = "DBConnectionError";
+    }
+  }
+  //campos vazios
+  else {
+    resultadofinal.resposta = "MissingFields";
+  }
+  return resultadofinal;
+};
+/**
+ * Método que permite ir buscar os dados de um utilizador
+ */
+exports.getUser = async (bd, id) => {
+  let resultadofinal = { stat: 1, resposta: {} };
+  let resposta_bd = await bd.query(
+    "Select * from tbl_utilizadores where userID = ? limit 1",
+    [id]
+  );
+  //encontrou o utilizador
+  if (resposta_bd.stat === 0) {
+    resultadofinal.stat = resposta_bd.stat;
+    //nao mostrar o salt
+    resposta_bd.resposta[0].salt = undefined;
+    //nao mostrar o hash da password
+    resposta_bd.resposta[0].password = undefined;
+    resultadofinal.resposta = resposta_bd.resposta[0];
+  }
+  //ocorreu algum problema com a base de dados
+  else {
     resultadofinal.resposta = resposta_bd.resposta;
   }
   return resultadofinal;

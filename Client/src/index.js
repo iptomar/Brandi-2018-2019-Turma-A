@@ -8,10 +8,13 @@ import RegisterPage from './MasterComponents/RegisterPage';
 import LoginPage from './MasterComponents/LoginPage';
 import AboutPage from './MasterComponents/AboutPage';
 import ContactPage from './MasterComponents/ContactPage';
+import ProfilePage from './MasterComponents/ProfilePage';
+
 // FICHAS TÉCNICAS
 // import CreateFichaTecnica from './MasterComponents/Ficha Tecnica/CreateFichaTecnica';
 // import DetailsFichaTecnica from './MasterComponents/Ficha Tecnica/DetailsFichaTecnica';
 // import IndexFichaTecnica from './MasterComponents/Ficha Tecnica/IndexFichaTecnica';
+
 // FICHAS RI
 import IndexFichaRI from './MasterComponents/FichaRegistoIdentificacao/IndexFichaRI';
 import CreateFichaRI from './MasterComponents/FichaRegistoIdentificacao/CreateFichaRI';
@@ -26,6 +29,7 @@ ReactDOM.render(
             <Route path="/registar" component={RegisterPage} />
             <Route path="/sobre" component={AboutPage} />
             <Route path="/contactos" component={ContactPage} />
+            <Route path="/perfil" component={ProfilePage} />
             {/* FICHA TÉCNICA */}
             {/* <Route path="/fichaTecnica" component={IndexFichaTecnica}/>
             <Route path="/fichaTecnica/criar" component={CreateFichaTecnica}/>

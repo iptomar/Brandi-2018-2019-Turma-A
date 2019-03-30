@@ -72,15 +72,22 @@ CREATE TABLE tbl_registoTecnicos
 );
 
 #ADICIONEI MAIS ISTO
-INSERT INTO TBL_ROLES (role) values("Admin");
-INSERT INTO TBL_ROLES (role) values("Aluno");
-INSERT INTO TBL_ROLES (role) values("Tecnicos");
+INSERT INTO tbl_roles (role) values("Admin");
+INSERT INTO tbl_roles (role) values("Aluno");
+INSERT INTO tbl_roles (role) values("Tecnicos");
 INSERT INTO tbl_utilizadores (login, email, password, salt, roleFK) values ("admin", "admin@mail.com", "$2b$10$7io89FC0T16oI4cuZf5A.eKUlNHmPHWhqbZAjZwG2.l/q4jOt54xO", "$2b$10$7io89FC0T16oI4cuZf5A.e", 1); # password = admin
 INSERT INTO tbl_utilizadores (login, email, password, salt, roleFK) values ("tecnico1", "tecnico1@mail.com", "$2b$10$/xQxm72q/9uIYcdRzD1leeQsoAfxy2k2nliWx9EBsMpUlFyvbQp4.", "$2b$10$/xQxm72q/9uIYcdRzD1lee", 3); # password = tecnico
 INSERT INTO tbl_utilizadores (login, email, password, salt, roleFK) values ("tecnico2", "tecnico2@mail.com", "$2b$10$2Y9iK6yq7bkaVlSxs2/4x.xmh.Bc6/pqaH7EIegtz0oiox04OmnCu", "$2b$10$2Y9iK6yq7bkaVlSxs2/4x.", 3); # password = tecnico
 INSERT INTO tbl_utilizadores (login, email, password, salt, roleFK) values ("tecnico3", "tecnico3@mail.com", "$2b$10$Uy6VqpjOVVJqJE/u/7JmIuygnFDtFHtluuakXhdNH1Xa54ZLkwr1q", "$2b$10$Uy6VqpjOVVJqJE/u/7JmIu", 3); # password = tecnico
 INSERT INTO tbl_utilizadores (login, email, password, salt, roleFK) values ("aluno", "aluno@mail.com", "$2b$10$xZ8KFZkeA0sLNhGBanV9Ueb6m7GNihxL8JjzmRqNtXBWzirwG1NCK", "$2b$10$xZ8KFZkeA0sLNhGBanV9Ue", 2); # password = aluno
 INSERT INTO tbl_tecnicos (nome, habilitacoes, nivelProfissional, userFK) values ("Aníbal Teste", "Bom em tudo", 10, 1);
+INSERT INTO tbl_tecnicos (nome, habilitacoes, nivelProfissional, userFK) values ("António Teste", "Mediano", 8, 2);
 INSERT INTO tbl_interessados (nome, enderecoPostal, email, tipo) values ("Esdrubal Teste", "2220-012", "EsdrubalTeste@mail.com", "Proprietário");
+INSERT INTO tbl_interessados (nome, enderecoPostal, email, tipo) values ("Carlos Teste", "1243-011", "CarlosTeste@mail.com", "Proprietário");
+INSERT INTO tbl_interessados (nome, enderecoPostal, email, tipo) values ("Jacinto Teste", "3323-312", "JacintoTeste@mail.com", "Proprietário");
 INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, interessadoFK) values (true, "Cadeira de madeira", "1234", "1234", "2018-03-26", "Mário Teste", "Maria Teste", "Tomar", 1);
+INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, interessadoFK) values (true, "Mesa de madeira", "4321", "4321", "2018-03-30", "Carlos Teste", "Carlinhos Teste", "Tomar", 2);
+INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, interessadoFK) values (false, "Estatua de madeira", "1243", "1243", "2018-03-29", "Faguntes Teste", "Fabio Teste", "Tomar", 3);
 INSERT INTO tbl_registoTecnicos (fichaRegistoFK, tecnicoFK) values (1, 1);
+INSERT INTO tbl_registoTecnicos (fichaRegistoFK, tecnicoFK) values (2, 2);
+INSERT INTO tbl_registoTecnicos (fichaRegistoFK, tecnicoFK) values (3, 1);

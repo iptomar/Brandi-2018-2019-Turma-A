@@ -48,9 +48,9 @@ class Create extends Component {
             <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
           :
           // Animação Loading
-          <div class="d-flex justify-content-center">
-            <div class="spinner-border" role="status" style={{width: '5rem', height: '5rem'}}>
-              <span class="sr-only">Loading...</span>
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border" role="status" style={{width: '5rem', height: '5rem'}}>
+              <span className="sr-only">Loading...</span>
             </div>
           </div>
           

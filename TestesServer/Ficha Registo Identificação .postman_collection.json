@@ -1,0 +1,381 @@
+{
+	"info": {
+		"_postman_id": "414df6db-2668-4117-b6ec-2cdde61add0b",
+		"name": "Ficha Registo Identificação ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Request de uma ficha Registo Identificação",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b712087c-c78e-412d-b4ce-6f7e6e8f3a16",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"A ficha de Registo Identificação existe na BD\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.resposta.visible).to.eql(1);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsImxvZ2luIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwicm9sZUZLIjoxfQ.Ly3aESO-OhdZWeAI08d_ifHh5N-7byDmtPRif12yWCg",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8181/api/fichaRegistoIdentificacao/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"fichaRegistoIdentificacao",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request de todas as fichas Registo Identificação",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2048d9da-7545-42fc-ab48-a686021b0c9f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Existem fichas de Registo Identificação\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).not.eql([]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8181/api/fichaRegistoIdentificacao",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"fichaRegistoIdentificacao"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar ficha de Registo Identificação",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "190a8780-5cc6-456b-9f20-33d9126220f7",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"});",
+							"",
+							"pm.test(\"Adição de nova ficha Registo Identificação\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.stat).to.eql(\"Registed\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsImxvZ2luIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwicm9sZUZLIjoxfQ.Ly3aESO-OhdZWeAI08d_ifHh5N-7byDmtPRif12yWCg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "visible",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "designacao",
+							"value": "designacaoTeste",
+							"type": "text"
+						},
+						{
+							"key": "processoLCRM",
+							"value": "processoLCRMTeste",
+							"type": "text"
+						},
+						{
+							"key": "processoCEARC",
+							"value": "processoCEARCTeste",
+							"type": "text"
+						},
+						{
+							"key": "dataEntrada",
+							"value": "2019-01-01",
+							"type": "text"
+						},
+						{
+							"key": "dataConclusao",
+							"value": "2019-01-02",
+							"type": "text"
+						},
+						{
+							"key": "dataEntrega",
+							"value": "2019-01-03",
+							"type": "text"
+						},
+						{
+							"key": "coordenacao",
+							"value": "coordenacaoTeste",
+							"type": "text"
+						},
+						{
+							"key": "direcaoTecnica",
+							"value": "direcaoTecnicaTeste",
+							"type": "text"
+						},
+						{
+							"key": "localidade",
+							"value": "localidadeTeste",
+							"type": "text"
+						},
+						{
+							"key": "interessadoFK",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8181/api/fichaRegistoIdentificacao/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"fichaRegistoIdentificacao",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar Ficha de Registo Identificação",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c0f3fbb3-8296-4659-baf7-45d5757313f6",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"});",
+							"",
+							"pm.test(\"Ficha de Registo Identificação atualizada\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.resposta.affectedRows).to.eql(1);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsImxvZ2luIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwicm9sZUZLIjoxfQ.Ly3aESO-OhdZWeAI08d_ifHh5N-7byDmtPRif12yWCg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "visible",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "designacao",
+							"value": "designacaoUpdated",
+							"type": "text"
+						},
+						{
+							"key": "processoLCRM",
+							"value": "processoLCRMUpdated",
+							"type": "text"
+						},
+						{
+							"key": "processoCEARC",
+							"value": "processoCEARCUpdated",
+							"type": "text"
+						},
+						{
+							"key": "dataEntrada",
+							"value": "2019-01-03",
+							"type": "text"
+						},
+						{
+							"key": "dataConclusao",
+							"value": "2019-01-04",
+							"type": "text"
+						},
+						{
+							"key": "dataEntrega",
+							"value": "2019-01-05",
+							"type": "text"
+						},
+						{
+							"key": "coordenacao",
+							"value": "coordenacaoUpdated",
+							"type": "text"
+						},
+						{
+							"key": "direcaoTecnica",
+							"value": "direcaoTecnicaUpdated",
+							"type": "text"
+						},
+						{
+							"key": "localidade",
+							"value": "localidadeUpdated",
+							"type": "text"
+						},
+						{
+							"key": "interessadoFK",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8181/api/fichaRegistoIdentificacao/2/edit",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"fichaRegistoIdentificacao",
+						"2",
+						"edit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Apagar ficha Registo Identificação",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ab137a1e-af4c-4408-8d5a-928cffe58549",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"});",
+							"",
+							"pm.test(\"Ficha Registo Identificação apagada\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.resposta.affectedRows).to.eql(1);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsImxvZ2luIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwicm9sZUZLIjoxfQ.Ly3aESO-OhdZWeAI08d_ifHh5N-7byDmtPRif12yWCg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8181/api/fichaRegistoIdentificacao/2/delete",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"fichaRegistoIdentificacao",
+						"2",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

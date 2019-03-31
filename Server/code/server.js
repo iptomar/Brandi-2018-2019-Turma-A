@@ -6,6 +6,7 @@ const roleRouter = require("./modulos/Routers/RolesUtilizadorRoutes");
 const userRouter = require("./modulos/Routers/UtilizadoresRouter");
 const FichaRegistoIdentificacaoRouter = require("./modulos/Routers/FichaRegistoIdentificacaoRouter");
 const processosRouter = require("./modulos/Routers/ProcessosRouter");
+const tecnicosRouter = require("./modulos/Routers/TecnicosRouter");
 //cria ligacao à base de dados
 let bd = new _basedeDados.BasedeDados(
   "localhost",
@@ -45,7 +46,14 @@ FichaRegistoIdentificacaoRouter.getTodasFichasRegistoIdentificacaoRoute(
   app,
   bd
 );
-
+//get all tecnico
+tecnicosRouter.getAllTecnicosRoute(app, bd);
+//get single tecnico
+tecnicosRouter.getTecnicoRoute(app, bd);
+//create tecnicos
+tecnicosRouter.createTecnicoRoute(app, bd);
+//update tecnicos
+tecnicosRouter.updateTecnicoRouter(app, bd);
 // //rota que devolve um processo
 // processosRouter.readProcessoRoute(app, bd);
 // //rota que cria um processo

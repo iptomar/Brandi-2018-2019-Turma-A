@@ -78,7 +78,8 @@ exports.createfichaRegistoIdentificacaoRoute = async (app, bd) => {
           coordenacao: req.body.coordenacao,
           direcaoTecnica: req.body.direcaoTecnica,
           localidade: req.body.localidade,
-          interessadoFK: req.body.interessadoFK
+          interessadoFK: req.body.interessadoFK,
+          tecnicosFK: req.body.tecnicosFK
         };
         let resposta_bd = await fichaRegistoIdentificacao.createFichaRegistoIdentificacao(
           bd,
@@ -88,8 +89,18 @@ exports.createfichaRegistoIdentificacaoRoute = async (app, bd) => {
           resposta_servidor.stat = "Registed";
           resposta_servidor.resposta = resposta_bd.resposta;
         } else {
+          code = 400;
           resposta_servidor.stat = "NotRegisted";
-          resposta_servidor.resposta = resposta_bd.resposta;
+          //erro de datas
+          if (resposta_bd.stat >= 2) {
+            resposta_servidor.resposta = await bd.tratamentoErros(
+              resposta_bd.stat,
+              resposta_bd.resposta.sqlMessage
+            );
+          } else {
+            code = 500;
+            resposta_servidor.resposta = "DBConnectionError";
+          }
         }
       }
       //nao e administrador
@@ -132,7 +143,7 @@ exports.updatefichaRegistoIdentificacaoRoute = async (app, bd) => {
       //admin
       if (token.roleFK === 1) {
         let ficha = {
-          visible: req.body.visible,
+          visible: true,
           designacao: req.body.designacao,
           processoLCRM: req.body.processoLCRM,
           processoCEARC: req.body.processoCEARC,
@@ -143,8 +154,19 @@ exports.updatefichaRegistoIdentificacaoRoute = async (app, bd) => {
           direcaoTecnica: req.body.direcaoTecnica,
           localidade: req.body.localidade,
           interessadoFK: req.body.interessadoFK,
-          fichaRegistoID: req.params.id
+          fichaRegistoID: req.params.id,
+          tecnicosFK: req.body.tecnicosFK
         };
+        //verificar se dataConclusao e dataEntrega est#ao preenchidas
+        if (ficha.dataConclusao === "" && ficha.dataEntrega === "") {
+          ficha.dataConclusao = undefined;
+          ficha.dataEntrega = undefined;
+        } else if (ficha.dataEntrega === "") {
+          ficha.dataEntrega = undefined;
+        } else if (ficha.dataConclusao === "") {
+          ficha.dataConclusao = undefined;
+        }
+        //alterar os campos
         let resposta_bd = await fichaRegistoIdentificacao.updateFichaRegistoIdentificacao(
           bd,
           ficha
@@ -152,9 +174,17 @@ exports.updatefichaRegistoIdentificacaoRoute = async (app, bd) => {
         if (resposta_bd.stat === 0) {
           resposta_servidor.stat = "Updated";
           resposta_servidor.resposta = resposta_bd.resposta;
-        } else {
+        } else if (resposta_bd.stat >= 2) {
           resposta_servidor.stat = "NotUpdated";
-          resposta_servidor.resposta = resposta_bd.resposta;
+          code = 400;
+          resposta_servidor.resposta = await bd.tratamentoErros(
+            resposta_bd.stat,
+            resposta_bd.resposta.sqlMessage
+          );
+        } else {
+          code = 500;
+          resposta_servidor.stat = "NotUpdated";
+          resposta_servidor.resposta = "DBConnectionError";
         }
       }
       //nao e administrador
@@ -195,26 +225,21 @@ exports.readfichaRegistoIdentificacaoRoute = async (app, bd) => {
     }
     //existe token/sessao
     else {
-      //admin
-      if (token.roleFK === 1) {
-        let resposta_bd = await fichaRegistoIdentificacao.getFichaRegistoIdentificacao(
-          bd,
-          req.params.id
-        );
-        if (resposta_bd.stat === 0) {
-          code = 200;
-          resposta_servidor.stat = "Authenticated";
-          resposta_servidor.resposta = resposta_bd.resposta;
-        } else {
-          resposta_servidor.stat = resposta_bd.stat;
-          resposta_servidor.resposta = resposta_bd.resposta;
-        }
+      let resposta_bd = await fichaRegistoIdentificacao.getFichaRegistoIdentificacao(
+        bd,
+        req.params.id
+      );
+      if (resposta_bd.stat === 0) {
+        code = 200;
+        resposta_servidor.stat = "Authenticated";
+        resposta_servidor.resposta = resposta_bd.resposta;
+      } else if (resposta_bd.stat === 1) {
+        code = 500;
+        resposta_servidor.stat = "Authenticated";
+        resposta_servidor.resposta = "DBConnectionError";
       }
+
       //nao e administrador
-      else {
-        code = 400;
-        resposta_servidor.stat = "NotAuthenticated";
-      }
       token = await getToken.generateToken(token);
     }
     resp

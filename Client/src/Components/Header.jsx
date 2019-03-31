@@ -33,14 +33,14 @@ class Header extends Component {
               <a className="nav-link" href="/contactos">Contactos</a>
             </li>
             </ul>
-            {/* LOGOUT */}
+            {/* DROPDOWN */}
             <ul className="navbar-nav">
               <li className="nav-item dropdown" style={{paddingLeft:'50px', paddingRight:'35px'}}>
                 <a className="nav-link active dropdown-toggle" href="#.#" id="navbardrop" data-toggle="dropdown">
                   {sessionStorage.getItem('nome')}
                 </a>
                 <div className="dropdown-menu">
-                  <a className="dropdown-item" style={{cursor:'pointer'}} href="#.#">Perfil</a>
+                  <a className="dropdown-item" style={{cursor:'pointer'}} href="/perfil">Perfil</a>
                   <a className="dropdown-item" style={{cursor:'pointer'}} href="#.#" onClick={this.out}>Sair</a>
                 </div>
               </li>

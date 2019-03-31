@@ -143,7 +143,7 @@ exports.updatefichaRegistoIdentificacaoRoute = async (app, bd) => {
       //admin
       if (token.roleFK === 1) {
         let ficha = {
-          visible: req.body.visible,
+          visible: true,
           designacao: req.body.designacao,
           processoLCRM: req.body.processoLCRM,
           processoCEARC: req.body.processoCEARC,

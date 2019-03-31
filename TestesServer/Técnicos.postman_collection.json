@@ -1,0 +1,273 @@
+{
+	"info": {
+		"_postman_id": "66328066-1dc5-4bbe-b42d-50ac526183fa",
+		"name": "Técnicos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Request de todos os técnicos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f80a3c2f-387e-4686-927f-927642d41c3c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Existem Técnicos na Base de Dados\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).not.eql([]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsImxvZ2luIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwicm9sZUZLIjoxfQ.Ly3aESO-OhdZWeAI08d_ifHh5N-7byDmtPRif12yWCg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8181/api/tecnicos",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"tecnicos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request de um Técnico",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c65f89a0-3e6a-4c7d-bff2-16bf379059d2",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Tempo de resposta menor que 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"",
+							"/*pm.test(\"O Técnico existe na base de dados\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.resposta[0].nome).to.eql(\"Aníbal Teste\");",
+							"});",
+							"*/",
+							"",
+							"pm.test(\"O Técnico existe na base de dados\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.resposta).not.to.eql([]);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsImxvZ2luIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwicm9sZUZLIjoxfQ.Ly3aESO-OhdZWeAI08d_ifHh5N-7byDmtPRif12yWCg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8181/api/tecnicos/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"tecnicos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar novo técnico",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "62b18102-d0fe-4bac-adba-f79a37f6a5d5",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"});",
+							"",
+							"pm.test(\"Novo Técnico criado com sucesso\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(\"Created\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsImxvZ2luIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwicm9sZUZLIjoxfQ.Ly3aESO-OhdZWeAI08d_ifHh5N-7byDmtPRif12yWCg",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nome",
+							"value": "tecnico_Teste",
+							"type": "text"
+						},
+						{
+							"key": "habilitacoes",
+							"value": "Não sabe fazer nada",
+							"type": "text"
+						},
+						{
+							"key": "nivelProfissional",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "userFK",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8181/api/tecnicos/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"tecnicos",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar dados de um Técnico",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "62b18102-d0fe-4bac-adba-f79a37f6a5d5",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"});",
+							"",
+							"pm.test(\"Dados de um Técnico Atualizados\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.resposta.affectedRows).to.eql(1);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsImxvZ2luIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwicm9sZUZLIjoxfQ.Ly3aESO-OhdZWeAI08d_ifHh5N-7byDmtPRif12yWCg"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nome",
+							"value": "tecnico_Updated",
+							"type": "text"
+						},
+						{
+							"key": "habilitacoes",
+							"value": "Sabe fazer pouco",
+							"type": "text"
+						},
+						{
+							"key": "nivelProfissional",
+							"value": "6",
+							"type": "text"
+						},
+						{
+							"key": "userFK",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8181/api/tecnicos/1/edit",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"tecnicos",
+						"1",
+						"edit"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

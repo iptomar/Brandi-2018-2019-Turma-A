@@ -552,7 +552,7 @@
 </details>
 
 # ----------------------------------------------
-## GET /api/fichaRegistoIdentificacao/:id/edit :heavy_check_mark:
+## GET /api/fichaRegistoIdentificacao/:id :heavy_check_mark:
 
 <details>
  
@@ -574,7 +574,7 @@
  
   <details>
   
-  ![alt text](https://https://raw.githubusercontent.com/iptomar/Brandi-2018-2019-Turma-A/master/Server/postman_screenshots/fichaRegistoIdentificacao/getFichaID/NoToken.PNG)
+  ![alt text](https://raw.githubusercontent.com/iptomar/Brandi-2018-2019-Turma-A/master/Server/postman_screenshots/fichaRegistoIdentificacao/getFichaID/GetDetails.PNG)
   
   </details>
  

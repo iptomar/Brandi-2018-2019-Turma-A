@@ -10,7 +10,7 @@ class Details extends Component {
       data: null,
       edit: false,
       loading: true,
-      error: false
+      alert: false,
     };
     this.toggleEdit = this.toggleEdit.bind(this);
     this.delete = this.delete.bind(this);
@@ -123,7 +123,9 @@ class Details extends Component {
           this.setState({
             alertText: "A ficha foi removida com sucesso.",
             alertisNotVisible: false,
-            alertColor: 'danger'
+            alertColor: 'danger',
+            alert: true,
+            loading: true
           });
           window.scrollTo(0, 0);
           break;
@@ -145,7 +147,7 @@ class Details extends Component {
     if (sessionStorage.getItem("token") == null) {
       window.location = "/";
     } else {
-      if (this.state.data != null) {
+      if (!this.state.loading) {
           return (
             <div className="container">
               <div className="py-3 text-center">
@@ -382,22 +384,20 @@ class Details extends Component {
             </div>
           );
       } else {
-        if (this.state.loading){
-          return (
-            <div className="container">
-              <div className="py-3 text-center">
-                <h2>Detalhes da Ficha de Registo e Identificação</h2>
-              </div>
-              {this.state.error? 
-                  <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} /> 
-                : 
-                  <LoadingAnimation height="6rem" width="6em" />
-              }
+        return (
+          <div className="container">
+            <div className="py-3 text-center">
+              <h2>Detalhes da Ficha de Registo e Identificação</h2>
             </div>
-          );
-        }
-      };
-    }
+            {this.state.alert? 
+                <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} /> 
+              : 
+                <LoadingAnimation height="6rem" width="6em" />
+            }
+          </div>
+        );
+      }
+    };
   }
 }
 

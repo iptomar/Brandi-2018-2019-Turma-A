@@ -550,6 +550,7 @@
 
   
 </details>
+
 # ----------------------------------------------
 ## GET /api/fichaRegistoIdentificacao/:id/edit :heavy_check_mark:
 

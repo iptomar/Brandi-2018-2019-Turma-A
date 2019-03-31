@@ -70,9 +70,11 @@ class Details extends Component {
       coordenacao: document.getElementById("coord").value,
       direcaoTecnica: document.getElementById("dirTecn").value,
       localidade: document.getElementById("endPostLocal").value,
-      interessadoFK: 1
+      tecnicosFK: [document.getElementById("tecResp").value],
+      interessadoFK: 1,
+      visible: 1
     };
-
+    console.log(data);
     //Enviar pedidos
     const response = await fetch(`/api/fichaRegistoIdentificacao/${this.props.id}/edit`, {
       method: "POST",
@@ -92,8 +94,9 @@ class Details extends Component {
           this.setState({
             alertText: "Editado com sucesso.",
             alertisNotVisible: false,
-            alertColor: "danger"
+            alertColor: "primary"
           });
+          window.scrollTo(0, 0);
           break;
         case "NotUpdated":
           window.location = '/fichaRI';
@@ -122,6 +125,7 @@ class Details extends Component {
             alertisNotVisible: false,
             alertColor: 'danger'
           });
+          window.scrollTo(0, 0);
           break;
         case "NotDeleted":
           this.setState({
@@ -129,6 +133,7 @@ class Details extends Component {
             alertisNotVisible: false,
             alertColor: 'danger'
           });
+          window.scrollTo(0, 0);
           break;
       default:
         console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
@@ -170,6 +175,11 @@ class Details extends Component {
                         id="dObjeto"
                         value={this.state.data.designacao}
                         readOnly={!this.state.edit}
+                        onChange={(evt) => {
+                          this.setState({
+                            data: { designacao : evt.target.value}
+                          });
+                        }}
                       />
                     </div>
                   </div>
@@ -182,6 +192,11 @@ class Details extends Component {
                         id="procLCRM"
                         value={this.state.data.processoLCRM}
                         readOnly={!this.state.edit}
+                        onChange={(evt) => {
+                          this.setState({
+                            data: { processoLCRM : evt.target.value}
+                          });
+                        }}
                       />
                     </div>
                     <div className="col-md-6 mb-3">
@@ -192,6 +207,11 @@ class Details extends Component {
                         id="procCEARC"
                         value={this.state.data.processoCEARC}
                         readOnly={!this.state.edit}
+                        onChange={(evt) => {
+                          this.setState({
+                            data: { processoCEARC : evt.target.value}
+                          });
+                        }}
                       />
                     </div>
                   </div>
@@ -204,6 +224,11 @@ class Details extends Component {
                         id="dateEntrada"
                         value={this.state.data.dataEntrada!=null? this.state.data.dataEntrada.substring(0,10) : null}
                         readOnly={!this.state.edit}
+                        onChange={(evt) => {
+                          this.setState({
+                            data: { dataEntrada : evt.target.value}
+                          });
+                        }}
                       />
                     </div>
                     <div className="col-md-4 mb-3">
@@ -214,6 +239,11 @@ class Details extends Component {
                         id="dateConclusão"
                         value={this.state.data.dataConclusao!=null? this.state.data.dataConclusao.substring(0,10) : null}
                         readOnly={!this.state.edit}
+                        onChange={(evt) => {
+                          this.setState({
+                            data: { dataConclusao : evt.target.value}
+                          });
+                        }}
                       />
                     </div>
                     <div className="col-md-4 mb-3">
@@ -224,6 +254,11 @@ class Details extends Component {
                         id="dateEntrega"
                         value={this.state.data.dataEntrega!=null? this.state.data.dataEntrega.substring(0,10) : null}
                         readOnly={!this.state.edit}
+                        onChange={(evt) => {
+                          this.setState({
+                            data: { dataEntrega : evt.target.value}
+                          });
+                        }}
                       />
                     </div>
                   </div>
@@ -236,6 +271,11 @@ class Details extends Component {
                         id="coord"
                         value={this.state.data.coordenacao}
                         readOnly={!this.state.edit}
+                        onChange={(evt) => {
+                          this.setState({
+                            data: { coordenacao : evt.target.value}
+                          });
+                        }}
                       />
                     </div>
                     <div className="col-md-6 mb-3">
@@ -246,6 +286,11 @@ class Details extends Component {
                         id="dirTecn"
                         value={this.state.data.direcaoTecnica}
                         readOnly={!this.state.edit}
+                        onChange={(evt) => {
+                          this.setState({
+                            data: { direcaoTecnica : evt.target.value}
+                          });
+                        }}
                       />
                     </div>
                   </div>
@@ -256,29 +301,26 @@ class Details extends Component {
                         type="text"
                         className="form-control"
                         id="tecResp"
-                        value={this.state.data.tecnicos.registoTecnicoID}
+                        value='1'
                         readOnly={!this.state.edit}
                       />
                     </div>
                   </div>
                   <div className="row">
-                    <div className="col-md-6 mb-3">
+                    <div className="col-md-12 mb-3">
                       <label className="font-weight-bold">Endereço Postal | Localidade</label>
                       <input 
                         type="text" 
                         className="form-control" 
                         id="endPostLocal" 
                         value={this.state.data.localidade}
-                        readOnly={!this.state.edit}/>
-                    </div>
-                    <div className="col-md-6 mb-3">
-                      <label className="font-weight-bold">Direção Técnica</label>
-                      <input 
-                        type="text" 
-                        className="form-control"
-                        id="dirTecn" 
-                        value={this.state.data.direcaoTecnica}
-                        readOnly={!this.state.edit}/>
+                        readOnly={!this.state.edit}
+                        onChange={(evt) => {
+                          this.setState({
+                            data: { localidade : evt.target.value}
+                          });
+                        }}
+                        />
                     </div>
                   </div>
                   <hr className="mb-4" />

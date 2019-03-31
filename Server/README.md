@@ -15,7 +15,7 @@
   # **recebe**
    > Nada
   # **devolve**
-  ## -Sucess :white_check_mark:
+  ## -Success :white_check_mark:
   <details>
   
   ![alt text](https://raw.githubusercontent.com/iptomar/Brandi-2018-2019-Turma-A/master/Server/postman_screenshots/utilizadores/GETUsers/getAllusers_sucess.PNG)
@@ -41,7 +41,7 @@
    # **recebe** 
     > id
   # **devolve:**
-  ## -Sucess :white_check_mark:
+  ## -Success :white_check_mark:
   <details>
   
    ![alt text](https://raw.githubusercontent.com/iptomar/Brandi-2018-2019-Turma-A/master/Server/postman_screenshots/utilizadores/GetSingleUser/getSingleUserDetails_Authenticated.PNG)
@@ -87,7 +87,7 @@
   # **recebe**
   > login , password
   # **devolve**
-  ## -Sucess :white_check_mark:
+  ## -Success :white_check_mark:
   
    <details>
   
@@ -128,7 +128,7 @@
   # **recebe**
   > login,password,email,roleFK
   # **devolve**
-  ## -Sucess :white_check_mark:
+  ## -Success :white_check_mark:
   
    <details>
 
@@ -186,7 +186,7 @@
   # **recebe**
   >id,login,email,roleFK
   # **devolve**
-  ## -Sucess :white_check_mark:
+  ## -Success :white_check_mark:
   
   <details>
 
@@ -247,7 +247,7 @@
   # **recebe**
   > nada
   # **devolve**
-  ## -Sucess :white_check_mark:
+  ## -Success :white_check_mark:
   
   <details>
 
@@ -296,7 +296,7 @@
   # **recebe**
   > nada
   # **devolve**
-  ## -Sucess :white_check_mark:
+  ## -Success :white_check_mark:
   
   <details>
   
@@ -338,7 +338,7 @@
   # **recebe**
   > nome , habilitacoes , nivelProfissional
   # **devolve**
-  ## -Sucess :white_check_mark:
+  ## -Success :white_check_mark:
   
    <details>
   
@@ -388,7 +388,7 @@
   # **recebe**
   > nome , habilitacoes , nivelProfissional , userFK
   # **devolve**
-  ## -Sucess :white_check_mark:
+  ## -Success :white_check_mark:
   
   <details>
   
@@ -447,7 +447,7 @@
   # **recebe**
   > nada
   # **devolve**
-  ## -Sucess :white_check_mark:
+  ## -Success :white_check_mark:
   
   <details>
  
@@ -491,7 +491,7 @@
   # **recebe**
   > visible , designacao , processoLCRM , processoCEARC , dataEntrada , dataConclusao , coordenacao , direcaoTecnica , interessadoFK , dataEntrega, array de tecnicos
   # **devolve**
-  ## -Sucess :white_check_mark:
+  ## -Success :white_check_mark:
   
   
    <details>
@@ -561,7 +561,7 @@
    # **recebe**
   > Nada
   # **devolve**
-  ## -Sucess :white_check_mark:
+  ## -Success :white_check_mark:
   
   <details>
   
@@ -600,7 +600,7 @@
    # **recebe**
   > id,visible , designacao , processoLCRM , processoCEARC , dataEntrada , dataConclusao , coordenacao , direcaoTecnica , interessadoFK , dataEntrega, array de tecnicos
   # **devolve**
-  ## -Sucess :white_check_mark:
+  ## -Success :white_check_mark:
   
    <details>
  

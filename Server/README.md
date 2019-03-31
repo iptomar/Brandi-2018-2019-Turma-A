@@ -628,6 +628,7 @@
    ![alt text](https://raw.githubusercontent.com/iptomar/Brandi-2018-2019-Turma-A/master/Server/postman_screenshots/fichaRegistoIdentificacao/updateFicha/Erro%20num%20dos%20campos.PNG)
   
   </details>
+  
   ### --DB Down
   
    <details>

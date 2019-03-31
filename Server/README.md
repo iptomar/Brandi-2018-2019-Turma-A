@@ -552,6 +552,45 @@
 </details>
 
 # ----------------------------------------------
+## GET /api/fichaRegistoIdentificacao/:id :heavy_check_mark:
+
+<details>
+ 
+  <summary>Click me</summary>
+  
+   # **recebe**
+  > Nada
+  # **devolve**
+  ## -Sucess :white_check_mark:
+  
+  <details>
+  
+  ![alt text](https://raw.githubusercontent.com/iptomar/Brandi-2018-2019-Turma-A/master/Server/postman_screenshots/fichaRegistoIdentificacao/getFichaID/GetDetails.PNG)
+  
+  </details>
+  
+ ## -Unsucess :x:
+ ### --No Token
+ 
+  <details>
+  
+  ![alt text](https://raw.githubusercontent.com/iptomar/Brandi-2018-2019-Turma-A/master/Server/postman_screenshots/fichaRegistoIdentificacao/getFichaID/GetDetails.PNG)
+  
+  </details>
+ 
+ ### --DB Down
+ 
+   <details>
+  
+  ![alt text](https://raw.githubusercontent.com/iptomar/Brandi-2018-2019-Turma-A/master/Server/postman_screenshots/fichaRegistoIdentificacao/getFichaID/DBDown.PNG)
+  
+  </details>
+ 
+  
+</details>
+  
+
+# ----------------------------------------------
 ## POST /api/fichaRegistoIdentificacao/:id/edit :heavy_check_mark:
 
 <details>

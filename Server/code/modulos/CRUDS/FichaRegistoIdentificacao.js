@@ -179,6 +179,9 @@ exports.getFichaRegistoIdentificacao = async (bd, id) => {
       resultadofinal.stat = resposta_bd2.stat;
       resultadofinal.resposta = resposta_bd2.resposta;
     }
+  } else if (resposta_bd.stat === 0) {
+    resultadofinal.stat = resposta_bd.stat;
+    resultadofinal.resposta = "FichaNaoExistente";
   } else {
     resultadofinal.stat = resposta_bd.stat;
     resultadofinal.resposta = resposta_bd.resposta;

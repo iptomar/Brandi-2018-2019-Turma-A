@@ -10,8 +10,8 @@ const tecnicosRouter = require("./modulos/Routers/TecnicosRouter");
 //cria ligacao à base de dados
 let bd = new _basedeDados.BasedeDados(
   "localhost",
-  "root",
-  "root",
+  "admina",
+  "admina_ADMINA_123",
   "5",
   "brandi_a"
 );
@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //port de escuta
-const port = process.env.PORT || 8181;
+const port = process.env.PORT || 8081;
 //rota de registo
 userRouter.registerRoute(app, bd);
 //rota de login

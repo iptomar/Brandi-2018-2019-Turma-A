@@ -169,7 +169,7 @@ exports.changeUser = async (bd, dados) => {
 exports.getUser = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: {} };
   let resposta_bd = await bd.query(
-    "Select * from tbl_utilizadores where userID = ? and visibile = true limit 1",
+    "Select * from tbl_utilizadores where userID = ? and visible = true limit 1",
     [id]
   );
   //encontrou o utilizador
@@ -182,7 +182,7 @@ exports.getUser = async (bd, id) => {
     resultadofinal.resposta = resposta_bd.resposta[0];
   } else if (resposta_bd.stat === 0) {
     resultadofinal.stat = resposta_bd.stat;
-    resultadofinal.resposta = "NotVisible";
+    resultadofinal.resposta = "UserNotFound";
   }
   //ocorreu algum problema com a base de dados
   else {

@@ -4,20 +4,35 @@ import AlertMsg from "../AlertMsg";
 class Create extends Component {
   constructor(props) {
     super(props);
-    document.body.style = 'background: rgb(235, 235, 235)';
-
     this.state = {
       alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
       alertisNotVisible: true,
       alertColor: "danger",
-      file: null
+      file: null,
+      tecnicosResp: []
     }
+    this.fetchTecnicos();
     this.handleChange = this.handleChange.bind(this);
   }
 
+
+  async fetchTecnicos(){
+    //Enviar pedido para receber 
+    const response = await fetch("/api/tecnicos", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'x-auth-token': sessionStorage.getItem('token')
+      }
+    });
+    await response.json().then(resp => {
+      this.setState({ tecnicosResp: resp.resposta })
+    });
+  }
+
+
   handleSubmit = async e => {
     e.preventDefault();
-
     //Objeto data
     const data = {
       designacao: document.getElementById("dObjeto").value,
@@ -137,9 +152,18 @@ class Create extends Component {
                   </div>
                   <div className="row">
                     <div className="col-md-12 mb-3">
-                      <label>Técnico(s) Responsável(eis)</label>
-                      <input type="text" className="form-control" id="tecResp" placeholder="Técnico(s) Responsável(eis)" required />
-                    </div>
+                      <label>Técnico(s) Responsável(eis)</label> <br/>
+                      {this.state.tecnicosResp.map(function (object) {
+                        console.log(object);
+                        return (
+                          <div className="form-check-inline">
+                          <label className="form-check-label">
+                            <input type="radio" className="form-check-input" key={object.tecnicoID} />{object.nome}
+                          </label>
+                        </div>
+                        );
+                      })}
+                      </div>
                   </div>
                   <div className="row">
                     <div className="col-md-12 mb-3">

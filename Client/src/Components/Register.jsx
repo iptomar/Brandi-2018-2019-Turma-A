@@ -56,7 +56,7 @@ class Register extends Component {
 
     var select = document.getElementById("DDLRoles");
     var option = select.options[select.selectedIndex];
-    
+
     //Objeto Register
     const registerData = {
       login: document.getElementById("user").value,
@@ -171,7 +171,7 @@ class Register extends Component {
                       </div>
                     </div>
                     <select id="DDLRoles" className="form-control">
-                      {this.state.rolesList.map(function(object) {
+                      {this.state.rolesList.map(function (object) {
                         return (
                           <option
                             className="dropdown-item"

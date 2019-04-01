@@ -36,7 +36,6 @@ class Login extends Component {
       login: document.getElementById('user').value,
       password: hexCodes.join('')
     };
-    console.log(loginData.password);
     //Enviar pedidos
     const response = await fetch('/auth/login', {
       method: 'POST',

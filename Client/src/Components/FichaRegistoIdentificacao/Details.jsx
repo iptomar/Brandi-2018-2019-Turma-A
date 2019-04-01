@@ -32,7 +32,6 @@ class Details extends Component {
     //Aguardar API
     await response.json().then(resp => {
       let status = resp.stat;
-      console.log(resp);
       switch (status) {
         case "Authenticated":
           this.setState({ data: resp.resposta, loading: false });
@@ -74,7 +73,6 @@ class Details extends Component {
       interessadoFK: 1,
       visible: 1
     };
-    console.log(data);
     //Enviar pedidos
     const response = await fetch(`/api/fichaRegistoIdentificacao/${this.props.id}/edit`, {
       method: "POST",
@@ -87,7 +85,6 @@ class Details extends Component {
 
     //Aguardar API
     await response.json().then(resp => {
-      console.log(resp);
       let status = resp.stat;
       switch (status) {
         case "Updated":
@@ -224,7 +221,7 @@ class Details extends Component {
                         type="date"
                         className="form-control"
                         id="dateEntrada"
-                        value={this.state.data.dataEntrada!=null? this.state.data.dataEntrada.substring(0,10) : null}
+                        value={this.state.data.dataEntrada!=null? this.state.data.dataEntrada.substring(0,10) : ""}
                         readOnly={!this.state.edit}
                         onChange={(evt) => {
                           this.setState({
@@ -239,7 +236,7 @@ class Details extends Component {
                         type="date"
                         className="form-control"
                         id="dateConclusão"
-                        value={this.state.data.dataConclusao!=null? this.state.data.dataConclusao.substring(0,10) : null}
+                        value={this.state.data.dataConclusao!=null? this.state.data.dataConclusao.substring(0,10) : ""}
                         readOnly={!this.state.edit}
                         onChange={(evt) => {
                           this.setState({
@@ -254,7 +251,7 @@ class Details extends Component {
                         type="date"
                         className="form-control"
                         id="dateEntrega"
-                        value={this.state.data.dataEntrega!=null? this.state.data.dataEntrega.substring(0,10) : null}
+                        value={this.state.data.dataEntrega!=null? this.state.data.dataEntrega.substring(0,10) : ""}
                         readOnly={!this.state.edit}
                         onChange={(evt) => {
                           this.setState({
@@ -339,21 +336,21 @@ class Details extends Component {
               </div>
 
               { /* Modal de apagar*/ }
-              <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Apagar Ficha de Registo e Identificação</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <div className="modal fade" id="modalDelete" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="exampleModalLabel">Apagar Ficha de Registo e Identificação</h5>
+                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <div class="modal-body">
+                    <div className="modal-body">
                       Tem a certeza que pretende apagar a Ficha de Registo e Identificação?
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
-                      <button type="button" class="btn btn-danger" onClick={this.delete} data-dismiss="modal">Sim</button>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-primary" data-dismiss="modal">Não</button>
+                      <button type="button" className="btn btn-danger" onClick={this.delete} data-dismiss="modal">Sim</button>
                     </div>
                   </div>
                 </div>
@@ -361,21 +358,21 @@ class Details extends Component {
 
               { /* Modal de editar*/ }
 
-              <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Editar Ficha de Registo e Identificação</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <div className="modal fade" id="modalEdit" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="exampleModalLabel">Editar Ficha de Registo e Identificação</h5>
+                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <div class="modal-body">
+                    <div className="modal-body">
                       Pretende guardar as alterações?
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
-                      <button type="submit" class="btn btn-success"  onClick={this.edit} data-dismiss="modal">Sim</button>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-primary" data-dismiss="modal">Não</button>
+                      <button type="submit" className="btn btn-success"  onClick={this.edit} data-dismiss="modal">Sim</button>
                     </div>
                   </div>
                 </div>

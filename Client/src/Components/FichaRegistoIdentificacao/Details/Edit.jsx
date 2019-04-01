@@ -174,7 +174,7 @@ class Edit extends Component {
                         value={this.state.data.dataEntrada!=null? this.state.data.dataEntrada.substring(0,10) : ""}
                         onChange={(evt) => {
                           this.setState({
-                            data: { dataEntrada : evt.target.value!=null? evt.target.value.substring(0,10) : ""}
+                            data: { dataEntrada : evt.target.value}
                           });
                         }}
                       />
@@ -188,7 +188,7 @@ class Edit extends Component {
                         value={this.state.data.dataConclusao!=null? this.state.data.dataConclusao.substring(0,10) : ""}
                         onChange={(evt) => {
                           this.setState({
-                            data: { dataConclusao : evt.target.value!=null? evt.target.value.substring(0,10) : ""}
+                            data: { dataConclusao : evt.target.value}
                           });
                         }}
                       />
@@ -202,7 +202,7 @@ class Edit extends Component {
                         value={this.state.data.dataEntrega!=null? this.state.data.dataEntrega.substring(0,10) : ""}
                         onChange={(evt) => {
                           this.setState({
-                            data: { dataEntrega : evt.target.value!=null? evt.target.value.substring(0,10) : ""}
+                            data: { dataEntrega : evt.target.value}
                           });
                         }}
                       />

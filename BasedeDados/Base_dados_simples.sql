@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS tbl_utilizadores;
 CREATE TABLE tbl_utilizadores
 (
     userID INT NOT NULL AUTO_INCREMENT,
+    visible bool not null, #EXTRA
     login VARCHAR(255) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(1024) NOT NULL,
@@ -45,7 +46,7 @@ DROP TABLE IF EXISTS tbl_fichaRegistoIdentificacao;
 CREATE TABLE tbl_fichaRegistoIdentificacao
 (
     fichaRegistoID INT NOT NULL AUTO_INCREMENT,
-	visible bool not null, #EXTRA
+    visible bool not null, #EXTRA
     designacao VARCHAR(255) NOT NULL,
     processoLCRM VARCHAR(255) NOT NULL UNIQUE,
     processoCEARC VARCHAR(255) NOT NULL UNIQUE,
@@ -74,16 +75,16 @@ CREATE TABLE tbl_registoTecnicos
 INSERT INTO TBL_ROLES (role) values("Admin");
 INSERT INTO TBL_ROLES (role) values("Aluno");
 INSERT INTO TBL_ROLES (role) values("Tecnicos");
-INSERT INTO tbl_utilizadores (login, email, password, salt, roleFK) values ("admin", "admin@mail.com", "$2b$10$7io89FC0T16oI4cuZf5A.eKUlNHmPHWhqbZAjZwG2.l/q4jOt54xO", "$2b$10$7io89FC0T16oI4cuZf5A.e", 1); # password = admin
-INSERT INTO tbl_utilizadores (login, email, password, salt, roleFK) values ("tecnico1", "tecnico1@mail.com", "$2b$10$/xQxm72q/9uIYcdRzD1leeQsoAfxy2k2nliWx9EBsMpUlFyvbQp4.", "$2b$10$/xQxm72q/9uIYcdRzD1lee", 3); # password = tecnico
-INSERT INTO tbl_utilizadores (login, email, password, salt, roleFK) values ("tecnico2", "tecnico2@mail.com", "$2b$10$2Y9iK6yq7bkaVlSxs2/4x.xmh.Bc6/pqaH7EIegtz0oiox04OmnCu", "$2b$10$2Y9iK6yq7bkaVlSxs2/4x.", 3); # password = tecnico
-INSERT INTO tbl_utilizadores (login, email, password, salt, roleFK) values ("tecnico3", "tecnico3@mail.com", "$2b$10$Uy6VqpjOVVJqJE/u/7JmIuygnFDtFHtluuakXhdNH1Xa54ZLkwr1q", "$2b$10$Uy6VqpjOVVJqJE/u/7JmIu", 3); # password = tecnico
-INSERT INTO tbl_utilizadores (login, email, password, salt, roleFK) values ("aluno", "aluno@mail.com", "$2b$10$xZ8KFZkeA0sLNhGBanV9Ueb6m7GNihxL8JjzmRqNtXBWzirwG1NCK", "$2b$10$xZ8KFZkeA0sLNhGBanV9Ue", 2); # password = aluno
-INSERT INTO tbl_tecnicos (nome, habilitacoes, nivelProfissional, userFK) values ("Aníbal Teste", "Bom em tudo", 10, 1);
-INSERT INTO tbl_tecnicos (nome, habilitacoes, nivelProfissional, userFK) values ("João Teste", "primitivo", 2, 2);
+INSERT INTO tbl_utilizadores (visible, login, email, password, salt, roleFK) values (true, "admin", "admin@mail.com", "$2b$10$7io89FC0T16oI4cuZf5A.eKUlNHmPHWhqbZAjZwG2.l/q4jOt54xO", "$2b$10$7io89FC0T16oI4cuZf5A.e", 1); # password = admin
+INSERT INTO tbl_utilizadores (visible, login, email, password, salt, roleFK) values (true, "tecnico1", "tecnico1@mail.com", "$2b$10$/xQxm72q/9uIYcdRzD1leeQsoAfxy2k2nliWx9EBsMpUlFyvbQp4.", "$2b$10$/xQxm72q/9uIYcdRzD1lee", 3); # password = tecnico
+INSERT INTO tbl_utilizadores (visible, login, email, password, salt, roleFK) values (true, "tecnico2", "tecnico2@mail.com", "$2b$10$2Y9iK6yq7bkaVlSxs2/4x.xmh.Bc6/pqaH7EIegtz0oiox04OmnCu", "$2b$10$2Y9iK6yq7bkaVlSxs2/4x.", 3); # password = tecnico
+INSERT INTO tbl_utilizadores (visible, login, email, password, salt, roleFK) values (true, "tecnico3", "tecnico3@mail.com", "$2b$10$Uy6VqpjOVVJqJE/u/7JmIuygnFDtFHtluuakXhdNH1Xa54ZLkwr1q", "$2b$10$Uy6VqpjOVVJqJE/u/7JmIu", 3); # password = tecnico
+INSERT INTO tbl_utilizadores (visible, login, email, password, salt, roleFK) values (true, "aluno", "aluno@mail.com", "$2b$10$xZ8KFZkeA0sLNhGBanV9Ueb6m7GNihxL8JjzmRqNtXBWzirwG1NCK", "$2b$10$xZ8KFZkeA0sLNhGBanV9Ue", 2); # password = aluno
+INSERT INTO tbl_tecnicos (nome, habilitacoes, nivelProfissional, userFK) values ("Aníbal Teste", "Bom em tudo", 9, 1);
+INSERT INTO tbl_tecnicos (nome, habilitacoes, nivelProfissional, userFK) values ("João Teste", "Primitivo", 2, 2);
 INSERT INTO tbl_tecnicos (nome, habilitacoes, nivelProfissional, userFK) values ("Xico Teste", "Razoavel em tudo", 6, 3);
 INSERT INTO tbl_tecnicos (nome, habilitacoes, nivelProfissional, userFK) values ("Maria Teste", "Bastante boa", 8, 4);
-INSERT INTO tbl_tecnicos (nome, habilitacoes, nivelProfissional, userFK) values ("Zeca Teste", "Razoavel em tudo", 5, 5);
+INSERT INTO tbl_tecnicos (nome, habilitacoes, nivelProfissional, userFK) values ("Zeca Teste", "Excelente", 10, 5);
 INSERT INTO tbl_interessados (nome, enderecoPostal, email, tipo) values ("Esdrubal Teste", "2220-012", "EsdrubalTeste@mail.com", "Proprietário");
 INSERT INTO tbl_interessados (nome, enderecoPostal, email, tipo) values ("Antonieta Teste", "3330-013", "AntonietaTeste@mail.com", "Dono da obra");
 INSERT INTO tbl_interessados (nome, enderecoPostal, email, tipo) values ("Capitulina Teste", "4440-014", "CapitulinaTeste@mail.com", "Mecenas");

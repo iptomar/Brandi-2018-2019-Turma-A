@@ -99,7 +99,8 @@ exports.registerRoute = async (app, bd) => {
           login: req.body.login,
           email: req.body.email,
           password: req.body.password,
-          roleFK: req.body.roleFK
+          roleFK: req.body.roleFK,
+          visible: true
         };
         //registar utilizador
         let resultadoregister = await authentication.registerUser(
@@ -225,7 +226,8 @@ exports.changeUserDetails = async (app, bd) => {
           login: req.body.login,
           email: req.body.email,
           userID: req.params.id,
-          roleFK: req.body.roleFK
+          roleFK: req.body.roleFK,
+          visible: req.body.visible
         };
         //tentar alterar os de um utilizador
         let resposta_bd = await authentication.changeUser(bd, utilizador);

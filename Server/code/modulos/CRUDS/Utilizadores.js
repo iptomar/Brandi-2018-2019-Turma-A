@@ -12,7 +12,7 @@ exports.authenticateUser = async (bd, dados) => {
   if (dados.login && dados.password) {
     //pesquisar o utilizador na base de dados
     let resposta_bd = await bd.query(
-      "Select * from tbl_utilizadores where login = ? limit 1",
+      "Select * from tbl_utilizadores where login = ? and visible = true limit 1",
       [dados.login]
     );
     // verficar se encontrou o utilizador
@@ -37,6 +37,8 @@ exports.authenticateUser = async (bd, dados) => {
       // erro de conecao com base de dados
       if (resposta_bd.stat === 1) {
         resultadofinal.resposta = "DBConnectionError";
+      } else {
+        resultadofinal.resposta = "NotAuthenticated";
       }
     }
   }
@@ -59,8 +61,8 @@ exports.registerUser = async (bd, dados) => {
   let password = await bcrypt.hash(dados.password, salt);
   //registar utilizador na base de dados
   let resposta_bd = await bd.query(
-    "Insert into tbl_utilizadores(login,email,password, salt,roleFK) values( ?,?,?,?,?)",
-    [dados.login, dados.email, password, salt, dados.roleFK]
+    "Insert into tbl_utilizadores(login,email,password, salt,roleFK,visible) values( ?,?,?,?,?,?)",
+    [dados.login, dados.email, password, salt, dados.roleFK, dados.visible]
   );
   //campos duplicados
   if (resposta_bd.stat === 2) {
@@ -107,7 +109,9 @@ exports.registerUser = async (bd, dados) => {
  */
 exports.getAllUsers = async bd => {
   let resultadofinal = { stat: 1, resposta: {} };
-  let resposta_bd = await bd.query("Select * from tbl_utilizadores");
+  let resposta_bd = await bd.query(
+    "Select * from tbl_utilizadores where visible = true"
+  );
   if (resposta_bd.stat === 0) {
     resultadofinal.stat = 0;
     //ocultar os campos salt e password
@@ -132,8 +136,8 @@ exports.changeUser = async (bd, dados) => {
   if (dados.userID && dados.login && dados.email && dados.roleFK) {
     //query a base de dados
     let resposta_bd = await bd.query(
-      "update tbl_utilizadores set login= ? , email = ? , roleFK = ?  where userID = ?",
-      [dados.login, dados.email, dados.roleFK, dados.userID]
+      "update tbl_utilizadores set login= ? , email = ? , roleFK = ? visible = ?  where userID = ? ",
+      [dados.login, dados.email, dados.roleFK, dados.userID, dados.visible]
     );
     //query bem sucedida
     if (resposta_bd.stat === 0) {
@@ -165,17 +169,20 @@ exports.changeUser = async (bd, dados) => {
 exports.getUser = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: {} };
   let resposta_bd = await bd.query(
-    "Select * from tbl_utilizadores where userID = ? limit 1",
+    "Select * from tbl_utilizadores where userID = ? and visible = true limit 1",
     [id]
   );
   //encontrou o utilizador
-  if (resposta_bd.stat === 0) {
+  if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
     resultadofinal.stat = resposta_bd.stat;
     //nao mostrar o salt
     resposta_bd.resposta[0].salt = undefined;
     //nao mostrar o hash da password
     resposta_bd.resposta[0].password = undefined;
     resultadofinal.resposta = resposta_bd.resposta[0];
+  } else if (resposta_bd.stat === 0) {
+    resultadofinal.stat = resposta_bd.stat;
+    resultadofinal.resposta = "UserNotFound";
   }
   //ocorreu algum problema com a base de dados
   else {

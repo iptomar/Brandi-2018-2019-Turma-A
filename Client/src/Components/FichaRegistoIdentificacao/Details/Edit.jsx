@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import AlertMsg from '../AlertMsg';
-import LoadingAnimation from '../LoadingAnimation';
+import AlertMsg from '../../AlertMsg';
+import LoadingAnimation from '../../LoadingAnimation';
 
-class Details extends Component {
+class Edit extends Component {
   constructor(props) {
     super(props);
     document.body.style = "background: rgb(235, 235, 235)";
@@ -12,8 +12,6 @@ class Details extends Component {
       loading: true,
       alert: false,
     };
-    this.toggleEdit = this.toggleEdit.bind(this);
-    this.delete = this.delete.bind(this);
   }
 
   componentDidMount(){
@@ -47,12 +45,6 @@ class Details extends Component {
         alertColor: 'danger'
       })
     });
-  }
-
-  toggleEdit() {
-    this.setState(state => ({
-      edit: !state.edit
-    }));
   }
 
   edit = async e => {
@@ -104,42 +96,6 @@ class Details extends Component {
     });
   }
 
-  delete = async e => {
-    const request = await fetch(`/api/fichaRegistoIdentificacao/${this.props.id}/delete`, {
-      method: 'POST',
-      headers: {
-        'x-auth-token': sessionStorage.getItem('token')
-      }
-    });
-    request.json().then( resp => {
-      let status = resp.stat;
-
-      // Interpretar a resposta do servidor
-      switch (status) {
-        case "Deleted":
-          this.setState({
-            alertText: "A ficha foi removida com sucesso.",
-            alertisNotVisible: false,
-            alertColor: 'danger',
-            alert: true,
-            loading: true
-          });
-          window.scrollTo(0, 0);
-          break;
-        case "NotDeleted":
-          this.setState({
-            alertText: "Não foi possível remover a ficha.",
-            alertisNotVisible: false,
-            alertColor: 'danger'
-          });
-          window.scrollTo(0, 0);
-          break;
-      default:
-        console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
-      }
-    });
-  }
-
   render() {
     if (sessionStorage.getItem("token") == null) {
       window.location = "/";
@@ -147,9 +103,6 @@ class Details extends Component {
       if (!this.state.loading) {
           return (
             <div className="container">
-              <div className="py-3 text-center">
-                <h2>Detalhes da Ficha de Registo e Identificação</h2>
-              </div>
               <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
               <div className="row">
                 <div className="col-md-12 mb-3">
@@ -173,7 +126,6 @@ class Details extends Component {
                         className="form-control"
                         id="dObjeto"
                         value={this.state.data.designacao}
-                        readOnly={!this.state.edit}
                         onChange={(evt) => {
                           this.setState({
                             data: { designacao : evt.target.value}
@@ -190,7 +142,6 @@ class Details extends Component {
                         className="form-control"
                         id="procLCRM"
                         value={this.state.data.processoLCRM}
-                        readOnly={!this.state.edit}
                         onChange={(evt) => {
                           this.setState({
                             data: { processoLCRM : evt.target.value}
@@ -205,7 +156,6 @@ class Details extends Component {
                         className="form-control"
                         id="procCEARC"
                         value={this.state.data.processoCEARC}
-                        readOnly={!this.state.edit}
                         onChange={(evt) => {
                           this.setState({
                             data: { processoCEARC : evt.target.value}
@@ -222,10 +172,9 @@ class Details extends Component {
                         className="form-control"
                         id="dateEntrada"
                         value={this.state.data.dataEntrada!=null? this.state.data.dataEntrada.substring(0,10) : ""}
-                        readOnly={!this.state.edit}
                         onChange={(evt) => {
                           this.setState({
-                            data: { dataEntrada : evt.target.value}
+                            data: { dataEntrada : evt.target.value!=null? evt.target.value.substring(0,10) : ""}
                           });
                         }}
                       />
@@ -237,10 +186,9 @@ class Details extends Component {
                         className="form-control"
                         id="dateConclusão"
                         value={this.state.data.dataConclusao!=null? this.state.data.dataConclusao.substring(0,10) : ""}
-                        readOnly={!this.state.edit}
                         onChange={(evt) => {
                           this.setState({
-                            data: { dataConclusao : evt.target.value}
+                            data: { dataConclusao : evt.target.value!=null? evt.target.value.substring(0,10) : ""}
                           });
                         }}
                       />
@@ -252,10 +200,9 @@ class Details extends Component {
                         className="form-control"
                         id="dateEntrega"
                         value={this.state.data.dataEntrega!=null? this.state.data.dataEntrega.substring(0,10) : ""}
-                        readOnly={!this.state.edit}
                         onChange={(evt) => {
                           this.setState({
-                            data: { dataEntrega : evt.target.value}
+                            data: { dataEntrega : evt.target.value!=null? evt.target.value.substring(0,10) : ""}
                           });
                         }}
                       />
@@ -269,7 +216,6 @@ class Details extends Component {
                         className="form-control"
                         id="coord"
                         value={this.state.data.coordenacao}
-                        readOnly={!this.state.edit}
                         onChange={(evt) => {
                           this.setState({
                             data: { coordenacao : evt.target.value}
@@ -284,7 +230,6 @@ class Details extends Component {
                         className="form-control"
                         id="dirTecn"
                         value={this.state.data.direcaoTecnica}
-                        readOnly={!this.state.edit}
                         onChange={(evt) => {
                           this.setState({
                             data: { direcaoTecnica : evt.target.value}
@@ -301,7 +246,6 @@ class Details extends Component {
                         className="form-control"
                         id="tecResp"
                         value='1'
-                        readOnly={!this.state.edit}
                       />
                     </div>
                   </div>
@@ -313,7 +257,6 @@ class Details extends Component {
                         className="form-control" 
                         id="endPostLocal" 
                         value={this.state.data.localidade}
-                        readOnly={!this.state.edit}
                         onChange={(evt) => {
                           this.setState({
                             data: { localidade : evt.target.value}
@@ -323,15 +266,7 @@ class Details extends Component {
                     </div>
                   </div>
                   <hr className="mb-4" />
-
-                  {
-                    this.state.edit? 
-                      <button className="btn btn-primary btn-lg btn-block" onClick={this.toggleEdit} data-toggle="modal" data-target="#modalEdit">Guardar</button>
-                    :
-                      <button className="btn btn-primary btn-lg btn-block" onClick={this.toggleEdit}>Editar</button>
-                  }
-
-                  <button type="button" className="btbtn btn-danger btn-lg btn-block" data-toggle="modal" data-target="#modalDelete">Apagar</button>
+                  <button className="btn btn-primary btn-lg btn-block" onClick={this.toggleEdit} data-toggle="modal" data-target="#modalEdit">Guardar</button>
                 </div>
               </div>
 
@@ -398,4 +333,4 @@ class Details extends Component {
   }
 }
 
-export default Details;
+export default Edit;

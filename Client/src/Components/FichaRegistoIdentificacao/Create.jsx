@@ -159,10 +159,9 @@ class Create extends Component {
                   </div>
                   <label>Técnico(s) Responsável(eis)</label>
                   <div className="row">
-
                     {this.state.tecnicosResp.map(function (object) {
                       return (
-                        <div className="input-group mb-3 col-md-2" key={object.tecnicoID}>
+                        <div className="input-group mb-3 col-md-3" key={object.tecnicoID}>
                           <div className="input-group-prepend">
                             <div className="input-group-text">
                               <input type="checkbox" id="tecnicosCheckbox" value={object.tecnicoID} />

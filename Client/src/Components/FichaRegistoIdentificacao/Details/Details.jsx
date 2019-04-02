@@ -75,11 +75,11 @@ class Details extends Component {
             <div className="py-3 text-center">
               <h2>Detalhes da Ficha de Registo e Identificação</h2>
             </div>
-            <div className="">
+            <div className="text-right mr-3">
               <button className="btn btn-primary" onClick={this.toggleEdit} align>
                 <i className="fas fa-edit"></i>
               </button>
-              <button type="button" className="btn btn-danger" data-toggle="modal" data-target="#modalDelete">
+              <button type="button" className="ml-2 btn btn-danger" data-toggle="modal" data-target="#modalDelete">
                 <i className="far fa-trash-alt"></i>
               </button>
             </div>

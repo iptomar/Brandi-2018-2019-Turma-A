@@ -19,22 +19,23 @@ class Login extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     //Criar o hash
-    let hexCodes;
-    const encoder = new TextEncoder();
-    const data = encoder.encode(document.getElementById('pass').value);
-    await window.crypto.subtle.digest("SHA-512", data).then(hashArray => {
-      //Hash to String
-      const byteArray = new Uint8Array(hashArray);
-      hexCodes = [...byteArray].map(value => {
-        const hexCode = value.toString(16);
-        return hexCode.padStart(2, '0');
-      })
-    });
+    // let hexCodes;
+    // const encoder = new TextEncoder();
+    // const data = encoder.encode(document.getElementById('pass').value);
+    // await window.crypto.subtle.digest("SHA-512", data).then(hashArray => {
+    //   //Hash to String
+    //   const byteArray = new Uint8Array(hashArray);
+    //   hexCodes = [...byteArray].map(value => {
+    //     const hexCode = value.toString(16);
+    //     return hexCode.padStart(2, '0');
+    //   })
+    // });
 
     //Objeto Login
     const loginData = {
       login: document.getElementById('user').value,
-      password: hexCodes.join('')
+      password: document.getElementById('pass').value 
+      // hexCodes.join('')
     };
     //Enviar pedidos
     const response = await fetch('/auth/login', {

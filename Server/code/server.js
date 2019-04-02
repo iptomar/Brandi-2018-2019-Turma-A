@@ -10,8 +10,8 @@ const tecnicosRouter = require("./modulos/Routers/TecnicosRouter");
 //cria ligacao à base de dados
 let bd = new _basedeDados.BasedeDados(
   "localhost",
-  "admina",
-  "admina_ADMINA_123",
+  "root",
+  "root",
   "5",
   "brandi_a"
 );

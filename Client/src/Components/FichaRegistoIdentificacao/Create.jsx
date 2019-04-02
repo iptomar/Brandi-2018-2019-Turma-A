@@ -16,7 +16,7 @@ class Create extends Component {
   }
 
 
-  async fetchTecnicos(){
+  async fetchTecnicos() {
     //Enviar pedido para receber 
     const response = await fetch("/api/tecnicos", {
       method: "GET",
@@ -30,6 +30,13 @@ class Create extends Component {
     });
   }
 
+  verifyCBS() {
+    var cboxes = document.querySelectorAll("#tecnicosCheckbox");
+    var len = cboxes.length;
+    let idCBS = [];
+    for (var i = 0; i < len; i++) if (cboxes[i].checked) idCBS.push(cboxes[i].value);
+    return idCBS;
+  }
 
   handleSubmit = async e => {
     e.preventDefault();
@@ -44,7 +51,8 @@ class Create extends Component {
       coordenacao: document.getElementById("coord").value,
       direcaoTecnica: document.getElementById("dirTecn").value,
       localidade: document.getElementById("endPostLocal").value,
-      interessadoFK: 1
+      interessadoFK: 1,
+      tecnicosFK: this.verifyCBS()
     };
 
     //Enviar pedidos
@@ -58,7 +66,6 @@ class Create extends Component {
     });
     //Aguardar API
     await response.json().then(resp => {
-      console.log(resp);
       let status = resp.stat;
       switch (status) {
         case "DatabaseError":
@@ -150,20 +157,21 @@ class Create extends Component {
                       <input type="text" className="form-control" id="dirTecn" placeholder="Direção Técnica" required />
                     </div>
                   </div>
+                  <label>Técnico(s) Responsável(eis)</label>
                   <div className="row">
-                    <div className="col-md-12 mb-3">
-                      <label>Técnico(s) Responsável(eis)</label> <br/>
-                      {this.state.tecnicosResp.map(function (object) {
-                        console.log(object);
-                        return (
-                          <div className="form-check-inline">
-                          <label className="form-check-label">
-                            <input type="radio" className="form-check-input" key={object.tecnicoID} />{object.nome}
-                          </label>
+
+                    {this.state.tecnicosResp.map(function (object) {
+                      return (
+                        <div className="input-group mb-3 col-md-2" key={object.tecnicoID}>
+                          <div className="input-group-prepend">
+                            <div className="input-group-text">
+                              <input type="checkbox" id="tecnicosCheckbox" value={object.tecnicoID} />
+                            </div>
+                          </div>
+                          <label className="form-control">{object.nome}</label>
                         </div>
-                        );
-                      })}
-                      </div>
+                      );
+                    })}
                   </div>
                   <div className="row">
                     <div className="col-md-12 mb-3">

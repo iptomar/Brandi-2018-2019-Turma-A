@@ -7,6 +7,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import RegisterPage from './MasterComponents/Users/RegisterPage';
 import IndexPage from './MasterComponents/Users/IndexPage';
 import EditUserPage from "./MasterComponents/Users/EditPage";
+import DetailsUserPage from "./MasterComponents/Users/DetailsUserPage";
 import LoginPage from './MasterComponents/LoginPage';
 import AboutPage from './MasterComponents/AboutPage';
 import ContactPage from './MasterComponents/ContactPage';
@@ -35,6 +36,7 @@ ReactDOM.render(
             <Route path="/utilizadores/registar" component={RegisterPage} />
             <Route path="/utilizadores/listar" component={IndexPage} />
             <Route path="/utilizadores/:id/editar" component={(r) => <EditUserPage id={r.match.params.id}/>} />
+            <Route path="/utilizadores/:id/detalhes" component={(r) => <DetailsUserPage id={r.match.params.id}/>} />
             {/* Ficha Registo Identificacao */}
             <Route path="/fichaRI/criar" component={CreateFichaRI} />
             <Route path="/fichaRI/:id/detalhes" component={(r) => <DetailsFichaRI id={r.match.params.id}/>} />

@@ -284,8 +284,8 @@ class Edit extends Component {
                       Tem a certeza que pretende apagar a Ficha de Registo e Identificação?
                     </div>
                     <div className="modal-footer">
-                      <button type="button" className="btn btn-primary" data-dismiss="modal">Não</button>
-                      <button type="button" className="btn btn-danger" onClick={this.delete} data-dismiss="modal">Sim</button>
+                      <button type="button" className="btn btn-danger" data-dismiss="modal">Não</button>
+                      <button type="button" className="btn btn-primary" onClick={this.delete} data-dismiss="modal">Sim</button>
                     </div>
                   </div>
                 </div>
@@ -306,8 +306,8 @@ class Edit extends Component {
                       Pretende guardar as alterações?
                     </div>
                     <div className="modal-footer">
-                      <button type="button" className="btn btn-primary" data-dismiss="modal">Não</button>
-                      <button type="submit" className="btn btn-success"  onClick={this.edit} data-dismiss="modal">Sim</button>
+                      <button type="button" className="btn btn-danger" data-dismiss="modal">Não</button>
+                      <button type="submit" className="btn btn-primary"  onClick={this.edit} data-dismiss="modal">Sim</button>
                     </div>
                   </div>
                 </div>

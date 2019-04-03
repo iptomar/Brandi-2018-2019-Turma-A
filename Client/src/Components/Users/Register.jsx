@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AlertMsg from "./AlertMsg";
+import AlertMsg from "../AlertMsg";
 
 class Register extends Component {
   constructor(props) {
@@ -41,19 +41,7 @@ class Register extends Component {
       });
       return null;
     }
-    //Criar o hash
-    // let hexCodes;
-    // const encoder = new TextEncoder();
-    // const data = encoder.encode(document.getElementById("pass").value);
-    // await window.crypto.subtle.digest("SHA-512", data).then(hashArray => {
-    //   //Hash to String
-    //   const byteArray = new Uint8Array(hashArray);
-    //   hexCodes = [...byteArray].map(value => {
-    //     const hexCode = value.toString(16);
-    //     return hexCode.padStart(2, "0");
-    //   });
-    // });
-
+    
     var select = document.getElementById("DDLRoles");
     var option = select.options[select.selectedIndex];
 
@@ -62,7 +50,6 @@ class Register extends Component {
       login: document.getElementById("user").value,
       email: document.getElementById("email").value,
       password: document.getElementById('pass').value,
-      // hexCodes.join(""),
       roleFK: option.id
     };
 
@@ -171,6 +158,7 @@ class Register extends Component {
                         />
                       </div>
                     </div>
+                    <label>Tipo de utilizador</label>
                     <select id="DDLRoles" className="form-control">
                       {this.state.rolesList.map(function (object) {
                         return (

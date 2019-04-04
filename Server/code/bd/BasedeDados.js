@@ -85,7 +85,7 @@ class BasedeDados {
         stringerror = await this.error_TRUNCATED(string);
         break;
     }
-    return "Erro no campo" + stringerror;
+    return "Erro no campo " + stringerror;
   }
 }
 exports.BasedeDados = BasedeDados;

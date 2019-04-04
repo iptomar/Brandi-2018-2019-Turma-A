@@ -26,8 +26,7 @@ class Details extends Component {
     });
     //Aguardar API
     await response.json().then(resp => {
-      console.log(response);
-      let status = resp.stat;
+      let status = resp.status;
       switch (status) {
         case "Authenticated":
           this.setState({ data: resp.resposta });

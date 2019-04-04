@@ -1,14 +1,46 @@
 import React, { Component } from "react";
+import AlertMsg from "../AlertMsg";
 
 class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      alertText: "",
+      alertisNotVisible: true,
+      alertColor: "",
       userList: [],
       rolesList: []
     };
+  }
+
+  componentDidMount() {
     this.fetchUsers();
     this.fetchRoles();
+    this.queryState(this.props.query);
+  }
+
+  queryState(query) {
+    switch (query) {
+      case 'showConfirmEdited':
+        this.setState({
+          alertText: "Utilizador editado com sucesso",
+          alertisNotVisible: false,
+          alertColor: "success"
+        });
+        break;
+      case 'showConfirmDelete':
+        this.setState({
+          alertText: "Utilizador eliminado com sucesso",
+          alertisNotVisible: false,
+          alertColor: "success"
+        });
+        break;
+      case 'listar':
+        break;
+      default:
+        window.location = "/utilizadores/listar"
+        break;
+    }
   }
 
   //Receber os utilizadores
@@ -41,29 +73,31 @@ class Index extends Component {
       .then(resp => this.setState({ rolesList: resp.resposta }));
   }
 
-  handleSubmit = async e => {
-    e.preventDefault();
-    if (
-      document.getElementById("pass").value !==
-      document.getElementById("passConfirmer").value
-    ) {
-      this.setState({
-        alertText: "As palavras-passe não são iguais",
-        alertisNotVisible: false,
-        alertColor: "warning"
-      });
-      return null;
-    }
-  };
-
   // Ativa o click em cada linha da tabela
   rowClick(href) {
     window.location = href + "/detalhes";
   }
 
   //Elimina utilizadores
-  deleteUser(){
-    alert("AINDA NÃO EXISTE API PARA ISTO!!!!");
+  async deleteUser(id) {
+    //Enviar pedidos
+    const response = await fetch(`/api/users/${id}/delete`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": sessionStorage.getItem("token")
+      }
+    });
+    await response.json().then(resp => {
+      switch (resp.status) {
+        case "Delete":
+          window.location = "/utilizadores/showConfirmDelete"
+          break;
+        default:
+          console.log("A API ESTÁ A ARDER" + resp.status);
+          break;
+      }
+    });
   }
 
   render() {
@@ -74,6 +108,7 @@ class Index extends Component {
     } else {
       return (
         <div className="container">
+          <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
           <h2 className="py-3 mb-3">Lista de Utilizadores</h2>
           <table className="table table-sm table-hover">
             <thead>
@@ -110,19 +145,19 @@ class Index extends Component {
           </table>
 
           {/* Modal */}
-          <div class="modal fade" id="modalConfirmElem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Eliminar Utilizador</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <div className="modal fade" id="modalConfirmElem" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">Eliminar Utilizador</h5>
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body">Têm a certeza que deseja eliminar este utilizador?</div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
-                  <button type="button" class="btn btn-warning" onClick={this.deleteUser}>Sim</button>
+                <div className="modal-body">Têm a certeza que deseja eliminar este utilizador?</div>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-secondary" data-dismiss="modal">Não</button>
+                  <button type="button" className="btn btn-warning" onClick={this.deleteUser}>Sim</button>
                 </div>
               </div>
             </div>

@@ -9,7 +9,7 @@ class RegisterPage extends Component {
       return (
         <div className="RegisterPage">
           <Header/>
-          <Index/>
+          <Index query={this.props.query}/>
           <Footer/>
         </div>
       );

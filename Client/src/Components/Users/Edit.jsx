@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-import AlertMsg from "../AlertMsg";
 
 class Edit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      alertText: "",
-      alertisNotVisible: true,
-      alertColor: "",
       data: [],
       rolesList: []
     };
@@ -29,7 +25,7 @@ class Edit extends Component {
     });
     //Aguardar API
     await response.json().then(resp => {
-      let status = resp.stat;
+      let status = resp.status;
       switch (status) {
         case "Authenticated":
           this.setState({ data: resp.resposta });
@@ -66,12 +62,12 @@ class Edit extends Component {
       login: document.getElementById("user").value,
       email: document.getElementById("email").value,
       roleFK: option.id,
-      visible: 0
+      visible: 1
     };
 
     //Verifica se não foi preenchido algum campo
-    if(data.login == "") data.login = document.getElementById("user").placeholder;
-    if(data.email == "") data.email = document.getElementById("email").placeholder;
+    if(data.login === "") data.login = document.getElementById("user").placeholder;
+    if(data.email === "") data.email = document.getElementById("email").placeholder;
 
     //Enviar pedidos
     const response = await fetch(`/api/users/${this.props.id}/edit`,
@@ -88,8 +84,11 @@ class Edit extends Component {
     //Aguardar API
     await response.json().then(resp => {
       console.log(resp);
-      let status = resp.stat;
+      let status = resp.status;
       switch (status) {
+        case 'Updated':
+            window.location = "/utilizadores/showConfirmEdited";
+        break;
         default:
           console.log("A API ESTÁ A ARDER: " + status);
       }
@@ -143,11 +142,6 @@ class Edit extends Component {
                       );
                     })}
                   </select>
-                  <AlertMsg
-                    text={this.state.alertText}
-                    isNotVisible={this.state.alertisNotVisible}
-                    alertColor={this.state.alertColor}
-                  />
                   <button className="btn btn-success btn-lg btn-block mb-5" type="submit"> Editar </button>
                 </form>
               </div>

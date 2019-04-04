@@ -57,7 +57,7 @@ class Edit extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-
+    //Armazenar o valor selecionado na dropdownlist
     var select = document.getElementById("DDLRoles");
     var option = select.options[select.selectedIndex];
 
@@ -65,8 +65,13 @@ class Edit extends Component {
     const data = {
       login: document.getElementById("user").value,
       email: document.getElementById("email").value,
-      roleFK: option.id
+      roleFK: option.id,
+      visible: 0
     };
+
+    //Verifica se não foi preenchido algum campo
+    if(data.login == "") data.login = document.getElementById("user").placeholder;
+    if(data.email == "") data.email = document.getElementById("email").placeholder;
 
     //Enviar pedidos
     const response = await fetch(`/api/users/${this.props.id}/edit`,
@@ -82,6 +87,7 @@ class Edit extends Component {
 
     //Aguardar API
     await response.json().then(resp => {
+      console.log(resp);
       let status = resp.stat;
       switch (status) {
         default:

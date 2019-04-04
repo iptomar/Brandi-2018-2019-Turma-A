@@ -92,12 +92,7 @@ class Index extends Component {
                     <td className="align-middle" onClick={() => getThis.rowClick(href)}>{obj.login}</td>
                     <td className="align-middle" onClick={() => getThis.rowClick(href)}>{obj.email}</td>
                     <td className="align-middle" onClick={() => getThis.rowClick(href)}>
-                      {getThis.state.rolesList.map(function (role) {
-                        if (role.roleID === obj.roleFK) {
-                          return role.role;
-                        }
-                        return null;
-                      })}
+                      {obj.role}
                     </td>
                     <td>
                       <a className="btn btn-warning mr-2" href={href + "/editar"}>

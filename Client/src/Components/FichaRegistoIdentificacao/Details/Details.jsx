@@ -76,7 +76,7 @@ class Details extends Component {
               <h2>Detalhes da Ficha de Registo e Identificação</h2>
             </div>
             <div className="text-right mr-3">
-              <button className="btn btn-primary" onClick={this.toggleEdit} align>
+              <button className="btn btn-primary" onClick={this.toggleEdit} align="right">
                 <i className="fas fa-edit"></i>
               </button>
               <button type="button" className="ml-2 btn btn-danger" data-toggle="modal" data-target="#modalDelete">

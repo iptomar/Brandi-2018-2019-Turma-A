@@ -11,14 +11,17 @@ class Edit extends Component {
       edit: false,
       loading: true,
       alert: false,
+      tecnicosResp: [],
+      loadingTecnicos: true
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount(){
-    this.getFichaRI(this.props.id);
+    this.fetchFichaRI(this.props.id);
   }
 
-  async getFichaRI(id) {
+  async fetchFichaRI(id) {
     //Enviar pedido
     const response = await fetch(`/api/fichaRegistoIdentificacao/${this.props.id}`, {
       method: "GET",
@@ -33,6 +36,7 @@ class Edit extends Component {
       switch (status) {
         case "Authenticated":
           this.setState({ data: resp.resposta, loading: false });
+          this.fetchTecnicos();
           break;
         default:
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
@@ -47,24 +51,76 @@ class Edit extends Component {
     });
   }
 
+  async fetchTecnicos() {
+    //Enviar pedido para receber 
+    const response = await fetch("/api/tecnicos", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'x-auth-token': sessionStorage.getItem('token')
+      }
+    });
+
+    await response.json().then(resp => {
+      let resposta = resp.resposta;
+
+      // Definir quais os tecnicos que já se encontram 
+      for(let i=0; i<resposta.length; i++) {
+        let bool = false;
+        this.state.data.tecnicos.map((tecnico) => {
+          if(tecnico.tecnicoID === resposta[i].tecnicoID){
+            return bool=true;
+          }
+        })
+        // Novo objecto de tecnico
+        let tec = {
+          tecnicoID: resposta[i].tecnicoID,
+          nome: resposta[i].nome,
+          checked: bool
+        }
+        // Override do tecnico
+        resposta[i]=tec;
+      }
+      this.setState({ tecnicosResp: resposta, loadingTecnicos: false })
+    });
+  }
+
+  handleChange(e) {
+    let tecnicos = this.state.tecnicosResp;
+    tecnicos.forEach(tecnico => {
+      if (tecnico.tecnicoID == e.target.value)
+        tecnico.checked = e.target.checked;
+    })
+    this.setState({tecnicosResp: tecnicos})
+  }
+
+  verifyCBS() {
+    var cboxes = document.querySelectorAll("#tecnicosCheckbox");
+    var len = cboxes.length;
+    let idCBS = [];
+    for (var i = 0; i < len; i++) if (cboxes[i].checked) idCBS.push(cboxes[i].value);
+    return idCBS;
+  }
+
   edit = async e => {
     e.preventDefault();
 
     //Objeto data
     const data = {
-      designacao: document.getElementById("dObjeto").value,
-      processoLCRM: document.getElementById("procLCRM").value,
-      processoCEARC: document.getElementById("procCEARC").value,
-      dataEntrada: document.getElementById("dateEntrada").value,
-      dataConclusao: document.getElementById("dateConclusão").value,
-      dataEntrega: document.getElementById("dateEntrega").value,
-      coordenacao: document.getElementById("coord").value,
-      direcaoTecnica: document.getElementById("dirTecn").value,
-      localidade: document.getElementById("endPostLocal").value,
-      tecnicosFK: [document.getElementById("tecResp").value],
-      interessadoFK: 1,
-      visible: 1
+      designacao: this.state.data.designacao,
+      processoLCRM: this.state.data.processoLCRM,
+      processoCEARC: this.state.data.processoCEARC,
+      dataEntrada: '2018-03-25T23:00:00.000Z',
+      dataConclusao: '2018-03-25T23:00:00.000Z',
+      dataEntrega: '2018-03-25T23:00:00.000Z',
+      coordenacao: this.state.data.coordenacao,
+      localidade: this.state.data.localidade,
+      tecnicosFK: this.verifyCBS(),
+      interessadoFK: '1',
+      fichaRegistoID: this.props.id
     };
+    console.log(data);
+
     //Enviar pedidos
     const response = await fetch(`/api/fichaRegistoIdentificacao/${this.props.id}/edit`, {
       method: "POST",
@@ -88,7 +144,7 @@ class Edit extends Component {
           window.scrollTo(0, 0);
           break;
         case "NotUpdated":
-          window.location = '/fichaRI';
+          //window.location = '/fichaRI';
           break;
         default:
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
@@ -101,6 +157,7 @@ class Edit extends Component {
       window.location = "/";
     } else {
       if (!this.state.loading) {
+          let getThis = this;
           return (
             <div className="container">
               <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
@@ -238,16 +295,31 @@ class Edit extends Component {
                       />
                     </div>
                   </div>
+                  <label>Técnico(s) Responsável(eis)</label>
                   <div className="row">
-                    <div className="col-md-12 mb-3">
-                      <label className="font-weight-bold">Técnico(s) Responsável(eis)</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="tecResp"
-                        value='1'
-                      />
-                    </div>
+                    {
+                      this.state.loadingTecnicos? 
+                        <LoadingAnimation height="6rem" width="6em" />
+                      :
+                        this.state.tecnicosResp.map(function (object) {
+                          return (
+                            <div className="input-group mb-3 col-md-3" key={object.tecnicoID}>
+                              <div className="input-group-prepend">
+                                <div className="input-group-text">
+                                  <input 
+                                    type="checkbox" 
+                                    id="tecnicosCheckbox" 
+                                    value={object.tecnicoID}
+                                    checked={object.checked}
+                                    onChange={getThis.handleChange}
+                                  />
+                                </div>
+                              </div>
+                              <label className="form-control">{object.nome}</label>
+                            </div>
+                          );
+                        })
+                    }
                   </div>
                   <div className="row">
                     <div className="col-md-12 mb-3">
@@ -267,27 +339,6 @@ class Edit extends Component {
                   </div>
                   <hr className="mb-4" />
                   <button className="btn btn-primary btn-lg btn-block" onClick={this.toggleEdit} data-toggle="modal" data-target="#modalEdit">Guardar</button>
-                </div>
-              </div>
-
-              { /* Modal de apagar*/ }
-              <div className="modal fade" id="modalDelete" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog" role="document">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h5 className="modal-title" id="exampleModalLabel">Apagar Ficha de Registo e Identificação</h5>
-                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div className="modal-body">
-                      Tem a certeza que pretende apagar a Ficha de Registo e Identificação?
-                    </div>
-                    <div className="modal-footer">
-                      <button type="button" className="btn btn-primary" data-dismiss="modal">Não</button>
-                      <button type="button" className="btn btn-danger" onClick={this.delete} data-dismiss="modal">Sim</button>
-                    </div>
-                  </div>
                 </div>
               </div>
 
@@ -312,7 +363,6 @@ class Edit extends Component {
                   </div>
                 </div>
               </div>
-
             </div>
           );
       } else {

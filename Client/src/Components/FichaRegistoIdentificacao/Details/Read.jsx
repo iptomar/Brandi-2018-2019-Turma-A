@@ -26,10 +26,11 @@ class Read extends Component {
         "x-auth-token": sessionStorage.getItem("token")
       }
     });
-
+    
     //Aguardar API
     await response.json().then(resp => {
       let status = resp.stat;
+      console.log(resp);
       switch (status) {
         case "Authenticated":
           this.setState({ data: resp.resposta, loading: false });
@@ -158,17 +159,15 @@ class Read extends Component {
                       />
                     </div>
                   </div>
+                  <label className="font-weight-bold">Técnico(s) Responsável(eis)</label>
                   <div className="row">
-                    <div className="col-md-12 mb-3">
-                      <label className="font-weight-bold">Técnico(s) Responsável(eis)</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="tecResp"
-                        value='1'
-                        readOnly
-                      />
-                    </div>
+                    {this.state.data.tecnicos.map(function (object) {
+                      return (
+                        <div className="mb-3 col-md-3" key={object.tecnicoID}>
+                          <label className="">{object.nome}</label>
+                        </div>
+                      );
+                    })}
                   </div>
                   <div className="row">
                     <div className="col-md-12 mb-3">

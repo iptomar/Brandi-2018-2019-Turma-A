@@ -179,7 +179,7 @@ exports.getUserDetails = async (app, bd) => {
       resposta_servidor.stat = "InvalidToken";
     } else {
       //buscar dados do utilizador
-      let resposta_bd = await authentication.getUser(bd, token.roleFK);
+      let resposta_bd = await authentication.getUser(bd, req.params.id);
       //busca dos dados com sucesso
       if (resposta_bd.stat === 0) {
         resposta_servidor.stat = "Authenticated";

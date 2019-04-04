@@ -28,7 +28,7 @@ CREATE TABLE tbl_tecnicos
     nome VARCHAR(255) NOT NULL,
     habilitacoes VARCHAR(255) NOT NULL,
     nivelProfissional INT NOT NULL,
-    userFK INT,
+    userFK INT NOT NULL UNIQUE,
     PRIMARY KEY(tecnicoID),
     FOREIGN KEY(userFK) REFERENCES tbl_utilizadores(userID)
 );

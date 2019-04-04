@@ -25,6 +25,18 @@ class Header extends Component {
             {" "}Brandi
           </a>
           <div className="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+            {/* DROPDOWN UTILIZADORES*/}
+            <ul className="navbar-nav">
+              <li className="nav-item dropdown">
+                <a className="nav-link active dropdown-toggle" href="#.#" id="navbardrop" data-toggle="dropdown">
+                  Utilizadores
+                </a>
+                <div className="dropdown-menu">
+                  <a className="dropdown-item" style={{cursor:'pointer'}} href="/utilizadores/registar">Registar</a>
+                  <a className="dropdown-item" style={{cursor:'pointer'}} href="/utilizadores/listar">Listar</a>
+                </div>
+              </li>
+            </ul>
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
               <a className="nav-link" href="/sobre">Sobre</a>

@@ -4,7 +4,10 @@ import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-import RegisterPage from './MasterComponents/RegisterPage';
+import RegisterPage from './MasterComponents/Users/RegisterPage';
+import IndexPage from './MasterComponents/Users/IndexPage';
+import EditUserPage from "./MasterComponents/Users/EditPage";
+import DetailsUserPage from "./MasterComponents/Users/DetailsUserPage";
 import LoginPage from './MasterComponents/LoginPage';
 import AboutPage from './MasterComponents/AboutPage';
 import ContactPage from './MasterComponents/ContactPage';
@@ -26,14 +29,14 @@ ReactDOM.render(
     <BrowserRouter>
         <Switch>
             <Route path="/" exact={true} component={LoginPage} />
-            <Route path="/registar" component={RegisterPage} />
             <Route path="/sobre" component={AboutPage} />
             <Route path="/contactos" component={ContactPage} />
             <Route path="/perfil" component={ProfilePage} />
-            {/* FICHA TÉCNICA */}
-            {/* <Route path="/fichaTecnica" component={IndexFichaTecnica}/>
-            <Route path="/fichaTecnica/criar" component={CreateFichaTecnica}/>
-            <Route path="/fichaTecnica/details/:id" component={DetailsFichaTecnica} /> */}
+            {/* UTILIZADORES */}
+            <Route path="/utilizadores/registar" component={RegisterPage} />
+            <Route path="/utilizadores/listar" component={IndexPage} />
+            <Route path="/utilizadores/:id/editar" component={(r) => <EditUserPage id={r.match.params.id}/>} />
+            <Route path="/utilizadores/:id/detalhes" component={(r) => <DetailsUserPage id={r.match.params.id}/>} />
             {/* Ficha Registo Identificacao */}
             <Route path="/fichaRI/criar" component={CreateFichaRI} />
             <Route path="/fichaRI/:id/detalhes" component={(r) => <DetailsFichaRI id={r.match.params.id}/>} />

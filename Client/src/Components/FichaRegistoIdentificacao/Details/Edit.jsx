@@ -71,6 +71,7 @@ class Edit extends Component {
           if(tecnico.tecnicoID === resposta[i].tecnicoID){
             return bool=true;
           }
+          return null;
         })
         // Novo objecto de tecnico
         let tec = {
@@ -88,7 +89,7 @@ class Edit extends Component {
   handleChange(e) {
     let tecnicos = this.state.tecnicosResp;
     tecnicos.forEach(tecnico => {
-      if (tecnico.tecnicoID == e.target.value)
+      if (tecnico.tecnicoID === e.target.value)
         tecnico.checked = e.target.checked;
     })
     this.setState({tecnicosResp: tecnicos})

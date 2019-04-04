@@ -110,14 +110,14 @@ class Edit extends Component {
       designacao: this.state.data.designacao,
       processoLCRM: this.state.data.processoLCRM,
       processoCEARC: this.state.data.processoCEARC,
-      dataEntrada: '2018-03-25T23:00:00.000Z',
-      dataConclusao: '2018-03-25T23:00:00.000Z',
-      dataEntrega: '2018-03-25T23:00:00.000Z',
+      dataEntrada: this.state.data.dataEntrada,
+      dataConclusao: this.state.data.dataConclusao,
+      dataEntrega: this.state.data.Entrega,
       coordenacao: this.state.data.coordenacao,
+      direcaoTecnica: this.state.data.direcaoTecnica,
       localidade: this.state.data.localidade,
       tecnicosFK: this.verifyCBS(),
-      interessadoFK: '1',
-      fichaRegistoID: this.props.id
+      interessadoFK: '1'
     };
     console.log(data);
 
@@ -228,7 +228,7 @@ class Edit extends Component {
                         type="date"
                         className="form-control"
                         id="dateEntrada"
-                        value={this.state.data.dataEntrada!=null? this.state.data.dataEntrada.substring(0,10) : ""}
+                        value={this.state.data.dataEntrada}
                         onChange={(evt) => {
                           this.setState({
                             data: { dataEntrada : evt.target.value}
@@ -242,7 +242,7 @@ class Edit extends Component {
                         type="date"
                         className="form-control"
                         id="dateConclusão"
-                        value={this.state.data.dataConclusao!=null? this.state.data.dataConclusao.substring(0,10) : ""}
+                        value={this.state.data.dataConclusao}
                         onChange={(evt) => {
                           this.setState({
                             data: { dataConclusao : evt.target.value}
@@ -261,6 +261,7 @@ class Edit extends Component {
                           this.setState({
                             data: { dataEntrega : evt.target.value}
                           });
+                          console.log(this.state.data);
                         }}
                       />
                     </div>
@@ -341,6 +342,7 @@ class Edit extends Component {
                   <button className="btn btn-primary btn-lg btn-block" onClick={this.toggleEdit} data-toggle="modal" data-target="#modalEdit">Guardar</button>
                 </div>
               </div>
+
 
               { /* Modal de editar*/ }
 

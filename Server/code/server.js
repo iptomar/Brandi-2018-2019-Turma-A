@@ -8,10 +8,19 @@ const FichaRegistoIdentificacaoRouter = require("./modulos/Routers/FichaRegistoI
 const processosRouter = require("./modulos/Routers/ProcessosRouter");
 const tecnicosRouter = require("./modulos/Routers/TecnicosRouter");
 //cria ligacao à base de dados
+        // LIGAÇÃO SERVIDOR
+// let bd = new _basedeDados.BasedeDados(
+//   "localhost",
+//   "admina",
+//   "admina_ADMINA_123",
+//   "5",
+//   "brandi_a"
+// );
+
 let bd = new _basedeDados.BasedeDados(
   "localhost",
-  "admina",
-  "admina_ADMINA_123",
+  "root",
+  "root",
   "5",
   "brandi_a"
 );

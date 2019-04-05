@@ -99,7 +99,8 @@ exports.registerRoute = async (app, bd) => {
           login: req.body.login,
           email: req.body.email,
           password: req.body.password,
-          roleFK: req.body.roleFK
+          roleFK: req.body.roleFK,
+          visible: true
         };
         //registar utilizador
         let resultadoregister = await authentication.registerUser(
@@ -130,14 +131,9 @@ exports.registerRoute = async (app, bd) => {
         code = 400;
         resposta_servidor.status = "NotAuthorized";
       }
-      //gerar novamente o token
-      token = await getToken.generateToken(token);
     }
     //resposta do servidor
-    resp
-      .status(code)
-      .header("x-auth-token", token)
-      .json(resposta_servidor);
+    resp.status(code).json(resposta_servidor);
   });
 };
 /**
@@ -146,7 +142,7 @@ exports.registerRoute = async (app, bd) => {
 exports.alluserRoute = async (app, bd) => {
   app.get("/api/users", async (req, resp) => {
     let resposta_bd = await authentication.getAllUsers(bd);
-    let resposta_servidor = { status: 1, resposta: {} };
+    let resposta_servidor = { status: "NotAuthenticated", resposta: {} };
     let code = 200;
     if (resposta_bd.stat === 1) {
       code = 500;
@@ -161,48 +157,49 @@ exports.alluserRoute = async (app, bd) => {
 /**
  * Rota para ir buscar os detalhes de 1 utilizador
  */
-exports.getUserDetails = async (app, bd) => {
+exports.getUserDetailsRoute = async (app, bd) => {
   app.get("/api/users/:id", async (req, resp) => {
-    let resposta_servidor = { stat: 1, resposta: {} };
+    let resposta_servidor = { status: "NotAuthenticated", resposta: {} };
     let code = 200;
     let token;
+    let resposta_bd;
     token = await getToken.getToken(req);
     if (token === null) {
       //HTTP CODE BAD REQUEST
       code = 400;
-      resposta_servidor.stat = "NotAuthenticated";
-      resposta_servidor.resposta = "Utilizador não autenticado";
+      resposta_servidor.status = "NotAuthenticated";
     } else if (token.name) {
       //HTTP CODE BAD REQUEST
       code = 400;
-      resposta_servidor.stat = "InvalidToken";
+      resposta_servidor.status = "InvalidToken";
     } else {
-      //buscar dados do utilizador
-      let resposta_bd = await authentication.getUser(bd, token.roleFK);
+      //Permissoes administrativas
+      if (token.roleFK === 1) {
+        resposta_bd = await authentication.getUser(bd, req.params.id);
+      }
+      // Nao tem permissoes administrativas
+      else {
+        resposta_bd = await authentication.getUser(bd, token.userID);
+      }
       //busca dos dados com sucesso
       if (resposta_bd.stat === 0) {
-        resposta_servidor.stat = "Authenticated";
+        resposta_servidor.status = "Authenticated";
         resposta_servidor.resposta = resposta_bd.resposta;
       }
       //erro na pesquisa dos dados do utilizador
       else if (resposta_bd.stat === 1) {
-        resposta_servidor.stat = "Authenticated";
+        resposta_servidor.status = "Authenticated";
         resposta_servidor.resposta = resposta_bd.resposta;
       }
-      //gerar novamente o token
-      token = await getToken.generateToken(token);
     }
     //resposta do servidor
-    resp
-      .status(code)
-      .header("x-auth-token", token)
-      .json(resposta_servidor);
+    resp.status(code).json(resposta_servidor);
   });
 };
 /**
  * Rota de alterar dados de um utilizador
  */
-exports.changeUserDetails = async (app, bd) => {
+exports.changeUserDetailsRoute = async (app, bd) => {
   app.post("/api/users/:id/edit", async (req, resp) => {
     let code = 201;
     let token;
@@ -212,7 +209,6 @@ exports.changeUserDetails = async (app, bd) => {
       //HTTP CODE BAD REQUEST
       code = 400;
       resposta_servidor.status = "NotAuthenticated";
-      resposta_servidor.resposta = "Utilizador não autenticado";
     } else if (token.name) {
       //HTTP CODE BAD REQUEST
       code = 400;
@@ -225,10 +221,12 @@ exports.changeUserDetails = async (app, bd) => {
           login: req.body.login,
           email: req.body.email,
           userID: req.params.id,
-          roleFK: req.body.roleFK
+          roleFK: req.body.roleFK,
+          visible: req.body.visible
         };
         //tentar alterar os de um utilizador
         let resposta_bd = await authentication.changeUser(bd, utilizador);
+
         //alterações  com sucesso
         if (resposta_bd.stat === 0) {
           resposta_servidor.status = "Updated";
@@ -241,8 +239,6 @@ exports.changeUserDetails = async (app, bd) => {
           resposta_servidor.status = "NotUpdated";
           resposta_servidor.resposta = resposta_bd.resposta;
         }
-        //gerar novamente o token
-        token = await getToken.generateToken(token);
       }
       //nao tem permissoes
       else {
@@ -250,9 +246,50 @@ exports.changeUserDetails = async (app, bd) => {
       }
     }
     //resposta do servidor
-    resp
-      .status(code)
-      .header("x-auth-token", token)
-      .json(resposta_servidor);
+    resp.status(code).json(resposta_servidor);
+  });
+};
+/**
+ * Rota que permite apagar um utilizador
+ */
+exports.deleteUserRoute = async (app, bd) => {
+  app.post("/api/users/:id/delete", async (req, resp) => {
+    let code = 201;
+    let token;
+    let resposta_servidor = { status: "NotAuthenticated", resposta: {} };
+    token = await getToken.getToken(req);
+    if (token === null) {
+      //HTTP CODE BAD REQUEST
+      code = 400;
+      resposta_servidor.status = "NotAuthenticated";
+    } else if (token.name) {
+      //HTTP CODE BAD REQUEST
+      code = 400;
+      resposta_servidor.status = "InvalidToken";
+    } else {
+      //verificar se e administrador
+      if (token.roleFK === 1) {
+        //tentar alterar os de um utilizador
+        let resposta_bd = await authentication.deleteUser(bd, req.params.id);
+        //alterações  com sucesso
+        if (resposta_bd.stat === 0) {
+          resposta_servidor.status = "Delete";
+          resposta_servidor.resposta = resposta_bd.resposta;
+        }
+        //algum erro com a base de dados
+        else {
+          //HTTP BAD REQUEST
+          code = 400;
+          resposta_servidor.status = "NotDeleted";
+          resposta_servidor.resposta = resposta_bd.resposta;
+        }
+      }
+      //nao tem permissoes
+      else {
+        resposta_servidor.status = "NotAuthorized";
+      }
+    }
+    //resposta do servidor
+    resp.status(code).json(resposta_servidor);
   });
 };

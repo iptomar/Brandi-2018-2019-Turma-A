@@ -44,10 +44,48 @@ class BasedeDados {
       if (ex.code === "ER_DUP_ENTRY") response.stat = 2;
       //foreign key error
       if (ex.code === "ER_NO_REFERENCED_ROW_2") response.stat = 3;
+      //datas incorretas ou inteiros incorretos
+      if (
+        ex.code === "ER_TRUNCATED_WRONG_VALUE" ||
+        ex.code === "ER_TRUNCATED_WRONG_VALUE_FOR_FIELD"
+      )
+        response.stat = 4;
       response.resposta = ex;
     } finally {
       return response;
     }
+  }
+  async errorDUPENTRY(string) {
+    var n = string.lastIndexOf("key ");
+    var res = string.substring(n + 5, string.length - 1);
+    return res;
+  }
+  async error_TRUNCATED(string) {
+    var n = string.lastIndexOf("column");
+    var n2 = string.lastIndexOf("at");
+    var res = string.substring(n + 6, n2);
+    return res;
+  }
+  async ER_NO_REFERENCED_ROW_2(string) {
+    var n = string.lastIndexOf("FOREIGN KEY");
+    var n2 = string.lastIndexOf("REFERENCES");
+    var res = string.substring(n + 11, n2);
+    return res;
+  }
+  async tratamentoErros(error, string) {
+    let stringerror;
+    switch (error) {
+      case 2:
+        stringerror = await this.errorDUPENTRY(string);
+        break;
+      case 3:
+        stringerror = await this.ER_NO_REFERENCED_ROW_2(string);
+        break;
+      case 4:
+        stringerror = await this.error_TRUNCATED(string);
+        break;
+    }
+    return "Erro no campo " + stringerror;
   }
 }
 exports.BasedeDados = BasedeDados;

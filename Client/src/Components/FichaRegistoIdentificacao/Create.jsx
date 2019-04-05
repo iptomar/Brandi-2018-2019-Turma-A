@@ -1,23 +1,63 @@
 import React, { Component } from "react";
 import AlertMsg from "../AlertMsg";
+import ImageUploader from 'react-images-upload';
 
 class Create extends Component {
   constructor(props) {
     super(props);
-    document.body.style = 'background: rgb(235, 235, 235)';
-
     this.state = {
       alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
       alertisNotVisible: true,
       alertColor: "danger",
-      file: null
+      file: null,
+      tecnicosResp: [],
+      pictures: []
     }
-    this.handleChange = this.handleChange.bind(this);
+    this.fetchTecnicos();
+    this.onDrop = this.onDrop.bind(this);
+  }
+
+
+  async fetchTecnicos() {
+    //Enviar pedido para receber 
+    const response = await fetch("/api/tecnicos", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'x-auth-token': sessionStorage.getItem('token')
+      }
+    });
+    await response.json().then(resp => {
+      this.setState({ tecnicosResp: resp.resposta })
+    });
+  }
+
+  verifyCBS() {
+    var cboxes = document.querySelectorAll("#tecnicosCheckbox");
+    var len = cboxes.length;
+    let idCBS = [];
+    for (var i = 0; i < len; i++) if (cboxes[i].checked) idCBS.push(cboxes[i].value);
+    return idCBS;
+  }
+
+  onDrop(picture) {
+    this.setState(prevState => ({
+      ...prevState,
+      pictures: picture,
+    }));
   }
 
   handleSubmit = async e => {
     e.preventDefault();
 
+    if(this.state.pictures.length === 0){
+      this.setState({
+        alertText: "Insira uma imagem",
+        alertisNotVisible: false,
+        alertColor: "danger"
+      });
+      return null
+    }
     //Objeto data
     const data = {
       designacao: document.getElementById("dObjeto").value,
@@ -29,7 +69,9 @@ class Create extends Component {
       coordenacao: document.getElementById("coord").value,
       direcaoTecnica: document.getElementById("dirTecn").value,
       localidade: document.getElementById("endPostLocal").value,
-      interessadoFK: 1
+      interessadoFK: 1,
+      tecnicosFK: this.verifyCBS(),
+      imagens: this.state.pictures
     };
 
     //Enviar pedidos
@@ -43,7 +85,6 @@ class Create extends Component {
     });
     //Aguardar API
     await response.json().then(resp => {
-      console.log(resp);
       let status = resp.stat;
       switch (status) {
         case "DatabaseError":
@@ -65,20 +106,6 @@ class Create extends Component {
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
       }
     });
-  };
-
-  handleChange(event) {
-    this.setState({
-      file: URL.createObjectURL(event.target.files[0])
-    })
-  }
-
-  onImgLoad = ({ target: img }) => {
-    this.setState({
-      width: img.width,
-      height: img.height,
-    });
-    document.getElementById("customFile").blur();
   };
 
   render() {
@@ -135,11 +162,20 @@ class Create extends Component {
                       <input type="text" className="form-control" id="dirTecn" placeholder="Direção Técnica" required />
                     </div>
                   </div>
+                  <label>Técnico(s) Responsável(eis)</label>
                   <div className="row">
-                    <div className="col-md-12 mb-3">
-                      <label>Técnico(s) Responsável(eis)</label>
-                      <input type="text" className="form-control" id="tecResp" placeholder="Técnico(s) Responsável(eis)" required />
-                    </div>
+                    {this.state.tecnicosResp.map(function (object) {
+                      return (
+                        <div className="input-group mb-3 col-md-3" key={object.tecnicoID}>
+                          <div className="input-group-prepend">
+                            <div className="input-group-text">
+                              <input type="checkbox" id="tecnicosCheckbox" value={object.tecnicoID} />
+                            </div>
+                          </div>
+                          <label className="form-control">{object.nome}</label>
+                        </div>
+                      );
+                    })}
                   </div>
                   <div className="row">
                     <div className="col-md-12 mb-3">
@@ -161,11 +197,11 @@ class Create extends Component {
                   </div>
                   <hr className="mb-4" />
                   <div className="row">
-                    <div className="col-md-12 mb-3">
-                      <div className="custom-file">
-                        <input type="file" className="custom-file-input" id="customFile" accept="image/*" onChange={this.handleChange} />
-                        <label className="custom-file-label" data-browse="Escolher Ficheiro" >Escolha Fotografia</label>
-                      </div>
+                    <div className="col-md-12">
+                        <ImageUploader withIcon={true} withPreview={true} withLabel={false} buttonText='Escolha as imagens'
+                          onChange={this.onDrop}
+                          imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                        />
                       <div className="text-center">
                         {
                           this.state.file ?
@@ -178,7 +214,7 @@ class Create extends Component {
                   </div>
                   <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
                   <hr className="mb-4" />
-                  <button className="btn btn-success btn-lg btn-block mb-5" type="submit">Criar</button>
+                    <button className="btn btn-success btn-lg btn-block mb-5" type="submit">Criar</button>
                 </form>
               </div>
             </div>

@@ -30,6 +30,7 @@ exports.getAllFichasRegistoIdentificacao = async bd => {
  */
 exports.createFichaRegistoIdentificacao = async (bd, dados) => {
   let resultadofinal = { stat: 1, resposta: {} };
+  let resposta_bd;
   //verificar se os campos estao preenchidos
   if (
     dados.designacao &&
@@ -41,22 +42,88 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
     dados.localidade &&
     dados.interessadoFK
   ) {
-    let resposta_bd = await bd.query(
-      "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
-      [
-        dados.visible,
-        dados.designacao,
-        dados.processoLCRM,
-        dados.processoCEARC,
-        dados.dataEntrada,
-        dados.dataConclusao,
-        dados.coordenacao,
-        dados.direcaoTecnica,
-        dados.localidade,
-        dados.interessadoFK,
-        dados.dataEntrega
-      ]
-    );
+    //datas nao preenchidas
+    if (dados.dataEntrega === "" && dados.dataConclusao === "") {
+      resposta_bd = await bd.query(
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+        [
+          dados.visible,
+          dados.designacao,
+          dados.processoLCRM,
+          dados.processoCEARC,
+          dados.dataEntrada,
+          null,
+          dados.coordenacao,
+          dados.direcaoTecnica,
+          dados.localidade,
+          dados.interessadoFK,
+          null
+        ]
+      );
+    }
+    //data de entrega nao preenchida
+    else if (dados.dataEntrega === "") {
+      resposta_bd = await bd.query(
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+        [
+          dados.visible,
+          dados.designacao,
+          dados.processoLCRM,
+          dados.processoCEARC,
+          dados.dataEntrada,
+          dados.dataConclusao,
+          dados.coordenacao,
+          dados.direcaoTecnica,
+          dados.localidade,
+          dados.interessadoFK,
+          null
+        ]
+      );
+    }
+    //data de conclusao nao preenchida
+    else if (dados.dataConclusao === "") {
+      resposta_bd = await bd.query(
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+        [
+          dados.visible,
+          dados.designacao,
+          dados.processoLCRM,
+          dados.processoCEARC,
+          dados.dataEntrada,
+          null,
+          dados.coordenacao,
+          dados.direcaoTecnica,
+          dados.localidade,
+          dados.interessadoFK,
+          dados.dataEntrega
+        ]
+      );
+    } else {
+      resposta_bd = await bd.query(
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+        [
+          dados.visible,
+          dados.designacao,
+          dados.processoLCRM,
+          dados.processoCEARC,
+          dados.dataEntrada,
+          dados.dataConclusao,
+          dados.coordenacao,
+          dados.direcaoTecnica,
+          dados.localidade,
+          dados.interessadoFK,
+          dados.dataEntrega
+        ]
+      );
+    }
+    //procurar id da ficha inserida
+    for (i = 0; i < dados.tecnicosFK.length; i++) {
+      let resposta_bd2 = await bd.query(
+        "INSERT INTO tbl_registoTecnicos (fichaRegistoFK, tecnicoFK) values (?, ?)",
+        [resposta_bd.resposta.insertId, dados.tecnicosFK[i]]
+      );
+    }
+
     //inserçao bem sucedida na base de dados
     if (resposta_bd.stat === 0) {
       resultadofinal.stat = 0;
@@ -81,27 +148,45 @@ exports.getFichaRegistoIdentificacao = async (bd, id) => {
     "Select * from tbl_fichaRegistoIdentificacao where fichaRegistoID = ? and visible = true limit 1",
     [id]
   );
-  if (resposta_bd.stat === 0) {
+  if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
     resultadofinal.stat = 0;
     resultadofinal.resposta = resposta_bd.resposta[0];
+    // procurar o nome do proprietario da peça
+    let resposta_bd3 = await bd.query(
+      "Select * from tbl_interessados where interessadoID = ? limit 1",
+      [resposta_bd.resposta[0].interessadoFK]
+    );
+    //pesquisa bem sucedida
+    if (resposta_bd3.stat === 0 && resposta_bd3.resposta.length > 0) {
+      resposta_bd.resposta[0].interessado = resposta_bd3.resposta[0].nome;
+      resposta_bd.resposta[0].interessadoFK = undefined;
+    } else {
+      resultadofinal.stat = 1;
+      resultadofinal.resposta = "Ocorreu um erro na procura do proprietario";
+      return resultadofinal;
+    }
     //procurar os tecnicos da ficha RegistoIdentificacao
     let resposta_bd2 = await bd.query(
-      "Select * from tbl_registoTecnicos where fichaRegistoFK = ?",
-      [id]
+      "select b.tecnicoID , b.nome from tbl_fichaRegistoIdentificacao a, tbl_tecnicos b, tbl_registoTecnicos c where a.fichaRegistoID = ? and c.fichaRegistoFK = ? and b.tecnicoID = c.tecnicoFK GROUP BY TECNICOFK",
+      [id, id]
     );
     //encontrou tecnicos associados a ficha e a ficha e visivel
     if (resposta_bd2.stat == 0 && resposta_bd.resposta[0] !== undefined) {
-      resultadofinal.resposta.tecnicos = resposta_bd2.resposta[0];
+      resultadofinal.resposta.tecnicos = resposta_bd2.resposta;
     }
     //erro de conecao com a base de dados
     else if (resposta_bd2.stat === 1) {
       resultadofinal.stat = resposta_bd2.stat;
       resultadofinal.resposta = resposta_bd2.resposta;
     }
+  } else if (resposta_bd.stat === 0) {
+    resultadofinal.stat = resposta_bd.stat;
+    resultadofinal.resposta = "FichaNaoExistente";
   } else {
     resultadofinal.stat = resposta_bd.stat;
     resultadofinal.resposta = resposta_bd.resposta;
   }
+
   return resultadofinal;
 };
 /**
@@ -137,7 +222,25 @@ exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
         dados.fichaRegistoID
       ]
     );
-    //conseguio inserir na base de dados
+    let resposta_aux = await bd.query(
+      "Select * from tbl_registoTecnicos where fichaRegistoFK = ?",
+      [dados.fichaRegistoID]
+    );
+    //apagar os tecnicos associados a ficha
+    for (i = 0; i < resposta_aux.resposta.length; i++) {
+      let apagar_tecnicos = await bd.query(
+        "Delete from tbl_registoTecnicos where tecnicoFK = ? and fichaRegistoFK = ?",
+        [resposta_aux.resposta[i].tecnicoFK, dados.fichaRegistoID]
+      );
+    }
+    //adicionar os novos tecnicos a ficha
+    for (i = 0; i < dados.tecnicosFK.length; i++) {
+      let resposta_bd2 = await bd.query(
+        "INSERT INTO tbl_registoTecnicos (tecnicoFK, fichaRegistoFK) values (?, ?)",
+        [dados.tecnicosFK[i], dados.fichaRegistoID]
+      );
+    }
+    //inserio na base de dados
     if (resposta_bd.stat === 0) {
       resultadofinal.stat = 0;
       resultadofinal.resposta = resposta_bd.resposta;

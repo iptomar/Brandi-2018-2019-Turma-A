@@ -1,26 +1,30 @@
 import React, { Component } from "react";
-import AlertMsg from '../AlertMsg';
-import LoadingAnimation from '../LoadingAnimation';
+import AlertMsg from '../../AlertMsg';
+import LoadingAnimation from '../../LoadingAnimation';
 
-class Details extends Component {
+class Edit extends Component {
   constructor(props) {
     super(props);
-    document.body.style = "background: rgb(235, 235, 235)";
     this.state = {
+      alertText: '',
+      alertisNotVisible: true,
+      alertColor: '',
       data: null,
       edit: false,
       loading: true,
       alert: false,
+      tecnicosResp: [],
+      loadingTecnicos: true
     };
-    this.toggleEdit = this.toggleEdit.bind(this);
-    this.delete = this.delete.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.dateTreatment = this.dateTreatment.bind(this);
   }
 
   componentDidMount(){
-    this.getFichaRI(this.props.id);
+    this.fetchFichaRI(this.props.id);
   }
 
-  async getFichaRI(id) {
+  async fetchFichaRI(id) {
     //Enviar pedido
     const response = await fetch(`/api/fichaRegistoIdentificacao/${this.props.id}`, {
       method: "GET",
@@ -35,6 +39,7 @@ class Details extends Component {
       switch (status) {
         case "Authenticated":
           this.setState({ data: resp.resposta, loading: false });
+          this.fetchTecnicos();
           break;
         default:
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
@@ -49,10 +54,60 @@ class Details extends Component {
     });
   }
 
-  toggleEdit() {
-    this.setState(state => ({
-      edit: !state.edit
-    }));
+  async fetchTecnicos() {
+    //Enviar pedido para receber 
+    const response = await fetch("/api/tecnicos", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'x-auth-token': sessionStorage.getItem('token')
+      }
+    });
+
+    await response.json().then(resp => {
+      let resposta = resp.resposta;
+
+      // Definir quais os tecnicos que já se encontram 
+      for(let i=0; i<resposta.length; i++) {
+        let bool = false;
+        this.state.data.tecnicos.map((tecnico) => {
+          if(tecnico.tecnicoID === resposta[i].tecnicoID){
+            return bool=true;
+          }
+          return false;
+        })
+        // Novo objecto de tecnico
+        let tec = {
+          tecnicoID: resposta[i].tecnicoID,
+          nome: resposta[i].nome,
+          checked: bool
+        }
+        // Override do tecnico
+        resposta[i]=tec;
+      }
+      this.setState({ tecnicosResp: resposta, loadingTecnicos: false })
+    });
+  }
+
+  handleChange(e) {
+    let tecnicos = this.state.tecnicosResp;
+    tecnicos.forEach(tecnico => {
+      if (tecnico.tecnicoID+"" === e.target.value)
+        tecnico.checked = e.target.checked;
+    })
+    this.setState({tecnicosResp: tecnicos})
+  }
+
+  verifyCBS() {
+    var cboxes = document.querySelectorAll("#tecnicosCheckbox");
+    var len = cboxes.length;
+    let idCBS = [];
+    for (var i = 0; i < len; i++) if (cboxes[i].checked) idCBS.push(cboxes[i].value);
+    return idCBS;
+  }
+
+  dateTreatment(date){
+    return date!=null? date.substring(0,10) : null;
   }
 
   edit = async e => {
@@ -60,18 +115,17 @@ class Details extends Component {
 
     //Objeto data
     const data = {
-      designacao: document.getElementById("dObjeto").value,
-      processoLCRM: document.getElementById("procLCRM").value,
-      processoCEARC: document.getElementById("procCEARC").value,
-      dataEntrada: document.getElementById("dateEntrada").value,
-      dataConclusao: document.getElementById("dateConclusão").value,
-      dataEntrega: document.getElementById("dateEntrega").value,
-      coordenacao: document.getElementById("coord").value,
-      direcaoTecnica: document.getElementById("dirTecn").value,
-      localidade: document.getElementById("endPostLocal").value,
-      tecnicosFK: [document.getElementById("tecResp").value],
-      interessadoFK: 1,
-      visible: 1
+      designacao: this.state.data.designacao,
+      processoLCRM: this.state.data.processoLCRM,
+      processoCEARC: this.state.data.processoCEARC,
+      dataEntrada: this.dateTreatment(this.state.data.dataEntrada),
+      dataConclusao: this.dateTreatment(this.state.data.dataConclusao),
+      dataEntrega: this.dateTreatment(this.state.data.dataEntrega),
+      coordenacao: this.state.data.coordenacao,
+      direcaoTecnica: this.state.data.direcaoTecnica,
+      localidade: this.state.data.localidade,
+      tecnicosFK: this.verifyCBS(),
+      interessadoFK: '1'
     };
     //Enviar pedidos
     const response = await fetch(`/api/fichaRegistoIdentificacao/${this.props.id}/edit`, {
@@ -96,47 +150,18 @@ class Details extends Component {
           window.scrollTo(0, 0);
           break;
         case "NotUpdated":
-          window.location = '/fichaRI';
+          //window.location = '/fichaRI';
           break;
         default:
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
       }
-    });
-  }
-
-  delete = async e => {
-    const request = await fetch(`/api/fichaRegistoIdentificacao/${this.props.id}/delete`, {
-      method: 'POST',
-      headers: {
-        'x-auth-token': sessionStorage.getItem('token')
-      }
-    });
-    request.json().then( resp => {
-      let status = resp.stat;
-
-      // Interpretar a resposta do servidor
-      switch (status) {
-        case "Deleted":
-          this.setState({
-            alertText: "A ficha foi removida com sucesso.",
-            alertisNotVisible: false,
-            alertColor: 'danger',
-            alert: true,
-            loading: true
-          });
-          window.scrollTo(0, 0);
-          break;
-        case "NotDeleted":
-          this.setState({
-            alertText: "Não foi possível remover a ficha.",
-            alertisNotVisible: false,
-            alertColor: 'danger'
-          });
-          window.scrollTo(0, 0);
-          break;
-      default:
-        console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
-      }
+    }).catch(resp => {
+      this.setState({
+        alertText: "Erro ao editar.",
+        alertisNotVisible: false,
+        alertColor: "danger"
+      });
+      window.scrollTo(0, 0);
     });
   }
 
@@ -145,11 +170,9 @@ class Details extends Component {
       window.location = "/";
     } else {
       if (!this.state.loading) {
+          let getThis = this;
           return (
             <div className="container">
-              <div className="py-3 text-center">
-                <h2>Detalhes da Ficha de Registo e Identificação</h2>
-              </div>
               <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
               <div className="row">
                 <div className="col-md-12 mb-3">
@@ -173,11 +196,14 @@ class Details extends Component {
                         className="form-control"
                         id="dObjeto"
                         value={this.state.data.designacao}
-                        readOnly={!this.state.edit}
                         onChange={(evt) => {
-                          this.setState({
-                            data: { designacao : evt.target.value}
-                          });
+                          let value = evt.target.value;
+                          this.setState(prevState => ({
+                            data: {
+                                ...prevState.data,
+                                designacao: value
+                            }
+                          }))
                         }}
                       />
                     </div>
@@ -190,11 +216,14 @@ class Details extends Component {
                         className="form-control"
                         id="procLCRM"
                         value={this.state.data.processoLCRM}
-                        readOnly={!this.state.edit}
                         onChange={(evt) => {
-                          this.setState({
-                            data: { processoLCRM : evt.target.value}
-                          });
+                          let value = evt.target.value;
+                          this.setState(prevState => ({
+                            data: {
+                                ...prevState.data,
+                                processoLCRM: value
+                            }
+                          }))
                         }}
                       />
                     </div>
@@ -205,11 +234,14 @@ class Details extends Component {
                         className="form-control"
                         id="procCEARC"
                         value={this.state.data.processoCEARC}
-                        readOnly={!this.state.edit}
                         onChange={(evt) => {
-                          this.setState({
-                            data: { processoCEARC : evt.target.value}
-                          });
+                          let value = evt.target.value;
+                          this.setState(prevState => ({
+                            data: {
+                                ...prevState.data,
+                                processoCEARC: value
+                            }
+                          }))
                         }}
                       />
                     </div>
@@ -222,11 +254,14 @@ class Details extends Component {
                         className="form-control"
                         id="dateEntrada"
                         value={this.state.data.dataEntrada!=null? this.state.data.dataEntrada.substring(0,10) : ""}
-                        readOnly={!this.state.edit}
                         onChange={(evt) => {
-                          this.setState({
-                            data: { dataEntrada : evt.target.value}
-                          });
+                          let value = evt.target.value;
+                          this.setState(prevState => ({
+                            data: {
+                                ...prevState.data,
+                                dataEntrada: value
+                            }
+                          }))
                         }}
                       />
                     </div>
@@ -237,11 +272,14 @@ class Details extends Component {
                         className="form-control"
                         id="dateConclusão"
                         value={this.state.data.dataConclusao!=null? this.state.data.dataConclusao.substring(0,10) : ""}
-                        readOnly={!this.state.edit}
                         onChange={(evt) => {
-                          this.setState({
-                            data: { dataConclusao : evt.target.value}
-                          });
+                          let value = evt.target.value;
+                          this.setState(prevState => ({
+                            data: {
+                                ...prevState.data,
+                                dataConclusao: value
+                            }
+                          }))
                         }}
                       />
                     </div>
@@ -252,11 +290,14 @@ class Details extends Component {
                         className="form-control"
                         id="dateEntrega"
                         value={this.state.data.dataEntrega!=null? this.state.data.dataEntrega.substring(0,10) : ""}
-                        readOnly={!this.state.edit}
                         onChange={(evt) => {
-                          this.setState({
-                            data: { dataEntrega : evt.target.value}
-                          });
+                          let value = evt.target.value;
+                          this.setState(prevState => ({
+                            data: {
+                                ...prevState.data,
+                                dataEntrega: value
+                            }
+                          }))
                         }}
                       />
                     </div>
@@ -269,11 +310,14 @@ class Details extends Component {
                         className="form-control"
                         id="coord"
                         value={this.state.data.coordenacao}
-                        readOnly={!this.state.edit}
                         onChange={(evt) => {
-                          this.setState({
-                            data: { coordenacao : evt.target.value}
-                          });
+                          let value = evt.target.value;
+                          this.setState(prevState => ({
+                            data: {
+                                ...prevState.data,
+                                coordenacao: value
+                            }
+                          }))
                         }}
                       />
                     </div>
@@ -284,26 +328,43 @@ class Details extends Component {
                         className="form-control"
                         id="dirTecn"
                         value={this.state.data.direcaoTecnica}
-                        readOnly={!this.state.edit}
                         onChange={(evt) => {
-                          this.setState({
-                            data: { direcaoTecnica : evt.target.value}
-                          });
+                          let value = evt.target.value;
+                          this.setState(prevState => ({
+                            data: {
+                                ...prevState.data,
+                                direcaoTecnica: value
+                            }
+                          }))
                         }}
                       />
                     </div>
                   </div>
+                  <label>Técnico(s) Responsável(eis)</label>
                   <div className="row">
-                    <div className="col-md-12 mb-3">
-                      <label className="font-weight-bold">Técnico(s) Responsável(eis)</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="tecResp"
-                        value='1'
-                        readOnly={!this.state.edit}
-                      />
-                    </div>
+                    {
+                      this.state.loadingTecnicos? 
+                        <LoadingAnimation height="6rem" width="6em" />
+                      :
+                        this.state.tecnicosResp.map(function (object) {
+                          return (
+                            <div className="input-group mb-3 col-md-3" key={object.tecnicoID}>
+                              <div className="input-group-prepend">
+                                <div className="input-group-text">
+                                  <input 
+                                    type="checkbox" 
+                                    id="tecnicosCheckbox" 
+                                    value={object.tecnicoID}
+                                    checked={object.checked}
+                                    onChange={getThis.handleChange}
+                                  />
+                                </div>
+                              </div>
+                              <label className="form-control">{object.nome}</label>
+                            </div>
+                          );
+                        })
+                    }
                   </div>
                   <div className="row">
                     <div className="col-md-12 mb-3">
@@ -313,48 +374,23 @@ class Details extends Component {
                         className="form-control" 
                         id="endPostLocal" 
                         value={this.state.data.localidade}
-                        readOnly={!this.state.edit}
                         onChange={(evt) => {
-                          this.setState({
-                            data: { localidade : evt.target.value}
-                          });
+                          let value = evt.target.value;
+                          this.setState(prevState => ({
+                            data: {
+                                ...prevState.data,
+                                localidade: value
+                            }
+                          }))
                         }}
                         />
                     </div>
                   </div>
                   <hr className="mb-4" />
-
-                  {
-                    this.state.edit? 
-                      <button className="btn btn-primary btn-lg btn-block" onClick={this.toggleEdit} data-toggle="modal" data-target="#modalEdit">Guardar</button>
-                    :
-                      <button className="btn btn-primary btn-lg btn-block" onClick={this.toggleEdit}>Editar</button>
-                  }
-
-                  <button type="button" className="btbtn btn-danger btn-lg btn-block" data-toggle="modal" data-target="#modalDelete">Apagar</button>
+                  <button className="btn btn-primary btn-lg btn-block" onClick={this.toggleEdit} data-toggle="modal" data-target="#modalEdit">Guardar</button>
                 </div>
               </div>
 
-              { /* Modal de apagar*/ }
-              <div className="modal fade" id="modalDelete" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog" role="document">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h5 className="modal-title" id="exampleModalLabel">Apagar Ficha de Registo e Identificação</h5>
-                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div className="modal-body">
-                      Tem a certeza que pretende apagar a Ficha de Registo e Identificação?
-                    </div>
-                    <div className="modal-footer">
-                      <button type="button" className="btn btn-primary" data-dismiss="modal">Não</button>
-                      <button type="button" className="btn btn-danger" onClick={this.delete} data-dismiss="modal">Sim</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
               { /* Modal de editar*/ }
 
@@ -371,21 +407,17 @@ class Details extends Component {
                       Pretende guardar as alterações?
                     </div>
                     <div className="modal-footer">
-                      <button type="button" className="btn btn-primary" data-dismiss="modal">Não</button>
-                      <button type="submit" className="btn btn-success"  onClick={this.edit} data-dismiss="modal">Sim</button>
+                      <button type="button" className="btn btn-danger" data-dismiss="modal">Não</button>
+                      <button type="submit" className="btn btn-primary"  onClick={this.edit} data-dismiss="modal">Sim</button>
                     </div>
                   </div>
                 </div>
               </div>
-
             </div>
           );
       } else {
         return (
           <div className="container">
-            <div className="py-3 text-center">
-              <h2>Detalhes da Ficha de Registo e Identificação</h2>
-            </div>
             {this.state.alert? 
                 <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} /> 
               : 
@@ -398,4 +430,4 @@ class Details extends Component {
   }
 }
 
-export default Details;
+export default Edit;

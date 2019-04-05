@@ -43,7 +43,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
     dados.interessadoFK
   ) {
     //datas nao preenchidas
-    if (dados.dataEntrega === undefined && dados.dataConclusao === undefined) {
+    if (dados.dataEntrega === "" && dados.dataConclusao === "") {
       resposta_bd = await bd.query(
         "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
         [
@@ -62,7 +62,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
       );
     }
     //data de entrega nao preenchida
-    else if (dados.dataEntrega === undefined) {
+    else if (dados.dataEntrega === "") {
       resposta_bd = await bd.query(
         "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
         [
@@ -81,7 +81,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
       );
     }
     //data de conclusao nao preenchida
-    else if (dados.dataConclusao === undefined) {
+    else if (dados.dataConclusao === "") {
       resposta_bd = await bd.query(
         "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
         [
@@ -167,7 +167,7 @@ exports.getFichaRegistoIdentificacao = async (bd, id) => {
     }
     //procurar os tecnicos da ficha RegistoIdentificacao
     let resposta_bd2 = await bd.query(
-      "select b.nome from tbl_fichaRegistoIdentificacao a, tbl_tecnicos b, tbl_registoTecnicos c where a.fichaRegistoID = ? and c.fichaRegistoFK = ? and b.tecnicoID = c.tecnicoFK GROUP BY TECNICOFK;",
+      "select b.tecnicoID , b.nome from tbl_fichaRegistoIdentificacao a, tbl_tecnicos b, tbl_registoTecnicos c where a.fichaRegistoID = ? and c.fichaRegistoFK = ? and b.tecnicoID = c.tecnicoFK GROUP BY TECNICOFK",
       [id, id]
     );
     //encontrou tecnicos associados a ficha e a ficha e visivel

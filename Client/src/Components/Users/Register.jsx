@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AlertMsg from "./AlertMsg";
+import AlertMsg from "../AlertMsg";
 
 class Register extends Component {
   constructor(props) {
@@ -41,27 +41,15 @@ class Register extends Component {
       });
       return null;
     }
-    //Criar o hash
-    let hexCodes;
-    const encoder = new TextEncoder();
-    const data = encoder.encode(document.getElementById("pass").value);
-    await window.crypto.subtle.digest("SHA-512", data).then(hashArray => {
-      //Hash to String
-      const byteArray = new Uint8Array(hashArray);
-      hexCodes = [...byteArray].map(value => {
-        const hexCode = value.toString(16);
-        return hexCode.padStart(2, "0");
-      });
-    });
 
     var select = document.getElementById("DDLRoles");
     var option = select.options[select.selectedIndex];
-    
+
     //Objeto Register
     const registerData = {
       login: document.getElementById("user").value,
       email: document.getElementById("email").value,
-      password: hexCodes.join(""),
+      password: document.getElementById('pass').value,
       roleFK: option.id
     };
 
@@ -80,15 +68,18 @@ class Register extends Component {
       let status = resp.status;
       switch (status) {
         case "Registed":
-          this.setState({
-            alertText: "Registado com sucesso",
-            alertisNotVisible: false,
-            alertColor: "success"
-          });
+          window.location = "/utilizadores/listar&showConfirm"
           break;
         case "FieldError":
           this.setState({
             alertText: "Utilizador já registado",
+            alertisNotVisible: false,
+            alertColor: "warning"
+          });
+          break;
+        case "NotRegisted":
+          this.setState({
+            alertText: "Erro no campo Login",
             alertisNotVisible: false,
             alertColor: "warning"
           });
@@ -170,8 +161,9 @@ class Register extends Component {
                         />
                       </div>
                     </div>
-                    <select id="DDLRoles" className="form-control">
-                      {this.state.rolesList.map(function(object) {
+                    <label>Tipo de utilizador</label>
+                    <select id="DDLRoles" className="form-control mb-3">
+                      {this.state.rolesList.map(function (object) {
                         return (
                           <option
                             className="dropdown-item"

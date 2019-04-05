@@ -12,7 +12,7 @@ exports.authenticateUser = async (bd, dados) => {
   if (dados.login && dados.password) {
     //pesquisar o utilizador na base de dados
     let resposta_bd = await bd.query(
-      "Select * from tbl_utilizadores where login = ? and visible = true limit 1",
+      "Select a.* , b.role from tbl_utilizadores a, tbl_roles b where a.login = ? and a.visible = true and b.roleID = a.roleFK limit 1",
       [dados.login]
     );
     // verficar se encontrou o utilizador
@@ -49,7 +49,7 @@ exports.authenticateUser = async (bd, dados) => {
  * Método para registar um utilizador na base de dados
  * @param bd - recebe base de dados para fazer query
  * @param dados -dados para executar query
- * @returns {object} stat: 1 <erro> 0 <sucesso> , resposta <dados do utilizador>
+ * @returns {object} stat: 1 <erro> 0 <sucesso>, resposta <dados do utilizador>
  */
 exports.registerUser = async (bd, dados) => {
   let resultadofinal = { stat: 1, resposta: {} };
@@ -64,35 +64,16 @@ exports.registerUser = async (bd, dados) => {
     "Insert into tbl_utilizadores(login,email,password, salt,roleFK,visible) values( ?,?,?,?,?,?)",
     [dados.login, dados.email, password, salt, dados.roleFK, dados.visible]
   );
-  //campos duplicados
-  if (resposta_bd.stat === 2) {
-    resposta_bd2 = await bd.query(
-      "Select * from tbl_utilizadores where login = ?",
-      [dados.login]
+  //tratamento de erros de sql
+  if (resposta_bd.stat >= 2) {
+    resultadofinal.resposta = await bd.tratamentoErros(
+      resposta_bd.stat,
+      resposta_bd.resposta.sqlMessage
     );
-    //login ja existente na base de dados
-    if (resposta_bd2.resposta.length > 0) {
-      resultadofinal.resposta = "Já existe um utilizador com esse login";
-    }
-    //verificar se já existe algum utilizador com o email
-    else {
-      resposta_bd2 = await bd.query(
-        "Select * from tbl_utilizadores where email = ?",
-        [dados.email]
-      );
-      //emails ja existente na base de dados
-      if (resposta_bd2.resposta.length > 0) {
-        resultadofinal.resposta = "Já existe um utilizador com esse email";
-      }
-    }
   }
   //erro na conecao com a base de dados
   else if (resposta_bd.stat === 1) {
     resultadofinal.resposta = "DBConnectionError";
-  }
-  //Role nao existente
-  else if (resposta_bd.stat === 3) {
-    resultadofinal.resposta = "UnknowRole";
   }
   //utilizador registado com sucesso
   else {
@@ -110,7 +91,7 @@ exports.registerUser = async (bd, dados) => {
 exports.getAllUsers = async bd => {
   let resultadofinal = { stat: 1, resposta: {} };
   let resposta_bd = await bd.query(
-    "Select * from tbl_utilizadores where visible = true"
+    "Select a.* , b.role from tbl_utilizadores a, tbl_roles b where a.visible = true and b.roleID = a.roleFK"
   );
   if (resposta_bd.stat === 0) {
     resultadofinal.stat = 0;
@@ -136,24 +117,21 @@ exports.changeUser = async (bd, dados) => {
   if (dados.userID && dados.login && dados.email && dados.roleFK) {
     //query a base de dados
     let resposta_bd = await bd.query(
-      "update tbl_utilizadores set login= ? , email = ? , roleFK = ? visible = ?  where userID = ? ",
-      [dados.login, dados.email, dados.roleFK, dados.userID, dados.visible]
+      "update tbl_utilizadores set login = ?, email = ? , roleFK = ? , visible = ? where userID = ?",
+      [dados.login, dados.email, dados.roleFK, dados.visible, dados.userID]
     );
     //query bem sucedida
     if (resposta_bd.stat === 0) {
       resultadofinal.stat = resposta_bd.stat;
       resultadofinal.resposta = resposta_bd.resposta;
-    }
-    //erro de role nao existente
-    else if (resposta_bd.stat === 3) {
-      resultadofinal.resposta = "UnknowRole";
-    }
-    //erro de camplos duplos na base de dados
-    else if (resposta_bd.stat === 2) {
-      resultadofinal.resposta = "InvalidField";
+    } else if (resposta_bd.stat >= 2) {
+      resultadofinal.resposta = await bd.tratamentoErros(
+        resposta_bd.stat,
+        resposta_bd.resposta.sqlMessage
+      );
     }
     //erro de connecao
-    else if (resposta_bd.stat === 1) {
+    else {
       resultadofinal.resposta = "DBConnectionError";
     }
   }
@@ -169,7 +147,7 @@ exports.changeUser = async (bd, dados) => {
 exports.getUser = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: {} };
   let resposta_bd = await bd.query(
-    "Select * from tbl_utilizadores where userID = ? and visibile = true limit 1",
+    "Select a.* , b.role from tbl_utilizadores a, tbl_roles b where a.userID = ? and a.visible = true and b.roleID = a.roleFK limit 1",
     [id]
   );
   //encontrou o utilizador
@@ -182,11 +160,32 @@ exports.getUser = async (bd, id) => {
     resultadofinal.resposta = resposta_bd.resposta[0];
   } else if (resposta_bd.stat === 0) {
     resultadofinal.stat = resposta_bd.stat;
-    resultadofinal.resposta = "NotVisible";
+    resultadofinal.resposta = "UserNotFound";
   }
   //ocorreu algum problema com a base de dados
   else {
     resultadofinal.resposta = resposta_bd.resposta;
+  }
+  return resultadofinal;
+};
+/**
+ * Método que permite esconder um utilizador
+ *
+ */
+exports.deleteUser = async (bd, id) => {
+  let resultadofinal = { stat: 1, resposta: {} };
+  let resposta_bd = await bd.query(
+    "Update tbl_utilizadores set visible = false where userID = ?",
+    [id]
+  );
+  if (resposta_bd.stat === 0) {
+    resultadofinal.resposta = resposta_bd.resposta;
+    resultadofinal.stat = resposta_bd.stat;
+  } else if (resposta_bd.stat >= 2) {
+    resultadofinal.resposta = bd.tratamentoErros(
+      resposta_bd.stat,
+      resposta_bd.sqlMessage
+    );
   }
   return resultadofinal;
 };

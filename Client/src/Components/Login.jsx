@@ -1,5 +1,3 @@
-// 2 | teste | teste          | $2b$10$CwkTD5D9Ez02Uomn0kQcJ.fUZMDCQEL1hAkP6kSILXBRV8Ax/FgTK | $2b$10$CwkTD5D9Ez02Uomn0kQcJ. |      1 |
-
 import React, { Component } from "react";
 import AlertMsg from './AlertMsg';
 import '../CssComponents/login.css';
@@ -18,25 +16,13 @@ class Login extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-    //Criar o hash
-    let hexCodes;
-    const encoder = new TextEncoder();
-    const data = encoder.encode(document.getElementById('pass').value);
-    await window.crypto.subtle.digest("SHA-512", data).then(hashArray => {
-      //Hash to String
-      const byteArray = new Uint8Array(hashArray);
-      hexCodes = [...byteArray].map(value => {
-        const hexCode = value.toString(16);
-        return hexCode.padStart(2, '0');
-      })
-    });
 
     //Objeto Login
     const loginData = {
       login: document.getElementById('user').value,
-      password: hexCodes.join('')
+      password: document.getElementById('pass').value
     };
-    console.log(loginData.password);
+    
     //Enviar pedidos
     const response = await fetch('/auth/login', {
       method: 'POST',

@@ -52,7 +52,7 @@ class Index extends Component {
                     <a href={href}>
                       <div className="card">
                         <div className="card-body p-0">
-                          <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Michelangelo_-_Creation_of_Adam_%28cropped%29.jpg" alt="Imagem" className="card-img-top img-fluid"
+                          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Our_Lady_of_the_Gate_of_Dawn_Interior_During_Service%2C_Vilnius%2C_Lithuania_-_Diliff.jpg/800px-Our_Lady_of_the_Gate_of_Dawn_Interior_During_Service%2C_Vilnius%2C_Lithuania_-_Diliff.jpg" alt="Imagem" className="card-img-top img-fluid"
                             style={{ objectFit: "cover", height: "200px", width: "300px" }} />
                           <div className="card-footer text-muted text-center">
                             {obj.designacao}

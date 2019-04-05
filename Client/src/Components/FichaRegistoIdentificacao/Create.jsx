@@ -4,20 +4,42 @@ import AlertMsg from "../AlertMsg";
 class Create extends Component {
   constructor(props) {
     super(props);
-    document.body.style = 'background: rgb(235, 235, 235)';
-
     this.state = {
       alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
       alertisNotVisible: true,
       alertColor: "danger",
-      file: null
+      file: null,
+      tecnicosResp: []
     }
+    this.fetchTecnicos();
     this.handleChange = this.handleChange.bind(this);
+  }
+
+
+  async fetchTecnicos() {
+    //Enviar pedido para receber 
+    const response = await fetch("/api/tecnicos", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'x-auth-token': sessionStorage.getItem('token')
+      }
+    });
+    await response.json().then(resp => {
+      this.setState({ tecnicosResp: resp.resposta })
+    });
+  }
+
+  verifyCBS() {
+    var cboxes = document.querySelectorAll("#tecnicosCheckbox");
+    var len = cboxes.length;
+    let idCBS = [];
+    for (var i = 0; i < len; i++) if (cboxes[i].checked) idCBS.push(cboxes[i].value);
+    return idCBS;
   }
 
   handleSubmit = async e => {
     e.preventDefault();
-
     //Objeto data
     const data = {
       designacao: document.getElementById("dObjeto").value,
@@ -29,7 +51,8 @@ class Create extends Component {
       coordenacao: document.getElementById("coord").value,
       direcaoTecnica: document.getElementById("dirTecn").value,
       localidade: document.getElementById("endPostLocal").value,
-      interessadoFK: 1
+      interessadoFK: 1,
+      tecnicosFK: this.verifyCBS()
     };
 
     //Enviar pedidos
@@ -43,7 +66,6 @@ class Create extends Component {
     });
     //Aguardar API
     await response.json().then(resp => {
-      console.log(resp);
       let status = resp.stat;
       switch (status) {
         case "DatabaseError":
@@ -135,11 +157,20 @@ class Create extends Component {
                       <input type="text" className="form-control" id="dirTecn" placeholder="Direção Técnica" required />
                     </div>
                   </div>
+                  <label>Técnico(s) Responsável(eis)</label>
                   <div className="row">
-                    <div className="col-md-12 mb-3">
-                      <label>Técnico(s) Responsável(eis)</label>
-                      <input type="text" className="form-control" id="tecResp" placeholder="Técnico(s) Responsável(eis)" required />
-                    </div>
+                    {this.state.tecnicosResp.map(function (object) {
+                      return (
+                        <div className="input-group mb-3 col-md-3" key={object.tecnicoID}>
+                          <div className="input-group-prepend">
+                            <div className="input-group-text">
+                              <input type="checkbox" id="tecnicosCheckbox" value={object.tecnicoID} />
+                            </div>
+                          </div>
+                          <label className="form-control">{object.nome}</label>
+                        </div>
+                      );
+                    })}
                   </div>
                   <div className="row">
                     <div className="col-md-12 mb-3">

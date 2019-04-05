@@ -33,22 +33,26 @@ class Read extends Component {
     //Aguardar API
     await response.json().then(resp => {
       let status = resp.stat;
-      console.log(resp);
       switch (status) {
         case "Authenticated":
-          this.setState({ data: resp.resposta, loading: false });
+          this.setState(prevState => ({
+              ...prevState,
+              data: resp.resposta, 
+              loading: false 
+          }));
           break;
         default:
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
       }
     }).catch( resp => {
-      this.setState({
+      this.setState(prevState => ({
+        ...prevState,
         error: true,
         loading: true,
         alertText: 'Não existe conexão com o servidor.',
         alertisNotVisible: false,
         alertColor: 'danger'
-      })
+      }))
     });
   }
 

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import $ from "jquery";
 import AlertMsg from "../AlertMsg";
 
 class Index extends Component {
@@ -8,17 +9,28 @@ class Index extends Component {
       alertText: "",
       alertisNotVisible: true,
       alertColor: "",
+      id: null,
       userList: [],
       rolesList: []
     };
   }
 
   componentDidMount() {
+    this.queryState(this.props.query);
     this.fetchUsers();
     this.fetchRoles();
-    this.queryState(this.props.query);
+    let getThis = this;
+    //Ativa o clique do botão
+    $(document).on('click', '#modalButton', function () {
+      var idC = $(this).data('id');
+      getThis.setState({id: idC});
+    });
+    //Ativa o botão de eliminação do modal
+    $(document).on('click', '#deleteUserConfirm', function () {
+      getThis.deleteUser(getThis.state.id);
+    });
   }
-
+  //Define o tipo de query
   queryState(query) {
     switch (query) {
       case 'showConfirmEdited':
@@ -42,7 +54,7 @@ class Index extends Component {
         break;
     }
   }
-
+  
   //Receber os utilizadores
   async fetchUsers() {
     //Enviar pedidos
@@ -133,7 +145,7 @@ class Index extends Component {
                       <a className="btn btn-warning mr-2" href={href + "/editar"}>
                         <i className="fas fa-edit"></i>
                       </a>
-                      <button type="button" className="btn btn-danger" data-toggle="modal" data-target="#modalConfirmElem" >
+                      <button type="button" className="btn btn-danger" id="modalButton" data-id={obj.userID} data-toggle="modal" data-target="#modalConfirmElem" >
                         <i className="fas fa-trash-alt"></i>
                       </button>
                     </td>
@@ -157,7 +169,7 @@ class Index extends Component {
                 <div className="modal-body">Têm a certeza que deseja eliminar este utilizador?</div>
                 <div className="modal-footer">
                   <button type="button" className="btn btn-secondary" data-dismiss="modal">Não</button>
-                  <button type="button" className="btn btn-warning" onClick={this.deleteUser}>Sim</button>
+                  <button type="button" className="btn btn-warning" id="deleteUserConfirm">Sim</button>
                 </div>
               </div>
             </div>

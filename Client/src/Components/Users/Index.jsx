@@ -32,7 +32,7 @@ class Index extends Component {
   }
   //Define o tipo de query
   queryState(query) {
-    if (query != undefined) {
+    if (query !== undefined) {
       switch (query) {
         case '&showConfirmEdited':
           this.setState({

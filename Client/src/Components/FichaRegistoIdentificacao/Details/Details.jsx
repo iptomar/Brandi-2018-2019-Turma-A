@@ -75,7 +75,7 @@ class Details extends Component {
             <div className="py-3 text-center">
               <h2>Detalhes da Ficha de Registo e Identificação</h2>
             </div>
-            <div className="text-right mr-3">
+            <div className="text-right mr-3 mb-3">
               <button className="btn btn-primary" onClick={this.toggleEdit} align="right">
                 <i className="fas fa-edit"></i>
               </button>

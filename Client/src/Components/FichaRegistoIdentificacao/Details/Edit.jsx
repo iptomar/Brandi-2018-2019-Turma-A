@@ -5,8 +5,10 @@ import LoadingAnimation from '../../LoadingAnimation';
 class Edit extends Component {
   constructor(props) {
     super(props);
-    document.body.style = "background: rgb(235, 235, 235)";
     this.state = {
+      alertText: '',
+      alertisNotVisible: true,
+      alertColor: '',
       data: null,
       edit: false,
       loading: true,
@@ -72,7 +74,7 @@ class Edit extends Component {
           if(tecnico.tecnicoID === resposta[i].tecnicoID){
             return bool=true;
           }
-          return null;
+          return false;
         })
         // Novo objecto de tecnico
         let tec = {
@@ -122,7 +124,7 @@ class Edit extends Component {
       coordenacao: this.state.data.coordenacao,
       direcaoTecnica: this.state.data.direcaoTecnica,
       localidade: this.state.data.localidade,
-      tecnicosFK: '1',
+      tecnicosFK: this.verifyCBS(),
       interessadoFK: '1'
     };
     //Enviar pedidos
@@ -416,9 +418,6 @@ class Edit extends Component {
       } else {
         return (
           <div className="container">
-            <div className="py-3 text-center">
-              <h2>Detalhes da Ficha de Registo e Identificação</h2>
-            </div>
             {this.state.alert? 
                 <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} /> 
               : 

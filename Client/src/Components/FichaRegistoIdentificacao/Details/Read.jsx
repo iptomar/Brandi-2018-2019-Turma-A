@@ -6,6 +6,9 @@ class Read extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      alertText: '',
+      alertisNotVisible: true,
+      alertColor: '',
       data: null,
       loading: true,
       alert: false,
@@ -188,9 +191,6 @@ class Read extends Component {
       } else {
         return (
           <div className="container">
-            <div className="py-3 text-center">
-              <h2>Detalhes da Ficha de Registo e Identificação</h2>
-            </div>
             {this.state.alert? 
                 <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} /> 
               : 

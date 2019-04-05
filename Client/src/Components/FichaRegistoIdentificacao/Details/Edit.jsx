@@ -15,6 +15,7 @@ class Edit extends Component {
       loadingTecnicos: true
     };
     this.handleChange = this.handleChange.bind(this);
+    this.dateTreatment = this.dateTreatment.bind(this);
   }
 
   componentDidMount(){
@@ -89,7 +90,7 @@ class Edit extends Component {
   handleChange(e) {
     let tecnicos = this.state.tecnicosResp;
     tecnicos.forEach(tecnico => {
-      if (tecnico.tecnicoID === e.target.value)
+      if (tecnico.tecnicoID+"" === e.target.value)
         tecnico.checked = e.target.checked;
     })
     this.setState({tecnicosResp: tecnicos})
@@ -103,6 +104,10 @@ class Edit extends Component {
     return idCBS;
   }
 
+  dateTreatment(date){
+    return date!=null? date.substring(0,10) : null;
+  }
+
   edit = async e => {
     e.preventDefault();
 
@@ -111,17 +116,15 @@ class Edit extends Component {
       designacao: this.state.data.designacao,
       processoLCRM: this.state.data.processoLCRM,
       processoCEARC: this.state.data.processoCEARC,
-      dataEntrada: this.state.data.dataEntrada,
-      dataConclusao: this.state.data.dataConclusao,
-      dataEntrega: this.state.data.Entrega,
+      dataEntrada: this.dateTreatment(this.state.data.dataEntrada),
+      dataConclusao: this.dateTreatment(this.state.data.dataConclusao),
+      dataEntrega: this.dateTreatment(this.state.data.dataEntrega),
       coordenacao: this.state.data.coordenacao,
       direcaoTecnica: this.state.data.direcaoTecnica,
       localidade: this.state.data.localidade,
-      tecnicosFK: this.verifyCBS(),
+      tecnicosFK: '1',
       interessadoFK: '1'
     };
-    console.log(data);
-
     //Enviar pedidos
     const response = await fetch(`/api/fichaRegistoIdentificacao/${this.props.id}/edit`, {
       method: "POST",
@@ -150,6 +153,13 @@ class Edit extends Component {
         default:
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
       }
+    }).catch(resp => {
+      this.setState({
+        alertText: "Erro ao editar.",
+        alertisNotVisible: false,
+        alertColor: "danger"
+      });
+      window.scrollTo(0, 0);
     });
   }
 
@@ -185,9 +195,13 @@ class Edit extends Component {
                         id="dObjeto"
                         value={this.state.data.designacao}
                         onChange={(evt) => {
-                          this.setState({
-                            data: { designacao : evt.target.value}
-                          });
+                          let value = evt.target.value;
+                          this.setState(prevState => ({
+                            data: {
+                                ...prevState.data,
+                                designacao: value
+                            }
+                          }))
                         }}
                       />
                     </div>
@@ -201,9 +215,13 @@ class Edit extends Component {
                         id="procLCRM"
                         value={this.state.data.processoLCRM}
                         onChange={(evt) => {
-                          this.setState({
-                            data: { processoLCRM : evt.target.value}
-                          });
+                          let value = evt.target.value;
+                          this.setState(prevState => ({
+                            data: {
+                                ...prevState.data,
+                                processoLCRM: value
+                            }
+                          }))
                         }}
                       />
                     </div>
@@ -215,9 +233,13 @@ class Edit extends Component {
                         id="procCEARC"
                         value={this.state.data.processoCEARC}
                         onChange={(evt) => {
-                          this.setState({
-                            data: { processoCEARC : evt.target.value}
-                          });
+                          let value = evt.target.value;
+                          this.setState(prevState => ({
+                            data: {
+                                ...prevState.data,
+                                processoCEARC: value
+                            }
+                          }))
                         }}
                       />
                     </div>
@@ -229,11 +251,15 @@ class Edit extends Component {
                         type="date"
                         className="form-control"
                         id="dateEntrada"
-                        value={this.state.data.dataEntrada}
+                        value={this.state.data.dataEntrada!=null? this.state.data.dataEntrada.substring(0,10) : ""}
                         onChange={(evt) => {
-                          this.setState({
-                            data: { dataEntrada : evt.target.value}
-                          });
+                          let value = evt.target.value;
+                          this.setState(prevState => ({
+                            data: {
+                                ...prevState.data,
+                                dataEntrada: value
+                            }
+                          }))
                         }}
                       />
                     </div>
@@ -243,11 +269,15 @@ class Edit extends Component {
                         type="date"
                         className="form-control"
                         id="dateConclusão"
-                        value={this.state.data.dataConclusao}
+                        value={this.state.data.dataConclusao!=null? this.state.data.dataConclusao.substring(0,10) : ""}
                         onChange={(evt) => {
-                          this.setState({
-                            data: { dataConclusao : evt.target.value}
-                          });
+                          let value = evt.target.value;
+                          this.setState(prevState => ({
+                            data: {
+                                ...prevState.data,
+                                dataConclusao: value
+                            }
+                          }))
                         }}
                       />
                     </div>
@@ -259,10 +289,13 @@ class Edit extends Component {
                         id="dateEntrega"
                         value={this.state.data.dataEntrega!=null? this.state.data.dataEntrega.substring(0,10) : ""}
                         onChange={(evt) => {
-                          this.setState({
-                            data: { dataEntrega : evt.target.value}
-                          });
-                          console.log(this.state.data);
+                          let value = evt.target.value;
+                          this.setState(prevState => ({
+                            data: {
+                                ...prevState.data,
+                                dataEntrega: value
+                            }
+                          }))
                         }}
                       />
                     </div>
@@ -276,9 +309,13 @@ class Edit extends Component {
                         id="coord"
                         value={this.state.data.coordenacao}
                         onChange={(evt) => {
-                          this.setState({
-                            data: { coordenacao : evt.target.value}
-                          });
+                          let value = evt.target.value;
+                          this.setState(prevState => ({
+                            data: {
+                                ...prevState.data,
+                                coordenacao: value
+                            }
+                          }))
                         }}
                       />
                     </div>
@@ -290,9 +327,13 @@ class Edit extends Component {
                         id="dirTecn"
                         value={this.state.data.direcaoTecnica}
                         onChange={(evt) => {
-                          this.setState({
-                            data: { direcaoTecnica : evt.target.value}
-                          });
+                          let value = evt.target.value;
+                          this.setState(prevState => ({
+                            data: {
+                                ...prevState.data,
+                                direcaoTecnica: value
+                            }
+                          }))
                         }}
                       />
                     </div>
@@ -332,9 +373,13 @@ class Edit extends Component {
                         id="endPostLocal" 
                         value={this.state.data.localidade}
                         onChange={(evt) => {
-                          this.setState({
-                            data: { localidade : evt.target.value}
-                          });
+                          let value = evt.target.value;
+                          this.setState(prevState => ({
+                            data: {
+                                ...prevState.data,
+                                localidade: value
+                            }
+                          }))
                         }}
                         />
                     </div>

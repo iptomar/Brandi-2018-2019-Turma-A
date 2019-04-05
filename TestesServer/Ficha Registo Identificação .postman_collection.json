@@ -46,15 +46,24 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "localhost:8181/api/fichaRegistoIdentificacao/1",
+					"raw": "http://brandi.ipt.pt:81/api/fichaRegistoIdentificacao/:id",
+					"protocol": "http",
 					"host": [
-						"localhost"
+						"brandi",
+						"ipt",
+						"pt"
 					],
-					"port": "8181",
+					"port": "81",
 					"path": [
 						"api",
 						"fichaRegistoIdentificacao",
-						"1"
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2"
+						}
 					]
 				}
 			},
@@ -95,11 +104,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "localhost:8181/api/fichaRegistoIdentificacao",
+					"raw": "brandi.ipt.pt:81/api/fichaRegistoIdentificacao",
 					"host": [
-						"localhost"
+						"brandi",
+						"ipt",
+						"pt"
 					],
-					"port": "8181",
+					"port": "81",
 					"path": [
 						"api",
 						"fichaRegistoIdentificacao"
@@ -155,7 +166,8 @@
 						{
 							"key": "visible",
 							"value": "true",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "designacao",
@@ -164,12 +176,12 @@
 						},
 						{
 							"key": "processoLCRM",
-							"value": "processoLCRMTeste",
+							"value": "12345",
 							"type": "text"
 						},
 						{
 							"key": "processoCEARC",
-							"value": "processoCEARCTeste",
+							"value": "12345",
 							"type": "text"
 						},
 						{
@@ -215,11 +227,13 @@
 					]
 				},
 				"url": {
-					"raw": "localhost:8181/api/fichaRegistoIdentificacao/create",
+					"raw": "brandi.ipt.pt:81/api/fichaRegistoIdentificacao/create",
 					"host": [
-						"localhost"
+						"brandi",
+						"ipt",
+						"pt"
 					],
-					"port": "8181",
+					"port": "81",
 					"path": [
 						"api",
 						"fichaRegistoIdentificacao",
@@ -273,7 +287,8 @@
 						{
 							"key": "visible",
 							"value": "1",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "designacao",
@@ -282,12 +297,12 @@
 						},
 						{
 							"key": "processoLCRM",
-							"value": "processoLCRMUpdated",
+							"value": "54321",
 							"type": "text"
 						},
 						{
 							"key": "processoCEARC",
-							"value": "processoCEARCUpdated",
+							"value": "54321",
 							"type": "text"
 						},
 						{
@@ -333,16 +348,24 @@
 					]
 				},
 				"url": {
-					"raw": "localhost:8181/api/fichaRegistoIdentificacao/4/edit",
+					"raw": "brandi.ipt.pt:81/api/fichaRegistoIdentificacao/:id/edit",
 					"host": [
-						"localhost"
+						"brandi",
+						"ipt",
+						"pt"
 					],
-					"port": "8181",
+					"port": "81",
 					"path": [
 						"api",
 						"fichaRegistoIdentificacao",
-						"4",
+						":id",
 						"edit"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2"
+						}
 					]
 				}
 			},
@@ -383,16 +406,24 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "localhost:8181/api/fichaRegistoIdentificacao/2/delete",
+					"raw": "brandi.ipt.pt:81/api/fichaRegistoIdentificacao/:id/delete",
 					"host": [
-						"localhost"
+						"brandi",
+						"ipt",
+						"pt"
 					],
-					"port": "8181",
+					"port": "81",
 					"path": [
 						"api",
 						"fichaRegistoIdentificacao",
-						"2",
+						":id",
 						"delete"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2"
+						}
 					]
 				}
 			},

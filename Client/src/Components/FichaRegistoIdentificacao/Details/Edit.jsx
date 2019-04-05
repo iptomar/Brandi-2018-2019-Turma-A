@@ -16,8 +16,9 @@ class Edit extends Component {
       tecnicosResp: [],
       loadingTecnicos: true
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     this.dateTreatment = this.dateTreatment.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount(){
@@ -66,8 +67,7 @@ class Edit extends Component {
 
     await response.json().then(resp => {
       let resposta = resp.resposta;
-
-      // Definir quais os tecnicos que já se encontram 
+      // Definir quais os tecnicos que já se encontram associados à ficha
       for(let i=0; i<resposta.length; i++) {
         let bool = false;
         this.state.data.tecnicos.map((tecnico) => {
@@ -89,15 +89,31 @@ class Edit extends Component {
     });
   }
 
-  handleChange(e) {
+  // Controla as alterações nas checkboxes (Necessidade do React)
+  handleCheckboxChange(e) {
     let tecnicos = this.state.tecnicosResp;
     tecnicos.forEach(tecnico => {
       if (tecnico.tecnicoID+"" === e.target.value)
         tecnico.checked = e.target.checked;
     })
     this.setState({tecnicosResp: tecnicos})
+    console.log(this.state.tecnicosResp);
+  }
+  
+  // Controla as alterações nos inputs (Necessidade do React)
+  handleChange(e) {
+    let name = e.target.name;
+    let value = e.target.value;
+    this.setState( prevState => ({
+      ...prevState,
+      data: {
+        ...prevState.data,
+        [name] : value
+      }
+    }))
   }
 
+  // Verificar as checkboxes dos tecnicos. Retorna o array de tecnicos
   verifyCBS() {
     var cboxes = document.querySelectorAll("#tecnicosCheckbox");
     var len = cboxes.length;
@@ -106,6 +122,7 @@ class Edit extends Component {
     return idCBS;
   }
 
+  // Formatação da data
   dateTreatment(date){
     return date!=null? date.substring(0,10) : null;
   }
@@ -194,17 +211,9 @@ class Edit extends Component {
                       <input
                         type="text"
                         className="form-control"
-                        id="dObjeto"
+                        name="designacao"
                         value={this.state.data.designacao}
-                        onChange={(evt) => {
-                          let value = evt.target.value;
-                          this.setState(prevState => ({
-                            data: {
-                                ...prevState.data,
-                                designacao: value
-                            }
-                          }))
-                        }}
+                        onChange={this.handleChange}
                       />
                     </div>
                   </div>
@@ -214,17 +223,9 @@ class Edit extends Component {
                       <input
                         type="text"
                         className="form-control"
-                        id="procLCRM"
+                        name="processoLCRM"
                         value={this.state.data.processoLCRM}
-                        onChange={(evt) => {
-                          let value = evt.target.value;
-                          this.setState(prevState => ({
-                            data: {
-                                ...prevState.data,
-                                processoLCRM: value
-                            }
-                          }))
-                        }}
+                        onChange={this.handleChange}
                       />
                     </div>
                     <div className="col-md-6 mb-3">
@@ -232,17 +233,9 @@ class Edit extends Component {
                       <input
                         type="text"
                         className="form-control"
-                        id="procCEARC"
+                        name="processoCEARC"
                         value={this.state.data.processoCEARC}
-                        onChange={(evt) => {
-                          let value = evt.target.value;
-                          this.setState(prevState => ({
-                            data: {
-                                ...prevState.data,
-                                processoCEARC: value
-                            }
-                          }))
-                        }}
+                        onChange={this.handleChange}
                       />
                     </div>
                   </div>
@@ -252,17 +245,9 @@ class Edit extends Component {
                       <input
                         type="date"
                         className="form-control"
-                        id="dateEntrada"
+                        name="dataEntrada"
                         value={this.state.data.dataEntrada!=null? this.state.data.dataEntrada.substring(0,10) : ""}
-                        onChange={(evt) => {
-                          let value = evt.target.value;
-                          this.setState(prevState => ({
-                            data: {
-                                ...prevState.data,
-                                dataEntrada: value
-                            }
-                          }))
-                        }}
+                        onChange={this.handleChange}
                       />
                     </div>
                     <div className="col-md-4 mb-3">
@@ -270,17 +255,9 @@ class Edit extends Component {
                       <input
                         type="date"
                         className="form-control"
-                        id="dateConclusão"
+                        name="dataConclusao"
                         value={this.state.data.dataConclusao!=null? this.state.data.dataConclusao.substring(0,10) : ""}
-                        onChange={(evt) => {
-                          let value = evt.target.value;
-                          this.setState(prevState => ({
-                            data: {
-                                ...prevState.data,
-                                dataConclusao: value
-                            }
-                          }))
-                        }}
+                        onChange={this.handleChange}
                       />
                     </div>
                     <div className="col-md-4 mb-3">
@@ -288,17 +265,9 @@ class Edit extends Component {
                       <input
                         type="date"
                         className="form-control"
-                        id="dateEntrega"
+                        name="dataEntrega"
                         value={this.state.data.dataEntrega!=null? this.state.data.dataEntrega.substring(0,10) : ""}
-                        onChange={(evt) => {
-                          let value = evt.target.value;
-                          this.setState(prevState => ({
-                            data: {
-                                ...prevState.data,
-                                dataEntrega: value
-                            }
-                          }))
-                        }}
+                        onChange={this.handleChange}
                       />
                     </div>
                   </div>
@@ -308,17 +277,9 @@ class Edit extends Component {
                       <input
                         type="text"
                         className="form-control"
-                        id="coord"
+                        name="coordenacao"
                         value={this.state.data.coordenacao}
-                        onChange={(evt) => {
-                          let value = evt.target.value;
-                          this.setState(prevState => ({
-                            data: {
-                                ...prevState.data,
-                                coordenacao: value
-                            }
-                          }))
-                        }}
+                        onChange={this.handleChange}
                       />
                     </div>
                     <div className="col-md-6 mb-3">
@@ -326,17 +287,9 @@ class Edit extends Component {
                       <input
                         type="text"
                         className="form-control"
-                        id="dirTecn"
+                        name="direcaoTecnica"
                         value={this.state.data.direcaoTecnica}
-                        onChange={(evt) => {
-                          let value = evt.target.value;
-                          this.setState(prevState => ({
-                            data: {
-                                ...prevState.data,
-                                direcaoTecnica: value
-                            }
-                          }))
-                        }}
+                        onChange={this.handleChange}
                       />
                     </div>
                   </div>
@@ -356,7 +309,7 @@ class Edit extends Component {
                                     id="tecnicosCheckbox" 
                                     value={object.tecnicoID}
                                     checked={object.checked}
-                                    onChange={getThis.handleChange}
+                                    onChange={getThis.handleCheckboxChange}
                                   />
                                 </div>
                               </div>
@@ -372,17 +325,9 @@ class Edit extends Component {
                       <input 
                         type="text" 
                         className="form-control" 
-                        id="endPostLocal" 
+                        name="localidade" 
                         value={this.state.data.localidade}
-                        onChange={(evt) => {
-                          let value = evt.target.value;
-                          this.setState(prevState => ({
-                            data: {
-                                ...prevState.data,
-                                localidade: value
-                            }
-                          }))
-                        }}
+                        onChange={this.handleChange}
                         />
                     </div>
                   </div>
@@ -391,9 +336,7 @@ class Edit extends Component {
                 </div>
               </div>
 
-
               { /* Modal de editar*/ }
-
               <div className="modal fade" id="modalEdit" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog" role="document">
                   <div className="modal-content">
@@ -421,7 +364,7 @@ class Edit extends Component {
             {this.state.alert? 
                 <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} /> 
               : 
-                <LoadingAnimation height="6rem" width="6em" />
+                <LoadingAnimation />
             }
           </div>
         );

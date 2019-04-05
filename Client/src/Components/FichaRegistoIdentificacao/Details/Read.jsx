@@ -198,7 +198,7 @@ class Read extends Component {
             {this.state.alert? 
                 <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} /> 
               : 
-                <LoadingAnimation height="6rem" width="6em" />
+                <LoadingAnimation />
             }
           </div>
         );

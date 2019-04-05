@@ -67,7 +67,6 @@ class Edit extends Component {
 
     await response.json().then(resp => {
       let resposta = resp.resposta;
-
       // Definir quais os tecnicos que já se encontram associados à ficha
       for(let i=0; i<resposta.length; i++) {
         let bool = false;
@@ -90,6 +89,7 @@ class Edit extends Component {
     });
   }
 
+  // Controla as alterações nas checkboxes (Necessidade do React)
   handleCheckboxChange(e) {
     let tecnicos = this.state.tecnicosResp;
     tecnicos.forEach(tecnico => {
@@ -97,8 +97,10 @@ class Edit extends Component {
         tecnico.checked = e.target.checked;
     })
     this.setState({tecnicosResp: tecnicos})
+    console.log(this.state.tecnicosResp);
   }
   
+  // Controla as alterações nos inputs (Necessidade do React)
   handleChange(e) {
     let name = e.target.name;
     let value = e.target.value;
@@ -111,6 +113,7 @@ class Edit extends Component {
     }))
   }
 
+  // Verificar as checkboxes dos tecnicos. Retorna o array de tecnicos
   verifyCBS() {
     var cboxes = document.querySelectorAll("#tecnicosCheckbox");
     var len = cboxes.length;
@@ -119,6 +122,7 @@ class Edit extends Component {
     return idCBS;
   }
 
+  // Formatação da data
   dateTreatment(date){
     return date!=null? date.substring(0,10) : null;
   }
@@ -360,7 +364,7 @@ class Edit extends Component {
             {this.state.alert? 
                 <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} /> 
               : 
-                <LoadingAnimation height="6rem" width="6em" />
+                <LoadingAnimation />
             }
           </div>
         );

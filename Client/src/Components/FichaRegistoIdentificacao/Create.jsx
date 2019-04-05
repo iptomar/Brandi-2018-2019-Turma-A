@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AlertMsg from "../AlertMsg";
+import ImageUploader from 'react-images-upload';
 
 class Create extends Component {
   constructor(props) {
@@ -9,10 +10,11 @@ class Create extends Component {
       alertisNotVisible: true,
       alertColor: "danger",
       file: null,
-      tecnicosResp: []
+      tecnicosResp: [],
+      pictures: []
     }
     this.fetchTecnicos();
-    this.handleChange = this.handleChange.bind(this);
+    this.onDrop = this.onDrop.bind(this);
   }
 
 
@@ -38,8 +40,24 @@ class Create extends Component {
     return idCBS;
   }
 
+  onDrop(picture) {
+    this.setState(prevState => ({
+      ...prevState,
+      pictures: picture,
+    }));
+  }
+
   handleSubmit = async e => {
     e.preventDefault();
+
+    if(this.state.pictures.length === 0){
+      this.setState({
+        alertText: "Insira uma imagem",
+        alertisNotVisible: false,
+        alertColor: "danger"
+      });
+      return null
+    }
     //Objeto data
     const data = {
       designacao: document.getElementById("dObjeto").value,
@@ -52,7 +70,8 @@ class Create extends Component {
       direcaoTecnica: document.getElementById("dirTecn").value,
       localidade: document.getElementById("endPostLocal").value,
       interessadoFK: 1,
-      tecnicosFK: this.verifyCBS()
+      tecnicosFK: this.verifyCBS(),
+      imagens: this.state.pictures
     };
 
     //Enviar pedidos
@@ -87,20 +106,6 @@ class Create extends Component {
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
       }
     });
-  };
-
-  handleChange(event) {
-    this.setState({
-      file: URL.createObjectURL(event.target.files[0])
-    })
-  }
-
-  onImgLoad = ({ target: img }) => {
-    this.setState({
-      width: img.width,
-      height: img.height,
-    });
-    document.getElementById("customFile").blur();
   };
 
   render() {
@@ -192,11 +197,11 @@ class Create extends Component {
                   </div>
                   <hr className="mb-4" />
                   <div className="row">
-                    <div className="col-md-12 mb-3">
-                      <div className="custom-file">
-                        <input type="file" className="custom-file-input" id="customFile" accept="image/*" onChange={this.handleChange} />
-                        <label className="custom-file-label" data-browse="Escolher Ficheiro" >Escolha Fotografia</label>
-                      </div>
+                    <div className="col-md-12">
+                        <ImageUploader withIcon={true} withPreview={true} withLabel={false} buttonText='Escolha as imagens'
+                          onChange={this.onDrop}
+                          imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                        />
                       <div className="text-center">
                         {
                           this.state.file ?
@@ -209,7 +214,7 @@ class Create extends Component {
                   </div>
                   <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
                   <hr className="mb-4" />
-                  <button className="btn btn-success btn-lg btn-block mb-5" type="submit">Criar</button>
+                    <button className="btn btn-success btn-lg btn-block mb-5" type="submit">Criar</button>
                 </form>
               </div>
             </div>

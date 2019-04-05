@@ -23,7 +23,7 @@ class Index extends Component {
     //Ativa o clique do botão
     $(document).on('click', '#modalButton', function () {
       var idC = $(this).data('id');
-      getThis.setState({id: idC});
+      getThis.setState({ id: idC });
     });
     //Ativa o botão de eliminação do modal
     $(document).on('click', '#deleteUserConfirm', function () {
@@ -47,6 +47,13 @@ class Index extends Component {
           alertColor: "success"
         });
         break;
+      case 'showConfirm':
+        this.setState({
+          alertText: "Utilizador criado com sucesso",
+          alertisNotVisible: false,
+          alertColor: "success"
+        });
+        break;
       case 'listar':
         break;
       default:
@@ -54,7 +61,7 @@ class Index extends Component {
         break;
     }
   }
-  
+
   //Receber os utilizadores
   async fetchUsers() {
     //Enviar pedidos
@@ -120,7 +127,7 @@ class Index extends Component {
     } else {
       return (
         <div className="container">
-          <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
+          <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor}/>
           <h2 className="py-3 mb-3">Lista de Utilizadores</h2>
           <table className="table table-sm table-hover">
             <thead>

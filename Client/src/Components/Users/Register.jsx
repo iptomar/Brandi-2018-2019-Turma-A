@@ -41,7 +41,7 @@ class Register extends Component {
       });
       return null;
     }
-    
+
     var select = document.getElementById("DDLRoles");
     var option = select.options[select.selectedIndex];
 
@@ -68,15 +68,18 @@ class Register extends Component {
       let status = resp.status;
       switch (status) {
         case "Registed":
-          this.setState({
-            alertText: "Registado com sucesso",
-            alertisNotVisible: false,
-            alertColor: "success"
-          });
+          window.location = "/utilizadores/showConfirm"
           break;
         case "FieldError":
           this.setState({
             alertText: "Utilizador já registado",
+            alertisNotVisible: false,
+            alertColor: "warning"
+          });
+          break;
+        case "NotRegisted":
+          this.setState({
+            alertText: "Erro no campo Login",
             alertisNotVisible: false,
             alertColor: "warning"
           });
@@ -159,7 +162,7 @@ class Register extends Component {
                       </div>
                     </div>
                     <label>Tipo de utilizador</label>
-                    <select id="DDLRoles" className="form-control">
+                    <select id="DDLRoles" className="form-control mb-3">
                       {this.state.rolesList.map(function (object) {
                         return (
                           <option

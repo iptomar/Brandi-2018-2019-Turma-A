@@ -32,33 +32,33 @@ class Index extends Component {
   }
   //Define o tipo de query
   queryState(query) {
-    switch (query) {
-      case 'showConfirmEdited':
-        this.setState({
-          alertText: "Utilizador editado com sucesso",
-          alertisNotVisible: false,
-          alertColor: "success"
-        });
-        break;
-      case 'showConfirmDelete':
-        this.setState({
-          alertText: "Utilizador eliminado com sucesso",
-          alertisNotVisible: false,
-          alertColor: "success"
-        });
-        break;
-      case 'showConfirm':
-        this.setState({
-          alertText: "Utilizador criado com sucesso",
-          alertisNotVisible: false,
-          alertColor: "success"
-        });
-        break;
-      case 'listar':
-        break;
-      default:
-        window.location = "/utilizadores/listar"
-        break;
+    if (query != undefined) {
+      switch (query) {
+        case '&showConfirmEdited':
+          this.setState({
+            alertText: "Utilizador editado com sucesso",
+            alertisNotVisible: false,
+            alertColor: "success"
+          });
+          break;
+        case '&showConfirmDelete':
+          this.setState({
+            alertText: "Utilizador eliminado com sucesso",
+            alertisNotVisible: false,
+            alertColor: "success"
+          });
+          break;
+        case '&showConfirm':
+          this.setState({
+            alertText: "Utilizador criado com sucesso",
+            alertisNotVisible: false,
+            alertColor: "success"
+          });
+          break;
+        default:
+          window.location = "/utilizadores/listar"
+          break;
+      }
     }
   }
 
@@ -110,7 +110,7 @@ class Index extends Component {
     await response.json().then(resp => {
       switch (resp.status) {
         case "Delete":
-          window.location = "/utilizadores/showConfirmDelete"
+          window.location = "/utilizadores/listar&showConfirmDelete"
           break;
         default:
           console.log("A API ESTÁ A ARDER" + resp.status);
@@ -127,7 +127,7 @@ class Index extends Component {
     } else {
       return (
         <div className="container">
-          <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor}/>
+          <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
           <h2 className="py-3 mb-3">Lista de Utilizadores</h2>
           <table className="table table-sm table-hover">
             <thead>

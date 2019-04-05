@@ -87,7 +87,7 @@ class Edit extends Component {
       let status = resp.status;
       switch (status) {
         case 'Updated':
-            window.location = "/utilizadores/showConfirmEdited";
+            window.location = "/utilizadores/listar&showConfirmEdited";
         break;
         default:
           console.log("A API ESTÁ A ARDER: " + status);

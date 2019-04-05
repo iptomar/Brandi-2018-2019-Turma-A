@@ -68,7 +68,7 @@ class Register extends Component {
       let status = resp.status;
       switch (status) {
         case "Registed":
-          window.location = "/utilizadores/showConfirm"
+          window.location = "/utilizadores/listar&showConfirm"
           break;
         case "FieldError":
           this.setState({

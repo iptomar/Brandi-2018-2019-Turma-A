@@ -31,12 +31,12 @@ ReactDOM.render(
             <Route path="/utilizadores/registar" component={RegisterPage} />
             <Route path="/utilizadores/:id/editar" component={(r) => <EditUserPage id={r.match.params.id}/>} />
             <Route path="/utilizadores/:id/detalhes" component={(r) => <DetailsUserPage id={r.match.params.id}/>} />
-            <Route path="/utilizadores/:query" component={(r) => <IndexPage query={r.match.params.query}/>} />
+            <Route path="/utilizadores/listar:query?" component={(r) => <IndexPage query={r.match.params.query}/>} />
             {/* Ficha Registo Identificacao */}
             <Route path="/fichaRI/criar" component={CreateFichaRI} />
             <Route path="/fichaRI/:id/detalhes" component={(r) => <DetailsFichaRI id={r.match.params.id}/>} />
             <Route path="/fichaRI/" component={IndexFichaRI } />
-            {/* <Route component={LoginPage}/> */}
+            <Route component={LoginPage}/>
         </Switch>
     </ BrowserRouter>
     , document.getElementById('root')

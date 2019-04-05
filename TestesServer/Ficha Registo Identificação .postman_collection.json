@@ -83,7 +83,13 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsImxvZ2luIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwicm9sZUZLIjoxfQ.Ly3aESO-OhdZWeAI08d_ifHh5N-7byDmtPRif12yWCg",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": ""
@@ -117,7 +123,12 @@
 							"pm.test(\"Adição de nova ficha Registo Identificação\", function () {",
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(jsonData.stat).to.eql(\"Registed\");",
-							"});"
+							"});",
+							"",
+							"pm.test(\"Tempo de resposta menor que 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -193,6 +204,11 @@
 						},
 						{
 							"key": "interessadoFK",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "tecnicosFK",
 							"value": "1",
 							"type": "text"
 						}
@@ -308,11 +324,16 @@
 							"key": "interessadoFK",
 							"value": "1",
 							"type": "text"
+						},
+						{
+							"key": "tecnicosFK",
+							"value": "1",
+							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "localhost:8181/api/fichaRegistoIdentificacao/2/edit",
+					"raw": "localhost:8181/api/fichaRegistoIdentificacao/4/edit",
 					"host": [
 						"localhost"
 					],
@@ -320,7 +341,7 @@
 					"path": [
 						"api",
 						"fichaRegistoIdentificacao",
-						"2",
+						"4",
 						"edit"
 					]
 				}

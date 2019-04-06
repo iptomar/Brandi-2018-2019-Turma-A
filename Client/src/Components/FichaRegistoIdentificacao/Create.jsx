@@ -14,6 +14,7 @@ class Create extends Component {
     }
     this.fetchTecnicos();
     this.getData = this.getData.bind(this);
+    this.changeStatus = this.changeStatus.bind(this);
   }
 
   getData(files){
@@ -102,6 +103,11 @@ class Create extends Component {
       }
     });
   };
+
+    //Altera o estado conforme o Alert
+    changeStatus(){
+      this.setState({ alertisNotVisible: true });
+    }
 
   render() {
     //Verifica se existe o token
@@ -196,7 +202,7 @@ class Create extends Component {
                       <FileUpload sendData={this.getData}/>
                     </div>
                   </div>
-                  <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
+                  <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} status={this.changeStatus} />
                   <hr className="mb-4" />
                   <button className="btn btn-success btn-lg btn-block mb-5" type="submit">Criar</button>
                 </form>

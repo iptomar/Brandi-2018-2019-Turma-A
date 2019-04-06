@@ -12,6 +12,12 @@ class Login extends Component {
       alertisNotVisible: true,
       alertColor: 'danger'
     };
+    this.changeStatus = this.changeStatus.bind(this);
+  }
+
+  //Altera o estado conforme o Alert
+  changeStatus(){
+    this.setState({ alertisNotVisible: true });
   }
 
   handleSubmit = async e => {
@@ -73,7 +79,7 @@ class Login extends Component {
             <div className="text-center mb-4">
               <h1 className="h1 mb-5 font-weight-normal">Brandi</h1>
             </div>
-            <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
+            <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} status={this.changeStatus}/>
             <div className="form-label-group">
               <input type="text" id="user" className="form-control" placeholder=" " required autoFocus />
               <label>Utilizador</label>

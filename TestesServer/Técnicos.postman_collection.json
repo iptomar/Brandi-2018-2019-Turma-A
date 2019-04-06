@@ -40,11 +40,14 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "localhost:8181/api/tecnicos",
+					"raw": "http://brandi.ipt.pt:81/api/tecnicos",
+					"protocol": "http",
 					"host": [
-						"localhost"
+						"brandi",
+						"ipt",
+						"pt"
 					],
-					"port": "8181",
+					"port": "81",
 					"path": [
 						"api",
 						"tecnicos"
@@ -101,11 +104,14 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "localhost:8181/api/tecnicos/1",
+					"raw": "http://brandi.ipt.pt:81/api/tecnicos/1",
+					"protocol": "http",
 					"host": [
-						"localhost"
+						"brandi",
+						"ipt",
+						"pt"
 					],
-					"port": "8181",
+					"port": "81",
 					"path": [
 						"api",
 						"tecnicos",
@@ -171,17 +177,20 @@
 						},
 						{
 							"key": "userFK",
-							"value": "2",
+							"value": "4",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "localhost:8181/api/tecnicos/create",
+					"raw": "http://brandi.ipt.pt:81/api/tecnicos/create",
+					"protocol": "http",
 					"host": [
-						"localhost"
+						"brandi",
+						"ipt",
+						"pt"
 					],
-					"port": "8181",
+					"port": "81",
 					"path": [
 						"api",
 						"tecnicos",
@@ -254,11 +263,14 @@
 					]
 				},
 				"url": {
-					"raw": "localhost:8181/api/tecnicos/1/edit",
+					"raw": "http://brandi.ipt.pt:81/api/tecnicos/1/edit",
+					"protocol": "http",
 					"host": [
-						"localhost"
+						"brandi",
+						"ipt",
+						"pt"
 					],
-					"port": "8181",
+					"port": "81",
 					"path": [
 						"api",
 						"tecnicos",

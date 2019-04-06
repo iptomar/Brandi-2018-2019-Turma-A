@@ -1,0 +1,250 @@
+{
+	"info": {
+		"_postman_id": "c2034b92-2517-4b2a-9858-f2a6722f6f19",
+		"name": "Utilizadores",
+		"description": "Testes aos Utilizadores",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Request de todos os utilizadores",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5eb856ac-ae91-48dc-b07c-e741e4199d64",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Devolveu todos os utilizadores\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://brandi.ipt.pt:81/api/users",
+					"protocol": "http",
+					"host": [
+						"brandi",
+						"ipt",
+						"pt"
+					],
+					"port": "81",
+					"path": [
+						"api",
+						"users"
+					]
+				},
+				"description": "Devolve todos os utilizadores"
+			},
+			"response": []
+		},
+		{
+			"name": "Request de um utilizador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3b19c981-cde6-4ea3-8b19-0b79b00d8b77",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Devolveu o utilizador\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.resposta).not.eql(\"UserNotFound\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsImxvZ2luIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwicm9sZUZLIjoxfQ.Ly3aESO-OhdZWeAI08d_ifHh5N-7byDmtPRif12yWCg",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://brandi.ipt.pt:81/api/users/:id",
+					"protocol": "http",
+					"host": [
+						"brandi",
+						"ipt",
+						"pt"
+					],
+					"port": "81",
+					"path": [
+						"api",
+						"users",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Devolve um utilizador\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Edita um utilizador",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsImxvZ2luIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwicm9sZUZLIjoxfQ.Ly3aESO-OhdZWeAI08d_ifHh5N-7byDmtPRif12yWCg",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "login",
+							"value": "testeUpdated",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "emailUpdated",
+							"type": "text"
+						},
+						{
+							"key": "roleFK",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "visible ",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://brandi.ipt.pt:81/api/users/:id/edit",
+					"protocol": "http",
+					"host": [
+						"brandi",
+						"ipt",
+						"pt"
+					],
+					"port": "81",
+					"path": [
+						"api",
+						"users",
+						":id",
+						"edit"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Elimina um utilizador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4a2a8d75-75cc-49bf-9763-2d25c2bab234",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"});",
+							"",
+							"pm.test(\"Utilizador eliminado\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.resposta.affectedRows).to.eql(1);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOjEsImxvZ2luIjoiYWRtaW4iLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwicm9sZUZLIjoxfQ.Ly3aESO-OhdZWeAI08d_ifHh5N-7byDmtPRif12yWCg",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://brandi.ipt.pt:81/api/users/:id/delete",
+					"protocol": "http",
+					"host": [
+						"brandi",
+						"ipt",
+						"pt"
+					],
+					"port": "81",
+					"path": [
+						"api",
+						"users",
+						":id",
+						"delete"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

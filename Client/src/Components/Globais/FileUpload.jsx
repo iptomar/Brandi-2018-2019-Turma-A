@@ -10,10 +10,15 @@ class FileUpload extends Component {
     this.deleteFile = this.deleteFile.bind(this);
   }
 
+  sendFiles(){
+    this.props.sendData(this.state.file);
+  }
+
   async handleChange(event) {
     await this.setState({
       file: Array.from(event.target.files)
     })
+    this.sendFiles();
     this.state.file.forEach(async element => {
       await this.readURL(element);
     });

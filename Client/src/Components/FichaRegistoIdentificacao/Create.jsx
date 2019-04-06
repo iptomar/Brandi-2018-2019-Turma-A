@@ -13,6 +13,11 @@ class Create extends Component {
       tecnicosResp: []
     }
     this.fetchTecnicos();
+    this.getData = this.getData.bind(this);
+  }
+
+  getData(files){
+    this.setState({pictures: files});
   }
 
   async fetchTecnicos() {
@@ -40,14 +45,14 @@ class Create extends Component {
   handleSubmit = async e => {
     e.preventDefault();
 
-    // if(this.state.pictures.length === 0){
-    //   this.setState({
-    //     alertText: "Insira uma imagem",
-    //     alertisNotVisible: false,
-    //     alertColor: "danger"
-    //   });
-    //   return null
-    // }
+    if (this.state.pictures.length === 0) {
+      this.setState({
+        alertText: "Insira uma imagem",
+        alertisNotVisible: false,
+        alertColor: "danger"
+      });
+      return null
+    }
     //Objeto data
     const data = {
       designacao: document.getElementById("dObjeto").value,
@@ -188,12 +193,12 @@ class Create extends Component {
                   <hr className="mb-4" />
                   <div className="row">
                     <div className="col-md-12">
-                      <FileUpload/>
+                      <FileUpload sendData={this.getData}/>
                     </div>
                   </div>
                   <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
                   <hr className="mb-4" />
-                    <button className="btn btn-success btn-lg btn-block mb-5" type="submit">Criar</button>
+                  <button className="btn btn-success btn-lg btn-block mb-5" type="submit">Criar</button>
                 </form>
               </div>
             </div>

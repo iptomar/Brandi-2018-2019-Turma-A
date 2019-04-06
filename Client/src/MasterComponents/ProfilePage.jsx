@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import Header from '../Components/Header';
-import Profile from '../Components/Profile';
-import Footer from '../Components/Footer';
+import Header from '../Components/Globais/Header';
+import Profile from '../Components/Users/Profile';
+import Footer from '../Components/Globais/Footer';
 
 class ProfilePage extends Component {
     render() {

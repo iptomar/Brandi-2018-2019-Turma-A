@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import $ from "jquery";
-import AlertMsg from "../AlertMsg";
+import AlertMsg from "../Globais/AlertMsg";
 
 class Index extends Component {
   constructor(props) {

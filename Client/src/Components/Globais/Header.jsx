@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import favicon from "../Images/favicon.ico";
+import favicon from "../../Images/favicon.ico";
 
 class Header extends Component {
   out(){

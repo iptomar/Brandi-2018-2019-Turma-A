@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import AlertMsg from './AlertMsg';
-import '../CssComponents/login.css';
-import iptlogo from '../Images/ipt.png';
-import lcrlogo from '../Images/lcr_ipt.png';
+import AlertMsg from '../Globais/AlertMsg';
+import '../../CssComponents/login.css';
+import iptlogo from '../../Images/ipt.png';
+import lcrlogo from '../../Images/lcr_ipt.png';
 
 class Login extends Component {
   constructor() {

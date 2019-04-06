@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import AlertMsg from '../../AlertMsg';
-import LoadingAnimation from '../../LoadingAnimation';
+import AlertMsg from '../../Globais/AlertMsg';
+import LoadingAnimation from '../../Globais/LoadingAnimation';
 
 class Edit extends Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import AlertMsg from "../AlertMsg";
-import ImageUploader from 'react-images-upload';
+import AlertMsg from '../Globais/AlertMsg';
+import FileUpload from "../Globais/FileUpload";
 
 class Create extends Component {
   constructor(props) {
@@ -10,11 +10,9 @@ class Create extends Component {
       alertisNotVisible: true,
       alertColor: "danger",
       file: null,
-      tecnicosResp: [],
-      pictures: []
+      tecnicosResp: []
     }
     this.fetchTecnicos();
-    this.onDrop = this.onDrop.bind(this);
   }
 
   async fetchTecnicos() {
@@ -37,13 +35,6 @@ class Create extends Component {
     let idCBS = [];
     for (var i = 0; i < len; i++) if (cboxes[i].checked) idCBS.push(cboxes[i].value);
     return idCBS;
-  }
-
-  onDrop(picture) {
-    this.setState(prevState => ({
-      ...prevState,
-      pictures: picture,
-    }));
   }
 
   handleSubmit = async e => {
@@ -197,10 +188,7 @@ class Create extends Component {
                   <hr className="mb-4" />
                   <div className="row">
                     <div className="col-md-12">
-                        <ImageUploader withIcon={true} withPreview={true} withLabel={false} buttonText='Escolha as imagens'
-                          onChange={this.onDrop}
-                          imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                        />
+                      <FileUpload/>
                       <div className="text-center">
                         {
                           this.state.file ?

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import Header from '../../Components/Header';
 import Edit from '../../Components/Users/Edit';
-import Footer from '../../Components/Footer';
+import Header from "../../Components/Globais/Header";
+import Footer from "../../Components/Globais/Footer";
 
 class EditPage extends Component {
     render() {

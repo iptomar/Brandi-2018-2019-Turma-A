@@ -9,7 +9,7 @@ class Create extends Component {
       alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
       alertisNotVisible: true,
       alertColor: "danger",
-      file: null,
+      pictures: [],
       tecnicosResp: []
     }
     this.fetchTecnicos();
@@ -40,14 +40,14 @@ class Create extends Component {
   handleSubmit = async e => {
     e.preventDefault();
 
-    if(this.state.pictures.length === 0){
-      this.setState({
-        alertText: "Insira uma imagem",
-        alertisNotVisible: false,
-        alertColor: "danger"
-      });
-      return null
-    }
+    // if(this.state.pictures.length === 0){
+    //   this.setState({
+    //     alertText: "Insira uma imagem",
+    //     alertisNotVisible: false,
+    //     alertColor: "danger"
+    //   });
+    //   return null
+    // }
     //Objeto data
     const data = {
       designacao: document.getElementById("dObjeto").value,
@@ -189,14 +189,6 @@ class Create extends Component {
                   <div className="row">
                     <div className="col-md-12">
                       <FileUpload/>
-                      <div className="text-center">
-                        {
-                          this.state.file ?
-                            <img src={this.state.file} onLoad={this.onImgLoad} id="imgPrev" className="rounded img-thumbnail" alt="Pré-visualização da fotografia carregada..." />
-                            :
-                            null
-                        }
-                      </div>
                     </div>
                   </div>
                   <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />

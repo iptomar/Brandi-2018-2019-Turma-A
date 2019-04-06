@@ -159,26 +159,24 @@ class Edit extends Component {
       let status = resp.stat;
       switch (status) {
         case "Updated":
-          this.setState({
-            alertText: "Editado com sucesso.",
-            alertisNotVisible: false,
-            alertColor: "primary"
-          });
-          window.scrollTo(0, 0);
+          window.location = `/fichaRI/${this.props.id}/detalhes&showConfirmEdited`;
           break;
         case "NotUpdated":
-          //window.location = '/fichaRI';
+          this.setState({
+            alertText: "Erro ao editar.",
+            alertisNotVisible: false,
+            alertColor: "danger"
+          });
           break;
         default:
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
       }
     }).catch(resp => {
       this.setState({
-        alertText: "Erro ao editar.",
+        alertText: "Erro na comunicação com o servidor.",
         alertisNotVisible: false,
         alertColor: "danger"
       });
-      window.scrollTo(0, 0);
     });
   }
 
@@ -190,7 +188,6 @@ class Edit extends Component {
           let getThis = this;
           return (
             <div className="container">
-              <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
               <div className="row">
                 <div className="col-md-12 mb-3">
                   <div className="text-center">
@@ -331,6 +328,7 @@ class Edit extends Component {
                         />
                     </div>
                   </div>
+                  <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
                   <hr className="mb-4" />
                   <button className="btn btn-primary btn-lg btn-block" onClick={this.toggleEdit} data-toggle="modal" data-target="#modalEdit">Guardar</button>
                 </div>

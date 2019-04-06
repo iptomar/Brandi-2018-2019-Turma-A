@@ -8,7 +8,7 @@ class IndexFichaRI extends Component {
     return (
       <div className="IndexFichaRIPage">
         <Header />
-        <Index />
+        <Index query={this.props.query} />
         <Footer />
       </div>
     );

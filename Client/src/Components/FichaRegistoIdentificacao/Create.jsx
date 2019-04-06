@@ -17,7 +17,6 @@ class Create extends Component {
     this.onDrop = this.onDrop.bind(this);
   }
 
-
   async fetchTecnicos() {
     //Enviar pedido para receber 
     const response = await fetch("/api/tecnicos", {
@@ -95,7 +94,7 @@ class Create extends Component {
           });
           break;
         case "Registed":
-          window.location = '/fichaRI';
+          window.location = '/fichaRI/&showConfirm';
           break;
         case "NotRegisted":
           this.setState({

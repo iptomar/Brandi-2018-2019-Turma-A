@@ -34,8 +34,8 @@ ReactDOM.render(
             <Route path="/utilizadores/listar:query?" component={(r) => <IndexPage query={r.match.params.query}/>} />
             {/* Ficha Registo Identificacao */}
             <Route path="/fichaRI/criar" component={CreateFichaRI} />
-            <Route path="/fichaRI/:id/detalhes" component={(r) => <DetailsFichaRI id={r.match.params.id}/>} />
-            <Route path="/fichaRI/" component={IndexFichaRI } />
+            <Route path="/fichaRI/:id/detalhes:query?"  component={(r) => <DetailsFichaRI id={r.match.params.id} query={r.match.params.query}/>} />
+            <Route path="/fichaRI/:query?" component={(r) => <IndexFichaRI query={r.match.params.query}/>} />
             <Route component={LoginPage}/>
         </Switch>
     </ BrowserRouter>

@@ -1,12 +1,45 @@
 import React, { Component } from "react";
+import AlertMsg from '../AlertMsg';
 
 class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      alertText: "",
+      alertisNotVisible: true,
+      alertColor: '',
       list: []
     };
     this.getFichasRI();
+  }
+
+  componentDidMount() {
+    this.queryState(this.props.query);
+    console.log(this.props.query);
+  }
+
+  queryState(query) {
+    if (query !== undefined) {
+      switch (query) {
+        case '&showConfirmDelete':
+          this.setState({
+            alertText: "Ficha eliminada com sucesso",
+            alertisNotVisible: false,
+            alertColor: "success"
+          });
+          break;
+        case '&showConfirm':
+          this.setState({
+            alertText: "Ficha criada com sucesso",
+            alertisNotVisible: false,
+            alertColor: "success"
+          });
+          break;
+        default:
+          window.location = "/fichaRI";
+          break;
+      }
+    }
   }
 
   async getFichasRI() {
@@ -43,6 +76,7 @@ class Index extends Component {
               </a>
             </div>
           </div>
+          <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
           <div className="row">
             {!this.state.list.length !== 0 ? (
               this.state.list.map(function (obj) {

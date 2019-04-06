@@ -8,7 +8,7 @@ class DetailsFichaTecnica extends Component {
     return (
       <div className="DetailsRIPage">
         <Header />
-        <Details id={this.props.id}/>
+        <Details id={this.props.id} query={this.props.query}/>
         <Footer />
       </div>
     );

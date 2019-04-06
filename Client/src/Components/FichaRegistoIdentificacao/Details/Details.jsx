@@ -6,13 +6,37 @@ import Edit from '../Details/Edit';
 class Details extends Component {
   constructor(props) {
     super(props);
-    document.body.style = "background: rgb(235, 235, 235)";
     this.state = {
+      alertText: "",
+      alertisNotVisible: true,
+      alertColor: '',
       edit: false,
       deleted: false
     };
     this.toggleEdit = this.toggleEdit.bind(this);
     this.delete = this.delete.bind(this);
+  }
+
+  async componentDidMount(){
+    await this.queryState(this.props.query);
+    console.log(this.props.query);
+  }
+
+  async queryState(query) {
+    if (query !== undefined) {
+      switch (query) {
+        case '&showConfirmEdited':
+          this.setState({
+            alertText: "Utilizador editado com sucesso",
+            alertisNotVisible: false,
+            alertColor: "success"
+          });
+          break;
+        default:
+          window.location = `/fichaRI/${this.props.id}/detalhes`;
+          break;
+      }
+    }
   }
 
   toggleEdit() {
@@ -34,13 +58,7 @@ class Details extends Component {
       // Interpretar a resposta do servidor
       switch (status) {
         case "Deleted":
-          this.setState({
-            alertText: "A ficha foi removida com sucesso.",
-            alertisNotVisible: false,
-            alertColor: 'danger',
-            deleted: true
-          });
-          window.scrollTo(0, 0);
+          window.location = `/fichaRI/&showConfirmDelete`;
           break;
         case "NotDeleted":
           this.setState({
@@ -83,6 +101,7 @@ class Details extends Component {
                 <i className="far fa-trash-alt"></i>
               </button>
             </div>
+            <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
             {
               this.state.edit? 
                 <Edit id={this.props.id} /> 

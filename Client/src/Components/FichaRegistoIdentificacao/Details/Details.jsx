@@ -101,7 +101,12 @@ class Details extends Component {
               data-toggle={this.state.edit? "modal" : ""} 
               data-target={this.state.edit? "#modal" : ""} 
               align="right">
-              <i className="fas fa-edit"></i>
+              {
+                this.state.edit?
+                  <i class="fas fa-undo"></i>
+                :
+                  <i className="fas fa-edit"></i>
+              }
             </button>
             <button 
               type="button" 

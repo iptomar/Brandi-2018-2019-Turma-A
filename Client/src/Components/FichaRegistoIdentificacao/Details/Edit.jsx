@@ -6,19 +6,18 @@ class Edit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      alertText: '',
-      alertisNotVisible: true,
-      alertColor: '',
+      alert: {
+        text: '',
+        notVisible: true,
+        color: '',
+      },
+      showAlert: false,
       data: null,
-      edit: false,
-      loading: true,
-      alert: false,
       tecnicosResp: [],
-      loadingTecnicos: true
     };
+    this.handleChange = this.handleChange.bind(this);
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     this.dateTreatment = this.dateTreatment.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount(){
@@ -27,7 +26,7 @@ class Edit extends Component {
 
   async fetchFichaRI(id) {
     //Enviar pedido
-    const response = await fetch(`/api/fichaRegistoIdentificacao/${this.props.id}`, {
+    const response = await fetch(`/api/fichaRegistoIdentificacao/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +38,7 @@ class Edit extends Component {
       let status = resp.stat;
       switch (status) {
         case "Authenticated":
-          this.setState({ data: resp.resposta, loading: false });
+          this.setState({ data: resp.resposta });
           this.fetchTecnicos();
           break;
         default:
@@ -47,11 +46,13 @@ class Edit extends Component {
       }
     }).catch( resp => {
       this.setState({
-        error: true,
-        alertText: 'Não existe conexão com o servidor.',
-        alertisNotVisible: false,
-        alertColor: 'danger'
-      })
+        showAlert: true,
+        alert: { 
+          text: 'Não existe conexão com o servidor.',
+          notVisible: false,
+          color: 'danger'
+        }
+      });
     });
   }
 
@@ -85,7 +86,9 @@ class Edit extends Component {
         // Override do tecnico
         resposta[i]=tec;
       }
-      this.setState({ tecnicosResp: resposta, loadingTecnicos: false })
+      this.setState({ 
+        tecnicosResp: resposta
+      })
     });
   }
 
@@ -95,9 +98,10 @@ class Edit extends Component {
     tecnicos.forEach(tecnico => {
       if (tecnico.tecnicoID+"" === e.target.value)
         tecnico.checked = e.target.checked;
-    })
-    this.setState({tecnicosResp: tecnicos})
-    console.log(this.state.tecnicosResp);
+    });
+    this.setState({
+      tecnicosResp: tecnicos
+    });
   }
   
   // Controla as alterações nos inputs (Necessidade do React)
@@ -105,12 +109,11 @@ class Edit extends Component {
     let name = e.target.name;
     let value = e.target.value;
     this.setState( prevState => ({
-      ...prevState,
       data: {
         ...prevState.data,
         [name] : value
       }
-    }))
+    }));
   }
 
   // Verificar as checkboxes dos tecnicos. Retorna o array de tecnicos
@@ -124,7 +127,7 @@ class Edit extends Component {
 
   // Formatação da data
   dateTreatment(date){
-    return date!=null? date.substring(0,10) : null;
+    return date!==null? date.substring(0,10) : null;
   }
 
   edit = async e => {
@@ -144,7 +147,7 @@ class Edit extends Component {
       tecnicosFK: this.verifyCBS(),
       interessadoFK: '1'
     };
-    //Enviar pedidos
+    //Enviar pedido
     const response = await fetch(`/api/fichaRegistoIdentificacao/${this.props.id}/edit`, {
       method: "POST",
       headers: {
@@ -154,7 +157,7 @@ class Edit extends Component {
       body: JSON.stringify(data)
     });
 
-    //Aguardar API
+    //Aguardar resposta
     await response.json().then(resp => {
       let status = resp.stat;
       switch (status) {
@@ -163,9 +166,11 @@ class Edit extends Component {
           break;
         case "NotUpdated":
           this.setState({
-            alertText: "Erro ao editar.",
-            alertisNotVisible: false,
-            alertColor: "danger"
+            alert: {
+              text: "Erro ao editar.",
+              notVisible: false,
+              color: "danger"
+            }
           });
           break;
         default:
@@ -173,9 +178,12 @@ class Edit extends Component {
       }
     }).catch(resp => {
       this.setState({
-        alertText: "Erro na comunicação com o servidor.",
-        alertisNotVisible: false,
-        alertColor: "danger"
+        showAlert: true,
+        alert: {
+          text: "Erro na comunicação com o servidor.",
+          notVisible: false,
+          color: "danger"
+        }
       });
     });
   }
@@ -184,7 +192,7 @@ class Edit extends Component {
     if (sessionStorage.getItem("token") == null) {
       window.location = "/";
     } else {
-      if (!this.state.loading) {
+      if (this.state.data!==null) {
           let getThis = this;
           return (
             <div className="container">
@@ -243,7 +251,7 @@ class Edit extends Component {
                         type="date"
                         className="form-control"
                         name="dataEntrada"
-                        value={this.state.data.dataEntrada!=null? this.state.data.dataEntrada.substring(0,10) : ""}
+                        value={this.state.data.dataEntrada!==null? this.state.data.dataEntrada.substring(0,10) : ""}
                         onChange={this.handleChange}
                       />
                     </div>
@@ -253,7 +261,7 @@ class Edit extends Component {
                         type="date"
                         className="form-control"
                         name="dataConclusao"
-                        value={this.state.data.dataConclusao!=null? this.state.data.dataConclusao.substring(0,10) : ""}
+                        value={this.state.data.dataConclusao!==null? this.state.data.dataConclusao.substring(0,10) : ""}
                         onChange={this.handleChange}
                       />
                     </div>
@@ -263,7 +271,7 @@ class Edit extends Component {
                         type="date"
                         className="form-control"
                         name="dataEntrega"
-                        value={this.state.data.dataEntrega!=null? this.state.data.dataEntrega.substring(0,10) : ""}
+                        value={this.state.data.dataEntrega!==null? this.state.data.dataEntrega.substring(0,10) : ""}
                         onChange={this.handleChange}
                       />
                     </div>
@@ -293,9 +301,8 @@ class Edit extends Component {
                   <label>Técnico(s) Responsável(eis)</label>
                   <div className="row">
                     {
-                      this.state.loadingTecnicos? 
-                        <LoadingAnimation height="6rem" width="6em" />
-                      :
+                      // Mostra uma loading bar enquanto os tecnicos não são carregados
+                      this.state.tecnicosResp.length!==0? 
                         this.state.tecnicosResp.map(function (object) {
                           return (
                             <div className="input-group mb-3 col-md-3" key={object.tecnicoID}>
@@ -314,6 +321,8 @@ class Edit extends Component {
                             </div>
                           );
                         })
+                      :
+                        <LoadingAnimation />
                     }
                   </div>
                   <div className="row">
@@ -328,7 +337,7 @@ class Edit extends Component {
                         />
                     </div>
                   </div>
-                  <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
+                  <AlertMsg text={this.state.alert.text} isNotVisible={this.state.alert.notVisible} alertColor={this.state.alert.color} />
                   <hr className="mb-4" />
                   <button className="btn btn-primary btn-lg btn-block" onClick={this.toggleEdit} data-toggle="modal" data-target="#modalEdit">Guardar</button>
                 </div>
@@ -359,8 +368,8 @@ class Edit extends Component {
       } else {
         return (
           <div className="container">
-            {this.state.alert? 
-                <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} /> 
+            {this.state.showAlert? 
+                <AlertMsg text={this.state.alert.text} isNotVisible={this.state.alert.notVisible} alertColor={this.state.alert.color} /> 
               : 
                 <LoadingAnimation />
             }

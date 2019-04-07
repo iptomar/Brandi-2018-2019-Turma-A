@@ -19,7 +19,6 @@ class Details extends Component {
 
   async componentDidMount(){
     await this.queryState(this.props.query);
-    console.log(this.props.query);
   }
 
   async queryState(query) {

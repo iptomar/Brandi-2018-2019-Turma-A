@@ -4,8 +4,10 @@ class LoadingAnimation extends Component {
 
   render() {
     return (
-      <div className="d-flex justify-content-center">
-        <div className="spinner-border" style={{width: '6rem' , height: '6rem'}} role="status"></div>
+      <div className="container">
+        <div className="d-flex justify-content-center">
+          <div className="spinner-border" style={{width: '6rem' , height: '6rem'}} role="status"></div>
+        </div>
       </div>
     );
   }

@@ -9,7 +9,8 @@ class Index extends Component {
       alertText: "",
       alertisNotVisible: true,
       alertColor: '',
-      list: []
+      list: [],
+      loading: true
     };
     this.getFichasRI();
   }
@@ -54,7 +55,7 @@ class Index extends Component {
     });
     //Aguardar API
     await response.json().then(resp => {
-      this.setState({ list: resp.resposta });
+      this.setState({ list: resp.resposta, loading:false });
     });
   }
 
@@ -79,7 +80,7 @@ class Index extends Component {
           </div>
           <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
           {
-            this.state.list.length === 0 ?
+            this.state.loading?
               <LoadingAnimation />
             :
               <div className="row">

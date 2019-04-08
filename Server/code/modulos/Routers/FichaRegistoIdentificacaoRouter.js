@@ -140,8 +140,8 @@ exports.updatefichaRegistoIdentificacaoRoute = async (app, bd) => {
     }
     //existe token/sessao
     else {
-      //admin
-      if (token.roleFK === 1) {
+      //se tiver role
+      if (token.roleFK) {
         let ficha = {
           visible: true,
           designacao: req.body.designacao,
@@ -190,7 +190,7 @@ exports.updatefichaRegistoIdentificacaoRoute = async (app, bd) => {
       //nao e administrador
       else {
         code = 400;
-        resposta_servidor.stat = "NotAuthenticated";
+        resposta_servidor.stat = "NoPermissions";
       }
       token = await getToken.generateToken(token);
     }
@@ -289,7 +289,7 @@ exports.deletefichaRegistoIdentificacaoRoute = async (app, bd) => {
       //nao e administrador
       else {
         code = 400;
-        resposta_servidor.stat = "NotAuthenticated";
+        resposta_servidor.stat = "NoPermissions";
       }
       token = await getToken.generateToken(token);
     }

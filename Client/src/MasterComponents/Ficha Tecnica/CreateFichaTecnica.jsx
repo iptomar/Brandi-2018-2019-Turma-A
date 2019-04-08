@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Header from "../../Components/Header";
-import Footer from "../../Components/Footer";
+import Header from "../../Components/Globais/Header";
+import Footer from "../../Components/Globais/Footer";
 import Create from "../../Components/FichaTecnica/Create";
 
 class CreateFichaTecnica extends Component {

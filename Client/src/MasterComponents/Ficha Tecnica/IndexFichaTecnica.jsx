@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Header from "../../Components/Header";
-import Footer from "../../Components/Footer";
+import Header from "../../Components/Globais/Header";
+import Footer from "../../Components/Globais/Footer";
 import Index from "../../Components/FichaTecnica/Index";
 
 class IndexFichaTecnica extends Component {

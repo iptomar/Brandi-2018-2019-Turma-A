@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AlertMsg from "../../AlertMsg";
+import AlertMsg from "../../Globais/AlertMsg";
 
 class Create extends Component {
   constructor(props) {

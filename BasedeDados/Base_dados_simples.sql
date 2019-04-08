@@ -56,6 +56,7 @@ CREATE TABLE tbl_fichaRegistoIdentificacao
     coordenacao VARCHAR(255) NOT NULL,
     direcaoTecnica VARCHAR(255) NOT NULL,
     localidade VARCHAR(255) NOT NULL,
+    imagem VARCHAR(255) NOT NULL,
     interessadoFK INT,
     PRIMARY KEY(fichaRegistoID),
     FOREIGN KEY(interessadoFK) REFERENCES tbl_interessados(interessadoID)

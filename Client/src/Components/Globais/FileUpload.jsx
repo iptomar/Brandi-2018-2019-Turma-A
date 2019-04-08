@@ -8,9 +8,10 @@ class FileUpload extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.deleteFile = this.deleteFile.bind(this);
+    this.getBaseImage = this.getBaseImage.bind(this);
   }
 
-  sendFiles(){
+  sendFiles() {
     this.props.sendData(this.state.file);
   }
 
@@ -18,15 +19,16 @@ class FileUpload extends Component {
     await this.setState({
       file: Array.from(event.target.files)
     })
-    this.sendFiles();
+    //Apresenta o array das imagens
     this.state.file.forEach(async element => {
-      await this.readURL(element);
+      await this.getBaseImage(element);
     });
+    this.sendFiles();
 
   }
 
   //Apresenta os ficheiros carregados
-  readURL(ficheiro) {
+  getBaseImage(ficheiro) {
     var reader = new FileReader();
     reader.onload = function (e) {
       document.getElementById(ficheiro.name).setAttribute('src', e.target.result);
@@ -45,7 +47,7 @@ class FileUpload extends Component {
     return (
       <div>
         <div className="custom-file">
-          <input type="file" className="custom-file-input" id="customFile" name="filetoupload" accept="image/*" onChange={this.handleChange} />
+          <input type="file" className="custom-file-input" id="customFile" name="filetoupload" accept="image/*" onChange={this.handleChange}/>
           <label className="custom-file-label" data-browse="Escolher Ficheiro" >Escolha Fotografia</label>
         </div>
         <div>
@@ -54,7 +56,7 @@ class FileUpload extends Component {
               this.state.file.map(function (file) {
                 return (
                   <div className="card" key={file.name}>
-                    <img src="..." id={file.name} className="card-img-top" alt="" />
+                    <img id={file.name} className="card-img-top" alt="" />
                     <button type="button" id={file.name} onClick={getThis.deleteFile} className="btn btn-outline-dark shadow-none" style={{ position: "absolute", right: "0px", top: "0px", color: "white", border: "none", fontWeight: "bold" }}>X</button>
                   </div>
                 );

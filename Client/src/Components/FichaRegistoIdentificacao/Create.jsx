@@ -9,7 +9,7 @@ class Create extends Component {
       alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
       alertisNotVisible: true,
       alertColor: "danger",
-      pictures: [],
+      files: [],
       tecnicosResp: []
     }
     this.fetchTecnicos();
@@ -18,8 +18,8 @@ class Create extends Component {
   }
 
   //Recebe os dados do filho Upload
-  getData(files) {
-    this.setState({ pictures: files });
+  getData(data) {
+    this.setState({ files: data });
   }
 
   async fetchTecnicos() {
@@ -46,7 +46,7 @@ class Create extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-    if (this.state.pictures.length === 0) {
+    if (this.state.files.length === 0) {
       this.setState({
         alertText: "Insira uma imagem",
         alertisNotVisible: false,
@@ -54,8 +54,34 @@ class Create extends Component {
       });
       return null
     }
-    //Submeter o form das imagens
-    document.getElementById("submitI").submit();
+
+    //Enviar Imagens
+    var formData = new FormData();
+    for (var i = 0; i < this.state.files.length; i++) {
+      formData.append("Imagem ",this.state.files[i]);
+    }
+    const respI = fetch('/api/testes/fichaRegisto/imagem', {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        'x-auth-token': sessionStorage.getItem('token')
+      },
+      method: 'POST',
+      body: formData
+    })
+    //Aguardar API
+    await respI.json().then(resp => {
+      console.log("ENVIADO");
+    });
+
+    let CB = this.verifyCBS();
+    if (CB.length === 0) {
+      this.setState({
+        alertText: "Insira um técnico",
+        alertisNotVisible: false,
+        alertColor: "danger"
+      });
+      return null
+    }
     //Objeto data
     const data = {
       designacao: document.getElementById("dObjeto").value,
@@ -68,8 +94,8 @@ class Create extends Component {
       direcaoTecnica: document.getElementById("dirTecn").value,
       localidade: document.getElementById("endPostLocal").value,
       interessadoFK: 1,
-      tecnicosFK: this.verifyCBS(),
-      imagens: this.state.pictures
+      tecnicosFK: CB
+      // imagens: formData
     };
 
     //Enviar pedidos
@@ -124,7 +150,7 @@ class Create extends Component {
             </div>
             <div className="row">
               <div className="col-md-12 order-md-1">
-                <form onSubmit={this.handleSubmit} id="submitP">
+                <form onSubmit={this.handleSubmit}>
                   <div className="row">
                     <div className="col-md-12 mb-3">
                       <label>Designação do Objeto</label>
@@ -198,18 +224,17 @@ class Create extends Component {
                       <input type="text" className="form-control" id="endPostLocal" placeholder="Endereço Postal | Localidade" />
                     </div>
                   </div>
-                </form>
-                <hr className="mb-4" />
-                <div className="row">
-                  <div className="col-md-12">
-                    <form action="http://localhost:8081/api/testes/fichaRegisto/imagem" method="post" onSubmit={this.handleSubmit} encType="multipart/form-data" id="submitI">
+
+                  <hr className="mb-4" />
+                  <div className="row">
+                    <div className="col-md-12">
                       <FileUpload sendData={this.getData} />
-                    </form>
+                    </div>
                   </div>
-                </div>
-                <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} status={this.changeStatus} />
-                <hr className="mb-4" />
-                <button className="btn btn-success btn-lg btn-block mb-5" type="submit" form="submitP">Criar</button>
+                  <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} status={this.changeStatus} />
+                  <hr className="mb-4" />
+                  <button className="btn btn-success btn-lg btn-block mb-5" type="submit">Criar</button>
+                </form>
               </div>
             </div>
           </div>

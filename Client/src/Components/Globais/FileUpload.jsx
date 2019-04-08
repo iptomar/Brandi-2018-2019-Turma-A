@@ -45,7 +45,7 @@ class FileUpload extends Component {
     return (
       <div>
         <div className="custom-file">
-          <input type="file" className="custom-file-input" id="customFile" accept="image/*" onChange={this.handleChange} multiple />
+          <input type="file" className="custom-file-input" id="customFile" name="filetoupload" accept="image/*" onChange={this.handleChange} />
           <label className="custom-file-label" data-browse="Escolher Ficheiro" >Escolha Fotografia</label>
         </div>
         <div>

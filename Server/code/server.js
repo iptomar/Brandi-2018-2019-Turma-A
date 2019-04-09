@@ -7,8 +7,9 @@ const userRouter = require("./modulos/Routers/UtilizadoresRouter");
 const FichaRegistoIdentificacaoRouter = require("./modulos/Routers/FichaRegistoIdentificacaoRouter");
 const processosRouter = require("./modulos/Routers/ProcessosRouter");
 const tecnicosRouter = require("./modulos/Routers/TecnicosRouter");
+const imagensRouter = require("./modulos/Routers/ImagemRouter");
 //cria ligacao à base de dados
-        // LIGAÇÃO SERVIDOR
+// LIGAÇÃO SERVIDOR
 // let bd = new _basedeDados.BasedeDados(
 //   "localhost",
 //   "admina",
@@ -65,6 +66,8 @@ tecnicosRouter.getTecnicoRoute(app, bd);
 tecnicosRouter.createTecnicoRoute(app, bd);
 //update tecnicos
 tecnicosRouter.updateTecnicoRouter(app, bd);
+
+imagensRouter.createImagemRoute(app, bd);
 // //rota que devolve um processo
 // processosRouter.readProcessoRoute(app, bd);
 // //rota que cria um processo

@@ -1,0 +1,47 @@
+
+.dropdown-menu{
+  
+    border: none;
+    font-weight: bold;
+}
+
+.navbar-light .navbar-brand{
+    color:black;
+}
+.navbar-light .navbar-brand:hover{
+    color:black;
+}
+
+.navbar-light .navbar-nav .nav-link{
+    color:black;
+}
+.navbar-light .navbar-nav .nav-link:hover{
+    color:black;
+}
+.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active{
+    color:black;
+}
+
+.dropdown-item{
+    color:black;    
+}
+
+
+.divConta{
+    border-left: 6px solid black;
+    height: auto;
+    padding-right: 50px;
+
+
+}
+.sessionName{
+    padding-right: 10px;
+    color:black;
+}
+.sessionName:hover{
+    text-decoration: none;
+    color:black;
+}
+.nav-sair{
+    margin-left: 5px;
+}

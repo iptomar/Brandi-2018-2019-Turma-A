@@ -1,7 +1,13 @@
-Executar o seguinte comando, na diretoria da pasta Client:
+Primeiramente é necessário instalar as dependências
+### npm install
+
+Posteriormente pode opcionalmente ser executado o comando para auditar e resolver possíveis problemas
+### npm audit fix 
+
+Finalmente, executar o seguinte comando, na diretoria da pasta Client:
 ### npm start
 
-## Componentes já criados:
+## Componentes Globais:
 
   ## Footer 
   Representa o Rodapé da aplicação
@@ -17,10 +23,56 @@ Executar o seguinte comando, na diretoria da pasta Client:
   
   ## AlertMsg
   Representa uma mensagem informativa ao utilizador. Para definição deste componente, existem os seguintes states anexos:
+    alertText: Representa a mensagem a apresentar ao utilizador
+    alertisNotVisible:  TRUE -> Oculta o componente, FALSE -> Apresenta o componente
+    alertColor: São keywords do bootstrap e podem ser as seguintes: success, warning, danger, primary, ...     
+    [https://getbootstrap.com/docs/4.3/components/alerts/]
   
-  alertText: Representa a mensagem a apresentar ao utilizador
-    
-  alertisNotVisible:  TRUE -> Oculta o componente, FALSE -> Apresenta o componente
-    
-  alertColor: São keywords do bootstrap e podem ser as seguintes: success, warning, danger, primary, ... [https://getbootstrap.com/docs/4.3/components/alerts/]
-    
+  ## FileUpload
+  Permite carregar um ou mais ficheiros já com um design mais interativo.
+  
+  ## LoadingAnimation
+  Permite fazer uma animação enquanto a página é carregada, entre outros.
+
+## Componentes FichaRegistoIdentificacao
+  
+  ## Create
+  Permite criar uma nova ficha de registo e identificação
+  
+  ## Index
+  Permite listar todas as fichas de registo e identificação
+  
+  ## Details
+  Permite ver os detalhes de uma ficha de registo e identificação
+  
+  ## Edit
+  Permite editar uma ficha de registo e identificação
+  
+  ## Read
+  Permite fazer a leitura de uma ficha de registo e identificação
+  
+## Componentes Users
+  
+  ## Login
+  Permite fazer o login de um utilizador já registado
+  
+  ## Register
+  Permite, por parte de um administrador, fazer o registo de um utilizador não registado
+  
+  ## Index
+  Permite visualizar todos os utilizadores registados
+  
+  ## Profile
+  Permite visualizar os dados pessoais do utilizador loggado
+  
+  ## Details
+  Permite visualizar os dados pessoais de um utilizador
+  
+  ## Edit
+  Permite editar os dados pessoais de um utilizador
+  
+## MasterComponents
+  Os MasterComponents não têm muito que se lhe diga: servem para introduzir os componentes individuais, anteriormente descritos, por forma a serem chamados em conjunto numa só página. O path para os MasterComponents é posteriormente definido no documento index.js, através do componente <BrowserRouter>
+  
+## index.js
+  Onde são definidas as rotas para chamar os MasterComponents. A estrutura do RoutePath tem que ser conservada do mais simples ao mais complexo. Por exemplo, primeiro vem brandi.ipt.pt:81/fichaTecnica e só posteriormente o caminho mais complexo brandi.ipt.pt:81/fichaTecnica/:id/details

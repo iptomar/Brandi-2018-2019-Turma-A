@@ -57,7 +57,6 @@ class Create extends Component {
 
     //Enviar Imagens
     var formData = new FormData();
-    <formData className="appe"></formData>
     for (var i = 0; i < this.state.files.length; i++) {
       formData.append("Imagem ", this.state.files[i]);
     }

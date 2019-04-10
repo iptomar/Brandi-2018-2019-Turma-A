@@ -75,4 +75,4 @@ Finalmente, executar o seguinte comando, na diretoria da pasta Client:
   Os MasterComponents não têm muito que se lhe diga: servem para introduzir os componentes individuais, anteriormente descritos, por forma a serem chamados em conjunto numa só página. O path para os MasterComponents é posteriormente definido no documento index.js, através do componente <BrowserRouter>
   
 ## index.js
-  Onde são definidas as rotas para chamar os MasterComponents. A estrutura do RoutePath tem que ser conservada do mais simples ao mais complexo. Por exemplo, primeiro vem brandi.ipt.pt:81/fichaTecnica e só posteriormente o caminho mais complexo brandi.ipt.pt:81/fichaTecnica/:id/details
+  Onde são definidas as rotas para chamar os MasterComponents. A estrutura do RoutePath tem que ser conservada da mais complexa à mais simples. Por exemplo, primeiro vem brandi.ipt.pt:81/fichaTecnica/:id/details e só posteriormente brandi.ipt.pt:81/fichaTecnica. 

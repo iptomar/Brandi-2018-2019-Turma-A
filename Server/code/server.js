@@ -7,7 +7,7 @@ const userRouter = require("./modulos/Routers/UtilizadoresRouter");
 const FichaRegistoIdentificacaoRouter = require("./modulos/Routers/FichaRegistoIdentificacaoRouter");
 const processosRouter = require("./modulos/Routers/ProcessosRouter");
 const tecnicosRouter = require("./modulos/Routers/TecnicosRouter");
-const imagensRouter = require("./modulos/Routers/ImagemRouter");
+
 //cria ligacao à base de dados
 //LIGAÇÃO SERVIDOR
 // let bd = new _basedeDados.BasedeDados(
@@ -28,6 +28,7 @@ let bd = new _basedeDados.BasedeDados(
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
 
 //port de escuta
 const port = process.env.PORT || 8081;
@@ -67,7 +68,6 @@ tecnicosRouter.createTecnicoRoute(app, bd);
 //update tecnicos
 tecnicosRouter.updateTecnicoRouter(app, bd);
 
-imagensRouter.createImagemRoute(app, bd);
 // //rota que devolve um processo
 // processosRouter.readProcessoRoute(app, bd);
 // //rota que cria um processo

@@ -40,12 +40,13 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
     dados.coordenacao &&
     dados.direcaoTecnica &&
     dados.localidade &&
+    dados.imagem &&
     dados.interessadoFK
   ) {
     //datas nao preenchidas
     if (dados.dataEntrega === "" && dados.dataConclusao === "") {
       resposta_bd = await bd.query(
-        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
         [
           dados.visible,
           dados.designacao,
@@ -56,6 +57,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
           dados.coordenacao,
           dados.direcaoTecnica,
           dados.localidade,
+          dados.imagem,
           dados.interessadoFK,
           null
         ]
@@ -64,7 +66,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
     //data de entrega nao preenchida
     else if (dados.dataEntrega === "") {
       resposta_bd = await bd.query(
-        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
         [
           dados.visible,
           dados.designacao,
@@ -75,6 +77,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
           dados.coordenacao,
           dados.direcaoTecnica,
           dados.localidade,
+          dados.imagem,
           dados.interessadoFK,
           null
         ]
@@ -83,7 +86,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
     //data de conclusao nao preenchida
     else if (dados.dataConclusao === "") {
       resposta_bd = await bd.query(
-        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
         [
           dados.visible,
           dados.designacao,
@@ -94,13 +97,14 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
           dados.coordenacao,
           dados.direcaoTecnica,
           dados.localidade,
+          dados.imagem,
           dados.interessadoFK,
           dados.dataEntrega
         ]
       );
     } else {
       resposta_bd = await bd.query(
-        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
         [
           dados.visible,
           dados.designacao,
@@ -111,6 +115,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
           dados.coordenacao,
           dados.direcaoTecnica,
           dados.localidade,
+          dados.imagem,
           dados.interessadoFK,
           dados.dataEntrega
         ]

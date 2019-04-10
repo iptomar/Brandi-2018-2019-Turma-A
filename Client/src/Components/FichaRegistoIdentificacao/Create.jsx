@@ -57,10 +57,11 @@ class Create extends Component {
 
     //Enviar Imagens
     var formData = new FormData();
+    <formData className="appe"></formData>
     for (var i = 0; i < this.state.files.length; i++) {
-      formData.append("Imagem ",this.state.files[i]);
+      formData.append("Imagem ", this.state.files[i]);
     }
-    const respI = fetch('/api/testes/fichaRegisto/imagem', {
+    fetch('/api/testes/fichaRegisto/imagem', {
       headers: {
         "Content-Type": "multipart/form-data",
         'x-auth-token': sessionStorage.getItem('token')
@@ -68,10 +69,6 @@ class Create extends Component {
       method: 'POST',
       body: formData
     })
-    //Aguardar API
-    await respI.json().then(resp => {
-      console.log("ENVIADO");
-    });
 
     let CB = this.verifyCBS();
     if (CB.length === 0) {

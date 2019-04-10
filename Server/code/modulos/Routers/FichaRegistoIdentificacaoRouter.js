@@ -1,5 +1,24 @@
 const fichaRegistoIdentificacao = require("../CRUDS/FichaRegistoIdentificacao");
 const getToken = require("../Auxiliares/Token");
+var multer = require('multer');
+var mkdirp = require('mkdirp');
+
+mkdirp('../images/registoIdentificacao', function (err) {
+  if (err) console.error(err)
+});
+
+
+var storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, "../images/registoIdentificacao");
+  },
+  filename: function (req, file, callback) {
+    callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
+
 
 /**
  * Rota que retorna todas as fichas RegistoIdentificacao
@@ -45,7 +64,7 @@ exports.getTodasFichasRegistoIdentificacaoRoute = async (app, bd) => {
  * Rota para criar uam ficha RegistoIdentificacao
  */
 exports.createfichaRegistoIdentificacaoRoute = async (app, bd) => {
-  app.post("/api/fichaRegistoIdentificacao/create", async (req, resp) => {
+  app.post("/api/fichaRegistoIdentificacao/create", upload.single('imagem'), async (req, resp) => {
     let resposta_servidor = { stat: "Authenticated", resposta: {} };
     //HTTP CODE ACCEPTED
     let code = 201;
@@ -67,6 +86,11 @@ exports.createfichaRegistoIdentificacaoRoute = async (app, bd) => {
     else {
       //admin
       if (token.roleFK === 1) {
+        var imagem = "";
+        if (req.file) {
+          imagem = req.file.path;
+        }
+
         let ficha = {
           visible: true,
           designacao: req.body.designacao,
@@ -78,8 +102,10 @@ exports.createfichaRegistoIdentificacaoRoute = async (app, bd) => {
           coordenacao: req.body.coordenacao,
           direcaoTecnica: req.body.direcaoTecnica,
           localidade: req.body.localidade,
+          imagem: imagem,
           interessadoFK: req.body.interessadoFK,
-          tecnicosFK: req.body.tecnicosFK
+          tecnicosFK: req.body.tecnicosFK,
+
         };
         let resposta_bd = await fichaRegistoIdentificacao.createFichaRegistoIdentificacao(
           bd,

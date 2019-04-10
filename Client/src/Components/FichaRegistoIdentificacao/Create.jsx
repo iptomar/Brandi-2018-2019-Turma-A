@@ -46,6 +46,7 @@ class Create extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
+
     if (this.state.files.length === 0) {
       this.setState({
         alertText: "Insira uma imagem",
@@ -55,19 +56,7 @@ class Create extends Component {
       return null
     }
 
-    //Enviar Imagens
-    var formData = new FormData();
-    for (var i = 0; i < this.state.files.length; i++) {
-      formData.append("Imagem ", this.state.files[i]);
-    }
-    fetch('/api/testes/fichaRegisto/imagem', {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        'x-auth-token': sessionStorage.getItem('token')
-      },
-      method: 'POST',
-      body: formData
-    })
+    let formData = new FormData();
 
     let CB = this.verifyCBS();
     if (CB.length === 0) {
@@ -78,30 +67,31 @@ class Create extends Component {
       });
       return null
     }
-    //Objeto data
-    const data = {
-      designacao: document.getElementById("dObjeto").value,
-      processoLCRM: document.getElementById("procLCRM").value,
-      processoCEARC: document.getElementById("procCEARC").value,
-      dataEntrada: document.getElementById("dateEntrada").value,
-      dataConclusao: document.getElementById("dateConclusão").value,
-      dataEntrega: document.getElementById("dateEntrega").value,
-      coordenacao: document.getElementById("coord").value,
-      direcaoTecnica: document.getElementById("dirTecn").value,
-      localidade: document.getElementById("endPostLocal").value,
-      interessadoFK: 1,
-      tecnicosFK: CB
-      // imagens: formData
-    };
 
-    //Enviar pedidos
+    formData.append("designacao", document.getElementById("dObjeto").value);
+    formData.append("processoLCRM", document.getElementById("procLCRM").value);
+    formData.append("processoCEARC", document.getElementById("procCEARC").value);
+    formData.append("dataEntrada", document.getElementById("dateEntrada").value);
+    formData.append("dataConclusao", document.getElementById("dateConclusão").value);
+    formData.append("dataEntrega", document.getElementById("dateEntrega").value);
+    formData.append("coordenacao", document.getElementById("coord").value);
+    formData.append("direcaoTecnica", document.getElementById("dirTecn").value);
+    formData.append("localidade", document.getElementById("endPostLocal").value);
+    formData.append("interessadoFK", 1);
+    formData.append("tecnicosFK", CB);
+
+    //Enviar as imagens
+    for (var i = 0; i < this.state.files.length; i++) {
+      formData.append("imagem", this.state.files[i]);
+    }
+    
+    //Enviar pedidos (FORMA UTILIZADA A PEDIDO DA EQUIPA DA API)
     const response = await fetch("/api/fichaRegistoIdentificacao/create", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
         'x-auth-token': sessionStorage.getItem('token')
       },
-      body: JSON.stringify(data)
+      body: formData
     });
     //Aguardar API
     await response.json().then(resp => {
@@ -146,7 +136,7 @@ class Create extends Component {
             </div>
             <div className="row">
               <div className="col-md-12 order-md-1">
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} id="formSubmit">
                   <div className="row">
                     <div className="col-md-12 mb-3">
                       <label>Designação do Objeto</label>
@@ -220,7 +210,6 @@ class Create extends Component {
                       <input type="text" className="form-control" id="endPostLocal" placeholder="Endereço Postal | Localidade" />
                     </div>
                   </div>
-
                   <hr className="mb-4" />
                   <div className="row">
                     <div className="col-md-12">

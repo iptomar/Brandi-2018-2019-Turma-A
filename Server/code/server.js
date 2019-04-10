@@ -9,22 +9,22 @@ const processosRouter = require("./modulos/Routers/ProcessosRouter");
 const tecnicosRouter = require("./modulos/Routers/TecnicosRouter");
 const imagensRouter = require("./modulos/Routers/ImagemRouter");
 //cria ligacao à base de dados
-// LIGAÇÃO SERVIDOR
-// let bd = new _basedeDados.BasedeDados(
-//   "localhost",
-//   "admina",
-//   "admina_ADMINA_123",
-//   "5",
-//   "brandi_a"
-// );
-
+//LIGAÇÃO SERVIDOR
 let bd = new _basedeDados.BasedeDados(
   "localhost",
-  "root",
-  "root",
+  "admina",
+  "admina_ADMINA_123",
   "5",
   "brandi_a"
 );
+
+// let bd = new _basedeDados.BasedeDados(
+//   "localhost",
+//   "root",
+//   "root",
+//   "5",
+//   "brandi_a"
+// );
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

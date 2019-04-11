@@ -172,8 +172,8 @@ exports.getFichaRegistoIdentificacao = async (bd, id) => {
     }
     //procurar os tecnicos da ficha RegistoIdentificacao
     let resposta_bd2 = await bd.query(
-      "select b.tecnicoID , b.nome from tbl_fichaRegistoIdentificacao a, tbl_tecnicos b, tbl_registoTecnicos c where a.fichaRegistoID = ? and c.fichaRegistoFK = ? and b.tecnicoID = c.tecnicoFK GROUP BY TECNICOFK",
-      [id, id]
+      "select b.tecnicoID , b.nome from tbl_fichaRegistoIdentificacao a, tbl_tecnicos b, tbl_registoTecnicos c where a.fichaRegistoID = ? and a.fichaRegistoID=c.fichaRegistoFK and b.tecnicoID = c.tecnicoFK GROUP BY TECNICOFK",
+      [id]
     );
     //encontrou tecnicos associados a ficha e a ficha e visivel
     if (resposta_bd2.stat == 0 && resposta_bd.resposta[0] !== undefined) {

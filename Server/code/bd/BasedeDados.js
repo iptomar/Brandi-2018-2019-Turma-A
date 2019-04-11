@@ -8,7 +8,8 @@ class BasedeDados {
       user: user,
       password: password,
       connectionLimit: connectionLimit,
-      database: database
+      database: database,
+      timezone: 'UTC'
     });
   }
 

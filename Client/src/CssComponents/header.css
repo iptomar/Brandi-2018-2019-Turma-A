@@ -28,6 +28,7 @@
 
 
 .divConta{
+    border-left: 2px solid green;
     height: auto;
     padding-right: 50px;
 

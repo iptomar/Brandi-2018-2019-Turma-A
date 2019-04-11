@@ -1,14 +1,25 @@
 import React, { Component } from "react";
+import AlertMsg from '../Globais/AlertMsg';
 
 class FileUpload extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: []
+      file: [],
+      filesNotValid: false,
+      alertText: 'Alguns ficheiros foram removidos por não estarem de acordo com os requesitos',
+      alertisNotVisible: true,
+      alertColor: 'danger'
     };
     this.handleChange = this.handleChange.bind(this);
     this.deleteFile = this.deleteFile.bind(this);
     this.getBaseImage = this.getBaseImage.bind(this);
+    this.changeStatus = this.changeStatus.bind(this);
+  }
+
+  //Altera o estado conforme o Alert
+  changeStatus() {
+    this.setState({ alertisNotVisible: true });
   }
 
   sendFiles() {
@@ -21,10 +32,25 @@ class FileUpload extends Component {
     })
     //Apresenta o array das imagens
     this.state.file.forEach(async element => {
-      await this.getBaseImage(element);
+      //Verifica se o ficheiro é permitido
+      if (element.type.includes(this.props.type)) {
+        await this.getBaseImage(element);
+      } else {
+        await this.setState({
+          file: this.state.file.filter(position => position.name !== element.name),
+          filesNotValid: true
+        });
+      }
     });
+    //Se existir ficheiros inválido e se o número de ficheiros já filtrados for 0
+    if (this.state.filesNotValid) {
+      await this.setState({
+        alertText: 'Alguns Ficheiros foram removidos por não estarem de acordo com os requesitos',
+        alertColor: 'danger',
+        alertisNotVisible: false
+      });
+    }
     this.sendFiles();
-
   }
 
   //Apresenta os ficheiros carregados
@@ -47,12 +73,13 @@ class FileUpload extends Component {
     return (
       <div>
         <div className="custom-file">
-          <input type="file" className="custom-file-input" name="imagem" accept="image/*" onChange={this.handleChange}/>
+          <input type="file" className="custom-file-input" name="imagem" accept="image/*" onChange={this.handleChange} multiple />
           <label className="custom-file-label" data-browse="Escolher Ficheiro" >Escolha Fotografia</label>
         </div>
+        <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} status={this.changeStatus} />
         <div>
           <div className="card-deck mt-3">
-            {!this.state.file.length !== 0 ? (
+            {this.state.file.length !== 0 ? (
               this.state.file.map(function (file) {
                 return (
                   <div className="card" key={file.name}>
@@ -61,7 +88,9 @@ class FileUpload extends Component {
                   </div>
                 );
               })
-            ) : (<span></span>)}
+            ) : (
+                <span></span>
+              )}
           </div>
         </div>
       </div>

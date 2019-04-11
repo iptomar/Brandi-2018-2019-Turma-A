@@ -213,7 +213,7 @@ class Create extends Component {
                   <hr className="mb-4" />
                   <div className="row">
                     <div className="col-md-12">
-                      <FileUpload sendData={this.getData} />
+                      <FileUpload sendData={this.getData} type="image"/>
                     </div>
                   </div>
                   <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} status={this.changeStatus} />

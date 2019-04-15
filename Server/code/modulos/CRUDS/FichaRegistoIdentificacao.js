@@ -274,3 +274,28 @@ exports.deleteFichaRegistoIdentificacao = async (bd, id) => {
   }
   return resultadofinal;
 };
+
+/**
+ * Metodo que retorna uma ficha RegistoIdentificacao
+ * @param id - id da ficha RegistoIdentificacao
+ * @param bd - base de dados para querys
+ */
+exports.getFichaRegistoIdentificacaoImagem = async (bd, id) => {
+  let resultadofinal = { stat: 1, resposta: {} };
+  let resposta_bd = await bd.query(
+    "Select imagem from tbl_fichaRegistoIdentificacao where fichaRegistoID = ? and visible = true limit 1",
+    [id]
+  );
+  if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
+    resultadofinal.stat = 0;
+    resultadofinal.resposta = resposta_bd.resposta[0];
+  } else if (resposta_bd.stat === 0) {
+    resultadofinal.stat = resposta_bd.stat;
+    resultadofinal.resposta = "FichaNaoExistente";
+  } else {
+    resultadofinal.stat = resposta_bd.stat;
+    resultadofinal.resposta = resposta_bd.resposta;
+  }
+
+  return resultadofinal;
+};

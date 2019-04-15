@@ -2,6 +2,7 @@ const fichaRegistoIdentificacao = require("../CRUDS/FichaRegistoIdentificacao");
 const getToken = require("../Auxiliares/Token");
 var multer = require('multer');
 var mkdirp = require('mkdirp');
+const path = require('path');
 
 mkdirp('../images/registoIdentificacao', function (err) {
   if (err) console.error(err)
@@ -323,5 +324,53 @@ exports.deletefichaRegistoIdentificacaoRoute = async (app, bd) => {
       .status(code)
       .header("x-auth-token", token)
       .json(resposta_servidor);
+  });
+};
+
+/**
+ * Rota para ler uma ficha tecnica
+ */
+exports.readfichaRegistoIdentificacaoImagemRoute = async (app, bd) => {
+  app.get("/api/fichaRegistoIdentificacao/imagem/:id", async (req, resp) => {
+    let resposta_servidor = { stat: "Authenticated", resposta: {} };
+    //HTTP CODE ACCEPTED
+    let code = 200;
+    //token
+    let token;
+    //getToken
+    token = await getToken.getToken(req);
+    //nao existe token/sessao
+    if (token === null) {
+      code = 400;
+      resposta_servidor.stat = "NotAuthenticated";
+    }
+    //token corrompido
+    else if (token.name) {
+      code = 400;
+      resposta_servidor.stat = "InvalidToken";
+    }
+    //existe token/sessao
+    else {
+      let resposta_bd = await fichaRegistoIdentificacao.getFichaRegistoIdentificacaoImagem(
+        bd,
+        req.params.id
+      );
+      if (resposta_bd.stat === 0) {
+        code = 200;
+        resposta_servidor.stat = "Authenticated";
+        resposta_servidor.resposta = resposta_bd.resposta;
+      } else if (resposta_bd.stat === 1) {
+        code = 500;
+        resposta_servidor.stat = "Authenticated";
+        resposta_servidor.resposta = "DBConnectionError";
+      }
+
+      //nao e administrador
+      token = await getToken.generateToken(token);
+    }
+    resp
+      .status(code)
+      .header("x-auth-token", token)
+      .sendFile(path.join(__dirname, "../../", resposta_servidor.resposta.imagem));
   });
 };

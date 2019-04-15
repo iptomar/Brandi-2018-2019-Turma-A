@@ -6,10 +6,12 @@
  * Método que devolve todas as fichas RegistoIdentificacao
  * @param bd - base de dados para fazer query
  */
-exports.getAllFichasRegistoIdentificacao = async bd => {
+exports.getAllFichasRegistoIdentificacao = async (bd, limit, pagenumber) => {
   let resultadofinal = { stat: 1, resposta: {} };
+
   let resposta_bd = await bd.query(
-    "Select * from tbl_fichaRegistoIdentificacao where visible = true"
+    "Select * from tbl_fichaRegistoIdentificacao where visible = true limit ?,?",
+    [limit, pagenumber]
   );
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
     resultadofinal.resposta = resposta_bd.resposta;
@@ -21,7 +23,6 @@ exports.getAllFichasRegistoIdentificacao = async bd => {
   }
   return resultadofinal;
 };
-
 /**
  * Método para criar fichas RegistoIdentificacao
  * @param bd - base de dados para fazer querys

@@ -15,6 +15,7 @@ class FileUpload extends Component {
     this.deleteFile = this.deleteFile.bind(this);
     this.getBaseImage = this.getBaseImage.bind(this);
     this.changeStatus = this.changeStatus.bind(this);
+    console.log(this.props);
   }
 
   //Altera o estado conforme o Alert
@@ -73,8 +74,13 @@ class FileUpload extends Component {
     return (
       <div>
         <div className="custom-file">
-          <input type="file" className="custom-file-input" name="imagem" accept="image/*" onChange={this.handleChange} multiple />
-          <label className="custom-file-label" data-browse="Escolher Ficheiro" >Escolha Fotografia</label>
+        {
+            this.props.isMultiple ?
+              <input type="file" className="custom-file-input" name="imagem" accept="image/*" onChange={this.handleChange} multiple/>
+            :
+              <input type="file" className="custom-file-input" name="imagem" accept="image/*" onChange={this.handleChange} />
+        }
+        <label className="custom-file-label" data-browse="Escolher Ficheiro" >Escolha Fotografia</label>
         </div>
         <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} status={this.changeStatus} />
         <div>

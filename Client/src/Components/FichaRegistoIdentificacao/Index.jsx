@@ -16,6 +16,7 @@ class Index extends Component {
     };
     this.getFichasRI(1);
     this.changePage = this.changePage.bind(this);
+    this.createPagination = this.createPagination.bind(this);
   }
 
   componentDidMount() {
@@ -48,30 +49,36 @@ class Index extends Component {
 
   async getFichasRI(nPage) {
     //Enviar pedido
-    const response = await fetch("/api/fichaRegistoIdentificacao/", {
+    const response = await fetch("/api/fichaRegistoIdentificacao?pagenumber="+nPage, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         "x-auth-token": sessionStorage.getItem("token"),
-        "pagenumber": nPage
       }
     });
     //Aguardar API
     await response.json().then(resp => {
-      console.log(response);
+      console.log(response.headers.get('totalpages'));
       this.setState({ list: resp.resposta, loading: false, atualPage: nPage, numPage: Math.ceil(response.headers.get('totalpages') / 12)});
     });
   }
 
   async changePage(e){
-    await this.getFichasRI(e.target.value);
+    if(e.target.value === '-') await this.getFichasRI(this.state.atualPage-1);
+    else if(e.target.value === '+') await this.getFichasRI(this.state.atualPage+1);
+          else await this.getFichasRI(e.target.value);
   }
   
   createPagination(){
     let pag = [];
+    if(this.state.atualPage === 1) pag.push(<li className="page-item disabled" key="-"><button className="page-link">Antes</button></li>);
+    else pag.push(<li className="page-item" key="-"><button className="page-link" value="-" onClick={this.changePage}>Antes</button></li>);
       for (let i = 1; i <= this.state.numPage; i++) {
-       pag.push(<li className="page-item" key={i}><button className="page-link" value={i} onClick={this.changePage}>{i}</button></li>) ;
+        if(this.state.atualPage === i) pag.push(<li className="page-item disabled" key={i}><button className="page-link">{i}</button></li>);
+        else pag.push(<li className="page-item" key={i}><button className="page-link" value={i} onClick={this.changePage}>{i}</button></li>);
     }
+    if(this.state.atualPage === this.state.numPage) pag.push(<li className="page-item disabled" key="+"><button className="page-link">Depois</button></li>);
+    else pag.push(<li className="page-item" key="+"><button className="page-link" value="+" onClick={this.changePage}>Depois</button></li>);
     return pag;
   }
 
@@ -131,9 +138,7 @@ class Index extends Component {
           }
           <nav aria-label="Page navigation example center">
             <ul className="pagination">
-              <li className="page-item"><a className="page-link" href="#">Antes</a></li>
               {this.createPagination()}
-              <li className="page-item"><a className="page-link" href="#">Depois</a></li>
             </ul>
           </nav>
         </div>

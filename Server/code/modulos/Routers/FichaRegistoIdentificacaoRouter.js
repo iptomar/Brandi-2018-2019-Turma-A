@@ -25,7 +25,7 @@ const upload = multer({ storage: storage });
 exports.getTodasFichasRegistoIdentificacaoRoute = async (app, bd) => {
   app.get("/api/fichaRegistoIdentificacao", async (req, resp) => {
     let limit = 0;
-    let numpage = 10;
+    let numpage = 12;
     if (req.query.pagenumber >= 2) {
       limit = req.query.pagenumber * numpage - 10;
       numpage = req.query.pagenumber - 0;

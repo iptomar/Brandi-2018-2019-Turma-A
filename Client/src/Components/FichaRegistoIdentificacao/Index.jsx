@@ -10,14 +10,16 @@ class Index extends Component {
       alertisNotVisible: true,
       alertColor: '',
       list: [],
-      loading: true
+      loading: true,
+      numPage: 1,
+      atualPage: 1
     };
-    this.getFichasRI();
+    this.getFichasRI(1);
+    this.changePage = this.changePage.bind(this);
   }
 
   componentDidMount() {
     this.queryState(this.props.query);
-    console.log(this.props.query);
   }
 
   queryState(query) {
@@ -44,19 +46,33 @@ class Index extends Component {
     }
   }
 
-  async getFichasRI() {
+  async getFichasRI(nPage) {
     //Enviar pedido
-    const response = await fetch("/api/fichaRegistoIdentificacao", {
+    const response = await fetch("/api/fichaRegistoIdentificacao/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "x-auth-token": sessionStorage.getItem("token")
+        "x-auth-token": sessionStorage.getItem("token"),
+        "pagenumber": nPage
       }
     });
     //Aguardar API
     await response.json().then(resp => {
-      this.setState({ list: resp.resposta, loading:false });
+      console.log(response);
+      this.setState({ list: resp.resposta, loading: false, atualPage: nPage, numPage: Math.ceil(response.headers.get('totalpages') / 12)});
     });
+  }
+
+  async changePage(e){
+    await this.getFichasRI(e.target.value);
+  }
+  
+  createPagination(){
+    let pag = [];
+      for (let i = 1; i <= this.state.numPage; i++) {
+       pag.push(<li className="page-item" key={i}><button className="page-link" value={i} onClick={this.changePage}>{i}</button></li>) ;
+    }
+    return pag;
   }
 
   render() {
@@ -80,9 +96,9 @@ class Index extends Component {
           </div>
           <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
           {
-            this.state.loading?
+            this.state.loading ?
               <LoadingAnimation />
-            :
+              :
               <div className="row">
                 {!this.state.list.length !== 0 ? (
                   this.state.list.map(function (obj) {
@@ -113,6 +129,13 @@ class Index extends Component {
                   )}
               </div>
           }
+          <nav aria-label="Page navigation example center">
+            <ul className="pagination">
+              <li className="page-item"><a className="page-link" href="#">Antes</a></li>
+              {this.createPagination()}
+              <li className="page-item"><a className="page-link" href="#">Depois</a></li>
+            </ul>
+          </nav>
         </div>
       );
     }

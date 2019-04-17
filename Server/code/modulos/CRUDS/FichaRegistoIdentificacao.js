@@ -13,12 +13,13 @@ exports.getAllFichasRegistoIdentificacao = async (bd, limit, pagenumber) => {
     "Select * from tbl_fichaRegistoIdentificacao where visible = true limit ?,?",
     [limit, pagenumber]
   );
-  if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
+
+  if (resposta_bd.stat === 0) {
     resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;
   } else if (resposta_bd.stat === 1) {
     resultadofinal.resposta = "DBConnectionError";
-  } else {
+  } else if (resposta_bd.stat >= 2) {
     resultadofinal.resposta = resposta_bd.resposta;
   }
   return resultadofinal;

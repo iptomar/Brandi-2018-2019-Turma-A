@@ -59,6 +59,11 @@ FichaRegistoIdentificacaoRouter.getTodasFichasRegistoIdentificacaoRoute(
   app,
   bd
 );
+//rota que devolve a imagem de uma ficha de registo e identificação
+FichaRegistoIdentificacaoRouter.readfichaRegistoIdentificacaoImagemRoute(
+  app,
+  bd
+);
 //get all tecnico
 tecnicosRouter.getAllTecnicosRoute(app, bd);
 //get single tecnico

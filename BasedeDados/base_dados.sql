@@ -61,6 +61,7 @@ CREATE TABLE tbl_fichaRegistoIdentificacao
     coordenacao VARCHAR(255) NOT NULL,
     direcaoTecnica VARCHAR(255) NOT NULL,
     localidade VARCHAR(255) NOT NULL,
+	imagem VARCHAR(255) NOT NULL,
     interessadoFK INT NOT NULL,
     PRIMARY KEY(fichaRegistoID),
     FOREIGN KEY(interessadoFK) REFERENCES tbl_interessados(interessadoID)
@@ -70,12 +71,12 @@ DROP TABLE IF EXISTS tbl_folhasDeObra;
 CREATE TABLE tbl_folhasDeObra
 (
     folhaDeObraID INT NOT NULL AUTO_INCREMENT,
-    processoCEARCFK VARCHAR(255) NOT NULL UNIQUE,
     designacaoProcesso VARCHAR(255) NOT NULL,
     data DATE NOT NULL,
     designacaoProcedimento VARCHAR(255) NOT NULL,
     duracao VARCHAR(255) NOT NULL,
-    observacoes VARCHAR(255),   
+    observacoes VARCHAR(255),
+	processoCEARCFK VARCHAR(255) NOT NULL UNIQUE,	
     PRIMARY KEY(folhaDeObraID),
     FOREIGN KEY(processoCEARCFK) REFERENCES tbl_fichaRegistoIdentificacao(processoCEARC)
 );
@@ -102,8 +103,8 @@ CREATE TABLE tbl_registoTecnicos
     FOREIGN KEY(tecnicoFK) REFERENCES tbl_tecnicos(tecnicoID)
 );
 
-DROP TABLE IF EXISTS tbl_materiais;
-CREATE TABLE tbl_materiais
+DROP TABLE IF EXISTS tbl_materiaisFolhaObra;
+CREATE TABLE tbl_materiaisFolhaObra
 (
     materialID INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
@@ -119,7 +120,7 @@ CREATE TABLE tbl_folhasDeObraMateriais
     materialFK INT NOT NULL,
     PRIMARY KEY(folhaDeObraMaterialID),
     FOREIGN KEY(folhaDeObraFK) REFERENCES tbl_folhasDeObra(folhaDeObraID),
-    FOREIGN KEY(materialFK) REFERENCES tbl_materiais(materialID)
+    FOREIGN KEY(materialFK) REFERENCES tbl_materiaisFolhaObra(materialID)
 );
 
 DROP TABLE IF EXISTS tbl_interessadosContactos;
@@ -149,16 +150,87 @@ CREATE TABLE tbl_objetos(
     superCategorias VARCHAR(255) NOT NULL,
     categorias VARCHAR(255) NOT NULL,
     subCategorias VARCHAR(255) NOT NULL,
-	PRIMARY KEY(objetoID)
+	fichaDeRegistoFK INT NOT NULL,
+	PRIMARY KEY(objetoID),
+	FOREIGN KEY(fichaDeRegistoFK) REFERENCES tbl_fichaRegistoIdentificacao(fichaRegistoID)
 );
 
-DROP TABLE IF EXISTS tbl_outrasReferencias;
-CREATE TABLE tbl_outrasReferencias
+DROP TABLE IF EXISTS tbl_fichasTecnicas;
+CREATE TABLE tbl_fichasTecnicas
 (
-    outraReferenciaID INT NOT NULL AUTO_INCREMENT,
-    documentacaoFoto VARCHAR(255),
-    documentacaoGrafica VARCHAR(255),
-    PRIMARY KEY(outraReferenciaID)
+    fichaTecnicaID INT NOT NULL AUTO_INCREMENT,
+	visible BOOLEAN,
+	dataUltimaAlteracao DATE,
+	dataAberturaLCRM DATE,
+    dataEntradaLCRM DATE,
+    dataAberturaCEARC DATE,
+    dataEntradaCEARC DATE,	
+	bemIntegrado BOOLEAN,
+	tipoConjunto VARCHAR(255),
+	elementosBemCultural VARCHAR(255),
+    elementosAcessorios VARCHAR(255),
+	assinaturasAutoria VARCHAR(255),
+	inscricoesElementos VARCHAR(255),
+	inscricoesConstrucao VARCHAR(255),
+	classificacaoPatrimonial VARCHAR(255),
+	estilo VARCHAR(255),
+	epoca VARCHAR(255),
+	qualidade VARCHAR(255),
+	tipoFonte VARCHAR(255),
+	fonteAutor VARCHAR(255),
+	fonteTitulo VARCHAR(255),
+	fonteLocal VARCHAR(255),
+	fonteEditor VARCHAR(255),
+	fonteData VARCHAR(255),
+	fontePaginas VARCHAR(255),
+	propostaIntervencaoTipo VARCHAR(255),
+	propostaIntervencaoEstrutura VARCHAR(255),
+	propostaIntervencaoSuperficie VARCHAR(255),
+	propostaIntervencaoElementosAcessorios VARCHAR(255),
+	propostaIntervencaoConclusoes VARCHAR(255),
+	intervencaoRealizadaEstrutura VARCHAR(255),
+	intervencaoRealizadaSuperficie VARCHAR(255),
+	intervencaoRealizadaElementosAcessorios VARCHAR(255),
+	intervencaoRealizadaConclusoes VARCHAR(255),
+	intervencoesAnterioresEstrutura VARCHAR(255),
+	intervencoesAnterioresSuperficie VARCHAR(255),
+	intervencoesAnterioresElementosAcessorios VARCHAR(255),
+	intervencoesAnterioresConclusoes VARCHAR(255),
+	vontadesExpressasTipoDeIntervencao VARCHAR(255),
+	vontadesExpressasAspetosEspecificos VARCHAR(255),
+	documentacaoProduzidaRelatorioDaIntervencao VARCHAR(255),
+	documentacaoProduzidaTipoDeDocumento VARCHAR(255),
+	documentacaoProduzidaDesignacao VARCHAR(255),
+	documentacaoProduzidaReferencias VARCHAR(255),
+	documentacaoProduzidaEntidades VARCHAR(255),
+	estadoConservacaoConclusoes VARCHAR(255),
+	deterioracoesEstrutura VARCHAR(255),
+	deterioracoesSuperficie VARCHAR(255),
+	deterioracoesElementosAcessorios VARCHAR(255),
+	deterioracoesTipo VARCHAR(255),
+	fichaRegistoFK INT NOT NULL UNIQUE,
+    PRIMARY KEY(fichaTecnicaID),
+	FOREIGN KEY(fichaRegistoFK) REFERENCES tbl_fichaRegistoIdentificacao(fichaRegistoID)
+);
+
+DROP TABLE IF EXISTS tbl_documentacaoFotografica;
+CREATE TABLE tbl_documentacaoFotografica
+(
+    documentacaoFotograficaID INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    fichaTecnicaFK INT NOT NULL,
+    PRIMARY KEY(documentacaoFotograficaID),
+	FOREIGN KEY(fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
+);
+
+DROP TABLE IF EXISTS tbl_documentacaoGrafica;
+CREATE TABLE tbl_documentacaoGrafica
+(
+    documentacaoGraficaID INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    fichaTecnicaFK INT NOT NULL,
+    PRIMARY KEY(documentacaoGraficaID),
+	FOREIGN KEY(fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
 );
 
 DROP TABLE IF EXISTS tbl_fotografias;
@@ -169,29 +241,11 @@ CREATE TABLE tbl_fotografias
     resolucao VARCHAR(255),
     referencia VARCHAR(255),
     formato VARCHAR(255),
-    PRIMARY KEY(fotografiaID)
+	fichaTecnicaFK INT NOT NULL,
+    PRIMARY KEY(fotografiaID),
+	FOREIGN KEY(fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
 );
 
-DROP TABLE IF EXISTS tbl_deteriacoes;
-CREATE TABLE tbl_deteriacoes
-(
-    deteriacaoID INT NOT NULL AUTO_INCREMENT,
-    estrutura VARCHAR(255),
-    superficie VARCHAR(255),
-    elementosAcessorios VARCHAR(255),
-    tipo VARCHAR(255),
-    PRIMARY KEY(deteriacaoID)
-);
-
-DROP TABLE IF EXISTS tbl_estadosConservacao;
-CREATE TABLE tbl_estadosConservacao
-(
-    estadoConservacaoID INT NOT NULL AUTO_INCREMENT,
-    conclusoes VARCHAR(255),
-    deteriacaoFK INT NOT NULL UNIQUE,
-    PRIMARY KEY(estadoConservacaoID),
-    FOREIGN KEY(deteriacaoFK) REFERENCES tbl_deteriacoes(deteriacaoID)
-);
 
 DROP TABLE IF EXISTS tbl_examesAnalises;
 CREATE TABLE tbl_examesAnalises
@@ -199,19 +253,30 @@ CREATE TABLE tbl_examesAnalises
     exameAnaliseID INT NOT NULL AUTO_INCREMENT,
     identificacaoMateriais VARCHAR(255),
     identificacaoIntervencoes VARCHAR(255),
-    caracterizacaoEstadoConservacao VARCHAR(255),
-    identificacaoPatologias VARCHAR(255),
+	caracterizacaoEstadoConservacao VARCHAR(255),
+	identificacaoPatologias VARCHAR(255),
     datacaoObjeto VARCHAR(255),
-    ensaioProdutos VARCHAR(255),
-    tipo VARCHAR(255),
-    localizacao VARCHAR(255),
-    objetosEspecificados VARCHAR(255),
-    resultados VARCHAR(255),
-    entidadeTecnica VARCHAR(255),
-    data DATE,
-    interpretacaoResultados VARCHAR(255),
+	ensaioProdutos VARCHAR(255),
+	interpretacaoResultados VARCHAR(255),
     conclusoes VARCHAR(255),
-    PRIMARY KEY(exameAnaliseID)
+	fichaTecnicaFK INT NOT NULL,
+    PRIMARY KEY(exameAnaliseID),
+	FOREIGN KEY(fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
+);
+
+DROP TABLE IF EXISTS tbl_especificacoesExames;
+CREATE TABLE tbl_especificacoesExames
+(
+    especificacoesExamesID INT NOT NULL AUTO_INCREMENT,
+	tipo VARCHAR(255),
+	localizacao VARCHAR(255),
+    objetosEspecificos VARCHAR(255),
+	resultados VARCHAR(255),
+	entidadeTecnica VARCHAR(255),
+	data DATE,
+	exameAnaliseFK INT NOT NULL,
+    PRIMARY KEY(especificacoesExamesID),
+    FOREIGN KEY(exameAnaliseFK) REFERENCES tbl_examesAnalises(exameAnaliseID)
 );
 
 DROP TABLE IF EXISTS tbl_testesEficacia;
@@ -222,9 +287,9 @@ CREATE TABLE tbl_testesEficacia
     caracteristicas VARCHAR(255),
     tecnicoResponsavel VARCHAR(255),
     data DATE,
-    exameAnaliseFK INT NOT NULL,
+    especificacoesExamesFK INT NOT NULL,
     PRIMARY KEY(testeEficaciaID),
-    FOREIGN KEY(exameAnaliseFK) REFERENCES tbl_examesAnalises(exameAnaliseID)
+    FOREIGN KEY(especificacoesExamesFK) REFERENCES tbl_especificacoesExames(especificacoesExamesID)
 );
 
 DROP TABLE IF EXISTS tbl_solventes;
@@ -249,80 +314,14 @@ CREATE TABLE tbl_grausEficaciaSolubilizacao
     FOREIGN KEY(solventeFK) REFERENCES tbl_solventes(solventeID)
 );
 
-DROP TABLE IF EXISTS tbl_fontes;
-CREATE TABLE tbl_fontes
-(
-    fonteID INT NOT NULL AUTO_INCREMENT,
-    tipoFonte VARCHAR(255),
-    autor VARCHAR(255),
-    titulo VARCHAR(255),
-    local VARCHAR(255),
-    editor VARCHAR(255),
-    data DATE,
-    paginas VARCHAR(255),
-    PRIMARY KEY(fonteID)
-);
-
-DROP TABLE IF EXISTS tbl_vontadesExpressas;
-CREATE TABLE tbl_vontadesExpressas
-(
-    vontadeExpressaID INT NOT NULL AUTO_INCREMENT,
-    tipoIntervencao VARCHAR(255),
-    aspetosEspecificados VARCHAR(255),
-    PRIMARY KEY(vontadeExpressaID)
-);
-
-DROP TABLE IF EXISTS tbl_documentacaoProduzida;
-CREATE TABLE tbl_documentacaoProduzida
-(
-    documentoProduzidoID INT NOT NULL AUTO_INCREMENT,
-    relatorioTecnicoLCRM VARCHAR(255),
-    tipoDocumento VARCHAR(255),
-    designacao VARCHAR(255),
-    referencias VARCHAR(255),
-    entidades VARCHAR(255),
-    PRIMARY KEY(documentoProduzidoID)
-);
-
-DROP TABLE IF EXISTS tbl_ciclosEstacoesClimatericas;
-CREATE TABLE tbl_ciclosEstacoesClimatericas
-(
-    cicloEstacaoClimaID INT NOT NULL AUTO_INCREMENT,
-    tempFrioHumido INT,
-    tempQuenteSeco INT,
-    humidadeFrioHumido INT,
-    humidadeQuenteSeco INT,
-    periodoFrioHumidoInicio VARCHAR(255),
-    periodoQuenteSecoInicio VARCHAR(255),
-    periodoFrioHumidoFim VARCHAR(255),
-    periodoQuenteSecoFim VARCHAR(255),
-    PRIMARY KEY(cicloEstacaoClimaID)
-);
-
-DROP TABLE IF EXISTS tbl_especificacoes;
-CREATE TABLE tbl_especificacoes(
-    especificacoesID INT NOT NULL AUTO_INCREMENT,
-    tipoConjunto VARCHAR(255) NOT NULL,
-    elementosBemCultural VARCHAR(255) NOT NULL,
-    elementosAcessorios VARCHAR(255)NOT NULL,
-    assinaturasAutoria VARCHAR(255)NOT NULL,
-    inscricoesElementos VARCHAR(255) NOT NULL,
-    inscricoesConstrucao VARCHAR(255) NOT NULL,
-    classificacaoPatrimonial VARCHAR(255) NOT NULL,
-    estilo VARCHAR(255) NOT NULL,
-    epoca VARCHAR(255) NOT NULL,
-    qualidade VARCHAR(255) NOT NULL, 
-    PRIMARY KEY (especificacoesID)
-);
-
-DROP TABLE IF EXISTS tbl_materiaisEspecificacoes;
-CREATE TABLE tbl_materiaisEspecificacoes( 
-    materiasID INT NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS tbl_materiais;
+CREATE TABLE tbl_materiais( 
+    materiaisID INT NOT NULL AUTO_INCREMENT,
     estrutura VARCHAR(255) NOT NULL,
     superficie VARCHAR(255) NOT NULL,
-    especificacoesFK INT NOT NULL,
-    PRIMARY KEY(materiasID), 
-    FOREIGN KEY (especificacoesFK) REFERENCES tbl_especificacoes(especificacoesID)
+    fichaTecnicaFK INT NOT NULL,
+    PRIMARY KEY(materiaisID), 
+    FOREIGN KEY (fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
 );
 
 DROP TABLE IF EXISTS tbl_Tecnicas;
@@ -330,129 +329,9 @@ CREATE TABLE tbl_Tecnicas(
         tecnicasID INT NOT NULL AUTO_INCREMENT,
         estrutura VARCHAR(255) NOT NULL,
         superficie VARCHAR(255) NOT NULL,
-        especificacoesFK INT NOT NULL,
+        fichaTecnicaFK INT NOT NULL,
         PRIMARY KEY (tecnicasID),
-        FOREIGN KEY (especificacoesFK) REFERENCES tbl_especificacoes(especificacoesID)
-);
-
-DROP TABLE IF EXISTS tbl_IntervencoesAnteriores;
-CREATE TABLE tbl_IntervencoesAnteriores(
-    intervAnterioresID INT NOT NULL AUTO_INCREMENT, 
-    estrutura VARCHAR(255) NOT NULL,
-    superficies VARCHAR(255) NOT NULL, 
-    elementosAcessorioes VARCHAR(255) NOT NULL, 
-    conclusoes VARCHAR(255) NOT NULL, 
-    PRIMARY KEY (intervAnterioresID)
-);
-
-DROP TABLE IF EXISTS tbl_IntervencaoRealizada;
-CREATE TABLE tbl_IntervencaoRealizada(
-        intervRealizadaID INT NOT NULL AUTO_INCREMENT,
-        estrutura VARCHAR(255) NOT NULL,
-        superficie VARCHAR(255) NOT NULL,
-        elementosAcessorios VARCHAR(255) NOT NULL,
-        PRIMARY KEY (intervRealizadaID)
-);
-
-DROP TABLE IF EXISTS tbl_PropostasIntervencao;
-CREATE TABLE tbl_PropostasIntervencao(
-        propIntervID INT NOT NULL AUTO_INCREMENT,
-        tipo VARCHAR(255) NOT NULL,
-        estrutura VARCHAR(255) NOT NULL,
-        superficie VARCHAR(255) NOT NULL,
-        elementosAcessorios VARCHAR(255) NOT NULL,
-        conclusoes VARCHAR(255) NOT NULL,
-        PRIMARY KEY (propIntervID)
-);
-
-DROP TABLE IF EXISTS tbl_Poluicao;
-CREATE TABLE tbl_Poluicao(
-        poluicaoID INT NOT NULL AUTO_INCREMENT,
-		agentesPoluidores VARCHAR(255) NOT NULL,
-        fontes VARCHAR(255) NOT NULL,
-		resultados VARCHAR(255) NOT NULL,
-        conclusoes VARCHAR(255) NOT NULL,
-        PRIMARY KEY (PoluicaoID)
-);
-
-DROP TABLE IF EXISTS tbl_ValoresIluminacao;
-CREATE TABLE tbl_ValoresIluminacao(
-        valoresIluminacaoID INT NOT NULL AUTO_INCREMENT,
-        valorIluminancia INT NOT NULL,
-        valorUVmedidos INT NOT NULL,
-        valorRealUV INT NOT NULL,
-        PRIMARY KEY(valoresIluminacaoID)
-);
-
-DROP TABLE IF EXISTS tbl_IluminacaoArtificial;
-CREATE TABLE tbl_IluminacaoArtificial(
-        ilumArtifID INT NOT NULL AUTO_INCREMENT,
-        tipo VARCHAR(255) NOT NULL,
-		valoresIluminacaoFK INT NOT NULL UNIQUE,
-        PRIMARY KEY(ilumArtifID),
-        FOREIGN KEY(valoresIluminacaoFK) REFERENCES tbl_ValoresIluminacao(valoresIluminacaoID)
-);
-DROP TABLE IF EXISTS tbl_IluminacaoNatural;
-CREATE TABLE tbl_IluminacaoNatural(
-        iluminacaoNaturalID INT NOT NULL AUTO_INCREMENT,
-        origem VARCHAR(255) NOT NULL,
-        valoresIluminacaoFK INT NOT NULL UNIQUE,
-        PRIMARY KEY(iluminacaoNaturalID),
-        FOREIGN KEY(valoresIluminacaoFK) REFERENCES tbl_ValoresIluminacao(valoresIluminacaoID)
-);
-DROP TABLE IF EXISTS tbl_CondicoesAmbientaisLocal;
-CREATE TABLE tbl_CondicoesAmbientaisLocal(
-        condAmbLocalID INT NOT NULL AUTO_INCREMENT,
-        descricao VARCHAR(255) NOT NULL,
-		cicloEstacaoClimaFK INT NOT NULL UNIQUE,
-        poluicaoFK INT NOT NULL UNIQUE,
-        iluminacaoArtificalFK INT NOT NULL UNIQUE,
-        iluminacaoNaturalFK INT NOT NULL UNIQUE,
-        PRIMARY KEY(condAmbLocalID),
-        FOREIGN KEY(cicloEstacaoClimaFK) REFERENCES tbl_ciclosEstacoesClimatericas(cicloEstacaoClimaID),
-        FOREIGN KEY(poluicaoFK) REFERENCES tbl_Poluicao(poluicaoID),
-		FOREIGN KEY(iluminacaoArtificalFK) REFERENCES tbl_IluminacaoArtificial(ilumArtifID),
-        FOREIGN KEY(iluminacaoNaturalFK) REFERENCES tbl_IluminacaoNatural(iluminacaoNaturalID)
-);
-
-DROP TABLE IF EXISTS tbl_fichasTecnicas;
-CREATE TABLE tbl_fichasTecnicas
-(
-    fichaTecnicaID INT NOT NULL AUTO_INCREMENT,
-	dataAberturaLCRM DATE NOT NULL,
-    dataEntradaLCRM DATE NOT NULL,
-    dataAberturaCEARC DATE NOT NULL,
-    dataEntradaCEARC DATE NOT NULL,	
-	dataUltimaAlteracao DATE NOT NULL,
-    fichaRegistoFK INT NOT NULL UNIQUE,
-    objetoFK INT NOT NULL,
-	fotografiasFK INT NOT NULL,
-    especificacoesFK INT NOT NULL UNIQUE,
-    outraReferenciaFK INT NOT NULL UNIQUE,
-    condAmbLocalFK INT NOT NULL UNIQUE,
-    exameAnaliseFK INT NOT NULL UNIQUE,
-    estadoConservacaoFK INT NOT NULL UNIQUE,
-    intervAnterioresFK INT NOT NULL UNIQUE,
-    propIntervFK INT NOT NULL UNIQUE,
-    intervRealizadaFK INT NOT NULL UNIQUE,
-    vontadeExpressaFK INT NOT NULL UNIQUE,
-    documentoProduzidoFK INT NOT NULL UNIQUE,
-    fonteFK INT NOT NULL UNIQUE,
-    PRIMARY KEY(fichaTecnicaID),
-	FOREIGN KEY(objetoFK) REFERENCES tbl_objetos(objetoID),
-	FOREIGN KEY(fichaRegistoFK) REFERENCES tbl_fichaRegistoIdentificacao(fichaRegistoID),
-    FOREIGN KEY(fotografiasFK) REFERENCES tbl_fotografias(fotografiaID),
-    FOREIGN KEY(especificacoesFK) REFERENCES tbl_especificacoes(especificacoesID),
-    FOREIGN KEY(outraReferenciaFK) REFERENCES tbl_outrasReferencias(outraReferenciaID),
-    FOREIGN KEY(condAmbLocalFK) REFERENCES tbl_CondicoesAmbientaisLocal(condAmbLocalID),
-    FOREIGN KEY(exameAnaliseFK) REFERENCES tbl_examesAnalises(exameAnaliseID),
-    FOREIGN KEY(estadoConservacaoFK) REFERENCES tbl_estadosConservacao(estadoConservacaoID),
-    FOREIGN KEY(intervAnterioresFK) REFERENCES tbl_IntervencoesAnteriores(intervAnterioresID),
-    FOREIGN KEY(propIntervFK) REFERENCES tbl_PropostasIntervencao(propIntervID),
-    FOREIGN KEY(intervRealizadaFK) REFERENCES tbl_IntervencaoRealizada(intervRealizadaID),
-    FOREIGN KEY(vontadeExpressaFK) REFERENCES tbl_vontadesExpressas(vontadeExpressaID),
-    FOREIGN KEY(documentoProduzidoFK) REFERENCES tbl_documentacaoProduzida(documentoProduzidoID),
-    FOREIGN KEY(fonteFK) REFERENCES tbl_fontes(fonteID)
+        FOREIGN KEY (fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
 );
 
 DROP TABLE IF EXISTS tbl_equipasFichasTecnicas;
@@ -478,6 +357,7 @@ CREATE TABLE tbl_interessadosFichasTecnicas
 	FOREIGN KEY(fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
 );
 
+
 INSERT INTO tbl_roles (role) values("Admin");
 INSERT INTO tbl_roles (role) values("Aluno");
 INSERT INTO tbl_roles (role) values("Tecnicos");
@@ -494,16 +374,16 @@ INSERT INTO tbl_tecnicos (nome, habilitacoes, nivelProfissional, userFK) values 
 INSERT INTO tbl_interessados (nome, enderecoPostal, email, tipo) values ("Esdrubal Teste", "2220-012", "EsdrubalTeste@mail.com", "Proprietário");
 INSERT INTO tbl_interessados (nome, enderecoPostal, email, tipo) values ("Antonieta Teste", "3330-013", "AntonietaTeste@mail.com", "Dono da obra");
 INSERT INTO tbl_interessados (nome, enderecoPostal, email, tipo) values ("Capitulina Teste", "4440-014", "CapitulinaTeste@mail.com", "Mecenas");
-INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, interessadoFK) values (true, "Cadeira de madeira", "1234", "1234", "2018-03-26", "Mário Teste", "Maria Teste", "Tomar", 1);
-INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, interessadoFK) values (true, "Estante de metal", "5678", "5678", "2017-01-02", "Ze Teste", "Marcia Teste", "Torres Novas", 2);
-INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, interessadoFK) values (true, "Mesa de barro", "1111", "1111", "2019-03-12", "João Teste", "Joana Teste", "Entroncamento", 2);
-INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, interessadoFK) values (true, "Estatueta de loiça", "2222", "2222", "2016-03-23", "António Teste", "Tiago Teste", "Tomar", 3);
-INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, interessadoFK) values (true, "Cruz de prata", "3333", "3333", "2010-01-13", "Cruzado Teste", "Areias Teste", "Tomar", 1);
-INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, interessadoFK) values (true, "Vaso de ouro", "4444", "4444", "2019-01-22", "Rafael Teste", "André Teste", "Tomar", 2);
-INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, interessadoFK) values (true, "Cadeirão de madeira", "5555", "5555", "2019-02-15", "Dario Teste", "Telmo Teste", "Abrantes", 1);
-INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, interessadoFK) values (true, "Cruz de ferro", "6666", "6666", "2015-11-23", "Maria Teste", "Areias Teste", "Tomar", 1);
-INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, interessadoFK) values (true, "Vaso de vidro", "7777", "7777", "2016-02-21", "Rafael Teste", "André Teste", "Entroncamento", 2);
-INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, interessadoFK) values (true, "Gaiola de cobre", "8888", "8888", "2017-02-15", "Dario Teste", "Telmo Teste", "Abrantes", 1);
+INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, imagem, interessadoFK) values (true, "Cadeira de madeira", "1234", "1234", "2018-03-26", "Mário Teste", "Maria Teste", "Tomar", "a", 1);
+INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, imagem, interessadoFK) values (true, "Estante de metal", "5678", "5678", "2017-01-02", "Ze Teste", "Marcia Teste", "Torres Novas", "a", 2);
+INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, imagem, interessadoFK) values (true, "Mesa de barro", "1111", "1111", "2019-03-12", "João Teste", "Joana Teste", "Entroncamento", "a", 2);
+INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, imagem, interessadoFK) values (true, "Estatueta de loiça", "2222", "2222", "2016-03-23", "António Teste", "Tiago Teste", "Tomar", "a", 3);
+INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, imagem, interessadoFK) values (true, "Cruz de prata", "3333", "3333", "2010-01-13", "Cruzado Teste", "Areias Teste", "Tomar", "a", 1);
+INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, imagem, interessadoFK) values (true, "Vaso de ouro", "4444", "4444", "2019-01-22", "Rafael Teste", "André Teste", "Tomar", "a", 2);
+INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, imagem, interessadoFK) values (true, "Cadeirão de madeira", "5555", "5555", "2019-02-15", "Dario Teste", "Telmo Teste", "Abrantes", "a", 1);
+INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, imagem, interessadoFK) values (true, "Cruz de ferro", "6666", "6666", "2015-11-23", "Maria Teste", "Areias Teste", "Tomar", "a", 1);
+INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, imagem, interessadoFK) values (true, "Vaso de vidro", "7777", "7777", "2016-02-21", "Rafael Teste", "André Teste", "Entroncamento", "a", 2);
+INSERT INTO tbl_fichaRegistoIdentificacao (visible, designacao, processoLCRM, processoCEARC, dataEntrada, coordenacao, direcaoTecnica, localidade, imagem, interessadoFK) values (true, "Gaiola de cobre", "8888", "8888", "2017-02-15", "Dario Teste", "Telmo Teste", "Abrantes", "a", 1);
 INSERT INTO tbl_registoTecnicos (fichaRegistoFK, tecnicoFK) values (1, 1);
 INSERT INTO tbl_registoTecnicos (fichaRegistoFK, tecnicoFK) values (2, 2);
 INSERT INTO tbl_registoTecnicos (fichaRegistoFK, tecnicoFK) values (3, 2);

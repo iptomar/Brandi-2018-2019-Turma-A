@@ -15,12 +15,21 @@ class Index extends Component {
       atualPage: 1
     };
     this.getFichasRI(1);
-    this.changePage = this.changePage.bind(this);
-    this.createPagination = this.createPagination.bind(this);
   }
 
   componentDidMount() {
     this.queryState(this.props.query);
+    this.changePage = this.changePage.bind(this);
+    this.createPagination = this.createPagination.bind(this);
+    this.stateImage = this.stateImage.bind(this);
+    this.stateImage();
+  }
+
+  stateImage(num){
+    var min = 12*(this.state.atualPage-1)+1;
+    var max = 12*this.state.atualPage - (12-num);
+    for(var i = min; i <= max; i++ ) this.getImage(i);
+    alert("MINIMO= "+min+" MAX= "+ max);
   }
 
   queryState(query) {
@@ -59,6 +68,7 @@ class Index extends Component {
     //Aguardar API
     await response.json().then(resp => {
       this.setState({ list: resp.resposta, loading: false, atualPage: nPage, numPage: Math.ceil(response.headers.get('totalpages') / 12)});
+      this.stateImage(this.state.list.length);
     });
   }
 
@@ -81,7 +91,27 @@ class Index extends Component {
     return pag;
   }
 
+  getImage(id) {
+    // alert("A CARREGAR A IMAGEM "+ id);
+    const response = fetch("/api/fichaRegistoIdentificacao/imagem/"+id, {
+      method: "GET",
+      headers: {
+        "x-auth-token": sessionStorage.getItem("token")
+      }
+    });
+    //Aguardar API
+    response.then(resp => resp.blob())
+    .then(blob =>{
+        let reader = new FileReader();
+        reader.onload = function () {
+          document.getElementById(id+"img").src = reader.result.toString();
+        }
+        reader.readAsDataURL(blob);
+    });
+  }
+
   render() {
+    let getThis = this;
     //Verifica se existe o token
     if (sessionStorage.getItem("token") == null) {
       window.location = "/";
@@ -113,9 +143,8 @@ class Index extends Component {
                       <div className="col-sm-3 mb-3" key={obj.fichaRegistoID}>
                         <a href={href}>
                           <div className="card">
-                            <div className="card-body p-0">
-                              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Our_Lady_of_the_Gate_of_Dawn_Interior_During_Service%2C_Vilnius%2C_Lithuania_-_Diliff.jpg/800px-Our_Lady_of_the_Gate_of_Dawn_Interior_During_Service%2C_Vilnius%2C_Lithuania_-_Diliff.jpg" alt="Imagem" className="card-img-top img-fluid"
-                                style={{ objectFit: "cover", height: "200px", width: "300px" }} />
+                            <div className="card-body p-0" id={obj.fichaRegistoID}>
+                              <img id={obj.fichaRegistoID+"img"}  src="..." alt="Imagem" className="card-img-top img-fluid" style={{ objectFit: "cover", height: "200px", width: "300px" }} />
                               <div className="card-footer text-muted text-center">
                                 {obj.designacao}
                               </div>

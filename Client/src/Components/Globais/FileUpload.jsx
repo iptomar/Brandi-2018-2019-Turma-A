@@ -15,7 +15,6 @@ class FileUpload extends Component {
     this.deleteFile = this.deleteFile.bind(this);
     this.getBaseImage = this.getBaseImage.bind(this);
     this.changeStatus = this.changeStatus.bind(this);
-    console.log(this.props);
   }
 
   //Altera o estado conforme o Alert

@@ -381,15 +381,12 @@ exports.readfichaRegistoIdentificacaoImagemRoute = async (app, bd) => {
         resposta_servidor.stat = "Authenticated";
         resposta_servidor.resposta = "DBConnectionError";
       }
-
       //nao e administrador
       token = await getToken.generateToken(token);
     }
     resp
       .status(code)
       .header("x-auth-token", token)
-      .sendFile(
-        path.join(__dirname, "../../", resposta_servidor.resposta.imagem)
-      );
+      .sendFile(path.join(__dirname, "../../", resposta_servidor.resposta.imagem));
   });
 };

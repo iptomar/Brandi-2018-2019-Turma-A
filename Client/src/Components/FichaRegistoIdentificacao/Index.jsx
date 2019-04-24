@@ -58,7 +58,6 @@ class Index extends Component {
     });
     //Aguardar API
     await response.json().then(resp => {
-      console.log(response.headers.get('totalpages'));
       this.setState({ list: resp.resposta, loading: false, atualPage: nPage, numPage: Math.ceil(response.headers.get('totalpages') / 12)});
     });
   }

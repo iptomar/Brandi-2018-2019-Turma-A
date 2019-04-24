@@ -7,6 +7,7 @@ const userRouter = require("./modulos/Routers/UtilizadoresRouter");
 const FichaRegistoIdentificacaoRouter = require("./modulos/Routers/FichaRegistoIdentificacaoRouter");
 const processosRouter = require("./modulos/Routers/ProcessosRouter");
 const tecnicosRouter = require("./modulos/Routers/TecnicosRouter");
+const objetosRouter = require("./modulos/Routers/ObjetoRouter");
 
 //cria ligacao à base de dados
 //LIGAÇÃO SERVIDOR
@@ -20,10 +21,10 @@ const tecnicosRouter = require("./modulos/Routers/TecnicosRouter");
 
 let bd = new _basedeDados.BasedeDados(
   "localhost",
-   "root",
-   "root",
-   "5",
-   "brandi_a"
+  "root",
+  "root",
+  "5",
+  "brandi_a"
 );
 
 app.use(bodyParser.json());
@@ -79,4 +80,17 @@ tecnicosRouter.updateTecnicoRouter(app, bd);
 // processosRouter.createProcessoRoute(app, bd);
 // //rota que edita um processo
 // processosRouter.updateProcessoRoute(app, bd);
+
+//rota que devolve todos os objetos
+objetosRouter.getAllObjetosRoute(app, bd);
+//rota que devolver um objeto
+objetosRouter.getObjetoRoute(app, bd);
+//rota que cria um objeto
+objetosRouter.createObjetoRoute(app, bd);
+//rota que edita um objeto
+objetosRouter.updateObjetoRouter(app, bd);
+//rota que apagar um objeto
+objetosRouter.deleteObjetoRouter(app, bd);
+
+
 app.listen(port, () => console.log("Listening na porta", port));

@@ -6,21 +6,21 @@ class Index extends Component {
     this.state = {
       list: ""
     };
-    this.getFichasTecn();
+    // this.getFichasTecn();
   }
 
-  async getFichasTecn() {
-    //Enviar pedido
-    const response = await fetch("/api/fichatecnica", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        'x-auth-token': sessionStorage.getItem('token')
-      }
-    });
-    //Aguardar API
-    await response.json().then(resp => this.setState({list: resp}));
-  };
+  // async getFichasTecn() {
+  //   //Enviar pedido
+  //   const response = await fetch("/api/fichatecnica", {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       'x-auth-token': sessionStorage.getItem('token')
+  //     }
+  //   });
+  //   //Aguardar API
+  //   await response.json().then(resp => this.setState({list: resp}));
+  // };
 
   render() {
     var visualList = "";

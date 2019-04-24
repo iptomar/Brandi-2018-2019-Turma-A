@@ -3,9 +3,15 @@ import FileUpload from "../../Globais/FileUpload";
 import AlertMsg from "../../Globais/AlertMsg";
 
 class Pag1 extends Component {
-  constructor(props){
-    // super(props);
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      edit: false,
+      alertText: '',
+      alertisNotVisible: true,
+      alertColor: ''
+    };
   }
 
   render() {
@@ -60,7 +66,7 @@ class Pag1 extends Component {
                   </div>
                   <label>Técnico(s) Responsável(eis)</label>
                   <div className="row">
-                    {this.state.tecnicosResp.map(function (object) {
+                    {/* {this.state.tecnicosResp.map(function (object) {
                       return (
                         <div className="input-group mb-3 col-md-3" key={object.tecnicoID}>
                           <div className="input-group-prepend">
@@ -71,7 +77,7 @@ class Pag1 extends Component {
                           <label className="form-control">{object.nome}</label>
                         </div>
                       );
-                    })}
+                    })} */}
                   </div>
                   <div className="row">
                     <div className="col-md-12 mb-3">

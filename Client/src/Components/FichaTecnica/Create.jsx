@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Header from "../../Components/Globais/Header";
-import Footer from "../../Components/Globais/Footer";
 import Pag1 from "../../Components/FichaTecnica/Create/Pag1";
 
 class Create extends Component {
@@ -59,11 +57,9 @@ class Create extends Component {
   render() {
     return (
       <div className="LoginPage">
-        <Header />
         <form className="py-3" onSubmit={this.handleSubmit}>
           <Pag1 />
         </form>
-        <Footer />
       </div>
     );
   }

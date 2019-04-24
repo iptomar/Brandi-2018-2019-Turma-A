@@ -31,8 +31,17 @@ class Header extends Component {
           <ul className="navbar-nav mr-auto">
             <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Fichas
+              </a>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a className="dropdown-item" href="/fichaRI">Registo e Identificação</a>
+                <a className="dropdown-item" href="/fichaTecnica">Técnicas</a>
+              </div>
+            </li>
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Utilizadores
-         </a>
+              </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <a className="dropdown-item" href="/utilizadores/registar">Registar</a>
                 <a className="dropdown-item" href="/utilizadores/listar">Listar</a>

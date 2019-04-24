@@ -7,19 +7,21 @@ class Details extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      alertText: "",
-      alertisNotVisible: true,
-      alertColor: '',
+      alert: {
+        text: "",
+        notVisible: true,
+        color: '',
+      },
       edit: false,
-      deleted: false
+      deleted: false,
+      modal: ''
     };
     this.toggleEdit = this.toggleEdit.bind(this);
     this.delete = this.delete.bind(this);
   }
 
-  async componentDidMount(){
+  async componentDidMount() {
     await this.queryState(this.props.query);
-    console.log(this.props.query);
   }
 
   async queryState(query) {
@@ -27,9 +29,11 @@ class Details extends Component {
       switch (query) {
         case '&showConfirmEdited':
           this.setState({
-            alertText: "Utilizador editado com sucesso",
-            alertisNotVisible: false,
-            alertColor: "success"
+            alert: {
+              text: "Utilizador editado com sucesso",
+              notVisible: false,
+              color: "success"
+            }
           });
           break;
         default:
@@ -40,8 +44,8 @@ class Details extends Component {
   }
 
   toggleEdit() {
-    this.setState(state => ({
-      edit: !state.edit
+    this.setState(prevState => ({
+      edit: !prevState.edit
     }));
   }
 
@@ -52,9 +56,8 @@ class Details extends Component {
         'x-auth-token': sessionStorage.getItem('token')
       }
     });
-    request.json().then( resp => {
+    request.json().then(resp => {
       let status = resp.stat;
-
       // Interpretar a resposta do servidor
       switch (status) {
         case "Deleted":
@@ -62,14 +65,16 @@ class Details extends Component {
           break;
         case "NotDeleted":
           this.setState({
-            alertText: "Não foi possível remover a ficha.",
-            alertisNotVisible: false,
-            alertColor: 'danger'
+            alert: {
+              text: "Não foi possível remover a ficha.",
+              notVisible: false,
+              color: 'danger'
+            }
           });
           window.scrollTo(0, 0);
           break;
-      default:
-        console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
+        default:
+          console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
       }
     });
   }
@@ -78,60 +83,91 @@ class Details extends Component {
     if (sessionStorage.getItem("token") == null) {
       window.location = "/";
     } else {
-      if (this.state.deleted){
-        return (
-          <div className="container">
-            <div className="py-3 text-center">
-              <h2>Detalhes da Ficha de Registo e Identificação</h2>
-            </div>
-            <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
+      return (
+        <div className="container">
+          <div className="py-3 text-center">
+            <h2>Detalhes da Ficha de Registo e Identificação</h2>
           </div>
-        );
-      }else{
-        return (
-          <div className="container">
-            <div className="py-3 text-center">
-              <h2>Detalhes da Ficha de Registo e Identificação</h2>
-            </div>
-            <div className="text-right mr-3 mb-3">
-              <button className="btn btn-primary" onClick={this.toggleEdit} align="right">
-                <i className="fas fa-edit"></i>
-              </button>
-              <button type="button" className="ml-2 btn btn-danger" data-toggle="modal" data-target="#modalDelete">
-                <i className="far fa-trash-alt"></i>
-              </button>
-            </div>
-            <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
-            {
-              this.state.edit? 
-                <Edit id={this.props.id} /> 
-              : 
-                <Read id={this.props.id} /> 
-            }
+          <div className="text-right mr-3 mb-3">
+            <button 
+              className="btn btn-primary" 
+              onClick={() => {
+                if(this.state.edit){
+                  this.setState({ modal: 'Edit'});
+                }else{
+                  this.toggleEdit();
+                }
+              }}
+              data-toggle={this.state.edit? "modal" : ""} 
+              data-target={this.state.edit? "#modal" : ""} 
+              align="right">
+              {
+                this.state.edit?
+                  <i class="fas fa-undo"></i>
+                :
+                  <i className="fas fa-edit"></i>
+              }
+            </button>
+            <button 
+              type="button" 
+              className="ml-2 btn btn-danger" 
+              onClick={() => {
+                this.setState({ 
+                  modal: 'Delete' 
+                })
+              }}
+              data-toggle="modal" 
+              data-target="#modal">
+              <i className="far fa-trash-alt"></i>
+            </button>
+          </div>
+          <AlertMsg text={this.state.alert.text} isNotVisible={this.state.alert.notVisible} alertColor={this.state.alert.color} />
+          {
+            this.state.edit?
+              <Edit id={this.props.id} />
+              :
+              <Read id={this.props.id} />
+          }
 
-            { /* Modal de apagar*/ }
-            <div className="modal fade" id="modalDelete" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div className="modal-dialog" role="document">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalLabel">Apagar Ficha de Registo e Identificação</h5>
-                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
+          { /* Modal de apagar*/}
+          <div className="modal fade" id="modal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog modal-lg" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">
+                  {this.state.modal==='Delete'?
+                    'Apagar Ficha de Registo e Identificação'
+                  :
+                    'Editar Ficha de Registo e Identificação'
+                  }
+                  </h5>
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  {this.state.modal==='Delete'? 
+                    'Tem a certeza que pretende apagar a Ficha de Registo e Identificação?'
+                  :
+                    'Todas as alterações realizadas não serão guardadas. Tem a certeza que pretende sair do editar?'
+                  }
                   </div>
-                  <div className="modal-body">
-                    Tem a certeza que pretende apagar a Ficha de Registo e Identificação?
-                  </div>
-                  <div className="modal-footer">
-                    <button type="button" className="btn btn-primary" data-dismiss="modal">Não</button>
-                    <button type="button" className="btn btn-danger" onClick={this.delete} data-dismiss="modal">Sim</button>
-                  </div>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-secondary" data-dismiss="modal">Não</button>
+                  <button type="button" className="btn btn-primary" 
+                  onClick={
+                    this.state.modal==='Delete'? 
+                      this.delete
+                    : 
+                      this.toggleEdit
+                    } 
+                    data-dismiss="modal">Sim</button>
                 </div>
               </div>
             </div>
           </div>
-        );
-      }
+        </div>
+      );
     };
   }
 }

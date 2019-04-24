@@ -25,7 +25,17 @@ class Register extends Component {
     });
     await response
       .json()
-      .then(resp => this.setState({ rolesList: resp.resposta }));
+      .then(resp => {
+        switch (resp.stat) {
+          case "NoPermission":
+            alert("NÃO TENS PERMISSÃO");
+            window.location = "/";
+            break;
+          default:
+            this.setState({ rolesList: resp.resposta })
+            break;
+        }
+      });
   }
 
   handleSubmit = async e => {

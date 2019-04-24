@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Read from "./Read";
 import Edit from "./Edit";
-import AlertMsg from '../../AlertMsg';
+import AlertMsg from '../../Globais/AlertMsg';
 
 class Details extends Component {
   constructor(props) {

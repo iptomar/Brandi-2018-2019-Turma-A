@@ -7,8 +7,9 @@ const userRouter = require("./modulos/Routers/UtilizadoresRouter");
 const FichaRegistoIdentificacaoRouter = require("./modulos/Routers/FichaRegistoIdentificacaoRouter");
 const processosRouter = require("./modulos/Routers/ProcessosRouter");
 const tecnicosRouter = require("./modulos/Routers/TecnicosRouter");
+
 //cria ligacao à base de dados
-        // LIGAÇÃO SERVIDOR
+//LIGAÇÃO SERVIDOR
 // let bd = new _basedeDados.BasedeDados(
 //   "localhost",
 //   "admina",
@@ -19,14 +20,15 @@ const tecnicosRouter = require("./modulos/Routers/TecnicosRouter");
 
 let bd = new _basedeDados.BasedeDados(
   "localhost",
-  "root",
-  "root",
-  "5",
-  "brandi_a"
+   "root",
+   "root",
+   "5",
+   "brandi_a"
 );
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
 
 //port de escuta
 const port = process.env.PORT || 8081;
@@ -57,6 +59,11 @@ FichaRegistoIdentificacaoRouter.getTodasFichasRegistoIdentificacaoRoute(
   app,
   bd
 );
+//rota que devolve a imagem de uma ficha de registo e identificação
+FichaRegistoIdentificacaoRouter.readfichaRegistoIdentificacaoImagemRoute(
+  app,
+  bd
+);
 //get all tecnico
 tecnicosRouter.getAllTecnicosRoute(app, bd);
 //get single tecnico
@@ -65,6 +72,7 @@ tecnicosRouter.getTecnicoRoute(app, bd);
 tecnicosRouter.createTecnicoRoute(app, bd);
 //update tecnicos
 tecnicosRouter.updateTecnicoRouter(app, bd);
+
 // //rota que devolve um processo
 // processosRouter.readProcessoRoute(app, bd);
 // //rota que cria um processo

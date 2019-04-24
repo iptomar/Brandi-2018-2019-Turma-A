@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import favicon from "../../Images/favicon.ico";
+import '../../CssComponents/header.css';
 
 class Header extends Component {
-  out(){
+  out() {
     //Eliminar os dados armazenados da conta
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('nome');
@@ -12,55 +13,56 @@ class Header extends Component {
 
   render() {
     return (
-      <div className="Header">
-        <nav className="navbar navbar-expand-lg navbar-light">
-          <a className="navbar-brand" href="/" style={{paddingLeft:'35px'}}>
-            <img
-              src={favicon}
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-              alt="Ícone"
-            />
-            {" "}Brandi
-          </a>
-          <div className="collapse navbar-collapse justify-content-end" id="navbarCollapse">
-            {/* DROPDOWN UTILIZADORES*/}
-            <ul className="navbar-nav">
-              <li className="nav-item dropdown">
-                <a className="nav-link active dropdown-toggle" href="#.#" id="navbardrop" data-toggle="dropdown">
-                  Utilizadores
-                </a>
-                <div className="dropdown-menu">
-                  <a className="dropdown-item" style={{cursor:'pointer'}} href="/utilizadores/registar">Registar</a>
-                  <a className="dropdown-item" style={{cursor:'pointer'}} href="/utilizadores/listar">Listar</a>
-                </div>
-              </li>
-            </ul>
+      <nav className="navbar navbar-expand-lg navbar-light">
+        <a className="navbar-brand" href="/" style={{ paddingLeft: '35px' }}>
+          <img
+            src={favicon}
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+            alt="Ícone"
+          />
+          {" "}Brandi
+           </a>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarText">
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <a className="nav-link" href="/sobre">Sobre</a>
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Utilizadores
+         </a>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a className="dropdown-item" href="/utilizadores/registar">Registar</a>
+                <a className="dropdown-item" href="/utilizadores/listar">Listar</a>
+              </div>
             </li>
-            <li className="nav-item active">
-              <a className="nav-link" href="/contactos">Contactos</a>
+            <li className="nav-item">
+              <a className="nav-link" href="/Sobre">Sobre</a>
             </li>
-            </ul>
-            {/* DROPDOWN */}
+            <li className="nav-item">
+              <a className="nav-link" href="/Contactos">Contactos</a>
+            </li>
+          </ul>
+          <hr />
+          {/* <span className="sessionName">{sessionStorage.getItem('nome')}</span> */}
+          <a className="sessionName" href="/perfil">{sessionStorage.getItem('nome')}</a>
+          <div className="divConta">
             <ul className="navbar-nav">
-              <li className="nav-item dropdown" style={{paddingLeft:'50px', paddingRight:'35px'}}>
-                <a className="nav-link active dropdown-toggle" href="#.#" id="navbardrop" data-toggle="dropdown">
-                  {sessionStorage.getItem('nome')}
-                </a>
-                <div className="dropdown-menu">
-                  <a className="dropdown-item" style={{cursor:'pointer'}} href="/perfil">Perfil</a>
-                  <a className="dropdown-item" style={{cursor:'pointer'}} href="#.#" onClick={this.out}>Sair</a>
-                </div>
+              {/* <li className="nav-item">
+               <a className="nav-link" href="/Sobre">Perfil</a>
+             </li> */}
+
+              <li className="nav-sair">
+                <a className="nav-link" href="#.#" onClick={this.out}>Sair</a>
               </li>
             </ul>
-          
           </div>
-        </nav>
-      </div>
+        </div>
+      </nav>
+
+
     );
   }
 }

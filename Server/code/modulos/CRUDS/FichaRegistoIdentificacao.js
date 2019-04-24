@@ -6,22 +6,24 @@
  * Método que devolve todas as fichas RegistoIdentificacao
  * @param bd - base de dados para fazer query
  */
-exports.getAllFichasRegistoIdentificacao = async bd => {
+exports.getAllFichasRegistoIdentificacao = async (bd, limit, pagenumber) => {
   let resultadofinal = { stat: 1, resposta: {} };
+
   let resposta_bd = await bd.query(
-    "Select * from tbl_fichaRegistoIdentificacao where visible = true"
+    "Select * from tbl_fichaRegistoIdentificacao where visible = true limit ?,?",
+    [limit, pagenumber]
   );
-  if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
+
+  if (resposta_bd.stat === 0) {
     resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;
   } else if (resposta_bd.stat === 1) {
     resultadofinal.resposta = "DBConnectionError";
-  } else {
+  } else if (resposta_bd.stat >= 2) {
     resultadofinal.resposta = resposta_bd.resposta;
   }
   return resultadofinal;
 };
-
 /**
  * Método para criar fichas RegistoIdentificacao
  * @param bd - base de dados para fazer querys
@@ -40,12 +42,13 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
     dados.coordenacao &&
     dados.direcaoTecnica &&
     dados.localidade &&
+    dados.imagem &&
     dados.interessadoFK
   ) {
     //datas nao preenchidas
     if (dados.dataEntrega === "" && dados.dataConclusao === "") {
       resposta_bd = await bd.query(
-        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
         [
           dados.visible,
           dados.designacao,
@@ -56,6 +59,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
           dados.coordenacao,
           dados.direcaoTecnica,
           dados.localidade,
+          dados.imagem,
           dados.interessadoFK,
           null
         ]
@@ -64,7 +68,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
     //data de entrega nao preenchida
     else if (dados.dataEntrega === "") {
       resposta_bd = await bd.query(
-        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
         [
           dados.visible,
           dados.designacao,
@@ -75,6 +79,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
           dados.coordenacao,
           dados.direcaoTecnica,
           dados.localidade,
+          dados.imagem,
           dados.interessadoFK,
           null
         ]
@@ -83,7 +88,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
     //data de conclusao nao preenchida
     else if (dados.dataConclusao === "") {
       resposta_bd = await bd.query(
-        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
         [
           dados.visible,
           dados.designacao,
@@ -94,13 +99,14 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
           dados.coordenacao,
           dados.direcaoTecnica,
           dados.localidade,
+          dados.imagem,
           dados.interessadoFK,
           dados.dataEntrega
         ]
       );
     } else {
       resposta_bd = await bd.query(
-        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
         [
           dados.visible,
           dados.designacao,
@@ -111,6 +117,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
           dados.coordenacao,
           dados.direcaoTecnica,
           dados.localidade,
+          dados.imagem,
           dados.interessadoFK,
           dados.dataEntrega
         ]
@@ -167,8 +174,8 @@ exports.getFichaRegistoIdentificacao = async (bd, id) => {
     }
     //procurar os tecnicos da ficha RegistoIdentificacao
     let resposta_bd2 = await bd.query(
-      "select b.tecnicoID , b.nome from tbl_fichaRegistoIdentificacao a, tbl_tecnicos b, tbl_registoTecnicos c where a.fichaRegistoID = ? and c.fichaRegistoFK = ? and b.tecnicoID = c.tecnicoFK GROUP BY TECNICOFK",
-      [id, id]
+      "select b.tecnicoID , b.nome from tbl_fichaRegistoIdentificacao a, tbl_tecnicos b, tbl_registoTecnicos c where a.fichaRegistoID = ? and a.fichaRegistoID=c.fichaRegistoFK and b.tecnicoID = c.tecnicoFK GROUP BY TECNICOFK",
+      [id]
     );
     //encontrou tecnicos associados a ficha e a ficha e visivel
     if (resposta_bd2.stat == 0 && resposta_bd.resposta[0] !== undefined) {
@@ -267,5 +274,30 @@ exports.deleteFichaRegistoIdentificacao = async (bd, id) => {
     resultadofinal.stat = resposta_bd.stat;
     resultadofinal.resposta = resposta_bd.resposta;
   }
+  return resultadofinal;
+};
+
+/**
+ * Metodo que retorna uma ficha RegistoIdentificacao
+ * @param id - id da ficha RegistoIdentificacao
+ * @param bd - base de dados para querys
+ */
+exports.getFichaRegistoIdentificacaoImagem = async (bd, id) => {
+  let resultadofinal = { stat: 1, resposta: {} };
+  let resposta_bd = await bd.query(
+    "Select imagem from tbl_fichaRegistoIdentificacao where fichaRegistoID = ? and visible = true limit 1",
+    [id]
+  );
+  if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
+    resultadofinal.stat = 0;
+    resultadofinal.resposta = resposta_bd.resposta[0];
+  } else if (resposta_bd.stat === 0) {
+    resultadofinal.stat = resposta_bd.stat;
+    resultadofinal.resposta = "FichaNaoExistente";
+  } else {
+    resultadofinal.stat = resposta_bd.stat;
+    resultadofinal.resposta = resposta_bd.resposta;
+  }
+
   return resultadofinal;
 };

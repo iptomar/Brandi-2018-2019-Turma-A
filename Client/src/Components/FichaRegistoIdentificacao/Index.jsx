@@ -10,14 +10,26 @@ class Index extends Component {
       alertisNotVisible: true,
       alertColor: '',
       list: [],
-      loading: true
+      loading: true,
+      numPage: 1,
+      atualPage: 1
     };
-    this.getFichasRI();
+    this.getFichasRI(1);
   }
 
   componentDidMount() {
     this.queryState(this.props.query);
-    console.log(this.props.query);
+    this.changePage = this.changePage.bind(this);
+    this.createPagination = this.createPagination.bind(this);
+    this.stateImage = this.stateImage.bind(this);
+    this.stateImage();
+  }
+
+  stateImage(num){
+    var min = 12*(this.state.atualPage-1)+1;
+    var max = 12*this.state.atualPage - (12-num);
+    for(var i = min; i <= max; i++ ) this.getImage(i);
+    alert("MINIMO= "+min+" MAX= "+ max);
   }
 
   queryState(query) {
@@ -44,22 +56,62 @@ class Index extends Component {
     }
   }
 
-  async getFichasRI() {
+  async getFichasRI(nPage) {
     //Enviar pedido
-    const response = await fetch("/api/fichaRegistoIdentificacao", {
+    const response = await fetch("/api/fichaRegistoIdentificacao?pagenumber="+nPage, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "x-auth-token": sessionStorage.getItem("token")
+        "x-auth-token": sessionStorage.getItem("token"),
       }
     });
     //Aguardar API
     await response.json().then(resp => {
-      this.setState({ list: resp.resposta, loading:false });
+      this.setState({ list: resp.resposta, loading: false, atualPage: nPage, numPage: Math.ceil(response.headers.get('totalpages') / 12)});
+      this.stateImage(this.state.list.length);
+    });
+  }
+
+  async changePage(e){
+    if(e.target.value === '-') await this.getFichasRI(this.state.atualPage-1);
+    else if(e.target.value === '+') await this.getFichasRI(this.state.atualPage+1);
+          else await this.getFichasRI(e.target.value);
+  }
+  
+  createPagination(){
+    let pag = [];
+    if(this.state.atualPage === 1) pag.push(<li className="page-item disabled" key="-"><button className="page-link">Antes</button></li>);
+    else pag.push(<li className="page-item" key="-"><button className="page-link" value="-" onClick={this.changePage}>Antes</button></li>);
+      for (let i = 1; i <= this.state.numPage; i++) {
+        if(this.state.atualPage === i) pag.push(<li className="page-item disabled" key={i}><button className="page-link">{i}</button></li>);
+        else pag.push(<li className="page-item" key={i}><button className="page-link" value={i} onClick={this.changePage}>{i}</button></li>);
+    }
+    if(this.state.atualPage === this.state.numPage) pag.push(<li className="page-item disabled" key="+"><button className="page-link">Depois</button></li>);
+    else pag.push(<li className="page-item" key="+"><button className="page-link" value="+" onClick={this.changePage}>Depois</button></li>);
+    return pag;
+  }
+
+  getImage(id) {
+    // alert("A CARREGAR A IMAGEM "+ id);
+    const response = fetch("/api/fichaRegistoIdentificacao/imagem/"+id, {
+      method: "GET",
+      headers: {
+        "x-auth-token": sessionStorage.getItem("token")
+      }
+    });
+    //Aguardar API
+    response.then(resp => resp.blob())
+    .then(blob =>{
+        let reader = new FileReader();
+        reader.onload = function () {
+          document.getElementById(id+"img").src = reader.result.toString();
+        }
+        reader.readAsDataURL(blob);
     });
   }
 
   render() {
+    let getThis = this;
     //Verifica se existe o token
     if (sessionStorage.getItem("token") == null) {
       window.location = "/";
@@ -80,9 +132,9 @@ class Index extends Component {
           </div>
           <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
           {
-            this.state.loading?
+            this.state.loading ?
               <LoadingAnimation />
-            :
+              :
               <div className="row">
                 {!this.state.list.length !== 0 ? (
                   this.state.list.map(function (obj) {
@@ -91,9 +143,8 @@ class Index extends Component {
                       <div className="col-sm-3 mb-3" key={obj.fichaRegistoID}>
                         <a href={href}>
                           <div className="card">
-                            <div className="card-body p-0">
-                              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Our_Lady_of_the_Gate_of_Dawn_Interior_During_Service%2C_Vilnius%2C_Lithuania_-_Diliff.jpg/800px-Our_Lady_of_the_Gate_of_Dawn_Interior_During_Service%2C_Vilnius%2C_Lithuania_-_Diliff.jpg" alt="Imagem" className="card-img-top img-fluid"
-                                style={{ objectFit: "cover", height: "200px", width: "300px" }} />
+                            <div className="card-body p-0" id={obj.fichaRegistoID}>
+                              <img id={obj.fichaRegistoID+"img"}  src="..." alt="Imagem" className="card-img-top img-fluid" style={{ objectFit: "cover", height: "200px", width: "300px" }} />
                               <div className="card-footer text-muted text-center">
                                 {obj.designacao}
                               </div>
@@ -113,6 +164,11 @@ class Index extends Component {
                   )}
               </div>
           }
+          <nav aria-label="Page navigation example center">
+            <ul className="pagination">
+              {this.createPagination()}
+            </ul>
+          </nav>
         </div>
       );
     }

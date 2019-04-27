@@ -1,3 +1,4 @@
+var fs = require('file-system');
 /**
  * Ficheiro que faz as querys de uma ficha tecnica
  */
@@ -201,6 +202,7 @@ exports.getFichaRegistoIdentificacao = async (bd, id) => {
  */
 exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
   let resultadofinal = { stat: 1, resposta: "Missing Fields" };
+  let resposta_bd;
   //verificar se os campos estao preenchidos
   if (
     dados.designacao &&
@@ -212,23 +214,56 @@ exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
     dados.localidade &&
     dados.interessadoFK
   ) {
-    let resposta_bd = await bd.query(
-      "update tbl_fichaRegistoIdentificacao set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataEntrega=?, coordenacao =? ,direcaoTecnica=?,localidade=?,interessadoFK =?  where fichaRegistoID = ?",
-      [
-        dados.visible,
-        dados.designacao,
-        dados.processoLCRM,
-        dados.processoCEARC,
-        dados.dataEntrada,
-        dados.dataConclusao,
-        dados.dataEntrega,
-        dados.coordenacao,
-        dados.direcaoTecnica,
-        dados.localidade,
-        dados.interessadoFK,
-        dados.fichaRegistoID
-      ]
-    );
+    if (dados.imagem == "") {
+      resposta_bd = await bd.query(
+        "update tbl_fichaRegistoIdentificacao set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataEntrega=?, coordenacao =? ,direcaoTecnica=?,localidade=?,interessadoFK =?  where fichaRegistoID = ?",
+        [
+          dados.visible,
+          dados.designacao,
+          dados.processoLCRM,
+          dados.processoCEARC,
+          dados.dataEntrada,
+          dados.dataConclusao,
+          dados.dataEntrega,
+          dados.coordenacao,
+          dados.direcaoTecnica,
+          dados.localidade,
+          dados.interessadoFK,
+          dados.fichaRegistoID
+        ]
+      );
+    } else {
+      let imagemVelha = await bd.query(
+        "Select imagem from tbl_ficharegistoidentificacao where fichaRegistoID = ?",
+        [dados.fichaRegistoID]
+      );
+      imagemVelha = imagemVelha.resposta[0].imagem;
+      console.log(imagemVelha);
+      if (fs.existsSync(imagemVelha + "")) {
+        fs.unlink(imagemVelha + "", (err) => {
+          if (err) throw err;
+          console.log('Apagado');
+        });
+      }
+      resposta_bd = await bd.query(
+        "update tbl_fichaRegistoIdentificacao set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataEntrega=?, coordenacao =? ,direcaoTecnica=?,localidade=?, imagem=?, interessadoFK =?  where fichaRegistoID = ?",
+        [
+          dados.visible,
+          dados.designacao,
+          dados.processoLCRM,
+          dados.processoCEARC,
+          dados.dataEntrada,
+          dados.dataConclusao,
+          dados.dataEntrega,
+          dados.coordenacao,
+          dados.direcaoTecnica,
+          dados.localidade,
+          dados.imagem,
+          dados.interessadoFK,
+          dados.fichaRegistoID
+        ]
+      );
+    }
     let resposta_aux = await bd.query(
       "Select * from tbl_registoTecnicos where fichaRegistoFK = ?",
       [dados.fichaRegistoID]

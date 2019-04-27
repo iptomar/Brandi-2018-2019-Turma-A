@@ -4,15 +4,15 @@ var multer = require("multer");
 var mkdirp = require("mkdirp");
 const path = require("path");
 
-mkdirp("../images/registoIdentificacao", function(err) {
+mkdirp("../images/registoIdentificacao", function (err) {
   if (err) console.error(err);
 });
 
 var storage = multer.diskStorage({
-  destination: function(req, file, callback) {
+  destination: function (req, file, callback) {
     callback(null, "../images/registoIdentificacao");
   },
-  filename: function(req, file, callback) {
+  filename: function (req, file, callback) {
     callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
   }
 });
@@ -32,7 +32,7 @@ exports.getTodasFichasRegistoIdentificacaoRoute = async (app, bd) => {
     }
     //query para saber o numero de paginas que existem
     let totalpagesquery = await bd.query(
-      "select count(*) as total from tbl_ficharegistoIdentificacao where visible=1" 
+      "select count(*) as total from tbl_ficharegistoIdentificacao where visible=1"
     );
     // numero de paginas que existe na base de dados
     let totalpages = totalpagesquery.resposta[0];
@@ -164,7 +164,7 @@ exports.createfichaRegistoIdentificacaoRoute = async (app, bd) => {
  * Rota para alterar uma ficha tecnica
  */
 exports.updatefichaRegistoIdentificacaoRoute = async (app, bd) => {
-  app.post("/api/fichaRegistoIdentificacao/:id/edit", async (req, resp) => {
+  app.post("/api/fichaRegistoIdentificacao/:id/edit", upload.single("imagem"), async (req, resp) => {
     let resposta_servidor = { stat: "Authenticated", resposta: {} };
     //HTTP CODE ACCEPTED
     let code = 201;
@@ -186,6 +186,10 @@ exports.updatefichaRegistoIdentificacaoRoute = async (app, bd) => {
     else {
       //se tiver role
       if (token.roleFK) {
+        var imagem = "";
+        if (req.file) {
+          imagem = req.file.path;
+        }
         let ficha = {
           visible: true,
           designacao: req.body.designacao,
@@ -197,6 +201,7 @@ exports.updatefichaRegistoIdentificacaoRoute = async (app, bd) => {
           coordenacao: req.body.coordenacao,
           direcaoTecnica: req.body.direcaoTecnica,
           localidade: req.body.localidade,
+          imagem: imagem,
           interessadoFK: req.body.interessadoFK,
           fichaRegistoID: req.params.id,
           tecnicosFK: req.body.tecnicosFK

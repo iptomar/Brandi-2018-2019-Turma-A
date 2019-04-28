@@ -10,8 +10,9 @@ class Pag3 extends Component {
       edit: false,
       alertText: '',
       alertisNotVisible: true,
-      alertColor: ''
+      alertColor: '',
     };
+    
   }
 
   render() {
@@ -22,8 +23,9 @@ class Pag3 extends Component {
                 <div class="col-6 col-md-4">
                     <div>
                         <label>Descrição:</label>
+                        <textarea type="text" className="form-control" placeholder="" />
                     </div>
-                    <div></div>
+                  
                 </div>
                 
                 <div class="col-12 col-md-8">
@@ -35,13 +37,13 @@ class Pag3 extends Component {
                         </div>
                         <div class="row">
                             <div class="col-6 col-md-4"> <label>Temperatura (em ºC):</label></div>
-                            <div class="col-6 col-md-4"> <input type="text" className="form-control"  placeholder="desconhecido" /></div>{/*falta a restriçao dos valores*/}
-                            <div class="col-6 col-md-4"><input type="text" className="form-control"  placeholder="desconhecido" /></div>{/*falta a restriçao dos valores*/}
+                            <div class="col-6 col-md-4"> <input type="number" className="form-control" onchange ={this.handlechange}  placeholder="desconhecido" /></div>{/*falta a restriçao dos valores*/}
+                            <div class="col-6 col-md-4"><input type="number" className="form-control"  placeholder="desconhecido" /></div>{/*falta a restriçao dos valores*/}
                         </div>
                         <div class="row">
                             <div class="col-6 col-md-4"><label>Humidade relativa (em %):</label></div>
-                            <div class="col-6 col-md-4"><input type="text" className="form-control"  placeholder="desconhecido" /></div>{/*falta a restriçao dos valores*/}
-                            <div class="col-6 col-md-4"><input type="text" className="form-control"  placeholder="desconhecido" /></div>{/*falta a restriçao dos valores*/}
+                            <div class="col-6 col-md-4"><input type="number" className="form-control"  placeholder="desconhecido" /></div>{/*falta a restriçao dos valores*/}
+                            <div class="col-6 col-md-4"><input type="number" className="form-control"  placeholder="desconhecido" /></div>{/*falta a restriçao dos valores*/}
                         </div>
                         <div class="row">
                             <div class="col-6 col-md-4"><label>periodo do ano:</label></div>
@@ -49,22 +51,22 @@ class Pag3 extends Component {
                                 
                                     <div class="row">          
                                         <div class="col">                          
-                                            <input type="text" className="form-control" placeholder="Inicio" />
+                                            <input type="number" min="1" max="12" className="form-control" placeholder="Inicio" />
                                         </div>
                                         <div class="col">                          
-                                            <input type="text" className="form-control" placeholder="Fim" />
+                                            <input type="number" min="1" max="12" className="form-control" placeholder="Fim" />
                                         </div>
-                                </div>
+                                    </div>
                             </div>
                             <div class="col-6 col-md-4">
                             <div class="row">          
                                         <div class="col">                          
-                                            <input type="text" className="form-control" placeholder="Inicio" />
+                                            <input type="number" min="1" max="12" className="form-control" placeholder="Inicio" />
                                         </div>
                                         <div class="col">                          
-                                            <input type="text" className="form-control" placeholder="Fim" />
+                                            <input type="number" min="1" max="12" className="form-control" placeholder="Fim" />
                                         </div>
-                                </div>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -95,16 +97,16 @@ class Pag3 extends Component {
             </div>
 
             <div class="row">
-                <div class="col"><label>Valor de U.V Medidos (nw/cm^2): </label> </div>
+                <div class="col"><label>Valor de U.V Medidos (nw/cm<sup>2</sup>): </label> </div>
                 <div class="col">  <input type="text" className="form-control" placeholder="" /> </div>
-                <div class="col"><label>Valor de U.V Medidos (nw/cm^2): </label> </div>
+                <div class="col"><label>Valor de U.V Medidos (nw/cm<sup>2</sup>): </label> </div>
                 <div class="col">  <input type="text" className="form-control" placeholder="" /> </div>
             </div>
             
             <div class="row">
-                <div class="col"><label>Valor real de U.V (nw/cm^2): </label> </div>
+                <div class="col"><label>Valor real de U.V (nw/cm<sup>2</sup>): </label> </div>
                 <div class="col">  <input type="text" className="form-control" placeholder="" /> </div>
-                <div class="col"><label>Valor real de U.V (nw/cm^2): </label> </div>
+                <div class="col"><label>Valor real de U.V (nw/cm<sup>2</sup>): </label> </div>
                 <div class="col">  <input type="text" className="form-control" placeholder="" /> </div>
             </div>
             

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Pag1 from "../../Components/FichaTecnica/Create/Pag1";
+import Pag2 from "../../Components/FichaTecnica/Create/Pag2";
 import Pag3 from "../../Components/FichaTecnica/Create/Pag3";
 class Create extends Component {
   handleSubmit = async e => {

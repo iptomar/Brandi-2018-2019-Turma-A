@@ -28,7 +28,8 @@ exports.getSingleMateriais = async (bd, id) => {
   return resultadofinal;
 };
 
-exports.createExamesEAnalises = async (bd, dados) => {
+exports.createMateriais = async (bd, dados) => {
+  dados = [{estrutura: "dadasdadadds", superficie: "fdadasdasda", fichaTecnicaFK: 1}];
   let resultadofinal = { stat: 1, resposta: "Campos Inválidos" };
   let auxiliar = "";
   for (let i = 0; i < dados.length; i++) {
@@ -37,9 +38,9 @@ exports.createExamesEAnalises = async (bd, dados) => {
   auxiliar = auxiliar.substring(0, auxiliar.length - 1); //tira ultima virgula
   let array2 = [];
   for (let i = 0; i < dados.length; i++) {
-    if (dados[i].estrutura && dados[i].superifice && dados[i].fichaTecnicaFK) {
+    if (dados[i].estrutura && dados[i].superficie && dados[i].fichaTecnicaFK) {
       array2.push(dados[i].estrutura);
-      array2.push(dados[i].superifice);
+      array2.push(dados[i].superficie);
       array2.push(dados[i].fichaTecnicaFK);
     } else {
       return resultadofinal;
@@ -50,6 +51,7 @@ exports.createExamesEAnalises = async (bd, dados) => {
       auxiliar,
     array2
   );
+  console.log(resposta_bd);
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
     resultadofinal.resposta = resposta_bd.resposta[0];
     resultadofinal.stat = 0;

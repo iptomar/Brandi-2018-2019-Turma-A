@@ -17,9 +17,10 @@ exports.getAllCondicoesAmbientaisLocal = async bd => {
 exports.getSingleCondicoesAmbientaisLocal = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: "" };
   let resposta_bd = await bd.query(
-    " Select from tbl_condicoesAmbientaisLocal where condicoesAmbientaisLocalID  = ?",
+    " Select * from tbl_condicoesAmbientaisLocal where condicoesAmbientaisLocalID  = ?",
     [id]
   );
+  console.log(resposta_bd);
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
     resultadofinal.resposta = resposta_bd.resposta[0];
     resultadofinal.stat = 0;

@@ -9,6 +9,7 @@ const processosRouter = require("./modulos/Routers/ProcessosRouter");
 const tecnicosRouter = require("./modulos/Routers/TecnicosRouter");
 const objetosRouter = require("./modulos/Routers/ObjetoRouter");
 const materiaisRouter = require("./modulos/Routers/MateriaisRouter");
+const condicoesAmbientaisLocais = require("./modulos/Routers/CondicoesAmbientaisLocalRouter");
 
 //cria ligacao à base de dados
 //LIGAÇÃO SERVIDOR
@@ -101,6 +102,15 @@ materiaisRouter.getMaterialRoute(app, bd);
 materiaisRouter.createMaterialRoute(app, bd);
 //rota que dá update aos materiais
 materiaisRouter.updateMateriaisRoute(app, bd);
+
+//rota que devolve todas as condições ambientais locais
+condicoesAmbientaisLocais.getAllCondicoesAmbientaisLocal(app, bd);
+//rota que devolve uma condição ambiental local
+condicoesAmbientaisLocais.getCondicaoAmbientalLocal(app, bd);
+//rota que cria uma condição ambiental local
+condicoesAmbientaisLocais.createCondicaoAmbientalLocal(app, bd);
+//rota que dá update de uma condição ambiental local
+condicoesAmbientaisLocais.updateCondicaoAmbientalLocal(app, bd);
 
 
 app.listen(port, () => console.log("Listening na porta", port));

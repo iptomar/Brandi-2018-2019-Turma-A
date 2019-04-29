@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,24 +20,24 @@ import org.openqa.selenium.chrome.ChromeDriver;
  *
  * @author Pedro Tapadas
  */
-public class TestarVisualizacao {
+public class TestarVisualizacaoUsers {
     
     static WebDriver driver = new ChromeDriver();
     
-    public TestarVisualizacao() {
+    public TestarVisualizacaoUsers() {
+        
     }
     
     @BeforeClass
     public static void setUpClass() throws InterruptedException {
-       driver.get("brandi.ipt.pt:81");
+        driver.get("brandi.ipt.pt:81");
         WebElement userField = driver.findElement(By.id("user"));
         userField.sendKeys("admin");
         Thread.sleep(2000);  // Let the user actually see something!
         WebElement passField = driver.findElement(By.id("pass"));
         passField.sendKeys("admin");
         passField.submit();
-        Thread.sleep(2000);  // Let the user actually see something!
-      
+        Thread.sleep(2000);
     }
     
     @AfterClass
@@ -50,21 +51,18 @@ public class TestarVisualizacao {
     }
     
     @After
-    public void tearDown() { 
-   }
+    public void tearDown() {
+    }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
     @Test
-    public void TestVisualizacao() throws InterruptedException {
-        WebElement ficha = driver.findElement(By.className("card"));
-        ficha.click();
+    public void TestVisualizacaoUsers() throws InterruptedException {
+        List<WebElement> users =  driver.findElements(By.className("nav-link"));
+        users.get(0).click();
         Thread.sleep(2000);
-        
-        WebElement details = driver.findElement(By.className("DetailsRIPage"));
-        assertEquals(true, details.isDisplayed());
-          
+        List<WebElement> options =  driver.findElements(By.className("dropdown-item"));
+        options.get(1).click();
+        Thread.sleep(2000);
+        WebElement userList = driver.findElement(By.className("RegisterPage"));
+        assertEquals(true, userList.isDisplayed());
 }
-    
 }

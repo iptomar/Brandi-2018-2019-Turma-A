@@ -24,6 +24,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class TestarLogin {
     
     static WebDriver driver = new ChromeDriver();
+    //variavel utilizada para fazer o logout no final do teste
     boolean dologout = true;
     
     public TestarLogin() {
@@ -49,8 +50,10 @@ public class TestarLogin {
     
     @After
     public void tearDown() {
+        //caso a variavel dologout estetja a true, é efetuado o logout selecionando 
+        //esta opçao na pagina "IndexFichaRIPage"
         if (dologout) {
-         List<WebElement> sair =  driver.findElements(By.className("nav-link"));
+        List<WebElement> sair =  driver.findElements(By.className("nav-link"));
         sair.get(3).click();
         sair =  driver.findElements(By.className("dropdown-item"));
         sair.get(3).click();
@@ -62,32 +65,39 @@ public class TestarLogin {
     //
     @Test
     public void TestLoginSucesso() throws InterruptedException {
-    
+        //definir pagina inicial
         driver.get("brandi.ipt.pt:81");
+        //preencher campos de login
         WebElement userField = driver.findElement(By.id("user"));
         userField.sendKeys("aluno");
-        Thread.sleep(2000);  // Let the user actually see something!
         WebElement passField = driver.findElement(By.id("pass"));
         passField.sendKeys("aluno");
+        //eperar para deixar mostrar o input de dados
+        Thread.sleep(2000);
         passField.submit();
-        Thread.sleep(2000);  // Let the user actually see something!
+        Thread.sleep(2000); 
+        //efectuar o logout
         assertEquals(true,true);
        dologout = true;
     }
     
     @Test
     public void TestLoginInSucesso() throws InterruptedException {
-    
+        //definir pagina inicial
         driver.get("brandi.ipt.pt:81");
+        //preencher campos de login
         WebElement userField = driver.findElement(By.id("user"));
         userField.sendKeys("lala");
-        Thread.sleep(2000);  // Let the user actually see something!
         WebElement passField = driver.findElement(By.id("pass"));
         passField.sendKeys("lala");
+        //eperar para deixar mostrar o input de dados
+        Thread.sleep(2000); 
         passField.submit();
-        Thread.sleep(2000);  // Let the user actually see something!
+        Thread.sleep(2000);  
+        // condicao que verifica se a mensagem de login falhado foi apresentada
         WebElement msg = driver.findElement(By.id("adeus"));
         assertEquals(true, msg.getText().contains("Utilizador ou palavra-passe erradas"));
+         //variavel dologout mudada para true para que seja efetuado o logout no after
         dologout = false;
      }
 }

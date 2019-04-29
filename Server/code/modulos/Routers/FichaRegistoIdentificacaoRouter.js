@@ -32,7 +32,7 @@ exports.getTodasFichasRegistoIdentificacaoRoute = async (app, bd) => {
     }
     //query para saber o numero de paginas que existem
     let totalpagesquery = await bd.query(
-      "select count(*) as total from tbl_ficharegistoIdentificacao where visible=1"
+      "select count(*) as total from tbl_fichaRegistoIdentificacao where visible=1"
     );
     // numero de paginas que existe na base de dados
     let totalpages = totalpagesquery.resposta[0];

@@ -27,7 +27,7 @@ exports.getAllMateriais = async (bd) => {
 };
 
 /**
- * Método que devolve um material
+ * Método que devolve os materiais de uma ficha tecnica
  * @param bd - base de dados para fazer query
  */
 exports.getMaterial = async (bd, id) => {
@@ -36,7 +36,7 @@ exports.getMaterial = async (bd, id) => {
         resposta: {}
     };
     let resposta_bd = await bd.query(
-        "Select * from tbl_materiais where materiaisID = ?", [id]
+        "Select * from tbl_materiais where fichaTecnicaFK = ?", [id]
     );
     if (resposta_bd.stat === 0) {
         resultadofinal.resposta = resposta_bd.resposta;
@@ -54,7 +54,8 @@ exports.getMaterial = async (bd, id) => {
  * @param bd - base de dados para fazer query
  */
 exports.createMaterial = async (bd, dados) => {
-
+    //dados = [{estrutura: "esturjurahfj", superficie: "bfnjdfj", fichaTecnicaFK: 1}];
+    //console.log(dados);
     let resultadofinal = { stat: 1, resposta: "" };
     let resposta_bd;
     //verifica se os campos estão preenchidos
@@ -68,15 +69,14 @@ exports.createMaterial = async (bd, dados) => {
         let i=0;
         while(i < dados.length){
             resposta_bd = await bd.query(
-                "INSERT INTO tbl_materiais (materiaisID, estrutura, superficie, fichaTecnicaFK) VALUES(?, ?, ?, ?)",
-                [dados[i].materiaisID, dados[i].estrutura, dados[i].superficie, dados[i].fichaTecnicaFK]
+                "INSERT INTO tbl_materiais (estrutura, superficie, fichaTecnicaFK) VALUES(?, ?, ?, ?)",
+                [dados[i].estrutura, dados[i].superficie, dados[i].fichaTecnicaFK]
             );
 
             if(resposta_bd != null){
                 i++;
             }
         }
-        //console.log(resposta_bd);
     if (resposta_bd.stat === 0) {
       resultadofinal.resposta = resposta_bd.resposta[0];
       resultadofinal.stat = 0;
@@ -94,6 +94,8 @@ exports.createMaterial = async (bd, dados) => {
  * @param bd - base de dados para fazer query
  */
 exports.updateMateriais = async (bd, dados, id) => {
+
+        //dados = [{estrutura: "esturjurahfj", superficie: "bfnjdfj", fichaTecnicaFK: 1}];
 
     let resultadofinal = { stat: 1, resposta: "" };
     let resposta_bd;

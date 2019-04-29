@@ -8,6 +8,7 @@ const FichaRegistoIdentificacaoRouter = require("./modulos/Routers/FichaRegistoI
 const processosRouter = require("./modulos/Routers/ProcessosRouter");
 const tecnicosRouter = require("./modulos/Routers/TecnicosRouter");
 const objetosRouter = require("./modulos/Routers/ObjetoRouter");
+const materiaisRouter = require("./modulos/Routers/MateriaisRouter");
 
 //cria ligacao à base de dados
 //LIGAÇÃO SERVIDOR
@@ -91,6 +92,15 @@ objetosRouter.createObjetoRoute(app, bd);
 objetosRouter.updateObjetoRouter(app, bd);
 //rota que apagar um objeto
 objetosRouter.deleteObjetoRouter(app, bd);
+
+//rota que devolve todos os materiais
+materiaisRouter.getAllMateriaisRoute(app, bd);
+//rota que devolve um material
+materiaisRouter.getMaterialRoute(app, bd);
+//rota que cria materais
+materiaisRouter.createMaterialRoute(app, bd);
+//rota que dá update aos materiais
+materiaisRouter.updateMateriaisRoute(app, bd);
 
 
 app.listen(port, () => console.log("Listening na porta", port));

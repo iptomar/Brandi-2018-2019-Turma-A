@@ -234,17 +234,27 @@ CREATE TABLE tbl_documentacaoGrafica
 	FOREIGN KEY(fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
 );
 
-DROP TABLE IF EXISTS tbl_fotografias;
-CREATE TABLE tbl_fotografias
+DROP TABLE IF EXISTS tbl_detalhesFotografia;
+CREATE TABLE tbl_detalhesFotografia
 (
-    fotografiaID INT NOT NULL AUTO_INCREMENT,
+    detalhesFotografiaID INT NOT NULL AUTO_INCREMENT,
     tipoRegisto VARCHAR(255),
     resolucao VARCHAR(255),
     referencia VARCHAR(255),
     formato VARCHAR(255),
 	fichaTecnicaFK INT NOT NULL,
-    PRIMARY KEY(fotografiaID),
+    PRIMARY KEY(detalhesFotografiaID),
 	FOREIGN KEY(fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
+);
+
+DROP TABLE IF EXISTS tbl_fotografias;
+CREATE TABLE tbl_fotografias
+(
+    fotografiaID INT NOT NULL AUTO_INCREMENT,
+    fotografia VARCHAR(255),
+	detalhesFotografiaFK INT NOT NULL,
+    PRIMARY KEY(fotografiaID),
+	FOREIGN KEY(detalhesFotografiaFK) REFERENCES tbl_detalhesFotografia(detalhesFotografiaID)
 );
 
 

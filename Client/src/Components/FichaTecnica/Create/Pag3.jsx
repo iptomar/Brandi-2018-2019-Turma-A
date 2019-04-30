@@ -43,10 +43,10 @@ class Pag3 extends Component {
                             </div>
                             <div className="col-6 col-md-4">
                                 <input className="form-control" type="number" onchange ={this.handlechange} placeholder="Temperatura" />
-                            </div>{/*falta a restriçao dos valores*/}
+                            </div>
                             <div className="col-6 col-md-4">
                                 <input className="form-control" type="number" placeholder="Temperatura" />
-                            </div>{/*falta a restriçao dos valores*/}
+                            </div>
                         </div>
                         <div className="row text-right mb-3">
                             <div class="col-6 col-md-4">
@@ -54,10 +54,10 @@ class Pag3 extends Component {
                             </label></div>
                             <div class="col-6 col-md-4">
                                 <input class="form-control" type="number" min="0" max="100" placeholder="Humidade relativa" />
-                            </div>{/*falta a restriçao dos valores*/}
+                            </div>
                             <div class="col-6 col-md-4">
                                 <input class="form-control" type="number" min="0" max="100" placeholder="Humidade relativa" />
-                            </div>{/*falta a restriçao dos valores*/}
+                            </div>
                         </div>
                         <div class="row text-right mb-4">
                             <div class="col-6 col-md-4">

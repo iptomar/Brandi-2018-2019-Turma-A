@@ -31,7 +31,6 @@ class Pag3 extends Component {
                             </div>
                         </div>
                         <div className="col-12 col-md-8">
-                            <div className="container">
                                 <div className="row text-center mb-3">
                                     <div className="col-6 col-md-4"></div>
                                     <div className="col-6 col-md-4">Frio / Húmido</div>
@@ -50,8 +49,8 @@ class Pag3 extends Component {
                                 </div>
                                 <div className="row text-right mb-3">
                                     <div class="col-6 col-md-4">
-                                        <label>Humidade relativa (%):
-                            </label></div>
+                                        <label>Humidade relativa (%):</label>
+                                    </div>
                                     <div class="col-6 col-md-4">
                                         <input class="form-control" type="number" min="0" max="100" placeholder="Humidade relativa" />
                                     </div>
@@ -84,7 +83,7 @@ class Pag3 extends Component {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            
                         </div>
                     </div>
 

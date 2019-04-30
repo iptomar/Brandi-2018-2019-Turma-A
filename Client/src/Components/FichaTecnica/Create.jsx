@@ -62,6 +62,7 @@ class Create extends Component {
             <div className="py-3 text-center">
               <h2>Ficha Técnica</h2>
             </div>
+            
             <Pag1 />
             <Pag2 />
             <Pag3 />

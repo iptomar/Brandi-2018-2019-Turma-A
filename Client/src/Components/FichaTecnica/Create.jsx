@@ -59,7 +59,12 @@ class Create extends Component {
     return (
       <div className="LoginPage">
         <form className="py-3" onSubmit={this.handleSubmit}>
-          <Pag3 />
+            <div className="py-3 text-center">
+              <h2>Ficha Técnica</h2>
+            </div>
+            <Pag1 />
+            <Pag2 />
+            <Pag3 />
 
         </form>
       </div>

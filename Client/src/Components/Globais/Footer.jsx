@@ -8,7 +8,7 @@ class Footer extends Component {
        
        <div class="container-footer-all">
         
-            <div class="container-body">
+            <div class="container-body-footer">
 
                 <div class="colum1">
                     <h1>Informação da aplicação</h1>
@@ -22,18 +22,18 @@ class Footer extends Component {
 
                     <h1>Redes Sociais</h1>
 				<div class="column2_n">
-                    <div class="row">
+                    <div class="row-footer">
 					<a href="https://www.facebook.com/iptomar" class="btn btn-block btn-social btn-twitter btn_edit">
     					<span class="fa fa-facebook">Segue o IPT no Facebook</span> 
   					</a>
                     </div>
 
-                    <div class="row">
+                    <div class="row-footer">
 					<a href="https://www.instagram.com/ipt.politecnicodetomar/" class="btn btn-block btn-social btn-twitter btn_edit">
     					<span class="fa fa-instagram"> Segue o IPT no Instagram</span>
   					</a>
                     </div>
-                    <div class="row">
+                    <div class="row-footer">
                     
 						<a href="https://twitter.com/iptomar" class="btn btn-block btn-social btn-twitter btn_edit">
     					<span class="fa fa-twitter">Segue o IPT no Twitter </span> 

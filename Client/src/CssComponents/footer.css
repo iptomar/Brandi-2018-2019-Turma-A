@@ -14,7 +14,7 @@ footer{
     padding: 40px;
 }
 
-.container-body{
+.container-body-footer{
     display: flex;
     justify-content: space-between;
 }
@@ -41,24 +41,23 @@ footer{
 .colum2 h1{
     font-size: 22px;
 }
+
+
 .column2_n{
 	align-content: initial;
-
-
-
 }
 
-.row{
+.row-footer{
     margin-top: 20px;
     display: flex;
 }
 
-.row img{
+.row-footer img{
     width: 36px;
     height: 36px;
 }
 
-.row label{
+.row-footer label{
     margin-top: 10px;
     margin-left: 20px;
     color: #C7C7C7;

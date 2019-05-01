@@ -48,36 +48,36 @@ class Pag3 extends Component {
                                     </div>
                                 </div>
                                 <div className="row text-right mb-3">
-                                    <div class="col-6 col-md-4">
+                                    <div className="col-6 col-md-4">
                                         <label>Humidade relativa (%):</label>
                                     </div>
-                                    <div class="col-6 col-md-4">
-                                        <input class="form-control" type="number" min="0" max="100" placeholder="Humidade relativa" />
+                                    <div className="col-6 col-md-4">
+                                        <input className="form-control" type="number" min="0" max="100" placeholder="Humidade relativa" />
                                     </div>
-                                    <div class="col-6 col-md-4">
-                                        <input class="form-control" type="number" min="0" max="100" placeholder="Humidade relativa" />
+                                    <div className="col-6 col-md-4">
+                                        <input className="form-control" type="number" min="0" max="100" placeholder="Humidade relativa" />
                                     </div>
                                 </div>
-                                <div class="row text-right mb-4">
-                                    <div class="col-6 col-md-4">
+                                <div className="row text-right mb-4">
+                                    <div className="col-6 col-md-4">
                                         <label>Período do ano (Meses):</label>
                                     </div>
-                                    <div class="col-6 col-md-4">
-                                        <div class="row">
-                                            <div class="col-md-6 pr-1">
-                                                <input type="number" min="1" max="12" className="form-control" placeholder="Início" />
+                                    <div className="col-6 col-md-4">
+                                        <div className="row">
+                                            <div className="col-md-6 pr-1">
+                                                <input type="number" min="1" max="12" classNameName="form-control" placeholder="Início" />
                                             </div>
-                                            <div class="col-md-6 pl-1">
+                                            <div className="col-md-6 pl-1">
                                                 <input type="number" min="1" max="12" className="form-control" placeholder="Fim" />
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6 col-md-4">
-                                        <div class="row">
-                                            <div class="col-md-6 pr-1">
+                                    <div className="col-6 col-md-4">
+                                        <div className="row">
+                                            <div className="col-md-6 pr-1">
                                                 <input type="number" min="1" max="12" className="form-control" placeholder="Início" />
                                             </div>
-                                            <div class="col-md-6 pl-1">
+                                            <div className="col-md-6 pl-1">
                                                 <input type="number" min="1" max="12" className="form-control" placeholder="Fim" />
                                             </div>
                                         </div>
@@ -91,11 +91,11 @@ class Pag3 extends Component {
                         <h4>Iluminação</h4>
                     </div>
 
-                    <div class="row">
-                        <div class="col text-center py-2 ">
+                    <div className="row">
+                        <div className="col text-center py-2 ">
                             <h5>Artificial</h5>
                         </div>
-                        <div class="col text-center py-2" >
+                        <div className="col text-center py-2" >
                             <h5>Natural </h5>
                         </div>
                     </div>

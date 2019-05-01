@@ -6,11 +6,11 @@ class Footer extends Component {
 		return (
 			<footer>
        
-       <div class="container-footer-all">
+       <div className="container-footer-all">
         
-            <div class="container-body-footer">
+            <div className="container-body-footer">
 
-                <div class="colum1">
+                <div className="colum1">
                     <h1>Informação da aplicação</h1>
 
                     <p>Esta aplicação foi criada para o Laboratório de Conservação e Restauro
@@ -18,25 +18,25 @@ class Footer extends Component {
 
                 </div>
 
-                <div class="colum2">
+                <div className="colum2">
 
                     <h1>Redes Sociais</h1>
-				<div class="column2_n">
-                    <div class="row-footer">
-					<a href="https://www.facebook.com/iptomar" class="btn btn-block btn-social btn-twitter btn_edit">
-    					<span class="fa fa-facebook">Segue o IPT no Facebook</span> 
+				<div className="column2_n">
+                    <div className="row-footer">
+					<a href="https://www.facebook.com/iptomar" className="btn btn-block btn-social btn-twitter btn_edit">
+    					<span className="fa fa-facebook">Segue o IPT no Facebook</span> 
   					</a>
                     </div>
 
-                    <div class="row-footer">
-					<a href="https://www.instagram.com/ipt.politecnicodetomar/" class="btn btn-block btn-social btn-twitter btn_edit">
-    					<span class="fa fa-instagram"> Segue o IPT no Instagram</span>
+                    <div className="row-footer">
+					<a href="https://www.instagram.com/ipt.politecnicodetomar/" className="btn btn-block btn-social btn-twitter btn_edit">
+    					<span className="fa fa-instagram"> Segue o IPT no Instagram</span>
   					</a>
                     </div>
-                    <div class="row-footer">
+                    <div className="row-footer">
                     
-						<a href="https://twitter.com/iptomar" class="btn btn-block btn-social btn-twitter btn_edit">
-    					<span class="fa fa-twitter">Segue o IPT no Twitter </span> 
+						<a href="https://twitter.com/iptomar" className="btn btn-block btn-social btn-twitter btn_edit">
+    					<span className="fa fa-twitter">Segue o IPT no Twitter </span> 
   						</a>
                     </div>
 					
@@ -45,23 +45,23 @@ class Footer extends Component {
 
                 </div>
 
-                <div class="colum3">
+                <div className="colum3">
 
                     <h1>Informações de Contacto</h1>
-					<div class="column2_n">
-						<div class="row2">
-							<span class="fa fa-home btn_edit" aria-hidden="true"><label>Quinta do Contador . 
+					<div className="column2_n">
+						<div className="row2">
+							<span className="fa fa-home btn_edit" aria-hidden="true"><label>Quinta do Contador . 
 							Estrada da Serra . 2300-313 . 
 							Tomar . Portugal</label></span>
                    		</div>
 
-                   		<div class="row2">
+                   		<div className="row2">
                        
-                        	<span class="fa fa-phone btn_edit " aria-hidden="true" ><label>+1-829-395-2064</label></span>
+                        	<span className="fa fa-phone btn_edit " aria-hidden="true" ><label>+1-829-395-2064</label></span>
                     	</div>
 
-                    	<div class="row2">
-							<span class="fa fa-envelope btn_edit" aria-hidden="true"> <label>geral@ipt.pt</label></span> 
+                    	<div className="row2">
+							<span className="fa fa-envelope btn_edit" aria-hidden="true"> <label>geral@ipt.pt</label></span> 
                     	</div>
 					
 				
@@ -74,9 +74,9 @@ class Footer extends Component {
         
         </div>
         
-        {/*<div class="container-footer">
-               <div class="footer">
-                    <div class="copyright">
+        {/*<div className="container-footer">
+               <div className="footer">
+                    <div className="copyright">
                         © 2019 | <a href="">Brandi</a>
                     </div>
 

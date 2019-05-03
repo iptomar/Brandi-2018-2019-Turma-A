@@ -28,7 +28,7 @@ exports.getSingleInteressadosContactos = async (bd, id) => {
   return resultadofinal;
 };
 
-exports.createExamesEAnalises = async (bd, dados) => {
+exports.createInteressadosContactos = async (bd, dados) => {
   let resultadofinal = { stat: 1, resposta: "Campos Inválidos" };
   let auxiliar = "";
   for (let i = 0; i < dados.length; i++) {
@@ -46,7 +46,7 @@ exports.createExamesEAnalises = async (bd, dados) => {
   }
   let resposta_bd = await bd.query(
     " Insert into tbl_interessadosContactos (contacto,interessadoFK) values " +
-      auxiliar,
+    auxiliar,
     array2
   );
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {

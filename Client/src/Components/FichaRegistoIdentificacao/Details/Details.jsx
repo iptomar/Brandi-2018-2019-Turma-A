@@ -103,7 +103,7 @@ class Details extends Component {
               align="right">
               {
                 this.state.edit?
-                  <i class="fas fa-undo"></i>
+                  <i className="fas fa-undo"></i>
                 :
                   <i className="fas fa-edit"></i>
               }

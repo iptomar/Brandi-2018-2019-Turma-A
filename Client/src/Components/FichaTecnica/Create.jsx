@@ -71,6 +71,7 @@ class Create extends Component {
             <Pag1 />
             <Pag2 />
             <Pag3 />
+            <Pag4 />
         </form>
       </div>
     );

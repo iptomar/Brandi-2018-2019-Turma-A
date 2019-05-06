@@ -174,7 +174,7 @@ class Edit extends Component {
     formData.append("interessadoFK", '1');
     formData.append("imagem", this.state.data.files);
 
-    if(this.state.files.length!=0){
+    if(this.state.files.length!==0){
       formData.delete("imagem");
       formData.append("imagem", this.state.files);
     }

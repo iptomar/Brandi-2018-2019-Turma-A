@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import FileUpload from "../../Globais/FileUpload";
-import AlertMsg from "../../Globais/AlertMsg";
-
 export class Pag1 extends Component {
 
   constructor(props) {

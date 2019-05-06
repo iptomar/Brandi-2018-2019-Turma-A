@@ -17,6 +17,7 @@ class Read extends Component {
 
   componentDidMount(){
     this.getFichaRI(this.props.id);
+    this.getAndSetImage();
   }
 
   async getFichaRI(id) {
@@ -56,6 +57,24 @@ class Read extends Component {
     });
   }
 
+  getAndSetImage() {
+    const response = fetch("/api/fichaRegistoIdentificacao/imagem/"+this.props.id, {
+      method: "GET",
+      headers: {
+        "x-auth-token": sessionStorage.getItem("token")
+      }
+    });
+    //Aguardar API
+    response.then(resp => resp.blob())
+    .then(blob =>{
+        let reader = new FileReader();
+        reader.onload = function () {
+          document.getElementById("imgPrev").src = reader.result.toString();
+        }
+        reader.readAsDataURL(blob);
+    });
+  }
+
   render() {
     if (sessionStorage.getItem("token") == null) {
       window.location = "/";
@@ -68,7 +87,7 @@ class Read extends Component {
                 <div className="col-md-12 mb-3">
                   <div className="text-center">
                     <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Michelangelo_-_Creation_of_Adam_%28cropped%29.jpg"
+                      src="..."
                       id="imgPrev"
                       className="rounded img-thumbnail"
                       alt="Imagem"

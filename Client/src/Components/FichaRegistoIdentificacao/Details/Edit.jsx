@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AlertMsg from '../../Globais/AlertMsg';
 import LoadingAnimation from '../../Globais/LoadingAnimation';
+import FileUpload from "../../Globais/FileUpload";
 
 class Edit extends Component {
   constructor(props) {
@@ -14,14 +15,21 @@ class Edit extends Component {
       showAlert: false,
       data: null,
       tecnicosResp: [],
+      files: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     this.dateTreatment = this.dateTreatment.bind(this);
   }
 
+  //Recebe os dados do filho Upload
+  getData(data) {
+    this.setState({ files: data });
+  }
+
   componentDidMount(){
     this.fetchFichaRI(this.props.id);
+    this.getAndSetImage();
   }
 
   async fetchFichaRI(id) {
@@ -53,6 +61,24 @@ class Edit extends Component {
           color: 'danger'
         }
       });
+    });
+  }
+
+  getAndSetImage() {
+    const response = fetch("/api/fichaRegistoIdentificacao/imagem/"+this.props.id, {
+      method: "GET",
+      headers: {
+        "x-auth-token": sessionStorage.getItem("token")
+      }
+    });
+    //Aguardar API
+    response.then(resp => resp.blob())
+    .then(blob =>{
+        let reader = new FileReader();
+        reader.onload = function () {
+          document.getElementById("imgPrev").src = reader.result.toString();
+        }
+        reader.readAsDataURL(blob);
     });
   }
 
@@ -133,28 +159,33 @@ class Edit extends Component {
   edit = async e => {
     e.preventDefault();
 
-    //Objeto data
-    const data = {
-      designacao: this.state.data.designacao,
-      processoLCRM: this.state.data.processoLCRM,
-      processoCEARC: this.state.data.processoCEARC,
-      dataEntrada: this.dateTreatment(this.state.data.dataEntrada),
-      dataConclusao: this.dateTreatment(this.state.data.dataConclusao),
-      dataEntrega: this.dateTreatment(this.state.data.dataEntrega),
-      coordenacao: this.state.data.coordenacao,
-      direcaoTecnica: this.state.data.direcaoTecnica,
-      localidade: this.state.data.localidade,
-      tecnicosFK: this.verifyCBS(),
-      interessadoFK: '1'
-    };
+    let formData = new FormData();
+    
+    formData.append("designação", this.state.data.designacao);
+    formData.append("processoLCRM", this.state.data.processoLCRM);
+    formData.append("processoCEARC", this.state.data.processoCEARC);
+    formData.append("dataEntrada", this.dateTreatment(this.state.data.dataEntrada));
+    formData.append("dataConclusao", this.dateTreatment(this.state.data.dataConclusao));
+    formData.append("dataEntrega", this.dateTreatment(this.state.data.dataEntrega));
+    formData.append("coordenacao", this.state.data.coordenacao);
+    formData.append("direcaoTecnica", this.state.data.direcaoTecnica);
+    formData.append("localidade", this.state.data.localidade);
+    formData.append("tecnicosFK", this.verifyCBS());
+    formData.append("interessadoFK", '1');
+    formData.append("imagem", this.state.data.files);
+
+    if(this.state.files.length!=0){
+      formData.delete("imagem");
+      formData.append("imagem", this.state.files);
+    }
+
     //Enviar pedido
     const response = await fetch(`/api/fichaRegistoIdentificacao/${this.props.id}/edit`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
         'x-auth-token': sessionStorage.getItem('token')
       },
-      body: JSON.stringify(data)
+      body: formData
     });
 
     //Aguardar resposta
@@ -200,7 +231,7 @@ class Edit extends Component {
                 <div className="col-md-12 mb-3">
                   <div className="text-center">
                     <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Michelangelo_-_Creation_of_Adam_%28cropped%29.jpg"
+                      src="..."
                       id="imgPrev"
                       className="rounded img-thumbnail"
                       alt="Imagem"
@@ -337,9 +368,12 @@ class Edit extends Component {
                         />
                     </div>
                   </div>
+                  
+                  <FileUpload sendData={this.getData} type="image"/>
+
                   <AlertMsg text={this.state.alert.text} isNotVisible={this.state.alert.notVisible} alertColor={this.state.alert.color} />
                   <hr className="mb-4" />
-                  <button className="btn btn-primary btn-lg btn-block" onClick={this.toggleEdit} data-toggle="modal" data-target="#modalEdit">Guardar</button>
+                  <button className="btn btn-primary btn-lg btn-block mb-4" onClick={this.toggleEdit} data-toggle="modal" data-target="#modalEdit">Guardar</button>
                 </div>
               </div>
 

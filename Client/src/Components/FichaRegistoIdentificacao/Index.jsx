@@ -144,7 +144,7 @@ class Index extends Component {
                         <a href={href}>
                           <div className="card">
                             <div className="card-body p-0" id={obj.fichaRegistoID}>
-                              <img id={obj.fichaRegistoID+"img"}  src="..." alt="Imagem" className="card-img-top img-fluid" style={{ objectFit: "cover", height: "200px", width: "300px" }} />
+                              <img id={obj.fichaRegistoID+"img"}  src="" alt="Imagem" className="card-img-top img-fluid" style={{ objectFit: "cover", height: "200px", width: "300px" }} />
                               <div className="card-footer text-muted text-center">
                                 {obj.designacao}
                               </div>

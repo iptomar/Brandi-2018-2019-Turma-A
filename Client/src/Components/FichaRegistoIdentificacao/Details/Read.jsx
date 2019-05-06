@@ -87,7 +87,7 @@ class Read extends Component {
                 <div className="col-md-12 mb-3">
                   <div className="text-center">
                     <img
-                      src="..."
+                      src=""
                       id="imgPrev"
                       className="rounded img-thumbnail"
                       alt="Imagem"

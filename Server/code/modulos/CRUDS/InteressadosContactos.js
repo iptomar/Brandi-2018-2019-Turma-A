@@ -14,7 +14,7 @@ exports.getAllInteressadosContactos = async (bd, limit, pagenumber) => {
 exports.getSingleInteressadosContactos = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: "" };
   let resposta_bd = await bd.query(
-    " Select from tbl_interessadosContactos where interessadoContactoID= ?",
+    " Select * from tbl_interessadosContactos where interessadoContactoID= ?",
     [id]
   );
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {

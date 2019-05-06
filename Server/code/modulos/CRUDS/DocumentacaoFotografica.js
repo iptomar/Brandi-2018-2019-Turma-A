@@ -15,7 +15,7 @@ exports.getAllDocumentacaoFotografica = async bd => {
 exports.getSingleDocumentacaoFotografica = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: "" };
   let resposta_bd = await bd.query(
-    " Select from tbl_documentacaoFotografica where documentacaoFotograficaID = ?",
+    " Select * from tbl_documentacaoFotografica where documentacaoFotograficaID = ?",
     [id]
   );
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {

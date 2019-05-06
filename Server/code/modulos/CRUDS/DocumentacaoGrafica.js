@@ -15,7 +15,7 @@ exports.getAllDocumentacaoGrafica = async bd => {
 exports.getSingleDocumentacaoGrafica = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: "" };
   let resposta_bd = await bd.query(
-    " Select from tbl_documentacaoGrafica where documentacaoGraficaID = ?",
+    " Select * from tbl_documentacaoGrafica where documentacaoGraficaID = ?",
     [id]
   );
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {

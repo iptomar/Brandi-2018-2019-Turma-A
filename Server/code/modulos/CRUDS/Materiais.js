@@ -14,7 +14,7 @@ exports.getAllMateriais = async (bd, limit, pagenumber) => {
 exports.getSingleMateriais = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: "" };
   let resposta_bd = await bd.query(
-    " Select from tbl_materiais where materiaisID    = ?",
+    " Select * from tbl_materiais where materiaisID    = ?",
     [id]
   );
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
@@ -29,7 +29,6 @@ exports.getSingleMateriais = async (bd, id) => {
 };
 
 exports.createMateriais = async (bd, dados) => {
-  dados = [{estrutura: "dadasdadadds", superficie: "fdadasdasda", fichaTecnicaFK: 1}];
   let resultadofinal = { stat: 1, resposta: "Campos Inválidos" };
   let auxiliar = "";
   for (let i = 0; i < dados.length; i++) {

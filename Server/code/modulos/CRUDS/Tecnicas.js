@@ -14,7 +14,7 @@ exports.getAllTecnicas = async bd => {
 exports.getSingleTecnicas = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: "" };
   let resposta_bd = await bd.query(
-    " Select from tbl_Tecnicas where tecnicasID   = ?",
+    " Select * from tbl_Tecnicas where tecnicasID   = ?",
     [id]
   );
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {

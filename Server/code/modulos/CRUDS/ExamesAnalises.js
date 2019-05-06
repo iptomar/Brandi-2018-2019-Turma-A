@@ -14,7 +14,7 @@ exports.getAllExamesEAnalises = async bd => {
 exports.getSingleExamesEAnalises = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: "" };
   let resposta_bd = await bd.query(
-    " Select from tbl_examesAnalises where exameAnaliseID  = ?",
+    " Select * from tbl_examesAnalises where exameAnaliseID  = ?",
     [id]
   );
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {

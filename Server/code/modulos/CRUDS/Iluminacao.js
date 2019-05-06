@@ -15,7 +15,7 @@ exports.getAllIluminacao = async bd => {
 exports.getSingleIluminacao = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: "" };
   let resposta_bd = await bd.query(
-    " Select from tbl_iluminacao where IluminacaoID = ?",
+    " Select * from tbl_iluminacao where IluminacaoID = ?",
     [id]
   );
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {

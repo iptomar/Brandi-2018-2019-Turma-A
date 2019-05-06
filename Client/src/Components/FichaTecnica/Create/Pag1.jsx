@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import FileUpload from "../../Globais/FileUpload";
 import AlertMsg from "../../Globais/AlertMsg";
 
-class Pag1 extends Component {
+export class Pag1 extends Component {
 
   constructor(props) {
     super(props);
@@ -20,7 +20,7 @@ class Pag1 extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12 mb-3">
-              <label>Ficha de registo e identificação correspondente: </label>
+              <label>Ficha Técnica </label>
               <select id="DDLRoles" className="form-control mb-3">
                 {/* {this.state.rolesList.map(function (object) {
                         return (
@@ -80,4 +80,5 @@ class Pag1 extends Component {
     );
   }
 }
+
 export default Pag1;

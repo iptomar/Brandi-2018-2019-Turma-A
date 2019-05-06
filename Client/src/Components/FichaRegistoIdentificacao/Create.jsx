@@ -93,8 +93,55 @@ class Create extends Component {
       },
       body: formData
     });
+
     //Aguardar API
     await response.json().then(resp => {
+      let status = resp.stat;
+      switch (status) {
+        case "DatabaseError":
+          this.setState({
+            alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
+            alertisNotVisible: false,
+            alertColor: "danger"
+          });
+          break;
+        case "NotRegisted":
+          this.setState({
+            alertisNotVisible: false
+          });
+          break;
+        default:
+          console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
+      }
+    });
+
+    //Limpar o formData depois de enviar a primeira parte
+    formData = new FormData();
+
+    formData.append("tipologia", document.getElementById("tipologia").value);
+    formData.append("dimensoes", document.getElementById("dimensoes").value);
+    formData.append("outrasDimensoes", document.getElementById("outrasDimensoes").value);
+    formData.append("breveDescricao", document.getElementById("breveDescricao").value);
+    formData.append("analogias", document.getElementById("analogias").value);
+    formData.append("conclusoes", document.getElementById("conclusoes").value);
+    formData.append("oficina", document.getElementById("oficina").value);
+    formData.append("datacao", document.getElementById("datacao").value);
+    formData.append("localOrigem", document.getElementById("localOrigem").value);
+    formData.append("superCategorias", document.getElementById("superCategorias").value);
+    formData.append("categorias", document.getElementById("categorias").value);
+    formData.append("subCategorias", document.getElementById("subCategorias").value);
+
+    //Enviar pedidos (FORMA UTILIZADA A PEDIDO DA EQUIPA DA API)
+    const responseObjeto = await fetch("/api/objetos/create", {
+      method: "POST",
+      headers: {
+        'x-auth-token': sessionStorage.getItem('token')
+      },
+      body: formData
+    });
+
+    //Aguardar API
+    await responseObjeto.json().then(resp => {
       let status = resp.stat;
       switch (status) {
         case "DatabaseError":
@@ -193,21 +240,65 @@ class Create extends Component {
                     })}
                   </div>
                   <div className="row">
-                    <div className="col-md-12 mb-3">
-                      <label>Proprietário | Dono da Obra</label>
-                      <input type="text" className="form-control" id="propDonObra" placeholder="Proprietário | Dono da Obra" required />
+                    <div className="col-md-6 mb-3">
+                        <label>Tipologia:</label>
+                        <input type="text" className="form-control mb-3" id="tipologia" placeholder="Tipologia" required/>
+                    </div>
+                    {/* ANALOGIAS */}
+                    <div className="col-md-6 mb-3">
+                        <label>Analogias:</label>
+                        <input type="text" className="form-control" id="analogias" placeholder="Analogias" required />
                     </div>
                   </div>
                   <div className="row">
-                    <div className="col-md-12 mb-3">
-                      <label>Contacto(s)</label>
-                      <input type="text" className="form-control" id="contact" placeholder="Contacto(s)" />
+                    <div className="col-md-6 mb-3">
+                      <label>Dimensões:</label>
+                      <input type="text" className="form-control mb-3" id="dimensoes" placeholder="Dimensões" required/>
+                    </div>
+                    <div className="col-md-6 mb-3">
+                      <label>Outras dimensões:</label>
+                      <input type="text" className="form-control mb-3" id="outrasDimensoes" placeholder="Outras dimensões" required/>
                     </div>
                   </div>
                   <div className="row">
+                    {/* BREVE DESCRIÇÃO */}
                     <div className="col-md-12 mb-3">
-                      <label>Endereço Postal | Localidade</label>
-                      <input type="text" className="form-control" id="endPostLocal" placeholder="Endereço Postal | Localidade" />
+                        <label>Breve descrição:</label>
+                        <textarea type="text" id="breveDescricao" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Breve descrição" />
+                    </div>
+                    {/* CONCLUSÕES */}
+                    <div className="col-md-12 mb-3">
+                        <label>Conclusões:</label>
+                        <textarea type="text" id="conclusoes" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Conclusões" />
+                    </div>
+                    {/* AUTORIA */}
+                    <div className="col-md-4 mb-3">
+                        <label>Autoria / Oficina:</label>
+                        <input type="text" className="form-control" id="oficina" placeholder="Autoria / Oficina" required />
+                    </div>
+                    {/* DATAÇÃO */}
+                    <div className="col-md-4 mb-3">
+                        <label>Datação:</label>
+                        <input type="text" className="form-control" id="datacao" placeholder="Datação" required />
+                    </div>
+                    {/* LOCAL DE ORIGEM / PRODUÇÃO */}
+                    <div className="col-md-4 mb-3">
+                        <label>Local de origem / Produção:</label>
+                        <input type="text" className="form-control" id="localOrigem" placeholder="Local de Origem / Produção" required />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-4 mb-3">
+                      <label>Super-categoria:</label>
+                      <input type="text" className="form-control mb-3" id="superCategorias" placeholder="Super-categoria" required/>
+                    </div>  
+                    <div className="col-md-4 mb-3">
+                      <label>Categoria:</label>
+                      <input type="text" className="form-control mb-3" id="categorias" placeholder="Categoria" required/>
+                      </div>
+                    <div className="col-md-4 mb-3">
+                      <label>Subcategoria:</label>
+                      <input type="text" className="form-control mb-3" id="subCategorias" placeholder="Subcategoria" required/>
                     </div>
                   </div>
                   <hr className="mb-4" />

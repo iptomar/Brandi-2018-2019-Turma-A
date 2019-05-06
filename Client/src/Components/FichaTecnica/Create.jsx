@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Pag1 from "../../Components/FichaTecnica/Create/Pag1";
 import Pag2 from "../../Components/FichaTecnica/Create/Pag2";
 import Pag3 from "../../Components/FichaTecnica/Create/Pag3";
+import Pag4 from "../../Components/FichaTecnica/Create/Pag4";
+
 class Create extends Component {
   handleSubmit = async e => {
     e.preventDefault();
@@ -69,7 +71,6 @@ class Create extends Component {
             <Pag1 />
             <Pag2 />
             <Pag3 />
-
         </form>
       </div>
     );

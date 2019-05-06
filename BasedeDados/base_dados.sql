@@ -137,11 +137,9 @@ DROP TABLE IF EXISTS tbl_objetos;
 CREATE TABLE tbl_objetos(
     objetoID INT NOT NULL AUTO_INCREMENT,
     visible BOOLEAN,
-	nome VARCHAR(255) NOT NULL,
     tipologia VARCHAR(255) NOT NULL,
     dimensoes VARCHAR(255) NOT NULL,
     outrasDimensoes VARCHAR(255) NOT NULL,
-    localizacao VARCHAR(255) NOT NULL,
     breveDescricao VARCHAR(255) NOT NULL,
     analogias VARCHAR(255) NOT NULL,
     conclusoes VARCHAR(255) NOT NULL,

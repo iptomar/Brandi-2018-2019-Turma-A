@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import FileUpload from "../../Globais/FileUpload";
 import AlertMsg from "../../Globais/AlertMsg";
 
-class Pag1 extends Component {
+export class Pag1 extends Component {
 
   constructor(props) {
     super(props);
@@ -20,7 +20,7 @@ class Pag1 extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12 mb-3">
-              <label>Ficha de registo e identificação correspondente: </label>
+              <label>Ficha Técnica </label>
               <select id="DDLRoles" className="form-control mb-3">
                 {/* {this.state.rolesList.map(function (object) {
                         return (
@@ -38,18 +38,8 @@ class Pag1 extends Component {
             
             {/* COLUNA 1 */}
             <div className="col-md-6 mb-3">
-              <label>Super-categoria:</label>
-              <input type="text" className="form-control mb-3" id="" placeholder="Super-categoria" required/>
-              <label>Categoria:</label>
-              <input type="text" className="form-control mb-3" id="" placeholder="Categoria" required/>
-              <label>Subcategoria:</label>
-              <input type="text" className="form-control mb-3" id="" placeholder="Subcategoria" required/>
-              <label>Tipologia:</label>
-              <input type="text" className="form-control mb-3" id="" placeholder="Tipologia" required/>
-              
-              <hr/>
-              
-              <label>Localização da obra:</label>
+ 
+              <label>Localização:</label>
               <input type="text" className="form-control mb-3" id="" placeholder="Localização da obra" required/>
               
               <hr/>
@@ -66,12 +56,6 @@ class Pag1 extends Component {
 
             {/* COLUNA 2 */}
             <div className="col-md-6 mb-3">
-              <label>Dimensões:</label>
-              <input type="text" className="form-control mb-3" id="" placeholder="Dimensões" required/>
-              <label>Outras dimensões:</label>
-              <input type="text" className="form-control mb-3" id="" placeholder="Outras dimensões" required/>
-              
-              <hr/>
 
               <label>Dono da obra:</label>
               <input type="text" className="form-control mb-3" id="" placeholder="Dono da obra" required/>
@@ -96,4 +80,5 @@ class Pag1 extends Component {
     );
   }
 }
+
 export default Pag1;

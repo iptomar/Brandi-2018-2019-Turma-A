@@ -20,7 +20,9 @@ import IndexFichaTecnica from './MasterComponents/Ficha Tecnica/IndexFichaTecnic
 import IndexFichaRI from './MasterComponents/FichaRegistoIdentificacao/IndexFichaRI';
 import CreateFichaRI from './MasterComponents/FichaRegistoIdentificacao/CreateFichaRI';
 import DetailsFichaRI from './MasterComponents/FichaRegistoIdentificacao/DetailsFichaRI';
-
+// INTERESSADOS
+import IndexInteressados from './MasterComponents/Interessados/IndexInteressados';
+import CreateInteressados from './MasterComponents/Interessados/CreateInteressados';
 
 
 ReactDOM.render(
@@ -43,6 +45,9 @@ ReactDOM.render(
             <Route path="/fichaRI/criar" component={CreateFichaRI} />
             <Route path="/fichaRI/:id/detalhes:query?" component={(r) => <DetailsFichaRI id={r.match.params.id} query={r.match.params.query} />} />
             <Route path="/fichaRI/:query?" component={(r) => <IndexFichaRI query={r.match.params.query} />} />
+            {/* Interessados */}
+            <Route path="/interessados/criar" component={CreateInteressados} />
+            <Route path="/interessados" component={IndexInteressados} />
             {/* Default */}
             <Route component={LoginPage} />
         </Switch>

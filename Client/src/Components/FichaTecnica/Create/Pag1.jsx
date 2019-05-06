@@ -49,7 +49,7 @@ class Pag1 extends Component {
               
               <hr/>
               
-              <label>Localização da obra:</label>
+              <label>Localização:</label>
               <input type="text" className="form-control mb-3" id="" placeholder="Localização da obra" required/>
               
               <hr/>

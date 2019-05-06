@@ -38,17 +38,7 @@ class Pag1 extends Component {
             
             {/* COLUNA 1 */}
             <div className="col-md-6 mb-3">
-              <label>Super-categoria:</label>
-              <input type="text" className="form-control mb-3" id="" placeholder="Super-categoria" required/>
-              <label>Categoria:</label>
-              <input type="text" className="form-control mb-3" id="" placeholder="Categoria" required/>
-              <label>Subcategoria:</label>
-              <input type="text" className="form-control mb-3" id="" placeholder="Subcategoria" required/>
-              <label>Tipologia:</label>
-              <input type="text" className="form-control mb-3" id="" placeholder="Tipologia" required/>
-              
-              <hr/>
-              
+ 
               <label>Localização:</label>
               <input type="text" className="form-control mb-3" id="" placeholder="Localização da obra" required/>
               
@@ -66,12 +56,6 @@ class Pag1 extends Component {
 
             {/* COLUNA 2 */}
             <div className="col-md-6 mb-3">
-              <label>Dimensões:</label>
-              <input type="text" className="form-control mb-3" id="" placeholder="Dimensões" required/>
-              <label>Outras dimensões:</label>
-              <input type="text" className="form-control mb-3" id="" placeholder="Outras dimensões" required/>
-              
-              <hr/>
 
               <label>Dono da obra:</label>
               <input type="text" className="form-control mb-3" id="" placeholder="Dono da obra" required/>

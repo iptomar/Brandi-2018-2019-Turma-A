@@ -207,42 +207,6 @@ class Pag2 extends Component {
                                     <textarea type="text" id="SuperficieTecnicas" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Superfície" />
                                 </div>
                             </div>
-
-                            <hr />
-
-                            
-                            <div className="row">
-                                {/* BREVE DESCRIÇÃO */}
-                                <div className="col-md-12 mb-3">
-                                    <label>Breve descrição:</label>
-                                    <textarea type="text" id="breveDescr" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Breve descrição" />
-                                </div>
-                                {/* ANALOGIAS */}
-                                <div className="col-md-12 mb-3">
-                                    <label>Analogias:</label>
-                                    <input type="text" className="form-control" id="analogias" placeholder="Analogias" required />
-                                </div>
-                                {/* CONCLUSÕES */}
-                                <div className="col-md-12 mb-3">
-                                    <label>Conclusões:</label>
-                                    <textarea type="text" id="conclusoes" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Conclusões" />
-                                </div>
-                                {/* AUTORIA */}
-                                <div className="col-md-4 mb-3">
-                                    <label>Autoria / Oficina:</label>
-                                    <input type="text" className="form-control" id="autoriaOfic" placeholder="Autoria / Oficina" required />
-                                </div>
-                                {/* DATAÇÃO */}
-                                <div className="col-md-4 mb-3">
-                                    <label>Datação:</label>
-                                    <input type="text" className="form-control" id="datação" placeholder="Datação" required />
-                                </div>
-                                {/* LOCAL DE ORIGEM / PRODUÇÃO */}
-                                <div className="col-md-4 mb-3">
-                                    <label>Local de origem / Produção:</label>
-                                    <input type="text" className="form-control" id="origProd" placeholder="Local de Origem / Produção" required />
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

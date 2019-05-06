@@ -36,11 +36,22 @@ class Index extends Component {
       }
       visualList+=`</div>`;
     }else{
-      visualList += `<div><h5>Ainda não existe nenhuma ficha técnica</h5><h6><a href="/fichaTecnica/criar">Adicione</a> já uma ficha</h6></div>`
+      visualList += `<div><h5>Ainda não existe nenhuma ficha técnica!</h5></div>`
     }
       return (
         <div className="Inicio container">
-          <p className="h4">Fichas Técnicas</p>
+          <div className="row">
+            <div className="col-md-9">
+              <h2 className="py-3 mb-3 text-center">
+                Fichas Técnicas
+              </h2>
+            </div>
+            <div className="col-md-3" style={{ display: "inline" }}>
+              <a href="/fichaTecnica/criar" className="mt-3 btn btn-success">
+                <i className="fas fa-plus fa-white" /> Adicionar Ficha
+              </a>
+            </div>
+          </div>
           <div dangerouslySetInnerHTML={{__html: visualList}}></div>
         </div>
       );

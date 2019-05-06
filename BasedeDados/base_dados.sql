@@ -1,4 +1,4 @@
-DROP DATABASE IF exists brandi_a;
+﻿DROP DATABASE IF exists brandi_a;
 CREATE DATABASE brandi_a;
 USE brandi_a;
 
@@ -9,6 +9,7 @@ CREATE TABLE tbl_roles
     role VARCHAR(255) NOT NULL UNIQUE,
     PRIMARY KEY(roleID)
 );
+
 
 DROP TABLE IF EXISTS tbl_utilizadores;
 CREATE TABLE tbl_utilizadores
@@ -137,11 +138,9 @@ DROP TABLE IF EXISTS tbl_objetos;
 CREATE TABLE tbl_objetos(
     objetoID INT NOT NULL AUTO_INCREMENT,
     visible BOOLEAN,
-	nome VARCHAR(255) NOT NULL,
     tipologia VARCHAR(255) NOT NULL,
     dimensoes VARCHAR(255) NOT NULL,
     outrasDimensoes VARCHAR(255) NOT NULL,
-    localizacao VARCHAR(255) NOT NULL,
     breveDescricao VARCHAR(255) NOT NULL,
     analogias VARCHAR(255) NOT NULL,
     conclusoes VARCHAR(255) NOT NULL,

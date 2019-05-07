@@ -19,23 +19,26 @@ class Pag4 extends Component {
         for (var i = 0; i < 4; i++) {
             var novaCelula = row.insertCell(i);
             var param = document.createElement('textarea');
+            param.setAttribute("rows", "2");
+            param.style.resize="none";
             novaCelula.appendChild(param);
         }
         //parametro input
         //técnico
         var cellTecnico = row.insertCell(4);
-        var paramTecnico = document.createElement('input');
-        paramTecnico.setAttribute("type","text")
-        paramTecnico.readOnly=true;
-        paramTecnico.value="Name";
+        var paramTecnico = document.createElement('textarea');
+        paramTecnico.setAttribute("type", "text")
+        paramTecnico.readOnly = true;
+        paramTecnico.setAttribute("rows", "2");
+        paramTecnico.style.resize = "none";
+        paramTecnico.value = "Name";
         cellTecnico.appendChild(paramTecnico);
         //parametro date
         //data
         var cellDate = row.insertCell(5);
         var paramData = document.createElement('input');
-        paramData.setAttribute("type","date")
+        paramData.setAttribute("type", "date")
         cellDate.appendChild(paramData);
-
     }
 
 
@@ -44,8 +47,6 @@ class Pag4 extends Component {
         return (
             <div className="Inicio container">
                 <div className="container">
-
-
                     <div className="pt-3 py-3 text-center">
                         <h4>Exames e Análises</h4>
                     </div>
@@ -101,40 +102,47 @@ class Pag4 extends Component {
                             <label className="form-control" for="ensaio">Ensaio de produtos e materiais a empregar na intervenção</label>
                         </div>
                     </div>
-                    <br />
+                    <hr/>
                     <div className="row">
-
-                            <table className="table table-bordered table-secondary" id="tabela">
-                                <thead >
-                                    <tr>
-                                        <th scope="col">Tipo-Referência</th>
-                                        <th>Localização, Área, Ponto</th>
-                                        <th>Objetivos Específicos</th>
-                                        <th>Resultados</th>
-                                        <th>Técnico</th>
-                                        <th>Data</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td id="param1"><textarea type="text"></textarea></td>
-                                        <td><textarea type="text"></textarea></td>
-                                        <td><textarea type="text"></textarea></td>
-                                        <td><textarea type="text"></textarea></td>
-                                        <td><input type="text" readOnly value="Name"></input></td>
-                                        <td><input type="date"></input></td>
-
-                                    </tr>
-
-
-                                </tbody>
-                            </table>
-                            <button type="button" class="btn btn-dark" onClick={this.adicionaNovaLinha}>Adicionar Linha</button>
-
-                        
+                        <table className="table table-bordered table-secondary text-center" id="tabela">
+                            <thead >
+                                <tr>
+                                    <th className="align-middle">Tipo-Referência</th>
+                                    <th className="align-middle">Localização, Área, Ponto</th>
+                                    <th className="align-middle">Objetivos Específicos</th>
+                                    <th className="align-middle">Resultados</th>
+                                    <th className="align-middle">Técnico</th>
+                                    <th className="align-middle">Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><textarea type="text" style={{ resize: "none" }} rows="2"></textarea></td>
+                                    <td><textarea type="text" style={{ resize: "none" }} rows="2"></textarea></td>
+                                    <td><textarea type="text" style={{ resize: "none" }} rows="2"></textarea></td>
+                                    <td><textarea type="text" style={{ resize: "none" }} rows="2"></textarea></td>
+                                    <td><textarea type="text" readOnly value="Name" style={{ resize: "none" }} rows="2"></textarea></td>
+                                    <td><input type="date" rows="2"></input></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="btn btn-dark" onClick={this.adicionaNovaLinha}>Adicionar Linha</button>
                     </div>
+                    <hr />
+                    <div className="row">
+                        <div className="col-md-12 mb-3">
+                            <label>Interpretação dos Resultados:</label>
+                            <textarea type="text" id="interpretacaoResul" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Interpretação dos Resultados" />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-12 mb-3">
+                            <label>Observações / Conclusões:</label>
+                            <textarea type="text" id="observaConclusoes" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Observações / Conclusões" />
+                        </div>
+                    </div>
+                    <hr />
                 </div>
-                <hr />
             </div>
         );
     }

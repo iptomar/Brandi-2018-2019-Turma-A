@@ -122,7 +122,7 @@ class Pag4 extends Component {
                                     <td><textarea type="text" style={{ resize: "none" }} rows="2"></textarea></td>
                                     <td><textarea type="text" style={{ resize: "none" }} rows="2"></textarea></td>
                                     <td><textarea type="text" readOnly value="Name" style={{ resize: "none" }} rows="2"></textarea></td>
-                                    <td><input type="date" rows="2"></input></td>
+                                    <td><input type="date"></input></td>
                                 </tr>
                             </tbody>
                         </table>

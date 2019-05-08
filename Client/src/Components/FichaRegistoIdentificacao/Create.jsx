@@ -240,6 +240,7 @@ class Create extends Component {
                     })}
                   </div>
                   <div className="row">
+                   {/* TIPOLOGIAS */}
                     <div className="col-md-6 mb-3">
                         <label>Tipologia:</label>
                         <input type="text" className="form-control mb-3" id="tipologia" placeholder="Tipologia" required/>

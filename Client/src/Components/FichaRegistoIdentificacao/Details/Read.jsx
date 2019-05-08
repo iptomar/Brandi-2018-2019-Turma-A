@@ -196,6 +196,134 @@ class Read extends Component {
                     })}
                   </div>
                   <div className="row">
+                  <div className="col-md-6 mb-3">
+                      <label className="font-weight-bold">Tipologia</label>
+                      <input 
+                        type="text" 
+                        className="form-control" 
+                        id="tipologia" 
+                        value={this.state.data.tipologia}
+                        readOnly
+                        />
+                    </div>
+                    <div className="col-md-6 mb-3">
+                      <label className="font-weight-bold">Analogias</label>
+                      <input 
+                        type="text" 
+                        className="form-control" 
+                        id="analogias" 
+                        value={this.state.data.analogias}
+                        readOnly
+                        />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-6 mb-3">
+                        <label className="font-weight-bold">Dimensões</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="dimensoes" 
+                          value={this.state.data.dimensoes}
+                          readOnly
+                          />
+                      </div>
+                      <div className="col-md-6 mb-3">
+                        <label className="font-weight-bold">Outras Dimensões</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="outrasDimensoes" 
+                          value={this.state.data.outrasDimensoes}
+                          readOnly
+                          />
+                      </div>
+                  </div>
+                  <div className="row">
+                  <div className="col-md-12 mb-3">
+                        <label className="font-weight-bold">Breve descrição</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="breveDescricao" 
+                          value={this.state.data.breveDescricao}
+                          readOnly
+                          />
+                    </div>
+                    <div className="col-md-12 mb-3">
+                        <label className="font-weight-bold">Conclusões</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="conclusoes" 
+                          value={this.state.data.conclusoes}
+                          readOnly
+                          />
+                    </div>
+                    <div className="col-md-4 mb-3">
+                        <label className="font-weight-bold">Autoria / Oficina</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="oficina" 
+                          value={this.state.data.oficina}
+                          readOnly
+                          />
+                    </div>
+                    <div className="col-md-4 mb-3">
+                        <label className="font-weight-bold">Datação</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="datacao" 
+                          value={this.state.data.datacao}
+                          readOnly
+                          />
+                    </div>
+                    <div className="col-md-4 mb-3">
+                        <label className="font-weight-bold">Local de origem / Produção</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="localOrigem" 
+                          value={this.state.data.localOrigem}
+                          readOnly
+                          />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-4 mb-3">
+                        <label className="font-weight-bold">Super-categoria</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="superCategorias" 
+                          value={this.state.data.superCategorias}
+                          readOnly
+                          />
+                    </div>
+                    <div className="col-md-4 mb-3">
+                        <label className="font-weight-bold">Categoria</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="categorias" 
+                          value={this.state.data.categorias}
+                          readOnly
+                          />
+                    </div>                    
+                    <div className="col-md-4 mb-3">
+                        <label className="font-weight-bold">Sub-categoria</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="subCategorias" 
+                          value={this.state.data.subCategorias}
+                          readOnly
+                          />
+                    </div>
+                  </div>
+                  <div className="row">
                     <div className="col-md-12 mb-3">
                       <label className="font-weight-bold">Endereço Postal | Localidade</label>
                       <input 

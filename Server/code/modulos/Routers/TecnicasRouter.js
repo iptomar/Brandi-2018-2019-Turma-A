@@ -1,12 +1,11 @@
 const getToken = require("../Auxiliares/Token");
-const materiais = require("../CRUDS/Materiaiss");
-const materiaisDario = require("../CRUDS/Materiais");
+const tecnicas = require('../CRUDS/Tecnicas');
 
 /**
- * Rota que retorna todas os materiais
+ * Rota que retorna todas as tecnicas
  */
-exports.getAllMateriaisRoute = async (app, bd) => {
-    app.get("/api/materiais", async (req, resp) => {
+exports.getAllTecnicasRoute = async (app, bd) => {
+    app.get("/api/tecnicas", async (req, resp) => {
 
         let code = 200;
         let resposta_servidor = {
@@ -21,7 +20,7 @@ exports.getAllMateriaisRoute = async (app, bd) => {
             code = 400;
             resposta_servidor.status = "InvalidToken";
         } else {
-            let resposta_bd = await materiais.getAllMateriais(bd);
+            let resposta_bd = await tecnicas.getAllTecnicas(bd);
             if (
                 resposta_bd.stat === 1 &&
                 resposta_bd.resposta === "DBConnectionError"
@@ -45,10 +44,10 @@ exports.getAllMateriaisRoute = async (app, bd) => {
 };
 
 /**
- * Rota que retorna um material
+ * Rota que retorna uma tecnica
  */
-exports.getMaterialRoute = async (app, bd) => {
-    app.get("/api/materiais/:id", async (req, resp) => {
+exports.getSingleTecnicasRouter = async (app, bd) => {
+    app.get("/api/tecnicas/:id", async (req, resp) => {
 
         let code = 200;
         let resposta_servidor = {
@@ -63,7 +62,7 @@ exports.getMaterialRoute = async (app, bd) => {
             code = 400;
             resposta_servidor.status = "InvalidToken";
         } else {
-            let resposta_bd = await materiais.getMaterial(bd, req.params.id);
+            let resposta_bd = await tecnicas.getSingleTecnicas(bd, req.params.id);
             console.log(resposta_bd);
             if (
                 resposta_bd.stat === 1 &&
@@ -88,10 +87,10 @@ exports.getMaterialRoute = async (app, bd) => {
 };
 
 /**
- * Rota que cria um material
+ * Rota que cria uma tecnica
  */
-exports.createMaterialRoute = async (app, bd) => {
-    app.post("/api/materiais/create", async (req, resp) => {
+exports.createTecnicasRouter = async (app, bd) => {
+    app.post("/api/tecnicas/create", async (req, resp) => {
 
         let code = 200;
         let resposta_servidor = {
@@ -108,7 +107,7 @@ exports.createMaterialRoute = async (app, bd) => {
         } else {
             let dados = [];
             dados.push(req.body);
-            let resposta_bd = await materiaisDario.createMateriais(bd, dados);
+            let resposta_bd = await tecnicas.createTecnicas(bd, dados);
             console.log(resposta_bd);
             if (resposta_bd.stat === 0) {
                 resposta_servidor.status = "Created";
@@ -138,12 +137,10 @@ exports.createMaterialRoute = async (app, bd) => {
 };
 
 /**
- * Rota que dá update num material
+ * Rota que dá update numa tecnica
  */
-exports.updateMateriaisRoute = async (app, bd) => {
-    app.post("/api/materiais/:id/edit", async (req, resp) => {
-
-        //console.log(req.body);
+exports.updateTecnicasRoute = async (app, bd) => {
+    app.post("/api/tecnicas/:id/edit", async (req, resp) => {
 
         let code = 200;
         let resposta_servidor = {
@@ -160,7 +157,7 @@ exports.updateMateriaisRoute = async (app, bd) => {
         } else {
             let dados = [];
             dados.push(req.body);
-            let resposta_bd = await materiais.updateMateriais(bd, dados, req.params.id);
+            let resposta_bd = await tecnicas.updateTecnicas(bd, dados);
             console.log(resposta_bd);
             if (resposta_bd.stat === 0) {
                 resposta_servidor.status = "Updated";

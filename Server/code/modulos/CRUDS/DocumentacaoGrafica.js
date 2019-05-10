@@ -1,6 +1,6 @@
-exports.getAllTecnicas = async bd => {
+exports.getAllDocumentacaoGrafica = async bd => {
   let resultadofinal = { stat: 1, resposta: "" };
-  let resposta_bd = await bd.query("Select * from tbl_tecnicas");
+  let resposta_bd = await bd.query("Select * from tbl_documentacaoGrafica");
   if (resposta_bd.stat === 0) {
     resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;
@@ -11,10 +11,11 @@ exports.getAllTecnicas = async bd => {
   }
   return resultadofinal;
 };
-exports.getSingleTecnicas = async (bd, id) => {
+
+exports.getSingleDocumentacaoGrafica = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: "" };
   let resposta_bd = await bd.query(
-    " Select * from tbl_tecnicas where tecnicasID   = ?",
+    " Select * from tbl_documentacaoGrafica where documentacaoGraficaID = ?",
     [id]
   );
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
@@ -28,25 +29,24 @@ exports.getSingleTecnicas = async (bd, id) => {
   return resultadofinal;
 };
 
-exports.createTecnicas = async (bd, dados) => {
+exports.createDocumentacaoGrafica = async (bd, dados) => {
   let resultadofinal = { stat: 1, resposta: "Campos Inválidos" };
   let auxiliar = "";
   for (let i = 0; i < dados.length; i++) {
-    auxiliar += "(?,?,?),";
+    auxiliar += "(?,?),";
   }
   auxiliar = auxiliar.substring(0, auxiliar.length - 1); //tira ultima virgula
   let array2 = [];
   for (let i = 0; i < dados.length; i++) {
-    if (dados[i].estrutura && dados[i].superficie && dados[i].fichaTecnicaFK) {
-      array2.push(dados[i].estrutura);
-      array2.push(dados[i].superficie);
+    if (dados[i].nome && dados[i].fichaTecnicaFK) {
+      array2.push(dados[i].nome);
       array2.push(dados[i].fichaTecnicaFK);
     } else {
       return resultadofinal;
     }
   }
   let resposta_bd = await bd.query(
-    " Insert into tbl_tecnicas (estrutura,superficie,fichaTecnicaFK) values " +
+    " Insert into tbl_documentacaoGrafica (nome,fichaTecnicaFK) values " +
       auxiliar,
     array2
   );
@@ -61,13 +61,12 @@ exports.createTecnicas = async (bd, dados) => {
   return resultadofinal;
 };
 
-exports.updateTecnicas = async (bd, dados) => {
+exports.updateDocumentacaoGrafica = async (bd, dados) => {
   let resultadofinal = { stat: 1, resposta: "Campos Inválidos" };
-
   return resultadofinal;
 };
 
-exports.deleteTecnicas = async (bd, dados) => {
+exports.deleteDocumentacaoGrafica = async (bd, dados) => {
   let resultadofinal = { stat: 1, resposta: "" };
   return resultadofinal;
 };

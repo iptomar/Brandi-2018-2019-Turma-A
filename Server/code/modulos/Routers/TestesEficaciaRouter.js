@@ -1,12 +1,11 @@
 const getToken = require("../Auxiliares/Token");
-const materiais = require("../CRUDS/Materiaiss");
-const materiaisDario = require("../CRUDS/Materiais");
+const testesEficacia = require("../CRUDS/TestesEficacia");
 
 /**
- * Rota que retorna todas os materiais
+ * Rota que retorna todas as condições ambientais
  */
-exports.getAllMateriaisRoute = async (app, bd) => {
-    app.get("/api/materiais", async (req, resp) => {
+exports.getAllTestesEficacia = async (app, bd) => {
+    app.get("/api/testesEficacia", async (req, resp) => {
 
         let code = 200;
         let resposta_servidor = {
@@ -21,7 +20,7 @@ exports.getAllMateriaisRoute = async (app, bd) => {
             code = 400;
             resposta_servidor.status = "InvalidToken";
         } else {
-            let resposta_bd = await materiais.getAllMateriais(bd);
+            let resposta_bd = await testesEficacia.getAllTestesEficacia(bd);
             if (
                 resposta_bd.stat === 1 &&
                 resposta_bd.resposta === "DBConnectionError"
@@ -45,10 +44,10 @@ exports.getAllMateriaisRoute = async (app, bd) => {
 };
 
 /**
- * Rota que retorna um material
+ * Rota que retorna uma condição ambiental local
  */
-exports.getMaterialRoute = async (app, bd) => {
-    app.get("/api/materiais/:id", async (req, resp) => {
+exports.getTesteEficacia = async (app, bd) => {
+    app.get("/api/testesEficacia/:id", async (req, resp) => {
 
         let code = 200;
         let resposta_servidor = {
@@ -63,8 +62,7 @@ exports.getMaterialRoute = async (app, bd) => {
             code = 400;
             resposta_servidor.status = "InvalidToken";
         } else {
-            let resposta_bd = await materiais.getMaterial(bd, req.params.id);
-            console.log(resposta_bd);
+            let resposta_bd = await testesEficacia.getTestesEficacia(bd, req.params.id);
             if (
                 resposta_bd.stat === 1 &&
                 resposta_bd.resposta === "DBConnectionError"
@@ -88,11 +86,12 @@ exports.getMaterialRoute = async (app, bd) => {
 };
 
 /**
- * Rota que cria um material
+ * Rota que cria uma condição ambiental local
  */
-exports.createMaterialRoute = async (app, bd) => {
-    app.post("/api/materiais/create", async (req, resp) => {
+exports.createTesteEficacia = async (app, bd) => {
+    app.post("/api/testesEficacia/create", async (req, resp) => {
 
+        let dados = req.body;
         let code = 200;
         let resposta_servidor = {
             status: "Not Authenticated",
@@ -106,9 +105,7 @@ exports.createMaterialRoute = async (app, bd) => {
             code = 400;
             resposta_servidor.status = "InvalidToken";
         } else {
-            let dados = [];
-            dados.push(req.body);
-            let resposta_bd = await materiaisDario.createMateriais(bd, dados);
+            let resposta_bd = await testesEficacia.createTestesEficacia(bd, dados);
             console.log(resposta_bd);
             if (resposta_bd.stat === 0) {
                 resposta_servidor.status = "Created";
@@ -138,13 +135,13 @@ exports.createMaterialRoute = async (app, bd) => {
 };
 
 /**
- * Rota que dá update num material
+ * Rota que dá update numa condição ambiental local
  */
-exports.updateMateriaisRoute = async (app, bd) => {
-    app.post("/api/materiais/:id/edit", async (req, resp) => {
+exports.updateTesteEficacia = async (app, bd) => {
+    app.post("/api/testesEficacia/:id/edit", async (req, resp) => {
 
         //console.log(req.body);
-
+        let dados = req.body;
         let code = 200;
         let resposta_servidor = {
             status: "Not Authenticated",
@@ -158,9 +155,7 @@ exports.updateMateriaisRoute = async (app, bd) => {
             code = 400;
             resposta_servidor.status = "InvalidToken";
         } else {
-            let dados = [];
-            dados.push(req.body);
-            let resposta_bd = await materiais.updateMateriais(bd, dados, req.params.id);
+            let resposta_bd = await testesEficacia.updateTestesEficacia(bd, dados);
             console.log(resposta_bd);
             if (resposta_bd.stat === 0) {
                 resposta_servidor.status = "Updated";

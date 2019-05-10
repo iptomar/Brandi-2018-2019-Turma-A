@@ -1,9 +1,6 @@
-exports.getAllExamesEAnalises = async (bd, limit, pagenumber) => {
+exports.getAllMateriais = async (bd, limit, pagenumber) => {
   let resultadofinal = { stat: 1, resposta: "" };
-  let resposta_bd = await bd.query("Select * from tbl_materiais limit ?,?", [
-    limit,
-    pagenumber
-  ]);
+  let resposta_bd = await bd.query("Select * from tbl_materiais");
   if (resposta_bd.stat === 0) {
     resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;
@@ -14,10 +11,10 @@ exports.getAllExamesEAnalises = async (bd, limit, pagenumber) => {
   }
   return resultadofinal;
 };
-exports.getSingleExamesEAnalises = async (bd, id) => {
+exports.getSingleMateriais = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: "" };
   let resposta_bd = await bd.query(
-    " Select from tbl_materiais where materiaisID    = ?",
+    " Select * from tbl_materiais where materiaisID    = ?",
     [id]
   );
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
@@ -31,41 +28,44 @@ exports.getSingleExamesEAnalises = async (bd, id) => {
   return resultadofinal;
 };
 
-exports.createExamesEAnalises = async (bd, dados) => {
+exports.createMateriais = async (bd, dados) => {
   let resultadofinal = { stat: 1, resposta: "Campos Inválidos" };
-  if (dados.estrutura && dados.superifice && dados.fichaTecnicaFK) {
-    let resposta_bd = await bd.query(
-      " Insert into tbl_materiais (estrutura,superficie,fichaTecnicaFK) values (?,?,?)",
-      [dados.estrutura, dados.superifice, dados.fichaTecnicaFK]
-    );
-    if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
-      resultadofinal.resposta = resposta_bd.resposta[0];
-      resultadofinal.stat = 0;
-    } else if (resposta_bd.stat === 1) {
-      resultadofinal.resposta = "DBConnectionError";
-    } else if (resposta_bd.stat >= 2) {
-      resultadofinal.resposta = resposta_bd.resposta;
+  let auxiliar = "";
+  for (let i = 0; i < dados.length; i++) {
+    auxiliar += "(?,?,?),";
+  }
+  auxiliar = auxiliar.substring(0, auxiliar.length - 1); //tira ultima virgula
+  let array2 = [];
+  for (let i = 0; i < dados.length; i++) {
+    if (dados[i].estrutura && dados[i].superficie && dados[i].fichaTecnicaFK) {
+      array2.push(dados[i].estrutura);
+      array2.push(dados[i].superficie);
+      array2.push(dados[i].fichaTecnicaFK);
+    } else {
+      return resultadofinal;
     }
   }
+  let resposta_bd = await bd.query(
+    " Insert into tbl_materiais (estrutura,superficie,fichaTecnicaFK) values " +
+      auxiliar,
+    array2
+  );
+  console.log(resposta_bd);
+  if (resposta_bd.stat === 0) {
+    resultadofinal.resposta = resposta_bd.resposta;
+    resultadofinal.stat = 0;
+  } else if (resposta_bd.stat === 1) {
+    resultadofinal.resposta = "DBConnectionError";
+  } else if (resposta_bd.stat >= 2) {
+    resultadofinal.resposta = resposta_bd.resposta;
+  }
+
   return resultadofinal;
 };
 
-exports.updateExamesEAnalises = async (bd, dados) => {
+exports.updateMateriais = async (bd, dados) => {
   let resultadofinal = { stat: 1, resposta: "Campos Inválidos" };
-  if (dados.id && dados.estrutura && dados.superifice && dados.fichaTecnicaFK) {
-    let resposta_bd = await bd.query(
-      " Update tbl_materiais set estrutura = ?,superficie = ?,fichaTecnicaFK =? where materiaisID  = ?",
-      [dados.estrutura, dados.superifice, dados.fichaTecnicaFK, dados.id]
-    );
-    if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
-      resultadofinal.resposta = resposta_bd.resposta[0];
-      resultadofinal.stat = 0;
-    } else if (resposta_bd.stat === 1) {
-      resultadofinal.resposta = "DBConnectionError";
-    } else if (resposta_bd.stat >= 2) {
-      resultadofinal.resposta = resposta_bd.resposta;
-    }
-  }
+
   return resultadofinal;
 };
 

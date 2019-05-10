@@ -5,7 +5,7 @@
 /**
  * get de todos os graus de eficacia
  */
-exports.getallGrausEficaciSolubilizacao = async (bd, limit, pagenumber) => {
+exports.getallGrausEficaciaSolubilizacao = async (bd, limit, pagenumber) => {
   let resultadofinal = { stat: 1, resposta: "" };
   let resposta_bd = await bd.query(
     "Select * from tbl_grausEficaciaSolubilizacao limit ?,?",

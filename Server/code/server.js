@@ -9,6 +9,15 @@ const processosRouter = require("./modulos/Routers/ProcessosRouter");
 const tecnicosRouter = require("./modulos/Routers/TecnicosRouter");
 const objetosRouter = require("./modulos/Routers/ObjetoRouter");
 const materiaisRouter = require("./modulos/Routers/MateriaisRouter");
+const condicoesAmbientaisLocais = require("./modulos/Routers/CondicoesAmbientaisLocalRouter");
+const especificacoesExames = require("./modulos/Routers/EspecificacoesExamesRouter");
+const examesAnalises = require("./modulos/Routers/ExamesAnalisesRouter");
+const grausEficaciaSolubilizacao = require("./modulos/Routers/GrausEficaciaSolubilizacaoRouter");
+const iluminacao = require("./modulos/Routers/IluminacaoRouter");
+const interessadosContactos = require("./modulos/Routers/InteressadosContactosRouter");
+const solventes = require("./modulos/Routers/SolventesRouter");
+const testesEficacia = require("./modulos/Routers/TestesEficaciaRouter");
+const tecnicas = require('./modulos/Routers/TecnicasRouter');
 
 //cria ligacao à base de dados
 //LIGAÇÃO SERVIDOR
@@ -101,6 +110,93 @@ materiaisRouter.getMaterialRoute(app, bd);
 materiaisRouter.createMaterialRoute(app, bd);
 //rota que dá update aos materiais
 materiaisRouter.updateMateriaisRoute(app, bd);
+
+//rota que devolve todas as condições ambientais locais
+condicoesAmbientaisLocais.getAllCondicoesAmbientaisLocal(app, bd);
+//rota que devolve uma condição ambiental local
+condicoesAmbientaisLocais.getCondicaoAmbientalLocal(app, bd);
+//rota que cria uma condição ambiental local
+condicoesAmbientaisLocais.createCondicaoAmbientalLocal(app, bd);
+//rota que dá update de uma condição ambiental local
+condicoesAmbientaisLocais.updateCondicaoAmbientalLocal(app, bd);
+
+//rota que devolve todas as especificacoes exames
+especificacoesExames.getAllEspecificacoesExames(app, bd);
+//rota que devolve uma especificação exame
+especificacoesExames.getEspecificacaoExame(app, bd);
+//rota que cria uma especificação exame
+especificacoesExames.createEspecificacaoExame(app, bd);
+//rota que dá update de uma especificação exame
+especificacoesExames.updateEspecificacaoExame(app, bd);
+
+//rota que devolve todas os exames analises
+examesAnalises.getAllExamesAnalises(app, bd);
+//rota que devolve um exame analise 
+examesAnalises.getExameAnalise(app, bd);
+//rota que cria um exame analise 
+examesAnalises.createExameAnalise(app, bd);
+//rota que dá update de um exame analise 
+examesAnalises.updateExameAnalise(app, bd);
+
+//rota que devolve todos os graus de eficacia e solubilizacao
+grausEficaciaSolubilizacao.getAllGrausEficaciaSolubilizacao(app, bd);
+//rota que devolve um grau de eficacia e solubilizacao
+grausEficaciaSolubilizacao.getGrauEficaciaSolubilizacao(app, bd);
+//rota que cria um grau de eficacia e solubilizacao
+grausEficaciaSolubilizacao.createGrauEficaciaSolubilizacao(app, bd);
+//rota que dá update de um grau de eficacia e solubilizacao
+grausEficaciaSolubilizacao.updateGrauEficaciaSolubilizacao(app, bd);
+
+//rota que devolve todos as iluminaçoes
+iluminacao.getAllIluminacao(app, bd);
+//rota que devolve uma iluminação
+iluminacao.getIluminacao(app, bd);
+//rota que cria uma iluminação
+iluminacao.createIluminacao(app, bd);
+//rota que dá update de uma iluminação
+iluminacao.updateIluminacao(app, bd);
+
+//rota que devolve todos os interessados Contactos
+interessadosContactos.getAllInteressadosContactos(app, bd);
+//rota que devolve um  interessado Contactos
+interessadosContactos.getInteressadoContactos(app, bd);
+//rota que cria um interessado Contactos
+interessadosContactos.createInteressadoContactos(app, bd);
+//rota que dá update de um interessado Contactos
+interessadosContactos.updateInteressadoContactos(app, bd);
+
+//rota que devolve todos os solventes
+solventes.getAllSolventes(app, bd);
+//rota que devolve um solvente
+solventes.getSolvente(app, bd);
+//rota que cria um solvente
+solventes.createSolvente(app, bd);
+//rota que dá update de um solvente
+solventes.updateSolvente(app, bd);
+
+//rota que devolve todos os testes de Eficacia
+testesEficacia.getAllTestesEficacia(app, bd);
+//rota que devolve um teste de Eficacia
+testesEficacia.getTesteEficacia(app, bd);
+//rota que cria um teste de Eficacia
+testesEficacia.createTesteEficacia(app, bd);
+//rota que dá update de um teste de Eficacia
+testesEficacia.updateTesteEficacia(app, bd);
+
+//rota que devolve todas as tecnicas
+tecnicas.getAllTecnicasRoute(app, bd);
+//rota que devolve uma tecnica
+tecnicas.getSingleTecnicasRouter(app, bd);
+//rota que cria uma tecnica
+tecnicas.createTecnicasRouter(app, bd);
+//rota que dá update numa tecnica
+tecnicas.updateTecnicasRoute(app, bd);
+
+
+
+
+
+
 
 
 app.listen(port, () => console.log("Listening na porta", port));

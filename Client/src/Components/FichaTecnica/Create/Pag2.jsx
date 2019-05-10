@@ -27,15 +27,15 @@ class Pag2 extends Component {
                                             <input type="radio" name="bemIntegradoOptions" id="bemIntegradoSim" value="Sim"/>
                                         </div>
                                     </div>
-                                    <label className="form-control" for="bemIntegradoSim">Sim</label>
+                                    <label className="form-control" htmlFor="bemIntegradoSim">Sim</label>
                                 </div>
                                 <div className="input-group mb-3 col-md-2">
                                     <div className="input-group-prepend">
                                         <div className="input-group-text">
-                                            <input type="radio" name="bemIntegradoOptions" id="bemIntegradoNão" value="Não"/>
+                                            <input type="radio" name="bemIntegradoOptions" id="bemIntegradoNão" value="Não" defaultChecked/>
                                         </div>
                                     </div>
-                                    <label className="form-control" for="bemIntegradoNão">Não</label>
+                                    <label className="form-control" htmlFor="bemIntegradoNão">Não</label>
                                 </div>
                             </div>
 
@@ -76,10 +76,10 @@ class Pag2 extends Component {
                                 <div className="input-group mb-3 col-md-2">
                                     <div className="input-group-prepend">
                                         <div className="input-group-text">
-                                            <input type="radio" name="EpocaOptions" id="EpocaCoevo" value="Coevo"/>
+                                            <input type="radio" name="EpocaOptions" id="EpocaCoevo" value="Coevo" defaultChecked/>
                                         </div>
                                     </div>
-                                    <label className="form-control" for="EpocaCoevo">Coevo</label>
+                                    <label className="form-control" htmlFor="EpocaCoevo">Coevo</label>
                                 </div>
 
                                 <div className="input-group mb-3 col-md-2">
@@ -88,7 +88,7 @@ class Pag2 extends Component {
                                             <input type="radio" name="EpocaOptions" id="EpocaTardio" value="Tardio"/>
                                         </div>
                                     </div>
-                                    <label className="form-control" for="EpocaTardio">Tardio</label>
+                                    <label className="form-control" htmlFor="EpocaTardio">Tardio</label>
                                 </div>
 
                                 <div className="input-group mb-3 col-md-2">
@@ -97,7 +97,7 @@ class Pag2 extends Component {
                                             <input type="radio" name="EpocaOptions" id="EpocaOutra" value="Outra época"/>
                                         </div>
                                     </div>
-                                    <label className="form-control" for="EpocaOutra">Outra época</label>
+                                    <label className="form-control" htmlFor="EpocaOutra">Outra época</label>
                                 </div>
 
                                 <div className="input-group mb-3 col-md-2">
@@ -106,7 +106,7 @@ class Pag2 extends Component {
                                             <input type="radio" name="EpocaOptions" id="EpocaReplica" value="Réplica"/>
                                         </div>
                                     </div>
-                                    <label className="form-control" for="EpocaReplica">Réplica</label>
+                                    <label className="form-control" htmlFor="EpocaReplica">Réplica</label>
                                 </div>
 
                                 <div className="input-group mb-3 col-md-2">
@@ -115,7 +115,7 @@ class Pag2 extends Component {
                                             <input type="radio" name="EpocaOptions" id="EpocaReproducao" value="Reprodução"/>
                                         </div>
                                     </div>
-                                    <label className="form-control" for="EpocaReproducao">Reprodução</label>
+                                    <label className="form-control" htmlFor="EpocaReproducao">Reprodução</label>
                                 </div>
 
                                 <div className="input-group mb-3 col-md-2">
@@ -124,7 +124,7 @@ class Pag2 extends Component {
                                             <input type="radio" name="EpocaOptions" id="EpocaFalsificacao" value="Falsificação"/>
                                         </div>
                                     </div>
-                                    <label className="form-control" for="EpocaFalsificacao">Falsificação</label>
+                                    <label className="form-control" htmlFor="EpocaFalsificacao">Falsificação</label>
                                 </div>
 
                             </div>
@@ -135,10 +135,10 @@ class Pag2 extends Component {
                                 <div className="input-group mb-3 col-md-2">
                                     <div className="input-group-prepend">
                                         <div className="input-group-text">
-                                            <input type="radio" name="QualidadeOptions" id="QualidadeExcelente" value="Excelente"/>
+                                            <input type="radio" name="QualidadeOptions" id="QualidadeExcelente" value="Excelente" defaultChecked/>
                                         </div>
                                     </div>
-                                    <label className="form-control" for="QualidadeExcelente">Excelente</label>
+                                    <label className="form-control" htmlFor="QualidadeExcelente">Excelente</label>
                                 </div>
 
                                 <div className="input-group mb-3 col-md-2">
@@ -147,7 +147,7 @@ class Pag2 extends Component {
                                             <input type="radio" name="QualidadeOptions" id="QualidadeMuitoBoa" value="Muito boa"/>
                                         </div>
                                     </div>
-                                    <label className="form-control" for="QualidadeMuitoBoa">Muito boa</label>
+                                    <label className="form-control" htmlFor="QualidadeMuitoBoa">Muito boa</label>
                                 </div>
 
                                 <div className="input-group mb-3 col-md-2">
@@ -156,7 +156,7 @@ class Pag2 extends Component {
                                             <input type="radio" name="QualidadeOptions" id="QualidadeBoa" value="Boa"/>
                                         </div>
                                     </div>
-                                    <label className="form-control" for="QualidadeBoa">Boa</label>
+                                    <label className="form-control" htmlFor="QualidadeBoa">Boa</label>
                                 </div>
 
                                 <div className="input-group mb-3 col-md-2">
@@ -165,7 +165,7 @@ class Pag2 extends Component {
                                             <input type="radio" name="QualidadeOptions" id="QualidadeRegular" value="Regular"/>
                                         </div>
                                     </div>
-                                    <label className="form-control" for="QualidadeRegular">Regular</label>
+                                    <label className="form-control" htmlFor="QualidadeRegular">Regular</label>
                                 </div>
 
                                 <div className="input-group mb-3 col-md-2">
@@ -174,7 +174,7 @@ class Pag2 extends Component {
                                             <input type="radio" name="QualidadeOptions" id="QualidadeFraca" value="Fraca"/>
                                         </div>
                                     </div>
-                                    <label className="form-control" for="QualidadeFraca">Fraca</label>
+                                    <label className="form-control" htmlFor="QualidadeFraca">Fraca</label>
                                 </div>
                             </div>
 

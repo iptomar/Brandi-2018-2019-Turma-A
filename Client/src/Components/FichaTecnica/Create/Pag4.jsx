@@ -59,7 +59,7 @@ class Pag4 extends Component {
                                     <input type="checkbox" name="objetivosGerais" id="identMateriais" value="identMateriais" />
                                 </div>
                             </div>
-                            <label className="form-control" for="identMateriais">Identificação de materiais, técnicas e tecnologias de produção</label>
+                            <label className="form-control" htmlFor="identMateriais">Identificação de materiais, técnicas e tecnologias de produção</label>
                         </div>
                         <div className="input-group mb-3 col-md-12">
                             <div className="input-group-prepend">
@@ -67,7 +67,7 @@ class Pag4 extends Component {
                                     <input type="checkbox" name="objetivosGerais" id="identIntervencoes" value="identIntervencoes" />
                                 </div>
                             </div>
-                            <label className="form-control" for="identIntervencoes">Identificação de intervenções efectuadas no objecto</label>
+                            <label className="form-control" htmlFor="identIntervencoes">Identificação de intervenções efectuadas no objecto</label>
                         </div>
                         <div className="input-group mb-3 col-md-12">
                             <div className="input-group-prepend">
@@ -75,7 +75,7 @@ class Pag4 extends Component {
                                     <input type="checkbox" name="objetivosGerais" id="caracterizacao" value="caracterizacao" />
                                 </div>
                             </div>
-                            <label className="form-control" for="caracterizacao">Caraterização do estado de conservação </label>
+                            <label className="form-control" htmlFor="caracterizacao">Caraterização do estado de conservação </label>
                         </div>
                         <div className="input-group mb-3 col-md-12">
                             <div className="input-group-prepend">
@@ -83,7 +83,7 @@ class Pag4 extends Component {
                                     <input type="checkbox" name="objetivosGerais" id="identPatologias" value="identPatologias" />
                                 </div>
                             </div>
-                            <label className="form-control" for="identPatologias">Identificação de patologias e agentes de biodeterioração</label>
+                            <label className="form-control" htmlFor="identPatologias">Identificação de patologias e agentes de biodeterioração</label>
                         </div>
                         <div className="input-group mb-3 col-md-12">
                             <div className="input-group-prepend">
@@ -91,7 +91,7 @@ class Pag4 extends Component {
                                     <input type="checkbox" name="objetivosGerais" id="datacao" value="datacao" />
                                 </div>
                             </div>
-                            <label className="form-control" for="datacao">Datação do objecto e das eventuais intervenções que tenha sido alvo</label>
+                            <label className="form-control" htmlFor="datacao">Datação do objecto e das eventuais intervenções que tenha sido alvo</label>
                         </div>
                         <div className="input-group mb-3 col-md-12">
                             <div className="input-group-prepend">
@@ -99,7 +99,7 @@ class Pag4 extends Component {
                                     <input type="checkbox" name="objetivosGerais" id="ensaio" value="ensaio" />
                                 </div>
                             </div>
-                            <label className="form-control" for="ensaio">Ensaio de produtos e materiais a empregar na intervenção</label>
+                            <label className="form-control" htmlFor="ensaio">Ensaio de produtos e materiais a empregar na intervenção</label>
                         </div>
                     </div>
                     <hr/>
@@ -108,7 +108,7 @@ class Pag4 extends Component {
                             <thead >
                                 <tr>
                                     <th className="align-middle">Tipo-Referência</th>
-                                    <th className="align-middle">Localização, Área, Ponto</th>
+                                    <th className="align-middle">Localização / Área / Ponto</th>
                                     <th className="align-middle">Objetivos Específicos</th>
                                     <th className="align-middle">Resultados</th>
                                     <th className="align-middle">Técnico</th>
@@ -117,16 +117,16 @@ class Pag4 extends Component {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><textarea type="text" style={{ resize: "none" }} rows="2"></textarea></td>
-                                    <td><textarea type="text" style={{ resize: "none" }} rows="2"></textarea></td>
-                                    <td><textarea type="text" style={{ resize: "none" }} rows="2"></textarea></td>
-                                    <td><textarea type="text" style={{ resize: "none" }} rows="2"></textarea></td>
-                                    <td><textarea type="text" readOnly value="Name" style={{ resize: "none" }} rows="2"></textarea></td>
-                                    <td><input type="date"></input></td>
+                                    <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2"></textarea></td>
+                                    <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2"></textarea></td>
+                                    <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2"></textarea></td>
+                                    <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2"></textarea></td>
+                                    <td><textarea className="form-control" type="text" readOnly value="Name" style={{ resize: "none" }} rows="2"></textarea></td>
+                                    <td><input className="form-control" type="date"></input></td>
                                 </tr>
                             </tbody>
                         </table>
-                        <button type="button" class="btn btn-dark" onClick={this.adicionaNovaLinha}>Adicionar Linha</button>
+                        <button type="button" className="btn btn-dark" onClick={this.adicionaNovaLinha}>Adicionar Linha</button>
                     </div>
                     <hr />
                     <div className="row">

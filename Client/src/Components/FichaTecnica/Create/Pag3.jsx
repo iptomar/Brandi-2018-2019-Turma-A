@@ -41,7 +41,7 @@ class Pag3 extends Component {
                                         <label>Temperatura (ºC):</label>
                                     </div>
                                     <div className="col-6 col-md-4">
-                                        <input className="form-control" type="number" onchange={this.handlechange} placeholder="Temperatura" />
+                                        <input className="form-control" type="number" onChange={this.handlechange} placeholder="Temperatura" />
                                     </div>
                                     <div className="col-6 col-md-4">
                                         <input className="form-control" type="number" placeholder="Temperatura" />

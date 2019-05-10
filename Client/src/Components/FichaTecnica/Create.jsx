@@ -67,61 +67,61 @@ class Create extends Component {
               <h2>Ficha Técnica</h2>
             </div>
             
-            <div class="accordion" id="accordionExample">
-              <div class="card bg-light">
-                <div class="card-header" id="headingOne">
-                  <h2 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <div className="accordion" id="accordionExample">
+              <div className="card bg-light">
+                <div className="card-header" id="headingOne">
+                  <h2 className="mb-0">
+                    <button className="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                       Página #1
                     </button>
                   </h2>
                 </div>
 
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                  <div class="card-body">
+                <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div className="card-body">
                     <Pag1 />
                   </div>
                 </div>
               </div>
-              <div class="card bg-light">
-                <div class="card-header" id="headingTwo">
-                  <h2 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <div className="card bg-light">
+                <div className="card-header" id="headingTwo">
+                  <h2 className="mb-0">
+                    <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                       Página #2
                     </button>
                   </h2>
                 </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                  <div class="card-body">
+                <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                  <div className="card-body">
                     <Pag2/>
                   </div>
                 </div>
               </div>
-              <div class="card bg-light">
-                <div class="card-header" id="headingThree">
-                  <h2 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              <div className="card bg-light">
+                <div className="card-header" id="headingThree">
+                  <h2 className="mb-0">
+                    <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                       Página #3
                     </button>
                   </h2>
                 </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                  <div class="card-body">
+                <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                  <div className="card-body">
                     <Pag3/>
                   </div>
                 </div>
               </div>
 
-              <div class="card bg-light">
-                <div class="card-header" id="headingFour">
-                  <h2 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              <div className="card bg-light">
+                <div className="card-header" id="headingFour">
+                  <h2 className="mb-0">
+                    <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                       Página #4
                     </button>
                   </h2>
                 </div>
-                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-                  <div class="card-body">
+                <div id="collapseFour" className="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                  <div className="card-body">
                     <Pag4/>
                   </div>
                 </div>

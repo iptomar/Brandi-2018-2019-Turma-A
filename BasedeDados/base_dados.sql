@@ -1,4 +1,4 @@
-DROP DATABASE IF exists brandi_a;
+﻿DROP DATABASE IF exists brandi_a;
 CREATE DATABASE brandi_a;
 USE brandi_a;
 
@@ -9,6 +9,7 @@ CREATE TABLE tbl_roles
     role VARCHAR(255) NOT NULL UNIQUE,
     PRIMARY KEY(roleID)
 );
+
 
 DROP TABLE IF EXISTS tbl_utilizadores;
 CREATE TABLE tbl_utilizadores
@@ -172,7 +173,8 @@ CREATE TABLE tbl_fichasTecnicas
 	inscricoesElementos VARCHAR(255),
 	inscricoesConstrucao VARCHAR(255),
 	classificacaoPatrimonial VARCHAR(255),
-	estilo VARCHAR(255),
+    esquemaGrafico VARCHAR(255),
+    estilo VARCHAR(255),
 	epoca VARCHAR(255),
 	qualidade VARCHAR(255),
 	tipoFonte VARCHAR(255),
@@ -232,17 +234,27 @@ CREATE TABLE tbl_documentacaoGrafica
 	FOREIGN KEY(fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
 );
 
-DROP TABLE IF EXISTS tbl_fotografias;
-CREATE TABLE tbl_fotografias
+DROP TABLE IF EXISTS tbl_detalhesFotografia;
+CREATE TABLE tbl_detalhesFotografia
 (
-    fotografiaID INT NOT NULL AUTO_INCREMENT,
+    detalhesFotografiaID INT NOT NULL AUTO_INCREMENT,
     tipoRegisto VARCHAR(255),
     resolucao VARCHAR(255),
     referencia VARCHAR(255),
     formato VARCHAR(255),
 	fichaTecnicaFK INT NOT NULL,
-    PRIMARY KEY(fotografiaID),
+    PRIMARY KEY(detalhesFotografiaID),
 	FOREIGN KEY(fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
+);
+
+DROP TABLE IF EXISTS tbl_fotografias;
+CREATE TABLE tbl_fotografias
+(
+    fotografiaID INT NOT NULL AUTO_INCREMENT,
+    fotografia VARCHAR(255),
+	detalhesFotografiaFK INT NOT NULL,
+    PRIMARY KEY(fotografiaID),
+	FOREIGN KEY(detalhesFotografiaFK) REFERENCES tbl_detalhesFotografia(detalhesFotografiaID)
 );
 
 
@@ -321,6 +333,40 @@ CREATE TABLE tbl_materiais(
     fichaTecnicaFK INT NOT NULL,
     PRIMARY KEY(materiaisID), 
     FOREIGN KEY (fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
+);
+
+DROP TABLE IF EXISTS tbl_condicoesAmbientaisLocal;
+CREATE TABLE tbl_condicoesAmbientaisLocal( 
+    condicoesAmbientaisLocalID INT NOT NULL AUTO_INCREMENT,
+	condicoesAmbientaisDescricao VARCHAR(255),
+    temperaturaFrioHumido INT,
+    temperaturaQuenteSeco INT,
+    humidadeFrioHumido INT,
+	humidadeQuenteSeco INT,
+	periodoFrioHumidoInicio VARCHAR(255),
+	periodoQuenteSecoInicio VARCHAR(255),
+	periodoFrioHumidoFim VARCHAR(255),
+	periodoQuenteSecoFim VARCHAR(255),
+	poluicaoAgentesPoluidores VARCHAR(255),
+	poluicaoFontes VARCHAR(255),
+	poluicaoResultados VARCHAR(255),
+	conclusoes VARCHAR(255),
+	fichaTecnicaFK INT NOT NULL,
+    PRIMARY KEY(condicoesAmbientaisLocalID), 
+    FOREIGN KEY (fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
+);
+
+DROP TABLE IF EXISTS tbl_iluminacao;
+CREATE TABLE tbl_iluminacao( 
+	iluminacaoID INT NOT NULL AUTO_INCREMENT,
+	radiacao VARCHAR(255),
+	origem VARCHAR(255),
+	valorIluminancia VARCHAR(255),
+	valorUVmedidos VARCHAR(255),
+	valorRealUV VARCHAR(255),
+	condicoesAmbientaisLocalFK INT NOT NULL,
+    PRIMARY KEY(iluminacaoID), 
+    FOREIGN KEY (condicoesAmbientaisLocalFK) REFERENCES tbl_condicoesAmbientaisLocal(condicoesAmbientaisLocalID)
 );
 
 DROP TABLE IF EXISTS tbl_Tecnicas;

@@ -65,7 +65,7 @@ class Pag3 extends Component {
                                     <div className="col-6 col-md-4">
                                         <div className="row">
                                             <div className="col-md-6 pr-1">
-                                                <input type="number" min="1" max="12" classNameName="form-control" placeholder="Início" />
+                                                <input type="number" min="1" max="12" className="form-control" placeholder="Início" />
                                             </div>
                                             <div className="col-md-6 pl-1">
                                                 <input type="number" min="1" max="12" className="form-control" placeholder="Fim" />

@@ -71,7 +71,6 @@ export class Pag1 extends Component {
               <input type="text" className="form-control mb-3" id="" placeholder="Contactos telefónicos" required/>
             </div>     
           </div>
-          <hr/>
         </div>
       </div>
     );

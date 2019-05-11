@@ -10,6 +10,7 @@ class Read extends Component {
       alertisNotVisible: true,
       alertColor: '',
       data: null,
+      dataObj: null,
       loading: true,
       alert: false,
     };
@@ -17,6 +18,7 @@ class Read extends Component {
 
   componentDidMount(){
     this.getFichaRI(this.props.id);
+    // this.getObjetos(this.props.id);
     this.getAndSetImage();
   }
 
@@ -56,6 +58,44 @@ class Read extends Component {
       }))
     });
   }
+  
+  async getObjetos(id) {
+
+    //Enviar pedido
+    const response = await fetch(`/api/objetos/${this.props.id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": sessionStorage.getItem("token")
+      }
+    });
+    
+    //Aguardar API
+    await response.json().then(resp => {
+      let status = resp.stat;
+      switch (status) {
+        case "Authenticated":
+          this.setState(prevState => ({
+              ...prevState,
+              dataObj: resp.resposta, 
+              loading: false 
+          }));
+          break;
+        default:
+          console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
+      }
+    }).catch( resp => {
+      this.setState(prevState => ({
+        ...prevState,
+        error: true,
+        loading: true,
+        alertText: 'Não existe conexão com o servidor.',
+        alertisNotVisible: false,
+        alertColor: 'danger'
+      }))
+    });
+  }
+  
 
   getAndSetImage() {
     const response = fetch("/api/fichaRegistoIdentificacao/imagem/"+this.props.id, {
@@ -202,7 +242,7 @@ class Read extends Component {
                         type="text" 
                         className="form-control" 
                         id="tipologia" 
-                        value={this.state.data.tipologia}
+                        value={this.state.dataObj.tipologia}
                         readOnly
                         />
                     </div>
@@ -212,7 +252,7 @@ class Read extends Component {
                         type="text" 
                         className="form-control" 
                         id="analogias" 
-                        value={this.state.data.analogias}
+                        value={this.state.dataObj.analogias}
                         readOnly
                         />
                     </div>
@@ -224,7 +264,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="dimensoes" 
-                          value={this.state.data.dimensoes}
+                          value={this.state.dataObj.dimensoes}
                           readOnly
                           />
                       </div>
@@ -234,7 +274,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="outrasDimensoes" 
-                          value={this.state.data.outrasDimensoes}
+                          value={this.state.dataObj.outrasDimensoes}
                           readOnly
                           />
                       </div>
@@ -246,7 +286,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="breveDescricao" 
-                          value={this.state.data.breveDescricao}
+                          value={this.state.dataObj.breveDescricao}
                           readOnly
                           />
                     </div>
@@ -256,7 +296,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="conclusoes" 
-                          value={this.state.data.conclusoes}
+                          value={this.state.dataObj.conclusoes}
                           readOnly
                           />
                     </div>
@@ -266,7 +306,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="oficina" 
-                          value={this.state.data.oficina}
+                          value={this.state.dataObj.oficina}
                           readOnly
                           />
                     </div>
@@ -276,7 +316,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="datacao" 
-                          value={this.state.data.datacao}
+                          value={this.state.dataObj.datacao}
                           readOnly
                           />
                     </div>
@@ -286,7 +326,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="localOrigem" 
-                          value={this.state.data.localOrigem}
+                          value={this.state.dataObj.localOrigem}
                           readOnly
                           />
                     </div>
@@ -298,7 +338,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="superCategorias" 
-                          value={this.state.data.superCategorias}
+                          value={this.state.dataObj.superCategorias}
                           readOnly
                           />
                     </div>
@@ -308,7 +348,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="categorias" 
-                          value={this.state.data.categorias}
+                          value={this.state.dataObj.categorias}
                           readOnly
                           />
                     </div>                    
@@ -318,7 +358,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="subCategorias" 
-                          value={this.state.data.subCategorias}
+                          value={this.state.dataObj.subCategorias}
                           readOnly
                           />
                     </div>

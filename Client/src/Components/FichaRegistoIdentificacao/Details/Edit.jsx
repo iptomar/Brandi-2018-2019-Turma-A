@@ -14,6 +14,7 @@ class Edit extends Component {
       },
       showAlert: false,
       data: null,
+      dataObj: null,
       tecnicosResp: [],
       files: []
     };
@@ -22,13 +23,14 @@ class Edit extends Component {
     this.dateTreatment = this.dateTreatment.bind(this);
   }
 
-  //Recebe os dados do filho Upload
+  //Recebe os dados do filho - Upload
   getData(data) {
     this.setState({ files: data });
   }
 
   componentDidMount(){
     this.fetchFichaRI(this.props.id);
+    this.fetchObjeto(this.props.id);
     this.getAndSetImage();
   }
 
@@ -48,6 +50,37 @@ class Edit extends Component {
         case "Authenticated":
           this.setState({ data: resp.resposta });
           this.fetchTecnicos();
+          break;
+        default:
+          console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
+      }
+    }).catch( resp => {
+      this.setState({
+        showAlert: true,
+        alert: { 
+          text: 'Não existe conexão com o servidor.',
+          notVisible: false,
+          color: 'danger'
+        }
+      });
+    });
+  }
+
+  async fetchObjeto(id) {
+    //Enviar pedido
+    const response = await fetch(`/api/objetos/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": sessionStorage.getItem("token")
+      }
+    });
+    //Aguardar API
+    await response.json().then(resp => {
+      let status = resp.stat;
+      switch (status) {
+        case "Authenticated":
+          this.setState({ dataObj: resp.resposta });
           break;
         default:
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
@@ -142,6 +175,18 @@ class Edit extends Component {
     }));
   }
 
+ // Controla as alterações nos inputs (Necessidade do React)
+ handleChangeObj(e) {
+  let name = e.target.name;
+  let value = e.target.value;
+  this.setState( prevState => ({
+    dataObj: {
+      ...prevState.dataObj,
+      [name] : value
+    }
+  }));
+}
+
   // Verificar as checkboxes dos tecnicos. Retorna o array de tecnicos
   verifyCBS() {
     var cboxes = document.querySelectorAll("#tecnicosCheckbox");
@@ -217,7 +262,65 @@ class Edit extends Component {
         }
       });
     });
+
+    //limpar formData
+    formData = new FormData();
+
+    formData.append("tipologia", this.state.dataObj.tipologia);
+    formData.append("dimensoes", this.state.dataObj.dimensoes);
+    formData.append("outrasDimensoes", this.state.dataObj.outrasDimensoes);
+    formData.append("breveDescricao", this.state.dataObj.breveDescricao);
+    formData.append("analogias", this.state.dataObj.analogias);
+    formData.append("conclusoes", this.state.dataObj.conclusoes);
+    formData.append("oficina", this.state.dataObj.oficina);
+    formData.append("datacao", this.state.dataObj.datacao);
+    formData.append("localOrigem", this.state.dataObj.localOrigem);
+    formData.append("superCategorias", this.state.dataObj.superCategorias);
+    formData.append("categorias", this.state.dataObj.categorias);
+    formData.append("subCategorias", this.state.dataObj.subCategorias);
+
+    //Enviar pedido
+    const responseObjeto = await fetch(`/api/objetos/${this.props.id}/edit`, {
+      method: "POST",
+      headers: {
+        'x-auth-token': sessionStorage.getItem('token')
+      },
+      body: formData
+    });
+
+    //Aguardar resposta
+    await responseObjeto.json().then(resp => {
+      let status = resp.stat;
+      switch (status) {
+        case "Updated":
+          window.location = `/fichaRI/${this.props.id}/detalhes&showConfirmEdited`;
+          break;
+        case "NotUpdated":
+          this.setState({
+            alert: {
+              text: "Erro ao editar.",
+              notVisible: false,
+              color: "danger"
+            }
+          });
+          break;
+        default:
+          console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
+      }
+    }).catch(resp => {
+      this.setState({
+        showAlert: true,
+        alert: {
+          text: "Erro na comunicação com o servidor.",
+          notVisible: false,
+          color: "danger"
+        }
+      });
+    });
+   
   }
+
+
 
   render() {
     if (sessionStorage.getItem("token") == null) {
@@ -355,6 +458,147 @@ class Edit extends Component {
                       :
                         <LoadingAnimation />
                     }
+                  </div>
+
+                  <div className="row">
+                  <div className="col-md-6 mb-3">
+                      <label className="font-weight-bold">Tipologia</label>
+                      <input 
+                        type="text" 
+                        className="form-control" 
+                        id="tipologia" 
+                        value={this.state.dataObj.tipologia}
+                        onChange={this.handleChangeObj}
+                        readOnly
+                        />
+                    </div>
+                    <div className="col-md-6 mb-3">
+                      <label className="font-weight-bold">Analogias</label>
+                      <input 
+                        type="text" 
+                        className="form-control" 
+                        id="analogias" 
+                        value={this.state.dataObj.analogias}
+                        onChange={this.handleChangeObj}
+                        readOnly
+                        />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-6 mb-3">
+                        <label className="font-weight-bold">Dimensões</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="dimensoes" 
+                          value={this.state.dataObj.dimensoes}
+                          onChange={this.handleChangeObj}
+                          readOnly
+                          />
+                      </div>
+                      <div className="col-md-6 mb-3">
+                        <label className="font-weight-bold">Outras Dimensões</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="outrasDimensoes" 
+                          value={this.state.dataObj.outrasDimensoes}
+                          onChange={this.handleChangeObj}
+                          readOnly
+                          />
+                      </div>
+                  </div>
+                  <div className="row">
+                  <div className="col-md-12 mb-3">
+                        <label className="font-weight-bold">Breve descrição</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="breveDescricao" 
+                          value={this.state.dataObj.breveDescricao}
+                          onChange={this.handleChangeObj}
+                          readOnly
+                          />
+                    </div>
+                    <div className="col-md-12 mb-3">
+                        <label className="font-weight-bold">Conclusões</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="conclusoes" 
+                          value={this.state.dataObj.conclusoes}
+                          onChange={this.handleChangeObj}
+                          readOnly
+                          />
+                    </div>
+                    <div className="col-md-4 mb-3">
+                        <label className="font-weight-bold">Autoria / Oficina</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="oficina" 
+                          value={this.state.dataObj.oficina}
+                          onChange={this.handleChangeObj}
+                          readOnly
+                          />
+                    </div>
+                    <div className="col-md-4 mb-3">
+                        <label className="font-weight-bold">Datação</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="datacao" 
+                          value={this.state.dataObj.datacao}
+                          onChange={this.handleChangeObj}
+                          readOnly
+                          />
+                    </div>
+                    <div className="col-md-4 mb-3">
+                        <label className="font-weight-bold">Local de origem / Produção</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="localOrigem" 
+                          value={this.state.dataObj.localOrigem}
+                          onChange={this.handleChangeObj}
+                          readOnly
+                          />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-4 mb-3">
+                        <label className="font-weight-bold">Super-categoria</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="superCategorias" 
+                          value={this.state.dataObj.superCategorias}
+                          onChange={this.handleChangeObj}
+                          readOnly
+                          />
+                    </div>
+                    <div className="col-md-4 mb-3">
+                        <label className="font-weight-bold">Categoria</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="categorias" 
+                          value={this.state.dataObj.categorias}
+                          onChange={this.handleChangeObj}
+                          readOnly
+                          />
+                    </div>                    
+                    <div className="col-md-4 mb-3">
+                        <label className="font-weight-bold">Sub-categoria</label>
+                        <input 
+                          type="text" 
+                          className="form-control" 
+                          id="subCategorias" 
+                          value={this.state.dataObj.subCategorias}
+                          onChange={this.handleChangeObj}
+                          readOnly
+                          />
+                    </div>
                   </div>
                   <div className="row">
                     <div className="col-md-12 mb-3">

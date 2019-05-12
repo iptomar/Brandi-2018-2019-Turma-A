@@ -23,6 +23,7 @@ import DetailsFichaRI from './MasterComponents/FichaRegistoIdentificacao/Details
 // INTERESSADOS
 import IndexInteressados from './MasterComponents/Interessados/IndexInteressados';
 import CreateInteressados from './MasterComponents/Interessados/CreateInteressados';
+import EditInteressados from './MasterComponents/Interessados/EditInteressados';
 
 
 ReactDOM.render(
@@ -47,6 +48,7 @@ ReactDOM.render(
             <Route path="/fichaRI/:query?" component={(r) => <IndexFichaRI query={r.match.params.query} />} />
             {/* Interessados */}
             <Route path="/interessados/criar" component={CreateInteressados} />
+            <Route path="/interessados/:id/editar" component={(r) => <EditInteressados id={r.match.params.id} />} />
             <Route path="/interessados" component={IndexInteressados} />
             {/* Default */}
             <Route component={LoginPage} />

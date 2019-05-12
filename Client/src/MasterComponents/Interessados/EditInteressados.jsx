@@ -6,7 +6,7 @@ import Edit from "../../Components/FichaTecnica/Interessados/Details/Edit";
 class EditInteressados extends Component {
   render() {
     return (
-      <div className="createInteressados">
+      <div className="editInteressados">
         <Header />
         <Edit />
         <Footer />

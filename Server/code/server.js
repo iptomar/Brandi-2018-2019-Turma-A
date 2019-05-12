@@ -18,6 +18,7 @@ const interessadosContactos = require("./modulos/Routers/InteressadosContactosRo
 const solventes = require("./modulos/Routers/SolventesRouter");
 const testesEficacia = require("./modulos/Routers/TestesEficaciaRouter");
 const tecnicas = require('./modulos/Routers/TecnicasRouter');
+const interessados = require('./modulos/Routers/InteressadosRouter');
 
 //cria ligacao à base de dados
 //LIGAÇÃO SERVIDOR
@@ -192,7 +193,14 @@ tecnicas.createTecnicasRouter(app, bd);
 //rota que dá update numa tecnica
 tecnicas.updateTecnicasRoute(app, bd);
 
-
+//rota que devolve todos os interessados
+interessados.getAllInteressadosRoute(app, bd);
+//rota que devolve um interessado
+interessados.getInteressadoRoute(app, bd);
+//rota que cria um interessado
+interessados.createInteressadoRoute(app, bd);
+//rota que dá update num interessado
+interessados.updateInteressadoRoute(app, bd);
 
 
 

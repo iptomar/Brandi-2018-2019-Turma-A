@@ -9,6 +9,64 @@ class Create extends Component {
       alertisNotVisible: true,
       alertColor: "danger"
     }
+
+  }
+
+  handleSubmit = async e => {
+    e.preventDefault();
+
+    let nome = document.getElementById("nomeInteressadoInput").value;
+    let email = document.getElementById("emailInput").value;
+    let tipo = document.getElementById("tipoInput").value;
+    let endPostal = document.getElementById("endPostalInput").value;
+
+    if(nome === "" || email === "" || tipo === "" || endPostal === ""){
+      this.setState({
+        alertText: "É necessário preencher todos os campos!",
+        alertisNotVisible: false,
+        alertColor: "danger"
+      });
+      return;
+    }
+
+    //Enviar pedidos (FORMA UTILIZADA A PEDIDO DA EQUIPA DA API)
+    const response = await fetch("/api/interessados/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        'x-auth-token': sessionStorage.getItem('token')
+      },
+      body: JSON.stringify({
+        "nome": nome,
+        "email": email,
+        "tipo": tipo,
+        "enderecoPostal": endPostal
+      })
+    });
+
+    //Aguardar API
+    await response.json().then(resp => {
+      let status = resp.status;
+      switch (status) {
+        case "NotCreated":
+          this.setState({
+            alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
+            alertisNotVisible: false,
+            alertColor: "danger"
+          });
+          break;
+        case "Created": 
+          window.location = '/interessados';
+          break;
+        default:
+        this.setState({
+          alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
+          alertisNotVisible: false,
+          alertColor: "danger"
+        });
+        break;
+      }
+    });
   }
 
   render() {

@@ -116,11 +116,9 @@ exports.createObjetoRoute = async (app, bd) => {
         } else {
             if (token.roleFK === 1) {
                 let newObjeto = {
-                    nome: req.body.nome,
                     tipologia: req.body.tipologia,
                     dimensoes: req.body.dimensoes,
                     outrasDimensoes: req.body.outrasDimensoes,
-                    localizacao: req.body.localizacao,
                     breveDescricao: req.body.breveDescricao,
                     analogias: req.body.analogias,
                     conclusoes: req.body.conclusoes,
@@ -186,11 +184,9 @@ exports.updateObjetoRouter = async (app, bd) => {
         } else {
             if (token.roleFK === 1) {
                 let newObjeto = {
-                    nome: req.body.nome,
                     tipologia: req.body.tipologia,
                     dimensoes: req.body.dimensoes,
                     outrasDimensoes: req.body.outrasDimensoes,
-                    localizacao: req.body.localizacao,
                     breveDescricao: req.body.breveDescricao,
                     analogias: req.body.analogias,
                     conclusoes: req.body.conclusoes,

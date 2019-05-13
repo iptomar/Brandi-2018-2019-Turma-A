@@ -35,11 +35,9 @@ exports.createObjeto = async (bd, dados) => {
     let resposta_bd;
     //verificar se os campos estao preenchidos
     if (
-        dados.nome &&
         dados.tipologia &&
         dados.dimensoes &&
         dados.outrasDimensoes &&
-        dados.localizacao &&
         dados.breveDescricao &&
         dados.analogias &&
         dados.conclusoes &&
@@ -53,14 +51,12 @@ exports.createObjeto = async (bd, dados) => {
     ) {
         //insert dos dados na tabela
         resposta_bd = await bd.query(
-            "INSERT INTO tbl_objetos (visible,nome,tipologia,dimensoes,outrasDimensoes,localizacao,breveDescricao,analogias,conclusoes,oficina,datacao,localOrigem,superCategorias,categorias,subCategorias,fichaDeRegistoFK) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            "INSERT INTO tbl_objetos (visible,tipologia,dimensoes,outrasDimensoes,breveDescricao,analogias,conclusoes,oficina,datacao,localOrigem,superCategorias,categorias,subCategorias,fichaDeRegistoFK) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             [
                 true,
-                dados.nome,
                 dados.tipologia,
                 dados.dimensoes,
                 dados.outrasDimensoes,
-                dados.localizacao,
                 dados.breveDescricao,
                 dados.analogias,
                 dados.conclusoes,
@@ -96,7 +92,7 @@ exports.createObjeto = async (bd, dados) => {
 exports.getObjeto = async (bd, id) => {
     let resultadofinal = { stat: 1, resposta: {} };
     let resposta_bd = await bd.query(
-        "Select nome, tipologia, dimensoes, outrasDimensoes, localizacao, breveDescricao, analogias, conclusoes, oficina, datacao, localOrigem, superCategorias, categorias, subCategorias from tbl_objetos where objetoID = ? and visible = true limit 1",
+        "Select tipologia, dimensoes, outrasDimensoes, breveDescricao, analogias, conclusoes, oficina, datacao, localOrigem, superCategorias, categorias, subCategorias from tbl_objetos where fichaDeRegistoFK  = ? and visible = true limit 1",
         [id]
     );
     if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
@@ -119,11 +115,9 @@ exports.updateObjeto = async (bd, dados) => {
     let resultadofinal = { stat: 1, resposta: "Missing Fields" };
     //verificar se os campos estao preenchidos
     if (
-        dados.nome &&
         dados.tipologia &&
         dados.dimensoes &&
         dados.outrasDimensoes &&
-        dados.localizacao &&
         dados.breveDescricao &&
         dados.analogias &&
         dados.conclusoes &&
@@ -136,14 +130,12 @@ exports.updateObjeto = async (bd, dados) => {
         dados.fichaDeRegistoFK
     ) {
         let resposta_bd = await bd.query(
-            "update tbl_objetos set visible=?,nome=?,tipologia=?,dimensoes=?,outrasDimensoes =?, localizacao=?, breveDescricao=?, analogias =? ,conclusoes=?,oficina=?,datacao =?,localOrigem=?,superCategorias=?,categorias=?,subCategorias=?,fichaDeRegistoFK=?  where objetoID = ?",
+            "update tbl_objetos set visible=?,tipologia=?,dimensoes=?,outrasDimensoes =?, breveDescricao=?, analogias =? ,conclusoes=?,oficina=?,datacao =?,localOrigem=?,superCategorias=?,categorias=?,subCategorias=?,fichaDeRegistoFK=?  where objetoID = ?",
             [
                 dados.visible,
-                dados.nome,
                 dados.tipologia,
                 dados.dimensoes,
                 dados.outrasDimensoes,
-                dados.localizacao,
                 dados.breveDescricao,
                 dados.analogias,
                 dados.conclusoes,

@@ -42,14 +42,14 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
     dados.dataEntrada &&
     dados.coordenacao &&
     dados.direcaoTecnica &&
-    dados.localidade &&
+    dados.interessadoFK &&
     dados.imagem &&
-    dados.interessadoFK
+    
   ) {
     //datas nao preenchidas
     if (dados.dataEntrega === "" && dados.dataConclusao === "") {
       resposta_bd = await bd.query(
-        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
         [
           dados.visible,
           dados.designacao,
@@ -59,7 +59,6 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
           null,
           dados.coordenacao,
           dados.direcaoTecnica,
-          dados.localidade,
           dados.imagem,
           dados.interessadoFK,
           null
@@ -69,7 +68,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
     //data de entrega nao preenchida
     else if (dados.dataEntrega === "") {
       resposta_bd = await bd.query(
-        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
         [
           dados.visible,
           dados.designacao,
@@ -79,7 +78,6 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
           dados.dataConclusao,
           dados.coordenacao,
           dados.direcaoTecnica,
-          dados.localidade,
           dados.imagem,
           dados.interessadoFK,
           null
@@ -89,7 +87,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
     //data de conclusao nao preenchida
     else if (dados.dataConclusao === "") {
       resposta_bd = await bd.query(
-        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
         [
           dados.visible,
           dados.designacao,
@@ -99,7 +97,6 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
           null,
           dados.coordenacao,
           dados.direcaoTecnica,
-          dados.localidade,
           dados.imagem,
           dados.interessadoFK,
           dados.dataEntrega
@@ -107,7 +104,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
       );
     } else {
       resposta_bd = await bd.query(
-        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
         [
           dados.visible,
           dados.designacao,
@@ -117,7 +114,6 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
           dados.dataConclusao,
           dados.coordenacao,
           dados.direcaoTecnica,
-          dados.localidade,
           dados.imagem,
           dados.interessadoFK,
           dados.dataEntrega
@@ -211,12 +207,11 @@ exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
     dados.dataEntrada &&
     dados.coordenacao &&
     dados.direcaoTecnica &&
-    dados.localidade &&
     dados.interessadoFK
   ) {
     if (dados.imagem == "") {
       resposta_bd = await bd.query(
-        "update tbl_fichaRegistoIdentificacao set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataEntrega=?, coordenacao =? ,direcaoTecnica=?,localidade=?,interessadoFK =?  where fichaRegistoID = ?",
+        "update tbl_fichaRegistoIdentificacao set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataEntrega=?, coordenacao =? ,direcaoTecnica=?,interessadoFK =?  where fichaRegistoID = ?",
         [
           dados.visible,
           dados.designacao,
@@ -227,7 +222,6 @@ exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
           dados.dataEntrega,
           dados.coordenacao,
           dados.direcaoTecnica,
-          dados.localidade,
           dados.interessadoFK,
           dados.fichaRegistoID
         ]
@@ -246,7 +240,7 @@ exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
         });
       }
       resposta_bd = await bd.query(
-        "update tbl_fichaRegistoIdentificacao set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataEntrega=?, coordenacao =? ,direcaoTecnica=?,localidade=?, imagem=?, interessadoFK =?  where fichaRegistoID = ?",
+        "update tbl_fichaRegistoIdentificacao set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataEntrega=?, coordenacao =? ,direcaoTecnica=?, imagem=?, interessadoFK =?  where fichaRegistoID = ?",
         [
           dados.visible,
           dados.designacao,
@@ -257,7 +251,6 @@ exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
           dados.dataEntrega,
           dados.coordenacao,
           dados.direcaoTecnica,
-          dados.localidade,
           dados.imagem,
           dados.interessadoFK,
           dados.fichaRegistoID

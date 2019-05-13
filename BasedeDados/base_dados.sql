@@ -61,8 +61,19 @@ CREATE TABLE tbl_fichaRegistoIdentificacao
     dataEntrega DATE,
     coordenacao VARCHAR(255) NOT NULL,
     direcaoTecnica VARCHAR(255) NOT NULL,
-    localidade VARCHAR(255) NOT NULL,
 	imagem VARCHAR(255) NOT NULL,
+    tipologia VARCHAR(255) NOT NULL,
+    analogias VARCHAR(255) NOT NULL,
+    dimensoes VARCHAR(255) NOT NULL,
+    outrasDimensoes VARCHAR(255) NOT NULL,
+    breveDescricao VARCHAR(255) NOT NULL,
+    conclusoes VARCHAR(255) NOT NULL,
+    oficina VARCHAR(255) NOT NULL,
+    datacao VARCHAR(255) NOT NULL,
+    localOrigem VARCHAR(255) NOT NULL,
+    superCategorias VARCHAR(255) NOT NULL,
+    categorias VARCHAR(255) NOT NULL,
+    subCategorias VARCHAR(255) NOT NULL,
     interessadoFK INT NOT NULL,
     PRIMARY KEY(fichaRegistoID),
     FOREIGN KEY(interessadoFK) REFERENCES tbl_interessados(interessadoID)
@@ -134,26 +145,6 @@ CREATE TABLE tbl_interessadosContactos
     FOREIGN KEY(interessadoFK) REFERENCES tbl_interessados(interessadoID)
 );
 
-DROP TABLE IF EXISTS tbl_objetos;
-CREATE TABLE tbl_objetos(
-    objetoID INT NOT NULL AUTO_INCREMENT,
-    visible BOOLEAN,
-    tipologia VARCHAR(255) NOT NULL,
-    dimensoes VARCHAR(255) NOT NULL,
-    outrasDimensoes VARCHAR(255) NOT NULL,
-    breveDescricao VARCHAR(255) NOT NULL,
-    analogias VARCHAR(255) NOT NULL,
-    conclusoes VARCHAR(255) NOT NULL,
-    oficina VARCHAR(255) NOT NULL,
-    datacao VARCHAR(255) NOT NULL,
-    localOrigem VARCHAR(255) NOT NULL,
-    superCategorias VARCHAR(255) NOT NULL,
-    categorias VARCHAR(255) NOT NULL,
-    subCategorias VARCHAR(255) NOT NULL,
-	fichaDeRegistoFK INT NOT NULL,
-	PRIMARY KEY(objetoID),
-	FOREIGN KEY(fichaDeRegistoFK) REFERENCES tbl_fichaRegistoIdentificacao(fichaRegistoID)
-);
 
 DROP TABLE IF EXISTS tbl_fichasTecnicas;
 CREATE TABLE tbl_fichasTecnicas

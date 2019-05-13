@@ -10,7 +10,6 @@ class Read extends Component {
       alertisNotVisible: true,
       alertColor: '',
       data: null,
-      dataObj: null,
       loading: true,
       alert: false,
     };
@@ -18,8 +17,6 @@ class Read extends Component {
 
   componentDidMount(){
     this.getFichaRI(this.props.id);
-    // this.getObjetos(this.props.id);
-    this.getAndSetImage();
   }
 
   async getFichaRI(id) {
@@ -35,6 +32,7 @@ class Read extends Component {
     
     //Aguardar API
     await response.json().then(resp => {
+      console.log(resp);
       let status = resp.stat;
       switch (status) {
         case "Authenticated":
@@ -43,6 +41,7 @@ class Read extends Component {
               data: resp.resposta, 
               loading: false 
           }));
+          this.getAndSetImage();
           break;
         default:
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
@@ -58,44 +57,6 @@ class Read extends Component {
       }))
     });
   }
-  
-  async getObjetos(id) {
-
-    //Enviar pedido
-    const response = await fetch(`/api/objetos/${this.props.id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": sessionStorage.getItem("token")
-      }
-    });
-    
-    //Aguardar API
-    await response.json().then(resp => {
-      let status = resp.stat;
-      switch (status) {
-        case "Authenticated":
-          this.setState(prevState => ({
-              ...prevState,
-              dataObj: resp.resposta, 
-              loading: false 
-          }));
-          break;
-        default:
-          console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
-      }
-    }).catch( resp => {
-      this.setState(prevState => ({
-        ...prevState,
-        error: true,
-        loading: true,
-        alertText: 'Não existe conexão com o servidor.',
-        alertisNotVisible: false,
-        alertColor: 'danger'
-      }))
-    });
-  }
-  
 
   getAndSetImage() {
     const response = fetch("/api/fichaRegistoIdentificacao/imagem/"+this.props.id, {
@@ -109,7 +70,7 @@ class Read extends Component {
     .then(blob =>{
         let reader = new FileReader();
         reader.onload = function () {
-          document.getElementById("imgPrev").src = reader.result.toString();
+          document.querySelector("#imgPrev").src = reader.result.toString();
         }
         reader.readAsDataURL(blob);
     });
@@ -242,7 +203,7 @@ class Read extends Component {
                         type="text" 
                         className="form-control" 
                         id="tipologia" 
-                        value={this.state.dataObj.tipologia}
+                        value={this.state.data.tipologia}
                         readOnly
                         />
                     </div>
@@ -252,7 +213,7 @@ class Read extends Component {
                         type="text" 
                         className="form-control" 
                         id="analogias" 
-                        value={this.state.dataObj.analogias}
+                        value={this.state.data.analogias}
                         readOnly
                         />
                     </div>
@@ -264,7 +225,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="dimensoes" 
-                          value={this.state.dataObj.dimensoes}
+                          value={this.state.data.dimensoes}
                           readOnly
                           />
                       </div>
@@ -274,7 +235,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="outrasDimensoes" 
-                          value={this.state.dataObj.outrasDimensoes}
+                          value={this.state.data.outrasDimensoes}
                           readOnly
                           />
                       </div>
@@ -286,7 +247,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="breveDescricao" 
-                          value={this.state.dataObj.breveDescricao}
+                          value={this.state.data.breveDescricao}
                           readOnly
                           />
                     </div>
@@ -296,7 +257,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="conclusoes" 
-                          value={this.state.dataObj.conclusoes}
+                          value={this.state.data.conclusoes}
                           readOnly
                           />
                     </div>
@@ -306,7 +267,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="oficina" 
-                          value={this.state.dataObj.oficina}
+                          value={this.state.data.oficina}
                           readOnly
                           />
                     </div>
@@ -316,7 +277,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="datacao" 
-                          value={this.state.dataObj.datacao}
+                          value={this.state.data.datacao}
                           readOnly
                           />
                     </div>
@@ -326,7 +287,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="localOrigem" 
-                          value={this.state.dataObj.localOrigem}
+                          value={this.state.data.localOrigem}
                           readOnly
                           />
                     </div>
@@ -338,7 +299,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="superCategorias" 
-                          value={this.state.dataObj.superCategorias}
+                          value={this.state.data.superCategorias}
                           readOnly
                           />
                     </div>
@@ -348,7 +309,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="categorias" 
-                          value={this.state.dataObj.categorias}
+                          value={this.state.data.categorias}
                           readOnly
                           />
                     </div>                    
@@ -358,7 +319,7 @@ class Read extends Component {
                           type="text" 
                           className="form-control" 
                           id="subCategorias" 
-                          value={this.state.dataObj.subCategorias}
+                          value={this.state.data.subCategorias}
                           readOnly
                           />
                     </div>

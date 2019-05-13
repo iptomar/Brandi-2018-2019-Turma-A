@@ -17,6 +17,8 @@ const iluminacao = require("./modulos/Routers/IluminacaoRouter");
 const interessadosContactos = require("./modulos/Routers/InteressadosContactosRouter");
 const solventes = require("./modulos/Routers/SolventesRouter");
 const testesEficacia = require("./modulos/Routers/TestesEficaciaRouter");
+const tecnicas = require('./modulos/Routers/TecnicasRouter');
+const interessados = require('./modulos/Routers/InteressadosRouter');
 
 //cria ligacao à base de dados
 //LIGAÇÃO SERVIDOR
@@ -182,7 +184,23 @@ testesEficacia.createTesteEficacia(app, bd);
 //rota que dá update de um teste de Eficacia
 testesEficacia.updateTesteEficacia(app, bd);
 
+//rota que devolve todas as tecnicas
+tecnicas.getAllTecnicasRoute(app, bd);
+//rota que devolve uma tecnica
+tecnicas.getSingleTecnicasRouter(app, bd);
+//rota que cria uma tecnica
+tecnicas.createTecnicasRouter(app, bd);
+//rota que dá update numa tecnica
+tecnicas.updateTecnicasRoute(app, bd);
 
+//rota que devolve todos os interessados
+interessados.getAllInteressadosRoute(app, bd);
+//rota que devolve um interessado
+interessados.getInteressadoRoute(app, bd);
+//rota que cria um interessado
+interessados.createInteressadoRoute(app, bd);
+//rota que dá update num interessado
+interessados.updateInteressadoRoute(app, bd);
 
 
 

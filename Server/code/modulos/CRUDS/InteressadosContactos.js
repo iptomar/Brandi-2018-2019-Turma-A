@@ -49,8 +49,8 @@ exports.createInteressadosContactos = async (bd, dados) => {
     auxiliar,
     array2
   );
-  if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
-    resultadofinal.resposta = resposta_bd.resposta[0];
+  if (resposta_bd.stat === 0) {
+    resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;
   } else if (resposta_bd.stat === 1) {
     resultadofinal.resposta = "DBConnectionError";

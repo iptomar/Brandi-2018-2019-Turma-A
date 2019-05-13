@@ -29,6 +29,7 @@ class BasedeDados {
       stat: 1,
       resposta: {}
     };
+  
     try {
       connection = await new Promise(async (resolve, reject) => {
         await this._pool.query(quer, params, async (error, results, fields) => {
@@ -52,6 +53,7 @@ class BasedeDados {
       )
         response.stat = 4;
       response.resposta = ex;
+   
     } finally {
       return response;
     }

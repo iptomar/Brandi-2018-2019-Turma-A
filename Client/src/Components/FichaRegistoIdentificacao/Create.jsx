@@ -10,9 +10,11 @@ class Create extends Component {
       alertisNotVisible: true,
       alertColor: "danger",
       files: [],
-      tecnicosResp: []
+      tecnicosResp: [],
+      interessadosResp: [],
     }
     this.fetchTecnicos();
+    this.fetchInteressados();
     this.getData = this.getData.bind(this);
     this.changeStatus = this.changeStatus.bind(this);
   }
@@ -33,6 +35,20 @@ class Create extends Component {
     });
     await response.json().then(resp => {
       this.setState({ tecnicosResp: resp.resposta })
+    });
+  }
+
+  async fetchInteressados() {
+    //Enviar pedido para receber 
+    const response = await fetch("/api/interessados", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'x-auth-token': sessionStorage.getItem('token')
+      }
+    });
+    await response.json().then(resp => {
+      this.setState({ interessadosResp: resp.resposta })
     });
   }
 
@@ -76,16 +92,20 @@ class Create extends Component {
     formData.append("dataEntrega", document.getElementById("dateEntrega").value);
     formData.append("coordenacao", document.getElementById("coord").value);
     formData.append("direcaoTecnica", document.getElementById("dirTecn").value);
-    formData.append("localidade", document.getElementById("endPostLocal").value);
-    formData.append("interessadoFK", 1);
+
+    var select = document.getElementById("SELECTinteressados");
+    var option = select.options[select.selectedIndex];
+    formData.append("interessadoFK", option);
+    
     formData.append("tecnicosFK", CB);
 
     //Enviar as imagens
     for (var i = 0; i < this.state.files.length; i++) {
       formData.append("imagem", this.state.files[i]);
     }
-    
-    //Enviar pedidos (FORMA UTILIZADA A PEDIDO DA EQUIPA DA API)
+
+    formData.append("");
+
     const response = await fetch("/api/fichaRegistoIdentificacao/create", {
       method: "POST",
       headers: {
@@ -225,7 +245,7 @@ class Create extends Component {
                     </div>
                   </div>
                   <label>Técnico(s) Responsável(eis)</label>
-                  <div className="row">
+                  <div className="row text-center">
                     {this.state.tecnicosResp.map(function (object) {
                       return (
                         <div className="input-group mb-3 col-md-3" key={object.tecnicoID}>
@@ -239,73 +259,87 @@ class Create extends Component {
                       );
                     })}
                   </div>
+                  <label>Proprietário / Dono da obra</label>
+                  <select id="SELECTinteressados" className="form-control mb-3">
+                    {this.state.interessadosResp.map(function (object, i) {
+                      return (
+                        <option
+                            className="dropdown-item"
+                            id={object.roleID}
+                            key={i}
+                          >
+                            {object.nome}
+                        </option>
+                      );
+                    })}
+                  </select>
                   <div className="row">
-                   {/* TIPOLOGIAS */}
+                    {/* TIPOLOGIAS */}
                     <div className="col-md-6 mb-3">
-                        <label>Tipologia:</label>
-                        <input type="text" className="form-control mb-3" id="tipologia" placeholder="Tipologia" required/>
+                      <label>Tipologia:</label>
+                      <input type="text" className="form-control mb-3" id="tipologia" placeholder="Tipologia" required />
                     </div>
                     {/* ANALOGIAS */}
                     <div className="col-md-6 mb-3">
-                        <label>Analogias:</label>
-                        <input type="text" className="form-control" id="analogias" placeholder="Analogias" required />
+                      <label>Analogias:</label>
+                      <input type="text" className="form-control" id="analogias" placeholder="Analogias" required />
                     </div>
                   </div>
                   <div className="row">
                     <div className="col-md-6 mb-3">
                       <label>Dimensões:</label>
-                      <input type="text" className="form-control mb-3" id="dimensoes" placeholder="Dimensões" required/>
+                      <input type="text" className="form-control mb-3" id="dimensoes" placeholder="Dimensões" required />
                     </div>
                     <div className="col-md-6 mb-3">
                       <label>Outras dimensões:</label>
-                      <input type="text" className="form-control mb-3" id="outrasDimensoes" placeholder="Outras dimensões" required/>
+                      <input type="text" className="form-control mb-3" id="outrasDimensoes" placeholder="Outras dimensões" required />
                     </div>
                   </div>
                   <div className="row">
                     {/* BREVE DESCRIÇÃO */}
                     <div className="col-md-12 mb-3">
-                        <label>Breve descrição:</label>
-                        <textarea type="text" id="breveDescricao" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Breve descrição" />
+                      <label>Breve descrição:</label>
+                      <textarea type="text" id="breveDescricao" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Breve descrição" />
                     </div>
                     {/* CONCLUSÕES */}
                     <div className="col-md-12 mb-3">
-                        <label>Conclusões:</label>
-                        <textarea type="text" id="conclusoes" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Conclusões" />
+                      <label>Conclusões:</label>
+                      <textarea type="text" id="conclusoes" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Conclusões" />
                     </div>
                     {/* AUTORIA */}
                     <div className="col-md-4 mb-3">
-                        <label>Autoria / Oficina:</label>
-                        <input type="text" className="form-control" id="oficina" placeholder="Autoria / Oficina" required />
+                      <label>Autoria / Oficina:</label>
+                      <input type="text" className="form-control" id="oficina" placeholder="Autoria / Oficina" required />
                     </div>
                     {/* DATAÇÃO */}
                     <div className="col-md-4 mb-3">
-                        <label>Datação:</label>
-                        <input type="text" className="form-control" id="datacao" placeholder="Datação" required />
+                      <label>Datação:</label>
+                      <input type="text" className="form-control" id="datacao" placeholder="Datação" required />
                     </div>
                     {/* LOCAL DE ORIGEM / PRODUÇÃO */}
                     <div className="col-md-4 mb-3">
-                        <label>Local de origem / Produção:</label>
-                        <input type="text" className="form-control" id="localOrigem" placeholder="Local de Origem / Produção" required />
+                      <label>Local de origem / Produção:</label>
+                      <input type="text" className="form-control" id="localOrigem" placeholder="Local de Origem / Produção" required />
                     </div>
                   </div>
                   <div className="row">
                     <div className="col-md-4 mb-3">
                       <label>Super-categoria:</label>
-                      <input type="text" className="form-control mb-3" id="superCategorias" placeholder="Super-categoria" required/>
-                    </div>  
+                      <input type="text" className="form-control mb-3" id="superCategorias" placeholder="Super-categoria" required />
+                    </div>
                     <div className="col-md-4 mb-3">
                       <label>Categoria:</label>
-                      <input type="text" className="form-control mb-3" id="categorias" placeholder="Categoria" required/>
-                      </div>
+                      <input type="text" className="form-control mb-3" id="categorias" placeholder="Categoria" required />
+                    </div>
                     <div className="col-md-4 mb-3">
                       <label>Subcategoria:</label>
-                      <input type="text" className="form-control mb-3" id="subCategorias" placeholder="Subcategoria" required/>
+                      <input type="text" className="form-control mb-3" id="subCategorias" placeholder="Subcategoria" required />
                     </div>
                   </div>
                   <hr className="mb-4" />
                   <div className="row">
                     <div className="col-md-12">
-                      <FileUpload sendData={this.getData} type="image"/>
+                      <FileUpload sendData={this.getData} type="image" />
                     </div>
                   </div>
                   <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} status={this.changeStatus} />

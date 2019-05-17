@@ -84,6 +84,7 @@ class Create extends Component {
       return null
     }
 
+    formData.append("visible", true);
     formData.append("designacao", document.getElementById("dObjeto").value);
     formData.append("processoLCRM", document.getElementById("procLCRM").value);
     formData.append("processoCEARC", document.getElementById("procCEARC").value);
@@ -95,7 +96,21 @@ class Create extends Component {
 
     var select = document.getElementById("SELECTinteressados");
     var option = select.options[select.selectedIndex];
-    formData.append("interessadoFK", option);
+    formData.append("interessadoFK", option.id);
+    console.log(option);
+
+    formData.append("tipologia", document.getElementById("tipologia").value);
+    formData.append("dimensoes", document.getElementById("dimensoes").value);
+    formData.append("outrasDimensoes", document.getElementById("outrasDimensoes").value);
+    formData.append("breveDescricao", document.getElementById("breveDescricao").value);
+    formData.append("analogias", document.getElementById("analogias").value);
+    formData.append("conclusoes", document.getElementById("conclusoes").value);
+    formData.append("oficina", document.getElementById("oficina").value);
+    formData.append("datacao", document.getElementById("datacao").value);
+    formData.append("localOrigem", document.getElementById("localOrigem").value);
+    formData.append("superCategorias", document.getElementById("superCategorias").value);
+    formData.append("categorias", document.getElementById("categorias").value);
+    formData.append("subCategorias", document.getElementById("subCategorias").value);
     
     formData.append("tecnicosFK", CB);
 
@@ -103,8 +118,6 @@ class Create extends Component {
     for (var i = 0; i < this.state.files.length; i++) {
       formData.append("imagem", this.state.files[i]);
     }
-
-    formData.append("");
 
     const response = await fetch("/api/fichaRegistoIdentificacao/create", {
       method: "POST",
@@ -124,55 +137,6 @@ class Create extends Component {
             alertisNotVisible: false,
             alertColor: "danger"
           });
-          break;
-        case "NotRegisted":
-          this.setState({
-            alertisNotVisible: false
-          });
-          break;
-        default:
-          console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
-      }
-    });
-
-    //Limpar o formData depois de enviar a primeira parte
-    formData = new FormData();
-
-    formData.append("tipologia", document.getElementById("tipologia").value);
-    formData.append("dimensoes", document.getElementById("dimensoes").value);
-    formData.append("outrasDimensoes", document.getElementById("outrasDimensoes").value);
-    formData.append("breveDescricao", document.getElementById("breveDescricao").value);
-    formData.append("analogias", document.getElementById("analogias").value);
-    formData.append("conclusoes", document.getElementById("conclusoes").value);
-    formData.append("oficina", document.getElementById("oficina").value);
-    formData.append("datacao", document.getElementById("datacao").value);
-    formData.append("localOrigem", document.getElementById("localOrigem").value);
-    formData.append("superCategorias", document.getElementById("superCategorias").value);
-    formData.append("categorias", document.getElementById("categorias").value);
-    formData.append("subCategorias", document.getElementById("subCategorias").value);
-
-    //Enviar pedidos (FORMA UTILIZADA A PEDIDO DA EQUIPA DA API)
-    const responseObjeto = await fetch("/api/objetos/create", {
-      method: "POST",
-      headers: {
-        'x-auth-token': sessionStorage.getItem('token')
-      },
-      body: formData
-    });
-
-    //Aguardar API
-    await responseObjeto.json().then(resp => {
-      let status = resp.stat;
-      switch (status) {
-        case "DatabaseError":
-          this.setState({
-            alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
-            alertisNotVisible: false,
-            alertColor: "danger"
-          });
-          break;
-        case "Registed":
-          window.location = '/fichaRI/&showConfirm';
           break;
         case "NotRegisted":
           this.setState({
@@ -265,7 +229,7 @@ class Create extends Component {
                       return (
                         <option
                             className="dropdown-item"
-                            id={object.roleID}
+                            id={object.interessadoID}
                             key={i}
                           >
                             {object.nome}

@@ -218,7 +218,7 @@ class Edit extends Component {
     });
 
     //Aguardar resposta
-    await responseObjeto.json().then(resp => {
+    await response.json().then(resp => {
       let status = resp.stat;
       switch (status) {
         case "Updated":

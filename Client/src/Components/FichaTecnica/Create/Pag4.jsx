@@ -11,6 +11,15 @@ class Pag4 extends Component {
             alertColor: '',
         };
     }
+
+    eliminaUltimaLinha = () => {
+        var table = document.getElementById("tabela");
+        var numRows = table.rows.length;
+        if (numRows > 2) {
+            table.deleteRow(-1);
+        }
+    }
+
     adicionaNovaLinha = () => {
         var table = document.getElementById("tabela");
         //inserir nova linha
@@ -19,27 +28,39 @@ class Pag4 extends Component {
         for (var i = 0; i < 4; i++) {
             var novaCelula = row.insertCell(i);
             var param = document.createElement('textarea');
+            param.className = "form-control";
+            param.setAttribute("type", "text");
+            param.style.resize = "none";
             param.setAttribute("rows", "2");
-            param.style.resize="none";
             novaCelula.appendChild(param);
         }
+
         //parametro input
         //técnico
         var cellTecnico = row.insertCell(4);
         var paramTecnico = document.createElement('textarea');
+        paramTecnico.className = "form-control";
         paramTecnico.setAttribute("type", "text")
         paramTecnico.readOnly = true;
-        paramTecnico.setAttribute("rows", "2");
-        paramTecnico.style.resize = "none";
         paramTecnico.value = "Name";
+        paramTecnico.style.resize = "none";
+        paramTecnico.setAttribute("rows", "2");
+
         cellTecnico.appendChild(paramTecnico);
+
         //parametro date
         //data
         var cellDate = row.insertCell(5);
         var paramData = document.createElement('input');
+        paramData.className = "form-control text-center";
+        paramData.style.width = "170px";
+        paramData.style.height = "63px"
         paramData.setAttribute("type", "date")
+
         cellDate.appendChild(paramData);
+
     }
+
 
 
 
@@ -102,7 +123,7 @@ class Pag4 extends Component {
                             <label className="form-control" htmlFor="ensaio">Ensaio de produtos e materiais a empregar na intervenção</label>
                         </div>
                     </div>
-                    <hr/>
+                    <hr />
                     <div className="row">
                         <table className="table table-bordered table-secondary text-center" id="tabela">
                             <thead >
@@ -122,11 +143,21 @@ class Pag4 extends Component {
                                     <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2"></textarea></td>
                                     <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2"></textarea></td>
                                     <td><textarea className="form-control" type="text" readOnly value="Name" style={{ resize: "none" }} rows="2"></textarea></td>
-                                    <td><input className="form-control" style={{width: "148px", height:"63px"}} type="date"></input></td>
+                                    <td><input className="form-control" style={{ width: "170px", height: "63px" }} type="date"></input></td>
                                 </tr>
                             </tbody>
                         </table>
-                        <button type="button" className="btn btn-dark" onClick={this.adicionaNovaLinha}>Adicionar Linha</button>
+                        {/*botões*/}
+
+                        <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                            <div className="btn-group mr-2" role="group" aria-label="First group">
+                                <button type="button" className="btn btn-dark" onClick={this.adicionaNovaLinha}>Adicionar Linha</button>
+                            </div>
+                            <div className="btn-group mr-2" role="group" aria-label="Second group">
+                                <button type="button" className="btn btn-dark" onClick={this.eliminaUltimaLinha}>Eliminar Linha</button>
+                            </div>
+                        </div>
+
                     </div>
                     <hr />
                     <div className="row">

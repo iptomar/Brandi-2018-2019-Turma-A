@@ -7,7 +7,6 @@ const userRouter = require("./modulos/Routers/UtilizadoresRouter");
 const FichaRegistoIdentificacaoRouter = require("./modulos/Routers/FichaRegistoIdentificacaoRouter");
 const processosRouter = require("./modulos/Routers/ProcessosRouter");
 const tecnicosRouter = require("./modulos/Routers/TecnicosRouter");
-const objetosRouter = require("./modulos/Routers/ObjetoRouter");
 const materiaisRouter = require("./modulos/Routers/MateriaisRouter");
 const condicoesAmbientaisLocais = require("./modulos/Routers/CondicoesAmbientaisLocalRouter");
 const especificacoesExames = require("./modulos/Routers/EspecificacoesExamesRouter");
@@ -91,17 +90,6 @@ tecnicosRouter.updateTecnicoRouter(app, bd);
 // processosRouter.createProcessoRoute(app, bd);
 // //rota que edita um processo
 // processosRouter.updateProcessoRoute(app, bd);
-
-//rota que devolve todos os objetos
-objetosRouter.getAllObjetosRoute(app, bd);
-//rota que devolver um objeto
-objetosRouter.getObjetoRoute(app, bd);
-//rota que cria um objeto
-objetosRouter.createObjetoRoute(app, bd);
-//rota que edita um objeto
-objetosRouter.updateObjetoRouter(app, bd);
-//rota que apagar um objeto
-objetosRouter.deleteObjetoRouter(app, bd);
 
 //rota que devolve todos os materiais
 materiaisRouter.getAllMateriaisRoute(app, bd);

@@ -42,14 +42,25 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
     dados.dataEntrada &&
     dados.coordenacao &&
     dados.direcaoTecnica &&
-    dados.localidade &&
     dados.imagem &&
+    dados.tipologia &&
+    dados.analogias &&
+    dados.dimensoes &&
+    dados.outrasDimensoes &&
+    dados.breveDescricao &&
+    dados.conclusoes &&
+    dados.oficina &&
+    dados.datacao &&
+    dados.localOrigem &&
+    dados.superCategorias &&
+    dados.categorias &&
+    dados.subCategorias &&
     dados.interessadoFK
   ) {
     //datas nao preenchidas
     if (dados.dataEntrega === "" && dados.dataConclusao === "") {
       resposta_bd = await bd.query(
-        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica, imagem, tipologia, analogias, dimensoes, outrasDimensoes, breveDescricao, conclusoes, oficina, datacao, localOrigem, superCategorias, categorias, subCategorias, interessadoFK, dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [
           dados.visible,
           dados.designacao,
@@ -59,8 +70,19 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
           null,
           dados.coordenacao,
           dados.direcaoTecnica,
-          dados.localidade,
           dados.imagem,
+          dados.tipologia,
+          dados.analogias,
+          dados.dimensoes,
+          dados.outrasDimensoes,
+          dados.breveDescricao,
+          dados.conclusoes,
+          dados.oficina,
+          dados.datacao,
+          dados.localOrigem,
+          dados.superCategorias,
+          dados.categorias,
+          dados.subCategorias,
           dados.interessadoFK,
           null
         ]
@@ -69,7 +91,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
     //data de entrega nao preenchida
     else if (dados.dataEntrega === "") {
       resposta_bd = await bd.query(
-        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica, imagem, tipologia, analogias, dimensoes, outrasDimensoes, breveDescricao, conclusoes, oficina, datacao, localOrigem, superCategorias, categorias, subCategorias, interessadoFK, dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [
           dados.visible,
           dados.designacao,
@@ -79,8 +101,19 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
           dados.dataConclusao,
           dados.coordenacao,
           dados.direcaoTecnica,
-          dados.localidade,
           dados.imagem,
+          dados.tipologia,
+          dados.analogias,
+          dados.dimensoes,
+          dados.outrasDimensoes,
+          dados.breveDescricao,
+          dados.conclusoes,
+          dados.oficina,
+          dados.datacao,
+          dados.localOrigem,
+          dados.superCategorias,
+          dados.categorias,
+          dados.subCategorias,
           dados.interessadoFK,
           null
         ]
@@ -89,7 +122,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
     //data de conclusao nao preenchida
     else if (dados.dataConclusao === "") {
       resposta_bd = await bd.query(
-        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica, imagem, tipologia, analogias, dimensoes, outrasDimensoes, breveDescricao, conclusoes, oficina, datacao, localOrigem, superCategorias, categorias, subCategorias, interessadoFK, dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [
           dados.visible,
           dados.designacao,
@@ -99,15 +132,26 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
           null,
           dados.coordenacao,
           dados.direcaoTecnica,
-          dados.localidade,
           dados.imagem,
+          dados.tipologia,
+          dados.analogias,
+          dados.dimensoes,
+          dados.outrasDimensoes,
+          dados.breveDescricao,
+          dados.conclusoes,
+          dados.oficina,
+          dados.datacao,
+          dados.localOrigem,
+          dados.superCategorias,
+          dados.categorias,
+          dados.subCategorias,
           dados.interessadoFK,
           dados.dataEntrega
         ]
       );
     } else {
       resposta_bd = await bd.query(
-        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica,localidade,imagem,interessadoFK,dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica, imagem, tipologia, analogias, dimensoes, outrasDimensoes, breveDescricao, conclusoes, oficina, datacao, localOrigem, superCategorias, categorias, subCategorias, interessadoFK, dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [
           dados.visible,
           dados.designacao,
@@ -117,8 +161,19 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
           dados.dataConclusao,
           dados.coordenacao,
           dados.direcaoTecnica,
-          dados.localidade,
           dados.imagem,
+          dados.tipologia,
+          dados.analogias,
+          dados.dimensoes,
+          dados.outrasDimensoes,
+          dados.breveDescricao,
+          dados.conclusoes,
+          dados.oficina,
+          dados.datacao,
+          dados.localOrigem,
+          dados.superCategorias,
+          dados.categorias,
+          dados.subCategorias,
           dados.interessadoFK,
           dados.dataEntrega
         ]
@@ -211,12 +266,24 @@ exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
     dados.dataEntrada &&
     dados.coordenacao &&
     dados.direcaoTecnica &&
-    dados.localidade &&
+    dados.imagem &&
+    dados.tipologia &&
+    dados.analogias &&
+    dados.dimensoes &&
+    dados.outrasDimensoes &&
+    dados.breveDescricao &&
+    dados.conclusoes &&
+    dados.oficina &&
+    dados.datacao &&
+    dados.localOrigem &&
+    dados.superCategorias &&
+    dados.categorias &&
+    dados.subCategorias &&
     dados.interessadoFK
   ) {
     if (dados.imagem == "") {
       resposta_bd = await bd.query(
-        "update tbl_fichaRegistoIdentificacao set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataEntrega=?, coordenacao =? ,direcaoTecnica=?,localidade=?,interessadoFK =?  where fichaRegistoID = ?",
+        "update tbl_fichaRegistoIdentificacao set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataEntrega=?, coordenacao =? , direcaoTecnica =?, tipologia =?, analogias =?, dimensoes =?, outrasDimensoes =?, breveDescricao =?, conclusoes =?, oficina =?, oficina =?, datacao =?, localOrigem =?, superCategorias =?, categorias =?, subCategorias =?, interessadoFK =? where fichaRegistoID = ? ",
         [
           dados.visible,
           dados.designacao,
@@ -227,7 +294,18 @@ exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
           dados.dataEntrega,
           dados.coordenacao,
           dados.direcaoTecnica,
-          dados.localidade,
+          dados.tipologia,
+          dados.analogias,
+          dados.dimensoes,
+          dados.outrasDimensoes,
+          dados.breveDescricao,
+          dados.conclusoes,
+          dados.oficina,
+          dados.datacao,
+          dados.localOrigem,
+          dados.superCategorias,
+          dados.categorias,
+          dados.subCategorias,
           dados.interessadoFK,
           dados.fichaRegistoID
         ]
@@ -246,7 +324,7 @@ exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
         });
       }
       resposta_bd = await bd.query(
-        "update tbl_fichaRegistoIdentificacao set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataEntrega=?, coordenacao =? ,direcaoTecnica=?,localidade=?, imagem=?, interessadoFK =?  where fichaRegistoID = ?",
+        "update tbl_fichaRegistoIdentificacao set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataEntrega=?, coordenacao =? , direcaoTecnica =?,imagem=?, tipologia =?, analogias =?, dimensoes =?, outrasDimensoes =?, breveDescricao =?, conclusoes =?, oficina =?, oficina =?, datacao =?, localOrigem =?, superCategorias =?, categorias =?, subCategorias =?, interessadoFK =? where fichaRegistoID = ? ",
         [
           dados.visible,
           dados.designacao,
@@ -257,8 +335,19 @@ exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
           dados.dataEntrega,
           dados.coordenacao,
           dados.direcaoTecnica,
-          dados.localidade,
           dados.imagem,
+          dados.tipologia,
+          dados.analogias,
+          dados.dimensoes,
+          dados.outrasDimensoes,
+          dados.breveDescricao,
+          dados.conclusoes,
+          dados.oficina,
+          dados.datacao,
+          dados.localOrigem,
+          dados.superCategorias,
+          dados.categorias,
+          dados.subCategorias,
           dados.interessadoFK,
           dados.fichaRegistoID
         ]

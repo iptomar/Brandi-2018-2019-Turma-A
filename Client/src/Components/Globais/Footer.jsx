@@ -23,19 +23,19 @@ class Footer extends Component {
                     <h1>Redes Sociais</h1>
 				<div className="column2_n">
                     <div className="row-footer">
-					<a href="https://www.facebook.com/iptomar" target="_blank" className="btn btn-block btn-social btn-twitter btn_edit">
+					<a href="https://www.facebook.com/iptomar" target="_blank" rel="noopener noreferrer"  className="btn btn-block btn-social btn-twitter btn_edit">
     					<span className="fa fa-facebook"> Segue o IPT no Facebook</span> 
   					</a>
                     </div>
 
                     <div className="row-footer">
-					<a href="https://www.instagram.com/ipt.politecnicodetomar/" target="_blank" className="btn btn-block btn-social btn-twitter btn_edit">
+					<a href="https://www.instagram.com/ipt.politecnicodetomar/" rel="noopener noreferrer"  target="_blank" className="btn btn-block btn-social btn-twitter btn_edit">
     					<span className="fa fa-instagram"> Segue o IPT no Instagram</span>
   					</a>
                     </div>
                     <div className="row-footer">
                     
-						<a href="https://twitter.com/iptomar" target="_blank" className="btn btn-block btn-social btn-twitter btn_edit">
+						<a href="https://twitter.com/iptomar" target="_blank" rel="noopener noreferrer"  className="btn btn-block btn-social btn-twitter btn_edit">
     					<span className="fa fa-twitter"> Segue o IPT no Twitter </span> 
   						</a>
                     </div>

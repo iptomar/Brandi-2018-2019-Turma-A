@@ -14,7 +14,6 @@ class Edit extends Component {
       },
       showAlert: false,
       data: null,
-      dataObj: null,
       tecnicosResp: [],
       files: []
     };
@@ -31,7 +30,6 @@ class Edit extends Component {
   componentDidMount(){
     this.fetchFichaRI(this.props.id);
     this.fetchObjeto(this.props.id);
-    this.getAndSetImage();
   }
 
   async fetchFichaRI(id) {
@@ -50,6 +48,8 @@ class Edit extends Component {
         case "Authenticated":
           this.setState({ data: resp.resposta });
           this.fetchTecnicos();
+          this.getAndSetImage();
+          console.log(resp);
           break;
         default:
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
@@ -66,37 +66,7 @@ class Edit extends Component {
     });
   }
 
-  async fetchObjeto(id) {
-    //Enviar pedido
-    const response = await fetch(`/api/objetos/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": sessionStorage.getItem("token")
-      }
-    });
-    //Aguardar API
-    await response.json().then(resp => {
-      let status = resp.stat;
-      switch (status) {
-        case "Authenticated":
-          this.setState({ dataObj: resp.resposta });
-          break;
-        default:
-          console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
-      }
-    }).catch( resp => {
-      this.setState({
-        showAlert: true,
-        alert: { 
-          text: 'Não existe conexão com o servidor.',
-          notVisible: false,
-          color: 'danger'
-        }
-      });
-    });
-  }
-
+  
   getAndSetImage() {
     const response = fetch("/api/fichaRegistoIdentificacao/imagem/"+this.props.id, {
       method: "GET",
@@ -224,6 +194,20 @@ class Edit extends Component {
       formData.append("imagem", this.state.files);
     }
 
+    formData.append("tipologia", this.state.dataObj.tipologia);
+    formData.append("dimensoes", this.state.dataObj.dimensoes);
+    formData.append("outrasDimensoes", this.state.dataObj.outrasDimensoes);
+    formData.append("breveDescricao", this.state.dataObj.breveDescricao);
+    formData.append("analogias", this.state.dataObj.analogias);
+    formData.append("conclusoes", this.state.dataObj.conclusoes);
+    formData.append("oficina", this.state.dataObj.oficina);
+    formData.append("datacao", this.state.dataObj.datacao);
+    formData.append("localOrigem", this.state.dataObj.localOrigem);
+    formData.append("superCategorias", this.state.dataObj.superCategorias);
+    formData.append("categorias", this.state.dataObj.categorias);
+    formData.append("subCategorias", this.state.dataObj.subCategorias);
+
+
     //Enviar pedido
     const response = await fetch(`/api/fichaRegistoIdentificacao/${this.props.id}/edit`, {
       method: "POST",
@@ -261,63 +245,7 @@ class Edit extends Component {
           color: "danger"
         }
       });
-    });
-
-    //limpar formData
-    formData = new FormData();
-
-    formData.append("tipologia", this.state.dataObj.tipologia);
-    formData.append("dimensoes", this.state.dataObj.dimensoes);
-    formData.append("outrasDimensoes", this.state.dataObj.outrasDimensoes);
-    formData.append("breveDescricao", this.state.dataObj.breveDescricao);
-    formData.append("analogias", this.state.dataObj.analogias);
-    formData.append("conclusoes", this.state.dataObj.conclusoes);
-    formData.append("oficina", this.state.dataObj.oficina);
-    formData.append("datacao", this.state.dataObj.datacao);
-    formData.append("localOrigem", this.state.dataObj.localOrigem);
-    formData.append("superCategorias", this.state.dataObj.superCategorias);
-    formData.append("categorias", this.state.dataObj.categorias);
-    formData.append("subCategorias", this.state.dataObj.subCategorias);
-
-    //Enviar pedido
-    const responseObjeto = await fetch(`/api/objetos/${this.props.id}/edit`, {
-      method: "POST",
-      headers: {
-        'x-auth-token': sessionStorage.getItem('token')
-      },
-      body: formData
-    });
-
-    //Aguardar resposta
-    await responseObjeto.json().then(resp => {
-      let status = resp.stat;
-      switch (status) {
-        case "Updated":
-          window.location = `/fichaRI/${this.props.id}/detalhes&showConfirmEdited`;
-          break;
-        case "NotUpdated":
-          this.setState({
-            alert: {
-              text: "Erro ao editar.",
-              notVisible: false,
-              color: "danger"
-            }
-          });
-          break;
-        default:
-          console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
-      }
-    }).catch(resp => {
-      this.setState({
-        showAlert: true,
-        alert: {
-          text: "Erro na comunicação com o servidor.",
-          notVisible: false,
-          color: "danger"
-        }
-      });
-    });
-   
+    });   
   }
 
 

@@ -97,7 +97,6 @@ class Create extends Component {
     var select = document.getElementById("SELECTinteressados");
     var option = select.options[select.selectedIndex];
     formData.append("interessadoFK", option.id);
-    console.log(option);
 
     formData.append("tipologia", document.getElementById("tipologia").value);
     formData.append("dimensoes", document.getElementById("dimensoes").value);

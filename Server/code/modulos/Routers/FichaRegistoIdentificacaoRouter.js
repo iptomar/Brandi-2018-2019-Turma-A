@@ -133,6 +133,7 @@ exports.createfichaRegistoIdentificacaoRoute = async (app, bd) => {
             subCategorias: req.body.subCategorias,
             interessadoFK: req.body.interessadoFK,
             dataEntrega: req.body.dataEntrega,
+            tecnicosFK: req.body.tecnicosFK,
           };
           let resposta_bd = await fichaRegistoIdentificacao.createFichaRegistoIdentificacao(
             bd,
@@ -225,6 +226,7 @@ exports.updatefichaRegistoIdentificacaoRoute = async (app, bd) => {
           interessadoFK: req.body.interessadoFK,
           dataEntrega: req.body.dataEntrega,
           fichaRegistoID: req.params.id,
+          tecnicosFK: req.body.tecnicosFK,
         };
         //verificar se dataConclusao e dataEntrega est#ao preenchidas
         if (ficha.dataConclusao === "" && ficha.dataEntrega === "") {

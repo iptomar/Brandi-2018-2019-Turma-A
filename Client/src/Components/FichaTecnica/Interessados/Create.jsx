@@ -9,7 +9,7 @@ class Create extends Component {
       alertisNotVisible: true,
       alertColor: "danger"
     }
-
+    this.redirectToIndex = this.redirectToIndex.bind(this);
   }
 
   handleSubmit = async e => {
@@ -69,6 +69,10 @@ class Create extends Component {
     });
   }
 
+  redirectToIndex = () => {
+    window.location = '/interessados';
+  };
+
   render() {
     //Verifica se existe o token
     if (sessionStorage.getItem('token') == null) {
@@ -105,7 +109,14 @@ class Create extends Component {
                   </div>
                   <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} status={this.changeStatus} />
                   <hr className="mb-4" />
-                  <button className="btn btn-success btn-lg btn-block mb-5" type="submit">Criar</button>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <button className="btn btn-success btn-lg btn-block mb-5" type="submit">Criar</button>
+                    </div>
+                    <div className="col-md-6">
+                      <button className="btn btn-secondary btn-lg btn-block mb-5" onClick={this.redirectToIndex}>Cancelar</button>
+                    </div>
+                  </div>
                 </form>
               </div>
             </div>

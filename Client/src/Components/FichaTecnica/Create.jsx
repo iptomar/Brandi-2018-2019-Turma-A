@@ -3,6 +3,8 @@ import Pag1 from "../../Components/FichaTecnica/Create/Pag1";
 import Pag2 from "../../Components/FichaTecnica/Create/Pag2";
 import Pag3 from "../../Components/FichaTecnica/Create/Pag3";
 import Pag4 from "../../Components/FichaTecnica/Create/Pag4";
+import Pag5 from "../../Components/FichaTecnica/Create/Pag5";
+
 
 class Create extends Component {
   handleSubmit = async e => {
@@ -126,6 +128,22 @@ class Create extends Component {
                   </div>
                 </div>
               </div>
+            </div>
+
+            
+            <div className="card bg-light">
+                <div className="card-header" id="headingFive">
+                  <h2 className="mb-0">
+                    <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                      Página #5
+                    </button>
+                  </h2>
+                </div>
+                <div id="collapseFive" className="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                  <div className="card-body">
+                    <Pag5/>
+                  </div>
+                </div>
             </div>
             
             

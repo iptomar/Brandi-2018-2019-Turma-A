@@ -18,6 +18,7 @@ const solventes = require("./modulos/Routers/SolventesRouter");
 const testesEficacia = require("./modulos/Routers/TestesEficaciaRouter");
 const tecnicas = require('./modulos/Routers/TecnicasRouter');
 const interessados = require('./modulos/Routers/InteressadosRouter');
+const fichaTecnica = require('./modulos/Routers/FichaTecnicaRouter');
 
 //cria ligacao à base de dados
 //LIGAÇÃO SERVIDOR
@@ -189,6 +190,17 @@ interessados.getInteressadoRoute(app, bd);
 interessados.createInteressadoRoute(app, bd);
 //rota que dá update num interessado
 interessados.updateInteressadoRoute(app, bd);
+
+//rota que cria uma ficha tecnica
+fichaTecnica.createFichaTecnicaRoute(app, bd);
+//rota que dá update numa ficha tecnica
+fichaTecnica.updateFichaTecnicaRoute(app, bd);
+//rota que devolve uma ficha tecnica
+fichaTecnica.readFichaTecnicaRoute(app, bd);
+//rota para apagar uma ficha tecnica
+fichaTecnica.deleteFichaTecnicaRoute(app, bd);
+
+
 
 
 

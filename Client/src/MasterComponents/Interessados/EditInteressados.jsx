@@ -8,7 +8,7 @@ class EditInteressados extends Component {
     return (
       <div className="editInteressados">
         <Header />
-        <Edit />
+        <Edit id={this.props.id} />
         <Footer />
       </div>
     );

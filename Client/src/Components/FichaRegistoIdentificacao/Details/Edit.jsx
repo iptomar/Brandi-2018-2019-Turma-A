@@ -29,7 +29,6 @@ class Edit extends Component {
 
   componentDidMount(){
     this.fetchFichaRI(this.props.id);
-    this.fetchObjeto(this.props.id);
   }
 
   async fetchFichaRI(id) {
@@ -395,7 +394,7 @@ class Edit extends Component {
                         type="text" 
                         className="form-control" 
                         id="tipologia" 
-                        value={this.state.dataObj.tipologia}
+                        value={this.state.data.tipologia}
                         onChange={this.handleChangeObj}
                         readOnly
                         />
@@ -406,7 +405,7 @@ class Edit extends Component {
                         type="text" 
                         className="form-control" 
                         id="analogias" 
-                        value={this.state.dataObj.analogias}
+                        value={this.state.data.analogias}
                         onChange={this.handleChangeObj}
                         readOnly
                         />
@@ -419,7 +418,7 @@ class Edit extends Component {
                           type="text" 
                           className="form-control" 
                           id="dimensoes" 
-                          value={this.state.dataObj.dimensoes}
+                          value={this.state.data.dimensoes}
                           onChange={this.handleChangeObj}
                           readOnly
                           />
@@ -430,7 +429,7 @@ class Edit extends Component {
                           type="text" 
                           className="form-control" 
                           id="outrasDimensoes" 
-                          value={this.state.dataObj.outrasDimensoes}
+                          value={this.state.data.outrasDimensoes}
                           onChange={this.handleChangeObj}
                           readOnly
                           />
@@ -443,7 +442,7 @@ class Edit extends Component {
                           type="text" 
                           className="form-control" 
                           id="breveDescricao" 
-                          value={this.state.dataObj.breveDescricao}
+                          value={this.state.data.breveDescricao}
                           onChange={this.handleChangeObj}
                           readOnly
                           />
@@ -454,7 +453,7 @@ class Edit extends Component {
                           type="text" 
                           className="form-control" 
                           id="conclusoes" 
-                          value={this.state.dataObj.conclusoes}
+                          value={this.state.data.conclusoes}
                           onChange={this.handleChangeObj}
                           readOnly
                           />
@@ -465,7 +464,7 @@ class Edit extends Component {
                           type="text" 
                           className="form-control" 
                           id="oficina" 
-                          value={this.state.dataObj.oficina}
+                          value={this.state.data.oficina}
                           onChange={this.handleChangeObj}
                           readOnly
                           />
@@ -476,7 +475,7 @@ class Edit extends Component {
                           type="text" 
                           className="form-control" 
                           id="datacao" 
-                          value={this.state.dataObj.datacao}
+                          value={this.state.data.datacao}
                           onChange={this.handleChangeObj}
                           readOnly
                           />
@@ -487,7 +486,7 @@ class Edit extends Component {
                           type="text" 
                           className="form-control" 
                           id="localOrigem" 
-                          value={this.state.dataObj.localOrigem}
+                          value={this.state.data.localOrigem}
                           onChange={this.handleChangeObj}
                           readOnly
                           />
@@ -500,7 +499,7 @@ class Edit extends Component {
                           type="text" 
                           className="form-control" 
                           id="superCategorias" 
-                          value={this.state.dataObj.superCategorias}
+                          value={this.state.data.superCategorias}
                           onChange={this.handleChangeObj}
                           readOnly
                           />
@@ -511,7 +510,7 @@ class Edit extends Component {
                           type="text" 
                           className="form-control" 
                           id="categorias" 
-                          value={this.state.dataObj.categorias}
+                          value={this.state.data.categorias}
                           onChange={this.handleChangeObj}
                           readOnly
                           />
@@ -522,7 +521,7 @@ class Edit extends Component {
                           type="text" 
                           className="form-control" 
                           id="subCategorias" 
-                          value={this.state.dataObj.subCategorias}
+                          value={this.state.data.subCategorias}
                           onChange={this.handleChangeObj}
                           readOnly
                           />

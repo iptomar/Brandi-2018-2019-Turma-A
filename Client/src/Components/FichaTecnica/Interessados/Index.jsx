@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import AlertMsg from '../../Globais/AlertMsg';
-import LoadingAnimation from '../../Globais/LoadingAnimation';
 
 class Index extends Component {
   constructor(props) {
@@ -9,18 +8,44 @@ class Index extends Component {
       alertText: "",
       alertisNotVisible: true,
       alertColor: '',
-      list: [],
-      loading: true
+      data: [],
     };
   }
 
   componentDidMount() {
-    this.setState({
-      loading: false
-    });
+    this.getInteressados();
   }
 
+  async getInteressados() {
+    const response = await fetch('/api/interessados', {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": sessionStorage.getItem("token")
+      }
+    });
+
+    await response.json().then(resp => {
+      let status = resp.status;
+      switch (status) {
+        case "Authenticated":
+          this.setState({ data: resp.resposta });
+          break;
+        default:
+          console.log(this.state.alertText);
+      }
+    })
+  }
+
+  // Ativa o click em cada linha da tabela
+  rowClick(href) {
+    window.location = href + "/detalhes";
+  }
+
+
   render() {
+    let getThis = this;
+
     //Verifica se existe o token
     if (sessionStorage.getItem("token") == null) {
       window.location = "/";
@@ -41,37 +66,47 @@ class Index extends Component {
           </div>
           <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
           {
-            this.state.loading ?
-              <LoadingAnimation />
-              :
-              <div className="row">
-                {this.state.list.length !== 0 ? (
-                  this.state.list.map(function (obj) {
-                    let href = "/fichaRI/" + obj.fichaRegistoID + "/detalhes";
-                    return (
-                      <div className="col-sm-3 mb-3" key={obj.fichaRegistoID}>
-                        <a href={href}>
-                          <div className="card">
-                            <div className="card-body p-0" id={obj.fichaRegistoID}>
-                              <img id={obj.fichaRegistoID+"img"}  src="..." alt="Imagem" className="card-img-top img-fluid" style={{ objectFit: "cover", height: "200px", width: "300px" }} />
-                              <div className="card-footer text-muted text-center">
-                                {obj.designacao}
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-                    );
-                  })
-                ) : (
-                    <div className="mx-auto my-5">
-                      <h5>Ainda não existe nenhum Interessado</h5>
-                      <h6>
-                        <a href="/interessados/criar">Adicione</a> já um interessado
+            <div className="row">
+              {this.state.data.length !== 0 ? (
+                <table className="table table-sm table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Endereço Postal</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Tipo de utilizador</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.state.data.map(function (obj) {
+                      let href = "/interessados/" + obj.interessadoID;
+                      return (
+                        <tr className="align-middle" key={obj.interessadoID}>
+                          <td className="align-middle" onClick={() => getThis.rowClick(href)}>{obj.nome}</td>
+                          <td className="align-middle" onClick={() => getThis.rowClick(href)}>{obj.enderecoPostal}</td>
+                          <td className="align-middle" onClick={() => getThis.rowClick(href)}>{obj.email}</td>
+                          <td className="align-middle" onClick={() => getThis.rowClick(href)}>{obj.tipo}</td>
+                          <td>
+                            <a className="btn btn-warning mr-2" href={href + "/editar"}>
+                              <i className="fas fa-edit"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      );
+                    })
+                    }
+                  </tbody>
+                </table>
+              ) : (
+                  <div className="mx-auto my-5">
+                    <h5>Ainda não existe nenhum Interessado</h5>
+                    <h6>
+                      <a href="/interessados/criar">Adicione</a> já um interessado
                       </h6>
-                    </div>
-                  )}
-              </div>
+                  </div>
+                )}
+            </div>
           }
         </div>
       );

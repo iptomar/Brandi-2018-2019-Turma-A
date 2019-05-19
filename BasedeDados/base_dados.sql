@@ -174,7 +174,7 @@ CREATE TABLE tbl_fichasTecnicas
     qualidade VARCHAR(255),
     materiaisEstruturaSuporte VARCHAR(255),
     materiaisSuperficies VARCHAR(255),
-    tecnicasEstrituraSuporte VARCHAR(255),
+    tecnicasEstruturaSuporte VARCHAR(255),
     tecnicasSuperficie VARCHAR(255),
     condAmbDescricao VARCHAR(255),
     condAmbFrioTemperatura VARCHAR(255),

@@ -144,18 +144,6 @@ class Edit extends Component {
     }));
   }
 
- // Controla as alterações nos inputs (Necessidade do React)
- handleChangeObj(e) {
-  let name = e.target.name;
-  let value = e.target.value;
-  this.setState( prevState => ({
-    dataObj: {
-      ...prevState.dataObj,
-      [name] : value
-    }
-  }));
-}
-
   // Verificar as checkboxes dos tecnicos. Retorna o array de tecnicos
   verifyCBS() {
     var cboxes = document.querySelectorAll("#tecnicosCheckbox");
@@ -193,18 +181,18 @@ class Edit extends Component {
       formData.append("imagem", this.state.files);
     }
 
-    formData.append("tipologia", this.state.dataObj.tipologia);
-    formData.append("dimensoes", this.state.dataObj.dimensoes);
-    formData.append("outrasDimensoes", this.state.dataObj.outrasDimensoes);
-    formData.append("breveDescricao", this.state.dataObj.breveDescricao);
-    formData.append("analogias", this.state.dataObj.analogias);
-    formData.append("conclusoes", this.state.dataObj.conclusoes);
-    formData.append("oficina", this.state.dataObj.oficina);
-    formData.append("datacao", this.state.dataObj.datacao);
-    formData.append("localOrigem", this.state.dataObj.localOrigem);
-    formData.append("superCategorias", this.state.dataObj.superCategorias);
-    formData.append("categorias", this.state.dataObj.categorias);
-    formData.append("subCategorias", this.state.dataObj.subCategorias);
+    formData.append("tipologia", this.state.data.tipologia);
+    formData.append("dimensoes", this.state.data.dimensoes);
+    formData.append("outrasDimensoes", this.state.data.outrasDimensoes);
+    formData.append("breveDescricao", this.state.data.breveDescricao);
+    formData.append("analogias", this.state.data.analogias);
+    formData.append("conclusoes", this.state.data.conclusoes);
+    formData.append("oficina", this.state.data.oficina);
+    formData.append("datacao", this.state.data.datacao);
+    formData.append("localOrigem", this.state.data.localOrigem);
+    formData.append("superCategorias", this.state.data.superCategorias);
+    formData.append("categorias", this.state.data.categorias);
+    formData.append("subCategorias", this.state.data.subCategorias);
 
 
     //Enviar pedido
@@ -395,8 +383,7 @@ class Edit extends Component {
                         className="form-control" 
                         id="tipologia" 
                         value={this.state.data.tipologia}
-                        onChange={this.handleChangeObj}
-                        readOnly
+                        onChange={this.handleChange}
                         />
                     </div>
                     <div className="col-md-6 mb-3">
@@ -406,8 +393,7 @@ class Edit extends Component {
                         className="form-control" 
                         id="analogias" 
                         value={this.state.data.analogias}
-                        onChange={this.handleChangeObj}
-                        readOnly
+                        onChange={this.handleChange}
                         />
                     </div>
                   </div>
@@ -419,8 +405,7 @@ class Edit extends Component {
                           className="form-control" 
                           id="dimensoes" 
                           value={this.state.data.dimensoes}
-                          onChange={this.handleChangeObj}
-                          readOnly
+                          onChange={this.handleChange}
                           />
                       </div>
                       <div className="col-md-6 mb-3">
@@ -430,8 +415,7 @@ class Edit extends Component {
                           className="form-control" 
                           id="outrasDimensoes" 
                           value={this.state.data.outrasDimensoes}
-                          onChange={this.handleChangeObj}
-                          readOnly
+                          onChange={this.handleChange}
                           />
                       </div>
                   </div>
@@ -443,8 +427,7 @@ class Edit extends Component {
                           className="form-control" 
                           id="breveDescricao" 
                           value={this.state.data.breveDescricao}
-                          onChange={this.handleChangeObj}
-                          readOnly
+                          onChange={this.handleChange}
                           />
                     </div>
                     <div className="col-md-12 mb-3">
@@ -454,8 +437,7 @@ class Edit extends Component {
                           className="form-control" 
                           id="conclusoes" 
                           value={this.state.data.conclusoes}
-                          onChange={this.handleChangeObj}
-                          readOnly
+                          onChange={this.handleChange}
                           />
                     </div>
                     <div className="col-md-4 mb-3">
@@ -465,8 +447,7 @@ class Edit extends Component {
                           className="form-control" 
                           id="oficina" 
                           value={this.state.data.oficina}
-                          onChange={this.handleChangeObj}
-                          readOnly
+                          onChange={this.handleChange}
                           />
                     </div>
                     <div className="col-md-4 mb-3">
@@ -476,8 +457,7 @@ class Edit extends Component {
                           className="form-control" 
                           id="datacao" 
                           value={this.state.data.datacao}
-                          onChange={this.handleChangeObj}
-                          readOnly
+                          onChange={this.handleChange}
                           />
                     </div>
                     <div className="col-md-4 mb-3">
@@ -487,8 +467,7 @@ class Edit extends Component {
                           className="form-control" 
                           id="localOrigem" 
                           value={this.state.data.localOrigem}
-                          onChange={this.handleChangeObj}
-                          readOnly
+                          onChange={this.handleChange}
                           />
                     </div>
                   </div>
@@ -500,8 +479,7 @@ class Edit extends Component {
                           className="form-control" 
                           id="superCategorias" 
                           value={this.state.data.superCategorias}
-                          onChange={this.handleChangeObj}
-                          readOnly
+                          onChange={this.handleChange}
                           />
                     </div>
                     <div className="col-md-4 mb-3">
@@ -511,8 +489,7 @@ class Edit extends Component {
                           className="form-control" 
                           id="categorias" 
                           value={this.state.data.categorias}
-                          onChange={this.handleChangeObj}
-                          readOnly
+                          onChange={this.handleChange}
                           />
                     </div>                    
                     <div className="col-md-4 mb-3">
@@ -522,9 +499,8 @@ class Edit extends Component {
                           className="form-control" 
                           id="subCategorias" 
                           value={this.state.data.subCategorias}
-                          onChange={this.handleChangeObj}
-                          readOnly
-                          />
+                          onChange={this.handleChange}
+                          />  
                     </div>
                   </div>
                   <div className="row">

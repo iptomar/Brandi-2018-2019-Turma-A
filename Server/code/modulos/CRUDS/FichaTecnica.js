@@ -14,7 +14,7 @@ exports.createFichaTecnica = async (bd, dados) => {
     //verificar se os campos estao preenchidos
     if (
         dados.visible &&
-        dados.localização &&
+        dados.localizacao &&
         dados.proprietario &&
         dados.codPostalProprietario &&
         dados.emailProprietario &&
@@ -63,10 +63,10 @@ exports.createFichaTecnica = async (bd, dados) => {
         dados.fichaRegistoFK
     ) {
         resposta_bd = await bd.query(
-            "INSERT INTO tbl_fichasTecnicas (visible,localização,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra, contactoDonoObra, mecenas, codPostalMecenas, contactoMecenas, bemIntegradoEmConjunto, tipoBensConjunto, elemConstConj, materiasElementosAcessorios, marcasInscricoesAssinaturas, marcasInscricoesMontagem, marcasInscricoesConstrucao, classPatrimonial, epoca, qualidade, materiaisEstruturaSuporte, materiaisSuperficies, tecnicasEstruturaSuporte, condAmbDescricao, condAmbFrioTemperatura, condAmbFrioHumidade, condAmbFrioPeriodoInicio, condAmbFrioPeriodoFim, condAmbQuenteTemperatura, condAmbQuenteHumidade, condAmbQuentePeriodoInicio, condAmbFrioPeriodoFim, ilumArtTipo, ilumArtValorIluminancia, ilumArtValurUV, ilumArtValorRealUV, ilumNatOrigem, ilumNatValorIluminancia, ilumNatValorUV, ilumArtValorRealUV, ilumNatOrigem, ilumNatValorIluminancia, ilumNatValorUV, ilumNatValorRealUV, poluicaoAgentes, poluicaoFontesOrigem, poluicaoResultados, poluicaoObservacoesConclusoes, fichaRegistoFK) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            "INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra, contactoDonoObra, mecenas, codPostalMecenas, contactoMecenas, bemIntegradoEmConjunto, tipoBensConjunto, elemConstConj, materiasElementosAcessorios, marcasInscricoesAssinaturas, marcasInscricoesMontagem, marcasInscricoesConstrucao, classPatrimonial, epoca, qualidade, materiaisEstruturaSuporte, materiaisSuperficies, tecnicasEstruturaSuporte, condAmbDescricao, condAmbFrioTemperatura, condAmbFrioHumidade, condAmbFrioPeriodoInicio, condAmbFrioPeriodoFim, condAmbQuenteTemperatura, condAmbQuenteHumidade, condAmbQuentePeriodoInicio, condAmbFrioPeriodoFim, ilumArtTipo, ilumArtValorIluminancia, ilumArtValurUV, ilumArtValorRealUV, ilumNatOrigem, ilumNatValorIluminancia, ilumNatValorUV, ilumArtValorRealUV, ilumNatOrigem, ilumNatValorIluminancia, ilumNatValorUV, ilumNatValorRealUV, poluicaoAgentes, poluicaoFontesOrigem, poluicaoResultados, poluicaoObservacoesConclusoes, fichaRegistoFK) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             [
                 dados.visible &&
-                dados.localização &&
+                dados.localizacao &&
                 dados.proprietario &&
                 dados.codPostalProprietario &&
                 dados.emailProprietario &&
@@ -161,7 +161,7 @@ exports.updateFichaTecnica = async (bd, dados) => {
     //verificar se os campos estao preenchidos
     if (
         dados.visible &&
-        dados.localização &&
+        dados.localizacao &&
         dados.proprietario &&
         dados.codPostalProprietario &&
         dados.emailProprietario &&
@@ -210,10 +210,10 @@ exports.updateFichaTecnica = async (bd, dados) => {
         dados.fichaRegistoFK
     ) {
         resposta_bd = await bd.query(
-            "update tbl_fichasTecnicas set visible=?,localização=?,proprietario=?,codPostalProprietario=?,emailProprietario =?, contactoProprietario=?, donoObra=?, codPostalDonoObra =? , contactoDonoObra =?, contactoDonoObra =?, mecenas =?, codPostalMecenas =?, contactoMecenas =?, bemIntegradoEmConjunto =?, tipoBensConjunto =?, elemConstConj =?, materiasElementosAcessorios =?, marcasInscricoesAssinaturas =?, marcasInscricoesMontagem =?, marcasInscricoesConstrucao =?, classPatrimonial =?, epoca =?, qualidade =?, materiaisEstruturaSuporte =?, materiaisSuperficies =?, tecnicasEstruturaSuporte =?, tecnicasSuperficie =?, condAmbDescricao =?,condAmbFrioTemperatura =?, condAmbFrioHumidade =?, condAmbFrioPeriodoInicio =?, condAmbFrioPeriodoFim =?, condAmbQuenteTemperatura =?, condAmbQuenteHumidade =?, condAmbQuentePeriodoInicio =?, condAmbQuentePeriodoFim =?, ilumArtTipo =?, ilumArtValorIluminancia =?, ilumArtValurUV =?, ilumArtValorRealUV =?, ilumNatOrigem =?, ilumNatValorIluminancia =?, ilumNatValorUV =?, ilumNatValorRealUV =?, poluicaoAgentes =?, poluicaoFontesOrigem =?, poluicaoResultados =?, poluicaoObservacoesConclusoes =?, fichaRegistoFK =? where fichaTecnicaID = ? ",
+            "update tbl_fichasTecnicas set visible=?,localizacao=?,proprietario=?,codPostalProprietario=?,emailProprietario =?, contactoProprietario=?, donoObra=?, codPostalDonoObra =? , contactoDonoObra =?, contactoDonoObra =?, mecenas =?, codPostalMecenas =?, contactoMecenas =?, bemIntegradoEmConjunto =?, tipoBensConjunto =?, elemConstConj =?, materiasElementosAcessorios =?, marcasInscricoesAssinaturas =?, marcasInscricoesMontagem =?, marcasInscricoesConstrucao =?, classPatrimonial =?, epoca =?, qualidade =?, materiaisEstruturaSuporte =?, materiaisSuperficies =?, tecnicasEstruturaSuporte =?, tecnicasSuperficie =?, condAmbDescricao =?,condAmbFrioTemperatura =?, condAmbFrioHumidade =?, condAmbFrioPeriodoInicio =?, condAmbFrioPeriodoFim =?, condAmbQuenteTemperatura =?, condAmbQuenteHumidade =?, condAmbQuentePeriodoInicio =?, condAmbQuentePeriodoFim =?, ilumArtTipo =?, ilumArtValorIluminancia =?, ilumArtValurUV =?, ilumArtValorRealUV =?, ilumNatOrigem =?, ilumNatValorIluminancia =?, ilumNatValorUV =?, ilumNatValorRealUV =?, poluicaoAgentes =?, poluicaoFontesOrigem =?, poluicaoResultados =?, poluicaoObservacoesConclusoes =?, fichaRegistoFK =? where fichaTecnicaID = ? ",
             [
                 dados.visible &&
-                dados.localização &&
+                dados.localizacao &&
                 dados.proprietario &&
                 dados.codPostalProprietario &&
                 dados.emailProprietario &&

@@ -33,7 +33,7 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
             if (token.roleFK === 1) {
                 let ficha = {
                     visible: true,
-                    localização: req.body.localização,
+                    localizacao: req.body.localizacao,
                     proprietario: req.body.proprietario,
                     codPostalProprietario: req.body.codPostalProprietario,
                     emailProprietario: req.body.emailProprietario,
@@ -145,7 +145,7 @@ exports.updateFichaTecnicaRoute = async (app, bd) => {
             if (token.roleFK) {
                 let ficha = {
                     visible: true,
-                    localização: req.body.localização,
+                    localizacao: req.body.localizacao,
                     proprietario: req.body.proprietario,
                     codPostalProprietario: req.body.codPostalProprietario,
                     emailProprietario: req.body.emailProprietario,

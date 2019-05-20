@@ -1,4 +1,4 @@
-const fichaRegistoIdentificacao = require("../CRUDS/FichaTecnica");
+const fichaTecnica = require("../CRUDS/FichaTecnica");
 const getToken = require("../Auxiliares/Token");
 
 
@@ -57,7 +57,7 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
                     materiaisEstruturaSuporte: req.body.materiaisEstruturaSuporte,
                     materiaisSuperficies: req.body.materiaisSuperficies,
                     tecnicasEstruturaSuporte: req.body.tecnicasEstruturaSuporte,
-                    tecnicasSuperficie: req.body.materiaisSuperficies,
+                    tecnicasSuperficie: req.body.tecnicasSuperficie,
                     condAmbDescricao: req.body.condAmbDescricao,
                     condAmbFrioTemperatura: req.body.condAmbFrioTemperatura,
                     condAmbFrioHumidade: req.body.condAmbFrioHumidade,
@@ -81,7 +81,7 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
                     poluicaoObservacoesConclusoes: req.body.poluicaoObservacoesConclusoes,
                     fichaRegistoFK: req.body.fichaRegistoFK,
                 };
-                let resposta_bd = await fichaRegistoIdentificacao.createFichaTecnica(
+                let resposta_bd = await fichaTecnica.createFichaTecnica(
                     bd,
                     ficha
                 );
@@ -169,7 +169,7 @@ exports.updateFichaTecnicaRoute = async (app, bd) => {
                     materiaisEstruturaSuporte: req.body.materiaisEstruturaSuporte,
                     materiaisSuperficies: req.body.materiaisSuperficies,
                     tecnicasEstruturaSuporte: req.body.tecnicasEstruturaSuporte,
-                    tecnicasSuperficie: req.body.materiaisSuperficies,
+                    tecnicasSuperficie: req.body.tecnicasSuperficie,
                     condAmbDescricao: req.body.condAmbDescricao,
                     condAmbFrioTemperatura: req.body.condAmbFrioTemperatura,
                     condAmbFrioHumidade: req.body.condAmbFrioHumidade,
@@ -194,7 +194,7 @@ exports.updateFichaTecnicaRoute = async (app, bd) => {
                     fichaRegistoFK: req.body.fichaRegistoFK,
                 };
                 //alterar os campos
-                let resposta_bd = await fichaRegistoIdentificacao.updateFichaTecnica(
+                let resposta_bd = await fichaTecnica.updateFichaTecnica(
                     bd,
                     ficha
                 );
@@ -252,7 +252,7 @@ exports.readFichaTecnicaRoute = async (app, bd) => {
         }
         //existe token/sessao
         else {
-            let resposta_bd = await fichaRegistoIdentificacao.getFichaTecnica(
+            let resposta_bd = await fichaTecnica.getFichaTecnica(
                 bd,
                 req.params.id
             );
@@ -301,7 +301,7 @@ exports.deleteFichaTecnicaRoute = async (app, bd) => {
         else {
             //admin
             if (token.roleFK === 1) {
-                let resposta_bd = await fichaRegistoIdentificacao.deleteFichaTecnica(
+                let resposta_bd = await fichaTecnica.deleteFichaTecnica(
                     bd,
                     req.params.id
                 );

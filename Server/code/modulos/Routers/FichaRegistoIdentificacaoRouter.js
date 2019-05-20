@@ -90,6 +90,7 @@ exports.createfichaRegistoIdentificacaoRoute = async (app, bd) => {
       let token;
       //getToken
       token = await getToken.getToken(req);
+      
       //nao existe token/sessao
       if (token === null) {
         code = 400;
@@ -126,7 +127,7 @@ exports.createfichaRegistoIdentificacaoRoute = async (app, bd) => {
             breveDescricao: req.body.breveDescricao,
             conclusoes: req.body.conclusoes,
             oficina: req.body.oficina,
-            datacao: req.bodydatacao,
+            datacao: req.body.datacao,
             localOrigem: req.body.localOrigem,
             superCategorias: req.body.superCategorias,
             categorias: req.body.categorias,

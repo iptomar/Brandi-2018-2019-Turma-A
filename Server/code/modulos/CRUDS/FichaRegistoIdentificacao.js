@@ -57,6 +57,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
     dados.subCategorias &&
     dados.interessadoFK
   ) {
+    
     //datas nao preenchidas
     if (dados.dataEntrega === "" && dados.dataConclusao === "") {
       resposta_bd = await bd.query(
@@ -150,6 +151,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
         ]
       );
     } else {
+      
       resposta_bd = await bd.query(
         "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica, imagem, tipologia, analogias, dimensoes, outrasDimensoes, breveDescricao, conclusoes, oficina, datacao, localOrigem, superCategorias, categorias, subCategorias, interessadoFK, dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [
@@ -316,11 +318,11 @@ exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
         [dados.fichaRegistoID]
       );
       imagemVelha = imagemVelha.resposta[0].imagem;
-      console.log(imagemVelha);
+      
       if (fs.existsSync(imagemVelha + "")) {
         fs.unlink(imagemVelha + "", (err) => {
           if (err) throw err;
-          console.log('Apagado');
+         
         });
       }
       resposta_bd = await bd.query(

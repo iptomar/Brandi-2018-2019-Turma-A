@@ -15,6 +15,7 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
         let code = 201;
         //token
         let token;
+        console.log("chegueo");
         //getToken
         token = await getToken.getToken(req);
         //nao existe token/sessao

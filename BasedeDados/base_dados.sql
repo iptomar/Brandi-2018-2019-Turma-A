@@ -151,7 +151,7 @@ CREATE TABLE tbl_fichasTecnicas
 (
     fichaTecnicaID INT NOT NULL AUTO_INCREMENT,
 	visible BOOLEAN,
-    localização VARCHAR(255),
+    localizacao VARCHAR(255),
     proprietario VARCHAR(255),
     codPostalProprietario VARCHAR(255),
     emailProprietario VARCHAR(255),

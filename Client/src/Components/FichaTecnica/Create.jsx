@@ -25,7 +25,7 @@ class Create extends Component {
     e.preventDefault();
       //Objeto data
       const data = {
-        localização:  document.getElementById('localização').value,
+        localizacao:  document.getElementById('localizacao').value,
         proprietario:  document.getElementById('proprietario').value,
         codPostalProprietario:  document.getElementById('codPostalProprietario').value,
         emailProprietario:  document.getElementById('emailProprietario').value,
@@ -74,8 +74,8 @@ class Create extends Component {
         fichaRegistoFK: this.state.id
       };
       //Verificações de radiobutton
-      if(document.getElementById('bemIntegradoSim').checked) data.bemIntegradoEmConjunto = document.getElementById('bemIntegradoSim').value;
-      else data.bemIntegradoEmConjunto = document.getElementById('bemIntegradoNão').value;
+      if(document.getElementById('bemIntegradoSim').checked) data.bemIntegradoEmConjunto = true;
+      else data.bemIntegradoEmConjunto = false;
 
       if(document.getElementById('EpocaCoevo').checked) data.epoca = document.getElementById('EpocaCoevo').value;
       else if(document.getElementById('EpocaTardio').checked) data.epoca = document.getElementById('EpocaTardio').value;

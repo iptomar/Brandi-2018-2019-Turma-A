@@ -27,7 +27,7 @@ class Pag3 extends Component {
                         <div className="col-6 col-md-4">
                             <div>
                                 <label className="mb-3">Descrição:</label>
-                                <textarea type="text" style={{ resize: "none" }} rows="6" className="form-control" placeholder="Descrição" />
+                                <textarea id="condAmbDescricao" type="text" style={{ resize: "none" }} rows="6" className="form-control" placeholder="Descrição" />
                             </div>
                         </div>
                         <div className="col-12 col-md-8">
@@ -41,10 +41,10 @@ class Pag3 extends Component {
                                         <label>Temperatura (ºC):</label>
                                     </div>
                                     <div className="col-6 col-md-4">
-                                        <input className="form-control" type="number" onChange={this.handlechange} placeholder="Temperatura" />
+                                        <input className="form-control" type="number" onChange={this.handlechange} placeholder="Temperatura" id="condAmbFrioTemperatura" />
                                     </div>
                                     <div className="col-6 col-md-4">
-                                        <input className="form-control" type="number" placeholder="Temperatura" />
+                                        <input className="form-control" type="number" placeholder="Temperatura" id="condAmbQuenteTemperatura" />
                                     </div>
                                 </div>
                                 <div className="row text-right mb-3">
@@ -52,10 +52,10 @@ class Pag3 extends Component {
                                         <label>Humidade relativa (%):</label>
                                     </div>
                                     <div className="col-6 col-md-4">
-                                        <input className="form-control" type="number" min="0" max="100" placeholder="Humidade relativa" />
+                                        <input className="form-control" type="number" min="0" max="100" placeholder="Humidade relativa" id="condAmbFrioHumidade" />
                                     </div>
                                     <div className="col-6 col-md-4">
-                                        <input className="form-control" type="number" min="0" max="100" placeholder="Humidade relativa" />
+                                        <input className="form-control" type="number" min="0" max="100" placeholder="Humidade relativa" id="condAmbQuenteHumidade" />
                                     </div>
                                 </div>
                                 <div className="row text-right mb-4">
@@ -65,20 +65,20 @@ class Pag3 extends Component {
                                     <div className="col-6 col-md-4">
                                         <div className="row">
                                             <div className="col-md-6 pr-1">
-                                                <input type="number" min="1" max="12" className="form-control" placeholder="Início" />
+                                                <input type="number" min="1" max="12" className="form-control" placeholder="Início" id="condAmbFrioPeriodoInicio" />
                                             </div>
                                             <div className="col-md-6 pl-1">
-                                                <input type="number" min="1" max="12" className="form-control" placeholder="Fim" />
+                                                <input type="number" min="1" max="12" className="form-control" placeholder="Fim" id="condAmbFrioPeriodoFim" />
                                             </div>
                                         </div>
                                     </div>
                                     <div className="col-6 col-md-4">
                                         <div className="row">
                                             <div className="col-md-6 pr-1">
-                                                <input type="number" min="1" max="12" className="form-control" placeholder="Início" />
+                                                <input type="number" min="1" max="12" className="form-control" placeholder="Início" id="condAmbQuentePeriodoInicio" />
                                             </div>
                                             <div className="col-md-6 pl-1">
-                                                <input type="number" min="1" max="12" className="form-control" placeholder="Fim" />
+                                                <input type="number" min="1" max="12" className="form-control" placeholder="Fim" id="condAmbQuentePeriodoFim" />
                                             </div>
                                         </div>
                                     </div>
@@ -105,13 +105,13 @@ class Pag3 extends Component {
                             <label>Tipo: </label>
                         </div>
                         <div className="col-md-4">
-                            <input type="text" className="form-control" placeholder="Tipo" />
+                            <input type="text" className="form-control" placeholder="Tipo" id="ilumArtTipo" />
                         </div>
                         <div className="col-md-2 text-right">
                             <label>Origem: </label>
                         </div>
                         <div className="col-md-4">
-                            <input type="text" className="form-control" placeholder="Origem" />
+                            <input type="text" className="form-control" placeholder="Origem" id="ilumNatOrigem" />
                         </div>
                     </div>
 
@@ -120,13 +120,13 @@ class Pag3 extends Component {
                             <label>Valor de Iluminância (lux):</label>
                         </div>
                         <div className="col-md-4">
-                            <input type="text" className="form-control" placeholder="Valor de Iluminância" />
+                            <input type="text" className="form-control" placeholder="Valor de Iluminância" id="ilumArtValorIluminancia" />
                         </div>
                         <div className="col-md-2 text-right">
                             <label>Valor de Iluminância (lux):</label>
                         </div>
                         <div className="col-md-4">
-                            <input type="text" className="form-control" placeholder="Valor de Iluminância" />
+                            <input type="text" className="form-control" placeholder="Valor de Iluminância" id="ilumNatValorIluminancia" />
                         </div>
                     </div>
 
@@ -135,13 +135,13 @@ class Pag3 extends Component {
                             <label>Valor de U.V. medidos (nw/cm<sup>2</sup>):</label>
                         </div>
                         <div className="col-md-4">
-                            <input type="text" className="form-control" placeholder="Valor de U.V. medidos" />
+                            <input type="text" className="form-control" placeholder="Valor de U.V. medidos" id="ilumArtValurUV" />
                         </div>
                         <div className="col-md-2 text-right">
                             <label>Valor de U.V medidos (nw/cm<sup>2</sup>):</label>
                         </div>
                         <div className="col-md-4">
-                            <input type="text" className="form-control" placeholder="Valor de U.V. medidos" />
+                            <input type="text" className="form-control" placeholder="Valor de U.V. medidos" id="ilumNatValorUV" />
                         </div>
                     </div>
 
@@ -150,13 +150,13 @@ class Pag3 extends Component {
                             <label>Valor real de U.V (nw/cm<sup>2</sup>):</label>
                         </div>
                         <div className="col-md-4">
-                            <input type="text" className="form-control" placeholder="Valor real de U.V (nw/cm2)" />
+                            <input type="text" className="form-control" placeholder="Valor real de U.V (nw/cm2)"  id="ilumArtValorRealUV"/>
                         </div>
                         <div className="col-md-2 text-right">
                             <label>Valor real de U.V (nw/cm<sup>2</sup>): </label>
                         </div>
                         <div className="col-md-4">
-                            <input type="text" className="form-control" placeholder="Valor real de U.V (nw/cm2)" />
+                            <input type="text" className="form-control" placeholder="Valor real de U.V (nw/cm2)" id="ilumNatValorRealUV" />
                         </div>
                     </div>
 
@@ -169,7 +169,7 @@ class Pag3 extends Component {
                             <label>Agentes Poluidores:</label>
                         </div>
                         <div className="col">
-                            <textarea type="text" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Agentes poluidores" />
+                            <textarea type="text" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Agentes poluidores" id="poluicaoAgentes" />
                         </div>
                     </div>
 
@@ -178,7 +178,7 @@ class Pag3 extends Component {
                             <label>Fontes / Origem: </label>
                         </div>
                         <div className="col">
-                            <textarea type="text" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Fontes / Origem" />
+                            <textarea type="text" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Fontes / Origem" id="poluicaoFontesOrigem" />
                         </div>
                     </div>
 
@@ -187,7 +187,7 @@ class Pag3 extends Component {
                             <label>Resultados: </label>
                         </div>
                         <div className="col">
-                            <textarea type="text" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Resultados" />
+                            <textarea type="text" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Resultados" id="poluicaoResultados" />
                         </div>
                     </div>
 
@@ -195,7 +195,7 @@ class Pag3 extends Component {
                         <h4>Observações / Conclusões</h4>
                     </div>
 
-                    <textarea type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="Observações / Conclusões" />
+                    <textarea type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="Observações / Conclusões" id="poluicaoObservacoesConclusoes" />
                 </div>
             </div>
         );

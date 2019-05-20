@@ -7,63 +7,133 @@ import Pag5 from "../../Components/FichaTecnica/Create/Pag5";
 
 
 class Create extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      alertText: '',
+      alertisNotVisible: true,
+      alertColor: '',
+      id: this.props.id,
+      alert: false,
+    };
+
+  }
+
+
   handleSubmit = async e => {
     e.preventDefault();
-      alert("AINDA NÃO CONFIUGRADO!!!");
-    // //Objeto data
-    // const data = {
-    //   processoLCRM: document.getElementById('nprocLCRM').value,
-    //   dataAberturaLCRM: document.getElementById('dataprocLCRM').value,
-    //   dataEntradaLCRM: document.getElementById('dataEprocLCRM').value,
-    //   processoCEARC: document.getElementById('nprocCEARC').value,
-    //   dataAberturaCEARC: document.getElementById('dataprocCEARC').value,
-    //   dataEntradaCEARC: document.getElementById('dataEprocCEARC').value,
-    //   direcaoTecnica: document.getElementById('coordenacao').value
-    // };
+      //Objeto data
+      const data = {
+        localização:  document.getElementById('localização').value,
+        proprietario:  document.getElementById('proprietario').value,
+        codPostalProprietario:  document.getElementById('codPostalProprietario').value,
+        emailProprietario:  document.getElementById('emailProprietario').value,
+        contactoProprietario:  document.getElementById('contactoProprietario').value,
+        donoObra:  document.getElementById('donoObra').value,
+        codPostalDonoObra:  document.getElementById('codPostalDonoObra').value,
+        contactoDonoObra:  document.getElementById('contactoDonoObra').value,
+        mecenas:  document.getElementById('mecenas').value,
+        codPostalMecenas:  document.getElementById('codPostalMecenas').value,
+        contactoMecenas:  document.getElementById('contactoMecenas').value,
+        tipoBensConjunto:  document.getElementById('tipoConjunto').value,
+        elemConstConj:  document.getElementById('elementosConst').value,
+        materiasElementosAcessorios:  document.getElementById('elementosAcess').value,
+        marcasInscricoesAssinaturas:  document.getElementById('assinaturasAutoria').value,
+        marcasInscricoesMontagem:  document.getElementById('inscricoesMontagem').value,
+        marcasInscricoesConstrucao:  document.getElementById('inscricoesConstrucao').value,
+        classPatrimonial:  document.getElementById('classPatrimonial').value,
+        epoca:  null,
+        qualidade:  null,
+        bemIntegradoEmConjunto: null ,
+        materiaisEstruturaSuporte:  document.getElementById('estruturaSuporteMateriais').value,
+        materiaisSuperficies:  document.getElementById('SuperficieMateriais').value,
+        tecnicasEstruturaSuporte:  document.getElementById('estruturaSuporteTecnicas').value,
+        tecnicasSuperficie:  document.getElementById('SuperficieTecnicas').value,
+        condAmbDescricao:  document.getElementById('condAmbDescricao').value,
+        condAmbFrioTemperatura:  document.getElementById('condAmbFrioTemperatura').value,
+        condAmbFrioHumidade:  document.getElementById('condAmbFrioHumidade').value,
+        condAmbFrioPeriodoInicio:  document.getElementById('condAmbFrioPeriodoInicio').value,
+        condAmbFrioPeriodoFim:  document.getElementById('condAmbFrioPeriodoFim').value,
+        condAmbQuenteTemperatura:  document.getElementById('condAmbQuenteTemperatura').value,
+        condAmbQuenteHumidade:  document.getElementById('condAmbQuenteHumidade').value,
+        condAmbQuentePeriodoInicio:  document.getElementById('condAmbQuentePeriodoInicio').value,
+        condAmbQuentePeriodoFim:  document.getElementById('condAmbQuentePeriodoFim').value,
+        ilumArtTipo:  document.getElementById('ilumArtTipo').value,
+        ilumArtValorIluminancia:  document.getElementById('ilumArtValorIluminancia').value,
+        ilumArtValurUV:  document.getElementById('ilumArtValurUV').value,
+        ilumArtValorRealUV:  document.getElementById('ilumArtValorRealUV').value,
+        ilumNatOrigem:  document.getElementById('ilumNatOrigem').value,
+        ilumNatValorIluminancia:  document.getElementById('ilumNatValorIluminancia').value,
+        ilumNatValorUV:  document.getElementById('ilumNatValorUV').value,
+        ilumNatValorRealUV:  document.getElementById('ilumNatValorRealUV').value,
+        poluicaoAgentes:  document.getElementById('poluicaoAgentes').value,
+        poluicaoFontesOrigem:  document.getElementById('poluicaoFontesOrigem').value,
+        poluicaoResultados:  document.getElementById('poluicaoResultados').value,
+        poluicaoObservacoesConclusoes:  document.getElementById('poluicaoObservacoesConclusoes').value,
+        fichaRegistoFK: this.state.id
+      };
+      //Verificações de radiobutton
+      if(document.getElementById('bemIntegradoSim').checked) data.bemIntegradoEmConjunto = document.getElementById('bemIntegradoSim').value;
+      else data.bemIntegradoEmConjunto = document.getElementById('bemIntegradoNão').value;
 
-    // //Enviar pedidos
-    // const response = await fetch("/api/processo/create", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     'x-auth-token': sessionStorage.getItem('token')
-    //   },
-    //   body: JSON.stringify(data)
-    // });
-    // //Aguardar API
-    // await response.json().then(resp => {
-    //   let status = resp.stat;
-    //   switch (status) {
-    //     case "DatabaseError":
-    //       this.setState({
-    //         alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
-    //         alertisNotVisible: false,
-    //         alertColor: "danger"
-    //       });
-    //       break;
-    //     case "Ficha inserida":
-    //       this.setState({
-    //         alertisNotVisible: false
-    //       });
-    //       break;
-    //     case "Erro na criação":
-    //       this.setState({
-    //         alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
-    //         alertisNotVisible: false,
-    //         alertColor: "danger"
-    //       });
-    //       break;
-    //     default:
-    //       console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
-    //   }
-    // });
+      if(document.getElementById('EpocaCoevo').checked) data.epoca = document.getElementById('EpocaCoevo').value;
+      else if(document.getElementById('EpocaTardio').checked) data.epoca = document.getElementById('EpocaTardio').value;
+      else  if(document.getElementById('EpocaOutra').checked) data.epoca = document.getElementById('EpocaOutra').value;
+      else if(document.getElementById('EpocaReplica').checked) data.epoca = document.getElementById('EpocaReplica').value;
+      else if(document.getElementById('EpocaReproducao').checked) data.epoca = document.getElementById('EpocaReproducao').value;
+      else data.epoca = document.getElementById('EpocaFalsificacao').value;
+
+      
+      if(document.getElementById('QualidadeExcelente').checked) data.qualidade = document.getElementById('QualidadeExcelente').value;
+      else if(document.getElementById('QualidadeMuitoBoa').checked) data.qualidade = document.getElementById('QualidadeMuitoBoa').value;
+      else  if(document.getElementById('QualidadeBoa').checked) data.qualidade = document.getElementById('QualidadeBoa').value;
+      else if(document.getElementById('QualidadeRegular').checked) data.qualidade = document.getElementById('QualidadeRegular').value;
+      else data.qualidade = document.getElementById('QualidadeFraca').value;
+
+    //Enviar pedidos
+    const response = await fetch("/api/fichaTecnica/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        'x-auth-token': sessionStorage.getItem('token')
+      },
+      body: JSON.stringify(data)
+      });
+      //Aguardar API
+      await response.json().then(resp => {
+        let status = resp.stat;
+        switch (status) {
+          case "DatabaseError":
+             this.setState({
+               alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
+               alertisNotVisible: false,
+               alertColor: "danger"
+             });
+             break;
+           case "Ficha inserida":
+             this.setState({
+               alertisNotVisible: false
+             });
+             break;
+         case "Erro na criação":
+           this.setState({
+             alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
+             alertisNotVisible: false,
+             alertColor: "danger"
+           });
+           break;
+         default:
+            console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
+       }
+    });
   };
 
   render() {
     return (
       <div className="Create">
 
-        <form className="py-3" onSubmit={this.handleSubmit}>
+         <form className="py-3" onSubmit={this.handleSubmit}>
             
             <div className="py-3 text-center">
               <h2>Ficha Técnica</h2>
@@ -145,10 +215,8 @@ class Create extends Component {
                   </div>
                 </div>
             </div>
-            
-            
-            
-        </form>
+            <button className="btn btn-success btn-lg btn-block mb-5" type="submit">Criar</button>
+        </form> 
       </div>
     );
   }

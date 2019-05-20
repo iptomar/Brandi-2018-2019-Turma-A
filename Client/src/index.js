@@ -40,7 +40,7 @@ ReactDOM.render(
             <Route path="/utilizadores/listar:query?" component={(r) => <IndexPage query={r.match.params.query} />} />
             {/* Ficha Técnica */}
             <Route path="/fichaTecnica/:id/details" component={DetailsFichaTecnica} />
-            <Route path="/fichaTecnica/criar" component={CreateFichaTecnica} />
+            <Route path="/fichaTecnica/criar/:id" component={(r) => <CreateFichaTecnica id={r.match.params.id} />} />
             <Route path="/fichaTecnica" component={IndexFichaTecnica} />
             {/* Ficha Registo Identificacao */}
             <Route path="/fichaRI/criar" component={CreateFichaRI} />

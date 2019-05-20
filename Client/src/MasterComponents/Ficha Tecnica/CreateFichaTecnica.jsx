@@ -8,7 +8,7 @@ class CreateFichaTecnica extends Component {
     return (
       <div className="LoginPage">
         <Header />
-        <Create />
+        <Create id={this.props.id}/>
         <Footer />
       </div>
     );

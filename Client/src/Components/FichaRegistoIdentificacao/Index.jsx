@@ -29,7 +29,6 @@ class Index extends Component {
     var min = 12*(this.state.atualPage-1)+1;
     var max = 12*this.state.atualPage - (12-num);
     for(var i = min; i <= max; i++ ) this.getImage(i);
-    // alert("MINIMO= "+min+" MAX= "+ max);
   }
 
   queryState(query) {

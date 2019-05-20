@@ -8,7 +8,7 @@ class CreateFichaTecnica extends Component {
     return (
       <div className="CreateRIPage">
         <Header />
-        <Create />
+        <Create/>
         <Footer />
       </div>
     );

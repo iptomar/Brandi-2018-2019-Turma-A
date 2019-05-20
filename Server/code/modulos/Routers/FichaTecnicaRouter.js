@@ -40,7 +40,7 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
                     contactoProprietario: req.body.contactoProprietario,
                     donoObra: req.body.donoObra,
                     codPostalDonoObra: req.body.codPostalDonoObra,
-                    contactoDonoObra: contactoDonoObra,
+                    contactoDonoObra: req.body.contactoDonoObra,
                     mecenas: req.body.mecenas,
                     codPostalMecenas: req.body.codPostalMecenas,
                     contactoMecenas: req.body.contactoMecenas,

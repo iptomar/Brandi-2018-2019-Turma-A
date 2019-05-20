@@ -118,13 +118,13 @@ exports.createFichaTecnica = async (bd, dados) => {
     }
     //inserçao bem sucedida na base de dados
     if (resposta_bd.stat === 0) {
-        resultadofinal.stat = 0;
-        resultadofinal.resposta = resposta_bd.resposta;
+         resultadofinal.stat = 0;
+         resultadofinal.resposta = resposta_bd.resposta;
     }
     //ocorreu um erro na inserção
     else {
-        resultadofinal.stat = resposta_bd.stat;
-        resultadofinal.resposta = resposta_bd.resposta;
+         resultadofinal.stat = resposta_bd.stat;
+         resultadofinal.resposta = resposta_bd.resposta;
     }
     return resultadofinal;
 };

@@ -82,7 +82,7 @@ class Index extends Component {
                     {this.state.data.map(function (obj) {
                       let href = "/interessados/" + obj.interessadoID;
                       return (
-                        <tr className="align-middle" key={obj.interessadoID}>
+                        <tr className="align-middle" key={obj.interessadoID} style={{ cursor: "pointer" }}>
                           <td className="align-middle" onClick={() => getThis.rowClick(href)}>{obj.nome}</td>
                           <td className="align-middle" onClick={() => getThis.rowClick(href)}>{obj.enderecoPostal}</td>
                           <td className="align-middle" onClick={() => getThis.rowClick(href)}>{obj.email}</td>

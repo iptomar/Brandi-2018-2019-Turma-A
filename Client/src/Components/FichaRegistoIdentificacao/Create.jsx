@@ -84,7 +84,6 @@ class Create extends Component {
       return null
     }
 
-    formData.append("visible", true);
     formData.append("designacao", document.getElementById("dObjeto").value);
     formData.append("processoLCRM", document.getElementById("procLCRM").value);
     formData.append("processoCEARC", document.getElementById("procCEARC").value);

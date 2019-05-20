@@ -25,7 +25,7 @@ class Create extends Component {
     e.preventDefault();
       //Objeto data
       const data = {
-        localização:  document.getElementById('localização').value,
+        localizacao:  document.getElementById('localizacao').value,
         proprietario:  document.getElementById('proprietario').value,
         codPostalProprietario:  document.getElementById('codPostalProprietario').value,
         emailProprietario:  document.getElementById('emailProprietario').value,

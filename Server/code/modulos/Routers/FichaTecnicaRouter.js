@@ -99,7 +99,7 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
                         );
                     } else {
                         code = 500;
-                        resposta_servidor.resposta = "DBConnectionError";
+                        resposta_servidor.resposta = resposta_bd.resposta;
                     }
                 }
             }

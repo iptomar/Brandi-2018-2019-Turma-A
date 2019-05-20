@@ -15,11 +15,13 @@ class Edit extends Component {
       showAlert: false,
       data: null,
       tecnicosResp: [],
+      interessadosResp: [],
       files: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
     this.dateTreatment = this.dateTreatment.bind(this);
+    this.getData = this.getData.bind(this);
   }
 
   //Recebe os dados do filho - Upload
@@ -29,6 +31,7 @@ class Edit extends Component {
 
   componentDidMount(){
     this.fetchFichaRI(this.props.id);
+
   }
 
   async fetchFichaRI(id) {
@@ -47,6 +50,7 @@ class Edit extends Component {
         case "Authenticated":
           this.setState({ data: resp.resposta });
           this.fetchTecnicos();
+          this.fetchInteressados();
           this.getAndSetImage();
           console.log(resp);
           break;
@@ -153,6 +157,21 @@ class Edit extends Component {
     return idCBS;
   }
 
+  async fetchInteressados() {
+    //Enviar pedido para receber 
+    const response = await fetch("/api/interessados", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'x-auth-token': sessionStorage.getItem('token')
+      }
+    });
+    await response.json().then(resp => {
+      this.setState({ interessadosResp: resp.resposta })
+    });
+  }
+
+
   // Formatação da data
   dateTreatment(date){
     return date!==null? date.substring(0,10) : null;
@@ -171,9 +190,12 @@ class Edit extends Component {
     formData.append("dataEntrega", this.dateTreatment(this.state.data.dataEntrega));
     formData.append("coordenacao", this.state.data.coordenacao);
     formData.append("direcaoTecnica", this.state.data.direcaoTecnica);
-    formData.append("localidade", this.state.data.localidade);
-    formData.append("tecnicosFK", this.verifyCBS());
-    formData.append("interessadoFK", '1');
+    formData.append("tecnicosFK", this.verifyCBS());    
+    
+    var select = document.getElementById("SELECTinteressados");
+    var option = select.options[select.selectedIndex];
+    formData.append("interessadoFK", option.id);
+
     formData.append("imagem", this.state.data.files);
 
     if(this.state.files.length!==0){
@@ -374,6 +396,20 @@ class Edit extends Component {
                         <LoadingAnimation />
                     }
                   </div>
+                  <label>Proprietário / Dono da obra</label>
+                  <select id="SELECTinteressados" className="form-control mb-3">
+                    {this.state.interessadosResp.map(function (object, i) {
+                      return (
+                        <option
+                            className="dropdown-item"
+                            id={object.interessadoID}
+                            key={i}
+                          >
+                            {object.nome}
+                        </option>
+                      );
+                    })}
+                  </select>
 
                   <div className="row">
                   <div className="col-md-6 mb-3">
@@ -381,7 +417,7 @@ class Edit extends Component {
                       <input 
                         type="text" 
                         className="form-control" 
-                        id="tipologia" 
+                        name="tipologia" 
                         value={this.state.data.tipologia}
                         onChange={this.handleChange}
                         />
@@ -391,7 +427,7 @@ class Edit extends Component {
                       <input 
                         type="text" 
                         className="form-control" 
-                        id="analogias" 
+                        name="analogias" 
                         value={this.state.data.analogias}
                         onChange={this.handleChange}
                         />
@@ -403,7 +439,7 @@ class Edit extends Component {
                         <input 
                           type="text" 
                           className="form-control" 
-                          id="dimensoes" 
+                          name="dimensoes" 
                           value={this.state.data.dimensoes}
                           onChange={this.handleChange}
                           />
@@ -413,7 +449,7 @@ class Edit extends Component {
                         <input 
                           type="text" 
                           className="form-control" 
-                          id="outrasDimensoes" 
+                          name="outrasDimensoes" 
                           value={this.state.data.outrasDimensoes}
                           onChange={this.handleChange}
                           />
@@ -425,7 +461,7 @@ class Edit extends Component {
                         <input 
                           type="text" 
                           className="form-control" 
-                          id="breveDescricao" 
+                          name="breveDescricao" 
                           value={this.state.data.breveDescricao}
                           onChange={this.handleChange}
                           />
@@ -435,7 +471,7 @@ class Edit extends Component {
                         <input 
                           type="text" 
                           className="form-control" 
-                          id="conclusoes" 
+                          name="conclusoes" 
                           value={this.state.data.conclusoes}
                           onChange={this.handleChange}
                           />
@@ -445,7 +481,7 @@ class Edit extends Component {
                         <input 
                           type="text" 
                           className="form-control" 
-                          id="oficina" 
+                          name="oficina" 
                           value={this.state.data.oficina}
                           onChange={this.handleChange}
                           />
@@ -455,7 +491,7 @@ class Edit extends Component {
                         <input 
                           type="text" 
                           className="form-control" 
-                          id="datacao" 
+                          name="datacao" 
                           value={this.state.data.datacao}
                           onChange={this.handleChange}
                           />
@@ -465,7 +501,7 @@ class Edit extends Component {
                         <input 
                           type="text" 
                           className="form-control" 
-                          id="localOrigem" 
+                          name="localOrigem" 
                           value={this.state.data.localOrigem}
                           onChange={this.handleChange}
                           />
@@ -477,7 +513,7 @@ class Edit extends Component {
                         <input 
                           type="text" 
                           className="form-control" 
-                          id="superCategorias" 
+                          name="superCategorias" 
                           value={this.state.data.superCategorias}
                           onChange={this.handleChange}
                           />
@@ -487,7 +523,7 @@ class Edit extends Component {
                         <input 
                           type="text" 
                           className="form-control" 
-                          id="categorias" 
+                          name="categorias" 
                           value={this.state.data.categorias}
                           onChange={this.handleChange}
                           />
@@ -497,25 +533,13 @@ class Edit extends Component {
                         <input 
                           type="text" 
                           className="form-control" 
-                          id="subCategorias" 
+                          name="subCategorias" 
                           value={this.state.data.subCategorias}
                           onChange={this.handleChange}
                           />  
                     </div>
                   </div>
-                  <div className="row">
-                    <div className="col-md-12 mb-3">
-                      <label className="font-weight-bold">Endereço Postal | Localidade</label>
-                      <input 
-                        type="text" 
-                        className="form-control" 
-                        name="localidade" 
-                        value={this.state.data.localidade}
-                        onChange={this.handleChange}
-                        />
-                    </div>
-                  </div>
-                  
+
                   <FileUpload sendData={this.getData} type="image"/>
 
                   <AlertMsg text={this.state.alert.text} isNotVisible={this.state.alert.notVisible} alertColor={this.state.alert.color} />

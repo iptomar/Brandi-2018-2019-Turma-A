@@ -48,7 +48,7 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
                     tipoBensConjunto: req.body.tipoBensConjunto,
                     elemConstConj: req.body.elemConstConj,
                     materiasElementosAcessorios: req.body.materiasElementosAcessorios,
-                    marcasInscricoesAssinaturas: req.marcasInscricoesAssinaturas,
+                    marcasInscricoesAssinaturas: req.body.marcasInscricoesAssinaturas,
                     marcasInscricoesMontagem: req.body.marcasInscricoesMontagem,
                     marcasInscricoesConstrucao: req.body.marcasInscricoesConstrucao,
                     classPatrimonial: req.body.classPatrimonial,
@@ -61,7 +61,7 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
                     condAmbDescricao: req.body.condAmbDescricao,
                     condAmbFrioTemperatura: req.body.condAmbFrioTemperatura,
                     condAmbFrioHumidade: req.body.condAmbFrioHumidade,
-                    condAmbFrioPeriodoInicio: req.condAmbFrioPeriodoInicio,
+                    condAmbFrioPeriodoInicio: req.body.condAmbFrioPeriodoInicio,
                     condAmbFrioPeriodoFim: req.body.condAmbFrioPeriodoFim,
                     condAmbQuenteTemperatura: req.body.condAmbQuenteTemperatura,
                     condAmbQuenteHumidade: req.body.condAmbQuenteHumidade,
@@ -99,7 +99,7 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
                         );
                     } else {
                         code = 500;
-                        resposta_servidor.resposta = resposta_bd.resposta;
+                        resposta_servidor.resposta = "DBConnectionError";
                     }
                 }
             }

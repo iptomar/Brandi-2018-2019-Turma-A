@@ -37,7 +37,7 @@ export class Pag1 extends Component {
             <div className="col-md-6 mb-3">
  
               <label>Localização:</label>
-              <input type="text" className="form-control mb-3" id="localização" placeholder="Localização da obra" required/>
+              <input type="text" className="form-control mb-3" id="localizacao" placeholder="Localização da obra" required/>
               
               <hr/>
               

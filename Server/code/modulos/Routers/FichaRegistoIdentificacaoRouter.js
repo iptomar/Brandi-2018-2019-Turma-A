@@ -154,7 +154,7 @@ exports.createfichaRegistoIdentificacaoRoute = async (app, bd) => {
               );
             } else {
               code = 500;
-              resposta_servidor.resposta = resposta_bd.resposta;
+              resposta_servidor.resposta = "DBConnectionError";
             }
           }
         }

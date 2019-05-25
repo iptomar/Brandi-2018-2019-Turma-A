@@ -60,11 +60,20 @@ exports.createFichaTecnica = async (bd, dados) => {
         dados.poluicaoFontesOrigem &&
         dados.poluicaoResultados &&
         dados.poluicaoObservacoesConclusoes &&
+        dados.examesAnalisesInterpResultados &&
+        dados.examesAnalisesObsConclusoes &&
+        dados.estadoConservFQMestrutura &&
+        dados.estadoConservFQMsuperficie &&
+        dados.estadoConservFQMelementosAcess &&
+        dados.estadoConservBioEstrutura &&
+        dados.estadoConservBioSuperficie &&
+        dados.estadoConservBioElementosAcess &&
+        dados.estadoConservObsConclusoes &&
         dados.fichaRegistoFK
     ) {
         console.log("entrou");
         resposta_bd = await bd.query(
-            "INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas, codPostalMecenas, contactoMecenas, bemIntegradoEmConjunto, tipoBensConjunto, elemConstConj, materiasElementosAcessorios, marcasInscricoesAssinaturas, marcasInscricoesMontagem, marcasInscricoesConstrucao, classPatrimonial, epoca, qualidade, materiaisEstruturaSuporte,  materiaisSuperficies, tecnicasEstruturaSuporte, tecnicasSuperficie, condAmbDescricao, condAmbFrioTemperatura, condAmbFrioHumidade, condAmbFrioPeriodoInicio, condAmbFrioPeriodoFim, condAmbQuenteTemperatura, condAmbQuenteHumidade, condAmbQuentePeriodoInicio, condAmbQuentePeriodoFim, ilumArtTipo, ilumArtValorIluminancia, ilumArtValurUV, ilumArtValorRealUV, ilumNatOrigem, ilumNatValorIluminancia, ilumNatValorUV, ilumNatValorRealUV,  poluicaoAgentes, poluicaoFontesOrigem, poluicaoResultados, poluicaoObservacoesConclusoes, fichaRegistoFK) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            "INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas, codPostalMecenas, contactoMecenas, bemIntegradoEmConjunto, tipoBensConjunto, elemConstConj, materiasElementosAcessorios, marcasInscricoesAssinaturas, marcasInscricoesMontagem, marcasInscricoesConstrucao, classPatrimonial, epoca, qualidade, materiaisEstruturaSuporte,  materiaisSuperficies, tecnicasEstruturaSuporte, tecnicasSuperficie, condAmbDescricao, condAmbFrioTemperatura, condAmbFrioHumidade, condAmbFrioPeriodoInicio, condAmbFrioPeriodoFim, condAmbQuenteTemperatura, condAmbQuenteHumidade, condAmbQuentePeriodoInicio, condAmbQuentePeriodoFim, ilumArtTipo, ilumArtValorIluminancia, ilumArtValurUV, ilumArtValorRealUV, ilumNatOrigem, ilumNatValorIluminancia, ilumNatValorUV, ilumNatValorRealUV,  poluicaoAgentes, poluicaoFontesOrigem, poluicaoResultados, poluicaoObservacoesConclusoes, examesAnalisesInterpResultados, examesAnalisesObsConclusoes, estadoConservFQMestrutura, estadoConservFQMsuperficie, estadoConservFQMelementosAcess, estadoConservBioEstrutura, estadoConservBioSuperficie, estadoConservBioElementosAcess, estadoConservObsConclusoes, fichaRegistoFK) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             [
                 dados.visible,
                 dados.localizacao,
@@ -113,6 +122,15 @@ exports.createFichaTecnica = async (bd, dados) => {
                 dados.poluicaoFontesOrigem,
                 dados.poluicaoResultados,
                 dados.poluicaoObservacoesConclusoes,
+                dados.examesAnalisesInterpResultados,
+                dados.examesAnalisesObsConclusoes,
+                dados.estadoConservFQMestrutura,
+                dados.estadoConservFQMsuperficie,
+                dados.estadoConservFQMelementosAcess,
+                dados.estadoConservBioEstrutura,
+                dados.estadoConservBioSuperficie,
+                dados.estadoConservBioElementosAcess,
+                dados.estadoConservObsConclusoes,
                 dados.fichaRegistoFK
             ]
         );
@@ -208,10 +226,19 @@ exports.updateFichaTecnica = async (bd, dados) => {
         dados.poluicaoFontesOrigem &&
         dados.poluicaoResultados &&
         dados.poluicaoObservacoesConclusoes &&
+        dados.examesAnalisesInterpResultados &&
+        dados.examesAnalisesObsConclusoes &&
+        dados.estadoConservFQMestrutura &&
+        dados.estadoConservFQMsuperficie &&
+        dados.estadoConservFQMelementosAcess &&
+        dados.estadoConservBioEstrutura &&
+        dados.estadoConservBioSuperficie &&
+        dados.estadoConservBioElementosAcess &&
+        dados.estadoConservObsConclusoes &&
         dados.fichaRegistoFK
     ) {
         resposta_bd = await bd.query(
-            "update tbl_fichasTecnicas set visible=?,localizacao=?,proprietario=?,codPostalProprietario=?,emailProprietario =?, contactoProprietario=?, donoObra=?, codPostalDonoObra =? , contactoDonoObra =?, contactoDonoObra =?, mecenas =?, codPostalMecenas =?, contactoMecenas =?, bemIntegradoEmConjunto =?, tipoBensConjunto =?, elemConstConj =?, materiasElementosAcessorios =?, marcasInscricoesAssinaturas =?, marcasInscricoesMontagem =?, marcasInscricoesConstrucao =?, classPatrimonial =?, epoca =?, qualidade =?, materiaisEstruturaSuporte =?, materiaisSuperficies =?, tecnicasEstruturaSuporte =?, tecnicasSuperficie =?, condAmbDescricao =?,condAmbFrioTemperatura =?, condAmbFrioHumidade =?, condAmbFrioPeriodoInicio =?, condAmbFrioPeriodoFim =?, condAmbQuenteTemperatura =?, condAmbQuenteHumidade =?, condAmbQuentePeriodoInicio =?, condAmbQuentePeriodoFim =?, ilumArtTipo =?, ilumArtValorIluminancia =?, ilumArtValurUV =?, ilumArtValorRealUV =?, ilumNatOrigem =?, ilumNatValorIluminancia =?, ilumNatValorUV =?, ilumNatValorRealUV =?, poluicaoAgentes =?, poluicaoFontesOrigem =?, poluicaoResultados =?, poluicaoObservacoesConclusoes =?, fichaRegistoFK =? where fichaTecnicaID = ? ",
+            "update tbl_fichasTecnicas set visible=?,localizacao=?,proprietario=?,codPostalProprietario=?,emailProprietario =?, contactoProprietario=?, donoObra=?, codPostalDonoObra =? , contactoDonoObra =?, contactoDonoObra =?, mecenas =?, codPostalMecenas =?, contactoMecenas =?, bemIntegradoEmConjunto =?, tipoBensConjunto =?, elemConstConj =?, materiasElementosAcessorios =?, marcasInscricoesAssinaturas =?, marcasInscricoesMontagem =?, marcasInscricoesConstrucao =?, classPatrimonial =?, epoca =?, qualidade =?, materiaisEstruturaSuporte =?, materiaisSuperficies =?, tecnicasEstruturaSuporte =?, tecnicasSuperficie =?, condAmbDescricao =?,condAmbFrioTemperatura =?, condAmbFrioHumidade =?, condAmbFrioPeriodoInicio =?, condAmbFrioPeriodoFim =?, condAmbQuenteTemperatura =?, condAmbQuenteHumidade =?, condAmbQuentePeriodoInicio =?, condAmbQuentePeriodoFim =?, ilumArtTipo =?, ilumArtValorIluminancia =?, ilumArtValurUV =?, ilumArtValorRealUV =?, ilumNatOrigem =?, ilumNatValorIluminancia =?, ilumNatValorUV =?, ilumNatValorRealUV =?, poluicaoAgentes =?, poluicaoFontesOrigem =?, poluicaoResultados =?, poluicaoObservacoesConclusoes =?,examesAnalisesInterpResultados =?, examesAnalisesObsConclusoes =?, estadoConservFQMestrutura =?, estadoConservFQMsuperficie =?, estadoConservFQMelementosAcess =?, estadoConservBioEstrutura =?, estadoConservBioSuperficie =?, estadoConservBioElementosAcess =?, estadoConservObsConclusoes =?, fichaRegistoFK =? where fichaTecnicaID = ? ",
             [
                 dados.visible &&
                 dados.localizacao &&
@@ -260,6 +287,15 @@ exports.updateFichaTecnica = async (bd, dados) => {
                 dados.poluicaoFontesOrigem &&
                 dados.poluicaoResultados &&
                 dados.poluicaoObservacoesConclusoes &&
+                dados.examesAnalisesInterpResultados &&
+                dados.examesAnalisesObsConclusoes &&
+                dados.estadoConservFQMestrutura &&
+                dados.estadoConservFQMsuperficie &&
+                dados.estadoConservFQMelementosAcess &&
+                dados.estadoConservBioEstrutura &&
+                dados.estadoConservBioSuperficie &&
+                dados.estadoConservBioElementosAcess &&
+                dados.estadoConservObsConclusoes &&
                 dados.fichaRegistoFK
             ]
         );

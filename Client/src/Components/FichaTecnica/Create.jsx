@@ -25,6 +25,7 @@ class Create extends Component {
     e.preventDefault();
       //Objeto data
       const data = {
+        //pag1
         localizacao:  document.getElementById('localizacao').value,
         proprietario:  document.getElementById('proprietario').value,
         codPostalProprietario:  document.getElementById('codPostalProprietario').value,
@@ -36,6 +37,7 @@ class Create extends Component {
         mecenas:  document.getElementById('mecenas').value,
         codPostalMecenas:  document.getElementById('codPostalMecenas').value,
         contactoMecenas:  document.getElementById('contactoMecenas').value,
+        //pag2
         tipoBensConjunto:  document.getElementById('tipoConjunto').value,
         elemConstConj:  document.getElementById('elementosConst').value,
         materiasElementosAcessorios:  document.getElementById('elementosAcess').value,
@@ -50,6 +52,7 @@ class Create extends Component {
         materiaisSuperficies:  document.getElementById('SuperficieMateriais').value,
         tecnicasEstruturaSuporte:  document.getElementById('estruturaSuporteTecnicas').value,
         tecnicasSuperficie:  document.getElementById('SuperficieTecnicas').value,
+        //pag3
         condAmbDescricao:  document.getElementById('condAmbDescricao').value,
         condAmbFrioTemperatura:  document.getElementById('condAmbFrioTemperatura').value,
         condAmbFrioHumidade:  document.getElementById('condAmbFrioHumidade').value,
@@ -71,6 +74,17 @@ class Create extends Component {
         poluicaoFontesOrigem:  document.getElementById('poluicaoFontesOrigem').value,
         poluicaoResultados:  document.getElementById('poluicaoResultados').value,
         poluicaoObservacoesConclusoes:  document.getElementById('poluicaoObservacoesConclusoes').value,
+        //pag4
+        //pag5
+        estruturaPag5: document.getElementById('estruturaPag5').value,
+        superficiePag5: document.getElementById('superficiePag5').value,
+        elementosAcessoriosPag5: document.getElementById('elementosAcessoriosPag5').value,
+        estruturaPag5diag: document.getElementById('estruturaPag5diag').value,
+        superficiePag5diag: document.getElementById('superficiePag5diag').value,
+        elementosAcessoriosPag5diag: document.getElementById('elementosAcessoriosPag5diag').value,
+        observaçoesConclusoesPag5: document.getElementById('observaçoesConclusoesPag5'),
+        //pag6
+        //pag7
         fichaRegistoFK: this.state.id
       };
       //Verificações de radiobutton
@@ -129,6 +143,7 @@ class Create extends Component {
     });
   };
 
+  
   render() {
     return (
       <div className="Create">

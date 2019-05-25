@@ -50,6 +50,11 @@ class Details extends Component {
                         <div className="py-3 text-center">
                             <div className="row">
                                 <h2 className="col-md-10">Detalhes </h2>
+                                <div className="col-md-2">
+                                    <a href={`/interessados/${this.props.id}/editar`} className="mt-3 btn btn-warning btn-block">
+                                        <i className="fas fa-edit"></i> Editar
+                                    </a>
+                                </div>
                             </div>
                         </div>
 

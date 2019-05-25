@@ -39,6 +39,7 @@ class BasedeDados {
       });
       response.stat = 0;
       response.resposta = connection;
+      console.log("chegou");
     } catch (ex) {
       //database conneciton
       if (ex.code === "ECONNREFUSED") response.stat = 1;

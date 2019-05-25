@@ -12,58 +12,6 @@ class Pag5 extends Component {
         };
     }
 
-    eliminaUltimaLinha = () => {
-        var table = document.getElementById("tabela");
-        var numRows = table.rows.length;
-        if (numRows > 2) {
-            table.deleteRow(-1);
-        }
-    }
-
-    adicionaNovaLinha = () => {
-        var table = document.getElementById("tabela");
-        //inserir nova linha
-        var row = table.insertRow(-1);
-        //parametros textArea
-        for (var i = 0; i < 4; i++) {
-            var novaCelula = row.insertCell(i);
-            var param = document.createElement('textarea');
-            param.className = "form-control";
-            param.setAttribute("type", "text");
-            param.style.resize = "none";
-            param.setAttribute("rows", "2");
-            novaCelula.appendChild(param);
-        }
-
-        //parametro input
-        //técnico
-        var cellTecnico = row.insertCell(4);
-        var paramTecnico = document.createElement('textarea');
-        paramTecnico.className = "form-control";
-        paramTecnico.setAttribute("type", "text")
-        paramTecnico.readOnly = true;
-        paramTecnico.value = "Name";
-        paramTecnico.style.resize = "none";
-        paramTecnico.setAttribute("rows", "2");
-
-        cellTecnico.appendChild(paramTecnico);
-
-        //parametro date
-        //data
-        var cellDate = row.insertCell(5);
-        var paramData = document.createElement('input');
-        paramData.className = "form-control text-center";
-        paramData.style.width = "170px";
-        paramData.style.height = "63px"
-        paramData.setAttribute("type", "date")
-
-        cellDate.appendChild(paramData);
-
-    }
-
-
-
-
     render() {
         return (
             <div className="Inicio container">

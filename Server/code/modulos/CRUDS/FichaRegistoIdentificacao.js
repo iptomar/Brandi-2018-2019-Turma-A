@@ -279,13 +279,14 @@ exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
     dados.superCategorias &&
     dados.categorias &&
     dados.subCategorias &&
-    dados.interessadoFK
+    dados.interessadoFK &&
+    dados.fichaRegistoID
   ) {
     if (dados.imagem == "") {
       resposta_bd = await bd.query(
-        "update tbl_fichaRegistoIdentificacao set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataEntrega=?, coordenacao =? , direcaoTecnica =?, tipologia =?, analogias =?, dimensoes =?, outrasDimensoes =?, breveDescricao =?, conclusoes =?, oficina =?, oficina =?, datacao =?, localOrigem =?, superCategorias =?, categorias =?, subCategorias =?, interessadoFK =? where fichaRegistoID = ? ",
+        "update tbl_fichaRegistoIdentificacao set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataEntrega=?, coordenacao =?, direcaoTecnica =?, tipologia =?, analogias =?, dimensoes =?, outrasDimensoes =?, breveDescricao =?, conclusoes =?, oficina =?, datacao =?, localOrigem =?, superCategorias =?, categorias =?, subCategorias =?, interessadoFK =? where fichaRegistoID = ? ",
         [
-          dados.visible,
+          true,
           dados.designacao,
           dados.processoLCRM,
           dados.processoCEARC,
@@ -324,9 +325,9 @@ exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
         });
       }
       resposta_bd = await bd.query(
-        "update tbl_fichaRegistoIdentificacao set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataEntrega=?, coordenacao =? , direcaoTecnica =?,imagem=?, tipologia =?, analogias =?, dimensoes =?, outrasDimensoes =?, breveDescricao =?, conclusoes =?, oficina =?, oficina =?, datacao =?, localOrigem =?, superCategorias =?, categorias =?, subCategorias =?, interessadoFK =? where fichaRegistoID = ? ",
+        "update tbl_fichaRegistoIdentificacao set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataEntrega=?, coordenacao =? , direcaoTecnica =?,imagem=?, tipologia =?, analogias =?, dimensoes =?, outrasDimensoes =?, breveDescricao =?, conclusoes =?, oficina =?, datacao =?, localOrigem =?, superCategorias =?, categorias =?, subCategorias =?, interessadoFK =? where fichaRegistoID = ? ",
         [
-          dados.visible,
+          true,
           dados.designacao,
           dados.processoLCRM,
           dados.processoCEARC,

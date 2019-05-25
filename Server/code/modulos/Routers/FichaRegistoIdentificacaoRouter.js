@@ -225,8 +225,8 @@ exports.updatefichaRegistoIdentificacaoRoute = async (app, bd) => {
           subCategorias: req.body.subCategorias,
           interessadoFK: req.body.interessadoFK,
           dataEntrega: req.body.dataEntrega,
-          fichaRegistoID: req.params.id,
           tecnicosFK: req.body.tecnicosFK,
+          fichaRegistoID: req.params.id,
         };
         //verificar se dataConclusao e dataEntrega est#ao preenchidas
         if (ficha.dataConclusao === "" && ficha.dataEntrega === "") {

@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import FileUpload from "../../Globais/FileUpload";
+
 export class Pag1 extends Component {
 
   constructor(props) {
@@ -16,23 +18,6 @@ export class Pag1 extends Component {
       <div className="container">
         <div className="container">
           <div className="row">
-            {/* <div className="col-md-12 mb-3">
-              <label>Ficha Técnica </label>
-              <select id="DDLRoles" className="form-control mb-3">
-                {/* {this.state.rolesList.map(function (object) {
-                        return (
-                          <option
-                            className="dropdown-item"
-                            id={object.roleID}
-                            key={object.roleID}
-                          >
-                            {object.role}
-                          </option>
-                        );
-                      })}
-              </select>
-            </div> */}
-            
             {/* COLUNA 1 */}
             <div className="col-md-6 mb-3">
  
@@ -71,6 +56,11 @@ export class Pag1 extends Component {
               <input type="text" className="form-control mb-3" id="contactoMecenas" placeholder="Contactos telefónicos" required/>
             </div>     
           </div>
+          <hr/>
+          <br/>
+          <FileUpload sendData={this.getData} type="image" />
+          <hr/>
+
         </div>
       </div>
     );

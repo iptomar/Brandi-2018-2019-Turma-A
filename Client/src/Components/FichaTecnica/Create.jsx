@@ -5,6 +5,7 @@ import Pag3 from "../../Components/FichaTecnica/Create/Pag3";
 import Pag4 from "../../Components/FichaTecnica/Create/Pag4";
 import Pag5 from "../../Components/FichaTecnica/Create/Pag5";
 import Pag6 from "../../Components/FichaTecnica/Create/Pag6";
+import Pag9 from "../../Components/FichaTecnica/Create/Pag9";
 
 
 
@@ -245,6 +246,21 @@ class Create extends Component {
                 <div id="collapseSix" className="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
                   <div className="card-body">
                     <Pag6/>
+                  </div>
+                </div>
+            </div>
+
+            <div className="card bg-light">
+                <div className="card-header" id="headingNine">
+                  <h2 className="mb-0">
+                    <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                      Página #9
+                    </button>
+                  </h2>
+                </div>
+                <div id="collapseNine" className="collapse" aria-labelledby="headingNine" data-parent="#accordionExample">
+                  <div className="card-body">
+                    <Pag9/>
                   </div>
                 </div>
             </div>

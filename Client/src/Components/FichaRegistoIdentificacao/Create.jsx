@@ -109,7 +109,7 @@ class Create extends Component {
     formData.append("superCategorias", document.getElementById("superCategorias").value);
     formData.append("categorias", document.getElementById("categorias").value);
     formData.append("subCategorias", document.getElementById("subCategorias").value);
-    
+
     formData.append("tecnicosFK", CB);
 
     //Enviar as imagens
@@ -129,6 +129,9 @@ class Create extends Component {
     await response.json().then(resp => {
       let status = resp.stat;
       switch (status) {
+        case "Registed":
+          window.location = "/fichaRI/&showConfirm"
+          break;
         case "DatabaseError":
           this.setState({
             alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
@@ -226,11 +229,11 @@ class Create extends Component {
                     {this.state.interessadosResp.map(function (object, i) {
                       return (
                         <option
-                            className="dropdown-item"
-                            id={object.interessadoID}
-                            key={i}
-                          >
-                            {object.nome}
+                          className="dropdown-item"
+                          id={object.interessadoID}
+                          key={i}
+                        >
+                          {object.nome}
                         </option>
                       );
                     })}

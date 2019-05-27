@@ -75,6 +75,8 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
           poluicaoFontesOrigem: req.body.poluicaoFontesOrigem,
           poluicaoResultados: req.body.poluicaoResultados,
           poluicaoObservacoesConclusoes: req.body.poluicaoObservacoesConclusoes,
+          objGerais: req.body.objGerais,
+          tabobjGerais: req.body.tabobjGerais,
           examesAnalisesInterpResultados:
             req.body.examesAnalisesInterpResultados,
           examesAnalisesObsConclusoes: req.body.examesAnalisesObsConclusoes,
@@ -89,6 +91,8 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
           estadoConservObsConclusoes: req.body.estadoConservObsConclusoes,
           fichaRegistoFK: req.body.fichaRegistoFK
         };
+        console.log(ficha.objGerais);
+        console.log(ficha.tabobjGerais);
         let resposta_bd = await fichaTecnica.createFichaTecnica(bd, ficha);
         if (resposta_bd.stat === 0) {
           resposta_servidor.stat = "Registed";

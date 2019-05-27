@@ -109,8 +109,6 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
           estadoConservObsConclusoes: req.body.estadoConservObsConclusoes,
           fichaRegistoFK: req.body.fichaRegistoFK
         };
-        console.log(ficha.objGerais);
-        console.log(ficha.tabobjGerais[0]);
         let resposta_bd = await fichaTecnica.createFichaTecnica(bd, ficha);
         if (resposta_bd.stat === 0) {
           resposta_servidor.stat = "Registed";

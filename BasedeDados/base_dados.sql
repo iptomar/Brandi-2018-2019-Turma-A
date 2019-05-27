@@ -451,6 +451,31 @@ CREATE TABLE tbl_interessadosFichasTecnicas
 	FOREIGN KEY(fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
 );
 
+--Adicionei estas tabelas para testes da pagina 4
+Drop table if exists tbl_testespagina4objectivosGerais;
+create table tbl_testespagina4(
+    ID int not null AUTO_INCREMENT,
+    Objectivo varchar(255) not null,
+    fichaTecnicaFK int not null,
+    PRIMARY KEY(ID),
+    FOREIGN key (fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
+);
+-- esta tabela representa a tabela onde o utilizador pode inserir mais descrições sobre a ficha tecnica na pagina 4
+    drop table if exists tbl_testespagina4tabelas;
+    create table tbl_testespagina4tabelas(
+        id int not null AUTO_INCREMENT,
+        tipoReferencia varchar(255),
+        LocalizacaoAreaPonto varchar(255),
+        ObjectivosEspecificos varchar(255),
+        Resultados varchar(1024),
+        TecnicoResponsavelFK int not null,
+        DataDePreenchimento date,
+        fichaTecnicaFK int not null,
+        PRIMARY key (id),
+        FOREIGN key (fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID),
+        FOREIGN key (TecnicoResponsavelFK) REFERENCES tbl_tecnicos(tecnicoID)
+    );
+
 
 INSERT INTO tbl_roles (role) values("Admin");
 INSERT INTO tbl_roles (role) values("Aluno");

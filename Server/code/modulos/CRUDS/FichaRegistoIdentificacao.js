@@ -1,4 +1,4 @@
-var fs = require('file-system');
+var fs = require("file-system");
 /**
  * Ficheiro que faz as querys de uma ficha tecnica
  */
@@ -57,7 +57,6 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
     dados.subCategorias &&
     dados.interessadoFK
   ) {
-    
     //datas nao preenchidas
     if (dados.dataEntrega === "" && dados.dataConclusao === "") {
       resposta_bd = await bd.query(
@@ -151,7 +150,6 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
         ]
       );
     } else {
-      
       resposta_bd = await bd.query(
         "INSERT INTO tbl_fichaRegistoIdentificacao (visible,designacao,processoLCRM,processoCEARC,dataEntrada,dataConclusao,coordenacao,direcaoTecnica, imagem, tipologia, analogias, dimensoes, outrasDimensoes, breveDescricao, conclusoes, oficina, datacao, localOrigem, superCategorias, categorias, subCategorias, interessadoFK, dataEntrega) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [
@@ -181,6 +179,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
         ]
       );
     }
+
     //procurar id da ficha inserida
     for (i = 0; i < dados.tecnicosFK.length; i++) {
       let resposta_bd2 = await bd.query(
@@ -319,11 +318,10 @@ exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
         [dados.fichaRegistoID]
       );
       imagemVelha = imagemVelha.resposta[0].imagem;
-      
+
       if (fs.existsSync(imagemVelha + "")) {
-        fs.unlink(imagemVelha + "", (err) => {
+        fs.unlink(imagemVelha + "", err => {
           if (err) throw err;
-         
         });
       }
       resposta_bd = await bd.query(

@@ -67,7 +67,7 @@ class Details extends Component {
       let href = "/utilizadores/" + this.props.id;
       let getThis = this;
       return (
-        <div className="Inicio container">
+        <div className="Inicio container mb-5">
           <div className="container">
             <div className="py-3 text-center">
               <div className="row">
@@ -110,7 +110,7 @@ class Details extends Component {
                 <label>Tipo de utilizador</label>
                 <select id="DDLRoles" className="form-control" disabled>
                   <option className="dropdown-item">
-                    {this.state.data.roleFK}
+                    {this.state.data.role}
                   </option>
                 </select>
               </div>

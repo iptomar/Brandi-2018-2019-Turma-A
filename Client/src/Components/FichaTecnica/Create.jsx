@@ -262,7 +262,6 @@ class Create extends Component {
                   </div>
                 </div>
               </div>
-            </div>
             
             <div className="card bg-light">
                 <div className="card-header" id="headingFive">
@@ -308,6 +307,7 @@ class Create extends Component {
                   </div>
                 </div>
             </div>
+
             <div className="card bg-light">
                 <div className="card-header" id="headingNine">
                   <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseNine">
@@ -323,6 +323,7 @@ class Create extends Component {
                 </div>
             </div>
 
+            </div>
             <button className="btn btn-success btn-lg btn-block mb-5" type="submit">Criar</button>
         </form> 
       </div>    

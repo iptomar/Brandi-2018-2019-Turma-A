@@ -58,7 +58,7 @@ class Pag6 extends Component {
                     <label>Tipo de intervenção:</label>
                     <div className="row">
 
-                        <div className="input-group mb-3 col-md-2">
+                        <div className="input-group mb-3 col-md-3 text-center">
                             <div className="input-group-prepend">
                                 <div className="input-group-text">
                                     <input type="radio" name="IntervOptions" id="intervPrevencao" value="Prevenção" defaultChecked />
@@ -67,7 +67,7 @@ class Pag6 extends Component {
                             <label className="form-control" htmlFor="intervPrevencao">Prevenção</label>
                         </div>
 
-                        <div className="input-group mb-3 col-md-2">
+                        <div className="input-group mb-3 col-md-3 text-center">
                             <div className="input-group-prepend">
                                 <div className="input-group-text">
                                     <input type="radio" name="IntervOptions" id="intervConvercao" value="Conservação" defaultChecked />
@@ -76,7 +76,7 @@ class Pag6 extends Component {
                             <label className="form-control" htmlFor="intervConvercao">Conservação</label>
                         </div>
 
-                        <div className="input-group mb-3 col-md-2">
+                        <div className="input-group mb-3 col-md-3 text-center">
                             <div className="input-group-prepend">
                                 <div className="input-group-text">
                                     <input type="radio" name="IntervOptions" id="intervRestauro" value="Restauro" defaultChecked />
@@ -87,7 +87,7 @@ class Pag6 extends Component {
 
                     </div>
 
-                    <label>Aspetos Especificos:</label>
+                    <label>Aspetos Específicos:</label>
                     <textarea id="aspetosEspecificosPag6" type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="" />
                 </div>
         );

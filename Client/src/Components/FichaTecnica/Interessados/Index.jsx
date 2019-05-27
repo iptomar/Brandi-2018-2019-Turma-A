@@ -91,9 +91,6 @@ class Index extends Component {
                             <a className="btn btn-warning mr-2" href={href + "/editar"}>
                               <i className="fas fa-edit"></i>
                             </a>
-                            <a className="btn btn-danger mr-2" href={href + "/"}>
-                              <i className="fas fa-trash-alt"></i>
-                            </a>
                           </td>
                         </tr>
                       );

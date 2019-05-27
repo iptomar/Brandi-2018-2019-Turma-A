@@ -7,7 +7,7 @@ class FileUpload extends Component {
     this.state = {
       file: [],
       filesNotValid: false,
-      alertText: 'Alguns ficheiros foram removidos por não estarem de acordo com os requesitos',
+      alertText: 'Alguns ficheiros foram removidos por não estarem de acordo com os requisitos',
       alertisNotVisible: true,
       alertColor: 'danger'
     };
@@ -45,7 +45,7 @@ class FileUpload extends Component {
     //Se existir ficheiros inválido e se o número de ficheiros já filtrados for 0
     if (this.state.filesNotValid) {
       await this.setState({
-        alertText: 'Alguns Ficheiros foram removidos por não estarem de acordo com os requesitos',
+        alertText: 'Alguns Ficheiros foram removidos por não estarem de acordo com os requisitos',
         alertColor: 'danger',
         alertisNotVisible: false
       });

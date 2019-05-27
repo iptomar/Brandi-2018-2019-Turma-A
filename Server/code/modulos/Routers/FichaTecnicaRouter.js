@@ -80,6 +80,15 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
                     poluicaoFontesOrigem: req.body.poluicaoFontesOrigem,
                     poluicaoResultados: req.body.poluicaoResultados,
                     poluicaoObservacoesConclusoes: req.body.poluicaoObservacoesConclusoes,
+                    examesAnalisesInterpResultados: req.body.examesAnalisesInterpResultados,
+                    examesAnalisesObsConclusoes: req.body.examesAnalisesObsConclusoes,
+                    estadoConservFQMestrutura: req.body.estadoConservFQMestrutura,
+                    estadoConservFQMsuperficie: req.body.estadoConservFQMsuperficie,
+                    estadoConservFQMelementosAcess: req.body.estadoConservFQMelementosAcess,
+                    estadoConservBioEstrutura: req.body.estadoConservBioEstrutura,
+                    estadoConservBioSuperficie: req.body.estadoConservBioSuperficie,
+                    estadoConservBioElementosAcess: req.body.estadoConservBioElementosAcess,
+                    estadoConservObsConclusoes: req.body.estadoConservObsConclusoes,
                     fichaRegistoFK: req.body.fichaRegistoFK,
                 };
                 let resposta_bd = await fichaTecnica.createFichaTecnica(
@@ -192,6 +201,15 @@ exports.updateFichaTecnicaRoute = async (app, bd) => {
                     poluicaoFontesOrigem: req.body.poluicaoFontesOrigem,
                     poluicaoResultados: req.body.poluicaoResultados,
                     poluicaoObservacoesConclusoes: req.body.poluicaoObservacoesConclusoes,
+                    examesAnalisesInterpResultados: req.body.examesAnalisesInterpResultados,
+                    examesAnalisesObsConclusoes: req.body.examesAnalisesObsConclusoes,
+                    estadoConservFQMestrutura: req.body.estadoConservFQMestrutura,
+                    estadoConservFQMsuperficie: req.body.estadoConservFQMsuperficie,
+                    estadoConservFQMelementosAcess: req.body.estadoConservFQMelementosAcess,
+                    estadoConservBioEstrutura: req.body.estadoConservBioEstrutura,
+                    estadoConservBioSuperficie: req.body.estadoConservBioSuperficie,
+                    estadoConservBioElementosAcess: req.body.estadoConservBioElementosAcess,
+                    estadoConservObsConclusoes: req.body.estadoConservObsConclusoes,
                     fichaRegistoFK: req.body.fichaRegistoFK,
                 };
                 //alterar os campos

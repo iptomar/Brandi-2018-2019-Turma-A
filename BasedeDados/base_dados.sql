@@ -197,6 +197,17 @@ CREATE TABLE tbl_fichasTecnicas
     poluicaoFontesOrigem VARCHAR(255),
     poluicaoResultados VARCHAR(255),
     poluicaoObservacoesConclusoes VARCHAR(255),
+    -- campos pagina 4, falta parte de objetivos gerais 
+    examesAnalisesInterpResultados VARCHAR(255),
+    examesAnalisesObsConclusoes VARCHAR(255),
+    -- campos pagina 5
+    estadoConservFQMestrutura VARCHAR(255),
+    estadoConservFQMsuperficie VARCHAR(255),
+    estadoConservFQMelementosAcess VARCHAR(255),
+    estadoConservBioEstrutura VARCHAR(255),
+    estadoConservBioSuperficie VARCHAR(255),
+    estadoConservBioElementosAcess VARCHAR(255),
+    estadoConservObsConclusoes VARCHAR(255),
     -- FEITO ATÉ A PAGINA 4 (PAG 4 NÃO ESTA FEITA)
 	-- dataUltimaAlteracao DATE,
 	-- dataAberturaLCRM DATE,

@@ -74,7 +74,7 @@ class Index extends Component {
                       <th scope="col">Nome</th>
                       <th scope="col">Endereço Postal</th>
                       <th scope="col">Email</th>
-                      <th scope="col">Tipo de utilizador</th>
+                      <th scope="col">Cargo</th>
                       <th scope="col"></th>
                     </tr>
                   </thead>

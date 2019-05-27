@@ -17,8 +17,7 @@ class Pag3 extends Component {
 
     render() {
         return (
-            <div className="Inicio container">
-                <div className="container">
+                <div className="container" style={{paddingTop:"0px"}}>
                     <div className="pt-3 py-3 text-center">
                         <h4>Condições ambientais do local de inserção do bem cultural</h4>
                     </div>
@@ -197,7 +196,6 @@ class Pag3 extends Component {
 
                     <textarea type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="Observações / Conclusões" id="poluicaoObservacoesConclusoes" />
                 </div>
-            </div>
         );
     }
 }

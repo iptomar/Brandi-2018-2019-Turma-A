@@ -15,8 +15,7 @@ class Pag8 extends Component {
 
     render() {
         return (
-            <div className="Inicio container">
-                <div className="container">
+                <div className="container" style={{paddingTop:"0px"}}>
                     <div className="pt-3 py-3 text-center">
                         <h4>Intervenção Realizada</h4>
                     </div>
@@ -54,11 +53,7 @@ class Pag8 extends Component {
                         <h5>Observações / Conclusões:</h5>
                     </div>
                     <textarea id="observaçoesConclusoesPag8" type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="" />
-                    <br />
-
                 </div>
-
-            </div>
         );
     }
 }

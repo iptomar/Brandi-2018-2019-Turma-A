@@ -14,8 +14,7 @@ class Pag2 extends Component {
 
     render() {
         return (
-            <div className="Inicio container">
-                <div className="container">
+                <div className="container" style={{paddingTop:"0px"}}>
                     <div className="row">
                         <div className="col-md-12 order-md-1">
                             <label>Bem Integrado em Conjunto:</label>
@@ -210,8 +209,6 @@ class Pag2 extends Component {
                         </div>
                     </div>
                 </div>
-                <hr/>
-            </div>
         );
     }
 }

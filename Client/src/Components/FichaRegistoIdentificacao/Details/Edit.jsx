@@ -52,7 +52,6 @@ class Edit extends Component {
           this.fetchTecnicos();
           this.fetchInteressados();
           this.getAndSetImage();
-          console.log(resp);
           break;
         default:
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");

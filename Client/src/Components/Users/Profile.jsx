@@ -33,7 +33,6 @@ class Profile extends Component {
       let status = resp.status;
       switch (status) {
         case "Authenticated":
-          console.log(resp.resposta);
           this.setState({ data: resp.resposta });
           break;
         default:
@@ -61,7 +60,6 @@ class Profile extends Component {
             window.location = "/";
             break;
           default:
-            console.log(resp.resposta);
             this.setState({ rolesList: resp.resposta })
             break;
         }

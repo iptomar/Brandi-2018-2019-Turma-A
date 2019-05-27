@@ -13,15 +13,10 @@ class Read extends Component {
       loading: true,
       alert: false,
     };
-    this.addFT = this.addFT.bind(this);
   }
 
   componentDidMount() {
     this.getFichaRI(this.props.id);
-  }
-
-  async addFT(){
-    window.location = "/fichaTecnica/criar/"+this.props.id;
   }
 
 
@@ -323,7 +318,6 @@ class Read extends Component {
                 </div>
               </div>
             </div>
-            <button className="btn btn-primary" onClick={this.addFT}>Criar Ficha Técnica</button>
           </div>
         );
       } else {

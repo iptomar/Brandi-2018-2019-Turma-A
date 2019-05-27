@@ -150,7 +150,7 @@ class Create extends Component {
   
   render() {
     return (
-      <div className="Create">
+      <div className="container Create">
 
          <form className="py-3" onSubmit={this.handleSubmit}>
             
@@ -161,22 +161,22 @@ class Create extends Component {
             <div className="accordion" id="accordionExample">
               <div className="card bg-light">
                 <div className="card-header" id="headingOne">
-                  <h2 className="mb-0">
+                  <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseOne">
                     <button className="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                       Página #1
                     </button>
                   </h2>
                 </div>
-
                 <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                   <div className="card-body">
                     <Pag1 />
                   </div>
                 </div>
               </div>
+
               <div className="card bg-light">
                 <div className="card-header" id="headingTwo">
-                  <h2 className="mb-0">
+                  <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseTwo">
                     <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                       Página #2
                     </button>
@@ -188,9 +188,10 @@ class Create extends Component {
                   </div>
                 </div>
               </div>
+
               <div className="card bg-light">
                 <div className="card-header" id="headingThree">
-                  <h2 className="mb-0">
+                  <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseThree">
                     <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                       Página #3
                     </button>
@@ -205,7 +206,7 @@ class Create extends Component {
 
               <div className="card bg-light">
                 <div className="card-header" id="headingFour">
-                  <h2 className="mb-0">
+                  <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseFour">
                     <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                       Página #4
                     </button>
@@ -218,11 +219,10 @@ class Create extends Component {
                 </div>
               </div>
             </div>
-
             
             <div className="card bg-light">
                 <div className="card-header" id="headingFive">
-                  <h2 className="mb-0">
+                  <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseFive">
                     <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                       Página #5
                     </button>
@@ -237,7 +237,7 @@ class Create extends Component {
 
             <div className="card bg-light">
                 <div className="card-header" id="headingSix">
-                  <h2 className="mb-0">
+                  <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseSix">
                     <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
                       Página #6
                     </button>
@@ -252,7 +252,7 @@ class Create extends Component {
 
             <div className="card bg-light">
                 <div className="card-header" id="headingNine">
-                  <h2 className="mb-0">
+                  <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseNine">
                     <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
                       Página #9
                     </button>

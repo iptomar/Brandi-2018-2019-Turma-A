@@ -5,6 +5,7 @@ import Pag3 from "../../Components/FichaTecnica/Create/Pag3";
 import Pag4 from "../../Components/FichaTecnica/Create/Pag4";
 import Pag5 from "../../Components/FichaTecnica/Create/Pag5";
 import Pag6 from "../../Components/FichaTecnica/Create/Pag6";
+import Pag8 from "../../Components/FichaTecnica/Create/Pag8";
 import Pag9 from "../../Components/FichaTecnica/Create/Pag9";
 
 
@@ -89,7 +90,16 @@ class Create extends Component {
         observaçoesConclusoesPag5: document.getElementById('observaçoesConclusoesPag5'),
         //pag6
         //pag7
-        fichaRegistoFK: this.state.id
+        fichaRegistoFK: this.state.id,
+        //pag8
+        estruturaPag8: document.getElementById('estruturaPag8').value,
+        recursosEstruturaPag8: document.getElementById('recursosEstruturaPag8').value,
+        superficiePag8: document.getElementById('superficiePag8').value,
+        recursosSuperficiePag8: document.getElementById('recursosSuperficiePag8').value,
+        elementosAcessoriosPag8: document.getElementById('elementosAcessoriosPag8').value,
+        recursosElementosAcPag8: document.getElementById('recursosElementosAcPag8').value,
+        observaçoesConclusoesPag8: document.getElementById('observaçoesConclusoesPag8').value
+
       };
       //Verificações de radiobutton
       if(document.getElementById('bemIntegradoSim').checked) data.bemIntegradoEmConjunto = true;
@@ -250,6 +260,20 @@ class Create extends Component {
                 </div>
             </div>
 
+            <div className="card bg-light">
+                <div className="card-header" id="headingEight">
+                  <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseEight">
+                    <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                      Página #8
+                    </button>
+                  </h2>
+                </div>
+                <div id="collapseEight" className="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
+                  <div className="card-body">
+                    <Pag8/>
+                  </div>
+                </div>
+            </div>
             <div className="card bg-light">
                 <div className="card-header" id="headingNine">
                   <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseNine">

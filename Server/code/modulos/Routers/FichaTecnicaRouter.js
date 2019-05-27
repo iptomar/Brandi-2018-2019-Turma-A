@@ -1,11 +1,29 @@
 const fichaTecnica = require("../CRUDS/FichaTecnica");
 const getToken = require("../Auxiliares/Token");
+var multer = require("multer");
+var mkdirp = require("mkdirp");
+const path = require("path");
+
+mkdirp("../images/registoIdentificacao", function (err) {
+  if (err) console.error(err);
+});
+
+var storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, "../images/registoIdentificacao");
+  },
+  filename: function (req, file, callback) {
+    callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
 
 /**
  * Rota para criar uam ficha RegistoIdentificacao
  */
 exports.createFichaTecnicaRoute = async (app, bd) => {
-  app.post("/api/fichaTecnica/create", async (req, resp) => {
+  app.post("/api/fichaTecnica/create", upload.single("imagem"), async (req, resp) => {
     let resposta_servidor = { stat: "Authenticated", resposta: {} };
     //HTTP CODE ACCEPTED
     let code = 201;
@@ -92,7 +110,7 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
           fichaRegistoFK: req.body.fichaRegistoFK
         };
         console.log(ficha.objGerais);
-        console.log(ficha.tabobjGerais);
+        console.log(ficha.tabobjGerais[0]);
         let resposta_bd = await fichaTecnica.createFichaTecnica(bd, ficha);
         if (resposta_bd.stat === 0) {
           resposta_servidor.stat = "Registed";

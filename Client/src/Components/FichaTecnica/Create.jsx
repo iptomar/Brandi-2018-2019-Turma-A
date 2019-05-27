@@ -136,6 +136,14 @@ class Create extends Component {
     formData.append("SuperficiePropRecPag6", document.getElementById('SuperficiePropRecPag6').value);
     formData.append("ElementosAcessPropRecPag6", document.getElementById('ElementosAcessPropRecPag6').value);
     formData.append("observaçoesConclusoesPag6", document.getElementById('observaçoesConclusoesPag6').value);
+    //Pag 8
+    formData.append("estruturaPag8", document.getElementById('estruturaPag8').value);
+    formData.append("recursosEstruturaPag8", document.getElementById('recursosEstruturaPag8').value);
+    formData.append("superficiePag8", document.getElementById('superficiePag8').value);
+    formData.append("recursosSuperficiePag8", document.getElementById('recursosSuperficiePag8').value);
+    formData.append("elementosAcessoriosPag8", document.getElementById('elementosAcessoriosPag8').value);
+    formData.append("recursosElementosAcPag8", document.getElementById('recursosElementosAcPag8').value);
+    formData.append("observaçoesConclusoesPag8", document.getElementById('observaçoesConclusoesPag8').value);
     //Pag 9
     formData.append("relTecInterLCRM", document.getElementById('relTecInterLCRM').value);
     formData.append("tipoDesigOrig", document.getElementById('tipoDesigOrig').value);
@@ -218,11 +226,11 @@ class Create extends Component {
                     </button>
                   </h2>
                 </div>
-                {/* <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample"> */}
+                <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                   <div className="card-body">
                     <Pag2/>
                   </div>
-                {/* </div> */}
+                </div>
               </div>
 
               <div className="card bg-light">
@@ -233,11 +241,11 @@ class Create extends Component {
                     </button>
                   </h2>
                 </div>
-                {/* <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordionExample"> */}
+                <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                   <div className="card-body">
                     <Pag3/>
                   </div>
-                {/* </div> */}
+                </div>
               </div>
 
               <div className="card bg-light">
@@ -248,11 +256,11 @@ class Create extends Component {
                     </button>
                   </h2>
                 </div>
-                {/* <div id="collapseFour" className="collapse" aria-labelledby="headingFour" data-parent="#accordionExample"> */}
+                <div id="collapseFour" className="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
                   <div className="card-body">
                     <Pag4/>
                   </div>
-                {/* </div> */}
+                </div>
               </div>
             </div>
             
@@ -264,10 +272,10 @@ class Create extends Component {
                     </button>
                   </h2>
                 </div>
-                {/* <div id="collapseFive" className="collapse" aria-labelledby="headingFive" data-parent="#accordionExample"> */}
+                <div id="collapseFive" className="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
                   <div className="card-body">
                     <Pag5/>
-                  {/* </div> */}
+                  </div>
                 </div>
             </div>
 
@@ -279,11 +287,11 @@ class Create extends Component {
                     </button>
                   </h2>
                 </div>
-                {/* <div id="collapseSix" className="collapse" aria-labelledby="headingSix" data-parent="#accordionExample"> */}
+                <div id="collapseSix" className="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
                   <div className="card-body">
                     <Pag6/>
                   </div>
-                {/* </div> */}
+                </div>
             </div>
 
             <div className="card bg-light">
@@ -308,11 +316,11 @@ class Create extends Component {
                     </button>
                   </h2>
                 </div>
-                {/* <div id="collapseNine" className="collapse" aria-labelledby="headingNine" data-parent="#accordionExample"> */}
+                <div id="collapseNine" className="collapse" aria-labelledby="headingNine" data-parent="#accordionExample">
                   <div className="card-body">
                     <Pag9/>
                   </div>
-                {/* </div> */}
+                </div>
             </div>
 
             <button className="btn btn-success btn-lg btn-block mb-5" type="submit">Criar</button>

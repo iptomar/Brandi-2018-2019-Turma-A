@@ -69,10 +69,32 @@ exports.createFichaTecnica = async (bd, dados) => {
     dados.estadoConservBioSuperficie &&
     dados.estadoConservBioElementosAcess &&
     dados.estadoConservObsConclusoes &&
+    //Estado de Conservação (página 5)
+    dados.estadoConservFQMestrutura &&
+    dados.estadoConservFQMsuperficie &&
+    dados.estadoConservFQMelementosAcess &&
+    dados.estadoConservBioEstrutura &&
+    dados.estadoConservBioSuperficie &&
+    dados.estadoConservBioElementosAcess &&
+    dados.estadoConservObsConclusoes &&
+    //Intervenções Anteriores
+    dados.estruturaIntervAnter &&
+    dados.superficieIntervAnter &&
+    dados.elementosAcessoriosIntervAnter &&
+    dados.observaçoesConclusoesPag6 &&
+    dados.tipoInterv &&
+    dados.aspetosEspecificosPag6 &&
+    dados.tipoIntervCR &&
+    dados.EstruturaPropPag6 &&
+    dados.EstruturaPropRecPag6 &&
+    dados.SuperficiePropPag6 &&
+    dados.SuperficiePropRecPag6 &&
+    dados.ElementosAcessPropRecPag6 &&
+    dados.observaçoesConclusoesPag6 &&
     dados.fichaRegistoFK
   ) {
     resposta_bd = await bd.query(
-      "INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas, codPostalMecenas, contactoMecenas, bemIntegradoEmConjunto, tipoBensConjunto, elemConstConj, materiasElementosAcessorios, marcasInscricoesAssinaturas, marcasInscricoesMontagem, marcasInscricoesConstrucao, classPatrimonial, epoca, qualidade, materiaisEstruturaSuporte,  materiaisSuperficies, tecnicasEstruturaSuporte, tecnicasSuperficie, condAmbDescricao, condAmbFrioTemperatura, condAmbFrioHumidade, condAmbFrioPeriodoInicio, condAmbFrioPeriodoFim, condAmbQuenteTemperatura, condAmbQuenteHumidade, condAmbQuentePeriodoInicio, condAmbQuentePeriodoFim, ilumArtTipo, ilumArtValorIluminancia, ilumArtValurUV, ilumArtValorRealUV, ilumNatOrigem, ilumNatValorIluminancia, ilumNatValorUV, ilumNatValorRealUV,  poluicaoAgentes, poluicaoFontesOrigem, poluicaoResultados, poluicaoObservacoesConclusoes, examesAnalisesInterpResultados, examesAnalisesObsConclusoes, estadoConservFQMestrutura, estadoConservFQMsuperficie, estadoConservFQMelementosAcess, estadoConservBioEstrutura, estadoConservBioSuperficie, estadoConservBioElementosAcess, estadoConservObsConclusoes, fichaRegistoFK) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas, codPostalMecenas, contactoMecenas, bemIntegradoEmConjunto, tipoBensConjunto, elemConstConj, materiasElementosAcessorios, marcasInscricoesAssinaturas, marcasInscricoesMontagem, marcasInscricoesConstrucao, classPatrimonial, epoca, qualidade, materiaisEstruturaSuporte,  materiaisSuperficies, tecnicasEstruturaSuporte, tecnicasSuperficie, condAmbDescricao, condAmbFrioTemperatura, condAmbFrioHumidade, condAmbFrioPeriodoInicio, condAmbFrioPeriodoFim, condAmbQuenteTemperatura, condAmbQuenteHumidade, condAmbQuentePeriodoInicio, condAmbQuentePeriodoFim, ilumArtTipo, ilumArtValorIluminancia, ilumArtValurUV, ilumArtValorRealUV, ilumNatOrigem, ilumNatValorIluminancia, ilumNatValorUV, ilumNatValorRealUV,  poluicaoAgentes, poluicaoFontesOrigem, poluicaoResultados, poluicaoObservacoesConclusoes, examesAnalisesInterpResultados, examesAnalisesObsConclusoes, estadoConservFQMestrutura, estadoConservFQMsuperficie, estadoConservFQMelementosAcess, estadoConservBioEstrutura, estadoConservBioSuperficie, estadoConservBioElementosAcess, estadoConservObsConclusoes, estadoConservFQMestrutura, estadoConservFQMsuperficie, estadoConservFQMelementosAcess, estadoConservBioEstrutura, estadoConservBioSuperficie, estadoConservObsConclusoes, estruturaIntervAnter, superficieIntervAnter, elementosAcessoriosIntervAnter, observaçoesConclusoesPag6, tipoInterv, aspetosEspecificosPag6, tipoIntervCR, EstruturaPropPag6, EstruturaPropRecPag6, SuperficiePropPag6, SuperficiePropRecPag6, ElementosAcessPropRecPag6, observaçoesConclusoesPag6, fichaRegistoFK) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         dados.visible,
         dados.localizacao,
@@ -123,6 +145,7 @@ exports.createFichaTecnica = async (bd, dados) => {
         dados.poluicaoObservacoesConclusoes,
         dados.examesAnalisesInterpResultados,
         dados.examesAnalisesObsConclusoes,
+        //Estado de Conservação (página 5)
         dados.estadoConservFQMestrutura,
         dados.estadoConservFQMsuperficie,
         dados.estadoConservFQMelementosAcess,
@@ -130,6 +153,20 @@ exports.createFichaTecnica = async (bd, dados) => {
         dados.estadoConservBioSuperficie,
         dados.estadoConservBioElementosAcess,
         dados.estadoConservObsConclusoes,
+        //Intervenções Anteriores
+        dados.estruturaIntervAnter,
+        dados.superficieIntervAnter,
+        dados.elementosAcessoriosIntervAnter,
+        dados.observaçoesConclusoesPag6,
+        dados.tipoInterv,
+        dados.aspetosEspecificosPag6,
+        dados.tipoIntervCR,
+        dados.EstruturaPropPag6,
+        dados.EstruturaPropRecPag6,
+        dados.SuperficiePropPag6,
+        dados.SuperficiePropRecPag6,
+        dados.ElementosAcessPropRecPag6,
+        dados.observaçoesConclusoesPag6,
         dados.fichaRegistoFK
       ]
     );
@@ -148,8 +185,8 @@ exports.createFichaTecnica = async (bd, dados) => {
     //array auxiliar que contem todos os objectivosGerais num só array
     let array2 = [];
     for (let i = 0; i < dados.objectivosGerais.length; i++) {
-      if (dados.objectivosGerais[i].estrutura && dados.objectivosGerais[i].fichaTecnicaFK) {
-        array2.push(dados.objectivosGerais[i].Objectivo);
+      if (dados.objectivosGerais[i]) {
+        array2.push(dados.objectivosGerais[i]);
         //id da ficha tecnica criada
         array2.push(dados.resposta_bd.resposta.insertId);
       } else {
@@ -159,7 +196,7 @@ exports.createFichaTecnica = async (bd, dados) => {
     let resposta_bd2 = { stat: 1, resposta: {} };
     resposta_bd2 = await bd.query(
       "Insert into tbl_testespagina4objectivosGerais(Objectivo,fichaTecnicaFK) values " +
-        auxiliar,
+      auxiliar,
       array2
     );
     // não ocorreu nenhum erro na inserção
@@ -184,7 +221,7 @@ exports.createFichaTecnica = async (bd, dados) => {
       let resposta_bd3 = { stat: 1, resposta: {} };
       resposta_bd3 = await bd.query(
         "Insert into tbl_testespagina4tabelas(tipoReferencia ,LocalizacaoAreaPonto ,ObjectivosEspecificos ,Resultados ,TecnicoResponsavelFK ,DataDePreenchimento ,fichaTecnicaFK) values " +
-          auxiliar,
+        auxiliar,
         array2
       );
       //não ocorreu nenhum erro ao inserir os campos descritivos relativos aos objectivos gerais na pagina 4
@@ -335,68 +372,96 @@ exports.updateFichaTecnica = async (bd, dados) => {
     dados.estadoConservBioSuperficie &&
     dados.estadoConservBioElementosAcess &&
     dados.estadoConservObsConclusoes &&
+    //Pagina 6
+    dados.estruturaIntervAnter &&
+    dados.superficieIntervAnter &&
+    dados.elementosAcessoriosIntervAnter &&
+    dados.observaçoesConclusoesPag6 &&
+    dados.tipoInterv &&
+    dados.aspetosEspecificosPag6 &&
+    dados.tipoIntervCR &&
+    dados.EstruturaPropPag6 &&
+    dados.EstruturaPropRecPag6 &&
+    dados.SuperficiePropPag6 &&
+    dados.SuperficiePropRecPag6 &&
+    dados.ElementosAcessPropRecPag6 &&
+    dados.observaçoesConclusoesPag6 &&
     dados.fichaRegistoFK
   ) {
     resposta_bd = await bd.query(
-      "update tbl_fichasTecnicas set visible=?,localizacao=?,proprietario=?,codPostalProprietario=?,emailProprietario =?, contactoProprietario=?, donoObra=?, codPostalDonoObra =? , contactoDonoObra =?, contactoDonoObra =?, mecenas =?, codPostalMecenas =?, contactoMecenas =?, bemIntegradoEmConjunto =?, tipoBensConjunto =?, elemConstConj =?, materiasElementosAcessorios =?, marcasInscricoesAssinaturas =?, marcasInscricoesMontagem =?, marcasInscricoesConstrucao =?, classPatrimonial =?, epoca =?, qualidade =?, materiaisEstruturaSuporte =?, materiaisSuperficies =?, tecnicasEstruturaSuporte =?, tecnicasSuperficie =?, condAmbDescricao =?,condAmbFrioTemperatura =?, condAmbFrioHumidade =?, condAmbFrioPeriodoInicio =?, condAmbFrioPeriodoFim =?, condAmbQuenteTemperatura =?, condAmbQuenteHumidade =?, condAmbQuentePeriodoInicio =?, condAmbQuentePeriodoFim =?, ilumArtTipo =?, ilumArtValorIluminancia =?, ilumArtValurUV =?, ilumArtValorRealUV =?, ilumNatOrigem =?, ilumNatValorIluminancia =?, ilumNatValorUV =?, ilumNatValorRealUV =?, poluicaoAgentes =?, poluicaoFontesOrigem =?, poluicaoResultados =?, poluicaoObservacoesConclusoes =?,examesAnalisesInterpResultados =?, examesAnalisesObsConclusoes =?, estadoConservFQMestrutura =?, estadoConservFQMsuperficie =?, estadoConservFQMelementosAcess =?, estadoConservBioEstrutura =?, estadoConservBioSuperficie =?, estadoConservBioElementosAcess =?, estadoConservObsConclusoes =?, fichaRegistoFK =? where fichaTecnicaID = ? ",
+      "update tbl_fichasTecnicas set visible=?,localizacao=?,proprietario=?,codPostalProprietario=?,emailProprietario =?, contactoProprietario=?, donoObra=?, codPostalDonoObra =? , contactoDonoObra =?, contactoDonoObra =?, mecenas =?, codPostalMecenas =?, contactoMecenas =?, bemIntegradoEmConjunto =?, tipoBensConjunto =?, elemConstConj =?, materiasElementosAcessorios =?, marcasInscricoesAssinaturas =?, marcasInscricoesMontagem =?, marcasInscricoesConstrucao =?, classPatrimonial =?, epoca =?, qualidade =?, materiaisEstruturaSuporte =?, materiaisSuperficies =?, tecnicasEstruturaSuporte =?, tecnicasSuperficie =?, condAmbDescricao =?,condAmbFrioTemperatura =?, condAmbFrioHumidade =?, condAmbFrioPeriodoInicio =?, condAmbFrioPeriodoFim =?, condAmbQuenteTemperatura =?, condAmbQuenteHumidade =?, condAmbQuentePeriodoInicio =?, condAmbQuentePeriodoFim =?, ilumArtTipo =?, ilumArtValorIluminancia =?, ilumArtValurUV =?, ilumArtValorRealUV =?, ilumNatOrigem =?, ilumNatValorIluminancia =?, ilumNatValorUV =?, ilumNatValorRealUV =?, poluicaoAgentes =?, poluicaoFontesOrigem =?, poluicaoResultados =?, poluicaoObservacoesConclusoes =?,examesAnalisesInterpResultados =?, examesAnalisesObsConclusoes =?, estadoConservFQMestrutura =?, estadoConservFQMsuperficie =?, estadoConservFQMelementosAcess =?, estadoConservBioEstrutura =?, estadoConservBioSuperficie =?, estadoConservBioElementosAcess =?, estadoConservObsConclusoes =?, estruturaIntervAnter =?, superficieIntervAnter =?, elementosAcessoriosIntervAnter =?, observaçoesConclusoesPag6 =?, tipoInterv =?, aspetosEspecificosPag6 =?, tipoIntervCR =?, EstruturaPropPag6 =?, EstruturaPropRecPag6 =?, SuperficiePropPag6 =?, SuperficiePropRecPag6 =?, ElementosAcessPropRecPag6 =?, observaçoesConclusoesPag6 =? fichaRegistoFK =? where fichaTecnicaID = ? ",
       [
-        dados.visible &&
-          dados.localizacao &&
-          dados.proprietario &&
-          dados.codPostalProprietario &&
-          dados.emailProprietario &&
-          dados.contactoProprietario &&
-          dados.donoObra &&
-          dados.codPostalDonoObra &&
-          dados.contactoDonoObra &&
-          dados.mecenas &&
-          dados.codPostalMecenas &&
-          dados.contactoMecenas &&
-          dados.bemIntegradoEmConjunto &&
-          dados.tipoBensConjunto &&
-          dados.elemConstConj &&
-          dados.materiasElementosAcessorios &&
-          dados.marcasInscricoesAssinaturas &&
-          dados.marcasInscricoesMontagem &&
-          dados.marcasInscricoesConstrucao &&
-          dados.classPatrimonial &&
-          dados.epoca &&
-          dados.qualidade &&
-          dados.materiaisEstruturaSuporte &&
-          dados.materiaisSuperficies &&
-          dados.tecnicasEstruturaSuporte &&
-          dados.tecnicasSuperficie &&
-          dados.condAmbDescricao &&
-          dados.condAmbFrioTemperatura &&
-          dados.condAmbFrioHumidade &&
-          dados.condAmbFrioPeriodoInicio &&
-          dados.condAmbFrioPeriodoFim &&
-          dados.condAmbQuenteTemperatura &&
-          dados.condAmbQuenteHumidade &&
-          dados.condAmbQuentePeriodoInicio &&
-          dados.condAmbQuentePeriodoFim &&
-          dados.ilumArtTipo &&
-          dados.ilumArtValorIluminancia &&
-          dados.ilumArtValurUV &&
-          dados.ilumArtValorRealUV &&
-          dados.ilumNatOrigem &&
-          dados.ilumNatValorIluminancia &&
-          dados.ilumNatValorUV &&
-          dados.ilumNatValorRealUV &&
-          dados.poluicaoAgentes &&
-          dados.poluicaoFontesOrigem &&
-          dados.poluicaoResultados &&
-          dados.poluicaoObservacoesConclusoes &&
-          dados.examesAnalisesInterpResultados &&
-          dados.examesAnalisesObsConclusoes &&
-          dados.estadoConservFQMestrutura &&
-          dados.estadoConservFQMsuperficie &&
-          dados.estadoConservFQMelementosAcess &&
-          dados.estadoConservBioEstrutura &&
-          dados.estadoConservBioSuperficie &&
-          dados.estadoConservBioElementosAcess &&
-          dados.estadoConservObsConclusoes &&
-          dados.fichaRegistoFK
+        dados.visible,
+        dados.localizacao,
+        dados.proprietario,
+        dados.codPostalProprietario,
+        dados.emailProprietario,,
+        dados.contactoProprietario,
+        dados.donoObra,
+        dados.codPostalDonoObra,
+        dados.contactoDonoObra,
+        dados.mecenas,
+        dados.codPostalMecenas,
+        dados.contactoMecenas,
+        dados.bemIntegradoEmConjunto,
+        dados.tipoBensConjunto,
+        dados.elemConstConj,
+        dados.materiasElementosAcessorios,
+        dados.marcasInscricoesAssinaturas,
+        dados.marcasInscricoesMontagem,
+        dados.marcasInscricoesConstrucao,
+        dados.classPatrimonial,
+        dados.epoca,
+        dados.qualidade,
+        dados.materiaisEstruturaSuporte,
+        dados.materiaisSuperficies,
+        dados.tecnicasEstruturaSuporte,
+        dados.tecnicasSuperficie,
+        dados.condAmbDescricao,
+        dados.condAmbFrioTemperatura,
+        dados.condAmbFrioHumidade,
+        dados.condAmbFrioPeriodoInicio,,
+        dados.condAmbFrioPeriodoFim,
+        dados.condAmbQuenteTemperatura,
+        dados.condAmbQuenteHumidade,
+        dados.condAmbQuentePeriodoInicio,
+        dados.condAmbQuentePeriodoFim,
+        dados.ilumArtTipo,
+        dados.ilumArtValorIluminancia,
+        dados.ilumArtValurUV,
+        dados.ilumArtValorRealUV,
+        dados.ilumNatOrigem,
+        dados.ilumNatValorIluminancia,
+        dados.ilumNatValorUV,
+        dados.ilumNatValorRealUV,
+        dados.poluicaoAgentes,
+        dados.poluicaoFontesOrigem,
+        dados.poluicaoResultados,
+        dados.poluicaoObservacoesConclusoes,
+        dados.examesAnalisesInterpResultados,
+        dados.examesAnalisesObsConclusoes,
+        dados.estadoConservFQMestrutura,
+        dados.estadoConservFQMsuperficie,
+        dados.estadoConservFQMelementosAcess,
+        dados.estadoConservBioEstrutura,
+        dados.estadoConservBioSuperficie,
+        dados.estadoConservBioElementosAcess,
+        dados.estadoConservObsConclusoes,
+         //Página 6
+         dados.estruturaIntervAnter,
+         dados.superficieIntervAnter,
+         dados.elementosAcessoriosIntervAnter,
+         dados.observaçoesConclusoesPag6,
+         dados.tipoInterv,
+         dados.aspetosEspecificosPag6,
+         dados.tipoIntervCR,
+         dados.EstruturaPropPag6,
+         dados.EstruturaPropRecPag6,
+         dados.SuperficiePropPag6,
+         dados.SuperficiePropRecPag6,
+         dados.ElementosAcessPropRecPag6,
+         dados.observaçoesConclusoesPag6,
+        dados.fichaRegistoFK
       ]
     );
   }

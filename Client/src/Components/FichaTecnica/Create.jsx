@@ -18,14 +18,21 @@ class Create extends Component {
       alertColor: '',
       id: this.props.id,
       alert: false,
-      files: []
+      files: [],
+      filesG: []
     };
     this.getData = this.getData.bind(this);
+    this.getDataG = this.getDataG.bind(this);
   }
 
   //Recebe os dados do filho Pag1
   getData(data) {
     this.setState({ files: data });
+  }
+
+  //Recebe os dados do filho Pag1
+  getDataG(data) {
+    this.setState({ filesG: data });
   }
 
   handleSubmit = async e => {
@@ -213,7 +220,10 @@ class Create extends Component {
                 </div>
                 <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                   <div className="card-body">
-                    <Pag1 sendData={this.getData}/>
+                      <Pag1
+                      sendData={this.getData} 
+                      // sendDataG={this.getData}
+                       />
                   </div>
                 </div>
               </div>

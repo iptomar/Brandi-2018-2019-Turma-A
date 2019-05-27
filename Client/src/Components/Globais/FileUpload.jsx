@@ -79,7 +79,7 @@ class FileUpload extends Component {
             :
               <input type="file" className="custom-file-input" name="imagem" accept="image/*" onChange={this.handleChange} />
         }
-        <label className="custom-file-label" data-browse="Escolher Ficheiro" >Escolha Fotografia</label>
+        <label className="custom-file-label" data-browse="Escolher Ficheiro" >Escolha Ficheiros</label>
         </div>
         <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} status={this.changeStatus} />
         <div>

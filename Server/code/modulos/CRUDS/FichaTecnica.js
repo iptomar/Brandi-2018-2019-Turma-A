@@ -141,17 +141,17 @@ exports.createFichaTecnica = async (bd, dados) => {
     // inserir os campos da página 4
     // inserir multiplos valores
     let auxiliar = "";
-    for (let i = 0; i < objectivosGerais.length; i++) {
+    for (let i = 0; i < dados.objectivosGerais.length; i++) {
       auxiliar += "(?,?),";
     }
     auxiliar = auxiliar.substring(0, auxiliar.length - 1); //tira ultima virgula
     //array auxiliar que contem todos os objectivosGerais num só array
     let array2 = [];
-    for (let i = 0; i < objectivosGerais.length; i++) {
-      if (objectivosGerais[i].estrutura && objectivosGerais[i].fichaTecnicaFK) {
-        array2.push(objectivosGerais[i].Objectivo);
+    for (let i = 0; i < dados.objectivosGerais.length; i++) {
+      if (dados.objectivosGerais[i].estrutura && dados.objectivosGerais[i].fichaTecnicaFK) {
+        array2.push(dados.objectivosGerais[i].Objectivo);
         //id da ficha tecnica criada
-        array2.push(resposta_bd.resposta.insertId);
+        array2.push(dados.resposta_bd.resposta.insertId);
       } else {
         return resultadofinal;
       }
@@ -165,19 +165,19 @@ exports.createFichaTecnica = async (bd, dados) => {
     // não ocorreu nenhum erro na inserção
     if (resposta_bd2.stat === 0) {
       let auxiliar = "";
-      for (let i = 0; i < objectivosGerais.length; i++) {
+      for (let i = 0; i < dados.objectivosGerais.length; i++) {
         auxiliar += "(?,?,?,?,?,?,?),";
       }
       auxiliar = auxiliar.substring(0, auxiliar.length - 1); //tira ultima virgula
       //array auxiliar que contem todos os objectivosGerais num só array
       let array2 = [];
-      for (let i = 0; i < dadosobjectivosGerais.length; i++) {
-        array2.push(dadosobjectivosGerais[i].tipoReferencia);
-        array2.push(dadosobjectivosGerais[i].LocalizacaoAreaPonto);
-        array2.push(dadosobjectivosGerais[i].ObjectivosEspecificos);
-        array2.push(dadosobjectivosGerais[i].Resultados);
-        array2.push(dadosobjectivosGerais[i].TecnicoResponsavelFK);
-        array2.push(dadosobjectivosGerais[i].DataDePreenchimento);
+      for (let i = 0; i < dados.dadosobjectivosGerais.length; i++) {
+        array2.push(dados.dadosobjectivosGerais[i].tipoReferencia);
+        array2.push(dados.dadosobjectivosGerais[i].LocalizacaoAreaPonto);
+        array2.push(dados.dadosobjectivosGerais[i].ObjectivosEspecificos);
+        array2.push(dados.dadosobjectivosGerais[i].Resultados);
+        array2.push(dados.dadosobjectivosGerais[i].TecnicoResponsavelFK);
+        array2.push(dados.dadosobjectivosGerais[i].DataDePreenchimento);
         //id da ficha tecnica criada
         array2.push(resposta_bd.resposta.insertId);
       }

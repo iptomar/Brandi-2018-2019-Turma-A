@@ -67,7 +67,7 @@ class Header extends Component {
           </ul>
           <hr />
           {/* <span className="sessionName">{sessionStorage.getItem('nome')}</span> */}
-          <a className="sessionName" href="/perfil">{sessionStorage.getItem('nome')}</a>
+          <a className="sessionName" href="/perfil"><i className="far fa-user"></i>&nbsp;{sessionStorage.getItem('nome')}</a>
           <div className="divConta">
             <ul className="navbar-nav">
               {/* <li className="nav-item">

@@ -125,7 +125,7 @@ class Index extends Component {
             </div>
             <div className="col-md-3" style={{ display: "inline" }}>
               <a href="/fichaRI/criar" className="mt-3 btn btn-success">
-                <i className="fas fa-plus fa-white" /> Adicionar Ficha
+                <i className="fas fa-plus fa-white" /> Adicionar Ficha de R. e I.
               </a>
             </div>
           </div>

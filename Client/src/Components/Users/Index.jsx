@@ -128,7 +128,18 @@ class Index extends Component {
       return (
         <div className="container">
           <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
-          <h2 className="py-3 mb-3">Lista de Utilizadores</h2>
+          <div className="row">
+            <div className="col-md-9">
+              <h2 className="py-3 mb-3 text-center">
+                Lista de Utilizadores
+              </h2>
+            </div>
+            <div className="col-md-3" style={{ display: "inline" }}>
+              <a href="/utilizadores/registar" className="mt-3 btn btn-success">
+                <i className="fas fa-plus fa-white" /> Registar Utilizador
+              </a>
+            </div>
+          </div>
           <table className="table table-sm table-hover">
             <thead>
               <tr>

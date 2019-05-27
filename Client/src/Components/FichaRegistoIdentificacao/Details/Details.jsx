@@ -18,6 +18,7 @@ class Details extends Component {
     };
     this.toggleEdit = this.toggleEdit.bind(this);
     this.delete = this.delete.bind(this);
+    this.addFT = this.addFT.bind(this);
   }
 
   async componentDidMount() {
@@ -41,6 +42,10 @@ class Details extends Component {
           break;
       }
     }
+  }
+
+  async addFT(){
+    window.location = "/fichaTecnica/criar/"+this.props.id;
   }
 
   toggleEdit() {
@@ -89,8 +94,11 @@ class Details extends Component {
             <h2>Detalhes da Ficha de Registo e Identificação</h2>
           </div>
           <div className="text-right mr-3 mb-3">
+          <button className="btn btn-success" onClick={this.addFT}>
+              Adicionar Ficha Técnica <i className="fas fa-plus"/>
+            </button>
             <button 
-              className="btn btn-primary" 
+              className="btn btn-warning ml-2" 
               onClick={() => {
                 if(this.state.edit){
                   this.setState({ modal: 'Edit'});

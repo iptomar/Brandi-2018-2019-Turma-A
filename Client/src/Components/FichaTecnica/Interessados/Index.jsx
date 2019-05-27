@@ -55,7 +55,7 @@ class Index extends Component {
           <div className="row">
             <div className="col-md-9">
               <h2 className="py-3 mb-3 text-center">
-                Interessados
+                Lista de Interessados
               </h2>
             </div>
             <div className="col-md-3" style={{ display: "inline" }}>
@@ -74,7 +74,7 @@ class Index extends Component {
                       <th scope="col">Nome</th>
                       <th scope="col">Endereço Postal</th>
                       <th scope="col">Email</th>
-                      <th scope="col">Tipo de utilizador</th>
+                      <th scope="col">Cargo</th>
                       <th scope="col"></th>
                     </tr>
                   </thead>
@@ -90,6 +90,9 @@ class Index extends Component {
                           <td>
                             <a className="btn btn-warning mr-2" href={href + "/editar"}>
                               <i className="fas fa-edit"></i>
+                            </a>
+                            <a className="btn btn-danger mr-2" href={href + "/"}>
+                              <i className="fas fa-trash-alt"></i>
                             </a>
                           </td>
                         </tr>

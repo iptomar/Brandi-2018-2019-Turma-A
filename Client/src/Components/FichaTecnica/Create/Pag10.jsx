@@ -10,7 +10,34 @@ class Pag10 extends Component {
             alertisNotVisible: true,
             alertColor: '',
         };
+
     }
+
+    eliminaUltimaLinha = () => {
+        var table = document.getElementById("tabela");
+        var numRows = table.rows.length;
+        if (numRows > 2) {
+            table.deleteRow(-1);
+        }
+    }
+
+    adicionaNovaLinha = () => {
+        var table = document.getElementById("tabela");
+        //inserir nova linha
+        var row = table.insertRow(-1);
+        //parametros textArea
+        for (var i = 0; i < 4; i++) {
+            var novaCelula = row.insertCell(i);
+            var param = document.createElement('textarea');
+            param.className = "form-control";
+            param.setAttribute("type", "text");
+            param.style.resize = "none";
+            param.setAttribute("rows", "2");
+            novaCelula.appendChild(param);
+        }
+    
+    }
+    
 
 
     render() {
@@ -31,47 +58,41 @@ class Pag10 extends Component {
                     <div className="row">
                         <div className="col d-flex justify-content-center">
                             <label className="align-middle">Autor/Título/Local/Editor/Data/Página(s)</label>
-
-
                         </div>
+
                         <div className="col d-flex justify-content-center">
                             <label className="align-middle">Tipo</label>
-
-
                         </div>
 
                         <div className="col d-flex justify-content-center">
                             <label className="align-middle">Localização</label>
-
-
                         </div>
 
                         <div className="col d-flex justify-content-center">
                             <label className="align-middle">Cota</label>
-
 
                         </div>
                     </div>
 
                     <div className="row">
                         <div className="col d-flex justify-content-center">
-                            <textarea id="tipoDesigOrig" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
+                            <textarea id="atledpArqDoc" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
                         </div>
 
                         <div className="col d-flex justify-content-center">
-                            <textarea id="refOrig" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
+                            <textarea id="tipoArqDoc" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
 
 
                         </div>
                         
                         <div className="col d-flex justify-content-center">
-                            <textarea id="refOrig" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
+                            <textarea id="localArqDoc" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
 
 
                         </div>
 
                         <div className="col d-flex justify-content-center">
-                            <textarea id="entidadeOrig" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
+                            <textarea id="cotaArqDoc" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
 
 
                         </div>
@@ -112,23 +133,23 @@ class Pag10 extends Component {
 
                     <div className="row">
                         <div className="col d-flex justify-content-center">
-                            <textarea id="tipoDesigOrig" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
+                            <textarea id="atledpIcon" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
                         </div>
 
                         <div className="col d-flex justify-content-center">
-                            <textarea id="refOrig" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
+                            <textarea id="tipoIcon" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
 
 
                         </div>
                         
                         <div className="col d-flex justify-content-center">
-                            <textarea id="refOrig" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
+                            <textarea id="localIcon" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
 
 
                         </div>
 
                         <div className="col d-flex justify-content-center">
-                            <textarea id="entidadeOrig" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
+                            <textarea id="cotaIcon" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
 
 
                         </div>
@@ -169,23 +190,23 @@ class Pag10 extends Component {
 
                     <div className="row">
                         <div className="col d-flex justify-content-center">
-                            <textarea id="tipoDesigOrig" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
+                            <textarea id="atledpBiblio" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
                         </div>
 
                         <div className="col d-flex justify-content-center">
-                            <textarea id="refOrig" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
+                            <textarea id="tipoBiblio" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
 
 
                         </div>
                         
                         <div className="col d-flex justify-content-center">
-                            <textarea id="refOrig" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
+                            <textarea id="localBiblio" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
 
 
                         </div>
 
                         <div className="col d-flex justify-content-center">
-                            <textarea id="entidadeOrig" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
+                            <textarea id="cotaBiblio" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
 
 
                         </div>
@@ -199,7 +220,7 @@ class Pag10 extends Component {
                         </div>
                     </div>
 
-                                        <div className="row">
+                    <div className="row">
                         <div className="col d-flex justify-content-center">
                             <label className="align-middle">Autor/Título/Local/Editor/Data/Página(s)</label>
 
@@ -257,13 +278,15 @@ class Pag10 extends Component {
                                     <h4>CONSTITUIÇÃO DA EQUIPA</h4>
                                     Nome do Técnico
                                 </th>
-                                <th className="align-middle"><h4>Funções Desempenhadas</h4></th>
                                 <th className="align-middle">
-                                <h4>Habilitações</h4>
-                                (Escolares | Académicas)
-                                <h4>Nível Profissional</h4>
-                                (1-8)
-                                    </th>
+                                    <h4>Funções Desempenhadas</h4>
+                                </th>
+                                <th className="align-middle">
+                                    <h4>Habilitações</h4>
+                                    (Escolares | Académicas)
+                                    <h4>Nível Profissional</h4>
+                                    (1-8)
+                                </th>
 
                             </tr>
                         </thead>

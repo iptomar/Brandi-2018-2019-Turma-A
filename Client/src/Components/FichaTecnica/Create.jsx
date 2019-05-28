@@ -8,6 +8,7 @@ import Pag6 from "../../Components/FichaTecnica/Create/Pag6";
 import Pag7 from "../../Components/FichaTecnica/Create/Pag7";
 import Pag8 from "../../Components/FichaTecnica/Create/Pag8";
 import Pag9 from "../../Components/FichaTecnica/Create/Pag9";
+import Pag10 from "../../Components/FichaTecnica/Create/Pag10";
 
 class Create extends Component {
 
@@ -163,6 +164,8 @@ class Create extends Component {
     formData.append("tipoDesigExames", document.getElementById('tipoDesigExames').value);
     formData.append("refExames", document.getElementById('refExames').value);
     formData.append("entidadeExames", document.getElementById('entidadeExames').value);
+    //Pag10
+    
     //Final
     formData.append("fichaRegistoFK", this.state.id);
 
@@ -346,6 +349,21 @@ class Create extends Component {
                 <div id="collapseNine" className="collapse" aria-labelledby="headingNine" data-parent="#accordionExample">
                   <div className="card-body">
                     <Pag9/>
+                  </div>
+                </div>
+            </div>
+
+            <div className="card bg-light">
+                <div className="card-header" id="headingTen">
+                  <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseTen">
+                    <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                      Página #10
+                    </button>
+                  </h2>
+                </div>
+                <div id="collapseTen" className="collapse" aria-labelledby="headingTen" data-parent="#accordionExample">
+                  <div className="card-body">
+                    <Pag10/>
                   </div>
                 </div>
             </div>

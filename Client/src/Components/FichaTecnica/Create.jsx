@@ -165,6 +165,24 @@ class Create extends Component {
     formData.append("refExames", document.getElementById('refExames').value);
     formData.append("entidadeExames", document.getElementById('entidadeExames').value);
     //Pag10
+    formData.append("atledpArqDoc", document.getElementById('atledpArqDoc').value);
+    formData.append("tipoArqDoc", document.getElementById('tipoArqDoc').value);
+    formData.append("localArqDoc", document.getElementById('localArqDoc').value);
+    formData.append("cotaArqDoc", document.getElementById('cotaArqDoc').value);
+    formData.append("atledpIcon", document.getElementById('atledpIcon').value);
+    formData.append("tipoIcon", document.getElementById('tipoIcon').value);
+    formData.append("localIcon", document.getElementById('localIcon').value);
+    formData.append("cotaIcon", document.getElementById('cotaIcon').value);
+    formData.append("atledpBiblio", document.getElementById('atledpBiblio').value);
+    formData.append("tipoBiblio", document.getElementById('tipoBiblio').value);
+    formData.append("localBiblio", document.getElementById('localBiblio').value);
+    formData.append("cotaBiblio", document.getElementById('cotaBiblio').value);
+    let tabela = [];
+    for(let j = 0 ; j < document.getElementById("tabela").children[1].childElementCount; j++){
+        let cont = document.getElementById("tabela").children[1].children[j];
+        tabela.push({tipoRef: cont.children[0].children[0].value, lap: cont.children[1].children[0].value, objEsp: cont.children[2].children[0].value, reslt: cont.children[3].children[0].value, data: cont.children[5].children[0].value });
+    }
+
     
     //Final
     formData.append("fichaRegistoFK", this.state.id);

@@ -1,11 +1,29 @@
 const fichaTecnica = require("../CRUDS/FichaTecnica");
 const getToken = require("../Auxiliares/Token");
+var multer = require("multer");
+var mkdirp = require("mkdirp");
+const path = require("path");
+
+mkdirp("../images/registoIdentificacao", function (err) {
+  if (err) console.error(err);
+});
+
+var storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, "../images/registoIdentificacao");
+  },
+  filename: function (req, file, callback) {
+    callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
 
 /**
  * Rota para criar uam ficha RegistoIdentificacao
  */
 exports.createFichaTecnicaRoute = async (app, bd) => {
-  app.post("/api/fichaTecnica/create", async (req, resp) => {
+  app.post("/api/fichaTecnica/create", upload.single("imagem"), async (req, resp) => {
     let resposta_servidor = { stat: "Authenticated", resposta: {} };
     //HTTP CODE ACCEPTED
     let code = 201;
@@ -75,6 +93,8 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
           poluicaoFontesOrigem: req.body.poluicaoFontesOrigem,
           poluicaoResultados: req.body.poluicaoResultados,
           poluicaoObservacoesConclusoes: req.body.poluicaoObservacoesConclusoes,
+          objGerais: req.body.objGerais,
+          tabobjGerais: req.body.tabobjGerais,
           examesAnalisesInterpResultados:
             req.body.examesAnalisesInterpResultados,
           examesAnalisesObsConclusoes: req.body.examesAnalisesObsConclusoes,

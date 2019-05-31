@@ -200,6 +200,22 @@ CREATE TABLE tbl_fichasTecnicas
     estruturaIntervAnter VARCHAR(255),
 	superficieIntervAnter VARCHAR(255),
 	elementosAcessoriosIntervAnter VARCHAR(255),
+    -- campos pagina 4, falta parte de objetivos gerais 
+    examesAnalisesInterpResultados VARCHAR(255),
+    examesAnalisesObsConclusoes VARCHAR(255),
+    -- campos pagina 5
+    estadoConservFQMestrutura VARCHAR(255),
+    estadoConservFQMsuperficie VARCHAR(255),
+    estadoConservFQMelementosAcess VARCHAR(255),
+    estadoConservBioEstrutura VARCHAR(255),
+    estadoConservBioSuperficie VARCHAR(255),
+    estadoConservBioElementosAcess VARCHAR(255),
+    estadoConservObsConclusoes VARCHAR(255),
+    -- campos pagina 6 e 7
+    estruturaIntervAnter VARCHAR(255),
+	superficieIntervAnter VARCHAR(255),
+	elementosAcessoriosIntervAnter VARCHAR(255),
+	observaçoesConclusoesPag6 VARCHAR(255),
 	tipoInterv VARCHAR(255),
 	aspetosEspecificosPag6 VARCHAR(255),
 	tipoIntervCR VARCHAR(255),
@@ -208,7 +224,6 @@ CREATE TABLE tbl_fichasTecnicas
 	SuperficiePropPag6 VARCHAR(255),
 	SuperficiePropRecPag6 VARCHAR(255),
 	ElementosAcessPropRecPag6 VARCHAR(255),
-	observaçoesConclusoesPag6 VARCHAR(255),
     -- FEITO ATÉ A PAGINA 4 (PAG 4 NÃO ESTA FEITA)
 	-- dataUltimaAlteracao DATE,
 	-- dataAberturaLCRM DATE,
@@ -259,6 +274,14 @@ CREATE TABLE tbl_fichasTecnicas
 	-- deterioracoesSuperficie VARCHAR(255),
 	-- deterioracoesElementosAcessorios VARCHAR(255),
 	-- deterioracoesTipo VARCHAR(255),
+    -- campos pagina 8
+    estruturaPag8 VARCHAR(255),
+    recursosEstruturaPag8 VARCHAR(255),
+    superficiePag8 VARCHAR(255),
+    recursosSuperficiePag8 VARCHAR(255),
+    elementosAcessoriosPag8 VARCHAR(255),
+    recursosElementosAcPag8 VARCHAR(255),
+    observaçoesConclusoesPag8 VARCHAR(255),
 	fichaRegistoFK INT NOT NULL UNIQUE,
     PRIMARY KEY(fichaTecnicaID),
 	FOREIGN KEY(fichaRegistoFK) REFERENCES tbl_fichaRegistoIdentificacao(fichaRegistoID)

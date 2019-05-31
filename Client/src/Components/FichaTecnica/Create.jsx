@@ -66,8 +66,8 @@ class Create extends Component {
         document.getElementById('codPostalMecenas').value = dados.codPostalMecenas;
         document.getElementById('contactoMecenas').value = dados.contactoMecenas;
         //Pag 2
-        if(!dados.bemIntegradoEmConjunto){ document.getElementById('bemIntegradoSim').parentNode.parentNode.parentNode.remove();
-        }else{ document.getElementById('bemIntegradoNão').parentNode.parentNode.parentNode.remove(); }
+        if(!dados.bemIntegradoEmConjunto){ document.getElementById('bemIntegradoSim').parentNode.parentNode.parentNode.style.display = "none";
+        }else{ document.getElementById('bemIntegradoNão').parentNode.parentNode.parentNode.style.display = "none"; }
         document.getElementById('tipoConjunto').value = dados.tipoBensConjunto;
         document.getElementById('elementosConst').value = dados.elemConstConj;
         document.getElementById('elementosAcess').value = dados.materiasElementosAcessorios;
@@ -76,16 +76,16 @@ class Create extends Component {
         document.getElementById('inscricoesConstrucao').value = dados.marcasInscricoesConstrucao;
         document.getElementById('classPatrimonial').value = dados.classPatrimonial;
         
-        if(dados.epoca !== "EpocaCoeva"){ document.getElementById('EpocaCoevo').parentNode.parentNode.parentNode.remove();}
-        if(dados.epoca !== "EpocaTardio"){ document.getElementById('EpocaTardio').parentNode.parentNode.parentNode.remove();}
-        if(dados.epoca !== "EpocaOutra"){ document.getElementById('EpocaOutra').parentNode.parentNode.parentNode.remove();}
-        if(dados.epoca !== "EpocaReplica"){ document.getElementById('EpocaReplica').parentNode.parentNode.parentNode.remove();}
-        if(dados.epoca !== "EpocaReproducao"){ document.getElementById('EpocaReproducao').parentNode.parentNode.parentNode.remove();}
+        if(dados.epoca !== "EpocaCoeva"){ document.getElementById('EpocaCoevo').parentNode.parentNode.parentNode.style.display = "none";}
+        if(dados.epoca !== "EpocaTardio"){ document.getElementById('EpocaTardio').parentNode.parentNode.parentNode.style.display = "none";}
+        if(dados.epoca !== "EpocaOutra"){ document.getElementById('EpocaOutra').parentNode.parentNode.parentNode.style.display = "none";}
+        if(dados.epoca !== "EpocaReplica"){ document.getElementById('EpocaReplica').parentNode.parentNode.parentNode.style.display = "none";}
+        if(dados.epoca !== "EpocaReproducao"){ document.getElementById('EpocaReproducao').parentNode.parentNode.parentNode.style.display = "none";}
 
-        if(dados.qualidade !== "Excelente") document.getElementById('QualidadeExcelente').parentNode.parentNode.parentNode.remove();
-        if(dados.qualidade !== "Muito boa") document.getElementById('QualidadeMuitoBoa').parentNode.parentNode.parentNode.remove();
-        if(dados.qualidade !== "Boa") document.getElementById('QualidadeBoa').parentNode.parentNode.parentNode.remove();
-        if(dados.qualidade !== "Regular") document.getElementById('QualidadeRegular').parentNode.parentNode.parentNode.remove();
+        if(dados.qualidade !== "Excelente") document.getElementById('QualidadeExcelente').parentNode.parentNode.parentNode.style.display = "none";
+        if(dados.qualidade !== "Muito boa") document.getElementById('QualidadeMuitoBoa').parentNode.parentNode.parentNode.style.display = "none";
+        if(dados.qualidade !== "Boa") document.getElementById('QualidadeBoa').parentNode.parentNode.parentNode.style.display = "none";
+        if(dados.qualidade !== "Regular") document.getElementById('QualidadeRegular').parentNode.parentNode.parentNode.style.display = "none";
 
         document.getElementById('estruturaSuporteMateriais').value = dados.materiaisEstruturaSuporte;
         document.getElementById('SuperficieMateriais').value = dados.materiaisSuperficies;

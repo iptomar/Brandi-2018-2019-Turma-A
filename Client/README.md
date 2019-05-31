@@ -30,6 +30,7 @@ Finalmente, executar o seguinte comando, na diretoria da pasta Client:
   
   ## FileUpload
   Permite carregar um ou mais ficheiros já com um design mais interativo.
+  Se for colocado o atributo isMultiple o FileUpload permite a inserção de mais do que um ficheiro ao mesmo tempo.
   
   ## LoadingAnimation
   Permite fazer uma animação enquanto a página é carregada, entre outros.
@@ -50,6 +51,17 @@ Finalmente, executar o seguinte comando, na diretoria da pasta Client:
   
   ## Read
   Permite fazer a leitura de uma ficha de registo e identificação
+  
+  ## Componentes Ficha técnica
+  
+  ## Create
+  Permite criar uma nova ficha tecnica
+  
+  ## Details
+  Permite ver os detalhes de uma ficha de tecnica
+  
+  ## Edit
+  Permite editar uma ficha tecnica
   
 ## Componentes Users
   

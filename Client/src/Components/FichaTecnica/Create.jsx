@@ -9,6 +9,7 @@ import Pag7 from "../../Components/FichaTecnica/Create/Pag7";
 import Pag8 from "../../Components/FichaTecnica/Create/Pag8";
 import Pag9 from "../../Components/FichaTecnica/Create/Pag9";
 import Pag10 from "../../Components/FichaTecnica/Create/Pag10";
+import $ from 'jquery';
 
 class Create extends Component {
 
@@ -25,6 +26,58 @@ class Create extends Component {
     };
     this.getData = this.getData.bind(this);
     this.getDataG = this.getDataG.bind(this);
+  }
+
+  componentDidMount() {
+    if(window.location.href.includes("/detalhes") && window.location.href.includes("/fichaTecnica/")){
+      $('input, textarea').attr('readonly', 'readonly');
+      this.fetchAndSetData(this.state.id);
+    }
+  }
+
+
+  //EXECUTAR FETCH E CARREGAR TODOS OS INPUT COM OS DADOS NECESSÁRIOS DA RESPOSTA DO FECTH
+  async fetchAndSetData(id){
+    //Enviar pedido
+    const response = await fetch(`/api/fichaTecnica/${this.props.id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": sessionStorage.getItem("token")
+      }
+    });
+
+    //Aguardar API
+    await response.json().then(resp => {
+      let status = resp.stat;
+      switch (status) {
+      //   case "Authenticated":
+      //     this.setState(prevState => ({
+      //     ...prevState,
+      //       data: resp.resposta,
+      //       loading: false
+      //     }));
+      //     this.getAndSetImage();
+      //     break;
+      //   default:
+      //     console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
+      }
+     }).catch(resp => {
+       this.setState(prevState => ({
+         ...prevState,
+         error: true,
+         loading: true,
+         alertText: 'Não existe conexão com o servidor.',
+         alertisNotVisible: false,
+         alertColor: 'danger'
+       }))
+    });
+  }
+
+  changeToEdit(){
+    $('input, textarea').removeAttr('readonly');
+    $('#btBar').html('<button class="btn btn-success btn-lg btn-block mb-5" type="button" onClick={this.changeToEdit}>Guardar</button>');
+
   }
 
   //Recebe os dados do filho Pag1
@@ -239,9 +292,18 @@ class Create extends Component {
     return (
       <div className="container Create">
          <form className="py-3" onSubmit={this.handleSubmit}>
-            <div className="py-3 text-center">
-              <h2>Ficha Técnica</h2>
-            </div>
+           <div className="row">
+            <div className="col-md-10 py-3 text-center">
+                <h2>Ficha Técnica</h2>
+              </div>
+              <div className="col-md-2" id="btBar">
+                {window.location.href.includes("/detalhes") && window.location.href.includes("/fichaTecnica/") ? 
+                  <button className="btn btn-success btn-lg btn-block mb-5" type="button" onClick={this.changeToEdit}>Editar</button>
+                :
+                  <span></span> 
+                }
+              </div>
+           </div>
             <div className="accordion" id="accordionExample">
               <div className="card bg-light">
                 <div className="card-header" id="headingOne">
@@ -398,7 +460,11 @@ class Create extends Component {
             </div>
 
             </div>
-            <button className="btn btn-success btn-lg btn-block mb-5" type="submit">Criar</button>
+            {window.location.href.includes("/detalhes") && window.location.href.includes("/fichaTecnica/") ? 
+              <span></span> 
+            :
+              <button className="btn btn-success btn-lg btn-block mb-5" type="submit">Criar</button>
+            }
         </form> 
       </div>    
     );

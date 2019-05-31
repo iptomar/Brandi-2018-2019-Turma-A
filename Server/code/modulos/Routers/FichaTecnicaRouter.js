@@ -95,18 +95,37 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
           poluicaoObservacoesConclusoes: req.body.poluicaoObservacoesConclusoes,
           objGerais: req.body.objGerais,
           tabobjGerais: req.body.tabobjGerais,
-          examesAnalisesInterpResultados:
-            req.body.examesAnalisesInterpResultados,
+          examesAnalisesInterpResultados: req.body.examesAnalisesInterpResultados,
           examesAnalisesObsConclusoes: req.body.examesAnalisesObsConclusoes,
           estadoConservFQMestrutura: req.body.estadoConservFQMestrutura,
           estadoConservFQMsuperficie: req.body.estadoConservFQMsuperficie,
-          estadoConservFQMelementosAcess:
-            req.body.estadoConservFQMelementosAcess,
+          estadoConservFQMelementosAcess: req.body.estadoConservFQMelementosAcess,
           estadoConservBioEstrutura: req.body.estadoConservBioEstrutura,
           estadoConservBioSuperficie: req.body.estadoConservBioSuperficie,
-          estadoConservBioElementosAcess:
-            req.body.estadoConservBioElementosAcess,
+          estadoConservBioElementosAcess: req.body.estadoConservBioElementosAcess,
           estadoConservObsConclusoes: req.body.estadoConservObsConclusoes,
+          //pagina 6 e 7
+          estruturaIntervAnter: req.body.estruturaIntervAnter,
+          superficieIntervAnter: req.body.superficieIntervAnter,
+          elementosAcessoriosIntervAnter: req.body.elementosAcessoriosIntervAnter,
+          observaçoesConclusoesPag6: req.body.observaçoesConclusoesPag6,
+          tipoInterv: req.body.tipoInterv,
+          aspetosEspecificosPag6: req.body.aspetosEspecificosPag6,
+          tipoIntervCR: req.body.tipoIntervCR,
+          EstruturaPropPag6: req.body.EstruturaPropPag6,
+          EstruturaPropRecPag6: req.body.EstruturaPropRecPag6,
+          SuperficiePropPag6: req.body.SuperficiePropPag6,
+          SuperficiePropRecPag6: req.body.SuperficiePropRecPag6,
+          ElementosAcessPropRecPag6: req.body.ElementosAcessPropRecPag6,
+          observaçoesConclusoesPag6: req.body.observaçoesConclusoesPag6,
+          //pagina 8
+          estruturaPag8: req.body.estruturaPag8,
+          recursosEstruturaPag8: req.body.recursosEstruturaPag8,
+          superficiePag8: req.body.superficiePag8,
+          recursosSuperficiePag8: req.body.recursosSuperficiePag8,
+          elementosAcessoriosPag8: req.body.elementosAcessoriosPag8,
+          recursosElementosAcPag8: req.body.recursosElementosAcPag8,
+          observaçoesConclusoesPag8: req.body.observaçoesConclusoesPag8,
           fichaRegistoFK: req.body.fichaRegistoFK
         };
         let resposta_bd = await fichaTecnica.createFichaTecnica(bd, ficha);
@@ -215,18 +234,37 @@ exports.updateFichaTecnicaRoute = async (app, bd) => {
           poluicaoFontesOrigem: req.body.poluicaoFontesOrigem,
           poluicaoResultados: req.body.poluicaoResultados,
           poluicaoObservacoesConclusoes: req.body.poluicaoObservacoesConclusoes,
-          examesAnalisesInterpResultados:
-            req.body.examesAnalisesInterpResultados,
+          examesAnalisesInterpResultados: req.body.examesAnalisesInterpResultados,
           examesAnalisesObsConclusoes: req.body.examesAnalisesObsConclusoes,
           estadoConservFQMestrutura: req.body.estadoConservFQMestrutura,
           estadoConservFQMsuperficie: req.body.estadoConservFQMsuperficie,
-          estadoConservFQMelementosAcess:
-            req.body.estadoConservFQMelementosAcess,
+          estadoConservFQMelementosAcess: req.body.estadoConservFQMelementosAcess,
           estadoConservBioEstrutura: req.body.estadoConservBioEstrutura,
           estadoConservBioSuperficie: req.body.estadoConservBioSuperficie,
-          estadoConservBioElementosAcess:
-            req.body.estadoConservBioElementosAcess,
+          estadoConservBioElementosAcess: req.body.estadoConservBioElementosAcess,
           estadoConservObsConclusoes: req.body.estadoConservObsConclusoes,
+          //pagina 6 e 7
+          estruturaIntervAnter: req.body.estruturaIntervAnter,
+          superficieIntervAnter: req.body.superficieIntervAnter,
+          elementosAcessoriosIntervAnter: req.body.elementosAcessoriosIntervAnter,
+          observaçoesConclusoesPag6: req.body.observaçoesConclusoesPag6,
+          tipoInterv: req.body.tipoInterv,
+          aspetosEspecificosPag6: req.body.aspetosEspecificosPag6,
+          tipoIntervCR: req.body.tipoIntervCR,
+          EstruturaPropPag6: req.body.EstruturaPropPag6,
+          EstruturaPropRecPag6: req.body.EstruturaPropRecPag6,
+          SuperficiePropPag6: req.body.SuperficiePropPag6,
+          SuperficiePropRecPag6: req.body.SuperficiePropRecPag6,
+          ElementosAcessPropRecPag6: req.body.ElementosAcessPropRecPag6,
+          observaçoesConclusoesPag6: req.body.observaçoesConclusoesPag6,
+          //pagina 8
+          estruturaPag8: req.body.estruturaPag8,
+          recursosEstruturaPag8: req.body.recursosEstruturaPag8,
+          superficiePag8: req.body.superficiePag8,
+          recursosSuperficiePag8: req.body.recursosSuperficiePag8,
+          elementosAcessoriosPag8: req.body.elementosAcessoriosPag8,
+          recursosElementosAcPag8: req.body.recursosElementosAcPag8,
+          observaçoesConclusoesPag8: req.body.observaçoesConclusoesPag8,
           fichaRegistoFK: req.body.fichaRegistoFK
         };
         //alterar os campos

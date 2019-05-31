@@ -21,11 +21,13 @@ class Create extends Component {
       alertColor: '',
       id: this.props.id,
       alert: false,
+      data: null,
       files: [],
       filesG: []
     };
     this.getData = this.getData.bind(this);
     this.getDataG = this.getDataG.bind(this);
+    this.fetchAndSetData = this.fetchAndSetData.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +35,18 @@ class Create extends Component {
       $('input, textarea').attr('readonly', 'readonly');
       this.fetchAndSetData(this.state.id);
     }
+  }
+
+   // Controla as alterações nos inputs (Necessidade do React)
+   handleChange(e) {
+    let name = e.target.name;
+    let value = e.target.value;
+    this.setState( prevState => ({
+      data: {
+        ...prevState.data,
+        [name] : value
+      }
+    }));
   }
 
   async fetchAndSetData(id){
@@ -46,73 +60,75 @@ class Create extends Component {
     });
 
     //Aguardar API
-    await response.json().then(resp => {
+    await response.json().then(async resp => {
       let status = resp.stat;
       switch (status) {
        case "Authenticated":
-        let dados = resp.resposta;
-        //console.log(dados);
+        await this.setState({ data: resp.resposta });
          //Inserção dos dados nos campos necessários
+         $('input, textarea').change(function () {
+            this.handleChange();
+         });
          //Pag 1
-        document.getElementById('localizacao').value = dados.localizacao;
-        document.getElementById('proprietario').value = dados.proprietario;
-        document.getElementById('codPostalProprietario').value = dados.codPostalProprietario;
-        document.getElementById('emailProprietario').value = dados.emailProprietario;
-        document.getElementById('contactoProprietario').value = dados.contactoProprietario;
-        document.getElementById('donoObra').value = dados.donoObra;
-        document.getElementById('codPostalDonoObra').value = dados.codPostalDonoObra;
-        document.getElementById('contactoDonoObra').value = dados.contactoDonoObra;
-        document.getElementById('mecenas').value = dados.mecenas;
-        document.getElementById('codPostalMecenas').value = dados.codPostalMecenas;
-        document.getElementById('contactoMecenas').value = dados.contactoMecenas;
+        document.getElementById('localizacao').value = this.state.data.localizacao;
+        document.getElementById('proprietario').value = this.state.data.proprietario;
+        document.getElementById('codPostalProprietario').value = this.state.data.codPostalProprietario;
+        document.getElementById('emailProprietario').value = this.state.data.emailProprietario;
+        document.getElementById('contactoProprietario').value = this.state.data.contactoProprietario;
+        document.getElementById('donoObra').value = this.state.data.donoObra;
+        document.getElementById('codPostalDonoObra').value = this.state.data.codPostalDonoObra;
+        document.getElementById('contactoDonoObra').value = this.state.data.contactoDonoObra;
+        document.getElementById('mecenas').value = this.state.data.mecenas;
+        document.getElementById('codPostalMecenas').value = this.state.data.codPostalMecenas;
+        document.getElementById('contactoMecenas').value = this.state.data.contactoMecenas;
         //Pag 2
-        if(!dados.bemIntegradoEmConjunto){ document.getElementById('bemIntegradoSim').parentNode.parentNode.parentNode.style.display = "none";
+        if(!this.state.data.bemIntegradoEmConjunto){ document.getElementById('bemIntegradoSim').parentNode.parentNode.parentNode.style.display = "none";
         }else{ document.getElementById('bemIntegradoNão').parentNode.parentNode.parentNode.style.display = "none"; }
-        document.getElementById('tipoConjunto').value = dados.tipoBensConjunto;
-        document.getElementById('elementosConst').value = dados.elemConstConj;
-        document.getElementById('elementosAcess').value = dados.materiasElementosAcessorios;
-        document.getElementById('assinaturasAutoria').value = dados.marcasInscricoesAssinaturas;
-        document.getElementById('inscricoesMontagem').value = dados.marcasInscricoesMontagem;
-        document.getElementById('inscricoesConstrucao').value = dados.marcasInscricoesConstrucao;
-        document.getElementById('classPatrimonial').value = dados.classPatrimonial;
+        document.getElementById('tipoConjunto').value = this.state.data.tipoBensConjunto;
+        document.getElementById('elementosConst').value = this.state.data.elemConstConj;
+        document.getElementById('elementosAcess').value = this.state.data.materiasElementosAcessorios;
+        document.getElementById('assinaturasAutoria').value = this.state.data.marcasInscricoesAssinaturas;
+        document.getElementById('inscricoesMontagem').value = this.state.data.marcasInscricoesMontagem;
+        document.getElementById('inscricoesConstrucao').value = this.state.data.marcasInscricoesConstrucao;
+        document.getElementById('classPatrimonial').value = this.state.data.classPatrimonial;
         
-        if(dados.epoca !== "EpocaCoeva"){ document.getElementById('EpocaCoevo').parentNode.parentNode.parentNode.style.display = "none";}
-        if(dados.epoca !== "EpocaTardio"){ document.getElementById('EpocaTardio').parentNode.parentNode.parentNode.style.display = "none";}
-        if(dados.epoca !== "EpocaOutra"){ document.getElementById('EpocaOutra').parentNode.parentNode.parentNode.style.display = "none";}
-        if(dados.epoca !== "EpocaReplica"){ document.getElementById('EpocaReplica').parentNode.parentNode.parentNode.style.display = "none";}
-        if(dados.epoca !== "EpocaReproducao"){ document.getElementById('EpocaReproducao').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data.epoca !== "EpocaCoeva"){ document.getElementById('EpocaCoevo').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data.epoca !== "EpocaTardio"){ document.getElementById('EpocaTardio').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data.epoca !== "EpocaOutra"){ document.getElementById('EpocaOutra').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data.epoca !== "EpocaReplica"){ document.getElementById('EpocaReplica').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data.epoca !== "EpocaReproducao"){ document.getElementById('EpocaReproducao').parentNode.parentNode.parentNode.style.display = "none";}
 
-        if(dados.qualidade !== "Excelente") document.getElementById('QualidadeExcelente').parentNode.parentNode.parentNode.style.display = "none";
-        if(dados.qualidade !== "Muito boa") document.getElementById('QualidadeMuitoBoa').parentNode.parentNode.parentNode.style.display = "none";
-        if(dados.qualidade !== "Boa") document.getElementById('QualidadeBoa').parentNode.parentNode.parentNode.style.display = "none";
-        if(dados.qualidade !== "Regular") document.getElementById('QualidadeRegular').parentNode.parentNode.parentNode.style.display = "none";
+        if(this.state.data.qualidade !== "Excelente") document.getElementById('QualidadeExcelente').parentNode.parentNode.parentNode.style.display = "none";
+        if(this.state.data.qualidade !== "Muito boa") document.getElementById('QualidadeMuitoBoa').parentNode.parentNode.parentNode.style.display = "none";
+        if(this.state.data.qualidade !== "Boa") document.getElementById('QualidadeBoa').parentNode.parentNode.parentNode.style.display = "none";
+        if(this.state.data.qualidade !== "Regular") document.getElementById('QualidadeRegular').parentNode.parentNode.parentNode.style.display = "none";
 
-        document.getElementById('estruturaSuporteMateriais').value = dados.materiaisEstruturaSuporte;
-        document.getElementById('SuperficieMateriais').value = dados.materiaisSuperficies;
-        document.getElementById('estruturaSuporteTecnicas').value = dados.tecnicasEstruturaSuporte;
-        document.getElementById('SuperficieTecnicas').value = dados.tecnicasSuperficie;
+        document.getElementById('estruturaSuporteMateriais').value = this.state.data.materiaisEstruturaSuporte;
+        document.getElementById('SuperficieMateriais').value = this.state.data.materiaisSuperficies;
+        document.getElementById('estruturaSuporteTecnicas').value = this.state.data.tecnicasEstruturaSuporte;
+        document.getElementById('SuperficieTecnicas').value = this.state.data.tecnicasSuperficie;
         //Pag 3
-        document.getElementById('condAmbDescricao').value = dados.condAmbDescricao;
-        document.getElementById('condAmbFrioTemperatura').value = dados.condAmbFrioTemperatura;
-        document.getElementById('condAmbFrioHumidade').value = dados.condAmbFrioHumidade;
-        document.getElementById('condAmbFrioPeriodoInicio').value = dados.condAmbFrioPeriodoInicio;
-        document.getElementById('condAmbFrioPeriodoFim').value = dados.condAmbFrioPeriodoFim;
-        document.getElementById('condAmbQuenteTemperatura').value = dados.condAmbQuenteTemperatura;
-        document.getElementById('condAmbQuenteHumidade').value = dados.condAmbQuenteHumidade;
-        document.getElementById('condAmbQuentePeriodoInicio').value = dados.condAmbQuentePeriodoInicio;
-        document.getElementById('condAmbQuentePeriodoFim').value = dados.condAmbQuentePeriodoFim;
-        document.getElementById('ilumArtTipo').value = dados.ilumArtTipo;
-        document.getElementById('ilumArtValorIluminancia').value = dados.ilumArtValorIluminancia;
-        document.getElementById('ilumArtValurUV').value = dados.ilumArtValurUV;
-        document.getElementById('ilumArtValorRealUV').value = dados.ilumArtValorRealUV;
-        document.getElementById('ilumNatOrigem').value = dados.ilumNatOrigem;
-        document.getElementById('ilumNatValorIluminancia').value = dados.ilumNatValorIluminancia;
-        document.getElementById('ilumNatValorUV').value = dados.ilumNatValorUV;
-        document.getElementById('ilumNatValorRealUV').value = dados.ilumNatValorRealUV;
-        document.getElementById('poluicaoAgentes').value = dados.poluicaoAgentes;
-        document.getElementById('poluicaoFontesOrigem').value = dados.poluicaoFontesOrigem;
-        document.getElementById('poluicaoResultados').value = dados.poluicaoResultados;
-        document.getElementById('poluicaoObservacoesConclusoes').value = dados.poluicaoObservacoesConclusoes;
+        document.getElementById('condAmbDescricao').value = this.state.data.condAmbDescricao;
+        document.getElementById('condAmbFrioTemperatura').value = this.state.data.condAmbFrioTemperatura;
+        document.getElementById('condAmbFrioHumidade').value = this.state.data.condAmbFrioHumidade;
+        document.getElementById('condAmbFrioPeriodoInicio').value = this.state.data.condAmbFrioPeriodoInicio;
+        document.getElementById('condAmbFrioPeriodoFim').value = this.state.data.condAmbFrioPeriodoFim;
+        document.getElementById('condAmbQuenteTemperatura').value = this.state.data.condAmbQuenteTemperatura;
+        document.getElementById('condAmbQuenteHumidade').value = this.state.data.condAmbQuenteHumidade;
+        document.getElementById('condAmbQuentePeriodoInicio').value = this.state.data.condAmbQuentePeriodoInicio;
+        document.getElementById('condAmbQuentePeriodoFim').value = this.state.data.condAmbQuentePeriodoFim;
+        document.getElementById('ilumArtTipo').value = this.state.data.ilumArtTipo;
+        document.getElementById('ilumArtValorIluminancia').value = this.state.data.ilumArtValorIluminancia;
+        document.getElementById('ilumArtValurUV').value = this.state.data.ilumArtValurUV;
+        document.getElementById('ilumArtValorRealUV').value = this.state.data.ilumArtValorRealUV;
+        document.getElementById('ilumNatOrigem').value = this.state.data.ilumNatOrigem;
+        document.getElementById('ilumNatValorIluminancia').value = this.state.data.ilumNatValorIluminancia;
+        document.getElementById('ilumNatValorUV').value = this.state.data.ilumNatValorUV;
+        document.getElementById('ilumNatValorRealUV').value = this.state.data.ilumNatValorRealUV;
+        document.getElementById('poluicaoAgentes').value = this.state.data.poluicaoAgentes;
+        document.getElementById('poluicaoFontesOrigem').value = this.state.data.poluicaoFontesOrigem;
+        document.getElementById('poluicaoResultados').value = this.state.data.poluicaoResultados;
+        document.getElementById('poluicaoObservacoesConclusoes').value = this.state.data.poluicaoObservacoesConclusoes;
         //Pag 4
         //FAZER DESAPARECER OS QUE NÃO SÃO ADEQUADOS (AINDA NÃO FEITO POR CAUSA DO INSERT NÃO TER ESTES DADOS CORRETOS)
     // let objGerais = [];

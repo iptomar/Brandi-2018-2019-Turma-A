@@ -206,7 +206,7 @@ class Create extends Component {
     // }
     // formData.append("tabel10", table);
         //Elimina todos os radiobuttons
-        $('input[type=radio]').remove();
+        $('input[type=radio]').hide();
         break;
         default:
            console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");

@@ -254,29 +254,28 @@ class Create extends Component {
     let formData = new FormData();
     
     //Pag 1
-    formData.append("localizacao", document.getElementById('localizacao').value);
-    formData.append("proprietario",  document.getElementById('proprietario').value);
-    formData.append("codPostalProprietario",  document.getElementById('codPostalProprietario').value);
-    formData.append("emailProprietario",  document.getElementById('emailProprietario').value);
-    formData.append("contactoProprietario",  document.getElementById('contactoProprietario').value);
-    formData.append("donoObra",  document.getElementById('donoObra').value);
-    formData.append("codPostalDonoObra",  document.getElementById('codPostalDonoObra').value);
-    formData.append("contactoDonoObra",  document.getElementById('contactoDonoObra').value);
-    formData.append("mecenas",  document.getElementById('mecenas').value);
-    formData.append("codPostalMecenas",  document.getElementById('codPostalMecenas').value);
-    formData.append("contactoMecenas",  document.getElementById('contactoMecenas').value);
-    formData.append("files", this.state.files);
+    formData.append("localizacao", this.state.data.localizacao);
+    formData.append("proprietario",  this.state.data.proprietario);
+    formData.append("codPostalProprietario",  this.state.data.codPostalProprietario);
+    formData.append("emailProprietario",  this.state.data.emailProprietario);
+    formData.append("contactoProprietario",  this.state.data.contactoProprietario);
+    formData.append("donoObra",  this.state.data.donoObra);
+    formData.append("codPostalDonoObra",  this.state.data.codPostalDonoObra);
+    formData.append("contactoDonoObra",  this.state.data.contactoDonoObra);
+    formData.append("mecenas",  this.state.data.mecenas);
+    formData.append("codPostalMecenas",  this.state.data.codPostalMecenas);
+    formData.append("contactoMecenas",  this.state.data.contactoMecenas);
     //Pag 2
       //Verificações de radiobutton
     if(document.getElementById('bemIntegradoSim').checked) formData.append("bemIntegradoEmConjunto", true);
     else formData.append("bemIntegradoEmConjunto", false);
-    formData.append("tipoBensConjunto",  document.getElementById('tipoConjunto').value);
-    formData.append("elemConstConj",  document.getElementById('elementosConst').value);
-    formData.append("materiasElementosAcessorios",  document.getElementById('elementosAcess').value);
-    formData.append("marcasInscricoesAssinaturas",  document.getElementById('assinaturasAutoria').value);
-    formData.append("marcasInscricoesMontagem",  document.getElementById('inscricoesMontagem').value);
-    formData.append("marcasInscricoesConstrucao",  document.getElementById('inscricoesConstrucao').value);
-    formData.append("classPatrimonial",  document.getElementById('classPatrimonial').value);
+    formData.append("tipoBensConjunto",  this.state.data.tipoConjunto);
+    formData.append("elemConstConj",  this.state.data.elementosConst);
+    formData.append("materiasElementosAcessorios",  this.state.data.elementosAcess);
+    formData.append("marcasInscricoesAssinaturas",  this.state.data.assinaturasAutoria);
+    formData.append("marcasInscricoesMontagem",  this.state.data.inscricoesMontagem);
+    formData.append("marcasInscricoesConstrucao",  this.state.data.inscricoesConstrucao);
+    formData.append("classPatrimonial",  this.state.data.classPatrimonial);
     if(document.getElementById('EpocaCoevo').checked) formData.append("epoca", document.getElementById('EpocaCoevo').value);
     else if(document.getElementById('EpocaTardio').checked) formData.append("epoca", document.getElementById('EpocaTardio').value);
     else if(document.getElementById('EpocaOutra').checked) formData.append("epoca", document.getElementById('EpocaOutra').value);

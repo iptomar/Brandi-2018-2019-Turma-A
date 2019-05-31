@@ -177,11 +177,22 @@ class Create extends Component {
     formData.append("tipoBiblio", document.getElementById('tipoBiblio').value);
     formData.append("localBiblio", document.getElementById('localBiblio').value);
     formData.append("cotaBiblio", document.getElementById('cotaBiblio').value);
-    let tabela = [];
-    for(let j = 0 ; j < document.getElementById("tabela").children[1].childElementCount; j++){
-        let cont = document.getElementById("tabela").children[1].children[j];
-        tabela.push({tipoRef: cont.children[0].children[0].value, lap: cont.children[1].children[0].value, objEsp: cont.children[2].children[0].value, reslt: cont.children[3].children[0].value, data: cont.children[5].children[0].value });
+    formData.append("atledpOutras", document.getElementById('atledpOutras').value);
+    formData.append("tipoOutras", document.getElementById('tipoOutras').value);
+    formData.append("localOutras", document.getElementById('localOutras').value);
+    formData.append("cotaOutras", document.getElementById('cotaOutras').value);
+    let table = [];
+    for(let j = 0 ; j < document.getElementById("table").children[1].childElementCount; j++){
+        let cont = document.getElementById("table").children[1].children[j];
+        table.push(
+          {
+            constEq: cont.children[0].children[0].value,
+            funcDes: cont.children[1].children[0].value,
+            habPro: cont.children[2].children[0].value
+          }
+        );
     }
+    formData.append("tabel10", table);
 
     
     //Final

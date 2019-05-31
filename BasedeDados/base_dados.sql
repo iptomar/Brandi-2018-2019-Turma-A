@@ -197,9 +197,9 @@ CREATE TABLE tbl_fichasTecnicas
     poluicaoFontesOrigem VARCHAR(255),
     poluicaoResultados VARCHAR(255),
     poluicaoObservacoesConclusoes VARCHAR(255),
-    estruturaIntervAnter VARCHAR(255),
-	superficieIntervAnter VARCHAR(255),
-	elementosAcessoriosIntervAnter VARCHAR(255),
+    -- estruturaIntervAnter VARCHAR(255),
+	-- superficieIntervAnter VARCHAR(255),
+	-- elementosAcessoriosIntervAnter VARCHAR(255),
     -- campos pagina 4, falta parte de objetivos gerais 
     examesAnalisesInterpResultados VARCHAR(255),
     examesAnalisesObsConclusoes VARCHAR(255),
@@ -284,7 +284,8 @@ CREATE TABLE tbl_fichasTecnicas
     observaçoesConclusoesPag8 VARCHAR(255),
 	fichaRegistoFK INT NOT NULL UNIQUE,
     PRIMARY KEY(fichaTecnicaID),
-	FOREIGN KEY(fichaRegistoFK) REFERENCES tbl_fichaRegistoIdentificacao(fichaRegistoID)
+	FOREIGN KEY(fichaRegistoFK)
+    REFERENCES tbl_fichaRegistoIdentificacao(fichaRegistoID)
 );
 
 DROP TABLE IF EXISTS tbl_documentacaoFotografica;

@@ -35,8 +35,6 @@ class Create extends Component {
     }
   }
 
-
-  //EXECUTAR FETCH E CARREGAR TODOS OS INPUT COM OS DADOS NECESSÁRIOS DA RESPOSTA DO FECTH
   async fetchAndSetData(id){
     //Enviar pedido
     const response = await fetch(`/api/fichaTecnica/${this.props.id}`, {
@@ -77,18 +75,27 @@ class Create extends Component {
         document.getElementById('inscricoesMontagem').value = dados.marcasInscricoesMontagem;
         document.getElementById('inscricoesConstrucao').value = dados.marcasInscricoesConstrucao;
         document.getElementById('classPatrimonial').value = dados.classPatrimonial;
-        //FAZER DESAPARECER OS QUE NÃO SÃO ADEQUADOS (AINDA NÃO FEITO POR CAUSA DO INSERT NÃO TER ESTES DADOS CORRETOS)
-    // if(document.getElementById('EpocaCoevo').checked) formData.append("epoca", document.getElementById('EpocaCoevo').value);
-    // else if(document.getElementById('EpocaTardio').checked) formData.append("epoca", document.getElementById('EpocaTardio').value);
-    // else if(document.getElementById('EpocaOutra').checked) formData.append("epoca", document.getElementById('EpocaOutra').value);
-    // else if(document.getElementById('EpocaReplica').checked) formData.append("epoca", document.getElementById('EpocaReplica').value);
-    // else if(document.getElementById('EpocaReproducao').checked) formData.append("epoca", document.getElementById('EpocaReproducao').value);
-    // else formData.append("epoca", document.getElementById('EpocaFalsificacao').value);
-    // if(document.getElementById('QualidadeExcelente').checked) formData.append("qualidade", document.getElementById('QualidadeExcelente').value);
-    // else if(document.getElementById('QualidadeMuitoBoa').checked) formData.append("qualidade", document.getElementById('QualidadeMuitoBoa').value);
-    // else  if(document.getElementById('QualidadeBoa').checked) formData.append("qualidade", document.getElementById('QualidadeBoa').value);
-    // else if(document.getElementById('QualidadeRegular').checked) formData.append("qualidade", document.getElementById('QualidadeRegular').value);
-    // else formData.append("qualidade", document.getElementById('QualidadeFraca').value);
+        if(dados.epoca != "EpocaCoeva"){ document.getElementById('EpocaCoevo').parentNode.parentNode.parentNode.remove();}
+        if(dados.epoca != "EpocaTardio"){ document.getElementById('EpocaTardio').parentNode.parentNode.parentNode.remove();}
+        if(dados.epoca != "EpocaOutra"){ document.getElementById('EpocaOutra').parentNode.parentNode.parentNode.remove();}
+        if(dados.epoca != "EpocaReplica"){ document.getElementById('EpocaReplica').parentNode.parentNode.parentNode.remove();}
+        if(dados.epoca != "EpocaReproducao"){ document.getElementById('EpocaReproducao').parentNode.parentNode.parentNode.remove();}
+        if(dados.epoca != "EpocaFalsificacao"){ document.getElementById('EpocaFalsificacao').parentNode.parentNode.parentNode.remove();}
+ // if(document.getElementById('EpocaTardio').checked) formData.append("epoca", document.getElementById('EpocaTardio').value);
+          // else if(document.getElementById('EpocaOutra').checked) formData.append("epoca", document.getElementById('EpocaOutra').value);
+          // else if(document.getElementById('EpocaReplica').checked) formData.append("epoca", document.getElementById('EpocaReplica').value);
+          // else if(document.getElementById('EpocaReproducao').checked) formData.append("epoca", document.getElementById('EpocaReproducao').value);
+          // else formData.append("epoca", document.getElementById('EpocaFalsificacao').value);
+
+
+          
+          // if(document.getElementById('QualidadeExcelente').checked) formData.append("qualidade", document.getElementById('QualidadeExcelente').value);
+          // else if(document.getElementById('QualidadeMuitoBoa').checked) formData.append("qualidade", document.getElementById('QualidadeMuitoBoa').value);
+          // else  if(document.getElementById('QualidadeBoa').checked) formData.append("qualidade", document.getElementById('QualidadeBoa').value);
+          // else if(document.getElementById('QualidadeRegular').checked) formData.append("qualidade", document.getElementById('QualidadeRegular').value);
+          // else formData.append("qualidade", document.getElementById('QualidadeFraca').value);
+
+
         document.getElementById('estruturaSuporteMateriais').value = dados.materiaisEstruturaSuporte;
         document.getElementById('SuperficieMateriais').value = dados.materiaisSuperficies;
         document.getElementById('estruturaSuporteTecnicas').value = dados.tecnicasEstruturaSuporte;

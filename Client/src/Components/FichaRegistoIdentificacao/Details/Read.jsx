@@ -77,6 +77,7 @@ class Read extends Component {
   }
 
   render() {
+    let getThis = this;
     if (sessionStorage.getItem("token") == null) {
       window.location = "/";
     } else {
@@ -318,6 +319,21 @@ class Read extends Component {
                 </div>
               </div>
             </div>
+            <div>
+                <h6>Fichas Técnicas Associadas</h6>
+                <p>A Procurar...</p>
+                <div>
+                <table class="table">
+                  <tbody>
+                    {/* {getThis.state.data.ft.forEach(element => {
+                      <tr>
+                        <th></th>
+                      </tr>
+                    })} */}
+                  </tbody>
+              </table>
+                </div>
+              </div>
           </div>
         );
       } else {

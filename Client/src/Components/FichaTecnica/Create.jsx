@@ -51,7 +51,7 @@ class Create extends Component {
       switch (status) {
        case "Authenticated":
         let dados = resp.resposta;
-        console.log(dados);
+        //console.log(dados);
          //Inserção dos dados nos campos necessários
          //Pag 1
         document.getElementById('localizacao').value = dados.localizacao;
@@ -75,26 +75,17 @@ class Create extends Component {
         document.getElementById('inscricoesMontagem').value = dados.marcasInscricoesMontagem;
         document.getElementById('inscricoesConstrucao').value = dados.marcasInscricoesConstrucao;
         document.getElementById('classPatrimonial').value = dados.classPatrimonial;
-        if(dados.epoca != "EpocaCoeva"){ document.getElementById('EpocaCoevo').parentNode.parentNode.parentNode.remove();}
-        if(dados.epoca != "EpocaTardio"){ document.getElementById('EpocaTardio').parentNode.parentNode.parentNode.remove();}
-        if(dados.epoca != "EpocaOutra"){ document.getElementById('EpocaOutra').parentNode.parentNode.parentNode.remove();}
-        if(dados.epoca != "EpocaReplica"){ document.getElementById('EpocaReplica').parentNode.parentNode.parentNode.remove();}
-        if(dados.epoca != "EpocaReproducao"){ document.getElementById('EpocaReproducao').parentNode.parentNode.parentNode.remove();}
-        if(dados.epoca != "EpocaFalsificacao"){ document.getElementById('EpocaFalsificacao').parentNode.parentNode.parentNode.remove();}
- // if(document.getElementById('EpocaTardio').checked) formData.append("epoca", document.getElementById('EpocaTardio').value);
-          // else if(document.getElementById('EpocaOutra').checked) formData.append("epoca", document.getElementById('EpocaOutra').value);
-          // else if(document.getElementById('EpocaReplica').checked) formData.append("epoca", document.getElementById('EpocaReplica').value);
-          // else if(document.getElementById('EpocaReproducao').checked) formData.append("epoca", document.getElementById('EpocaReproducao').value);
-          // else formData.append("epoca", document.getElementById('EpocaFalsificacao').value);
+        
+        if(dados.epoca !== "EpocaCoeva"){ document.getElementById('EpocaCoevo').parentNode.parentNode.parentNode.remove();}
+        if(dados.epoca !== "EpocaTardio"){ document.getElementById('EpocaTardio').parentNode.parentNode.parentNode.remove();}
+        if(dados.epoca !== "EpocaOutra"){ document.getElementById('EpocaOutra').parentNode.parentNode.parentNode.remove();}
+        if(dados.epoca !== "EpocaReplica"){ document.getElementById('EpocaReplica').parentNode.parentNode.parentNode.remove();}
+        if(dados.epoca !== "EpocaReproducao"){ document.getElementById('EpocaReproducao').parentNode.parentNode.parentNode.remove();}
 
-
-          
-          // if(document.getElementById('QualidadeExcelente').checked) formData.append("qualidade", document.getElementById('QualidadeExcelente').value);
-          // else if(document.getElementById('QualidadeMuitoBoa').checked) formData.append("qualidade", document.getElementById('QualidadeMuitoBoa').value);
-          // else  if(document.getElementById('QualidadeBoa').checked) formData.append("qualidade", document.getElementById('QualidadeBoa').value);
-          // else if(document.getElementById('QualidadeRegular').checked) formData.append("qualidade", document.getElementById('QualidadeRegular').value);
-          // else formData.append("qualidade", document.getElementById('QualidadeFraca').value);
-
+        if(dados.qualidade !== "Excelente") document.getElementById('QualidadeExcelente').parentNode.parentNode.parentNode.remove();
+        if(dados.qualidade !== "Muito boa") document.getElementById('QualidadeMuitoBoa').parentNode.parentNode.parentNode.remove();
+        if(dados.qualidade !== "Boa") document.getElementById('QualidadeBoa').parentNode.parentNode.parentNode.remove();
+        if(dados.qualidade !== "Regular") document.getElementById('QualidadeRegular').parentNode.parentNode.parentNode.remove();
 
         document.getElementById('estruturaSuporteMateriais').value = dados.materiaisEstruturaSuporte;
         document.getElementById('SuperficieMateriais').value = dados.materiaisSuperficies;

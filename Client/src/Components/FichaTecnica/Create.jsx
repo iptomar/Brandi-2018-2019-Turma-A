@@ -21,11 +21,13 @@ class Create extends Component {
       alertColor: '',
       id: this.props.id,
       alert: false,
+      data: null,
       files: [],
       filesG: []
     };
     this.getData = this.getData.bind(this);
     this.getDataG = this.getDataG.bind(this);
+    this.fetchAndSetData = this.fetchAndSetData.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +35,18 @@ class Create extends Component {
       $('input, textarea').attr('readonly', 'readonly');
       this.fetchAndSetData(this.state.id);
     }
+  }
+
+   // Controla as alterações nos inputs (Necessidade do React)
+   handleChange(e) {
+    let name = e.target.name;
+    let value = e.target.value;
+    this.setState( prevState => ({
+      data: {
+        ...prevState.data,
+        [name] : value
+      }
+    }));
   }
 
   async fetchAndSetData(id){
@@ -46,73 +60,74 @@ class Create extends Component {
     });
 
     //Aguardar API
-    await response.json().then(resp => {
+    await response.json().then(async resp => {
       let status = resp.stat;
       switch (status) {
        case "Authenticated":
-        let dados = resp.resposta;
-        //console.log(dados);
+        await this.setState({ data: resp.resposta });
          //Inserção dos dados nos campos necessários
+         document.querySelectorAll("input").onchange = 'this.handleChange()';
+         document.querySelectorAll("textarea").onchange = 'this.handleChange()';
          //Pag 1
-        document.getElementById('localizacao').value = dados.localizacao;
-        document.getElementById('proprietario').value = dados.proprietario;
-        document.getElementById('codPostalProprietario').value = dados.codPostalProprietario;
-        document.getElementById('emailProprietario').value = dados.emailProprietario;
-        document.getElementById('contactoProprietario').value = dados.contactoProprietario;
-        document.getElementById('donoObra').value = dados.donoObra;
-        document.getElementById('codPostalDonoObra').value = dados.codPostalDonoObra;
-        document.getElementById('contactoDonoObra').value = dados.contactoDonoObra;
-        document.getElementById('mecenas').value = dados.mecenas;
-        document.getElementById('codPostalMecenas').value = dados.codPostalMecenas;
-        document.getElementById('contactoMecenas').value = dados.contactoMecenas;
+        document.getElementById('localizacao').value = this.state.data.localizacao;
+        document.getElementById('proprietario').value = this.state.data.proprietario;
+        document.getElementById('codPostalProprietario').value = this.state.data.codPostalProprietario;
+        document.getElementById('emailProprietario').value = this.state.data.emailProprietario;
+        document.getElementById('contactoProprietario').value = this.state.data.contactoProprietario;
+        document.getElementById('donoObra').value = this.state.data.donoObra;
+        document.getElementById('codPostalDonoObra').value = this.state.data.codPostalDonoObra;
+        document.getElementById('contactoDonoObra').value = this.state.data.contactoDonoObra;
+        document.getElementById('mecenas').value = this.state.data.mecenas;
+        document.getElementById('codPostalMecenas').value = this.state.data.codPostalMecenas;
+        document.getElementById('contactoMecenas').value = this.state.data.contactoMecenas;
         //Pag 2
-        if(!dados.bemIntegradoEmConjunto){ document.getElementById('bemIntegradoSim').parentNode.parentNode.parentNode.style.display = "none";
+        if(!this.state.data.bemIntegradoEmConjunto){ document.getElementById('bemIntegradoSim').parentNode.parentNode.parentNode.style.display = "none";
         }else{ document.getElementById('bemIntegradoNão').parentNode.parentNode.parentNode.style.display = "none"; }
-        document.getElementById('tipoConjunto').value = dados.tipoBensConjunto;
-        document.getElementById('elementosConst').value = dados.elemConstConj;
-        document.getElementById('elementosAcess').value = dados.materiasElementosAcessorios;
-        document.getElementById('assinaturasAutoria').value = dados.marcasInscricoesAssinaturas;
-        document.getElementById('inscricoesMontagem').value = dados.marcasInscricoesMontagem;
-        document.getElementById('inscricoesConstrucao').value = dados.marcasInscricoesConstrucao;
-        document.getElementById('classPatrimonial').value = dados.classPatrimonial;
+        document.getElementById('tipoConjunto').value = this.state.data.tipoBensConjunto;
+        document.getElementById('elementosConst').value = this.state.data.elemConstConj;
+        document.getElementById('elementosAcess').value = this.state.data.materiasElementosAcessorios;
+        document.getElementById('assinaturasAutoria').value = this.state.data.marcasInscricoesAssinaturas;
+        document.getElementById('inscricoesMontagem').value = this.state.data.marcasInscricoesMontagem;
+        document.getElementById('inscricoesConstrucao').value = this.state.data.marcasInscricoesConstrucao;
+        document.getElementById('classPatrimonial').value = this.state.data.classPatrimonial;
         
-        if(dados.epoca !== "EpocaCoeva"){ document.getElementById('EpocaCoevo').parentNode.parentNode.parentNode.style.display = "none";}
-        if(dados.epoca !== "EpocaTardio"){ document.getElementById('EpocaTardio').parentNode.parentNode.parentNode.style.display = "none";}
-        if(dados.epoca !== "EpocaOutra"){ document.getElementById('EpocaOutra').parentNode.parentNode.parentNode.style.display = "none";}
-        if(dados.epoca !== "EpocaReplica"){ document.getElementById('EpocaReplica').parentNode.parentNode.parentNode.style.display = "none";}
-        if(dados.epoca !== "EpocaReproducao"){ document.getElementById('EpocaReproducao').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data.epoca !== "EpocaCoeva"){ document.getElementById('EpocaCoevo').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data.epoca !== "EpocaTardio"){ document.getElementById('EpocaTardio').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data.epoca !== "EpocaOutra"){ document.getElementById('EpocaOutra').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data.epoca !== "EpocaReplica"){ document.getElementById('EpocaReplica').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data.epoca !== "EpocaReproducao"){ document.getElementById('EpocaReproducao').parentNode.parentNode.parentNode.style.display = "none";}
 
-        if(dados.qualidade !== "Excelente") document.getElementById('QualidadeExcelente').parentNode.parentNode.parentNode.style.display = "none";
-        if(dados.qualidade !== "Muito boa") document.getElementById('QualidadeMuitoBoa').parentNode.parentNode.parentNode.style.display = "none";
-        if(dados.qualidade !== "Boa") document.getElementById('QualidadeBoa').parentNode.parentNode.parentNode.style.display = "none";
-        if(dados.qualidade !== "Regular") document.getElementById('QualidadeRegular').parentNode.parentNode.parentNode.style.display = "none";
+        if(this.state.data.qualidade !== "Excelente") document.getElementById('QualidadeExcelente').parentNode.parentNode.parentNode.style.display = "none";
+        if(this.state.data.qualidade !== "Muito boa") document.getElementById('QualidadeMuitoBoa').parentNode.parentNode.parentNode.style.display = "none";
+        if(this.state.data.qualidade !== "Boa") document.getElementById('QualidadeBoa').parentNode.parentNode.parentNode.style.display = "none";
+        if(this.state.data.qualidade !== "Regular") document.getElementById('QualidadeRegular').parentNode.parentNode.parentNode.style.display = "none";
 
-        document.getElementById('estruturaSuporteMateriais').value = dados.materiaisEstruturaSuporte;
-        document.getElementById('SuperficieMateriais').value = dados.materiaisSuperficies;
-        document.getElementById('estruturaSuporteTecnicas').value = dados.tecnicasEstruturaSuporte;
-        document.getElementById('SuperficieTecnicas').value = dados.tecnicasSuperficie;
+        document.getElementById('estruturaSuporteMateriais').value = this.state.data.materiaisEstruturaSuporte;
+        document.getElementById('SuperficieMateriais').value = this.state.data.materiaisSuperficies;
+        document.getElementById('estruturaSuporteTecnicas').value = this.state.data.tecnicasEstruturaSuporte;
+        document.getElementById('SuperficieTecnicas').value = this.state.data.tecnicasSuperficie;
         //Pag 3
-        document.getElementById('condAmbDescricao').value = dados.condAmbDescricao;
-        document.getElementById('condAmbFrioTemperatura').value = dados.condAmbFrioTemperatura;
-        document.getElementById('condAmbFrioHumidade').value = dados.condAmbFrioHumidade;
-        document.getElementById('condAmbFrioPeriodoInicio').value = dados.condAmbFrioPeriodoInicio;
-        document.getElementById('condAmbFrioPeriodoFim').value = dados.condAmbFrioPeriodoFim;
-        document.getElementById('condAmbQuenteTemperatura').value = dados.condAmbQuenteTemperatura;
-        document.getElementById('condAmbQuenteHumidade').value = dados.condAmbQuenteHumidade;
-        document.getElementById('condAmbQuentePeriodoInicio').value = dados.condAmbQuentePeriodoInicio;
-        document.getElementById('condAmbQuentePeriodoFim').value = dados.condAmbQuentePeriodoFim;
-        document.getElementById('ilumArtTipo').value = dados.ilumArtTipo;
-        document.getElementById('ilumArtValorIluminancia').value = dados.ilumArtValorIluminancia;
-        document.getElementById('ilumArtValurUV').value = dados.ilumArtValurUV;
-        document.getElementById('ilumArtValorRealUV').value = dados.ilumArtValorRealUV;
-        document.getElementById('ilumNatOrigem').value = dados.ilumNatOrigem;
-        document.getElementById('ilumNatValorIluminancia').value = dados.ilumNatValorIluminancia;
-        document.getElementById('ilumNatValorUV').value = dados.ilumNatValorUV;
-        document.getElementById('ilumNatValorRealUV').value = dados.ilumNatValorRealUV;
-        document.getElementById('poluicaoAgentes').value = dados.poluicaoAgentes;
-        document.getElementById('poluicaoFontesOrigem').value = dados.poluicaoFontesOrigem;
-        document.getElementById('poluicaoResultados').value = dados.poluicaoResultados;
-        document.getElementById('poluicaoObservacoesConclusoes').value = dados.poluicaoObservacoesConclusoes;
+        document.getElementById('condAmbDescricao').value = this.state.data.condAmbDescricao;
+        document.getElementById('condAmbFrioTemperatura').value = this.state.data.condAmbFrioTemperatura;
+        document.getElementById('condAmbFrioHumidade').value = this.state.data.condAmbFrioHumidade;
+        document.getElementById('condAmbFrioPeriodoInicio').value = this.state.data.condAmbFrioPeriodoInicio;
+        document.getElementById('condAmbFrioPeriodoFim').value = this.state.data.condAmbFrioPeriodoFim;
+        document.getElementById('condAmbQuenteTemperatura').value = this.state.data.condAmbQuenteTemperatura;
+        document.getElementById('condAmbQuenteHumidade').value = this.state.data.condAmbQuenteHumidade;
+        document.getElementById('condAmbQuentePeriodoInicio').value = this.state.data.condAmbQuentePeriodoInicio;
+        document.getElementById('condAmbQuentePeriodoFim').value = this.state.data.condAmbQuentePeriodoFim;
+        document.getElementById('ilumArtTipo').value = this.state.data.ilumArtTipo;
+        document.getElementById('ilumArtValorIluminancia').value = this.state.data.ilumArtValorIluminancia;
+        document.getElementById('ilumArtValurUV').value = this.state.data.ilumArtValurUV;
+        document.getElementById('ilumArtValorRealUV').value = this.state.data.ilumArtValorRealUV;
+        document.getElementById('ilumNatOrigem').value = this.state.data.ilumNatOrigem;
+        document.getElementById('ilumNatValorIluminancia').value = this.state.data.ilumNatValorIluminancia;
+        document.getElementById('ilumNatValorUV').value = this.state.data.ilumNatValorUV;
+        document.getElementById('ilumNatValorRealUV').value = this.state.data.ilumNatValorRealUV;
+        document.getElementById('poluicaoAgentes').value = this.state.data.poluicaoAgentes;
+        document.getElementById('poluicaoFontesOrigem').value = this.state.data.poluicaoFontesOrigem;
+        document.getElementById('poluicaoResultados').value = this.state.data.poluicaoResultados;
+        document.getElementById('poluicaoObservacoesConclusoes').value = this.state.data.poluicaoObservacoesConclusoes;
         //Pag 4
         //FAZER DESAPARECER OS QUE NÃO SÃO ADEQUADOS (AINDA NÃO FEITO POR CAUSA DO INSERT NÃO TER ESTES DADOS CORRETOS)
     // let objGerais = [];
@@ -205,8 +220,6 @@ class Create extends Component {
     //     );
     // }
     // formData.append("tabel10", table);
-        //Elimina todos os radiobuttons
-        $('input[type=radio]').hide();
         break;
         default:
            console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
@@ -225,9 +238,212 @@ class Create extends Component {
 
   changeToEdit(){
     $('input, textarea').removeAttr('readonly');
-    $('#btBar').html('<button class="btn btn-success btn-lg btn-block mb-5" type="button" onClick={this.changeToEdit}>Guardar</button>');
-
+    //$('#btBar').html('<button class="btn btn-success btn-lg btn-block mb-5" type="button">Guardar</button>');
+    const btEditar = document.getElementById('btEditar');
+    btEditar.style.display="none";
+    const btGuardar = document.getElementById('btGuardar');
+    btGuardar.style.display='block';
   }
+
+  submitEdit = async e => {
+    e.preventDefault();
+    //Form
+    let formData = new FormData();
+
+    //Pag 1
+    formData.append("localizacao", this.state.data.localizacao);
+    formData.append("proprietario",  this.state.data.proprietario);
+    formData.append("codPostalProprietario",  this.state.data.codPostalProprietario);
+    formData.append("emailProprietario",  this.state.data.emailProprietario);
+    formData.append("contactoProprietario",  this.state.data.contactoProprietario);
+    formData.append("donoObra",  this.state.data.donoObra);
+    formData.append("codPostalDonoObra",  this.state.data.codPostalDonoObra);
+    formData.append("contactoDonoObra",  this.state.data.contactoDonoObra);
+    formData.append("mecenas",  this.state.data.mecenas);
+    formData.append("codPostalMecenas",  this.state.data.codPostalMecenas);
+    formData.append("contactoMecenas",  this.state.data.contactoMecenas);
+    //Pag 2
+      //Verificações de radiobutton
+    if(document.getElementById('bemIntegradoSim').checked) formData.append("bemIntegradoEmConjunto", true);
+    else formData.append("bemIntegradoEmConjunto", false);
+    formData.append("tipoBensConjunto",  this.state.data.tipoBensConjunto);
+    formData.append("elemConstConj",  this.state.data.elemConstConj);
+    formData.append("materiasElementosAcessorios",  this.state.data.materiasElementosAcessorios);
+    formData.append("marcasInscricoesAssinaturas",  this.state.data.marcasInscricoesAssinaturas);
+    formData.append("marcasInscricoesMontagem",  this.state.data.marcasInscricoesMontagem);
+    formData.append("marcasInscricoesConstrucao",  this.state.data.marcasInscricoesConstrucao);
+    formData.append("classPatrimonial",  this.state.data.classPatrimonial);
+    if(document.getElementById('EpocaCoevo').checked) formData.append("epoca", document.getElementById('EpocaCoevo').value);
+    else if(document.getElementById('EpocaTardio').checked) formData.append("epoca", document.getElementById('EpocaTardio').value);
+    else if(document.getElementById('EpocaOutra').checked) formData.append("epoca", document.getElementById('EpocaOutra').value);
+    else if(document.getElementById('EpocaReplica').checked) formData.append("epoca", document.getElementById('EpocaReplica').value);
+    else if(document.getElementById('EpocaReproducao').checked) formData.append("epoca", document.getElementById('EpocaReproducao').value);
+    else formData.append("epoca", document.getElementById('EpocaFalsificacao').value);
+    if(document.getElementById('QualidadeExcelente').checked) formData.append("qualidade", document.getElementById('QualidadeExcelente').value);
+    else if(document.getElementById('QualidadeMuitoBoa').checked) formData.append("qualidade", document.getElementById('QualidadeMuitoBoa').value);
+    else  if(document.getElementById('QualidadeBoa').checked) formData.append("qualidade", document.getElementById('QualidadeBoa').value);
+    else if(document.getElementById('QualidadeRegular').checked) formData.append("qualidade", document.getElementById('QualidadeRegular').value);
+    else formData.append("qualidade", document.getElementById('QualidadeFraca').value);
+    formData.append("materiaisEstruturaSuporte",  this.state.data.materiaisEstruturaSuporte);
+    formData.append("materiaisSuperficies", this.state.data.materiaisSuperficies);
+    formData.append("tecnicasEstruturaSuporte",  this.state.data.tecnicasEstruturaSuporte);
+    formData.append("tecnicasSuperficie",  this.state.data.tecnicasSuperficie);
+    //Pag 3
+    formData.append("condAmbDescricao",  this.state.data.condAmbDescricao);
+    formData.append("condAmbFrioTemperatura",  this.state.data.condAmbFrioTemperatura);
+    formData.append("condAmbFrioHumidade",  this.state.data.condAmbFrioHumidade);
+    formData.append("condAmbFrioPeriodoInicio",  this.state.data.condAmbFrioPeriodoInicio);
+    formData.append("condAmbFrioPeriodoFim",  this.state.data.condAmbFrioPeriodoFim);
+    formData.append("condAmbQuenteTemperatura",  this.state.data.condAmbQuenteTemperatura);
+    formData.append("condAmbQuenteHumidade",   this.state.data.condAmbQuenteHumidade);
+    formData.append("condAmbQuentePeriodoInicio",  this.state.data.condAmbQuentePeriodoInicio);
+    formData.append("condAmbQuentePeriodoFim",  this.state.data.condAmbQuentePeriodoFim);
+    formData.append("ilumArtTipo",  this.state.data.ilumArtTipo);
+    formData.append("ilumArtValorIluminancia",   this.state.data.ilumArtValorIluminancia);
+    formData.append("ilumArtValurUV",  this.state.data.ilumArtValurUV);
+    formData.append("ilumArtValorRealUV",  this.state.data.ilumArtValorRealUV);
+    formData.append("ilumNatOrigem",  this.state.data.ilumNatOrigem);
+
+    formData.append("ilumNatValorIluminancia",  this.state.data.ilumNatValorIluminancia);
+    formData.append("ilumNatValorUV",  this.state.data.ilumNatValorUV);
+    formData.append("ilumNatValorRealUV",  this.state.data.ilumNatValorUV);
+    formData.append("poluicaoAgentes",  this.state.data.poluicaoAgentes);
+    formData.append("poluicaoFontesOrigem",  this.state.data.poluicaoFontesOrigem);
+    formData.append("poluicaoResultados",  this.state.data.poluicaoResultados);
+    formData.append("poluicaoObservacoesConclusoes",  this.state.data.poluicaoObservacoesConclusoes);
+    // //Pag 4
+    // let objGerais = [];
+    // if(document.getElementById("identMateriais").checked) objGerais.push(document.getElementById("identMateriais").value);
+    // if(document.getElementById("identIntervencoes").checked) objGerais.push(document.getElementById("identIntervencoes").value);
+    // if(document.getElementById("caracterizacao").checked) objGerais.push(document.getElementById("caracterizacao").value);
+    // if(document.getElementById("identPatologias").checked) objGerais.push(document.getElementById("identPatologias").value);
+    // if(document.getElementById("datacao").checked) objGerais.push(document.getElementById("datacao").value);
+    // if(document.getElementById("ensaio").checked) objGerais.push(document.getElementById("ensaio").value);
+    // formData.append("objGerais", objGerais);
+    // let tab = [];
+    // for(let i = 0 ; i < document.getElementById("tabela").children[1].childElementCount; i++){
+    //     let content = document.getElementById("tabela").children[1].children[i];
+    //     tab.push({tipoRef: content.children[0].children[0].value, lap: content.children[1].children[0].value, objEsp: content.children[2].children[0].value, reslt: content.children[3].children[0].value, data: content.children[5].children[0].value });
+    // }
+    // formData.append("tabobjGerais", tab);
+    // formData.append("examesAnalisesInterpResultados", document.getElementById('interpretacaoResul').value);
+    // formData.append("examesAnalisesObsConclusoes", document.getElementById('observaConclusoes').value);
+    // //Pag 5
+    // formData.append("estadoConservFQMestrutura", document.getElementById('estruturaPag5').value);
+    // formData.append("estadoConservFQMsuperficie", document.getElementById('superficiePag5').value);
+    // formData.append("estadoConservFQMelementosAcess", document.getElementById('elementosAcessoriosPag5').value);
+    // formData.append("estadoConservBioEstrutura", document.getElementById('estruturaPag5diag').value);
+    // formData.append("estadoConservBioSuperficie", document.getElementById('superficiePag5diag').value);
+    // formData.append("estadoConservBioElementosAcess", document.getElementById('elementosAcessoriosPag5diag').value);
+    // formData.append("estadoConservObsConclusoes", document.getElementById('observaçoesConclusoesPag5').value);
+    // //Pag 6
+    // formData.append("estruturaIntervAnter", document.getElementById('estruturaIntervAnter').value);
+    // formData.append("superficieIntervAnter", document.getElementById('superficieIntervAnter').value);
+    // formData.append("elementosAcessoriosIntervAnter", document.getElementById('elementosAcessoriosIntervAnter').value);
+    // formData.append("observaçoesConclusoesPag6", document.getElementById('observaçoesConclusoesPag6').value);
+    // if(document.getElementById('intervPrevencao').checked) formData.append("tipoInterv", document.getElementById('intervPrevencao').value);
+    // else if(document.getElementById('intervConvercao').checked) formData.append("tipoInterv", document.getElementById('intervConvercao').value);
+    // else formData.append("tipoInterv", document.getElementById('intervRestauro').value);
+    // formData.append("aspetosEspecificosPag6", document.getElementById('aspetosEspecificosPag6').value);
+    // if(document.getElementById('intervPrevencaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervPrevencaoConsRes').value);
+    // else if(document.getElementById('intervConvercaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervConvercaoConsRes').value);
+    // else formData.append("tipoIntervCR", document.getElementById('intervRestauroConsRes').value);
+    // formData.append("EstruturaPropPag6", document.getElementById('EstruturaPropPag6').value);
+    // formData.append("EstruturaPropRecPag6", document.getElementById('EstruturaPropRecPag6').value);
+    // formData.append("SuperficiePropPag6", document.getElementById('SuperficiePropPag6').value);
+    // formData.append("SuperficiePropRecPag6", document.getElementById('SuperficiePropRecPag6').value);
+    // formData.append("ElementosAcessPropRecPag6", document.getElementById('ElementosAcessPropRecPag6').value);
+    // formData.append("observaçoesConclusoesPag6", document.getElementById('observaçoesConclusoesPag6').value);
+    // //Pag 8
+    // formData.append("estruturaPag8", document.getElementById('estruturaPag8').value);
+    // formData.append("recursosEstruturaPag8", document.getElementById('recursosEstruturaPag8').value);
+    // formData.append("superficiePag8", document.getElementById('superficiePag8').value);
+    // formData.append("recursosSuperficiePag8", document.getElementById('recursosSuperficiePag8').value);
+    // formData.append("elementosAcessoriosPag8", document.getElementById('elementosAcessoriosPag8').value);
+    // formData.append("recursosElementosAcPag8", document.getElementById('recursosElementosAcPag8').value);
+    // formData.append("observaçoesConclusoesPag8", document.getElementById('observaçoesConclusoesPag8').value);
+    // //Pag 9
+    // formData.append("relTecInterLCRM", document.getElementById('relTecInterLCRM').value);
+    // formData.append("tipoDesigOrig", document.getElementById('tipoDesigOrig').value);
+    // formData.append("refOrig", document.getElementById('refOrig').value);
+    // formData.append("entidadeOrig", document.getElementById('entidadeOrig').value);
+    // formData.append("tipoDesigDocGraf", document.getElementById('tipoDesigDocGraf').value);
+    // formData.append("refDocGraf", document.getElementById('refDocGraf').value);
+    // formData.append("entidadeDocGraf", document.getElementById('entidadeDocGraf').value);
+    // formData.append("tipoDesigExames", document.getElementById('tipoDesigExames').value);
+    // formData.append("refExames", document.getElementById('refExames').value);
+    // formData.append("entidadeExames", document.getElementById('entidadeExames').value);
+    // //Pag10
+    // formData.append("atledpArqDoc", document.getElementById('atledpArqDoc').value);
+    // formData.append("tipoArqDoc", document.getElementById('tipoArqDoc').value);
+    // formData.append("localArqDoc", document.getElementById('localArqDoc').value);
+    // formData.append("cotaArqDoc", document.getElementById('cotaArqDoc').value);
+    // formData.append("atledpIcon", document.getElementById('atledpIcon').value);
+    // formData.append("tipoIcon", document.getElementById('tipoIcon').value);
+    // formData.append("localIcon", document.getElementById('localIcon').value);
+    // formData.append("cotaIcon", document.getElementById('cotaIcon').value);
+    // formData.append("atledpBiblio", document.getElementById('atledpBiblio').value);
+    // formData.append("tipoBiblio", document.getElementById('tipoBiblio').value);
+    // formData.append("localBiblio", document.getElementById('localBiblio').value);
+    // formData.append("cotaBiblio", document.getElementById('cotaBiblio').value);
+    // formData.append("atledpOutras", document.getElementById('atledpOutras').value);
+    // formData.append("tipoOutras", document.getElementById('tipoOutras').value);
+    // formData.append("localOutras", document.getElementById('localOutras').value);
+    // formData.append("cotaOutras", document.getElementById('cotaOutras').value);
+    // let table = [];
+    // for(let j = 0 ; j < document.getElementById("table").children[1].childElementCount; j++){
+    //     let cont = document.getElementById("table").children[1].children[j];
+    //     table.push(
+    //       {
+    //         constEq: cont.children[0].children[0].value,
+    //         funcDes: cont.children[1].children[0].value,
+    //         habPro: cont.children[2].children[0].value
+    //       }
+    //     );
+    // }
+    // formData.append("tabel10", table);
+
+    
+    //Final
+    //formData.append("fichaRegistoFK", this.state.id);
+    //Enviar pedidos
+    const response = await fetch(`/api/fichaTecnica/${this.props.id}/edit`, {
+      method: "POST",
+      headers: {
+        'x-auth-token': sessionStorage.getItem('token')
+      },
+      body: formData
+      });
+      //Aguardar API
+      await response.json().then(resp => {
+        let status = resp.stat;
+        switch (status) {
+          case "NoPermissions":
+             this.setState({
+               alertisNotVisible: false,
+             });
+             alert("Não tem permissões")
+             break;
+           case "Updated":
+             this.setState({
+               alertisNotVisible: false
+             });
+             alert("fez update");
+             break;
+             case "NotUpdated":
+              this.setState({
+                alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
+                alertisNotVisible: false,
+                alertColor: "danger"
+              });
+              break;
+           default:
+            console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
+       }
+    });
+  };
+
+
 
   //Recebe os dados do filho Pag1
   getData(data) {
@@ -445,10 +661,12 @@ class Create extends Component {
             <div className="col-md-10 py-3 text-center">
                 <h2>Ficha Técnica</h2>
               </div>
-              <div className="col-md-2" id="btBar">
+              <div className="col-md-2" >
                 {window.location.href.includes("/detalhes") && window.location.href.includes("/fichaTecnica/") ? 
-                  <button className="btn btn-success btn-lg btn-block mb-5" type="button" onClick={this.changeToEdit}>Editar</button>
-                :
+                <div>
+                  <button id="btEditar" className="btn btn-success btn-lg btn-block mb-5" type="button" onClick={this.changeToEdit}>Editar</button>
+                  <button id="btGuardar" className="btn btn-success btn-lg btn-block mb-5" type="button" style={{ display: "none" }} onClick={this.submitEdit}>Guardar</button>
+                  </div> :
                   <span></span> 
                 }
               </div>

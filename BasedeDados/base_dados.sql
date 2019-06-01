@@ -282,6 +282,16 @@ CREATE TABLE tbl_fichasTecnicas
     elementosAcessoriosPag8 TEXT,
     recursosElementosAcPag8 TEXT,
     observaçoesConclusoesPag8 TEXT,
+    -- campos pagina 9
+    relTecInterLCRM TEXT,
+    tipoDesigOrig TEXT,
+    refOrig TEXT,
+    entidadeOrig TEXT,
+    tipoDesigDocGraf TEXT,
+    refDocGraf TEXT,
+    entidadeDocGraf TEXT,
+    tipoDesigExames TEXT,
+    entidadeExames TEXT,
 	fichaRegistoFK INT NOT NULL UNIQUE,
     PRIMARY KEY(fichaTecnicaID),
 	FOREIGN KEY(fichaRegistoFK)

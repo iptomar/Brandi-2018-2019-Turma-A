@@ -126,6 +126,16 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
           elementosAcessoriosPag8: req.body.elementosAcessoriosPag8,
           recursosElementosAcPag8: req.body.recursosElementosAcPag8,
           observaçoesConclusoesPag8: req.body.observaçoesConclusoesPag8,
+          //pagina 9
+          relTecInterLCRM: req.body.relTecInterLCRM,
+          tipoDesigOrig: req.body.tipoDesigOrig,
+          refOrig: req.body.refOrig,
+          entidadeOrig: req.body.entidadeOrig,
+          tipoDesigDocGraf: req.body.tipoDesigDocGraf,
+          refDocGraf: req.body.refDocGraf,
+          entidadeDocGraf: req.body.entidadeDocGraf,
+          tipoDesigExames: req.body.tipoDesigExames,
+          entidadeExames: req.body.entidadeExames,
           fichaRegistoFK: req.body.fichaRegistoFK
         };
         let resposta_bd = await fichaTecnica.createFichaTecnica(bd, ficha);
@@ -265,6 +275,16 @@ exports.updateFichaTecnicaRoute = async (app, bd) => {
           elementosAcessoriosPag8: req.body.elementosAcessoriosPag8,
           recursosElementosAcPag8: req.body.recursosElementosAcPag8,
           observaçoesConclusoesPag8: req.body.observaçoesConclusoesPag8,
+          //pagina 9
+          relTecInterLCRM: req.body.relTecInterLCRM,
+          tipoDesigOrig: req.body.tipoDesigOrig,
+          refOrig: req.body.refOrig,
+          entidadeOrig: req.body.entidadeOrig,
+          tipoDesigDocGraf: req.body.tipoDesigDocGraf,
+          refDocGraf: req.body.refDocGraf,
+          entidadeDocGraf: req.body.entidadeDocGraf,
+          tipoDesigExames: req.body.tipoDesigExames,
+          entidadeExames: req.body.entidadeExames,
           fichaRegistoFK: req.body.fichaRegistoFK
         };
         //alterar os campos

@@ -443,7 +443,7 @@ class Create extends Component {
              this.setState({
                alertisNotVisible: false
              });
-             window.location("/fichaRI/"+this.state.id"/detalhes")
+             window.location("/fichaRI/"+this.state.id+"/detalhes");
              break;
              case "NotUpdated":
               this.setState({

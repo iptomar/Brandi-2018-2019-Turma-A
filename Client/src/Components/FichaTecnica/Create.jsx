@@ -544,7 +544,7 @@ class Create extends Component {
     if(document.getElementById("identPatologias").checked) objGerais.push(document.getElementById("identPatologias").value);
     if(document.getElementById("datacao").checked) objGerais.push(document.getElementById("datacao").value);
     if(document.getElementById("ensaio").checked) objGerais.push(document.getElementById("ensaio").value);
-    formData.append("objGerais", objGerais);
+    formData.append("objGerais",JSON.stringify( objGerais));
     let tab = [];
     for(let i = 0 ; i < document.getElementById("tabela").children[1].childElementCount; i++){
         let content = document.getElementById("tabela").children[1].children[i];

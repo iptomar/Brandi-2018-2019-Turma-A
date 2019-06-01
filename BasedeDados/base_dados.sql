@@ -516,17 +516,16 @@ create table tbl_testespagina4objectivosGerais(
     drop table if exists tbl_testespagina4tabelas;
     create table tbl_testespagina4tabelas(
         id int not null AUTO_INCREMENT,
-        tipoReferencia varchar(255),
-        LocalizacaoAreaPonto varchar(255),
-        ObjectivosEspecificos varchar(255),
-        Resultados varchar(1024),
-        TecnicoResponsavelFK int ,
-        DataDePreenchimento date,
+        tipoReferencia TEXT,
+        LocalizacaoAreaPonto TEXT,
+        ObjectivosEspecificos TEXT,
+        Resultados TEXT,
+        DataDePreenchimento DATE,
         fichaTecnicaFK int not null,
         PRIMARY key (id),
-        FOREIGN key (fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID),
-        FOREIGN key (TecnicoResponsavelFK) REFERENCES tbl_tecnicos(tecnicoID)
+        FOREIGN key (fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
     );
+
 
 
 INSERT INTO tbl_roles (role) values("Admin");

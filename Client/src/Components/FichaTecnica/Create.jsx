@@ -550,7 +550,8 @@ class Create extends Component {
         let content = document.getElementById("tabela").children[1].children[i];
         tab.push({tipoRef: content.children[0].children[0].value, lap: content.children[1].children[0].value, objEsp: content.children[2].children[0].value, reslt: content.children[3].children[0].value, data: content.children[5].children[0].value });
     }
-    formData.append("tabobjGerais", tab);
+    //Têm de ser enviado em JSON para a equipa de backend retirar os dados
+    formData.append("tabobjGerais", JSON.stringify(tab));
     formData.append("examesAnalisesInterpResultados", document.getElementById('interpretacaoResul').value);
     formData.append("examesAnalisesObsConclusoes", document.getElementById('observaConclusoes').value);
     //Pag 5
@@ -618,15 +619,19 @@ class Create extends Component {
     //Array a ser colocado os dados da tabela
     let table = [];
     for(let j = 0 ; j < document.getElementById("table").children[1].childElementCount; j++){
+        //Encontra o objeto "pai" da tabela onde se irá retirar os dados
         let cont = document.getElementById("table").children[1].children[j];
+        //Insere um objeto com os dados da tabela no array que irá ser enviado para o backend
         table.push(
           {
             constEq: cont.children[0].children[0].value,
             funcDes: cont.children[1].children[0].value,
             habPro: cont.children[2].children[0].value
           }
+          );
     }
-    formData.append("tabel10", table);
+    //Têm de ser enviado em JSON para a equipa de backend retirar os dados
+    formData.append("tabel10", JSON.stringify(table));
 
     
     //Final

@@ -111,7 +111,7 @@ class Create extends Component {
     formData.append("categorias", document.getElementById("categorias").value);
     formData.append("subCategorias", document.getElementById("subCategorias").value);
 
-    formData.append("tecnicosFK", CB);
+    formData.append("tecnicosFK", JSON.stringify(CB));
 
     //Enviar as imagens
     for (var i = 0; i < this.state.files.length; i++) {

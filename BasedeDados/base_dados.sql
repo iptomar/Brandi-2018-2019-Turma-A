@@ -505,7 +505,7 @@ CREATE TABLE tbl_interessadosFichasTecnicas
 
 -- Adicionei estas tabelas para testes da pagina 4
 Drop table if exists tbl_testespagina4objectivosGerais;
-create table tbl_testespagina4(
+create table tbl_testespagina4objectivosGerais(
     ID int not null AUTO_INCREMENT,
     Objectivo varchar(255) not null,
     fichaTecnicaFK int not null,
@@ -520,7 +520,7 @@ create table tbl_testespagina4(
         LocalizacaoAreaPonto varchar(255),
         ObjectivosEspecificos varchar(255),
         Resultados varchar(1024),
-        TecnicoResponsavelFK int not null,
+        TecnicoResponsavelFK int ,
         DataDePreenchimento date,
         fichaTecnicaFK int not null,
         PRIMARY key (id),

@@ -84,6 +84,7 @@ class Create extends Component {
       return null
     }
 
+    console.log(CB.toString());
     formData.append("designacao", document.getElementById("dObjeto").value);
     formData.append("processoLCRM", document.getElementById("procLCRM").value);
     formData.append("processoCEARC", document.getElementById("procCEARC").value);

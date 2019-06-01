@@ -532,7 +532,7 @@ class Create extends Component {
     let tab = [];
     for(let i = 0 ; i < document.getElementById("tabela").children[1].childElementCount; i++){
         let content = document.getElementById("tabela").children[1].children[i];
-        tab.push(ontent.children[0].children[0].value);
+        tab.push(content.children[0].children[0].value);
         tab.push(content.children[1].children[0].value); 
         tab.push(content.children[2].children[0].value);
         tab.push(content.children[2].children[0].value);

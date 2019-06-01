@@ -74,6 +74,7 @@ class Create extends Component {
 
     let formData = new FormData();
 
+    //Verifica quais são os técnicos selecionados
     let CB = this.verifyCBS();
     if (CB.length === 0) {
       this.setState({
@@ -84,7 +85,6 @@ class Create extends Component {
       return null
     }
 
-    console.log(CB.toString());
     formData.append("designacao", document.getElementById("dObjeto").value);
     formData.append("processoLCRM", document.getElementById("procLCRM").value);
     formData.append("processoCEARC", document.getElementById("procCEARC").value);

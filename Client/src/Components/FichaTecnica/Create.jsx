@@ -455,6 +455,7 @@ class Create extends Component {
     this.setState({ filesG: data });
   }
 
+  //Submeter o form da criação da página
   handleSubmit = async e => {
     e.preventDefault();
     //Form
@@ -532,12 +533,7 @@ class Create extends Component {
     let tab = [];
     for(let i = 0 ; i < document.getElementById("tabela").children[1].childElementCount; i++){
         let content = document.getElementById("tabela").children[1].children[i];
-        tab.push(content.children[0].children[0].value);
-        tab.push(content.children[1].children[0].value); 
-        tab.push(content.children[2].children[0].value);
-        tab.push(content.children[2].children[0].value);
-        tab.push(content.children[3].children[0].value);
-        tab.push(content.children[5].children[0].value);
+        tab.push({tipoRef: content.children[0].children[0].value, lap: content.children[1].children[0].value, objEsp: content.children[2].children[0].value, reslt: content.children[3].children[0].value, data: content.children[5].children[0].value });
     }
     formData.append("tabobjGerais", tab);
     formData.append("examesAnalisesInterpResultados", document.getElementById('interpretacaoResul').value);
@@ -604,12 +600,16 @@ class Create extends Component {
     formData.append("tipoOutras", document.getElementById('tipoOutras').value);
     formData.append("localOutras", document.getElementById('localOutras').value);
     formData.append("cotaOutras", document.getElementById('cotaOutras').value);
+    //Array a ser colocado os dados da tabela
     let table = [];
     for(let j = 0 ; j < document.getElementById("table").children[1].childElementCount; j++){
         let cont = document.getElementById("table").children[1].children[j];
-        table.push(cont.children[0].children[0].value);
-        table.push(cont.children[1].children[0].value);
-        table.push(cont.children[2].children[0].value);
+        table.push(
+          {
+            constEq: cont.children[0].children[0].value,
+            funcDes: cont.children[1].children[0].value,
+            habPro: cont.children[2].children[0].value
+          }
     }
     formData.append("tabel10", table);
 

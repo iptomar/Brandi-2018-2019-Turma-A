@@ -245,8 +245,8 @@ exports.getFichaRegistoIdentificacao = async (bd, id) => {
     }
     //procurar os tecnicos da ficha RegistoIdentificacao
     let resposta_bd4 = await bd.query(
-      "select b.fichaTecnicaID from tbl_fichaRegistoIdentificacao a, tbl_fichasTecnicas b, tbl_registoTecnicos c where a.fichaRegistoID = ? and a.fichaRegistoID=c.fichaRegistoFK",
-      [id]
+      "select b.fichaTecnicaID from tbl_fichaRegistoIdentificacao a, tbl_fichasTecnicas b, tbl_registoTecnicos c where a.fichaRegistoID = ? and a.fichaRegistoID=c.fichaRegistoFK and b.fichaRegistoFK = ?",
+      [id, id]
     );
     //console.log(resposta_bd4);
     //encontrou tecnicos associados a ficha e a ficha e visivel

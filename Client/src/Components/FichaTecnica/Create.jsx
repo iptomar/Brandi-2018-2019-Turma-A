@@ -490,8 +490,8 @@ class Create extends Component {
     formData.append("files", this.state.files);
     //Pag 2
       //Verificações de radiobutton
-    if(document.getElementById('bemIntegradoSim').checked) formData.append("bemIntegradoEmConjunto", true);
-    else formData.append("bemIntegradoEmConjunto", false);
+    if(document.getElementById('bemIntegradoSim').checked) formData.append("bemIntegradoEmConjunto", 1);
+    else formData.append("bemIntegradoEmConjunto", 0);
     formData.append("tipoBensConjunto",  document.getElementById('tipoConjunto').value);
     formData.append("elemConstConj",  document.getElementById('elementosConst').value);
     formData.append("materiasElementosAcessorios",  document.getElementById('elementosAcess').value);

@@ -203,8 +203,8 @@ exports.createFichaTecnica = async (bd, dados) => {
         dados.refDocGraf,
         dados.entidadeDocGraf,
         dados.tipoDesigExames,
-        dados.entidadeExames,
         dados.refExames,
+        dados.entidadeExames,
         dados.fichaRegistoFK
       ]
     );

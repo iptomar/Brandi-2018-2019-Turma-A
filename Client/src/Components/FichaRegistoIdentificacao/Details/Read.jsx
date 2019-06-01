@@ -35,7 +35,7 @@ class Read extends Component {
     //Aguardar API
     await response.json().then(resp => {
       let status = resp.stat;
-      console.log(resp);
+      // console.log(resp);
       switch (status) {
         case "Authenticated":
           this.setState(prevState => ({
@@ -328,17 +328,25 @@ class Read extends Component {
                   {
                     //Verifica se existem ficha técnicas associadas a esta ficha de registo
                     // e identificação
-                    getThis.state.ft.length != 0 ?
-                      <table class="table">
+                    getThis.state.data.fichatecnicas.length != 0 ?
+                      <table className="table">
                         <tbody>
-                          {
-                            //Percorre todas fichas técnicas e apresenta-as
-                            getThis.state.ft.forEach(element => 
-                              <tr>
-                                <th>{element.toString()}</th>
-                              </tr>
-                            )
-                           }
+                            {
+                              //Percorre todas fichas técnicas e apresenta-as
+                             // getThis.state.data.fichatecnicas.forEach(element => 
+                             getThis.state.data.fichatecnicas.map(function (obj) {
+                               return(
+                               <tr key={obj.fichaTecnicaID}>
+                                  <th>
+                                    <a href={"/fichaTecnica/"+obj.fichaTecnicaID+"/detalhes"}>
+                                      Ficha Técnica Nº
+                                      {obj.fichaTecnicaID}
+                                    </a>
+                                  </th>
+                                </tr>
+                              );
+                            })
+                          }
                         </tbody>
                       </table>
                   :

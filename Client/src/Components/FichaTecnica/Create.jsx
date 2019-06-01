@@ -439,11 +439,11 @@ class Create extends Component {
              });
              alert("Não tem permissões")
              break;
-           case "Updated":
+           case "Registed":
              this.setState({
                alertisNotVisible: false
              });
-             alert("fez update");
+             window.location("/fichaRI/"+this.state.id"/detalhes")
              break;
              case "NotUpdated":
               this.setState({

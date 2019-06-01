@@ -520,7 +520,7 @@ create table tbl_testespagina4objectivosGerais(
         LocalizacaoAreaPonto varchar(255),
         ObjectivosEspecificos varchar(255),
         Resultados varchar(1024),
-        TecnicoResponsavelFK int not null,
+        TecnicoResponsavelFK int ,
         DataDePreenchimento date,
         fichaTecnicaFK int not null,
         PRIMARY key (id),

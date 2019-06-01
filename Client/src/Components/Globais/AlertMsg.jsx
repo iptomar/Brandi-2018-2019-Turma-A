@@ -11,11 +11,15 @@ class AlertMsg extends Component {
     this.props.status();
   }
 
+  /**
+   * Método que apresentada/esconde o alert
+   */
   hid(){
     if(this.props.status !== undefined)
       this.changeStatus();
     document.getElementById("adeus").hidden = true;
   }
+
 
   render() {
     return (

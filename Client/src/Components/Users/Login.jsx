@@ -20,6 +20,9 @@ class Login extends Component {
     this.setState({ alertisNotVisible: true });
   }
 
+  /**
+   * Submete os dados da utilizador para o backend
+   */
   handleSubmit = async e => {
     e.preventDefault();
 

@@ -31,8 +31,11 @@ class Create extends Component {
   }
 
   componentDidMount() {
+    //Verifica se esta página é usada para verificar os detalhes de uma ficha técnica
     if(window.location.href.includes("/detalhes") && window.location.href.includes("/fichaTecnica/")){
+      //Coloca todas as textarea e input com readonly
       $('input, textarea').attr('readonly', 'readonly');
+      //Atualiza todos os valores necessários para apresentação da ficha técnica
       this.fetchAndSetData(this.state.id);
     }
   }
@@ -49,6 +52,12 @@ class Create extends Component {
     }));
   }
 
+  /**
+   * Atualiza os campos com os dados de uma ficha técnica
+   * para o utilizador poder verificar os seus detalhes
+   * @param {*} id
+   * :ID da ficha técnica
+   */
   async fetchAndSetData(id){
     //Enviar pedido
     const response = await fetch(`/api/fichaTecnica/${this.props.id}`, {
@@ -236,6 +245,9 @@ class Create extends Component {
     });
   }
 
+  /**
+   * Método que transforma a página dos detalhes para a página da edição
+   */
   changeToEdit(){
     $('input, textarea').removeAttr('readonly');
     //$('#btBar').html('<button class="btn btn-success btn-lg btn-block mb-5" type="button">Guardar</button>');
@@ -245,6 +257,9 @@ class Create extends Component {
     btGuardar.style.display='block';
   }
 
+  /**
+   * Método que envia o formulário da edição para o backend
+   */
   submitEdit = async e => {
     e.preventDefault();
     //Form

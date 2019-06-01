@@ -22,10 +22,21 @@ class FileUpload extends Component {
     this.setState({ alertisNotVisible: true });
   }
 
+  /**
+   * Envia os ficheiros para quem utilizar este componente
+   */
   sendFiles() {
     this.props.sendData(this.state.file);
   }
 
+  /**
+   * Filtra e coloca no state os ficheiros já filtrados.
+   * Se existir algum ficheiro fora do tipo escolhido
+   * Esse é removido, e é apresentado um aviso
+   * Caso não exista nenhum ficheiro de acordo com 
+   * o filtro então é apresentado um aviso a informar do mesmo.
+   * @param {*} event 
+   */
   async handleChange(event) {
     await this.setState({
       file: Array.from(event.target.files)
@@ -53,7 +64,11 @@ class FileUpload extends Component {
     this.sendFiles();
   }
 
-  //Apresenta os ficheiros carregados
+  /**
+   * Apresenta visualmente um ficheiro dado por parâmetro
+   * @param {*} ficheiro 
+   * : Ficheiro a ser apresentado
+   */
   getBaseImage(ficheiro) {
     var reader = new FileReader();
     reader.onload = function (e) {
@@ -62,6 +77,12 @@ class FileUpload extends Component {
     reader.readAsDataURL(ficheiro);
   }
 
+  /**
+   * Método que apaga um ficheiro pela alção do 
+   * click do rato no botão de apagar do ficheiro
+   * @param {*} event 
+   * Evento do click do rato no botão
+   */
   async deleteFile(event) {
     await this.setState({
       file: this.state.file.filter(position => position.name !== event.target.id)
@@ -84,7 +105,9 @@ class FileUpload extends Component {
         <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} status={this.changeStatus} />
         <div>
           <div className="card-deck mt-3">
+            {/* Verfica se  existe algum ficheiro já carregado */}
             {this.state.file.length !== 0 ? (
+              // Se existir algum ficheiro percorre todos e apresenta-os
               this.state.file.map(function (file) {
                 return (
                   <div className="card" key={file.name}>

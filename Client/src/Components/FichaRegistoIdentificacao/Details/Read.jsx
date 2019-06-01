@@ -35,6 +35,7 @@ class Read extends Component {
     //Aguardar API
     await response.json().then(resp => {
       let status = resp.stat;
+      console.log(resp);
       switch (status) {
         case "Authenticated":
           this.setState(prevState => ({

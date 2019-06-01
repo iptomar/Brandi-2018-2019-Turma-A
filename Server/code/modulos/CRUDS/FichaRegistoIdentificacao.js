@@ -243,6 +243,21 @@ exports.getFichaRegistoIdentificacao = async (bd, id) => {
       resultadofinal.stat = resposta_bd2.stat;
       resultadofinal.resposta = resposta_bd2.resposta;
     }
+    //procurar os tecnicos da ficha RegistoIdentificacao
+    let resposta_bd4 = await bd.query(
+      "select b.fichaTecnicaID from tbl_fichaRegistoIdentificacao a, tbl_fichasTecnicas b, tbl_registoTecnicos c where a.fichaRegistoID = ? and a.fichaRegistoID=c.fichaRegistoFK",
+      [id]
+    );
+    //console.log(resposta_bd4);
+    //encontrou tecnicos associados a ficha e a ficha e visivel
+    if (resposta_bd4.stat == 0 && resposta_bd.resposta[0] !== undefined) {
+       resultadofinal.resposta.fichatecnicas = resposta_bd4.resposta;
+    }
+    //erro de conecao com a base de dados
+    else if (resposta_bd4.stat === 1) {
+      resultadofinal.stat = resposta_bd4.stat;
+      resultadofinal.resposta = resposta_bd4.resposta;
+    }
   } else if (resposta_bd.stat === 0) {
     resultadofinal.stat = resposta_bd.stat;
     resultadofinal.resposta = "FichaNaoExistente";

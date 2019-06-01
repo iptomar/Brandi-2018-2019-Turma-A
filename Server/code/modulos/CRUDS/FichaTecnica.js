@@ -102,7 +102,7 @@ exports.createFichaTecnica = async (bd, dados) => {
   ) {
     resposta_bd = await bd.query(
       "INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario," +
-        "contactoProprietario,donoObra,codPostalDonoObra,mecenas,codPostalMecenas,contactoMecenas,bemIntegradoEmConjunto,tipoBensConjunto" +
+        "contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas,codPostalMecenas,contactoMecenas,tipoBensConjunto,bemIntegradoEmConjunto" +
         ",elemConstConj,materiasElementosAcessorios,marcasInscricoesAssinaturas,marcasInscricoesMontagem,marcasInscricoesConstrucao,classPatrimonial,epoca,qualidade,materiaisEstruturaSuporte," +
         "materiaisSuperficies,tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio," +
         "condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo,ilumArtValorIluminancia,ilumArtValurUV," +
@@ -113,7 +113,7 @@ exports.createFichaTecnica = async (bd, dados) => {
         "estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8,elementosAcessoriosPag8,recursosElementosAcPag8,observaçoesConclusoesPag8," +
         "relTecInterLCRM,tipoDesigOrig,refOrig,entidadeOrig,tipoDesigDocGraf,refDocGraf,entidadeDocGraf,tipoDesigExames,refExames,entidadeExames," +
         "atledpArqDoc,tipoArqDoc,localArqDoc,cotaArqDoc,atledpIcon,tipoIcon,localIcon,cotaIcon,atledpBiblio,tipoBiblio,localBiblio,cotaBiblio,atledpOutras,tipoOutras,localOutras,cotaOutras,fichaRegistoFK)" +
-        "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         dados.visible,
         dados.localizacao,
@@ -127,8 +127,8 @@ exports.createFichaTecnica = async (bd, dados) => {
         dados.mecenas,
         dados.codPostalMecenas,
         dados.contactoMecenas,
-        dados.bemIntegradoEmConjunto,
         dados.tipoBensConjunto,
+        dados.bemIntegradoEmConjunto,
         dados.elemConstConj,
         dados.materiasElementosAcessorios,
         dados.marcasInscricoesAssinaturas,
@@ -226,6 +226,7 @@ exports.createFichaTecnica = async (bd, dados) => {
       ]
     );
   }
+  console.log(resposta_bd);
   //inserçao bem sucedida na base de dados
   if (resposta_bd.stat === 0) {
     resultadofinal.stat = 0;

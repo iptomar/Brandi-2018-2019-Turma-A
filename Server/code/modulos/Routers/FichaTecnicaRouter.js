@@ -169,7 +169,7 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
             fichaRegistoFK: req.body.fichaRegistoFK
           };
           let resposta_bd = await fichaTecnica.createFichaTecnica(bd, ficha);
-          console.log(resposta_bd);
+
           if (resposta_bd.stat === 0) {
             resposta_servidor.stat = "Registed";
             resposta_servidor.resposta = resposta_bd.resposta;

@@ -135,6 +135,7 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
           refDocGraf: req.body.refDocGraf,
           entidadeDocGraf: req.body.entidadeDocGraf,
           tipoDesigExames: req.body.tipoDesigExames,
+          refExames: req.body.refExames,
           entidadeExames: req.body.entidadeExames,
           fichaRegistoFK: req.body.fichaRegistoFK
         };
@@ -284,6 +285,7 @@ exports.updateFichaTecnicaRoute = async (app, bd) => {
           refDocGraf: req.body.refDocGraf,
           entidadeDocGraf: req.body.entidadeDocGraf,
           tipoDesigExames: req.body.tipoDesigExames,
+          refExames: req.body.refExames,
           entidadeExames: req.body.entidadeExames,
           fichaRegistoFK: req.body.fichaRegistoFK
         };

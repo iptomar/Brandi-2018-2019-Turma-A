@@ -291,6 +291,7 @@ CREATE TABLE tbl_fichasTecnicas
     refDocGraf TEXT,
     entidadeDocGraf TEXT,
     tipoDesigExames TEXT,
+    refExames TEXT,
     entidadeExames TEXT,
 	fichaRegistoFK INT NOT NULL UNIQUE,
     PRIMARY KEY(fichaTecnicaID),

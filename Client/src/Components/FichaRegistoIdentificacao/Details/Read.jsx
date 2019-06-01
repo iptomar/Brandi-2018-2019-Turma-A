@@ -12,6 +12,7 @@ class Read extends Component {
       data: null,
       loading: true,
       alert: false,
+      ft: []
     };
   }
 
@@ -320,18 +321,34 @@ class Read extends Component {
               </div>
             </div>
             <div>
-                <h6>Fichas Técnicas Associadas</h6>
-                <p>A Procurar...</p>
+              <hr></hr>
+                <h4>Fichas Técnicas Associadas</h4>
                 <div>
-                <table class="table">
-                  <tbody>
-                    {/* {getThis.state.data.ft.forEach(element => {
-                      <tr>
-                        <th></th>
-                      </tr>
-                    })} */}
-                  </tbody>
-              </table>
+                  {
+                    //Verifica se existem ficha técnicas associadas a esta ficha de registo
+                    // e identificação
+                    getThis.state.ft.length != 0 ?
+                      <table class="table">
+                        <tbody>
+                          {
+                            //Percorre todas fichas técnicas e apresenta-as
+                            getThis.state.ft.forEach(element => 
+                              <tr>
+                                <th>{element.toString()}</th>
+                              </tr>
+                            )
+                           }
+                        </tbody>
+                      </table>
+                  :
+                    <div>
+                      {/* Se não, apresenta uma mensagem informativa */}
+                      <p>Ainda não existem fichas técnicas associadas a este objeto.</p>
+                      {
+                        <a href={"/fichaTecnica/criar/"+getThis.props.id}>Crie já uma nova ficha técnica</a>
+                      }
+                    </div>
+                  }
                 </div>
               </div>
           </div>

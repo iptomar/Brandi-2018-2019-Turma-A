@@ -95,7 +95,7 @@ class Details extends Component {
           </div>
           <div className="text-right mr-3 mb-3">
           <button className="btn btn-success" onClick={this.addFT}>
-              Adicionar Ficha Técnica <i className="fas fa-plus"/>
+              <i className="fas fa-plus"/> Adicionar Ficha Técnica
             </button>
             <button 
               className="btn btn-warning ml-2" 

@@ -323,43 +323,43 @@ class Read extends Component {
             </div>
             <div>
               <hr></hr>
-                <h4>Fichas Técnicas Associadas</h4>
-                <div>
-                  {
-                    //Verifica se existem ficha técnicas associadas a esta ficha de registo
-                    // e identificação
-                    getThis.state.data.fichatecnicas.length != 0 ?
-                      <table className="table">
-                        <tbody>
-                            {
-                              //Percorre todas fichas técnicas e apresenta-as
-                             // getThis.state.data.fichatecnicas.forEach(element => 
-                             getThis.state.data.fichatecnicas.map(function (obj) {
-                               return(
-                               <tr key={obj.fichaTecnicaID}>
-                                  <th>
-                                    <a href={"/fichaTecnica/"+obj.fichaTecnicaID+"/detalhes"}>
-                                      Ficha Técnica Nº
+              <h4>Fichas Técnicas Associadas</h4>
+              <div>
+                {
+                  //Verifica se existem ficha técnicas associadas a esta ficha de registo
+                  // e identificação
+                  getThis.state.data.fichatecnicas.length !== 0 ?
+                    <table className="table">
+                      <tbody>
+                        {
+                          //Percorre todas fichas técnicas e apresenta-as
+                          // getThis.state.data.fichatecnicas.forEach(element => 
+                          getThis.state.data.fichatecnicas.map(function (obj) {
+                            return (
+                              <tr key={obj.fichaTecnicaID}>
+                                <th>
+                                  <a href={"/fichaTecnica/" + obj.fichaTecnicaID + "/detalhes"}>
+                                    Ficha Técnica Nº
                                       {obj.fichaTecnicaID}
-                                    </a>
-                                  </th>
-                                </tr>
-                              );
-                            })
-                          }
-                        </tbody>
-                      </table>
-                  :
+                                  </a>
+                                </th>
+                              </tr>
+                            );
+                          })
+                        }
+                      </tbody>
+                    </table>
+                    :
                     <div>
                       {/* Se não, apresenta uma mensagem informativa */}
                       <p>Ainda não existem fichas técnicas associadas a este objeto.</p>
                       {
-                        <a href={"/fichaTecnica/criar/"+getThis.props.id}>Crie já uma nova ficha técnica</a>
+                        <a href={"/fichaTecnica/criar/" + getThis.props.id}>Crie uma nova ficha técnica</a>
                       }
                     </div>
-                  }
-                </div>
+                }
               </div>
+            </div>
           </div>
         );
       } else {

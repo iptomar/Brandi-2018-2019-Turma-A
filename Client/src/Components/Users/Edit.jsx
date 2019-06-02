@@ -133,10 +133,15 @@ class Edit extends Component {
                     </div>
                   </div>
                   <label>Tipo de utilizador</label>
-                  <select id="DDLRoles" className="form-control mb-4" value={this.state.data.roleFK}>
-                    {this.state.rolesList.map(function (object) {
+                  <select id="DDLRoles" className="form-control mb-4"
+                  >
+                    {this.state.rolesList.map(function (object, i) {
                       return (
-                        <option className="dropdown-item" id={object.roleID} value={object.roleID} key={object.roleID}>
+                        <option className="dropdown-item" 
+                          id={object.roleID} 
+                          value={object.roleID}  
+                          key={i}
+                        >
                           {object.role}
                         </option>
                       );

@@ -169,7 +169,6 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
             fichaRegistoFK: req.body.fichaRegistoFK
           };
           let resposta_bd = await fichaTecnica.createFichaTecnica(bd, ficha);
-
           if (resposta_bd.stat === 0) {
             resposta_servidor.stat = "Registed";
             resposta_servidor.resposta = resposta_bd.resposta;
@@ -195,6 +194,7 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
         }
         token = await getToken.generateToken(token);
       }
+
       resp
         .status(code)
         .header("x-auth-token", token)

@@ -119,7 +119,7 @@ exports.createFichaTecnica = async (bd, dados) => {
         "?,?,?,?,?,?,?,?,?,?,?,?," +
         "?,?,?,?,?,?,?,?,?,?,?,?," +
         "?,?,?,?,?,?,?,?,?,?,?,?," +
-        "?,?,?,?,?)",
+        "?,?,?,?,?,?)",
       [
         dados.visible,
         dados.localizacao,
@@ -302,12 +302,9 @@ exports.createFichaTecnica = async (bd, dados) => {
         //array auxiliar que contem todos os objectivosGerais num só array
         let array2 = [];
         for (let i = 0; i < dados.tabel10.length; i++) {
-          array2.push(dados.tabel10[i].tipoRef);
-          array2.push(dados.tabel10[i].lap);
-          array2.push(dados.tabel10[i].objEsp);
-          array2.push(dados.tabel10[i].reslt);
-
-          array2.push(dados.tabel10[i].data);
+          array2.push(dados.tabel10[i].constEq);
+          array2.push(dados.tabel10[i].funcDes);
+          array2.push(dados.tabel10[i].habPro);
           //id da ficha tecnica criada
           array2.push(resposta_bd.resposta.insertId);
         }
@@ -316,12 +313,13 @@ exports.createFichaTecnica = async (bd, dados) => {
             auxiliar,
           array2
         );
+
         if (resposta_bd4.stat === 0) {
           resultadofinal.stat = 0;
           resultadofinal.resposta = resposta_bd.resposta;
           resultadofinal.resposta2 = resposta_bd2.resposta;
           resultadofinal.resposta3 = resposta_bd3.resposta;
-          resultadofinal.resposta4 = resposta_bd4.resposta4;
+          resultadofinal.resposta4 = resposta_bd4.resposta;
           return resultadofinal;
         } else {
           let apagartabelaobjectivosgerais = await bd.query(
@@ -458,6 +456,22 @@ exports.getFichaTecnica = async (bd, id) => {
 exports.updateFichaTecnica = async (bd, dados) => {
   let resultadofinal = { stat: 1, resposta: "Missing Fields" };
   let resposta_bd;
+  dados.objGerais = [
+    "identMateriais",
+    "identIntervencoes",
+    "caracterizacao",
+    "identPatologias",
+    "datacao",
+    "ensaio"
+  ];
+  dados.tabobjGerais = [
+    { tipoRef: "1", lap: "1", objEsp: "1", reslt: "1", data: "2019-06-30" },
+    { tipoRef: "1", lap: "1", objEsp: "1", reslt: "1", data: "2019-06-30" }
+  ];
+  dados.tabel10 = [
+    { constEq: "1", funcDes: "1", habPro: "1" },
+    { constEq: "1", funcDes: "1", habPro: "1" }
+  ];
   //verificar se os campos estao preenchidos
   if (
     dados.visible &&
@@ -540,7 +554,6 @@ exports.updateFichaTecnica = async (bd, dados) => {
     dados.observaçoesConclusoesPag8 &&
     dados.fichaRegistoFK
   ) {
-    console.log("entrou no if");
     resposta_bd = await bd.query(
       "update tbl_fichasTecnicas set " +
         "visible = ?,localizacao= ?,proprietario= ?,codPostalProprietario= ?,emailProprietario= ?,contactoProprietario= ?,donoObra= ?,codPostalDonoObra= ?,contactoDonoObra= ?,mecenas= ?,codPostalMecenas= ?,contactoMecenas= ?," +
@@ -692,9 +705,6 @@ exports.updateFichaTecnica = async (bd, dados) => {
       [dados.id]
     );
     let auxiliar = "";
-    dados.objGerais = ["identMateriais","identIntervencoes","caracterizacao","identPatologias","datacao","ensaio"]
-    dados.tabobjGerais = [{tipoRef:"1",lap:"1",objEsp:"1",reslt:"1",data:"2019-06-30"},{tipoRef:"1",lap:"1",objEsp:"1",reslt:"1",data:"2019-06-30"}]
-    dados.tabel10 = [{constEq:"1",funcDes:"1",habPro:"1"},{constEq:"1",funcDes:"1",habPro:"1"}]
     for (let i = 0; i < dados.objGerais.length; i++) {
       auxiliar += "(?,?),";
     }
@@ -719,12 +729,9 @@ exports.updateFichaTecnica = async (bd, dados) => {
     //array auxiliar que contem todos os objectivosGerais num só array
     array2 = [];
     for (let i = 0; i < dados.tabobjGerais.length; i++) {
-      array2.push(dados.tabobjGerais[i].tipoRef);
-      array2.push(dados.tabobjGerais[i].lap);
-      array2.push(dados.tabobjGerais[i].objEsp);
-      array2.push(dados.tabobjGerais[i].reslt);
-
-      array2.push(dados.tabobjGerais[i].data);
+      array2.push(dados.tabobjGerais[i].constEq);
+      array2.push(dados.tabobjGerais[i].funcDes);
+      array2.push(dados.tabobjGerais[i].habPro);
       //id da ficha tecnica criada
       array2.push(dados.id);
     }
@@ -747,6 +754,10 @@ exports.updateFichaTecnica = async (bd, dados) => {
       array2.push(dados.tabel10[i].constEq);
       array2.push(dados.tabel10[i].funcDes);
       array2.push(dados.tabel10[i].habPro);
+      array2.push(dados.tabel10[i].fichaTecnicaFK);
+
+      array2.push(dados.tabel10[i].data);
+      //id da ficha tecnica criada
       array2.push(dados.id);
     }
     resposta_bd4 = await bd.query(
@@ -754,7 +765,6 @@ exports.updateFichaTecnica = async (bd, dados) => {
         auxiliar,
       array2
     );
-    console.log(resposta_bd4);
   } else {
     resultadofinal.stat = resposta_bd.stat;
     resultadofinal.resposta = resposta_bd.resposta;

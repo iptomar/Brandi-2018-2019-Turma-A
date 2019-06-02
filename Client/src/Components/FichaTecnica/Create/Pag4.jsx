@@ -137,10 +137,10 @@ class Pag4 extends Component {
                         </thead>
                         <tbody>
                             <tr>
-                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2"></textarea></td>
-                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2"></textarea></td>
-                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2"></textarea></td>
-                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2"></textarea></td>
+                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Tipo-Referência"></textarea></td>
+                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Localização / Área / Ponto"></textarea></td>
+                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Objetivos Específicos"></textarea></td>
+                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Resultados"></textarea></td>
                                 <td><textarea className="form-control" type="text" readOnly value="Name" style={{ resize: "none" }} rows="2"></textarea></td>
                                 <td><input className="form-control" style={{ width: "170px", height: "63px" }} type="date"></input></td>
                             </tr>

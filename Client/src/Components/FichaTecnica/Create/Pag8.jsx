@@ -26,7 +26,7 @@ class Pag8 extends Component {
                         <textarea type="text" id="estruturaPag8" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Estrutura" />
                     </div>
                     <div className="col-md-6 mb-3">
-                        <label>Recursos: (Materiais | Técnicos | Tecnológicos)</label>
+                        <label>Recursos (Materiais / Técnicos / Tecnológicos):</label>
                         <textarea type="text" id="recursosEstruturaPag8" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Recursos" />
                     </div>
                     {/* SUPERFICIE */}
@@ -35,7 +35,7 @@ class Pag8 extends Component {
                         <textarea type="text" id="superficiePag8" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Superficie" />
                     </div>
                     <div className="col-md-6 mb-3">
-                        <label>Recursos: (Materiais | Técnicos | Tecnológicos)</label>
+                        <label>Recursos (Materiais / Técnicos / Tecnológicos):</label>
                         <textarea type="text" id="recursosSuperficiePag8" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Recursos" />
                     </div>
                     {/* ELEMENTOS ACESSÓRIOS */}
@@ -44,7 +44,7 @@ class Pag8 extends Component {
                         <textarea type="text" id="elementosAcessoriosPag8" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Superficie" />
                     </div>
                     <div className="col-md-6 mb-3">
-                        <label>Recursos: (Materiais | Técnicos | Tecnológicos)</label>
+                        <label>Recursos (Materiais / Técnicos / Tecnológicos):</label>
                         <textarea type="text" id="recursosElementosAcPag8" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Recursos" />
                     </div>
                 </div>

@@ -17,10 +17,10 @@ class Pag9 extends Component {
         return (
             <div className="container" style={{ paddingTop: "0px" }}>
                 <div className="pt-3 py-3 text-center">
-                    <h4>Documentação produzida / recolhida</h4>
+                    <h4>Documentação Produzida / Recolhida</h4>
                 </div>
 
-                <div className="row">
+                <div className="row mb-3">
                     <div className="col-md-12 mb-3">
                         <label>Relatório Técnico da Intervenção do LCRM:</label>
                         <input type="text" className="form-control" id="relTecInterLCRM" placeholder="Ref.ª de Arquivo:" required />
@@ -33,44 +33,31 @@ class Pag9 extends Component {
                     </div>
                 </div>
 
-
                 <div className="row">
                     <div className="col d-flex justify-content-center">
                         <label className="align-middle">Tipo / Designação</label>
-
-
                     </div>
                     <div className="col d-flex justify-content-center">
                         <label className="align-middle">Referências</label>
-
-
                     </div>
 
                     <div className="col d-flex justify-content-center">
                         <label className="align-middle">Entidade / Autor</label>
-
-
                     </div>
                 </div>
 
-                <div className="row">
+                <div className="row mb-3">
                     <div className="col d-flex justify-content-center">
                         <textarea id="tipoDesigOrig" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
                     </div>
-
                     <div className="col d-flex justify-content-center">
                         <textarea id="refOrig" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
-
-
                     </div>
-
                     <div className="col d-flex justify-content-center">
                         <textarea id="entidadeOrig" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
-
-
                     </div>
                 </div>
-                <hr />
+
                 <br />
 
                 <div className="row">
@@ -79,15 +66,13 @@ class Pag9 extends Component {
                     </div>
                 </div>
 
-                <div className="row">
+                <div className="row mb-3">
                     <div className="col d-flex justify-content-center">
                         <label className="align-middle">Tipo / Designação</label>
                     </div>
-
                     <div className="col d-flex justify-content-center">
                         <label className="align-middle">Referências</label>
                     </div>
-
                     <div className="col d-flex justify-content-center">
                         <label className="align-middle">Entidade / Autor</label>
                     </div>
@@ -97,16 +82,13 @@ class Pag9 extends Component {
                     <div className="col d-flex justify-content-center">
                         <textarea id="tipoDesigDocGraf" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
                     </div>
-
                     <div className="col d-flex justify-content-center">
                         <textarea id="refDocGraf" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
                     </div>
-
                     <div className="col d-flex justify-content-center">
                         <textarea id="entidadeDocGraf" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
                     </div>
                 </div>
-                <hr />
                 <br />
 
                 <div className="row">
@@ -114,30 +96,24 @@ class Pag9 extends Component {
                         <h4>Exames e Análises</h4>
                     </div>
                 </div>
-
                 <div className="row">
                     <div className="col d-flex justify-content-center">
                         <label className="align-middle">Tipo / Designação</label>
                     </div>
-
                     <div className="col d-flex justify-content-center">
                         <label className="align-middle">Referências</label>
                     </div>
-
                     <div className="col d-flex justify-content-center">
                         <label className="align-middle">Entidade / Autor</label>
                     </div>
                 </div>
-
-                <div className="row">
+                <div className="row mb-3">
                     <div className="col d-flex justify-content-center">
                         <textarea id="tipoDesigExames" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
                     </div>
-
                     <div className="col d-flex justify-content-center">
                         <textarea id="refExames" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
                     </div>
-
                     <div className="col d-flex justify-content-center">
                         <textarea id="entidadeExames" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
                     </div>

@@ -26,7 +26,7 @@ class Pag7 extends Component {
                 <label>Tipo de intervenção:</label>
                 <div className="row">
 
-                    <div className="input-group mb-3 col-md-2">
+                    <div className="input-group mb-3 col-md-3 text-center">
                         <div className="input-group-prepend">
                             <div className="input-group-text">
                                 <input type="radio" name="IntervConsResOptions" id="intervPrevencaoConsRes" value="Prevenção" defaultChecked />
@@ -35,7 +35,7 @@ class Pag7 extends Component {
                         <label className="form-control" htmlFor="intervPrevencaoConsRes">Prevenção</label>
                     </div>
 
-                    <div className="input-group mb-3 col-md-2">
+                    <div className="input-group mb-3 col-md-3 text-center">
                         <div className="input-group-prepend">
                             <div className="input-group-text">
                                 <input type="radio" name="IntervConsResOptions" id="intervConvercaoConsRes" value="Conservação" defaultChecked />
@@ -44,7 +44,7 @@ class Pag7 extends Component {
                         <label className="form-control" htmlFor="intervConvercaoConsRes">Conservação</label>
                     </div>
 
-                    <div className="input-group mb-3 col-md-2">
+                    <div className="input-group mb-3 col-md-3 text-center">
                         <div className="input-group-prepend">
                             <div className="input-group-text">
                                 <input type="radio" name="IntervConsResOptions" id="intervRestauroConsRes" value="Restauro" defaultChecked />
@@ -52,8 +52,8 @@ class Pag7 extends Component {
                         </div>
                         <label className="form-control" htmlFor="intervRestauroConsRes">Restauro</label>
                     </div>
-
                 </div>
+                <hr/>
                 <div className="row">
                     <div className="col text-center">
                         <h4>Proposta metodológica de intervenção</h4>

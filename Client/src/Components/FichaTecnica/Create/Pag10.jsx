@@ -43,263 +43,116 @@ class Pag10 extends Component {
         return (
             <div className="container" style={{ paddingTop: "0px" }}>
                 <div className="pt-3 py-3 text-center">
-                    <h4>FONTES</h4>
+                    <h4>Fontes</h4>
                 </div>
 
+                <div className="row text-center mb-4">
+                    <div className="col-md-12 mb-2">
+                        <h5>Arquivísticas / Documentais:</h5>
+                    </div>
+                    <div className="col-md-6">
+                        <label className="align-middle">Autor / Título / Local / Editor / Data / Página:</label>
+                        <textarea id="atledpArqDoc" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="Autor / Título / Local / Editor / Data / Página" />
+                    </div>
+                    <div className="col-md-2">
+                        <label className="align-middle">Tipo:</label>
+                        <textarea id="tipoArqDoc" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="Tipo" />
+                    </div>
+                    <div className="col-md-2">
+                        <label className="align-middle">Localização:</label>
+                        <textarea id="localArqDoc" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="Localização" />
+                    </div>
+                    <div className="col-md-2">
+                        <label className="align-middle">Cota:</label>
+                        <textarea id="cotaArqDoc" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="Cota" />
+                    </div>
+                </div>
 
-                <div className="row">
+                <div className="row text-center mb-4">
+                    <div className="col-md-12 mb-2">
+                        <h5>Iconográficas:</h5>
+                    </div>
+                    <div className="col-md-6">
+                        <label className="align-middle">Autor / Título / Local / Editor / Data / Página:</label>
+                        <textarea id="atledpIcon" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="Autor / Título / Local / Editor / Data / Página" />
+                    </div>
+                    <div className="col-md-2">
+                        <label className="align-middle">Tipo:</label>
+                        <textarea id="tipoIcon" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="Tipo" />
+                    </div>
+                    <div className="col-md-2">
+                        <label className="align-middle">Localização:</label>
+                        <textarea id="localIcon" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="Localização" />
+                    </div>
+                    <div className="col-md-2">
+                        <label className="align-middle">Cota:</label>
+                        <textarea id="cotaIcon" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="Cota" />
+                    </div>
+                </div>
+
+                <div className="row text-center mb-4">
+                    <div className="col-md-12 mb-2">
+                        <h5>Bibliográficas:</h5>
+                    </div>
+                    <div className="col-md-6">
+                        <label className="align-middle">Autor / Título / Local / Editor / Data / Página:</label>
+                        <textarea id="atledpBiblio" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="Autor / Título / Local / Editor / Data / Página" />
+                    </div>
+                    <div className="col-md-2">
+                        <label className="align-middle">Tipo:</label>
+                        <textarea id="tipoBiblio" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="Tipo" />
+                    </div>
+                    <div className="col-md-2">
+                        <label className="align-middle">Localização:</label>
+                        <textarea id="localBiblio" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="Localização" />
+                    </div>
+                    <div className="col-md-2">
+                        <label className="align-middle">Cota:</label>
+                        <textarea id="cotaBiblio" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="Cota" />
+                    </div>
+                </div>
+
+                <div className="row text-center mb-5">
                     <div className="col-md-12 text-center">
-                        <h4>Arquivísticas | Documentais</h4>
+                        <h5>Outras Fontes:</h5>
+                    </div>
+                    <div className="col-md-6">
+                        <label className="align-middle">Autor / Título / Local / Editor / Data / Página:</label>
+                        <textarea id="atledpOutras" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="Autor / Título / Local / Editor / Data / Página" />
+                    </div>
+                    <div className="col-md-2">
+                        <label className="align-middle">Tipo:</label>
+                        <textarea id="tipoOutras" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="Tipo" />
+                    </div>
+                    <div className="col-md-2">
+                        <label className="align-middle">Localização:</label>
+                        <textarea id="localOutras" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="Localização" />
+                    </div>
+                    <div className="col-md-2">
+                        <label className="align-middle">Cota:</label>
+                        <textarea id="cotaOutras" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="Cota" />
                     </div>
                 </div>
 
-
-                <div className="row">
-                    <div className="col d-flex justify-content-center">
-                        <label className="align-middle">Autor/Título/Local/Editor/Data/Página(s)</label>
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <label className="align-middle">Tipo</label>
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <label className="align-middle">Localização</label>
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <label className="align-middle">Cota</label>
-
-                    </div>
-                </div>
-
-                <div className="row">
-                    <div className="col d-flex justify-content-center">
-                        <textarea id="atledpArqDoc" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <textarea id="tipoArqDoc" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
-
-
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <textarea id="localArqDoc" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
-
-
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <textarea id="cotaArqDoc" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
-
-
-                    </div>
-                </div>
-                <hr />
-                <br />
-
-                <div className="row">
-                    <div className="col-md-12 text-center">
-                        <h4>Iconográficas</h4>
-                    </div>
-                </div>
-
-                <div className="row">
-                    <div className="col d-flex justify-content-center">
-                        <label className="align-middle">Autor/Título/Local/Editor/Data/Página(s)</label>
-
-
-                    </div>
-                    <div className="col d-flex justify-content-center">
-                        <label className="align-middle">Tipo</label>
-
-
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <label className="align-middle">Localização</label>
-
-
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <label className="align-middle">Cota</label>
-
-
-                    </div>
-                </div>
-
-                <div className="row">
-                    <div className="col d-flex justify-content-center">
-                        <textarea id="atledpIcon" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <textarea id="tipoIcon" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
-
-
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <textarea id="localIcon" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
-
-
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <textarea id="cotaIcon" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
-
-
-                    </div>
-                </div>
-                <hr />
-                <br />
-
-                <div className="row">
-                    <div className="col-md-12 text-center">
-                        <h4>Bibliográficas</h4>
-                    </div>
-                </div>
-
-                <div className="row">
-                    <div className="col d-flex justify-content-center">
-                        <label className="align-middle">Autor/Título/Local/Editor/Data/Página(s)</label>
-
-
-                    </div>
-                    <div className="col d-flex justify-content-center">
-                        <label className="align-middle">Tipo</label>
-
-
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <label className="align-middle">Localização</label>
-
-
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <label className="align-middle">Cota</label>
-
-
-                    </div>
-                </div>
-
-                <div className="row">
-                    <div className="col d-flex justify-content-center">
-                        <textarea id="atledpBiblio" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <textarea id="tipoBiblio" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
-
-
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <textarea id="localBiblio" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
-
-
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <textarea id="cotaBiblio" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
-
-
-                    </div>
-                </div>
-                <hr />
-                <br />
-
-                <div className="row">
-                    <div className="col-md-12 text-center">
-                        <h4>Outras Fontes</h4>
-                    </div>
-                </div>
-
-                <div className="row">
-                    <div className="col d-flex justify-content-center">
-                        <label className="align-middle">Autor/Título/Local/Editor/Data/Página(s)</label>
-
-
-                    </div>
-                    <div className="col d-flex justify-content-center">
-                        <label className="align-middle">Tipo</label>
-
-
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <label className="align-middle">Localização</label>
-
-
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <label className="align-middle">Cota</label>
-
-
-                    </div>
-                </div>
-
-                <div className="row">
-                    <div className="col d-flex justify-content-center">
-                        <textarea id="atledpOutras" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <textarea id="tipoOutras" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
-
-
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <textarea id="localOutras" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
-
-
-                    </div>
-
-                    <div className="col d-flex justify-content-center">
-                        <textarea id="cotaOutras" type="text" style={{ resize: "none" }} rows="4" className="form-control" placeholder="" />
-
-
-                    </div>
-                </div>
-
-                <hr />
-                <br />
-                <hr />
                 <div className="row">
                     <table className="table table-bordered table-secondary text-center" id="table">
                         <thead >
                             <tr>
-                                <th className="align-middle">
-                                    <h4>CONSTITUIÇÃO DA EQUIPA</h4>
-                                    Nome do Técnico
-                                    </th>
-                                <th className="align-middle">
-                                    <h4>Funções Desempenhadas</h4>
-                                </th>
-                                <th className="align-middle">
-                                    <h4>Habilitações</h4>
-                                    (Escolares | Académicas)
-                                        <h4>Nível Profissional</h4>
-                                    (1-8)
-                                    </th>
+                                <th className="align-middle">Constituição da Equipa / Nome do Técnico</th>
+                                <th className="align-middle">Funções Desempenhadas</th>
+                                <th className="align-middle">Habilitações Escolares / Nível Profissional (1-8)</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2"></textarea></td>
-                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2"></textarea></td>
-                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2"></textarea></td>
+                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Constituição da Equipa / Nome do Técnico"></textarea></td>
+                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Funções Desempenhadas"></textarea></td>
+                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Habilitações Escolares / Nível Profissional (1-8)"></textarea></td>
                             </tr>
                         </tbody>
                     </table>
-                    {/*botões*/}
 
+                    {/*botões*/}
                     <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                         <div className="btn-group mr-2" role="group" aria-label="First group">
                             <button type="button" className="btn btn-dark" onClick={this.adicionaNovaLinha}>Adicionar Linha</button>

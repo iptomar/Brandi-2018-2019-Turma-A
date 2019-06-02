@@ -28,6 +28,7 @@ class Create extends Component {
     this.getData = this.getData.bind(this);
     this.getDataG = this.getDataG.bind(this);
     this.fetchAndSetData = this.fetchAndSetData.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -41,9 +42,9 @@ class Create extends Component {
   }
 
    // Controla as alterações nos inputs (Necessidade do React)
-   handleChange(e) {
-    let name = e.target.name;
-    let value = e.target.value;
+   handleChange(event) {
+    let name = event.target.id;
+    let value = event.target.value;
     this.setState( prevState => ({
       data: {
         ...prevState.data,
@@ -74,9 +75,9 @@ class Create extends Component {
       switch (status) {
        case "Authenticated":
         await this.setState({ data: resp.resposta });
+         //Ativa a função de atualização
+         $("input, textarea").on('change', this.handleChange);
          //Inserção dos dados nos campos necessários
-         document.querySelectorAll("input").onchange = 'this.handleChange()';
-         document.querySelectorAll("textarea").onchange = 'this.handleChange()';
          //Pag 1
         document.getElementById('localizacao').value = this.state.data.localizacao;
         document.getElementById('proprietario').value = this.state.data.proprietario;

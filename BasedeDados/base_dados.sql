@@ -525,7 +525,17 @@ create table tbl_testespagina4objectivosGerais(
         PRIMARY key (id),
         FOREIGN key (fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
     );
-
+ -- esta tabela representa a tabela onde o utilizador pode insere a constituição da equipa na página 10
+ drop table if exists tbl_constituicaoequipa;
+ create table tbl_constituicaoequipa(
+     id int not null AUTO_INCREMENT,
+     constEq TEXT,
+     funcDes TEXT,
+     habPro  TEXT,
+     fichaTecnicaFK int not null,
+     PRIMARY key (id),
+     FOREIGN key (fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
+ );
 
 
 INSERT INTO tbl_roles (role) values("Admin");

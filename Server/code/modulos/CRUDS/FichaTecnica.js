@@ -289,13 +289,70 @@ exports.createFichaTecnica = async (bd, dados) => {
           auxiliar,
         array2
       );
+
       //não ocorreu nenhum erro ao inserir os campos descritivos relativos aos objectivos gerais na pagina 4
       if (resposta_bd3.stat === 0) {
-        resultadofinal.stat = 0;
-        resultadofinal.resposta = resposta_bd.resposta;
-        resultadofinal.resposta2 = resposta_bd2.resposta;
-        resultadofinal.resposta3 = resposta_bd3.resposta;
-        return resultadofinal;
+        let resposta_bd4 = { stat: 1, resposta: {} };
+
+        let auxiliar = "";
+        for (let i = 0; i < dados.tabel10.length; i++) {
+          auxiliar += "(?,?,?,?),";
+        }
+        auxiliar = auxiliar.substring(0, auxiliar.length - 1); //tira ultima virgula
+        //array auxiliar que contem todos os objectivosGerais num só array
+        let array2 = [];
+        for (let i = 0; i < dados.tabel10.length; i++) {
+          array2.push(dados.tabel10[i].tipoRef);
+          array2.push(dados.tabel10[i].lap);
+          array2.push(dados.tabel10[i].objEsp);
+          array2.push(dados.tabel10[i].reslt);
+
+          array2.push(dados.tabel10[i].data);
+          //id da ficha tecnica criada
+          array2.push(resposta_bd.resposta.insertId);
+        }
+        resposta_bd4 = await bd.query(
+          "Insert into tbl_constituicaoequipa(constEq ,funcDes ,habPro ,fichaTecnicaFK ) values " +
+            auxiliar,
+          array2
+        );
+        if (resposta_bd4.stat === 0) {
+          resultadofinal.stat = 0;
+          resultadofinal.resposta = resposta_bd.resposta;
+          resultadofinal.resposta2 = resposta_bd2.resposta;
+          resultadofinal.resposta3 = resposta_bd3.resposta;
+          resultadofinal.resposta4 = resposta_bd4.resposta4;
+          return resultadofinal;
+        } else {
+          let apagartabelaobjectivosgerais = await bd.query(
+            "Delete from tbl_testespagina4tabelas where fichaTecnicaFK = ?",
+            resposta_bd.resposta.insertId
+          );
+          let apagarobjectivosgerais = await bd.query(
+            "Delete from tbl_testespagina4objectivosGerais where fichaTecnicaFK = ?",
+            resposta_bd.resposta.insertId
+          );
+          let apagarfichatecnica = await bd.query(
+            "Delete from tbl_fichasTecnicas where fichaTecnicaID = ?",
+            resposta_bd.resposta.insertId
+          );
+          if (
+            apagarobjectivosgerais.stat === 0 &&
+            apagarfichatecnica.stat === 0 &&
+            apagartabelaobjectivosgerais.stat === 0
+          ) {
+            resultadofinal.stat = 1;
+            resultadofinal.resposta = "não foi possivel criar ficha tecnica";
+            return resultadofinal;
+          }
+          //ocorreu um erro ao apagar os objectivos e a ficha tecnica
+          else {
+            resultadofinal.stat = 1;
+            resultadofinal.resposta = apagarfichatecnica.resposta;
+            resultadofinal.resposta2 = apagarobjectivosgerais.resposta;
+            resultadofinal.resposta3 = apagartabelaobjectivosgerais.resposta;
+          }
+        }
       }
       //ocorreu um erro
       else {
@@ -378,6 +435,12 @@ exports.getFichaTecnica = async (bd, id) => {
       [id]
     );
     //todos os dados da tabela testespagina4tabels relacionados com 1 ficha tecnica
+    resultadofinalteste.push(resposta_aux.resposta);
+
+    resposta_aux = await bd.query(
+      "select * from tbl_constituicaoequipa where fichaTecnicaFK = ?",
+      [id]
+    );
     resultadofinalteste.push(resposta_aux.resposta);
   } else if (resposta_bd.stat === 0) {
     resultadofinal.stat = resposta_bd.stat;
@@ -624,6 +687,10 @@ exports.updateFichaTecnica = async (bd, dados) => {
       "delete from tbl_testespagina4tabelas where fichaTecnicaFK = ?",
       [dados.id]
     );
+    resposta_aux = await bd.query(
+      "delete from tbl_constituicaoequipa where fichaTecnicaFK = ?",
+      [dados.id]
+    );
     let auxiliar = "";
     for (let i = 0; i < dados.objGerais.length; i++) {
       auxiliar += "(?,?),";
@@ -664,11 +731,34 @@ exports.updateFichaTecnica = async (bd, dados) => {
         auxiliar,
       array2
     );
+
+    let resposta_bd4 = { stat: 1, resposta: {} };
+    auxiliar = "";
+    for (let i = 0; i < dados.tabel10.length; i++) {
+      auxiliar += "(?,?,?,?),";
+    }
+    auxiliar = auxiliar.substring(0, auxiliar.length - 1); //tira ultima virgula
+    //array auxiliar que contem todos os objectivosGerais num só array
+    array2 = [];
+    for (let i = 0; i < dados.tabel10.length; i++) {
+      array2.push(dados.tabel10[i].tipoRef);
+      array2.push(dados.tabel10[i].lap);
+      array2.push(dados.tabel10[i].objEsp);
+      array2.push(dados.tabel10[i].reslt);
+
+      array2.push(dados.tabel10[i].data);
+      //id da ficha tecnica criada
+      array2.push(dados.id);
+    }
+    resposta_bd4 = await bd.query(
+      "Insert into tbl_constituicaoequipa(constEq ,funcDes ,habPro ,fichaTecnicaFK ) values " +
+        auxiliar,
+      array2
+    );
   } else {
     resultadofinal.stat = resposta_bd.stat;
     resultadofinal.resposta = resposta_bd.resposta;
   }
-
   return resultadofinal;
 };
 /**

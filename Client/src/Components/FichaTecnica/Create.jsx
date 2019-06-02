@@ -36,6 +36,8 @@ class Create extends Component {
     if(window.location.href.includes("/detalhes") && window.location.href.includes("/fichaTecnica/")){
       //Coloca todas as textarea e input com readonly
       $('input, textarea').attr('readonly', 'readonly');
+      //Ocultar input do tipo checkbox
+      $('input[type=checkbox], input[type=radio]').hide();
       //Atualiza todos os valores necessários para apresentação da ficha técnica
       this.fetchAndSetData(this.state.id);
     }
@@ -141,17 +143,25 @@ class Create extends Component {
         document.getElementById('poluicaoResultados').value = this.state.data[0].resposta.poluicaoResultados;
         document.getElementById('poluicaoObservacoesConclusoes').value = this.state.data[0].resposta.poluicaoObservacoesConclusoes;
 
-        //Pag 4
-
-        //FAZER DESAPARECER OS QUE NÃO SÃO ADEQUADOS (FALTA SER ENVIADO)
-                                      // let objGerais = [];
-                                      // if(document.getElementById("identMateriais").checked) objGerais.push(document.getElementById("identMateriais").value);
-                                      // if(document.getElementById("identIntervencoes").checked) objGerais.push(document.getElementById("identIntervencoes").value);
-                                      // if(document.getElementById("caracterizacao").checked) objGerais.push(document.getElementById("caracterizacao").value);
-                                      // if(document.getElementById("identPatologias").checked) objGerais.push(document.getElementById("identPatologias").value);
-                                      // if(document.getElementById("datacao").checked) objGerais.push(document.getElementById("datacao").value);
-                                      // if(document.getElementById("ensaio").checked) objGerais.push(document.getElementById("ensaio").value);
-                                      // formData.append("objGerais", objGerais);
+     //Pag 4
+     //CheckBox
+     document.getElementById("identMateriais").parentNode.parentNode.parentNode.style.display = "none";
+     document.getElementById("identIntervencoes").parentNode.parentNode.parentNode.style.display = "none";
+     document.getElementById("identPatologias").parentNode.parentNode.parentNode.style.display = "none";
+     document.getElementById("caracterizacao").parentNode.parentNode.parentNode.style.display = "none";
+     document.getElementById("datacao").parentNode.parentNode.parentNode.style.display = "none";
+     document.getElementById("ensaio").parentNode.parentNode.parentNode.style.display = "none";
+     console.log(this.state.data[1]);
+     for(let i = 0; i< this.state.data[1].length; i++){
+        if(this.state.data[1][i].Objectivo === "identMateriais"){
+          document.getElementById("identMateriais").parentNode.parentNode.parentNode.style.display = "";
+        } 
+        if(this.state.data[1][i].Objectivo === "identIntervencoes") document.getElementById("identIntervencoes").parentNode.parentNode.parentNode.style.display = "";
+        if(this.state.data[1][i].Objectivo === "caracterizacao") document.getElementById("caracterizacao").parentNode.parentNode.parentNode.style.display = "";
+        if(this.state.data[1][i].Objectivo === "identPatologias") document.getElementById("identPatologias").parentNode.parentNode.parentNode.style.display = "";
+        if(this.state.data[1][i].Objectivo ==="datacao") document.getElementById("datacao").parentNode.parentNode.parentNode.style.display = "";
+        if(this.state.data[1][i].Objectivo === "ensaio") document.getElementById("ensaio").parentNode.parentNode.parentNode.style.display = "";
+     }
     //Realizar a inserção na tabela
     document.getElementById("tabela").children[1].children[0].remove();
     let content = document.getElementById("tabela").children[1];
@@ -275,6 +285,8 @@ class Create extends Component {
     btGuardar.style.display='block';
     //Apresentar todo o conteudo que foi escondido na apresentação
     $('.Create .collapse div').show();
+    //Apresenta os input do tipo checkbox e radio
+    $('input[type=checkbox], input[type=radio]').show();
   }
 
   /**

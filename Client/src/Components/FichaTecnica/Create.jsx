@@ -153,16 +153,16 @@ class Create extends Component {
     //     tab.push({tipoRef: content.children[0].children[0].value, lap: content.children[1].children[0].value, objEsp: content.children[2].children[0].value, reslt: content.children[3].children[0].value, data: content.children[5].children[0].value });
     // }
     // formData.append("tabobjGerais", tab);
-    // document.getElementById('interpretacaoResul').value = dados.;
-    // document.getElementById('observaConclusoes').value = dados.;
+    document.getElementById('interpretacaoResul').value = this.state.data.examesAnalisesInterpResultados;
+     document.getElementById('observaConclusoes').value = this.state.data.examesAnalisesObsConclusoes;
     //Pag 5
-    // document.getElementById('estruturaPag5').value = dados.;
-    // document.getElementById('superficiePag5').value = dados.;
-    // document.getElementById('elementosAcessoriosPag5').value = dados.;
-    // document.getElementById('estruturaPag5diag').value = dados.;
-    // document.getElementById('superficiePag5diag').value = dados.;
-    // document.getElementById('elementosAcessoriosPag5diag').value = dados.;
-    // document.getElementById('observaçoesConclusoesPag5').value = dados.;
+     document.getElementById('estruturaPag5').value = this.state.data.estadoConservFQMestrutura;
+     document.getElementById('superficiePag5').value = this.state.data.estadoConservFQMsuperficie;
+     document.getElementById('elementosAcessoriosPag5').value = this.state.data.estadoConservFQMelementosAcess;
+     document.getElementById('estruturaPag5diag').value = this.state.data.estadoConservBioEstrutura;
+     document.getElementById('superficiePag5diag').value = this.state.data.estadoConservBioSuperficie;
+     document.getElementById('elementosAcessoriosPag5diag').value = this.state.data.estadoConservBioElementosAcess;
+     document.getElementById('observaçoesConclusoesPag5').value = this.state.data.estadoConservObsConclusoes;
 
     //Pag 6
     document.getElementById('estruturaIntervAnter').value = this.state.data.estruturaIntervAnter;
@@ -173,9 +173,8 @@ class Create extends Component {
                     // if(document.getElementById('intervPrevencao').checked) formData.append("tipoInterv", document.getElementById('intervPrevencao').value);
                     // else if(document.getElementById('intervConvercao').checked) formData.append("tipoInterv", document.getElementById('intervConvercao').value);
                     // else formData.append("tipoInterv", document.getElementById('intervRestauro').value);
-                    // formData.append("aspetosEspecificosPag6", document.getElementById('aspetosEspecificosPag6').value);
-
-    //Pag7
+    document.getElementById('aspetosEspecificosPag6').value = this.state.data.aspetosEspecificosPag6;
+               //Pag7
     //AINDA SEM DADOS RECEBIDOS
                     // if(document.getElementById('intervPrevencaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervPrevencaoConsRes').value);
                     // else if(document.getElementById('intervConvercaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervConvercaoConsRes').value);
@@ -333,6 +332,7 @@ class Create extends Component {
     formData.append("poluicaoResultados",  this.state.data.poluicaoResultados);
     formData.append("poluicaoObservacoesConclusoes",  this.state.data.poluicaoObservacoesConclusoes);
     // //Pag 4
+    //FALTA O LADO DO SERVER AINDA
     // let objGerais = [];
     // if(document.getElementById("identMateriais").checked) objGerais.push(document.getElementById("identMateriais").value);
     // if(document.getElementById("identIntervencoes").checked) objGerais.push(document.getElementById("identIntervencoes").value);
@@ -347,70 +347,71 @@ class Create extends Component {
     //     tab.push({tipoRef: content.children[0].children[0].value, lap: content.children[1].children[0].value, objEsp: content.children[2].children[0].value, reslt: content.children[3].children[0].value, data: content.children[5].children[0].value });
     // }
     // formData.append("tabobjGerais", tab);
-    // formData.append("examesAnalisesInterpResultados", document.getElementById('interpretacaoResul').value);
-    // formData.append("examesAnalisesObsConclusoes", document.getElementById('observaConclusoes').value);
-    // //Pag 5
-    // formData.append("estadoConservFQMestrutura", document.getElementById('estruturaPag5').value);
-    // formData.append("estadoConservFQMsuperficie", document.getElementById('superficiePag5').value);
-    // formData.append("estadoConservFQMelementosAcess", document.getElementById('elementosAcessoriosPag5').value);
-    // formData.append("estadoConservBioEstrutura", document.getElementById('estruturaPag5diag').value);
-    // formData.append("estadoConservBioSuperficie", document.getElementById('superficiePag5diag').value);
-    // formData.append("estadoConservBioElementosAcess", document.getElementById('elementosAcessoriosPag5diag').value);
-    // formData.append("estadoConservObsConclusoes", document.getElementById('observaçoesConclusoesPag5').value);
-    // //Pag 6
-    // formData.append("estruturaIntervAnter", document.getElementById('estruturaIntervAnter').value);
-    // formData.append("superficieIntervAnter", document.getElementById('superficieIntervAnter').value);
-    // formData.append("elementosAcessoriosIntervAnter", document.getElementById('elementosAcessoriosIntervAnter').value);
-    // formData.append("observaçoesConclusoesPag6", document.getElementById('observaçoesConclusoesPag6').value);
-    // if(document.getElementById('intervPrevencao').checked) formData.append("tipoInterv", document.getElementById('intervPrevencao').value);
-    // else if(document.getElementById('intervConvercao').checked) formData.append("tipoInterv", document.getElementById('intervConvercao').value);
-    // else formData.append("tipoInterv", document.getElementById('intervRestauro').value);
-    // formData.append("aspetosEspecificosPag6", document.getElementById('aspetosEspecificosPag6').value);
-    // if(document.getElementById('intervPrevencaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervPrevencaoConsRes').value);
-    // else if(document.getElementById('intervConvercaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervConvercaoConsRes').value);
-    // else formData.append("tipoIntervCR", document.getElementById('intervRestauroConsRes').value);
-    // formData.append("EstruturaPropPag6", document.getElementById('EstruturaPropPag6').value);
-    // formData.append("EstruturaPropRecPag6", document.getElementById('EstruturaPropRecPag6').value);
-    // formData.append("SuperficiePropPag6", document.getElementById('SuperficiePropPag6').value);
-    // formData.append("SuperficiePropRecPag6", document.getElementById('SuperficiePropRecPag6').value);
-    // formData.append("ElementosAcessPropRecPag6", document.getElementById('ElementosAcessPropRecPag6').value);
-    // formData.append("observaçoesConclusoesPag6", document.getElementById('observaçoesConclusoesPag6').value);
+     formData.append("examesAnalisesInterpResultados", this.state.data.examesAnalisesInterpResultados);
+     formData.append("examesAnalisesObsConclusoes", this.state.data.examesAnalisesObsConclusoes);
+     //Pag 5
+     formData.append("estadoConservFQMestrutura", this.state.data.estadoConservFQMestrutura);
+     formData.append("estadoConservFQMsuperficie", this.state.data.estadoConservFQMsuperficie);
+     formData.append("estadoConservFQMelementosAcess", this.state.data.estadoConservFQMelementosAcess);
+     formData.append("estadoConservBioEstrutura", this.state.data.estadoConservBioEstrutura);
+     formData.append("estadoConservBioSuperficie", this.state.data.estadoConservBioSuperficie);
+     formData.append("estadoConservBioElementosAcess", this.state.data.estadoConservBioElementosAcess);
+     formData.append("estadoConservObsConclusoes", this.state.data.estadoConservObsConclusoes);
+    //Pag 6
+     formData.append("estruturaIntervAnter", this.state.data.estruturaIntervAnter);
+     formData.append("superficieIntervAnter", this.state.data.superficieIntervAnter);
+     formData.append("elementosAcessoriosIntervAnter", this.state.data.elementosAcessoriosIntervAnter);
+     formData.append("observaçoesConclusoesPag6", this.state.data.observaçoesConclusoesPag6);
+     //if(document.getElementById('intervPrevencao').checked) formData.append("tipoInterv", document.getElementById('intervPrevencao').value);
+     //else if(document.getElementById('intervConvercao').checked) formData.append("tipoInterv", document.getElementById('intervConvercao').value);
+     //else formData.append("tipoInterv", document.getElementById('intervRestauro').value);
+     formData.append("aspetosEspecificosPag6", this.state.data.aspetosEspecificosPag6);
+    //Pag7
+     //if(document.getElementById('intervPrevencaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervPrevencaoConsRes').value);
+     //else if(document.getElementById('intervConvercaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervConvercaoConsRes').value);
+     //else formData.append("tipoIntervCR", document.getElementById('intervRestauroConsRes').value);
+     formData.append("EstruturaPropPag6", this.state.data.EstruturaPropPag6);
+     formData.append("EstruturaPropRecPag6", this.state.data.EstruturaPropRecPag6);
+     formData.append("SuperficiePropPag6", this.state.data.SuperficiePropPag6);
+     formData.append("SuperficiePropRecPag6", this.state.data.SuperficiePropRecPag6);
+     formData.append("ElementosAcessPropRecPag6", this.state.data.ElementosAcessPropRecPag6);
+     formData.append("observaçoesConclusoesPag6", this.state.data.observaçoesConclusoesPag6);
     // //Pag 8
-    // formData.append("estruturaPag8", document.getElementById('estruturaPag8').value);
-    // formData.append("recursosEstruturaPag8", document.getElementById('recursosEstruturaPag8').value);
-    // formData.append("superficiePag8", document.getElementById('superficiePag8').value);
-    // formData.append("recursosSuperficiePag8", document.getElementById('recursosSuperficiePag8').value);
-    // formData.append("elementosAcessoriosPag8", document.getElementById('elementosAcessoriosPag8').value);
-    // formData.append("recursosElementosAcPag8", document.getElementById('recursosElementosAcPag8').value);
-    // formData.append("observaçoesConclusoesPag8", document.getElementById('observaçoesConclusoesPag8').value);
+     formData.append("estruturaPag8", this.state.data.estruturaPag8);
+     formData.append("recursosEstruturaPag8", this.state.data.recursosEstruturaPag8);
+     formData.append("superficiePag8", this.state.data.superficiePag8);
+     formData.append("recursosSuperficiePag8", this.state.data.recursosSuperficiePag8);
+     formData.append("elementosAcessoriosPag8", this.state.data.elementosAcessoriosPag8);
+     formData.append("recursosElementosAcPag8",this.state.data.recursosElementosAcPag8);
+     formData.append("observaçoesConclusoesPag8", this.state.data.observaçoesConclusoesPag8);
     // //Pag 9
-    // formData.append("relTecInterLCRM", document.getElementById('relTecInterLCRM').value);
-    // formData.append("tipoDesigOrig", document.getElementById('tipoDesigOrig').value);
-    // formData.append("refOrig", document.getElementById('refOrig').value);
-    // formData.append("entidadeOrig", document.getElementById('entidadeOrig').value);
-    // formData.append("tipoDesigDocGraf", document.getElementById('tipoDesigDocGraf').value);
-    // formData.append("refDocGraf", document.getElementById('refDocGraf').value);
-    // formData.append("entidadeDocGraf", document.getElementById('entidadeDocGraf').value);
-    // formData.append("tipoDesigExames", document.getElementById('tipoDesigExames').value);
-    // formData.append("refExames", document.getElementById('refExames').value);
-    // formData.append("entidadeExames", document.getElementById('entidadeExames').value);
+     formData.append("relTecInterLCRM", this.state.data.relTecInterLCRM);
+     formData.append("tipoDesigOrig", this.state.data.tipoDesigOrig);
+     formData.append("refOrig", this.state.data.refOrig);
+     formData.append("entidadeOrig", this.state.data.entidadeOrig);
+     formData.append("tipoDesigDocGraf", this.state.data.tipoDesigDocGraf);
+     formData.append("refDocGraf", this.state.data.refDocGraf);
+     formData.append("entidadeDocGraf", this.state.data.entidadeDocGraf);
+     formData.append("tipoDesigExames", this.state.data.tipoDesigExames);
+     formData.append("refExames", this.state.data.refExames);
+     formData.append("entidadeExames", this.state.data.entidadeExames);
     // //Pag10
-    // formData.append("atledpArqDoc", document.getElementById('atledpArqDoc').value);
-    // formData.append("tipoArqDoc", document.getElementById('tipoArqDoc').value);
-    // formData.append("localArqDoc", document.getElementById('localArqDoc').value);
-    // formData.append("cotaArqDoc", document.getElementById('cotaArqDoc').value);
-    // formData.append("atledpIcon", document.getElementById('atledpIcon').value);
-    // formData.append("tipoIcon", document.getElementById('tipoIcon').value);
-    // formData.append("localIcon", document.getElementById('localIcon').value);
-    // formData.append("cotaIcon", document.getElementById('cotaIcon').value);
-    // formData.append("atledpBiblio", document.getElementById('atledpBiblio').value);
-    // formData.append("tipoBiblio", document.getElementById('tipoBiblio').value);
-    // formData.append("localBiblio", document.getElementById('localBiblio').value);
-    // formData.append("cotaBiblio", document.getElementById('cotaBiblio').value);
-    // formData.append("atledpOutras", document.getElementById('atledpOutras').value);
-    // formData.append("tipoOutras", document.getElementById('tipoOutras').value);
-    // formData.append("localOutras", document.getElementById('localOutras').value);
-    // formData.append("cotaOutras", document.getElementById('cotaOutras').value);
+     formData.append("atledpArqDoc", this.state.data.atledpArqDoc);
+     formData.append("tipoArqDoc", this.state.data.tipoArqDoc);
+     formData.append("localArqDoc", this.state.data.localArqDoc);
+     formData.append("cotaArqDoc", this.state.data.cotaArqDoc);
+     formData.append("atledpIcon", this.state.data.atledpIcon);
+     formData.append("tipoIcon", this.state.data.tipoIcon);
+     formData.append("localIcon", this.state.data.localIcon);
+     formData.append("cotaIcon", this.state.data.cotaIcon);
+     formData.append("atledpBiblio", this.state.data.atledpBiblio);
+     formData.append("tipoBiblio", this.state.data.tipoBiblio);
+     formData.append("localBiblio", this.state.data.localBiblio);
+     formData.append("cotaBiblio", this.state.data.cotaBiblio);
+     formData.append("atledpOutras", this.state.data.atledpOutras);
+     formData.append("tipoOutras", this.state.data.tipoOutras);
+     formData.append("localOutras", this.state.data.localOutras);
+     formData.append("cotaOutras", this.state.data.cotaOutras);
     // let table = [];
     // for(let j = 0 ; j < document.getElementById("table").children[1].childElementCount; j++){
     //     let cont = document.getElementById("table").children[1].children[j];
@@ -422,18 +423,16 @@ class Create extends Component {
     //       }
     //     );
     // }
-    // formData.append("tabel10", table);
-
-    
+    // formData.append("tabel10", table);    
     //Final
-    //formData.append("fichaRegistoFK", this.state.id);
+    formData.append("fichaRegistoFK", this.state.id);
     //Enviar pedidos
     const response = await fetch(`/api/fichaTecnica/${this.props.id}/edit`, {
       method: "POST",
       headers: {
         'x-auth-token': sessionStorage.getItem('token')
       },
-      body: formData
+      body: formData,
       });
       //Aguardar API
       await response.json().then(resp => {

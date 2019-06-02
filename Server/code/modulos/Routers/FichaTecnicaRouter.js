@@ -228,7 +228,7 @@ exports.updateFichaTecnicaRoute = async (app, bd) => {
     else {
       //se tiver role
       if (token.roleFK) {
-        let ficha = {
+        /*let ficha = {
           visible: true,
           localizacao: req.body.localizacao,
           proprietario: req.body.proprietario,
@@ -312,7 +312,9 @@ exports.updateFichaTecnicaRoute = async (app, bd) => {
           recursosElementosAcPag8: req.body.recursosElementosAcPag8,
           observaçoesConclusoesPag8: req.body.observaçoesConclusoesPag8,
           fichaRegistoFK: req.body.fichaRegistoFK
-        };
+        };*/
+        let ficha = req.body;
+        //console.log(ficha);
         //alterar os campos
         let resposta_bd = await fichaTecnica.updateFichaTecnica(bd, ficha);
         if (resposta_bd.stat === 0) {

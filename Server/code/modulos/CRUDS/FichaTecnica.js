@@ -472,14 +472,21 @@ exports.updateFichaTecnica = async (bd, dados) => {
     dados.fichaRegistoFK
   ) {
     resposta_bd = await bd.query(
-      "update tbl_fichasTecnicas set visible=?,localizacao=?,proprietario=?,codPostalProprietario=?,emailProprietario =?, contactoProprietario=?, donoObra=?, codPostalDonoObra =? , contactoDonoObra =?, contactoDonoObra =?, mecenas =?, codPostalMecenas =?, contactoMecenas =?, bemIntegradoEmConjunto =?, tipoBensConjunto =?, elemConstConj =?, materiasElementosAcessorios =?, marcasInscricoesAssinaturas =?, marcasInscricoesMontagem =?, marcasInscricoesConstrucao =?, classPatrimonial =?, epoca =?, qualidade =?, materiaisEstruturaSuporte =?, materiaisSuperficies =?, tecnicasEstruturaSuporte =?, tecnicasSuperficie =?, condAmbDescricao =?,condAmbFrioTemperatura =?, condAmbFrioHumidade =?, condAmbFrioPeriodoInicio =?, condAmbFrioPeriodoFim =?, condAmbQuenteTemperatura =?, condAmbQuenteHumidade =?, condAmbQuentePeriodoInicio =?, condAmbQuentePeriodoFim =?, ilumArtTipo =?, ilumArtValorIluminancia =?, ilumArtValurUV =?, ilumArtValorRealUV =?, ilumNatOrigem =?, ilumNatValorIluminancia =?, ilumNatValorUV =?, ilumNatValorRealUV =?, poluicaoAgentes =?, poluicaoFontesOrigem =?, poluicaoResultados =?, poluicaoObservacoesConclusoes =?,examesAnalisesInterpResultados =?, examesAnalisesObsConclusoes =?, estadoConservFQMestrutura =?, estadoConservFQMsuperficie =?, estadoConservFQMelementosAcess =?, estadoConservBioEstrutura =?, estadoConservBioSuperficie =?, estadoConservBioElementosAcess =?, estadoConservObsConclusoes =?, estruturaIntervAnter =?, superficieIntervAnter =?, elementosAcessoriosIntervAnter =?, observaçoesConclusoesPag6 =?, tipoInterv =?, aspetosEspecificosPag6 =?, tipoIntervCR =?, EstruturaPropPag6 =?, EstruturaPropRecPag6 =?, SuperficiePropPag6 =?, SuperficiePropRecPag6 =?, ElementosAcessPropRecPag6 =?, observaçoesConclusoesPag6 =?, estruturaPag8 =?, recursosEstruturaPag8 =?, superficiePag8 =?, recursosSuperficiePag8 =?, elementosAcessoriosPag8 =?, recursosElementosAcPag8 =?, observaçoesConclusoesPag8 =?, fichaRegistoFK =? where fichaTecnicaID = ? ",
+      "update tbl_fichasTecnicas set "+"visible = ?,localizacao= ?,proprietario= ?,codPostalProprietario= ?,emailProprietario= ?,contactoProprietario= ?,donoObra= ?,codPostalDonoObra= ?,contactoDonoObra= ?,mecenas= ?,codPostalMecenas= ?,contactoMecenas= ?," +
+      "tipoBensConjunto= ?,bemIntegradoEmConjunto= ?,elemConstConj= ?,materiasElementosAcessorios= ?,marcasInscricoesAssinaturas= ?,marcasInscricoesMontagem= ?,marcasInscricoesConstrucao= ?,classPatrimonial= ?,epoca= ?,qualidade= ?,materiaisEstruturaSuporte= ?,materiaisSuperficies= ?," +
+      "tecnicasEstruturaSuporte= ?,tecnicasSuperficie= ?,condAmbDescricao= ?,condAmbFrioTemperatura= ?,condAmbFrioHumidade= ?,condAmbFrioPeriodoInicio= ?,condAmbFrioPeriodoFim= ?,condAmbQuenteTemperatura= ?,condAmbQuenteHumidade= ?,condAmbQuentePeriodoInicio= ?,condAmbQuentePeriodoFim= ?,ilumArtTipo= ?," +
+      "ilumArtValorIluminancia= ?,ilumArtValurUV= ?,ilumArtValorRealUV= ?,ilumNatOrigem= ?,ilumNatValorIluminancia= ?,ilumNatValorUV= ?,ilumNatValorRealUV= ?,poluicaoAgentes= ?,poluicaoFontesOrigem= ?,poluicaoResultados= ?, poluicaoObservacoesConclusoes= ?,examesAnalisesInterpResultados= ?," +
+      "examesAnalisesObsConclusoes= ?,estadoConservFQMestrutura= ?,estadoConservFQMsuperficie= ?,estadoConservFQMelementosAcess= ?,estadoConservBioEstrutura= ?, estadoConservBioSuperficie= ?,estadoConservBioElementosAcess= ?,estadoConservObsConclusoes= ?,estruturaIntervAnter= ?,superficieIntervAnter= ?,elementosAcessoriosIntervAnter= ?,observaçoesConclusoesPag6= ?," +
+      "tipoInterv= ?,aspetosEspecificosPag6= ?,tipoIntervCR= ?,EstruturaPropPag6= ?,EstruturaPropRecPag6= ?,SuperficiePropPag6= ?,SuperficiePropRecPag6= ?,ElementosAcessPropRecPag6= ?,estruturaPag8= ?,recursosEstruturaPag8= ?,superficiePag8= ?,recursosSuperficiePag8= ?," +
+      "elementosAcessoriosPag8= ?,recursosElementosAcPag8= ?,observaçoesConclusoesPag8= ?, relTecInterLCRM= ?,tipoDesigOrig= ?,refOrig= ?,entidadeOrig= ?,tipoDesigDocGraf= ?,refDocGraf= ?,entidadeDocGraf= ?,tipoDesigExames= ?,refExames= ?," +
+      "entidadeExames= ?,atledpArqDoc= ?,tipoArqDoc= ?,localArqDoc= ?,cotaArqDoc= ?,atledpIcon= ?,tipoIcon= ?,localIcon= ?,cotaIcon= ?,atledpBiblio= ?,tipoBiblio= ?,localBiblio= ?," +
+      "cotaBiblio= ?,atledpOutras= ?,tipoOutras= ?,localOutras= ?,cotaOutras= ?,fichaRegistoFK= ? where fichaTecnicaID=?",
       [
         dados.visible,
         dados.localizacao,
         dados.proprietario,
         dados.codPostalProprietario,
         dados.emailProprietario,
-        ,
         dados.contactoProprietario,
         dados.donoObra,
         dados.codPostalDonoObra,
@@ -487,8 +494,8 @@ exports.updateFichaTecnica = async (bd, dados) => {
         dados.mecenas,
         dados.codPostalMecenas,
         dados.contactoMecenas,
-        dados.bemIntegradoEmConjunto,
         dados.tipoBensConjunto,
+        dados.bemIntegradoEmConjunto,
         dados.elemConstConj,
         dados.materiasElementosAcessorios,
         dados.marcasInscricoesAssinaturas,
@@ -505,7 +512,6 @@ exports.updateFichaTecnica = async (bd, dados) => {
         dados.condAmbFrioTemperatura,
         dados.condAmbFrioHumidade,
         dados.condAmbFrioPeriodoInicio,
-        ,
         dados.condAmbFrioPeriodoFim,
         dados.condAmbQuenteTemperatura,
         dados.condAmbQuenteHumidade,
@@ -523,8 +529,11 @@ exports.updateFichaTecnica = async (bd, dados) => {
         dados.poluicaoFontesOrigem,
         dados.poluicaoResultados,
         dados.poluicaoObservacoesConclusoes,
+        //Exames e Análises (página) 4
         dados.examesAnalisesInterpResultados,
         dados.examesAnalisesObsConclusoes,
+        //5
+        //Estado de Conservação (página 5)
         dados.estadoConservFQMestrutura,
         dados.estadoConservFQMsuperficie,
         dados.estadoConservFQMelementosAcess,
@@ -532,12 +541,14 @@ exports.updateFichaTecnica = async (bd, dados) => {
         dados.estadoConservBioSuperficie,
         dados.estadoConservBioElementosAcess,
         dados.estadoConservObsConclusoes,
-        //Página 6
+        //Intervenções Anteriores
         dados.estruturaIntervAnter,
         dados.superficieIntervAnter,
         dados.elementosAcessoriosIntervAnter,
+        //Intervenção Proposta pelo Conservador-Restaurador (página 7)
         dados.observaçoesConclusoesPag6,
         dados.tipoInterv,
+        //6
         dados.aspetosEspecificosPag6,
         dados.tipoIntervCR,
         dados.EstruturaPropPag6,
@@ -545,19 +556,52 @@ exports.updateFichaTecnica = async (bd, dados) => {
         dados.SuperficiePropPag6,
         dados.SuperficiePropRecPag6,
         dados.ElementosAcessPropRecPag6,
-        dados.observaçoesConclusoesPag6,
-        //pagina 8
+        // Intervenção Realizada página 8
         dados.estruturaPag8,
         dados.recursosEstruturaPag8,
         dados.superficiePag8,
         dados.recursosSuperficiePag8,
         dados.elementosAcessoriosPag8,
+        //7
         dados.recursosElementosAcPag8,
         dados.observaçoesConclusoesPag8,
-        dados.fichaRegistoFK
+        //Documentação produzida / recolhida página 9
+        dados.relTecInterLCRM,
+        dados.tipoDesigOrig,
+        dados.refOrig,
+        dados.entidadeOrig,
+        dados.tipoDesigDocGraf,
+        dados.refDocGraf,
+        dados.entidadeDocGraf,
+        dados.tipoDesigExames,
+        dados.refExames,
+        dados.entidadeExames,
+
+        //8
+        //FONTES Arquivísticas | Documentais página 10
+        dados.atledpArqDoc,
+        dados.tipoArqDoc,
+        dados.localArqDoc,
+        dados.cotaArqDoc,
+        dados.atledpIcon,
+        dados.tipoIcon,
+        dados.localIcon,
+        dados.cotaIcon,
+        dados.atledpBiblio,
+        dados.tipoBiblio,
+        dados.localBiblio,
+        dados.cotaBiblio,
+        //9
+        dados.atledpOutras,
+        dados.tipoOutras,
+        dados.localOutras,
+        dados.cotaOutras,
+        dados.fichaRegistoFK,
+        dados.fichaTecnicaID
       ]
     );
   }
+  console.log(resposta_bd.resposta);
   //inserio na base de dados
   if (resposta_bd.stat === 0) {
     resultadofinal.stat = 0;

@@ -263,12 +263,15 @@ class Create extends Component {
    * Método que transforma a página dos detalhes para a página da edição
    */
   changeToEdit(){
+    //Remove o atributo readonly nos input e nas textarea
     $('input, textarea').removeAttr('readonly');
     //$('#btBar').html('<button class="btn btn-success btn-lg btn-block mb-5" type="button">Guardar</button>');
     const btEditar = document.getElementById('btEditar');
     btEditar.style.display="none";
     const btGuardar = document.getElementById('btGuardar');
     btGuardar.style.display='block';
+    //Apresentar todo o conteudo que foi escondido na apresentação
+    $('.Create .collapse div').show();
   }
 
   /**

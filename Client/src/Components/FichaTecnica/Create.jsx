@@ -190,7 +190,7 @@ class Create extends Component {
     document.getElementById('SuperficiePropPag6').value = this.state.data.SuperficiePropPag6;
     document.getElementById('SuperficiePropRecPag6').value = this.state.data.SuperficiePropRecPag6;
     document.getElementById('ElementosAcessPropRecPag6').value =this.state.data.ElementosAcessPropRecPag6;
-    document.getElementById('observaçoesConclusoesPag6').value= this.state.data.observaçoesConclusoesPag6;		 	
+    document.getElementById('observaçoesConclusoesPag7').value= this.state.data.observaçoesConclusoesPag7;		 	
     
     //Pag 8
     document.getElementById('estruturaPag8').value = this.state.data.estruturaPag8;
@@ -212,7 +212,7 @@ class Create extends Component {
     document.getElementById('tipoDesigExames').value = this.state.data.tipoDesigExames;
     document.getElementById('refExames').value = this.state.data.refExames;
     document.getElementById('entidadeExames').value = this.state.data.entidadeExames;
-    
+
     //Pag10
     document.getElementById('atledpArqDoc').value = this.state.data.atledpArqDoc;
     document.getElementById('tipoArqDoc').value = this.state.data.tipoArqDoc;
@@ -384,7 +384,7 @@ class Create extends Component {
      formData.append("SuperficiePropPag6", this.state.data.SuperficiePropPag6);
      formData.append("SuperficiePropRecPag6", this.state.data.SuperficiePropRecPag6);
      formData.append("ElementosAcessPropRecPag6", this.state.data.ElementosAcessPropRecPag6);
-     formData.append("observaçoesConclusoesPag6", this.state.data.observaçoesConclusoesPag6);
+     formData.append("observaçoesConclusoesPag7", this.state.data.observaçoesConclusoesPag7);
     // //Pag 8
      formData.append("estruturaPag8", this.state.data.estruturaPag8);
      formData.append("recursosEstruturaPag8", this.state.data.recursosEstruturaPag8);
@@ -593,7 +593,7 @@ class Create extends Component {
     formData.append("SuperficiePropPag6", document.getElementById('SuperficiePropPag6').value);
     formData.append("SuperficiePropRecPag6", document.getElementById('SuperficiePropRecPag6').value);
     formData.append("ElementosAcessPropRecPag6", document.getElementById('ElementosAcessPropRecPag6').value);
-    formData.append("observaçoesConclusoesPag6", document.getElementById('observaçoesConclusoesPag6').value);
+    formData.append("observaçoesConclusoesPag7", document.getElementById('observaçoesConclusoesPag7').value);
     //Pag 8
     formData.append("estruturaPag8", document.getElementById('estruturaPag8').value);
     formData.append("recursosEstruturaPag8", document.getElementById('recursosEstruturaPag8').value);

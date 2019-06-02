@@ -360,7 +360,17 @@ exports.getFichaTecnica = async (bd, id) => {
     "Select * from tbl_fichasTecnicas where fichaRegistoFK = ? and visible = true limit 1",
     [id]
   );
-  if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
+  let resposta_aux = await bd.query(
+    "Select * from tbl_testespagina4objectivosGerais where fichaTecnicaFK = ?",
+    [id]
+  );
+  resultadofinal.objectivosGerais = resposta_aux.resposta;
+  resposta_aux = await bd.query(
+    "select * from tbl_testespagina4objectivosGerais where fichaTecnicaFK = ?",
+    [id]
+  );
+  resultadofinal.objectivosTabela = resposta_aux.resposta;
+  if (resposta_bd.stat == 0 && resposta_bd.resposta.length > 0) {
     resultadofinal.stat = 0;
     resultadofinal.resposta = resposta_bd.resposta[0];
   } else if (resposta_bd.stat === 0) {

@@ -29,7 +29,7 @@ class Details extends Component {
             let status = resp.status;
             switch (status) {
                 case "Authenticated":
-                    this.setState({ data: resp.resposta});
+                    this.setState({ data: resp.resposta });
                     break;
                 default:
                     console.log(this.alertText)
@@ -71,15 +71,18 @@ class Details extends Component {
                             </div>
                             <div className="col-md-6 mb-3">
                                 <label>Email</label>
-                                <input type="text" className="form-control" id="email" placeholder={this.state.data.email} readOnly/>
+                                <input type="text" className="form-control" id="email" placeholder={this.state.data.email} readOnly />
                             </div>
                             <div className="col-md-12 mb-3">
-                                <label>Tipo</label>
-                                <input type="text" className="form-control" id="tipo" placeholder={this.state.data.tipo} readOnly />
+                            <label>Tipo</label>
+                                <select id="DDLTipo" className="form-control" disabled>
+                                    <option className="dropdown-item">
+                                        {this.state.data.tipo}
+                                    </option>
+                                </select>
                             </div>
                         </div>
 
-                        {/*<a className="btn btn-success btn-lg btn-block" href={href + "/editar"}> Editar </a>*/}
                         <br />
                     </div>
                 </div>

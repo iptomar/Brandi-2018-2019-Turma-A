@@ -14,7 +14,7 @@ class Pag5 extends Component {
 
     render() {
         return (
-            <div className="container" style={{paddingTop:"0px"}}>
+            <div className="container" style={{ paddingTop: "0px" }}>
                 <div className="pt-3 py-3 text-center">
                     <h4>Estado de Conservação</h4>
                 </div>

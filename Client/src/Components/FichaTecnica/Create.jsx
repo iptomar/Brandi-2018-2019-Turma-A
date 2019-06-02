@@ -28,6 +28,7 @@ class Create extends Component {
     this.getData = this.getData.bind(this);
     this.getDataG = this.getDataG.bind(this);
     this.fetchAndSetData = this.fetchAndSetData.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -41,9 +42,9 @@ class Create extends Component {
   }
 
    // Controla as alterações nos inputs (Necessidade do React)
-   handleChange(e) {
-    let name = e.target.name;
-    let value = e.target.value;
+   handleChange(event) {
+    let name = event.target.id;
+    let value = event.target.value;
     this.setState( prevState => ({
       data: {
         ...prevState.data,
@@ -74,9 +75,9 @@ class Create extends Component {
       switch (status) {
        case "Authenticated":
         await this.setState({ data: resp.resposta });
+         //Ativa a função de atualização
+         $("input, textarea").on('change', this.handleChange);
          //Inserção dos dados nos campos necessários
-         document.querySelectorAll("input").onchange = 'this.handleChange()';
-         document.querySelectorAll("textarea").onchange = 'this.handleChange()';
          //Pag 1
         document.getElementById('localizacao').value = this.state.data.localizacao;
         document.getElementById('proprietario').value = this.state.data.proprietario;
@@ -100,16 +101,18 @@ class Create extends Component {
         document.getElementById('inscricoesConstrucao').value = this.state.data.marcasInscricoesConstrucao;
         document.getElementById('classPatrimonial').value = this.state.data.classPatrimonial;
         
-        if(this.state.data.epoca !== "EpocaCoeva"){ document.getElementById('EpocaCoevo').parentNode.parentNode.parentNode.style.display = "none";}
-        if(this.state.data.epoca !== "EpocaTardio"){ document.getElementById('EpocaTardio').parentNode.parentNode.parentNode.style.display = "none";}
-        if(this.state.data.epoca !== "EpocaOutra"){ document.getElementById('EpocaOutra').parentNode.parentNode.parentNode.style.display = "none";}
-        if(this.state.data.epoca !== "EpocaReplica"){ document.getElementById('EpocaReplica').parentNode.parentNode.parentNode.style.display = "none";}
-        if(this.state.data.epoca !== "EpocaReproducao"){ document.getElementById('EpocaReproducao').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data.epoca !== "Coevo"){ document.getElementById('EpocaCoevo').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data.epoca !== "Tardio"){ document.getElementById('EpocaTardio').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data.epoca !== "Outra"){ document.getElementById('EpocaOutra').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data.epoca !== "Replica"){ document.getElementById('EpocaReplica').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data.epoca !== "Reproducao"){ document.getElementById('EpocaReproducao').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data.epoca !== "Falsificacao"){ document.getElementById('EpocaFalsificacao').parentNode.parentNode.parentNode.style.display = "none";}
 
         if(this.state.data.qualidade !== "Excelente") document.getElementById('QualidadeExcelente').parentNode.parentNode.parentNode.style.display = "none";
         if(this.state.data.qualidade !== "Muito boa") document.getElementById('QualidadeMuitoBoa').parentNode.parentNode.parentNode.style.display = "none";
         if(this.state.data.qualidade !== "Boa") document.getElementById('QualidadeBoa').parentNode.parentNode.parentNode.style.display = "none";
         if(this.state.data.qualidade !== "Regular") document.getElementById('QualidadeRegular').parentNode.parentNode.parentNode.style.display = "none";
+        if(this.state.data.qualidade !== "Fraca") document.getElementById('QualidadeFraca').parentNode.parentNode.parentNode.style.display = "none";
 
         document.getElementById('estruturaSuporteMateriais').value = this.state.data.materiaisEstruturaSuporte;
         document.getElementById('SuperficieMateriais').value = this.state.data.materiaisSuperficies;
@@ -137,25 +140,27 @@ class Create extends Component {
         document.getElementById('poluicaoFontesOrigem').value = this.state.data.poluicaoFontesOrigem;
         document.getElementById('poluicaoResultados').value = this.state.data.poluicaoResultados;
         document.getElementById('poluicaoObservacoesConclusoes').value = this.state.data.poluicaoObservacoesConclusoes;
+
         //Pag 4
-        //FAZER DESAPARECER OS QUE NÃO SÃO ADEQUADOS (AINDA NÃO FEITO POR CAUSA DO INSERT NÃO TER ESTES DADOS CORRETOS)
-    // let objGerais = [];
-    // if(document.getElementById("identMateriais").checked) objGerais.push(document.getElementById("identMateriais").value);
-    // if(document.getElementById("identIntervencoes").checked) objGerais.push(document.getElementById("identIntervencoes").value);
-    // if(document.getElementById("caracterizacao").checked) objGerais.push(document.getElementById("caracterizacao").value);
-    // if(document.getElementById("identPatologias").checked) objGerais.push(document.getElementById("identPatologias").value);
-    // if(document.getElementById("datacao").checked) objGerais.push(document.getElementById("datacao").value);
-    // if(document.getElementById("ensaio").checked) objGerais.push(document.getElementById("ensaio").value);
-    // formData.append("objGerais", objGerais);
-    // let tab = [];
-    // for(let i = 0 ; i < document.getElementById("tabela").children[1].childElementCount; i++){
-    //     let content = document.getElementById("tabela").children[1].children[i];
-    //     tab.push({tipoRef: content.children[0].children[0].value, lap: content.children[1].children[0].value, objEsp: content.children[2].children[0].value, reslt: content.children[3].children[0].value, data: content.children[5].children[0].value });
-    // }
-    // formData.append("tabobjGerais", tab);
-    document.getElementById('interpretacaoResul').value = this.state.data.examesAnalisesInterpResultados;
+        //FAZER DESAPARECER OS QUE NÃO SÃO ADEQUADOS (FALTA SER ENVIADO)
+                                      // let objGerais = [];
+                                      // if(document.getElementById("identMateriais").checked) objGerais.push(document.getElementById("identMateriais").value);
+                                      // if(document.getElementById("identIntervencoes").checked) objGerais.push(document.getElementById("identIntervencoes").value);
+                                      // if(document.getElementById("caracterizacao").checked) objGerais.push(document.getElementById("caracterizacao").value);
+                                      // if(document.getElementById("identPatologias").checked) objGerais.push(document.getElementById("identPatologias").value);
+                                      // if(document.getElementById("datacao").checked) objGerais.push(document.getElementById("datacao").value);
+                                      // if(document.getElementById("ensaio").checked) objGerais.push(document.getElementById("ensaio").value);
+                                      // formData.append("objGerais", objGerais);
+                                      // let tab = [];
+                                      // for(let i = 0 ; i < document.getElementById("tabela").children[1].childElementCount; i++){
+                                      //     let content = document.getElementById("tabela").children[1].children[i];
+                                      //     tab.push({tipoRef: content.children[0].children[0].value, lap: content.children[1].children[0].value, objEsp: content.children[2].children[0].value, reslt: content.children[3].children[0].value, data: content.children[5].children[0].value });
+                                      // }
+                                      // formData.append("tabobjGerais", tab);
+      document.getElementById('interpretacaoResul').value = this.state.data.examesAnalisesInterpResultados;
      document.getElementById('observaConclusoes').value = this.state.data.examesAnalisesObsConclusoes;
-    //Pag 5
+
+     //Pag 5
      document.getElementById('estruturaPag5').value = this.state.data.estadoConservFQMestrutura;
      document.getElementById('superficiePag5').value = this.state.data.estadoConservFQMsuperficie;
      document.getElementById('elementosAcessoriosPag5').value = this.state.data.estadoConservFQMelementosAcess;
@@ -169,24 +174,25 @@ class Create extends Component {
     document.getElementById('superficieIntervAnter').value = this.state.data.superficieIntervAnter;
     document.getElementById('elementosAcessoriosIntervAnter').value = this.state.data.elementosAcessoriosIntervAnter;
     document.getElementById('observaçoesConclusoesPag6').value = this.state.data.observaçoesConclusoesPag6;
-      //AINDA SEM DADOS RECEBIDOS
-                    // if(document.getElementById('intervPrevencao').checked) formData.append("tipoInterv", document.getElementById('intervPrevencao').value);
-                    // else if(document.getElementById('intervConvercao').checked) formData.append("tipoInterv", document.getElementById('intervConvercao').value);
-                    // else formData.append("tipoInterv", document.getElementById('intervRestauro').value);
+    if(this.state.data.tipoInterv !== "Prevenção") document.getElementById('intervPrevencao').parentNode.parentNode.parentNode.style.display = "none";
+    if(this.state.data.tipoInterv !== "Conservação") document.getElementById('intervConvercao').parentNode.parentNode.parentNode.style.display = "none";
+    if(this.state.data.tipoInterv !== "Restauro") document.getElementById('intervRestauro').parentNode.parentNode.parentNode.style.display = "none";
     document.getElementById('aspetosEspecificosPag6').value = this.state.data.aspetosEspecificosPag6;
-               //Pag7
-    //AINDA SEM DADOS RECEBIDOS
-                    // if(document.getElementById('intervPrevencaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervPrevencaoConsRes').value);
-                    // else if(document.getElementById('intervConvercaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervConvercaoConsRes').value);
-                    // else formData.append("tipoIntervCR", document.getElementById('intervRestauroConsRes').value);
+    
+    //Pag7
+    //console.log(this.state.data);
+    if(this.state.data.tipoIntervCR !== "Prevenção") document.getElementById('intervPrevencaoConsRes').parentNode.parentNode.parentNode.style.display = "none";
+    if(this.state.data.tipoIntervCR !== "Conservação") document.getElementById('intervConvercaoConsRes').parentNode.parentNode.parentNode.style.display = "none";
+    if(this.state.data.tipoIntervCR !== "Restauro") document.getElementById('intervRestauroConsRes').parentNode.parentNode.parentNode.style.display = "none";
     
     document.getElementById('EstruturaPropPag6').value = this.state.data.EstruturaPropPag6;
     document.getElementById('EstruturaPropRecPag6').value = this.state.data.EstruturaPropRecPag6;
     document.getElementById('SuperficiePropPag6').value = this.state.data.SuperficiePropPag6;
     document.getElementById('SuperficiePropRecPag6').value = this.state.data.SuperficiePropRecPag6;
     document.getElementById('ElementosAcessPropRecPag6').value =this.state.data.ElementosAcessPropRecPag6;
-    document.getElementById('observaçoesConclusoesPag6').value= this.state.data.observaçoesConclusoesPag6;		 	
-    // //Pag 8
+    document.getElementById('observaçoesConclusoesPag7').value= this.state.data.observaçoesConclusoesPag7;		 	
+    
+    //Pag 8
     document.getElementById('estruturaPag8').value = this.state.data.estruturaPag8;
     document.getElementById('recursosEstruturaPag8').value = this.state.data.recursosEstruturaPag8;
     document.getElementById('superficiePag8').value = this.state.data.superficiePag8 ;
@@ -194,6 +200,7 @@ class Create extends Component {
     document.getElementById('elementosAcessoriosPag8').value = this.state.data.elementosAcessoriosPag8 ;
     document.getElementById('recursosElementosAcPag8').value = this.state.data.recursosElementosAcPag8;
     document.getElementById('observaçoesConclusoesPag8').value = this.state.data.observaçoesConclusoesPag8;
+    
     //Pag 9
     document.getElementById('relTecInterLCRM').value = this.state.data.relTecInterLCRM;
     document.getElementById('tipoDesigOrig').value = this.state.data.tipoDesigOrig;
@@ -205,6 +212,7 @@ class Create extends Component {
     document.getElementById('tipoDesigExames').value = this.state.data.tipoDesigExames;
     document.getElementById('refExames').value = this.state.data.refExames;
     document.getElementById('entidadeExames').value = this.state.data.entidadeExames;
+
     //Pag10
     document.getElementById('atledpArqDoc').value = this.state.data.atledpArqDoc;
     document.getElementById('tipoArqDoc').value = this.state.data.tipoArqDoc;
@@ -222,6 +230,7 @@ class Create extends Component {
     document.getElementById('tipoOutras').value = this.state.data.tipoOutras;
     document.getElementById('localOutras').value = this.state.data.localOutras;
     document.getElementById('cotaOutras').value = this.state.data.cotaOutras;
+    //console.log(this.state.tabel10);
     // let table = [];
     // for(let j = 0 ; j < document.getElementById("table").children[1].childElementCount; j++){
     //     let cont = document.getElementById("table").children[1].children[j];
@@ -254,12 +263,15 @@ class Create extends Component {
    * Método que transforma a página dos detalhes para a página da edição
    */
   changeToEdit(){
+    //Remove o atributo readonly nos input e nas textarea
     $('input, textarea').removeAttr('readonly');
     //$('#btBar').html('<button class="btn btn-success btn-lg btn-block mb-5" type="button">Guardar</button>');
     const btEditar = document.getElementById('btEditar');
     btEditar.style.display="none";
     const btGuardar = document.getElementById('btGuardar');
     btGuardar.style.display='block';
+    //Apresentar todo o conteudo que foi escondido na apresentação
+    $('.Create .collapse div').show();
   }
 
   /**
@@ -375,7 +387,7 @@ class Create extends Component {
      formData.append("SuperficiePropPag6", this.state.data.SuperficiePropPag6);
      formData.append("SuperficiePropRecPag6", this.state.data.SuperficiePropRecPag6);
      formData.append("ElementosAcessPropRecPag6", this.state.data.ElementosAcessPropRecPag6);
-     formData.append("observaçoesConclusoesPag6", this.state.data.observaçoesConclusoesPag6);
+     formData.append("observaçoesConclusoesPag7", this.state.data.observaçoesConclusoesPag7);
     // //Pag 8
      formData.append("estruturaPag8", this.state.data.estruturaPag8);
      formData.append("recursosEstruturaPag8", this.state.data.recursosEstruturaPag8);
@@ -584,7 +596,7 @@ class Create extends Component {
     formData.append("SuperficiePropPag6", document.getElementById('SuperficiePropPag6').value);
     formData.append("SuperficiePropRecPag6", document.getElementById('SuperficiePropRecPag6').value);
     formData.append("ElementosAcessPropRecPag6", document.getElementById('ElementosAcessPropRecPag6').value);
-    formData.append("observaçoesConclusoesPag6", document.getElementById('observaçoesConclusoesPag6').value);
+    formData.append("observaçoesConclusoesPag7", document.getElementById('observaçoesConclusoesPag7').value);
     //Pag 8
     formData.append("estruturaPag8", document.getElementById('estruturaPag8').value);
     formData.append("recursosEstruturaPag8", document.getElementById('recursosEstruturaPag8').value);

@@ -102,7 +102,7 @@ class Pag7 extends Component {
                 <div className="pt-3 py-3 text-center">
                     <h5>Observações / Conclusões:</h5>
                 </div>
-                <textarea id="observaçoesConclusoesPag6" type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="" />
+                <textarea id="observaçoesConclusoesPag7" type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="" />
 
             </div>
         );

@@ -186,6 +186,7 @@ exports.createFichaRegistoIdentificacao = async (bd, dados) => {
         "INSERT INTO tbl_registoTecnicos (fichaRegistoFK, tecnicoFK) values (?, ?)",
         [resposta_bd.resposta.insertId, dados.tecnicosFK[i]]
       );
+      console.log(resposta_bd2);
     }
 
     //inserçao bem sucedida na base de dados
@@ -251,7 +252,7 @@ exports.getFichaRegistoIdentificacao = async (bd, id) => {
     //console.log(resposta_bd4);
     //encontrou tecnicos associados a ficha e a ficha e visivel
     if (resposta_bd4.stat == 0 && resposta_bd.resposta[0] !== undefined) {
-       resultadofinal.resposta.fichatecnicas = resposta_bd4.resposta;
+      resultadofinal.resposta.fichatecnicas = resposta_bd4.resposta;
     }
     //erro de conecao com a base de dados
     else if (resposta_bd4.stat === 1) {

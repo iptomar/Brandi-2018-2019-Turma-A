@@ -4,15 +4,15 @@ var multer = require("multer");
 var mkdirp = require("mkdirp");
 const path = require("path");
 
-mkdirp("../images/registoIdentificacao", function (err) {
+mkdirp("../images/registoIdentificacao", function(err) {
   if (err) console.error(err);
 });
 
 var storage = multer.diskStorage({
-  destination: function (req, file, callback) {
+  destination: function(req, file, callback) {
     callback(null, "../images/registoIdentificacao");
   },
-  filename: function (req, file, callback) {
+  filename: function(req, file, callback) {
     callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
   }
 });
@@ -90,7 +90,7 @@ exports.createfichaRegistoIdentificacaoRoute = async (app, bd) => {
       let token;
       //getToken
       token = await getToken.getToken(req);
-      
+
       //nao existe token/sessao
       if (token === null) {
         code = 400;
@@ -134,7 +134,7 @@ exports.createfichaRegistoIdentificacaoRoute = async (app, bd) => {
             subCategorias: req.body.subCategorias,
             interessadoFK: req.body.interessadoFK,
             dataEntrega: req.body.dataEntrega,
-            tecnicosFK: req.body.tecnicosFK,
+            tecnicosFK: JSON.parse(req.body.tecnicosFK)
           };
           let resposta_bd = await fichaRegistoIdentificacao.createFichaRegistoIdentificacao(
             bd,
@@ -176,101 +176,105 @@ exports.createfichaRegistoIdentificacaoRoute = async (app, bd) => {
  * Rota para alterar uma ficha tecnica
  */
 exports.updatefichaRegistoIdentificacaoRoute = async (app, bd) => {
-  app.post("/api/fichaRegistoIdentificacao/:id/edit", upload.single("imagem"), async (req, resp) => {
-    let resposta_servidor = { stat: "Authenticated", resposta: {} };
-    //HTTP CODE ACCEPTED
-    let code = 201;
-    //token
-    let token;
-    //getToken
-    token = await getToken.getToken(req);
-    //nao existe token/sessao
-    if (token === null) {
-      code = 400;
-      resposta_servidor.stat = "NotAuthenticated";
-    }
-    //token corrompido
-    else if (token.name) {
-      code = 400;
-      resposta_servidor.stat = "InvalidToken";
-    }
-    //existe token/sessao
-    else {
-      //se tiver role
-      if (token.roleFK) {
-        var imagem = "";
-        if (req.file) {
-          imagem = req.file.path;
-        }
-        let ficha = {
-          visible: true,
-          designacao: req.body.designacao,
-          processoLCRM: req.body.processoLCRM,
-          processoCEARC: req.body.processoCEARC,
-          dataEntrada: req.body.dataEntrada,
-          dataConclusao: req.body.dataConclusao,
-          coordenacao: req.body.coordenacao,
-          direcaoTecnica: req.body.direcaoTecnica,
-          imagem: imagem,
-          tipologia: req.body.tipologia,
-          analogias: req.body.analogias,
-          dimensoes: req.body.dimensoes,
-          outrasDimensoes: req.body.outrasDimensoes,
-          breveDescricao: req.body.breveDescricao,
-          conclusoes: req.body.conclusoes,
-          oficina: req.body.oficina,
-          datacao: req.bodydatacao,
-          localOrigem: req.body.localOrigem,
-          superCategorias: req.body.superCategorias,
-          categorias: req.body.categorias,
-          subCategorias: req.body.subCategorias,
-          interessadoFK: req.body.interessadoFK,
-          dataEntrega: req.body.dataEntrega,
-          tecnicosFK: req.body.tecnicosFK,
-          fichaRegistoID: req.params.id,
-        };
-        //verificar se dataConclusao e dataEntrega est#ao preenchidas
-        if (ficha.dataConclusao === "" && ficha.dataEntrega === "") {
-          ficha.dataConclusao = undefined;
-          ficha.dataEntrega = undefined;
-        } else if (ficha.dataEntrega === "") {
-          ficha.dataEntrega = undefined;
-        } else if (ficha.dataConclusao === "") {
-          ficha.dataConclusao = undefined;
-        }
-        //alterar os campos
-        let resposta_bd = await fichaRegistoIdentificacao.updateFichaRegistoIdentificacao(
-          bd,
-          ficha
-        );
-        if (resposta_bd.stat === 0) {
-          resposta_servidor.stat = "Updated";
-          resposta_servidor.resposta = resposta_bd.resposta;
-        } else if (resposta_bd.stat >= 2) {
-          resposta_servidor.stat = "NotUpdated";
-          code = 400;
-          resposta_servidor.resposta = await bd.tratamentoErros(
-            resposta_bd.stat,
-            resposta_bd.resposta.sqlMessage
-          );
-        } else {
-          code = 500;
-          resposta_servidor.stat = "NotUpdated";
-          resposta_servidor.resposta = "DBConnectionError";
-        }
-      }
-      //nao e administrador
-      else {
+  app.post(
+    "/api/fichaRegistoIdentificacao/:id/edit",
+    upload.single("imagem"),
+    async (req, resp) => {
+      let resposta_servidor = { stat: "Authenticated", resposta: {} };
+      //HTTP CODE ACCEPTED
+      let code = 201;
+      //token
+      let token;
+      //getToken
+      token = await getToken.getToken(req);
+      //nao existe token/sessao
+      if (token === null) {
         code = 400;
-        resposta_servidor.stat = "NoPermissions";
+        resposta_servidor.stat = "NotAuthenticated";
       }
-      token = await getToken.generateToken(token);
+      //token corrompido
+      else if (token.name) {
+        code = 400;
+        resposta_servidor.stat = "InvalidToken";
+      }
+      //existe token/sessao
+      else {
+        //se tiver role
+        if (token.roleFK) {
+          var imagem = "";
+          if (req.file) {
+            imagem = req.file.path;
+          }
+          let ficha = {
+            visible: true,
+            designacao: req.body.designacao,
+            processoLCRM: req.body.processoLCRM,
+            processoCEARC: req.body.processoCEARC,
+            dataEntrada: req.body.dataEntrada,
+            dataConclusao: req.body.dataConclusao,
+            coordenacao: req.body.coordenacao,
+            direcaoTecnica: req.body.direcaoTecnica,
+            imagem: imagem,
+            tipologia: req.body.tipologia,
+            analogias: req.body.analogias,
+            dimensoes: req.body.dimensoes,
+            outrasDimensoes: req.body.outrasDimensoes,
+            breveDescricao: req.body.breveDescricao,
+            conclusoes: req.body.conclusoes,
+            oficina: req.body.oficina,
+            datacao: req.bodydatacao,
+            localOrigem: req.body.localOrigem,
+            superCategorias: req.body.superCategorias,
+            categorias: req.body.categorias,
+            subCategorias: req.body.subCategorias,
+            interessadoFK: req.body.interessadoFK,
+            dataEntrega: req.body.dataEntrega,
+            tecnicosFK: req.body.tecnicosFK,
+            fichaRegistoID: req.params.id
+          };
+          //verificar se dataConclusao e dataEntrega est#ao preenchidas
+          if (ficha.dataConclusao === "" && ficha.dataEntrega === "") {
+            ficha.dataConclusao = undefined;
+            ficha.dataEntrega = undefined;
+          } else if (ficha.dataEntrega === "") {
+            ficha.dataEntrega = undefined;
+          } else if (ficha.dataConclusao === "") {
+            ficha.dataConclusao = undefined;
+          }
+          //alterar os campos
+          let resposta_bd = await fichaRegistoIdentificacao.updateFichaRegistoIdentificacao(
+            bd,
+            ficha
+          );
+          if (resposta_bd.stat === 0) {
+            resposta_servidor.stat = "Updated";
+            resposta_servidor.resposta = resposta_bd.resposta;
+          } else if (resposta_bd.stat >= 2) {
+            resposta_servidor.stat = "NotUpdated";
+            code = 400;
+            resposta_servidor.resposta = await bd.tratamentoErros(
+              resposta_bd.stat,
+              resposta_bd.resposta.sqlMessage
+            );
+          } else {
+            code = 500;
+            resposta_servidor.stat = "NotUpdated";
+            resposta_servidor.resposta = "DBConnectionError";
+          }
+        }
+        //nao e administrador
+        else {
+          code = 400;
+          resposta_servidor.stat = "NoPermissions";
+        }
+        token = await getToken.generateToken(token);
+      }
+      resp
+        .status(code)
+        .header("x-auth-token", token)
+        .json(resposta_servidor);
     }
-    resp
-      .status(code)
-      .header("x-auth-token", token)
-      .json(resposta_servidor);
-  });
+  );
 };
 
 /**
@@ -415,6 +419,8 @@ exports.readfichaRegistoIdentificacaoImagemRoute = async (app, bd) => {
     resp
       .status(code)
       .header("x-auth-token", token)
-      .sendFile(path.join(__dirname, "../../", resposta_servidor.resposta.imagem));
+      .sendFile(
+        path.join(__dirname, "../../", resposta_servidor.resposta.imagem)
+      );
   });
 };

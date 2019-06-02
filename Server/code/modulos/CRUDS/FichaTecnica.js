@@ -101,19 +101,25 @@ exports.createFichaTecnica = async (bd, dados) => {
     dados.fichaRegistoFK
   ) {
     resposta_bd = await bd.query(
-      "INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario," +
-        "contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas,codPostalMecenas,contactoMecenas,tipoBensConjunto,bemIntegradoEmConjunto" +
-        ",elemConstConj,materiasElementosAcessorios,marcasInscricoesAssinaturas,marcasInscricoesMontagem,marcasInscricoesConstrucao,classPatrimonial,epoca,qualidade,materiaisEstruturaSuporte," +
-        "materiaisSuperficies,tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio," +
-        "condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo,ilumArtValorIluminancia,ilumArtValurUV," +
-        "ilumArtValorRealUV,ilumNatOrigem,ilumNatValorIluminancia,ilumNatValorUV,ilumNatValorRealUV,poluicaoAgentes,poluicaoFontesOrigem,poluicaoResultados," +
-        "poluicaoObservacoesConclusoes,examesAnalisesInterpResultados,examesAnalisesObsConclusoes,estadoConservFQMestrutura,estadoConservFQMsuperficie,estadoConservFQMelementosAcess,estadoConservBioEstrutura," +
-        "estadoConservBioSuperficie,estadoConservBioElementosAcess,estadoConservObsConclusoes,estruturaIntervAnter,superficieIntervAnter,elementosAcessoriosIntervAnter,observaçoesConclusoesPag6," +
-        "tipoInterv,aspetosEspecificosPag6,tipoIntervCR,EstruturaPropPag6,EstruturaPropRecPag6,SuperficiePropPag6,SuperficiePropRecPag6,ElementosAcessPropRecPag6," +
-        "estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8,elementosAcessoriosPag8,recursosElementosAcPag8,observaçoesConclusoesPag8," +
-        "relTecInterLCRM,tipoDesigOrig,refOrig,entidadeOrig,tipoDesigDocGraf,refDocGraf,entidadeDocGraf,tipoDesigExames,refExames,entidadeExames," +
-        "atledpArqDoc,tipoArqDoc,localArqDoc,cotaArqDoc,atledpIcon,tipoIcon,localIcon,cotaIcon,atledpBiblio,tipoBiblio,localBiblio,cotaBiblio,atledpOutras,tipoOutras,localOutras,cotaOutras,fichaRegistoFK)" +
-        "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO tbl_fichasTecnicas ("
+      +"visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas,codPostalMecenas,contactoMecenas,"
+      +"tipoBensConjunto,bemIntegradoEmConjunto,elemConstConj,materiasElementosAcessorios,marcasInscricoesAssinaturas,marcasInscricoesMontagem,marcasInscricoesConstrucao,classPatrimonial,epoca,qualidade,materiaisEstruturaSuporte,materiaisSuperficies,"
+      +"tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio,condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo,"
+      +"ilumArtValorIluminancia,ilumArtValurUV,ilumArtValorRealUV,ilumNatOrigem,ilumNatValorIluminancia,ilumNatValorUV,ilumNatValorRealUV,poluicaoAgentes,poluicaoFontesOrigem,poluicaoResultados, poluicaoObservacoesConclusoes,examesAnalisesInterpResultados,"
+      +"examesAnalisesObsConclusoes,estadoConservFQMestrutura,estadoConservFQMsuperficie,estadoConservFQMelementosAcess,estadoConservBioEstrutura,      estadoConservBioSuperficie,estadoConservBioElementosAcess,estadoConservObsConclusoes,estruturaIntervAnter,superficieIntervAnter,elementosAcessoriosIntervAnter,observaçoesConclusoesPag6," 
+      +"tipoInterv,aspetosEspecificosPag6,tipoIntervCR,EstruturaPropPag6,EstruturaPropRecPag6,SuperficiePropPag6,SuperficiePropRecPag6,ElementosAcessPropRecPag6, estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8,"
+      +"elementosAcessoriosPag8,recursosElementosAcPag8,observaçoesConclusoesPag8, relTecInterLCRM,tipoDesigOrig,refOrig,entidadeOrig,tipoDesigDocGraf,refDocGraf,entidadeDocGraf,tipoDesigExames,refExames,"
+      +"entidadeExames,atledpArqDoc,tipoArqDoc,localArqDoc,cotaArqDoc,atledpIcon,tipoIcon,localIcon,cotaIcon,atledpBiblio,tipoBiblio,localBiblio,"
+      +"cotaBiblio,atledpOutras,tipoOutras,localOutras,cotaOutras,fichaRegistoFK)" +
+        "values (?,?,?,?,?,?,?,?,?,?,?,?,"+
+                "?,?,?,?,?,?,?,?,?,?,?,?,"+
+                "?,?,?,?,?,?,?,?,?,?,?,?,"+
+                "?,?,?,?,?,?,?,?,?,?,?,?,"+
+                "?,?,?,?,?,?,?,?,?,?,?,?,"+
+                "?,?,?,?,?,?,?,?,?,?,?,?,"+
+                "?,?,?,?,?,?,?,?,?,?,?,?,"+
+                "?,?,?,?,?,?,?,?,?,?,?,?,"+
+                "?,?,?,?,?)",
       [
         dados.visible,
         dados.localizacao,
@@ -121,8 +127,7 @@ exports.createFichaTecnica = async (bd, dados) => {
         dados.codPostalProprietario,
         dados.emailProprietario,
         dados.contactoProprietario,
-        dados.donoObra,
-        dados.codPostalDonoObra,
+        dados.donoObra.codPostalDonoObra,
         dados.contactoDonoObra,
         dados.mecenas,
         dados.codPostalMecenas,
@@ -156,7 +161,7 @@ exports.createFichaTecnica = async (bd, dados) => {
         dados.ilumArtValorRealUV,
         dados.ilumNatOrigem,
         dados.ilumNatValorIluminancia,
-        dados.ilumNatValorUV,
+        dados.ilumNatValorUV, 
         dados.ilumNatValorRealUV,
         dados.poluicaoAgentes,
         dados.poluicaoFontesOrigem,
@@ -165,6 +170,7 @@ exports.createFichaTecnica = async (bd, dados) => {
         //Exames e Análises (página) 4
         dados.examesAnalisesInterpResultados,
         dados.examesAnalisesObsConclusoes,
+        //5
         //Estado de Conservação (página 5)
         dados.estadoConservFQMestrutura,
         dados.estadoConservFQMsuperficie,
@@ -180,6 +186,7 @@ exports.createFichaTecnica = async (bd, dados) => {
         //Intervenção Proposta pelo Conservador-Restaurador (página 7)
         dados.observaçoesConclusoesPag6,
         dados.tipoInterv,
+        //6
         dados.aspetosEspecificosPag6,
         dados.tipoIntervCR,
         dados.EstruturaPropPag6,
@@ -193,9 +200,11 @@ exports.createFichaTecnica = async (bd, dados) => {
         dados.superficiePag8,
         dados.recursosSuperficiePag8,
         dados.elementosAcessoriosPag8,
+        //7
         dados.recursosElementosAcPag8,
         dados.observaçoesConclusoesPag8,
         //Documentação produzida / recolhida página 9
+        dados.relTecInterLCRM,
         dados.tipoDesigOrig,
         dados.refOrig,
         dados.entidadeOrig,
@@ -205,6 +214,8 @@ exports.createFichaTecnica = async (bd, dados) => {
         dados.tipoDesigExames,
         dados.refExames,
         dados.entidadeExames,
+
+        //8
         //FONTES Arquivísticas | Documentais página 10
         dados.atledpArqDoc,
         dados.tipoArqDoc,
@@ -218,6 +229,7 @@ exports.createFichaTecnica = async (bd, dados) => {
         dados.tipoBiblio,
         dados.localBiblio,
         dados.cotaBiblio,
+        //9
         dados.atledpOutras,
         dados.tipoOutras,
         dados.localOutras,

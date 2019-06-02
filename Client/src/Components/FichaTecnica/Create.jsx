@@ -163,21 +163,25 @@ class Create extends Component {
     // document.getElementById('superficiePag5diag').value = dados.;
     // document.getElementById('elementosAcessoriosPag5diag').value = dados.;
     // document.getElementById('observaçoesConclusoesPag5').value = dados.;
+
     //Pag 6
-    //document.getElementById('estruturaIntervAnter').value = dados.;
-    //document.getElementById('superficieIntervAnter').value = dados.;
-    //document.getElementById('elementosAcessoriosIntervAnter').value = dados.;
-    // document.getElementById('observaçoesConclusoesPag6').value = dados.;
-    // if(document.getElementById('intervPrevencao').checked) formData.append("tipoInterv", document.getElementById('intervPrevencao').value);
-    // else if(document.getElementById('intervConvercao').checked) formData.append("tipoInterv", document.getElementById('intervConvercao').value);
-    // else formData.append("tipoInterv", document.getElementById('intervRestauro').value);
+    document.getElementById('estruturaIntervAnter').value = this.state.data.estruturaIntervAnter;
+    document.getElementById('superficieIntervAnter').value = this.state.data.superficieIntervAnter;
+    document.getElementById('elementosAcessoriosIntervAnter').value = this.state.data.elementosAcessoriosIntervAnter;
+    document.getElementById('observaçoesConclusoesPag6').value = this.state.data.observaçoesConclusoesPag6;
+      //AINDA SEM DADOS RECEBIDOS
+                    // if(document.getElementById('intervPrevencao').checked) formData.append("tipoInterv", document.getElementById('intervPrevencao').value);
+                    // else if(document.getElementById('intervConvercao').checked) formData.append("tipoInterv", document.getElementById('intervConvercao').value);
+                    // else formData.append("tipoInterv", document.getElementById('intervRestauro').value);
+                    // formData.append("aspetosEspecificosPag6", document.getElementById('aspetosEspecificosPag6').value);
+
     //Pag7
-    // formData.append("aspetosEspecificosPag6", document.getElementById('aspetosEspecificosPag6').value);
-    // if(document.getElementById('intervPrevencaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervPrevencaoConsRes').value);
-    // else if(document.getElementById('intervConvercaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervConvercaoConsRes').value);
-    // else formData.append("tipoIntervCR", document.getElementById('intervRestauroConsRes').value);
+    //AINDA SEM DADOS RECEBIDOS
+                    // if(document.getElementById('intervPrevencaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervPrevencaoConsRes').value);
+                    // else if(document.getElementById('intervConvercaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervConvercaoConsRes').value);
+                    // else formData.append("tipoIntervCR", document.getElementById('intervRestauroConsRes').value);
     
-    // document.getElementById('EstruturaPropPag6').value = this.state.data.EstruturaPropPag6;
+    document.getElementById('EstruturaPropPag6').value = this.state.data.EstruturaPropPag6;
     document.getElementById('EstruturaPropRecPag6').value = this.state.data.EstruturaPropRecPag6;
     document.getElementById('SuperficiePropPag6').value = this.state.data.SuperficiePropPag6;
     document.getElementById('SuperficiePropRecPag6').value = this.state.data.SuperficiePropRecPag6;
@@ -445,7 +449,7 @@ class Create extends Component {
              this.setState({
                alertisNotVisible: false
              });
-             window.location.href = "/fichaRI/"+this.state.id+"/detalhes";
+             window.location = "/fichaRI/"+this.state.id+"/detalhes";
              break;
              case "NotUpdated":
               this.setState({

@@ -309,7 +309,7 @@ CREATE TABLE tbl_fichasTecnicas
 	tipoOutras TEXT,
 	localOutras TEXT,
 	cotaOutras TEXT,
-	fichaRegistoFK INT NOT NULL UNIQUE,
+	fichaRegistoFK INT NOT NULL ,
     PRIMARY KEY(fichaTecnicaID),
 	FOREIGN KEY(fichaRegistoFK)
     REFERENCES tbl_fichaRegistoIdentificacao(fichaRegistoID)

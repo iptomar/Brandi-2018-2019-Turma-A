@@ -351,6 +351,8 @@ exports.updateFichaTecnicaRoute = async (app, bd) => {
 exports.readFichaTecnicaRoute = async (app, bd) => {
   app.get("/api/fichaTecnica/:id", async (req, resp) => {
     let resposta_servidor = { stat: "Authenticated", resposta: {} };
+    var teste1;
+    var teste2;
     //HTTP CODE ACCEPTED
     let code = 200;
     //token
@@ -370,10 +372,11 @@ exports.readFichaTecnicaRoute = async (app, bd) => {
     //existe token/sessao
     else {
       let resposta_bd = await fichaTecnica.getFichaTecnica(bd, req.params.id);
-      if (resposta_bd.stat === 0) {
+      if (resposta_bd[0].stat === 0) {
         code = 200;
         resposta_servidor.stat = "Authenticated";
-        resposta_servidor.resposta = resposta_bd.resposta;
+        resposta_bd[0].stat = undefined;
+        resposta_servidor.resposta = resposta_bd;
       } else if (resposta_bd.stat === 1) {
         code = 500;
         resposta_servidor.stat = "Authenticated";

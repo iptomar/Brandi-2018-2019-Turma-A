@@ -356,23 +356,29 @@ exports.createFichaTecnica = async (bd, dados) => {
  */
 exports.getFichaTecnica = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: {} };
+  // é necessário array por causa de overflow da variavel resultadofinal
+  let resultadofinalteste = [];
   let resposta_bd = await bd.query(
     "Select * from tbl_fichasTecnicas where fichaRegistoFK = ? and visible = true limit 1",
     [id]
   );
-  let resposta_aux = await bd.query(
-    "Select * from tbl_testespagina4objectivosGerais where fichaTecnicaFK = ?",
-    [id]
-  );
-  resultadofinal.objectivosGerais = resposta_aux.resposta;
-  resposta_aux = await bd.query(
-    "select * from tbl_testespagina4objectivosGerais where fichaTecnicaFK = ?",
-    [id]
-  );
-  resultadofinal.objectivosTabela = resposta_aux.resposta;
   if (resposta_bd.stat == 0 && resposta_bd.resposta.length > 0) {
     resultadofinal.stat = 0;
     resultadofinal.resposta = resposta_bd.resposta[0];
+    //posição 1 todos os dados de uma ficha tecnica
+    resultadofinalteste.push(resultadofinal);
+    let resposta_aux = await bd.query(
+      "Select * from tbl_testespagina4objectivosGerais where fichaTecnicaFK = ?",
+      [id]
+    );
+    //todos os dados da tabela testespagina4objectivosGerais relacionados com 1 ficha tecnica
+    resultadofinalteste.push(resposta_aux.resposta);
+    resposta_aux = await bd.query(
+      "select * from tbl_testespagina4tabelas where fichaTecnicaFK = ?",
+      [id]
+    );
+    //todos os dados da tabela testespagina4tabels relacionados com 1 ficha tecnica
+    resultadofinalteste.push(resposta_aux.resposta);
   } else if (resposta_bd.stat === 0) {
     resultadofinal.stat = resposta_bd.stat;
     resultadofinal.resposta = "FichaNaoExistente";
@@ -381,7 +387,7 @@ exports.getFichaTecnica = async (bd, id) => {
     resultadofinal.resposta = resposta_bd.resposta;
   }
 
-  return resultadofinal;
+  return resultadofinalteste;
 };
 /**
  * Metodo para alterar uma ficha RegistoIdentificacao

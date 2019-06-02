@@ -150,6 +150,11 @@ exports.getUser = async (bd, id) => {
     "Select a.* , b.role from tbl_utilizadores a, tbl_roles b where a.userID = ? and a.visible = true and b.roleID = a.roleFK limit 1",
     [id]
   );
+  let resposta_aux = await bd.query(
+    "Select * from tbl_tecnicos where userFK = ?",
+    [id]
+  );
+
   //encontrou o utilizador
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
     resultadofinal.stat = resposta_bd.stat;
@@ -158,6 +163,7 @@ exports.getUser = async (bd, id) => {
     //nao mostrar o hash da password
     resposta_bd.resposta[0].password = undefined;
     resultadofinal.resposta = resposta_bd.resposta[0];
+    resultadofinal.resposta.tecnicos = resposta_aux.resposta;
   } else if (resposta_bd.stat === 0) {
     resultadofinal.stat = resposta_bd.stat;
     resultadofinal.resposta = "UserNotFound";

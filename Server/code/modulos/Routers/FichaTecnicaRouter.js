@@ -314,6 +314,7 @@ exports.updateFichaTecnicaRoute = async (app, bd) => {
           fichaRegistoFK: req.body.fichaRegistoFK
         };*/
         let ficha = req.body;
+        ficha.id = req.params.id;
         //console.log(ficha);
         //alterar os campos
         let resposta_bd = await fichaTecnica.updateFichaTecnica(bd, ficha);

@@ -79,69 +79,70 @@ class Create extends Component {
          $("input, textarea").on('change', this.handleChange);
          //Inserção dos dados nos campos necessários
          //Pag 1
-        document.getElementById('localizacao').value = this.state.data.localizacao;
-        document.getElementById('proprietario').value = this.state.data.proprietario;
-        document.getElementById('codPostalProprietario').value = this.state.data.codPostalProprietario;
-        document.getElementById('emailProprietario').value = this.state.data.emailProprietario;
-        document.getElementById('contactoProprietario').value = this.state.data.contactoProprietario;
-        document.getElementById('donoObra').value = this.state.data.donoObra;
-        document.getElementById('codPostalDonoObra').value = this.state.data.codPostalDonoObra;
-        document.getElementById('contactoDonoObra').value = this.state.data.contactoDonoObra;
-        document.getElementById('mecenas').value = this.state.data.mecenas;
-        document.getElementById('codPostalMecenas').value = this.state.data.codPostalMecenas;
-        document.getElementById('contactoMecenas').value = this.state.data.contactoMecenas;
+        document.getElementById('localizacao').value = this.state.data[0].resposta.localizacao;
+        document.getElementById('proprietario').value = this.state.data[0].resposta.proprietario;
+        document.getElementById('codPostalProprietario').value = this.state.data[0].resposta.codPostalProprietario;
+        document.getElementById('emailProprietario').value = this.state.data[0].resposta.emailProprietario;
+        document.getElementById('contactoProprietario').value = this.state.data[0].resposta.contactoProprietario;
+        document.getElementById('donoObra').value = this.state.data[0].resposta.donoObra;
+        document.getElementById('codPostalDonoObra').value = this.state.data[0].resposta.codPostalDonoObra;
+        document.getElementById('contactoDonoObra').value = this.state.data[0].resposta.contactoDonoObra;
+        document.getElementById('mecenas').value = this.state.data[0].resposta.mecenas;
+        document.getElementById('codPostalMecenas').value = this.state.data[0].resposta.codPostalMecenas;
+        document.getElementById('contactoMecenas').value = this.state.data[0].resposta.contactoMecenas;
         //Pag 2
-        if(!this.state.data.bemIntegradoEmConjunto){ document.getElementById('bemIntegradoSim').parentNode.parentNode.parentNode.style.display = "none";
+        if(!this.state.data[0].resposta.bemIntegradoEmConjunto){ document.getElementById('bemIntegradoSim').parentNode.parentNode.parentNode.style.display = "none";
         }else{ document.getElementById('bemIntegradoNão').parentNode.parentNode.parentNode.style.display = "none"; }
-        document.getElementById('tipoConjunto').value = this.state.data.tipoBensConjunto;
-        document.getElementById('elementosConst').value = this.state.data.elemConstConj;
-        document.getElementById('elementosAcess').value = this.state.data.materiasElementosAcessorios;
-        document.getElementById('assinaturasAutoria').value = this.state.data.marcasInscricoesAssinaturas;
-        document.getElementById('inscricoesMontagem').value = this.state.data.marcasInscricoesMontagem;
-        document.getElementById('inscricoesConstrucao').value = this.state.data.marcasInscricoesConstrucao;
-        document.getElementById('classPatrimonial').value = this.state.data.classPatrimonial;
+        document.getElementById('tipoConjunto').value = this.state.data[0].resposta.tipoBensConjunto;
+        document.getElementById('elementosConst').value = this.state.data[0].resposta.elemConstConj;
+        document.getElementById('elementosAcess').value = this.state.data[0].resposta.materiasElementosAcessorios;
+        document.getElementById('assinaturasAutoria').value = this.state.data[0].resposta.marcasInscricoesAssinaturas;
+        document.getElementById('inscricoesMontagem').value = this.state.data[0].resposta.marcasInscricoesMontagem;
+        document.getElementById('inscricoesConstrucao').value = this.state.data[0].resposta.marcasInscricoesConstrucao;
+        document.getElementById('classPatrimonial').value = this.state.data[0].resposta.classPatrimonial;
         
-        if(this.state.data.epoca !== "Coevo"){ document.getElementById('EpocaCoevo').parentNode.parentNode.parentNode.style.display = "none";}
-        if(this.state.data.epoca !== "Tardio"){ document.getElementById('EpocaTardio').parentNode.parentNode.parentNode.style.display = "none";}
-        if(this.state.data.epoca !== "Outra"){ document.getElementById('EpocaOutra').parentNode.parentNode.parentNode.style.display = "none";}
-        if(this.state.data.epoca !== "Replica"){ document.getElementById('EpocaReplica').parentNode.parentNode.parentNode.style.display = "none";}
-        if(this.state.data.epoca !== "Reproducao"){ document.getElementById('EpocaReproducao').parentNode.parentNode.parentNode.style.display = "none";}
-        if(this.state.data.epoca !== "Falsificacao"){ document.getElementById('EpocaFalsificacao').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data[0].resposta.epoca !== "Coevo"){ document.getElementById('EpocaCoevo').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data[0].resposta.epoca !== "Tardio"){ document.getElementById('EpocaTardio').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data[0].resposta.epoca !== "Outra"){ document.getElementById('EpocaOutra').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data[0].resposta.epoca !== "Replica"){ document.getElementById('EpocaReplica').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data[0].resposta.epoca !== "Reproducao"){ document.getElementById('EpocaReproducao').parentNode.parentNode.parentNode.style.display = "none";}
+        if(this.state.data[0].resposta.epoca !== "Falsificacao"){ document.getElementById('EpocaFalsificacao').parentNode.parentNode.parentNode.style.display = "none";}
 
-        if(this.state.data.qualidade !== "Excelente") document.getElementById('QualidadeExcelente').parentNode.parentNode.parentNode.style.display = "none";
-        if(this.state.data.qualidade !== "Muito boa") document.getElementById('QualidadeMuitoBoa').parentNode.parentNode.parentNode.style.display = "none";
-        if(this.state.data.qualidade !== "Boa") document.getElementById('QualidadeBoa').parentNode.parentNode.parentNode.style.display = "none";
-        if(this.state.data.qualidade !== "Regular") document.getElementById('QualidadeRegular').parentNode.parentNode.parentNode.style.display = "none";
-        if(this.state.data.qualidade !== "Fraca") document.getElementById('QualidadeFraca').parentNode.parentNode.parentNode.style.display = "none";
+        if(this.state.data[0].resposta.qualidade !== "Excelente") document.getElementById('QualidadeExcelente').parentNode.parentNode.parentNode.style.display = "none";
+        if(this.state.data[0].resposta.qualidade !== "Muito boa") document.getElementById('QualidadeMuitoBoa').parentNode.parentNode.parentNode.style.display = "none";
+        if(this.state.data[0].resposta.qualidade !== "Boa") document.getElementById('QualidadeBoa').parentNode.parentNode.parentNode.style.display = "none";
+        if(this.state.data[0].resposta.qualidade !== "Regular") document.getElementById('QualidadeRegular').parentNode.parentNode.parentNode.style.display = "none";
+        if(this.state.data[0].resposta.qualidade !== "Fraca") document.getElementById('QualidadeFraca').parentNode.parentNode.parentNode.style.display = "none";
 
-        document.getElementById('estruturaSuporteMateriais').value = this.state.data.materiaisEstruturaSuporte;
-        document.getElementById('SuperficieMateriais').value = this.state.data.materiaisSuperficies;
-        document.getElementById('estruturaSuporteTecnicas').value = this.state.data.tecnicasEstruturaSuporte;
-        document.getElementById('SuperficieTecnicas').value = this.state.data.tecnicasSuperficie;
+        document.getElementById('estruturaSuporteMateriais').value = this.state.data[0].resposta.materiaisEstruturaSuporte;
+        document.getElementById('SuperficieMateriais').value = this.state.data[0].resposta.materiaisSuperficies;
+        document.getElementById('estruturaSuporteTecnicas').value = this.state.data[0].resposta.tecnicasEstruturaSuporte;
+        document.getElementById('SuperficieTecnicas').value = this.state.data[0].resposta.tecnicasSuperficie;
         //Pag 3
-        document.getElementById('condAmbDescricao').value = this.state.data.condAmbDescricao;
-        document.getElementById('condAmbFrioTemperatura').value = this.state.data.condAmbFrioTemperatura;
-        document.getElementById('condAmbFrioHumidade').value = this.state.data.condAmbFrioHumidade;
-        document.getElementById('condAmbFrioPeriodoInicio').value = this.state.data.condAmbFrioPeriodoInicio;
-        document.getElementById('condAmbFrioPeriodoFim').value = this.state.data.condAmbFrioPeriodoFim;
-        document.getElementById('condAmbQuenteTemperatura').value = this.state.data.condAmbQuenteTemperatura;
-        document.getElementById('condAmbQuenteHumidade').value = this.state.data.condAmbQuenteHumidade;
-        document.getElementById('condAmbQuentePeriodoInicio').value = this.state.data.condAmbQuentePeriodoInicio;
-        document.getElementById('condAmbQuentePeriodoFim').value = this.state.data.condAmbQuentePeriodoFim;
-        document.getElementById('ilumArtTipo').value = this.state.data.ilumArtTipo;
-        document.getElementById('ilumArtValorIluminancia').value = this.state.data.ilumArtValorIluminancia;
-        document.getElementById('ilumArtValurUV').value = this.state.data.ilumArtValurUV;
-        document.getElementById('ilumArtValorRealUV').value = this.state.data.ilumArtValorRealUV;
-        document.getElementById('ilumNatOrigem').value = this.state.data.ilumNatOrigem;
-        document.getElementById('ilumNatValorIluminancia').value = this.state.data.ilumNatValorIluminancia;
-        document.getElementById('ilumNatValorUV').value = this.state.data.ilumNatValorUV;
-        document.getElementById('ilumNatValorRealUV').value = this.state.data.ilumNatValorRealUV;
-        document.getElementById('poluicaoAgentes').value = this.state.data.poluicaoAgentes;
-        document.getElementById('poluicaoFontesOrigem').value = this.state.data.poluicaoFontesOrigem;
-        document.getElementById('poluicaoResultados').value = this.state.data.poluicaoResultados;
-        document.getElementById('poluicaoObservacoesConclusoes').value = this.state.data.poluicaoObservacoesConclusoes;
+        document.getElementById('condAmbDescricao').value = this.state.data[0].resposta.condAmbDescricao;
+        document.getElementById('condAmbFrioTemperatura').value = this.state.data[0].resposta.condAmbFrioTemperatura;
+        document.getElementById('condAmbFrioHumidade').value = this.state.data[0].resposta.condAmbFrioHumidade;
+        document.getElementById('condAmbFrioPeriodoInicio').value = this.state.data[0].resposta.condAmbFrioPeriodoInicio;
+        document.getElementById('condAmbFrioPeriodoFim').value = this.state.data[0].resposta.condAmbFrioPeriodoFim;
+        document.getElementById('condAmbQuenteTemperatura').value = this.state.data[0].resposta.condAmbQuenteTemperatura;
+        document.getElementById('condAmbQuenteHumidade').value = this.state.data[0].resposta.condAmbQuenteHumidade;
+        document.getElementById('condAmbQuentePeriodoInicio').value = this.state.data[0].resposta.condAmbQuentePeriodoInicio;
+        document.getElementById('condAmbQuentePeriodoFim').value = this.state.data[0].resposta.condAmbQuentePeriodoFim;
+        document.getElementById('ilumArtTipo').value = this.state.data[0].resposta.ilumArtTipo;
+        document.getElementById('ilumArtValorIluminancia').value = this.state.data[0].resposta.ilumArtValorIluminancia;
+        document.getElementById('ilumArtValurUV').value = this.state.data[0].resposta.ilumArtValurUV;
+        document.getElementById('ilumArtValorRealUV').value = this.state.data[0].resposta.ilumArtValorRealUV;
+        document.getElementById('ilumNatOrigem').value = this.state.data[0].resposta.ilumNatOrigem;
+        document.getElementById('ilumNatValorIluminancia').value = this.state.data[0].resposta.ilumNatValorIluminancia;
+        document.getElementById('ilumNatValorUV').value = this.state.data[0].resposta.ilumNatValorUV;
+        document.getElementById('ilumNatValorRealUV').value = this.state.data[0].resposta.ilumNatValorRealUV;
+        document.getElementById('poluicaoAgentes').value = this.state.data[0].resposta.poluicaoAgentes;
+        document.getElementById('poluicaoFontesOrigem').value = this.state.data[0].resposta.poluicaoFontesOrigem;
+        document.getElementById('poluicaoResultados').value = this.state.data[0].resposta.poluicaoResultados;
+        document.getElementById('poluicaoObservacoesConclusoes').value = this.state.data[0].resposta.poluicaoObservacoesConclusoes;
 
         //Pag 4
+
         //FAZER DESAPARECER OS QUE NÃO SÃO ADEQUADOS (FALTA SER ENVIADO)
                                       // let objGerais = [];
                                       // if(document.getElementById("identMateriais").checked) objGerais.push(document.getElementById("identMateriais").value);
@@ -151,85 +152,87 @@ class Create extends Component {
                                       // if(document.getElementById("datacao").checked) objGerais.push(document.getElementById("datacao").value);
                                       // if(document.getElementById("ensaio").checked) objGerais.push(document.getElementById("ensaio").value);
                                       // formData.append("objGerais", objGerais);
-                                      // let tab = [];
-                                      // for(let i = 0 ; i < document.getElementById("tabela").children[1].childElementCount; i++){
-                                      //     let content = document.getElementById("tabela").children[1].children[i];
-                                      //     tab.push({tipoRef: content.children[0].children[0].value, lap: content.children[1].children[0].value, objEsp: content.children[2].children[0].value, reslt: content.children[3].children[0].value, data: content.children[5].children[0].value });
-                                      // }
-                                      // formData.append("tabobjGerais", tab);
-      document.getElementById('interpretacaoResul').value = this.state.data.examesAnalisesInterpResultados;
-     document.getElementById('observaConclusoes').value = this.state.data.examesAnalisesObsConclusoes;
+    //Realizar a inserção na tabela
+    document.getElementById("tabela").children[1].children[0].remove();
+    let content = document.getElementById("tabela").children[1];
+    for(let i = 0 ; i < this.state.data[2].length; i++){
+      let tr = document.createElement('tr');
+      tr.innerHTML = '<tr><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Tipo-Referência" readonly="readonly">'+this.state.data[2][0].tipoReferencia+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Localização / Área / Ponto" readonly="readonly">'+this.state.data[2][0].LocalizacaoAreaPonto+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Objetivos Específicos" readonly="readonly">'+this.state.data[2][0].ObjectivosEspecificos+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Resultados" readonly="readonly">'+this.state.data[2][0].Resultados+'</textarea></td><td><textarea class="form-control" type="text" readonly="readonly" style="resize: none;" rows="2">Name</textarea></td><td><input class="form-control" style="width: 170px; height: 63px;" type="date" value="'+this.state.data[2][0].DataDePreenchimento.split("T")[0]+'" readonly="readonly"></td></tr>';
+      content.append(tr);
+    }
+     document.getElementById('interpretacaoResul').value = this.state.data[0].resposta.examesAnalisesInterpResultados;
+     document.getElementById('observaConclusoes').value = this.state.data[0].resposta.examesAnalisesObsConclusoes;
 
      //Pag 5
-     document.getElementById('estruturaPag5').value = this.state.data.estadoConservFQMestrutura;
-     document.getElementById('superficiePag5').value = this.state.data.estadoConservFQMsuperficie;
-     document.getElementById('elementosAcessoriosPag5').value = this.state.data.estadoConservFQMelementosAcess;
-     document.getElementById('estruturaPag5diag').value = this.state.data.estadoConservBioEstrutura;
-     document.getElementById('superficiePag5diag').value = this.state.data.estadoConservBioSuperficie;
-     document.getElementById('elementosAcessoriosPag5diag').value = this.state.data.estadoConservBioElementosAcess;
-     document.getElementById('observaçoesConclusoesPag5').value = this.state.data.estadoConservObsConclusoes;
+     document.getElementById('estruturaPag5').value = this.state.data[0].resposta.estadoConservFQMestrutura;
+     document.getElementById('superficiePag5').value = this.state.data[0].resposta.estadoConservFQMsuperficie;
+     document.getElementById('elementosAcessoriosPag5').value = this.state.data[0].resposta.estadoConservFQMelementosAcess;
+     document.getElementById('estruturaPag5diag').value = this.state.data[0].resposta.estadoConservBioEstrutura;
+     document.getElementById('superficiePag5diag').value = this.state.data[0].resposta.estadoConservBioSuperficie;
+     document.getElementById('elementosAcessoriosPag5diag').value = this.state.data[0].resposta.estadoConservBioElementosAcess;
+     document.getElementById('observaçoesConclusoesPag5').value = this.state.data[0].resposta.estadoConservObsConclusoes;
 
     //Pag 6
-    document.getElementById('estruturaIntervAnter').value = this.state.data.estruturaIntervAnter;
-    document.getElementById('superficieIntervAnter').value = this.state.data.superficieIntervAnter;
-    document.getElementById('elementosAcessoriosIntervAnter').value = this.state.data.elementosAcessoriosIntervAnter;
-    document.getElementById('observaçoesConclusoesPag6').value = this.state.data.observaçoesConclusoesPag6;
-    if(this.state.data.tipoInterv !== "Prevenção") document.getElementById('intervPrevencao').parentNode.parentNode.parentNode.style.display = "none";
-    if(this.state.data.tipoInterv !== "Conservação") document.getElementById('intervConvercao').parentNode.parentNode.parentNode.style.display = "none";
-    if(this.state.data.tipoInterv !== "Restauro") document.getElementById('intervRestauro').parentNode.parentNode.parentNode.style.display = "none";
+    document.getElementById('estruturaIntervAnter').value = this.state.data[0].resposta.estruturaIntervAnter;
+    document.getElementById('superficieIntervAnter').value = this.state.data[0].resposta.superficieIntervAnter;
+    document.getElementById('elementosAcessoriosIntervAnter').value = this.state.data[0].resposta.elementosAcessoriosIntervAnter;
+    document.getElementById('observaçoesConclusoesPag6').value = this.state.data[0].resposta.observaçoesConclusoesPag6;
+    if(this.state.data[0].resposta.tipoInterv !== "Prevenção") document.getElementById('intervPrevencao').parentNode.parentNode.parentNode.style.display = "none";
+    if(this.state.data[0].resposta.tipoInterv !== "Conservação") document.getElementById('intervConvercao').parentNode.parentNode.parentNode.style.display = "none";
+    if(this.state.data[0].resposta.tipoInterv !== "Restauro") document.getElementById('intervRestauro').parentNode.parentNode.parentNode.style.display = "none";
     document.getElementById('aspetosEspecificosPag6').value = this.state.data.aspetosEspecificosPag6;
     
     //Pag7
     //console.log(this.state.data);
-    if(this.state.data.tipoIntervCR !== "Prevenção") document.getElementById('intervPrevencaoConsRes').parentNode.parentNode.parentNode.style.display = "none";
-    if(this.state.data.tipoIntervCR !== "Conservação") document.getElementById('intervConvercaoConsRes').parentNode.parentNode.parentNode.style.display = "none";
-    if(this.state.data.tipoIntervCR !== "Restauro") document.getElementById('intervRestauroConsRes').parentNode.parentNode.parentNode.style.display = "none";
+    if(this.state.data[0].resposta.tipoIntervCR !== "Prevenção") document.getElementById('intervPrevencaoConsRes').parentNode.parentNode.parentNode.style.display = "none";
+    if(this.state.data[0].resposta.tipoIntervCR !== "Conservação") document.getElementById('intervConvercaoConsRes').parentNode.parentNode.parentNode.style.display = "none";
+    if(this.state.data[0].resposta.tipoIntervCR !== "Restauro") document.getElementById('intervRestauroConsRes').parentNode.parentNode.parentNode.style.display = "none";
     
-    document.getElementById('EstruturaPropPag6').value = this.state.data.EstruturaPropPag6;
-    document.getElementById('EstruturaPropRecPag6').value = this.state.data.EstruturaPropRecPag6;
-    document.getElementById('SuperficiePropPag6').value = this.state.data.SuperficiePropPag6;
-    document.getElementById('SuperficiePropRecPag6').value = this.state.data.SuperficiePropRecPag6;
-    document.getElementById('ElementosAcessPropRecPag6').value =this.state.data.ElementosAcessPropRecPag6;
-    document.getElementById('observaçoesConclusoesPag7').value= this.state.data.observaçoesConclusoesPag7;		 	
+    document.getElementById('EstruturaPropPag6').value = this.state.data[0].resposta.EstruturaPropPag6;
+    document.getElementById('EstruturaPropRecPag6').value = this.state.data[0].resposta.EstruturaPropRecPag6;
+    document.getElementById('SuperficiePropPag6').value = this.state.data[0].resposta.SuperficiePropPag6;
+    document.getElementById('SuperficiePropRecPag6').value = this.state.data[0].resposta.SuperficiePropRecPag6;
+    document.getElementById('ElementosAcessPropPag6').value= this.state.data[0].resposta.ElementosAcessPropRecPag6;
+    document.getElementById('observaçoesConclusoesPag7').value= this.state.data[0].resposta.observaçoesConclusoesPag7;		 	
     
     //Pag 8
-    document.getElementById('estruturaPag8').value = this.state.data.estruturaPag8;
-    document.getElementById('recursosEstruturaPag8').value = this.state.data.recursosEstruturaPag8;
-    document.getElementById('superficiePag8').value = this.state.data.superficiePag8 ;
-    document.getElementById('recursosSuperficiePag8').value = this.state.data.recursosSuperficiePag8;
-    document.getElementById('elementosAcessoriosPag8').value = this.state.data.elementosAcessoriosPag8 ;
-    document.getElementById('recursosElementosAcPag8').value = this.state.data.recursosElementosAcPag8;
-    document.getElementById('observaçoesConclusoesPag8').value = this.state.data.observaçoesConclusoesPag8;
+    document.getElementById('estruturaPag8').value = this.state.data[0].resposta.estruturaPag8;
+    document.getElementById('recursosEstruturaPag8').value = this.state.data[0].resposta.recursosEstruturaPag8;
+    document.getElementById('superficiePag8').value = this.state.data[0].resposta.superficiePag8;
+    document.getElementById('recursosSuperficiePag8').value = this.state.data[0].resposta.recursosSuperficiePag8;
+    document.getElementById('elementosAcessoriosPag8').value = this.state.data[0].resposta.elementosAcessoriosPag8 ;
+    document.getElementById('recursosElementosAcPag8').value = this.state.data[0].resposta.recursosElementosAcPag8;
+    document.getElementById('observaçoesConclusoesPag8').value = this.state.data[0].resposta.observaçoesConclusoesPag8;
     
     //Pag 9
-    document.getElementById('relTecInterLCRM').value = this.state.data.relTecInterLCRM;
-    document.getElementById('tipoDesigOrig').value = this.state.data.tipoDesigOrig;
-    document.getElementById('refOrig').value = this.state.data.refOrig;
-    document.getElementById('entidadeOrig').value = this.state.data.entidadeOrig;
-    document.getElementById('tipoDesigDocGraf').value = this.state.data.tipoDesigDocGraf;
-    document.getElementById('refDocGraf').value = this.state.data.refDocGraf;
-    document.getElementById('entidadeDocGraf').value = this.state.data.entidadeDocGraf;
-    document.getElementById('tipoDesigExames').value = this.state.data.tipoDesigExames;
-    document.getElementById('refExames').value = this.state.data.refExames;
-    document.getElementById('entidadeExames').value = this.state.data.entidadeExames;
+    document.getElementById('relTecInterLCRM').value = this.state.data[0].resposta.relTecInterLCRM;
+    document.getElementById('tipoDesigOrig').value = this.state.data[0].resposta.tipoDesigOrig;
+    document.getElementById('refOrig').value = this.state.data[0].resposta.refOrig;
+    document.getElementById('entidadeOrig').value = this.state.data[0].resposta.entidadeOrig;
+    document.getElementById('tipoDesigDocGraf').value = this.state.data[0].resposta.tipoDesigDocGraf;
+    document.getElementById('refDocGraf').value = this.state.data[0].resposta.refDocGraf;
+    document.getElementById('entidadeDocGraf').value = this.state.data[0].resposta.entidadeDocGraf;
+    document.getElementById('tipoDesigExames').value = this.state.data[0].resposta.tipoDesigExames;
+    document.getElementById('refExames').value = this.state.data[0].resposta.refExames;
+    document.getElementById('entidadeExames').value = this.state.data[0].resposta.entidadeExames;
 
     //Pag10
-    document.getElementById('atledpArqDoc').value = this.state.data.atledpArqDoc;
-    document.getElementById('tipoArqDoc').value = this.state.data.tipoArqDoc;
-    document.getElementById('localArqDoc').value = this.state.data.localArqDoc;
-    document.getElementById('cotaArqDoc').value = this.state.data.cotaArqDoc;
-    document.getElementById('atledpIcon').value = this.state.data.atledpIcon;
-    document.getElementById('tipoIcon').value = this.state.data.tipoIcon;
-    document.getElementById('localIcon').value = this.state.data.localIcon;
-    document.getElementById('cotaIcon').value = this.state.data.cotaIcon;
-    document.getElementById('atledpBiblio').value = this.state.data.atledpBiblio;
-    document.getElementById('tipoBiblio').value = this.state.data.tipoBiblio;
-    document.getElementById('localBiblio').value = this.state.data.localBiblio;
-    document.getElementById('cotaBiblio').value = this.state.data.cotaBiblio;
-    document.getElementById('atledpOutras').value = this.state.data.atledpOutras;
-    document.getElementById('tipoOutras').value = this.state.data.tipoOutras;
-    document.getElementById('localOutras').value = this.state.data.localOutras;
-    document.getElementById('cotaOutras').value = this.state.data.cotaOutras;
+    document.getElementById('atledpArqDoc').value = this.state.data[0].resposta.atledpArqDoc;
+    document.getElementById('tipoArqDoc').value = this.state.data[0].resposta.tipoArqDoc;
+    document.getElementById('localArqDoc').value = this.state.data[0].resposta.localArqDoc;
+    document.getElementById('cotaArqDoc').value = this.state.data[0].resposta.cotaArqDoc;
+    document.getElementById('atledpIcon').value = this.state.data[0].resposta.atledpIcon;
+    document.getElementById('tipoIcon').value = this.state.data[0].resposta.tipoIcon;
+    document.getElementById('localIcon').value = this.state.data[0].resposta.localIcon;
+    document.getElementById('cotaIcon').value = this.state.data[0].resposta.cotaIcon;
+    document.getElementById('atledpBiblio').value = this.state.data[0].resposta.atledpBiblio;
+    document.getElementById('tipoBiblio').value = this.state.data[0].resposta.tipoBiblio;
+    document.getElementById('localBiblio').value = this.state.data[0].resposta.localBiblio;
+    document.getElementById('cotaBiblio').value = this.state.data[0].resposta.cotaBiblio;
+    document.getElementById('atledpOutras').value = this.state.data[0].resposta.atledpOutras;
+    document.getElementById('tipoOutras').value = this.state.data[0].resposta.tipoOutras;
+    document.getElementById('localOutras').value = this.state.data[0].resposta.localOutras;
+    document.getElementById('cotaOutras').value = this.state.data[0].resposta.cotaOutras;
     //console.log(this.state.tabel10);
     // let table = [];
     // for(let j = 0 ; j < document.getElementById("table").children[1].childElementCount; j++){

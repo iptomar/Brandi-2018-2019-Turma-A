@@ -50,9 +50,11 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
         //admin
         if (token.roleFK === 1) {
           var imgGrafico = "";
+          console.log(req.file);
           if (req.file) {
             imgGrafico = req.file.path;
           }
+          console.log("IMG: " + imgGrafico);
           let ficha = {
             visible: true,
             localizacao: req.body.localizacao,
@@ -455,6 +457,62 @@ exports.deleteFichaTecnicaRoute = async (app, bd) => {
     resp
       .status(code)
       .header("x-auth-token", token)
+      .json(resposta_servidor);
+  });
+};
+/**
+ * Rota que retorna todas as fichas RegistoIdentificacao
+ */
+exports.getTodasFichasTecnicasRoute = async (app, bd) => {
+  app.get("/api/fichaRegistoIdentificacao/:id/fichasTecnicas", async (req, resp) => {
+    let limit = 0;
+    let numpage = 12;
+    if (req.query.pagenumber >= 2) {
+      limit = req.query.pagenumber * numpage - 12;
+      numpage = req.query.pagenumber - 0;
+    }
+    //query para saber o numero de paginas que existem
+    let totalpagesquery = await bd.query(
+      "select count(*) as total from tbl_fichasTecnicas where fichaRegistoFK = ? and visible = 1",[req.params.id]
+    );
+    // numero de paginas que existe na base de dados
+    let totalpages = totalpagesquery.resposta[0];
+    let token;
+    let resposta_servidor = { status: "NotAuthenticated", resposta: {} };
+    let resposta_bd = await fichaTecnica.getAllFichasTecnicas(
+      bd,
+      limit,
+      numpage,
+      req.params.id,
+    );
+
+    let code = 200;
+    token = await getToken.getToken(req);
+    if (token === null) {
+      code = 400;
+    } else if (token.name) {
+      code = 400;
+      resposta_servidor.status = "InvalidToken";
+    } else {
+      if (
+        resposta_bd.stat === 1 &&
+        resposta_bd.resposta === "DBConnectionError"
+      ) {
+        code = 500;
+        resposta_servidor.resposta = resposta_bd.resposta;
+      } else if (resposta_bd.stat === 0) {
+        resposta_servidor.resposta = resposta_bd.resposta;
+        resposta_servidor.status = "Authenticated";
+      } else if (resposta_bd.stat === 1) {
+        code = 400;
+        resposta_servidor.resposta = resposta_bd.resposta;
+      }
+      token = await getToken.generateToken(token);
+    }
+    resp
+      .status(code)
+      .header("x-auth-token", token)
+      .header("totalpages", totalpages.total) //envio de total de paginas
       .json(resposta_servidor);
   });
 };

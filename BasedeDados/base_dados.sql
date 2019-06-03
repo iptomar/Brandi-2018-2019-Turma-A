@@ -162,6 +162,7 @@ CREATE TABLE tbl_fichasTecnicas
     mecenas VARCHAR(255),
     codPostalMecenas VARCHAR(255),
     contactoMecenas VARCHAR(255),
+    imgGrafico VARCHAR(255),
     bemIntegradoEmConjunto BOOLEAN,
     tipoBensConjunto VARCHAR(255),
     elemConstConj VARCHAR(255),
@@ -293,6 +294,7 @@ CREATE TABLE tbl_fichasTecnicas
     tipoDesigExames TEXT,
     refExames TEXT,
     entidadeExames TEXT,
+    -- campos pagina 10
 	atledpArqDoc TEXT,
 	tipoArqDoc TEXT,
 	localArqDoc TEXT,

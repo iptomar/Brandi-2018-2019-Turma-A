@@ -14,7 +14,6 @@ export class Pag1 extends Component {
       filesG: []
     };
     this.getData = this.getData.bind(this);
-    this.getDataG = this.getDataG.bind(this);
   }
 
   //Recebe os dados do filho Upload
@@ -26,11 +25,6 @@ export class Pag1 extends Component {
   sendFiles(type) {
     if(type === 1) this.props.sendData(this.state.files);
     this.props.sendData(this.state.filesG);
-  }
-
-  async getDataG(data) {
-    await this.setState({ files: data });
-    this.sendFiles(2);
   }
 
   render() {
@@ -70,10 +64,7 @@ export class Pag1 extends Component {
         </div>
         <br />
         <label>Fotografia(s) do objeto:</label>
-        <FileUpload sendData={this.getDataG} type="image" isMultiple />
-        <hr />
-        <label>Gráfico:</label>
-        <FileUpload sendData={this.getData} type="image" />
+        <FileUpload sendData={this.getData} type="image" isMultiple />
       </div>
     );
   }

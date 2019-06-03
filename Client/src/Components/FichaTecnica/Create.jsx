@@ -10,6 +10,7 @@ import Pag8 from "../../Components/FichaTecnica/Create/Pag8";
 import Pag9 from "../../Components/FichaTecnica/Create/Pag9";
 import Pag10 from "../../Components/FichaTecnica/Create/Pag10";
 import $ from 'jquery';
+import FileUpload from "../Globais/FileUpload";
 
 class Create extends Component {
 
@@ -752,10 +753,10 @@ class Create extends Component {
                 </div>
                 <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                   <div className="card-body">
-                      <Pag1
-                      sendData={this.getData} 
-                      // sendDataG={this.getData}
-                       />
+                      <Pag1 sendData={this.getData} />
+                      <hr />
+                      <label>Gráfico:</label>
+                      <FileUpload sendData={this.getDataG} type="image" />
                   </div>
                 </div>
               </div>

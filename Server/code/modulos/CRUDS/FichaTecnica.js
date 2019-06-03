@@ -417,7 +417,7 @@ exports.getFichaTecnica = async (bd, id) => {
   // é necessário array por causa de overflow da variavel resultadofinal
   let resultadofinalteste = [];
   let resposta_bd = await bd.query(
-    "Select * from tbl_fichasTecnicas where fichaRegistoFK = ? and visible = true limit 1",
+    "Select * from tbl_fichasTecnicas where fichaTecnicaID = ? and visible = true limit 1",
     [id]
   );
   if (resposta_bd.stat == 0 && resposta_bd.resposta.length > 0) {
@@ -933,6 +933,28 @@ exports.deleteFichaTecnica = async (bd, id) => {
     resultadofinal.resposta = resposta_bd.resposta;
   } else {
     resultadofinal.stat = resposta_bd.stat;
+    resultadofinal.resposta = resposta_bd.resposta;
+  }
+  return resultadofinal;
+};
+/**
+ * Método que devolve todas as fichas RegistoIdentificacao
+ * @param bd - base de dados para fazer query
+ */
+exports.getAllFichasTecnicas = async (bd, limit, pagenumber, id) => {
+  let resultadofinal = { stat: 1, resposta: {} };
+
+  let resposta_bd = await bd.query(
+    "Select fichaTecnicaID from tbl_fichasTecnicas where fichaRegistoFK = ? visible = true limit ?,?",
+    [id, limit, pagenumber]
+  );
+
+  if (resposta_bd.stat === 0) {
+    resultadofinal.resposta = resposta_bd.resposta;
+    resultadofinal.stat = 0;
+  } else if (resposta_bd.stat === 1) {
+    resultadofinal.resposta = "DBConnectionError";
+  } else if (resposta_bd.stat >= 2) {
     resultadofinal.resposta = resposta_bd.resposta;
   }
   return resultadofinal;

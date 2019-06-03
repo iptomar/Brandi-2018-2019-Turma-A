@@ -68,32 +68,11 @@ export class Pag1 extends Component {
             <input type="text" className="form-control mb-3" id="contactoMecenas" placeholder="Contactos telefónicos" required />
           </div>
         </div>
-        <hr />
         <br />
+        <label>Fotografia(s) do objeto:</label>
         <FileUpload sendData={this.getDataG} type="image" isMultiple />
         <hr />
-        <div className="row">
-          {/* COLUNA 2 */}
-          <div className="col-md-6 mb-3">
-            <label>Dono da obra:</label>
-            <input type="text" className="form-control mb-3" id="donoObra" placeholder="Dono da obra" required />
-            <label>Código postal:</label>
-            <input type="text" className="form-control mb-3" id="codPostalDonoObra" placeholder="Código postal" required />
-            <label>Contactos telefónicos:</label>
-            <input type="text" className="form-control mb-3" id="contactoDonoObra" placeholder="Contactos telefónicos" required />
-          </div>
-
-          <div className="col-md-6 mb-3">
-            <label>Mecenas:</label>
-            <input type="text" className="form-control mb-3" id="mecenas" placeholder="Mecenas" required />
-            <label>Código postal:</label>
-            <input type="text" className="form-control mb-3" id="codPostalMecenas" placeholder="Código postal" required />
-            <label>Contactos telefónicos:</label>
-            <input type="text" className="form-control mb-3" id="contactoMecenas" placeholder="Contactos telefónicos" required />
-          </div>
-        </div>
-        <hr />
-        <br />
+        <label>Gráfico:</label>
         <FileUpload sendData={this.getData} type="image" />
       </div>
     );

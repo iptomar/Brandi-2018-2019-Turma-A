@@ -38,6 +38,8 @@ class Create extends Component {
       $('input, textarea').attr('readonly', 'readonly');
       //Ocultar input do tipo checkbox
       $('input[type=checkbox], input[type=radio]').hide();
+      //Ocultar os componentes FileUpload
+      $('.custom-file').hide();
       //Atualiza todos os valores necessários para apresentação da ficha técnica
       this.fetchAndSetData(this.state.id);
     }
@@ -253,6 +255,23 @@ class Create extends Component {
       tr.innerHTML = '<tr><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Constituição da Equipa / Nome do Técnico" readonly="readonly">'+this.state.data[3][i].constEq+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Funções Desempenhadas" readonly="readonly">'+this.state.data[3][i].funcDes+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Habilitações Escolares / Nível Profissional (1-8)" readonly="readonly">'+this.state.data[3][i].habPro+'</textarea></td></tr>';
       cont.append(tr);
     }
+
+      //Enviar pedido para as imagens
+      // const response = await fetch(`/api/fichaTecnica/${this.props.id}/imagens`, {
+      //   method: "GET",
+      //   headers: {
+      //     "x-auth-token": sessionStorage.getItem("token")
+      //   }
+      // });
+
+      // //Aguardar API
+      // await response.json().then(async resp => {
+      // let status = resp.stat;
+      //console.log(resp);
+
+      // });
+
+
         break;
         default:
            console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");

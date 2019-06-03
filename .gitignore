@@ -1,1 +1,3 @@
 .vscode/settings.json
+Server/images/registoIdentificacao/*
+!Server/images/registoIdentificacao/imagem_1556130161100_a.jpg

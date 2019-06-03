@@ -25,7 +25,7 @@ const upload = multer({ storage: storage });
 exports.createFichaTecnicaRoute = async (app, bd) => {
   app.post(
     "/api/fichaTecnica/create",
-    upload.single("imgGrafico"),
+    upload.single("imgGraph"),
     async (req, resp) => {
       let resposta_servidor = { stat: "Authenticated", resposta: {} };
 
@@ -214,7 +214,7 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
  */
 exports.updateFichaTecnicaRoute = async (app, bd) => {
   app.post("/api/fichaTecnica/:id/edit",
-    upload.single("imgGrafico"), async (req, resp) => {
+    upload.single("imgGraph"), async (req, resp) => {
       let resposta_servidor = { stat: "Authenticated", resposta: {} };
       //HTTP CODE ACCEPTED
       let code = 201;

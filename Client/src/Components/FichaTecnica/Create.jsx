@@ -167,7 +167,7 @@ class Create extends Component {
     let content = document.getElementById("tabela").children[1];
     for(let i = 0 ; i < this.state.data[2].length; i++){
       let tr = document.createElement('tr');
-      tr.innerHTML = '<tr><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Tipo-Referência" readonly="readonly">'+this.state.data[2][0].tipoReferencia+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Localização / Área / Ponto" readonly="readonly">'+this.state.data[2][0].LocalizacaoAreaPonto+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Objetivos Específicos" readonly="readonly">'+this.state.data[2][0].ObjectivosEspecificos+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Resultados" readonly="readonly">'+this.state.data[2][0].Resultados+'</textarea></td><td><textarea class="form-control" type="text" readonly="readonly" style="resize: none;" rows="2">Name</textarea></td><td><input class="form-control" style="width: 170px; height: 63px;" type="date" value="'+this.state.data[2][0].DataDePreenchimento.split("T")[0]+'" readonly="readonly"></td></tr>';
+      tr.innerHTML = '<tr><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Tipo-Referência" readonly="readonly">'+this.state.data[2][i].tipoReferencia+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Localização / Área / Ponto" readonly="readonly">'+this.state.data[2][i].LocalizacaoAreaPonto+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Objetivos Específicos" readonly="readonly">'+this.state.data[2][i].ObjectivosEspecificos+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Resultados" readonly="readonly">'+this.state.data[2][i].Resultados+'</textarea></td><td><textarea class="form-control" type="text" readonly="readonly" style="resize: none;" rows="2">Name</textarea></td><td><input class="form-control" style="width: 170px; height: 63px;" type="date" value="'+this.state.data[2][i].DataDePreenchimento.split("T")[0]+'" readonly="readonly"></td></tr>';
       content.append(tr);
     }
      document.getElementById('interpretacaoResul').value = this.state.data[0].resposta.examesAnalisesInterpResultados;
@@ -243,19 +243,16 @@ class Create extends Component {
     document.getElementById('tipoOutras').value = this.state.data[0].resposta.tipoOutras;
     document.getElementById('localOutras').value = this.state.data[0].resposta.localOutras;
     document.getElementById('cotaOutras').value = this.state.data[0].resposta.cotaOutras;
-    //console.log(this.state.tabel10);
-    // let table = [];
-    // for(let j = 0 ; j < document.getElementById("table").children[1].childElementCount; j++){
-    //     let cont = document.getElementById("table").children[1].children[j];
-    //     table.push(
-    //       {
-    //         constEq: cont.children[0].children[0].value,
-    //         funcDes: cont.children[1].children[0].value,
-    //         habPro: cont.children[2].children[0].value
-    //       }
-    //     );
-    // }
-    // formData.append("tabel10", table);
+
+
+    //Realizar a inserção na tabela
+    document.getElementById("table").children[1].children[0].remove();
+    let cont = document.getElementById("table").children[1];
+    for(let i = 0 ; i < this.state.data[3].length; i++){
+      let tr = document.createElement('tr');
+      tr.innerHTML = '<tr><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Constituição da Equipa / Nome do Técnico" readonly="readonly">'+this.state.data[3][i].constEq+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Funções Desempenhadas" readonly="readonly">'+this.state.data[3][i].funcDes+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Habilitações Escolares / Nível Profissional (1-8)" readonly="readonly">'+this.state.data[3][i].habPro+'</textarea></td></tr>';
+      cont.append(tr);
+    }
         break;
         default:
            console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");

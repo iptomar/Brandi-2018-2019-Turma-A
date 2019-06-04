@@ -10,6 +10,7 @@ import Pag8 from "../../Components/FichaTecnica/Create/Pag8";
 import Pag9 from "../../Components/FichaTecnica/Create/Pag9";
 import Pag10 from "../../Components/FichaTecnica/Create/Pag10";
 import $ from 'jquery';
+import FileUpload from "../Globais/FileUpload";
 
 class Create extends Component {
 
@@ -38,6 +39,8 @@ class Create extends Component {
       $('input, textarea').attr('readonly', 'readonly');
       //Ocultar input do tipo checkbox
       $('input[type=checkbox], input[type=radio]').hide();
+      //Ocultar os componentes FileUpload
+      $('.custom-file').hide();
       //Atualiza todos os valores necessários para apresentação da ficha técnica
       this.fetchAndSetData(this.state.id);
     }
@@ -93,7 +96,9 @@ class Create extends Component {
         document.getElementById('codPostalMecenas').value = this.state.data[0].resposta.codPostalMecenas;
         document.getElementById('contactoMecenas').value = this.state.data[0].resposta.contactoMecenas;
         //Pag 2
-        if(!this.state.data[0].resposta.bemIntegradoEmConjunto){ document.getElementById('bemIntegradoSim').parentNode.parentNode.parentNode.style.display = "none";
+        if(!this.state.data[0].resposta.bemIntegradoEmConjunto){ 
+          document.getElementById('bemIntegradoSim').parentNode.parentNode.parentNode.style.display = "none";
+          document.getElementById('bemIntegradoSim').setAttribute('checked', 'checked');
         }else{ document.getElementById('bemIntegradoNão').parentNode.parentNode.parentNode.style.display = "none"; }
         document.getElementById('tipoConjunto').value = this.state.data[0].resposta.tipoBensConjunto;
         document.getElementById('elementosConst').value = this.state.data[0].resposta.elemConstConj;
@@ -167,7 +172,7 @@ class Create extends Component {
     let content = document.getElementById("tabela").children[1];
     for(let i = 0 ; i < this.state.data[2].length; i++){
       let tr = document.createElement('tr');
-      tr.innerHTML = '<tr><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Tipo-Referência" readonly="readonly">'+this.state.data[2][0].tipoReferencia+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Localização / Área / Ponto" readonly="readonly">'+this.state.data[2][0].LocalizacaoAreaPonto+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Objetivos Específicos" readonly="readonly">'+this.state.data[2][0].ObjectivosEspecificos+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Resultados" readonly="readonly">'+this.state.data[2][0].Resultados+'</textarea></td><td><textarea class="form-control" type="text" readonly="readonly" style="resize: none;" rows="2">Name</textarea></td><td><input class="form-control" style="width: 170px; height: 63px;" type="date" value="'+this.state.data[2][0].DataDePreenchimento.split("T")[0]+'" readonly="readonly"></td></tr>';
+      tr.innerHTML = '<tr><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Tipo-Referência" readonly="readonly">'+this.state.data[2][i].tipoReferencia+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Localização / Área / Ponto" readonly="readonly">'+this.state.data[2][i].LocalizacaoAreaPonto+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Objetivos Específicos" readonly="readonly">'+this.state.data[2][i].ObjectivosEspecificos+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Resultados" readonly="readonly">'+this.state.data[2][i].Resultados+'</textarea></td><td><textarea class="form-control" type="text" readonly="readonly" style="resize: none;" rows="2">Name</textarea></td><td><input class="form-control" style="width: 170px; height: 63px;" type="date" value="'+this.state.data[2][i].DataDePreenchimento.split("T")[0]+'" readonly="readonly"></td></tr>';
       content.append(tr);
     }
      document.getElementById('interpretacaoResul').value = this.state.data[0].resposta.examesAnalisesInterpResultados;
@@ -243,19 +248,33 @@ class Create extends Component {
     document.getElementById('tipoOutras').value = this.state.data[0].resposta.tipoOutras;
     document.getElementById('localOutras').value = this.state.data[0].resposta.localOutras;
     document.getElementById('cotaOutras').value = this.state.data[0].resposta.cotaOutras;
-    //console.log(this.state.tabel10);
-    // let table = [];
-    // for(let j = 0 ; j < document.getElementById("table").children[1].childElementCount; j++){
-    //     let cont = document.getElementById("table").children[1].children[j];
-    //     table.push(
-    //       {
-    //         constEq: cont.children[0].children[0].value,
-    //         funcDes: cont.children[1].children[0].value,
-    //         habPro: cont.children[2].children[0].value
-    //       }
-    //     );
-    // }
-    // formData.append("tabel10", table);
+
+
+    //Realizar a inserção na tabela
+    document.getElementById("table").children[1].children[0].remove();
+    let cont = document.getElementById("table").children[1];
+    for(let i = 0 ; i < this.state.data[3].length; i++){
+      let tr = document.createElement('tr');
+      tr.innerHTML = '<tr><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Constituição da Equipa / Nome do Técnico" readonly="readonly">'+this.state.data[3][i].constEq+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Funções Desempenhadas" readonly="readonly">'+this.state.data[3][i].funcDes+'</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Habilitações Escolares / Nível Profissional (1-8)" readonly="readonly">'+this.state.data[3][i].habPro+'</textarea></td></tr>';
+      cont.append(tr);
+    }
+
+      //Enviar pedido para as imagens
+      // const response = await fetch(`/api/fichaTecnica/${this.props.id}/imagens`, {
+      //   method: "GET",
+      //   headers: {
+      //     "x-auth-token": sessionStorage.getItem("token")
+      //   }
+      // });
+
+      // //Aguardar API
+      // await response.json().then(async resp => {
+      // let status = resp.stat;
+      //console.log(resp);
+
+      // });
+
+
         break;
         default:
            console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
@@ -298,28 +317,28 @@ class Create extends Component {
     let formData = new FormData();
 
     //Pag 1
-    formData.append("localizacao", this.state.data.localizacao);
-    formData.append("proprietario",  this.state.data.proprietario);
-    formData.append("codPostalProprietario",  this.state.data.codPostalProprietario);
-    formData.append("emailProprietario",  this.state.data.emailProprietario);
-    formData.append("contactoProprietario",  this.state.data.contactoProprietario);
-    formData.append("donoObra",  this.state.data.donoObra);
-    formData.append("codPostalDonoObra",  this.state.data.codPostalDonoObra);
-    formData.append("contactoDonoObra",  this.state.data.contactoDonoObra);
-    formData.append("mecenas",  this.state.data.mecenas);
-    formData.append("codPostalMecenas",  this.state.data.codPostalMecenas);
-    formData.append("contactoMecenas",  this.state.data.contactoMecenas);
+    formData.append("localizacao", this.state.data[0].resposta.localizacao);
+    formData.append("proprietario",  this.state.data[0].resposta.proprietario);
+    formData.append("codPostalProprietario",  this.state.data[0].resposta.codPostalProprietario);
+    formData.append("emailProprietario",  this.state.data[0].resposta.emailProprietario);
+    formData.append("contactoProprietario",  this.state.data[0].resposta.contactoProprietario);
+    formData.append("donoObra",  this.state.data[0].resposta.donoObra);
+    formData.append("codPostalDonoObra",  this.state.data[0].resposta.codPostalDonoObra);
+    formData.append("contactoDonoObra",  this.state.data[0].resposta.contactoDonoObra);
+    formData.append("mecenas",  this.state.data[0].resposta.mecenas);
+    formData.append("codPostalMecenas",  this.state.data[0].resposta.codPostalMecenas);
+    formData.append("contactoMecenas",  this.state.data[0].resposta.contactoMecenas);
     //Pag 2
       //Verificações de radiobutton
     if(document.getElementById('bemIntegradoSim').checked) formData.append("bemIntegradoEmConjunto", true);
     else formData.append("bemIntegradoEmConjunto", false);
-    formData.append("tipoBensConjunto",  this.state.data.tipoBensConjunto);
-    formData.append("elemConstConj",  this.state.data.elemConstConj);
-    formData.append("materiasElementosAcessorios",  this.state.data.materiasElementosAcessorios);
-    formData.append("marcasInscricoesAssinaturas",  this.state.data.marcasInscricoesAssinaturas);
-    formData.append("marcasInscricoesMontagem",  this.state.data.marcasInscricoesMontagem);
-    formData.append("marcasInscricoesConstrucao",  this.state.data.marcasInscricoesConstrucao);
-    formData.append("classPatrimonial",  this.state.data.classPatrimonial);
+    formData.append("tipoBensConjunto",  this.state.data[0].resposta.tipoBensConjunto);
+    formData.append("elemConstConj",  this.state.data[0].resposta.elemConstConj);
+    formData.append("materiasElementosAcessorios",  this.state.data[0].resposta.materiasElementosAcessorios);
+    formData.append("marcasInscricoesAssinaturas",  this.state.data[0].resposta.marcasInscricoesAssinaturas);
+    formData.append("marcasInscricoesMontagem",  this.state.data[0].resposta.marcasInscricoesMontagem);
+    formData.append("marcasInscricoesConstrucao",  this.state.data[0].resposta.marcasInscricoesConstrucao);
+    formData.append("classPatrimonial",  this.state.data[0].resposta.classPatrimonial);
     if(document.getElementById('EpocaCoevo').checked) formData.append("epoca", document.getElementById('EpocaCoevo').value);
     else if(document.getElementById('EpocaTardio').checked) formData.append("epoca", document.getElementById('EpocaTardio').value);
     else if(document.getElementById('EpocaOutra').checked) formData.append("epoca", document.getElementById('EpocaOutra').value);
@@ -331,33 +350,33 @@ class Create extends Component {
     else  if(document.getElementById('QualidadeBoa').checked) formData.append("qualidade", document.getElementById('QualidadeBoa').value);
     else if(document.getElementById('QualidadeRegular').checked) formData.append("qualidade", document.getElementById('QualidadeRegular').value);
     else formData.append("qualidade", document.getElementById('QualidadeFraca').value);
-    formData.append("materiaisEstruturaSuporte",  this.state.data.materiaisEstruturaSuporte);
-    formData.append("materiaisSuperficies", this.state.data.materiaisSuperficies);
-    formData.append("tecnicasEstruturaSuporte",  this.state.data.tecnicasEstruturaSuporte);
-    formData.append("tecnicasSuperficie",  this.state.data.tecnicasSuperficie);
+    formData.append("materiaisEstruturaSuporte",  this.state.data[0].resposta.materiaisEstruturaSuporte);
+    formData.append("materiaisSuperficies", this.state.data[0].resposta.materiaisSuperficies);
+    formData.append("tecnicasEstruturaSuporte",  this.state.data[0].resposta.tecnicasEstruturaSuporte);
+    formData.append("tecnicasSuperficie",  this.state.data[0].resposta.tecnicasSuperficie);
     //Pag 3
-    formData.append("condAmbDescricao",  this.state.data.condAmbDescricao);
-    formData.append("condAmbFrioTemperatura",  this.state.data.condAmbFrioTemperatura);
-    formData.append("condAmbFrioHumidade",  this.state.data.condAmbFrioHumidade);
-    formData.append("condAmbFrioPeriodoInicio",  this.state.data.condAmbFrioPeriodoInicio);
-    formData.append("condAmbFrioPeriodoFim",  this.state.data.condAmbFrioPeriodoFim);
-    formData.append("condAmbQuenteTemperatura",  this.state.data.condAmbQuenteTemperatura);
-    formData.append("condAmbQuenteHumidade",   this.state.data.condAmbQuenteHumidade);
-    formData.append("condAmbQuentePeriodoInicio",  this.state.data.condAmbQuentePeriodoInicio);
-    formData.append("condAmbQuentePeriodoFim",  this.state.data.condAmbQuentePeriodoFim);
-    formData.append("ilumArtTipo",  this.state.data.ilumArtTipo);
-    formData.append("ilumArtValorIluminancia",   this.state.data.ilumArtValorIluminancia);
-    formData.append("ilumArtValurUV",  this.state.data.ilumArtValurUV);
-    formData.append("ilumArtValorRealUV",  this.state.data.ilumArtValorRealUV);
-    formData.append("ilumNatOrigem",  this.state.data.ilumNatOrigem);
+    formData.append("condAmbDescricao",  this.state.data[0].resposta.condAmbDescricao);
+    formData.append("condAmbFrioTemperatura",  this.state.data[0].resposta.condAmbFrioTemperatura);
+    formData.append("condAmbFrioHumidade",  this.state.data[0].resposta.condAmbFrioHumidade);
+    formData.append("condAmbFrioPeriodoInicio",  this.state.data[0].resposta.condAmbFrioPeriodoInicio);
+    formData.append("condAmbFrioPeriodoFim",  this.state.data[0].resposta.condAmbFrioPeriodoFim);
+    formData.append("condAmbQuenteTemperatura",  this.state.data[0].resposta.condAmbQuenteTemperatura);
+    formData.append("condAmbQuenteHumidade",   this.state.data[0].resposta.condAmbQuenteHumidade);
+    formData.append("condAmbQuentePeriodoInicio",  this.state.data[0].resposta.condAmbQuentePeriodoInicio);
+    formData.append("condAmbQuentePeriodoFim",  this.state.data[0].resposta.condAmbQuentePeriodoFim);
+    formData.append("ilumArtTipo",  this.state.data[0].resposta.ilumArtTipo);
+    formData.append("ilumArtValorIluminancia",   this.state.data[0].resposta.ilumArtValorIluminancia);
+    formData.append("ilumArtValurUV",  this.state.data[0].resposta.ilumArtValurUV);
+    formData.append("ilumArtValorRealUV",  this.state.data[0].resposta.ilumArtValorRealUV);
+    formData.append("ilumNatOrigem",  this.state.data[0].resposta.ilumNatOrigem);
 
-    formData.append("ilumNatValorIluminancia",  this.state.data.ilumNatValorIluminancia);
-    formData.append("ilumNatValorUV",  this.state.data.ilumNatValorUV);
-    formData.append("ilumNatValorRealUV",  this.state.data.ilumNatValorUV);
-    formData.append("poluicaoAgentes",  this.state.data.poluicaoAgentes);
-    formData.append("poluicaoFontesOrigem",  this.state.data.poluicaoFontesOrigem);
-    formData.append("poluicaoResultados",  this.state.data.poluicaoResultados);
-    formData.append("poluicaoObservacoesConclusoes",  this.state.data.poluicaoObservacoesConclusoes);
+    formData.append("ilumNatValorIluminancia",  this.state.data[0].resposta.ilumNatValorIluminancia);
+    formData.append("ilumNatValorUV",  this.state.data[0].resposta.ilumNatValorUV);
+    formData.append("ilumNatValorRealUV",  this.state.data[0].resposta.ilumNatValorUV);
+    formData.append("poluicaoAgentes",  this.state.data[0].resposta.poluicaoAgentes);
+    formData.append("poluicaoFontesOrigem",  this.state.data[0].resposta.poluicaoFontesOrigem);
+    formData.append("poluicaoResultados",  this.state.data[0].resposta.poluicaoResultados);
+    formData.append("poluicaoObservacoesConclusoes",  this.state.data[0].resposta.poluicaoObservacoesConclusoes);
     // //Pag 4
     //FALTA O LADO DO SERVER AINDA
     // let objGerais = [];
@@ -374,71 +393,71 @@ class Create extends Component {
     //     tab.push({tipoRef: content.children[0].children[0].value, lap: content.children[1].children[0].value, objEsp: content.children[2].children[0].value, reslt: content.children[3].children[0].value, data: content.children[5].children[0].value });
     // }
     // formData.append("tabobjGerais", tab);
-     formData.append("examesAnalisesInterpResultados", this.state.data.examesAnalisesInterpResultados);
-     formData.append("examesAnalisesObsConclusoes", this.state.data.examesAnalisesObsConclusoes);
+     formData.append("examesAnalisesInterpResultados", this.state.data[0].resposta.examesAnalisesInterpResultados);
+     formData.append("examesAnalisesObsConclusoes", this.state.data[0].resposta.examesAnalisesObsConclusoes);
      //Pag 5
-     formData.append("estadoConservFQMestrutura", this.state.data.estadoConservFQMestrutura);
-     formData.append("estadoConservFQMsuperficie", this.state.data.estadoConservFQMsuperficie);
-     formData.append("estadoConservFQMelementosAcess", this.state.data.estadoConservFQMelementosAcess);
-     formData.append("estadoConservBioEstrutura", this.state.data.estadoConservBioEstrutura);
-     formData.append("estadoConservBioSuperficie", this.state.data.estadoConservBioSuperficie);
-     formData.append("estadoConservBioElementosAcess", this.state.data.estadoConservBioElementosAcess);
-     formData.append("estadoConservObsConclusoes", this.state.data.estadoConservObsConclusoes);
+     formData.append("estadoConservFQMestrutura", this.state.data[0].resposta.estadoConservFQMestrutura);
+     formData.append("estadoConservFQMsuperficie", this.state.data[0].resposta.estadoConservFQMsuperficie);
+     formData.append("estadoConservFQMelementosAcess", this.state.data[0].resposta.estadoConservFQMelementosAcess);
+     formData.append("estadoConservBioEstrutura", this.state.data[0].resposta.estadoConservBioEstrutura);
+     formData.append("estadoConservBioSuperficie", this.state.data[0].resposta.estadoConservBioSuperficie);
+     formData.append("estadoConservBioElementosAcess", this.state.data[0].resposta.estadoConservBioElementosAcess);
+     formData.append("estadoConservObsConclusoes", this.state.data[0].resposta.estadoConservObsConclusoes);
     //Pag 6
-     formData.append("estruturaIntervAnter", this.state.data.estruturaIntervAnter);
-     formData.append("superficieIntervAnter", this.state.data.superficieIntervAnter);
-     formData.append("elementosAcessoriosIntervAnter", this.state.data.elementosAcessoriosIntervAnter);
-     formData.append("observaçoesConclusoesPag6", this.state.data.observaçoesConclusoesPag6);
+     formData.append("estruturaIntervAnter", this.state.data[0].resposta.estruturaIntervAnter);
+     formData.append("superficieIntervAnter", this.state.data[0].resposta.superficieIntervAnter);
+     formData.append("elementosAcessoriosIntervAnter", this.state.data[0].resposta.elementosAcessoriosIntervAnter);
+     formData.append("observaçoesConclusoesPag6", this.state.data[0].resposta.observaçoesConclusoesPag6);
      //if(document.getElementById('intervPrevencao').checked) formData.append("tipoInterv", document.getElementById('intervPrevencao').value);
      //else if(document.getElementById('intervConvercao').checked) formData.append("tipoInterv", document.getElementById('intervConvercao').value);
      //else formData.append("tipoInterv", document.getElementById('intervRestauro').value);
-     formData.append("aspetosEspecificosPag6", this.state.data.aspetosEspecificosPag6);
+     formData.append("aspetosEspecificosPag6", this.state.data[0].resposta.aspetosEspecificosPag6);
     //Pag7
      //if(document.getElementById('intervPrevencaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervPrevencaoConsRes').value);
      //else if(document.getElementById('intervConvercaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervConvercaoConsRes').value);
      //else formData.append("tipoIntervCR", document.getElementById('intervRestauroConsRes').value);
-     formData.append("EstruturaPropPag6", this.state.data.EstruturaPropPag6);
-     formData.append("EstruturaPropRecPag6", this.state.data.EstruturaPropRecPag6);
-     formData.append("SuperficiePropPag6", this.state.data.SuperficiePropPag6);
-     formData.append("SuperficiePropRecPag6", this.state.data.SuperficiePropRecPag6);
-     formData.append("ElementosAcessPropRecPag6", this.state.data.ElementosAcessPropRecPag6);
-     formData.append("observaçoesConclusoesPag7", this.state.data.observaçoesConclusoesPag7);
+     formData.append("EstruturaPropPag6", this.state.data[0].resposta.EstruturaPropPag6);
+     formData.append("EstruturaPropRecPag6", this.state.data[0].resposta.EstruturaPropRecPag6);
+     formData.append("SuperficiePropPag6", this.state.data[0].resposta.SuperficiePropPag6);
+     formData.append("SuperficiePropRecPag6", this.state.data[0].resposta.SuperficiePropRecPag6);
+     formData.append("ElementosAcessPropRecPag6", this.state.data[0].resposta.ElementosAcessPropRecPag6);
+     formData.append("observaçoesConclusoesPag7", this.state.data[0].resposta.observaçoesConclusoesPag7);
     // //Pag 8
-     formData.append("estruturaPag8", this.state.data.estruturaPag8);
-     formData.append("recursosEstruturaPag8", this.state.data.recursosEstruturaPag8);
-     formData.append("superficiePag8", this.state.data.superficiePag8);
-     formData.append("recursosSuperficiePag8", this.state.data.recursosSuperficiePag8);
-     formData.append("elementosAcessoriosPag8", this.state.data.elementosAcessoriosPag8);
-     formData.append("recursosElementosAcPag8",this.state.data.recursosElementosAcPag8);
-     formData.append("observaçoesConclusoesPag8", this.state.data.observaçoesConclusoesPag8);
+     formData.append("estruturaPag8", this.state.data[0].resposta.estruturaPag8);
+     formData.append("recursosEstruturaPag8", this.state.data[0].resposta.recursosEstruturaPag8);
+     formData.append("superficiePag8", this.state.data[0].resposta.superficiePag8);
+     formData.append("recursosSuperficiePag8", this.state.data[0].resposta.recursosSuperficiePag8);
+     formData.append("elementosAcessoriosPag8", this.state.data[0].resposta.elementosAcessoriosPag8);
+     formData.append("recursosElementosAcPag8",this.state.data[0].resposta.recursosElementosAcPag8);
+     formData.append("observaçoesConclusoesPag8", this.state.data[0].resposta.observaçoesConclusoesPag8);
     // //Pag 9
-     formData.append("relTecInterLCRM", this.state.data.relTecInterLCRM);
-     formData.append("tipoDesigOrig", this.state.data.tipoDesigOrig);
-     formData.append("refOrig", this.state.data.refOrig);
-     formData.append("entidadeOrig", this.state.data.entidadeOrig);
-     formData.append("tipoDesigDocGraf", this.state.data.tipoDesigDocGraf);
-     formData.append("refDocGraf", this.state.data.refDocGraf);
-     formData.append("entidadeDocGraf", this.state.data.entidadeDocGraf);
-     formData.append("tipoDesigExames", this.state.data.tipoDesigExames);
-     formData.append("refExames", this.state.data.refExames);
-     formData.append("entidadeExames", this.state.data.entidadeExames);
+     formData.append("relTecInterLCRM", this.state.data[0].resposta.relTecInterLCRM);
+     formData.append("tipoDesigOrig", this.state.data[0].resposta.tipoDesigOrig);
+     formData.append("refOrig", this.state.data[0].resposta.refOrig);
+     formData.append("entidadeOrig", this.state.data[0].resposta.entidadeOrig);
+     formData.append("tipoDesigDocGraf", this.state.data[0].resposta.tipoDesigDocGraf);
+     formData.append("refDocGraf", this.state.data[0].resposta.refDocGraf);
+     formData.append("entidadeDocGraf", this.state.data[0].resposta.entidadeDocGraf);
+     formData.append("tipoDesigExames", this.state.data[0].resposta.tipoDesigExames);
+     formData.append("refExames", this.state.data[0].resposta.refExames);
+     formData.append("entidadeExames", this.state.data[0].resposta.entidadeExames);
     // //Pag10
-     formData.append("atledpArqDoc", this.state.data.atledpArqDoc);
-     formData.append("tipoArqDoc", this.state.data.tipoArqDoc);
-     formData.append("localArqDoc", this.state.data.localArqDoc);
-     formData.append("cotaArqDoc", this.state.data.cotaArqDoc);
-     formData.append("atledpIcon", this.state.data.atledpIcon);
-     formData.append("tipoIcon", this.state.data.tipoIcon);
-     formData.append("localIcon", this.state.data.localIcon);
-     formData.append("cotaIcon", this.state.data.cotaIcon);
-     formData.append("atledpBiblio", this.state.data.atledpBiblio);
-     formData.append("tipoBiblio", this.state.data.tipoBiblio);
-     formData.append("localBiblio", this.state.data.localBiblio);
-     formData.append("cotaBiblio", this.state.data.cotaBiblio);
-     formData.append("atledpOutras", this.state.data.atledpOutras);
-     formData.append("tipoOutras", this.state.data.tipoOutras);
-     formData.append("localOutras", this.state.data.localOutras);
-     formData.append("cotaOutras", this.state.data.cotaOutras);
+     formData.append("atledpArqDoc", this.state.data[0].resposta.atledpArqDoc);
+     formData.append("tipoArqDoc", this.state.data[0].resposta.tipoArqDoc);
+     formData.append("localArqDoc", this.state.data[0].resposta.localArqDoc);
+     formData.append("cotaArqDoc", this.state.data[0].resposta.cotaArqDoc);
+     formData.append("atledpIcon", this.state.data[0].resposta.atledpIcon);
+     formData.append("tipoIcon", this.state.data[0].resposta.tipoIcon);
+     formData.append("localIcon", this.state.data[0].resposta.localIcon);
+     formData.append("cotaIcon", this.state.data[0].resposta.cotaIcon);
+     formData.append("atledpBiblio", this.state.data[0].resposta.atledpBiblio);
+     formData.append("tipoBiblio", this.state.data[0].resposta.tipoBiblio);
+     formData.append("localBiblio", this.state.data[0].resposta.localBiblio);
+     formData.append("cotaBiblio", this.state.data[0].resposta.cotaBiblio);
+     formData.append("atledpOutras", this.state.data[0].resposta.atledpOutras);
+     formData.append("tipoOutras", this.state.data[0].resposta.tipoOutras);
+     formData.append("localOutras", this.state.data[0].resposta.localOutras);
+     formData.append("cotaOutras", this.state.data[0].resposta.cotaOutras);
     // let table = [];
     // for(let j = 0 ; j < document.getElementById("table").children[1].childElementCount; j++){
     //     let cont = document.getElementById("table").children[1].children[j];
@@ -520,6 +539,7 @@ class Create extends Component {
     formData.append("codPostalMecenas",  document.getElementById('codPostalMecenas').value);
     formData.append("contactoMecenas",  document.getElementById('contactoMecenas').value);
     formData.append("files", this.state.files);
+    formData.append("imgGraph", this.state.filesG[0]);
     //Pag 2
       //Verificações de radiobutton
     if(document.getElementById('bemIntegradoSim').checked) formData.append("bemIntegradoEmConjunto", 1);
@@ -692,6 +712,7 @@ class Create extends Component {
              this.setState({
                alertisNotVisible: false
              });
+             window.location = "/fichaRI/"+this.state.id+"/detalhes";
              break;
          case "Erro na criação":
            this.setState({
@@ -735,10 +756,10 @@ class Create extends Component {
                 </div>
                 <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                   <div className="card-body">
-                      <Pag1
-                      sendData={this.getData} 
-                      // sendDataG={this.getData}
-                       />
+                      <Pag1 sendData={this.getData} />
+                      <hr />
+                      <label>Gráfico:</label>
+                      <FileUpload sendData={this.getDataG} type="image" />
                   </div>
                 </div>
               </div>

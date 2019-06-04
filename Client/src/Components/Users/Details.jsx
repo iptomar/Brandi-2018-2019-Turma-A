@@ -8,6 +8,7 @@ class Details extends Component {
       alertisNotVisible: true,
       alertColor: "",
       data: [],
+      dataTecnicos:[]
     };
   }
 
@@ -30,6 +31,7 @@ class Details extends Component {
       switch (status) {
         case "Authenticated":
           this.setState({ data: resp.resposta });
+          this.setState({dataTecnicos:resp.resposta.tecnicos[0]});
           break;
         default:
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
@@ -103,6 +105,42 @@ class Details extends Component {
                       className="form-control"
                       id="email"
                       placeholder={this.state.data.email}
+                      readOnly="readOnly"
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-12 mb-3">
+                    <label>Nome</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="nome"
+                      placeholder={this.state.dataTecnicos.nome}
+                      readOnly="readOnly"
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-12 mb-3">
+                    <label>Habilitações</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="habilitacoes"
+                      placeholder={this.state.dataTecnicos.habilitacoes}
+                      readOnly="readOnly"
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-12 mb-3">
+                    <label>Nível Profissional</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="nivelProf"
+                      placeholder={this.state.dataTecnicos.nivelProfissional + "/10"}
                       readOnly="readOnly"
                     />
                   </div>

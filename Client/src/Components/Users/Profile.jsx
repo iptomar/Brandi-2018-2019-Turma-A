@@ -9,7 +9,7 @@ class Profile extends Component {
       alertisNotVisible: true,
       alertColor: "",
       data: [],
-      rolesList: [],
+      dataTecnico: []
     };
   }
 
@@ -19,6 +19,11 @@ class Profile extends Component {
     this.fetchRoles();
   }
 
+  editar() {
+
+    var id = sessionStorage.getItem('id');
+    window.location="/utilizadores/" + id+"/editar";
+  }
   async getUser(id) {
     //Enviar pedido
     const response = await fetch(`/api/users/${id}`, {
@@ -30,10 +35,13 @@ class Profile extends Component {
     });
     //Aguardar API
     await response.json().then(resp => {
+      console.log(resp);
       let status = resp.status;
       switch (status) {
         case "Authenticated":
+          console.log(resp.resposta);
           this.setState({ data: resp.resposta });
+          this.setState({ dataTecnico: resp.resposta.tecnicos[0] });
           break;
         default:
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
@@ -41,7 +49,6 @@ class Profile extends Component {
     });
   }
 
-  //Receber os roles
   async fetchRoles() {
     //Enviar pedidos
     const response = await fetch("/api/roles", {
@@ -60,63 +67,86 @@ class Profile extends Component {
             window.location = "/";
             break;
           default:
+            console.log(resp.resposta);
             this.setState({ rolesList: resp.resposta })
             break;
         }
       });
   }
-
   render() {
     let getThis = this;
     return (
-      <div className="container mb-5">
-        <div className="row">
-          <div className="col-md-8">
-            <h2 className="py-3 mb-3 text-center">
-              O meu perfil
-              </h2>
-          </div>
-          <div className="col-md-4" style={{ display: "inline" }}>
-            <a href="/perfil" className="mt-3 btn btn-warning">
-              <i className="fas fa-edit" /> Editar perfil
-            </a>
-            <a href="/perfil" className="mt-3 btn btn-danger ml-2">
-              <i className="fas fa-key" /> Alterar palavra-passe
-              </a>
-          </div>
-
+      <div className="container">
+        <div className="pt-3 py-3 text-center">
+          <h3>User Profile</h3>
         </div>
         <hr />
         <div className="row">
-          <div className="col-md-12 mb-3">
-            <label>Nome de utilizador</label>
-            <input
-              type="text"
-              className="form-control"
-              id="user"
-              placeholder={getThis.state.data.login}
-              readOnly
-            />
+          <div className="col-xs-12 col-sm-12">
+            <div className="panel panel-default">
+              <div className="panel-body">
+                <div className="profile__header">
+                  <br></br>
+                  <center>
+                    <h4 style={{ fontWeight: "bold", fontSize: "35px", textAlign: "center", left: "85px" }}>{getThis.state.dataTecnico.nome}</h4>
+                    <div className="profile__avatar">
+                      <img src="http://icons.iconarchive.com/icons/icons8/ios7/512/Users-User-Male-2-icon.png" alt="...">
+                      </img>
+
+                    </div>
+                  </center>
+                  <br />
+                </div>
+              </div>
+            </div>
+            <br></br>
+            <div className="panel panel-default">
+              <div className="panel-body">
+                <table className="table profile__table">
+                  <tbody>
+                    <tr>
+                      <th><strong>Email</strong></th>
+                      <td>{this.state.data.email}</td>
+                    </tr>
+                    <tr>
+                      <th><strong>Username</strong></th>
+                      <td>{this.state.data.login}</td>
+                    </tr>
+                    <tr>
+                      <th><strong>Tipo de Utilizador</strong></th>
+                      <td>{this.state.data.role}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <hr />
+          </div>
+          <div className="col-xs-1 col-sm-5">
+            <h2>
+              Currículo Profissional
+            </h2>
+            <table className="table profile__table">
+              <tbody>
+                <tr>
+                  <th><strong>Habilitações</strong></th>
+                  <td>{this.state.dataTecnico.habilitacoes}</td>
+                </tr>
+                <tr>
+                  <th><strong>Nivel Profissional</strong></th>
+                  <td>{this.state.dataTecnico.nivelProfissional}/10</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-        <div className="row">
-          <div className="col-md-12 mb-3">
-            <label>Email</label>
-            <input
-              type="text"
-              className="form-control"
-              id="email"
-              placeholder={getThis.state.data.email}
-              readOnly
-            />
-          </div>
+        <div className="pt-3 py-3 text-center">
+          <button onClick={this.editar} className="btn btn-success btn-lg btn-block mb-5" type="submit">
+            <i className="fas fa-edit" /> Editar perfil
+        </button>
         </div>
-        <label>Tipo de utilizador</label>
-        <select id="DDLRoles" className="form-control" disabled>
-          <option className="dropdown-item">
-            {getThis.state.data.role}
-          </option>
-        </select>
+        <br />
+        <br />
       </div>
     );
   }

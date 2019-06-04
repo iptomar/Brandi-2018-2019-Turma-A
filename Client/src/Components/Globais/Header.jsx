@@ -3,12 +3,46 @@ import favicon from "../../Images/favicon.ico";
 import '../../CssComponents/header.css';
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: []
+    };
+  }
+  
+ 
+  componentDidMount() {
+    this.getUser(sessionStorage.getItem('id'));
+  }
   out() {
     //Eliminar os dados armazenados da conta
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('nome');
     //Redirect
     window.location = '/';
+  }  
+  
+  async getUser(id) {
+    //Enviar pedido
+    const response = await fetch(`/api/users/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": sessionStorage.getItem("token")
+      }
+    });
+    //Aguardar API
+    await response.json().then(resp => {
+      let status = resp.status;
+      switch (status) {
+        case "Authenticated":
+          this.setState({ data: resp.resposta });
+          console.log(this.state.data.role)
+          break;
+        default:
+          console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
+      }
+    });
   }
 
   render() {
@@ -48,16 +82,19 @@ class Header extends Component {
                 <a className="dropdown-item" href="/interessados/criar"><i className="fas fa-plus"></i> Adicionar</a>
               </div>
             </li>
-
+            {this.state.data.role === "Admin"?(
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Utilizadores
-              </a>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a className="dropdown-item" href="/utilizadores/listar"><i className="fas fa-th-list"></i> Listar</a>
-                <a className="dropdown-item" href="/utilizadores/registar"><i className="fas fa-plus"></i> Registar</a>
-              </div>
-            </li>
+            <a className="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Utilizadores
+            </a>
+            <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a className="dropdown-item" href="/utilizadores/listar"><i className="fas fa-th-list"></i> Listar</a>
+              <a className="dropdown-item" href="/utilizadores/registar"><i className="fas fa-plus"></i> Registar</a>
+            </div>
+          </li>
+          ):(
+            <div></div>
+          )}
             <li className="nav-item">
               <a className="nav-link" href="/Sobre">Sobre</a>
             </li>

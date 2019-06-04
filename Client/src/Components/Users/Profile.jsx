@@ -16,13 +16,15 @@ class Profile extends Component {
   componentDidMount() {
     var name = sessionStorage.getItem('id');
     this.getUser(name);
-    this.fetchRoles();
+    if (this.state.data.role === "Admin") {
+      this.fetchRoles();
+    }
   }
 
   editar() {
 
     var id = sessionStorage.getItem('id');
-    window.location="/utilizadores/" + id+"/editar";
+    window.location = "/utilizadores/" + id + "/editar";
   }
   async getUser(id) {
     //Enviar pedido
@@ -62,10 +64,6 @@ class Profile extends Component {
       .json()
       .then(resp => {
         switch (resp.stat) {
-          case "NoPermission":
-            alert("NÃO TENS PERMISSÃO");
-            window.location = "/";
-            break;
           default:
             console.log(resp.resposta);
             this.setState({ rolesList: resp.resposta })
@@ -88,7 +86,15 @@ class Profile extends Component {
                 <div className="profile__header">
                   <br></br>
                   <center>
-                    <h4 style={{ fontWeight: "bold", fontSize: "35px", textAlign: "center", left: "85px" }}>{getThis.state.dataTecnico.nome}</h4>
+                    {this.state.dataTecnico === undefined ? (
+                      <div>
+                        <h4 style={{ fontWeight: "bold", fontSize: "35px", textAlign: "center", left: "85px" }}>{getThis.state.data.login}</h4>
+                      </div>
+                    ) : (
+                        <div>
+                          <h4 style={{ fontWeight: "bold", fontSize: "35px", textAlign: "center", left: "85px" }}>{getThis.state.dataTecnico.nome}</h4>
+                        </div>
+                      )}
                     <div className="profile__avatar">
                       <img src="http://icons.iconarchive.com/icons/icons8/ios7/512/Users-User-Male-2-icon.png" alt="...">
                       </img>
@@ -122,23 +128,27 @@ class Profile extends Component {
             </div>
             <hr />
           </div>
-          <div className="col-xs-1 col-sm-5">
-            <h2>
-              Currículo Profissional
-            </h2>
-            <table className="table profile__table">
-              <tbody>
-                <tr>
-                  <th><strong>Habilitações</strong></th>
-                  <td>{this.state.dataTecnico.habilitacoes}</td>
-                </tr>
-                <tr>
-                  <th><strong>Nivel Profissional</strong></th>
-                  <td>{this.state.dataTecnico.nivelProfissional}/10</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          {this.state.dataTecnico !== undefined ? (
+            <div className="col-xs-1 col-sm-5">
+              <h2>
+                Currículo Profissional
+          </h2>
+              <table className="table profile__table">
+                <tbody>
+                  <tr>
+                    <th><strong>Habilitações</strong></th>
+                    <td>{this.state.dataTecnico.habilitacoes}</td>
+                  </tr>
+                  <tr>
+                    <th><strong>Nivel Profissional</strong></th>
+                    <td>{this.state.dataTecnico.nivelProfissional}/10</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          ) : (
+              <div></div>
+            )}
         </div>
         <div className="pt-3 py-3 text-center">
           <button onClick={this.editar} className="btn btn-success btn-lg btn-block mb-5" type="submit">

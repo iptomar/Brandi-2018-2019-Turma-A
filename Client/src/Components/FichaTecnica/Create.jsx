@@ -96,7 +96,9 @@ class Create extends Component {
         document.getElementById('codPostalMecenas').value = this.state.data[0].resposta.codPostalMecenas;
         document.getElementById('contactoMecenas').value = this.state.data[0].resposta.contactoMecenas;
         //Pag 2
-        if(!this.state.data[0].resposta.bemIntegradoEmConjunto){ document.getElementById('bemIntegradoSim').parentNode.parentNode.parentNode.style.display = "none";
+        if(!this.state.data[0].resposta.bemIntegradoEmConjunto){ 
+          document.getElementById('bemIntegradoSim').parentNode.parentNode.parentNode.style.display = "none";
+          document.getElementById('bemIntegradoSim').setAttribute('checked', 'checked');
         }else{ document.getElementById('bemIntegradoNão').parentNode.parentNode.parentNode.style.display = "none"; }
         document.getElementById('tipoConjunto').value = this.state.data[0].resposta.tipoBensConjunto;
         document.getElementById('elementosConst').value = this.state.data[0].resposta.elemConstConj;
@@ -356,7 +358,7 @@ class Create extends Component {
     formData.append("condAmbDescricao",  this.state.data[0].resposta.condAmbDescricao);
     formData.append("condAmbFrioTemperatura",  this.state.data[0].resposta.condAmbFrioTemperatura);
     formData.append("condAmbFrioHumidade",  this.state.data[0].resposta.condAmbFrioHumidade);
-    formData.append("condAmbFrioPeriodoInicio",  this.state[0].resposta.data.condAmbFrioPeriodoInicio);
+    formData.append("condAmbFrioPeriodoInicio",  this.state.data[0].resposta.condAmbFrioPeriodoInicio);
     formData.append("condAmbFrioPeriodoFim",  this.state.data[0].resposta.condAmbFrioPeriodoFim);
     formData.append("condAmbQuenteTemperatura",  this.state.data[0].resposta.condAmbQuenteTemperatura);
     formData.append("condAmbQuenteHumidade",   this.state.data[0].resposta.condAmbQuenteHumidade);
@@ -710,7 +712,7 @@ class Create extends Component {
              this.setState({
                alertisNotVisible: false
              });
-             windows.location = "/fichaRI/"+this.state.id+"/detalhes";
+             window.location = "/fichaRI/"+this.state.id+"/detalhes";
              break;
          case "Erro na criação":
            this.setState({

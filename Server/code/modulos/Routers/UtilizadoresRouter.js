@@ -214,35 +214,28 @@ exports.changeUserDetailsRoute = async (app, bd) => {
       code = 400;
       resposta_servidor.status = "InvalidToken";
     } else {
-      //verificar se e administrador
-      if (token.roleFK === 1) {
-        //criar um utilizador
-        let utilizador = {
-          login: req.body.login,
-          email: req.body.email,
-          userID: req.params.id,
-          roleFK: req.body.roleFK,
-          visible: req.body.visible
-        };
-        //tentar alterar os de um utilizador
-        let resposta_bd = await authentication.changeUser(bd, utilizador);
+      //criar um utilizador
+      let utilizador = {
+        login: req.body.login,
+        email: req.body.email,
+        userID: req.params.id,
+        roleFK: req.body.roleFK,
+        visible: req.body.visible
+      };
+      //tentar alterar os de um utilizador
+      let resposta_bd = await authentication.changeUser(bd, utilizador);
 
-        //alterações  com sucesso
-        if (resposta_bd.stat === 0) {
-          resposta_servidor.status = "Updated";
-          resposta_servidor.resposta = resposta_bd.resposta;
-        }
-        //algum erro com a base de dados
-        else {
-          //HTTP BAD REQUEST
-          code = 400;
-          resposta_servidor.status = "NotUpdated";
-          resposta_servidor.resposta = resposta_bd.resposta;
-        }
+      //alterações  com sucesso
+      if (resposta_bd.stat === 0) {
+        resposta_servidor.status = "Updated";
+        resposta_servidor.resposta = resposta_bd.resposta;
       }
-      //nao tem permissoes
+      //algum erro com a base de dados
       else {
-        resposta_servidor.resposta = "NotAuthorized";
+        //HTTP BAD REQUEST
+        code = 400;
+        resposta_servidor.status = "NotUpdated";
+        resposta_servidor.resposta = resposta_bd.resposta;
       }
     }
     //resposta do servidor

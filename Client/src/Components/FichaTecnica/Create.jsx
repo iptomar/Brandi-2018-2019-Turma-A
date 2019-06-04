@@ -284,16 +284,50 @@ class Create extends Component {
           document.getElementById('superficieIntervAnter').value = this.state.data[0].resposta.superficieIntervAnter;
           document.getElementById('elementosAcessoriosIntervAnter').value = this.state.data[0].resposta.elementosAcessoriosIntervAnter;
           document.getElementById('observaçoesConclusoesPag6').value = this.state.data[0].resposta.observaçoesConclusoesPag6;
-          if (this.state.data[0].resposta.tipoInterv !== "Prevenção") document.getElementById('intervPrevencao').parentNode.parentNode.parentNode.style.display = "none";
-          if (this.state.data[0].resposta.tipoInterv !== "Conservação") document.getElementById('intervConvercao').parentNode.parentNode.parentNode.style.display = "none";
-          if (this.state.data[0].resposta.tipoInterv !== "Restauro") document.getElementById('intervRestauro').parentNode.parentNode.parentNode.style.display = "none";
+          
+          document.getElementById('intervPrevencao').parentNode.parentNode.parentNode.style.display = "none";
+          document.getElementById('intervConvercao').parentNode.parentNode.parentNode.style.display = "none";
+          document.getElementById('intervRestauro').parentNode.parentNode.parentNode.style.display = "none";
+
+          if (this.state.data[0].resposta.tipoInterv !== "Prevenção") {
+            document.getElementById('intervConvercao').checked=true;
+            if (this.state.data[0].resposta.tipoInterv !== "Conservação") {
+              document.getElementById('intervRestauro').checked=true;
+              if (this.state.data[0].resposta.tipoInterv === "Restauro") {
+                document.getElementById('intervRestauro').parentNode.parentNode.parentNode.style.display = "";
+              }
+  
+            }else{
+              document.getElementById('intervConvercao').parentNode.parentNode.parentNode.style.display = "";
+            }
+          }else{
+            document.getElementById('intervPrevencao').parentNode.parentNode.parentNode.style.display = "";
+          }
+
+
           document.getElementById('aspetosEspecificosPag6').value = this.state.data[0].resposta.aspetosEspecificosPag6;
 
           //Pag7
           //console.log(this.state.data);
-          if (this.state.data[0].resposta.tipoIntervCR !== "Prevenção") document.getElementById('intervPrevencaoConsRes').parentNode.parentNode.parentNode.style.display = "none";
-          if (this.state.data[0].resposta.tipoIntervCR !== "Conservação") document.getElementById('intervConvercaoConsRes').parentNode.parentNode.parentNode.style.display = "none";
-          if (this.state.data[0].resposta.tipoIntervCR !== "Restauro") document.getElementById('intervRestauroConsRes').parentNode.parentNode.parentNode.style.display = "none";
+          document.getElementById('intervPrevencaoConsRes').parentNode.parentNode.parentNode.style.display = "none";
+          document.getElementById('intervConvercaoConsRes').parentNode.parentNode.parentNode.style.display = "none";
+          document.getElementById('intervRestauroConsRes').parentNode.parentNode.parentNode.style.display = "none";
+
+          if (this.state.data[0].resposta.tipoInterv !== "Prevenção") {
+            document.getElementById('intervConvercaoConsRes').checked=true;
+            if (this.state.data[0].resposta.tipoInterv !== "Conservação") {
+              document.getElementById('intervRestauroConsRes').checked=true;
+              if (this.state.data[0].resposta.tipoInterv === "Restauro") {
+                document.getElementById('intervRestauroConsRes').parentNode.parentNode.parentNode.style.display = "";
+              }
+            }else{
+              document.getElementById('intervConvercaoConsRes').parentNode.parentNode.parentNode.style.display = "";
+            }
+          }else{
+            document.getElementById('intervPrevencaoConsRes').parentNode.parentNode.parentNode.style.display = "";
+          }
+
+
 
           document.getElementById('EstruturaPropPag6').value = this.state.data[0].resposta.EstruturaPropPag6;
           document.getElementById('EstruturaPropRecPag6').value = this.state.data[0].resposta.EstruturaPropRecPag6;
@@ -472,21 +506,20 @@ class Create extends Component {
     formData.append("poluicaoResultados", this.state.data[0].resposta.poluicaoResultados);
     formData.append("poluicaoObservacoesConclusoes", this.state.data[0].resposta.poluicaoObservacoesConclusoes);
     // //Pag 4
-    //FALTA O LADO DO SERVER AINDA
-    // let objGerais = [];
-    // if(document.getElementById("identMateriais").checked) objGerais.push(document.getElementById("identMateriais").value);
-    // if(document.getElementById("identIntervencoes").checked) objGerais.push(document.getElementById("identIntervencoes").value);
-    // if(document.getElementById("caracterizacao").checked) objGerais.push(document.getElementById("caracterizacao").value);
-    // if(document.getElementById("identPatologias").checked) objGerais.push(document.getElementById("identPatologias").value);
-    // if(document.getElementById("datacao").checked) objGerais.push(document.getElementById("datacao").value);
-    // if(document.getElementById("ensaio").checked) objGerais.push(document.getElementById("ensaio").value);
-    // formData.append("objGerais", objGerais);
-    // let tab = [];
-    // for(let i = 0 ; i < document.getElementById("tabela").children[1].childElementCount; i++){
-    //     let content = document.getElementById("tabela").children[1].children[i];
-    //     tab.push({tipoRef: content.children[0].children[0].value, lap: content.children[1].children[0].value, objEsp: content.children[2].children[0].value, reslt: content.children[3].children[0].value, data: content.children[5].children[0].value });
-    // }
-    // formData.append("tabobjGerais", tab);
+     let objGerais = [];
+     if(document.getElementById("identMateriais").checked) objGerais.push(document.getElementById("identMateriais").value);
+     if(document.getElementById("identIntervencoes").checked) objGerais.push(document.getElementById("identIntervencoes").value);
+     if(document.getElementById("caracterizacao").checked) objGerais.push(document.getElementById("caracterizacao").value);
+     if(document.getElementById("identPatologias").checked) objGerais.push(document.getElementById("identPatologias").value);
+     if(document.getElementById("datacao").checked) objGerais.push(document.getElementById("datacao").value);
+     if(document.getElementById("ensaio").checked) objGerais.push(document.getElementById("ensaio").value);
+     formData.append("objGerais", objGerais);
+     let tab = [];
+     for(let i = 0 ; i < document.getElementById("tabela").children[1].childElementCount; i++){
+         let content = document.getElementById("tabela").children[1].children[i];
+         tab.push({tipoRef: content.children[0].children[0].value, lap: content.children[1].children[0].value, objEsp: content.children[2].children[0].value, reslt: content.children[3].children[0].value, data: content.children[5].children[0].value });
+     }
+     formData.append("tabobjGerais", tab);
     formData.append("examesAnalisesInterpResultados", this.state.data[0].resposta.examesAnalisesInterpResultados);
     formData.append("examesAnalisesObsConclusoes", this.state.data[0].resposta.examesAnalisesObsConclusoes);
     //Pag 5
@@ -502,14 +535,14 @@ class Create extends Component {
     formData.append("superficieIntervAnter", this.state.data[0].resposta.superficieIntervAnter);
     formData.append("elementosAcessoriosIntervAnter", this.state.data[0].resposta.elementosAcessoriosIntervAnter);
     formData.append("observaçoesConclusoesPag6", this.state.data[0].resposta.observaçoesConclusoesPag6);
-    //if(document.getElementById('intervPrevencao').checked) formData.append("tipoInterv", document.getElementById('intervPrevencao').value);
-    //else if(document.getElementById('intervConvercao').checked) formData.append("tipoInterv", document.getElementById('intervConvercao').value);
-    //else formData.append("tipoInterv", document.getElementById('intervRestauro').value);
+    if(document.getElementById('intervPrevencao').checked) formData.append("tipoInterv", document.getElementById('intervPrevencao').value);
+    else if(document.getElementById('intervConvercao').checked) formData.append("tipoInterv", document.getElementById('intervConvercao').value);
+    else formData.append("tipoInterv", document.getElementById('intervRestauro').value);
     formData.append("aspetosEspecificosPag6", this.state.data[0].resposta.aspetosEspecificosPag6);
     //Pag7
-    //if(document.getElementById('intervPrevencaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervPrevencaoConsRes').value);
-    //else if(document.getElementById('intervConvercaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervConvercaoConsRes').value);
-    //else formData.append("tipoIntervCR", document.getElementById('intervRestauroConsRes').value);
+    if(document.getElementById('intervPrevencaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervPrevencaoConsRes').value);
+    else if(document.getElementById('intervConvercaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervConvercaoConsRes').value);
+    else formData.append("tipoIntervCR", document.getElementById('intervRestauroConsRes').value);
     formData.append("EstruturaPropPag6", this.state.data[0].resposta.EstruturaPropPag6);
     formData.append("EstruturaPropRecPag6", this.state.data[0].resposta.EstruturaPropRecPag6);
     formData.append("SuperficiePropPag6", this.state.data[0].resposta.SuperficiePropPag6);
@@ -552,18 +585,18 @@ class Create extends Component {
     formData.append("tipoOutras", this.state.data[0].resposta.tipoOutras);
     formData.append("localOutras", this.state.data[0].resposta.localOutras);
     formData.append("cotaOutras", this.state.data[0].resposta.cotaOutras);
-    // let table = [];
-    // for(let j = 0 ; j < document.getElementById("table").children[1].childElementCount; j++){
-    //     let cont = document.getElementById("table").children[1].children[j];
-    //     table.push(
-    //       {
-    //         constEq: cont.children[0].children[0].value,
-    //         funcDes: cont.children[1].children[0].value,
-    //         habPro: cont.children[2].children[0].value
-    //       }
-    //     );
-    // }
-    // formData.append("tabel10", table);    
+     let table = [];
+     for(let j = 0 ; j < document.getElementById("table").children[1].childElementCount; j++){
+         let cont = document.getElementById("table").children[1].children[j];
+         table.push(
+           {
+             constEq: cont.children[0].children[0].value,
+             funcDes: cont.children[1].children[0].value,
+             habPro: cont.children[2].children[0].value
+           }
+         );
+     }
+     formData.append("tabel10", table);    
     //Final
     formData.append("fichaRegistoFK", this.state.id);
     //Enviar pedidos

@@ -53,10 +53,8 @@ public class TestarLogin {
         //caso a variavel dologout estetja a true, é efetuado o logout selecionando 
         //esta opçao na pagina "IndexFichaRIPage"
         if (dologout) {
-        List<WebElement> sair =  driver.findElements(By.className("nav-link"));
-        sair.get(3).click();
-        sair =  driver.findElements(By.className("dropdown-item"));
-        sair.get(3).click();
+        WebElement sair =  driver.findElement(By.className("nav-sair"));
+        sair.click();
         } 
     }
 

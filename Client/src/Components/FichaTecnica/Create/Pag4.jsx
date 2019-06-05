@@ -42,7 +42,7 @@ class Pag4 extends Component {
         paramTecnico.className = "form-control";
         paramTecnico.setAttribute("type", "text")
         paramTecnico.readOnly = true;
-        paramTecnico.value = "Name";
+        paramTecnico.value = "Técnico";
         paramTecnico.style.resize = "none";
         paramTecnico.setAttribute("rows", "2");
 

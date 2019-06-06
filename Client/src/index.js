@@ -25,6 +25,10 @@ import IndexInteressados from './MasterComponents/Interessados/IndexInteressados
 import CreateInteressados from './MasterComponents/Interessados/CreateInteressados';
 import EditInteressados from './MasterComponents/Interessados/EditInteressados';
 import DetailsInteressados from './MasterComponents/Interessados/DetailsInteressados';
+// FOLHAS DE OBRA
+import CreateFolhaDeObra from './MasterComponents/FolhaDeObra/CreateFolhaDeObra';
+import IndexFolhaDeObra from './MasterComponents/FolhaDeObra/IndexFolhaDeObra';
+
 
 ReactDOM.render(
     <BrowserRouter>
@@ -52,6 +56,9 @@ ReactDOM.render(
             <Route path="/interessados/criar" component={CreateInteressados} />
             <Route path="/interessados/:id/editar" component={(r) => <EditInteressados id={r.match.params.id} />} />
             <Route path="/interessados" component={IndexInteressados} />
+            {/* Folha de Obra */}
+            <Route path="/folhaDeObra/criar" component={CreateFolhaDeObra}/>
+            <Route path="/folhaDeObra" component={IndexFolhaDeObra}/>
             {/* Default */}
             <Route component={LoginPage} />
         </Switch>

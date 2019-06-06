@@ -8,7 +8,6 @@ Estas instruções fazem com que o utilizador fique com uma cópia do projeto em
 O grupo de front-end utilizou o IDE [Visual Studio Code](https://code.visualstudio.com/) para desenvolvimento, por ter a CMD integrada e uma interface simples e funcional.
 Como tecnologias, foi usado [React](https://reactjs.org/).
 
-### Tarefas
 - Transferir e instalar o [Node.js](https://nodejs.org/en/), que já trás o package manager NPM. O React é uma library de JavaScript, por isso precisa do Node.js (JavaScript Runtime).
 - Transferir o projeto. 
 - Instalar as dependências relativas ao front-end:
@@ -72,7 +71,7 @@ npm start (O React reinicia o servidor automaticamente quando é feita uma alter
 * Create - Permite criar uma folha de obra
   
 ### MasterComponents
-Os MasterComponents não têm muito que se lhe diga: servem para introduzir os componentes individuais, anteriormente descritos, por forma a serem chamados em conjunto numa só página. O path para os MasterComponents é posteriormente definido no documento index.js, através do componente <BrowserRouter>
+Os MasterComponents servem para introduzir os componentes individuais e anteriormente descritos, por forma a serem chamados em conjunto numa só página. O path para os MasterComponents é posteriormente definido no documento index.js, através do componente <BrowserRouter>
   
 ### index.js
-Onde são definidas as rotas para chamar os MasterComponents. A estrutura do RoutePath tem que ser conservada da mais complexa à mais simples. Por exemplo, primeiro vem brandi.ipt.pt:81/fichaTecnica/:id/details e só posteriormente brandi.ipt.pt:81/fichaTecnica. 
+Onde são definidas as rotas para chamar os MasterComponents. A estrutura do RoutePath tem que ser conservada da mais complexa à mais simples. Por exemplo, primeiro vem brandi.ipt.pt:81/fichaTecnica/:id/details e só posteriormente brandi.ipt.pt:81/fichaTecnica

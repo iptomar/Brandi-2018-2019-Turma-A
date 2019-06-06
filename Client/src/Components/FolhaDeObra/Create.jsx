@@ -93,7 +93,7 @@ class Create extends Component {
     }
 
     /**
-     * Verifica se a tabela está preenchida. Constrói um FormData com a tabela e submete-o. Trata a resposta do servidor
+     * Verifica se a tabela está preenchida. Cria um array com os conteúdos da tabela e submete-o. Trata a resposta do servidor
      */
     submit = async e => {
         e.preventDefault();
@@ -111,7 +111,6 @@ class Create extends Component {
             }
         }
         /* Neste momento, todos os inputs estão preenchidos */
-        let formData = new FormData();
         let tab = [];
         /* Iterar da 2.ª linha da tabela até ao fim */
         for (let i = 0; i < document.getElementById("tabela").children[1].childElementCount; i++) {
@@ -137,7 +136,7 @@ class Create extends Component {
                 "Accept": 'application/json',
                 "x-auth-token": sessionStorage.getItem("token")
             },
-            body: formData
+            body: JSON.stringify(tab)
         });
         /* Aguardar a resposta da API e avaliar o que fazer */
         await response.json().then(resp => {

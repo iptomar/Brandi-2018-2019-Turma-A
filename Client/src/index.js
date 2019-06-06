@@ -44,7 +44,7 @@ ReactDOM.render(
             <Route path="/utilizadores/listar:query?" component={(r) => <IndexPage query={r.match.params.query} />} />
             {/* Ficha Técnica */}
             <Route path="/fichaTecnica/:id/details" component={DetailsFichaTecnica} />
-            <Route path="/fichaTecnica/:id/detalhes"  component={(r) => <CreateFichaTecnica id={r.match.params.id} />} />
+            <Route path="/fichaTecnica/:id/detalhes" component={(r) => <CreateFichaTecnica id={r.match.params.id} />} />
             <Route path="/fichaTecnica/criar/:id" component={(r) => <CreateFichaTecnica id={r.match.params.id} />} />
             <Route path="/fichaTecnica" component={IndexFichaTecnica} />
             {/* Ficha Registo Identificacao */}
@@ -57,8 +57,8 @@ ReactDOM.render(
             <Route path="/interessados/:id/editar" component={(r) => <EditInteressados id={r.match.params.id} />} />
             <Route path="/interessados" component={IndexInteressados} />
             {/* Folha de Obra */}
-            <Route path="/folhaDeObra/criar" component={CreateFolhaDeObra}/>
-            <Route path="/folhaDeObra" component={IndexFolhaDeObra}/>
+            <Route path="/folhaDeObra/:id/criar" component={(r) => <CreateFolhaDeObra id={r.match.params.id} />} />
+            <Route path="/folhaDeObra" component={IndexFolhaDeObra} />
             {/* Default */}
             <Route component={LoginPage} />
         </Switch>

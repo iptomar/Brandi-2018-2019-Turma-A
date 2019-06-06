@@ -15,7 +15,6 @@ import ProfilePage from './MasterComponents/ProfilePage';
 // FICHAS TÉCNICAS
 import CreateFichaTecnica from './MasterComponents/Ficha Tecnica/CreateFichaTecnica';
 import DetailsFichaTecnica from './MasterComponents/Ficha Tecnica/DetailsFichaTecnica';
-import IndexFichaTecnica from './MasterComponents/Ficha Tecnica/IndexFichaTecnica';
 // FICHAS RI
 import IndexFichaRI from './MasterComponents/FichaRegistoIdentificacao/IndexFichaRI';
 import CreateFichaRI from './MasterComponents/FichaRegistoIdentificacao/CreateFichaRI';
@@ -27,7 +26,6 @@ import EditInteressados from './MasterComponents/Interessados/EditInteressados';
 import DetailsInteressados from './MasterComponents/Interessados/DetailsInteressados';
 // FOLHAS DE OBRA
 import CreateFolhaDeObra from './MasterComponents/FolhaDeObra/CreateFolhaDeObra';
-import IndexFolhaDeObra from './MasterComponents/FolhaDeObra/IndexFolhaDeObra';
 
 
 ReactDOM.render(
@@ -46,7 +44,6 @@ ReactDOM.render(
             <Route path="/fichaTecnica/:id/details" component={DetailsFichaTecnica} />
             <Route path="/fichaTecnica/:id/detalhes" component={(r) => <CreateFichaTecnica id={r.match.params.id} />} />
             <Route path="/fichaTecnica/criar/:id" component={(r) => <CreateFichaTecnica id={r.match.params.id} />} />
-            <Route path="/fichaTecnica" component={IndexFichaTecnica} />
             {/* Ficha Registo Identificacao */}
             <Route path="/fichaRI/criar" component={CreateFichaRI} />
             <Route path="/fichaRI/:id/detalhes:query?" component={(r) => <DetailsFichaRI id={r.match.params.id} query={r.match.params.query} />} />
@@ -58,7 +55,6 @@ ReactDOM.render(
             <Route path="/interessados" component={IndexInteressados} />
             {/* Folha de Obra */}
             <Route path="/folhaDeObra/:id/criar" component={(r) => <CreateFolhaDeObra id={r.match.params.id} />} />
-            <Route path="/folhaDeObra" component={IndexFolhaDeObra} />
             {/* Default */}
             <Route component={LoginPage} />
         </Switch>

@@ -25,20 +25,14 @@ npm start (O React reinicia o servidor automaticamente quando é feita uma alter
 
 ### Componentes Globais:
 * Footer - Representa o Rodapé da aplicação
-  
 * Header - Representa a Navbar (Cabeçalho) da aplicação
-  
 * Login - Representa o formulário de login
-  
 * Register - Representa o formulário de registo
-  
 * AlertMsg - Representa uma mensagem informativa ao utilizador. Para definição deste componente, existem os seguintes states anexos:
   - alertText: Representa a mensagem a apresentar ao utilizador
   - alertColor: São keywords do bootstrap e podem ser as seguintes: success, warning, danger, primary, ...     
   - [Documentação dos alerts do Bootstrap](https://getbootstrap.com/docs/4.3/components/alerts/)
-  
 * FileUpload - Permite carregar um ou mais ficheiros já com um design mais interativo. Se for colocado o atributo isMultiple o FileUpload permite a inserção de mais do que um ficheiro ao mesmo tempo.
-  
 * LoadingAnimation - Permite fazer uma animação enquanto algo é feito.
 
 ### Componentes FichaRegistoIdentificacao

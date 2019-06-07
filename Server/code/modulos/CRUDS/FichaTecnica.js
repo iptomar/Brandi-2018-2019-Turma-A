@@ -90,8 +90,9 @@ exports.createFichaTecnica = async (bd, dados) => {
     dados.EstruturaPropRecPag6 &&
     dados.SuperficiePropPag6 &&
     dados.SuperficiePropRecPag6 &&
+    dados.ElementosAcessPropPag6 &&
     dados.ElementosAcessPropRecPag6 &&
-    dados.observaçoesConclusoesPag6 &&
+    dados.observaçoesConclusoesPag7 &&
     //pagina 8
     dados.estruturaPag8 &&
     dados.recursosEstruturaPag8 &&
@@ -109,7 +110,7 @@ exports.createFichaTecnica = async (bd, dados) => {
       "tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio,condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo," +
       "ilumArtValorIluminancia,ilumArtValurUV,ilumArtValorRealUV,ilumNatOrigem,ilumNatValorIluminancia,ilumNatValorUV,ilumNatValorRealUV,poluicaoAgentes,poluicaoFontesOrigem,poluicaoResultados, poluicaoObservacoesConclusoes,examesAnalisesInterpResultados," +
       "examesAnalisesObsConclusoes,estadoConservFQMestrutura,estadoConservFQMsuperficie,estadoConservFQMelementosAcess,estadoConservBioEstrutura,      estadoConservBioSuperficie,estadoConservBioElementosAcess,estadoConservObsConclusoes,estruturaIntervAnter,superficieIntervAnter,elementosAcessoriosIntervAnter,observaçoesConclusoesPag6," +
-      "tipoInterv,aspetosEspecificosPag6,tipoIntervCR,EstruturaPropPag6,EstruturaPropRecPag6,SuperficiePropPag6,SuperficiePropRecPag6,ElementosAcessPropRecPag6, estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8," +
+      "tipoInterv,aspetosEspecificosPag6,tipoIntervCR,EstruturaPropPag6,EstruturaPropRecPag6,SuperficiePropPag6,SuperficiePropRecPag6, ElementosAcessPropPag6, ElementosAcessPropRecPag6, observaçoesConclusoesPag7, estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8," +
       "elementosAcessoriosPag8,recursosElementosAcPag8,observaçoesConclusoesPag8, relTecInterLCRM,tipoDesigOrig,refOrig,entidadeOrig,tipoDesigDocGraf,refDocGraf,entidadeDocGraf,tipoDesigExames,refExames," +
       "entidadeExames,atledpArqDoc,tipoArqDoc,localArqDoc,cotaArqDoc,atledpIcon,tipoIcon,localIcon,cotaIcon,atledpBiblio,tipoBiblio,localBiblio," +
       "cotaBiblio,atledpOutras,tipoOutras,localOutras,cotaOutras,fichaRegistoFK)" +
@@ -121,7 +122,7 @@ exports.createFichaTecnica = async (bd, dados) => {
       "?,?,?,?,?,?,?,?,?,?,?,?," +
       "?,?,?,?,?,?,?,?,?,?,?,?," +
       "?,?,?,?,?,?,?,?,?,?,?,?," +
-      "?,?,?,?,?,?,?)",
+      "?,?,?,?,?,?,?,?,?)",
       [
         dados.visible,
         dados.localizacao,
@@ -197,7 +198,9 @@ exports.createFichaTecnica = async (bd, dados) => {
         dados.EstruturaPropRecPag6,
         dados.SuperficiePropPag6,
         dados.SuperficiePropRecPag6,
+        dados.ElementosAcessPropPag6,
         dados.ElementosAcessPropRecPag6,
+        dados.observaçoesConclusoesPag7,
         // Intervenção Realizada página 8
         dados.estruturaPag8,
         dados.recursosEstruturaPag8,
@@ -583,8 +586,9 @@ exports.updateFichaTecnica = async (bd, dados) => {
     dados.EstruturaPropRecPag6 &&
     dados.SuperficiePropPag6 &&
     dados.SuperficiePropRecPag6 &&
+    dados.ElementosAcessPropPag6 &&
     dados.ElementosAcessPropRecPag6 &&
-    dados.observaçoesConclusoesPag6 &&
+    dados.observaçoesConclusoesPag7 &&
     //pagina 8
     dados.estruturaPag8 &&
     dados.recursosEstruturaPag8 &&
@@ -603,7 +607,7 @@ exports.updateFichaTecnica = async (bd, dados) => {
         "tecnicasEstruturaSuporte= ?,tecnicasSuperficie= ?,condAmbDescricao= ?,condAmbFrioTemperatura= ?,condAmbFrioHumidade= ?,condAmbFrioPeriodoInicio= ?,condAmbFrioPeriodoFim= ?,condAmbQuenteTemperatura= ?,condAmbQuenteHumidade= ?,condAmbQuentePeriodoInicio= ?,condAmbQuentePeriodoFim= ?,ilumArtTipo= ?," +
         "ilumArtValorIluminancia= ?,ilumArtValurUV= ?,ilumArtValorRealUV= ?,ilumNatOrigem= ?,ilumNatValorIluminancia= ?,ilumNatValorUV= ?,ilumNatValorRealUV= ?,poluicaoAgentes= ?,poluicaoFontesOrigem= ?,poluicaoResultados= ?, poluicaoObservacoesConclusoes= ?,examesAnalisesInterpResultados= ?," +
         "examesAnalisesObsConclusoes= ?,estadoConservFQMestrutura= ?,estadoConservFQMsuperficie= ?,estadoConservFQMelementosAcess= ?,estadoConservBioEstrutura= ?, estadoConservBioSuperficie= ?,estadoConservBioElementosAcess= ?,estadoConservObsConclusoes= ?,estruturaIntervAnter= ?,superficieIntervAnter= ?,elementosAcessoriosIntervAnter= ?,observaçoesConclusoesPag6= ?," +
-        "tipoInterv= ?,aspetosEspecificosPag6= ?,tipoIntervCR= ?,EstruturaPropPag6= ?,EstruturaPropRecPag6= ?,SuperficiePropPag6= ?,SuperficiePropRecPag6= ?,ElementosAcessPropRecPag6= ?,estruturaPag8= ?,recursosEstruturaPag8= ?,superficiePag8= ?,recursosSuperficiePag8= ?," +
+        "tipoInterv= ?,aspetosEspecificosPag6= ?,tipoIntervCR= ?,EstruturaPropPag6= ?,EstruturaPropRecPag6= ?,SuperficiePropPag6= ?,SuperficiePropRecPag6= ?, ElementosAcessPropPag6= ?, ElementosAcessPropRecPag6= ?, observaçoesConclusoesPag7= ?, estruturaPag8= ?,recursosEstruturaPag8= ?,superficiePag8= ?,recursosSuperficiePag8= ?," +
         "elementosAcessoriosPag8= ?,recursosElementosAcPag8= ?,observaçoesConclusoesPag8= ?, relTecInterLCRM= ?,tipoDesigOrig= ?,refOrig= ?,entidadeOrig= ?,tipoDesigDocGraf= ?,refDocGraf= ?,entidadeDocGraf= ?,tipoDesigExames= ?,refExames= ?," +
         "entidadeExames= ?,atledpArqDoc= ?,tipoArqDoc= ?,localArqDoc= ?,cotaArqDoc= ?,atledpIcon= ?,tipoIcon= ?,localIcon= ?,cotaIcon= ?,atledpBiblio= ?,tipoBiblio= ?,localBiblio= ?," +
         "cotaBiblio= ?,atledpOutras= ?,tipoOutras= ?,localOutras= ?,cotaOutras= ?,fichaRegistoFK= ? where fichaTecnicaID=?",
@@ -681,7 +685,9 @@ exports.updateFichaTecnica = async (bd, dados) => {
           dados.EstruturaPropRecPag6,
           dados.SuperficiePropPag6,
           dados.SuperficiePropRecPag6,
+          dados.ElementosAcessPropPag6,
           dados.ElementosAcessPropRecPag6,
+          dados.observaçoesConclusoesPag7,
           // Intervenção Realizada página 8
           dados.estruturaPag8,
           dados.recursosEstruturaPag8,
@@ -745,7 +751,7 @@ exports.updateFichaTecnica = async (bd, dados) => {
         "tecnicasEstruturaSuporte= ?,tecnicasSuperficie= ?,condAmbDescricao= ?,condAmbFrioTemperatura= ?,condAmbFrioHumidade= ?,condAmbFrioPeriodoInicio= ?,condAmbFrioPeriodoFim= ?,condAmbQuenteTemperatura= ?,condAmbQuenteHumidade= ?,condAmbQuentePeriodoInicio= ?,condAmbQuentePeriodoFim= ?,ilumArtTipo= ?," +
         "ilumArtValorIluminancia= ?,ilumArtValurUV= ?,ilumArtValorRealUV= ?,ilumNatOrigem= ?,ilumNatValorIluminancia= ?,ilumNatValorUV= ?,ilumNatValorRealUV= ?,poluicaoAgentes= ?,poluicaoFontesOrigem= ?,poluicaoResultados= ?, poluicaoObservacoesConclusoes= ?,examesAnalisesInterpResultados= ?," +
         "examesAnalisesObsConclusoes= ?,estadoConservFQMestrutura= ?,estadoConservFQMsuperficie= ?,estadoConservFQMelementosAcess= ?,estadoConservBioEstrutura= ?, estadoConservBioSuperficie= ?,estadoConservBioElementosAcess= ?,estadoConservObsConclusoes= ?,estruturaIntervAnter= ?,superficieIntervAnter= ?,elementosAcessoriosIntervAnter= ?,observaçoesConclusoesPag6= ?," +
-        "tipoInterv= ?,aspetosEspecificosPag6= ?,tipoIntervCR= ?,EstruturaPropPag6= ?,EstruturaPropRecPag6= ?,SuperficiePropPag6= ?,SuperficiePropRecPag6= ?,ElementosAcessPropRecPag6= ?,estruturaPag8= ?,recursosEstruturaPag8= ?,superficiePag8= ?,recursosSuperficiePag8= ?," +
+        "tipoInterv= ?,aspetosEspecificosPag6= ?,tipoIntervCR= ?,EstruturaPropPag6= ?,EstruturaPropRecPag6= ?,SuperficiePropPag6= ?,SuperficiePropRecPag6= ?, ElementosAcessPropPag6=?, ElementosAcessPropRecPag6= ?, observaçoesConclusoesPag6=?, estruturaPag8= ?,recursosEstruturaPag8= ?,superficiePag8= ?,recursosSuperficiePag8= ?," +
         "elementosAcessoriosPag8= ?,recursosElementosAcPag8= ?,observaçoesConclusoesPag8= ?, relTecInterLCRM= ?,tipoDesigOrig= ?,refOrig= ?,entidadeOrig= ?,tipoDesigDocGraf= ?,refDocGraf= ?,entidadeDocGraf= ?,tipoDesigExames= ?,refExames= ?," +
         "entidadeExames= ?,atledpArqDoc= ?,tipoArqDoc= ?,localArqDoc= ?,cotaArqDoc= ?,atledpIcon= ?,tipoIcon= ?,localIcon= ?,cotaIcon= ?,atledpBiblio= ?,tipoBiblio= ?,localBiblio= ?," +
         "cotaBiblio= ?,atledpOutras= ?,tipoOutras= ?,localOutras= ?,cotaOutras= ?,fichaRegistoFK= ? where fichaTecnicaID=?",
@@ -824,7 +830,9 @@ exports.updateFichaTecnica = async (bd, dados) => {
           dados.EstruturaPropRecPag6,
           dados.SuperficiePropPag6,
           dados.SuperficiePropRecPag6,
+          dados.ElementosAcessPropPag6,
           dados.ElementosAcessPropRecPag6,
+          dados.observaçoesConclusoesPag7,
           // Intervenção Realizada página 8
           dados.estruturaPag8,
           dados.recursosEstruturaPag8,

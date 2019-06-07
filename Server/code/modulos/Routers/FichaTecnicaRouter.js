@@ -140,8 +140,9 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
             EstruturaPropRecPag6: req.body.EstruturaPropRecPag6,
             SuperficiePropPag6: req.body.SuperficiePropPag6,
             SuperficiePropRecPag6: req.body.SuperficiePropRecPag6,
+            ElementosAcessPropPag6: req.body.ElementosAcessPropPag6,
             ElementosAcessPropRecPag6: req.body.ElementosAcessPropRecPag6,
-            observaçoesConclusoesPag6: req.body.observaçoesConclusoesPag6,
+            observaçoesConclusoesPag7: req.body.observaçoesConclusoesPag7,
             //pagina 8
             estruturaPag8: req.body.estruturaPag8,
             recursosEstruturaPag8: req.body.recursosEstruturaPag8,
@@ -334,9 +335,10 @@ exports.updateFichaTecnicaRoute = async (app, bd) => {
           }
 
           let ficha = req.body;
+          ficha.visible = 1;
           ficha.id = req.params.id;
           ficha.imgGrafico = imgGrafico;
-          ficha.imgArray = imgArray;
+          //ficha.imgArray = imgArray;
 
           //console.log(ficha);
           //alterar os campos

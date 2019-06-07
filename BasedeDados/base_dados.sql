@@ -221,7 +221,9 @@ CREATE TABLE tbl_fichasTecnicas
 	EstruturaPropRecPag6 TEXT,
 	SuperficiePropPag6 TEXT,
 	SuperficiePropRecPag6 TEXT,
-	ElementosAcessPropRecPag6 TEXT,
+	ElementosAcessPropPag6 TEXT,
+    ElementosAcessPropRecPag6 TEXT,
+    observaçoesConclusoesPag7 TEXT,
     -- campos pagina 8
     estruturaPag8 TEXT,
     recursosEstruturaPag8 TEXT,

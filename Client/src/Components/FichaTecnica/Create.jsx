@@ -124,7 +124,7 @@ class Create extends Component {
           document.getElementById('EpocaFalsificacao').parentNode.parentNode.parentNode.style.display = "none";
 
           if (this.state.data[0].resposta.epoca !== "Coevo") {
-            
+
             document.getElementById('EpocaTardio').checked = true;
             if (this.state.data[0].resposta.epoca !== "Tardio") {
               document.getElementById('EpocaOutra').checked = true;
@@ -168,35 +168,35 @@ class Create extends Component {
           document.getElementById('QualidadeFraca').parentNode.parentNode.parentNode.style.display = "none";
 
           if (this.state.data[0].resposta.qualidade !== "Excelente") {
-            document.getElementById('QualidadeMuitoBoa').checked=true;
+            document.getElementById('QualidadeMuitoBoa').checked = true;
             if (this.state.data[0].resposta.qualidade !== "Muito boa") {
-              document.getElementById('QualidadeBoa').checked=true;
+              document.getElementById('QualidadeBoa').checked = true;
               if (this.state.data[0].resposta.qualidade !== "Boa") {
-                document.getElementById('QualidadeRegular').checked=true;
+                document.getElementById('QualidadeRegular').checked = true;
                 if (this.state.data[0].resposta.qualidade !== "Regular") {
-                  document.getElementById('QualidadeFraca').checked=true;
+                  document.getElementById('QualidadeFraca').checked = true;
                   if (this.state.data[0].resposta.qualidade !== "Fraca") {
-                    document.getElementById('QualidadeFraca').checked=false;
-                  }else{
-                    document.getElementById('QualidadeFraca').checked=true;
+                    document.getElementById('QualidadeFraca').checked = false;
+                  } else {
+                    document.getElementById('QualidadeFraca').checked = true;
                     document.getElementById('QualidadeFraca').parentNode.parentNode.parentNode.style.display = "";
                   }
 
-                }else{
-                  document.getElementById('QualidadeRegular').checked=true;
+                } else {
+                  document.getElementById('QualidadeRegular').checked = true;
                   document.getElementById('QualidadeRegular').parentNode.parentNode.parentNode.style.display = "";
                 }
-  
-              }else{
-                document.getElementById('QualidadeBoa').checked=true;
+
+              } else {
+                document.getElementById('QualidadeBoa').checked = true;
                 document.getElementById('QualidadeBoa').parentNode.parentNode.parentNode.style.display = "";
               }
-  
-            }else{
-              document.getElementById('QualidadeMuitoBoa').checked=true;
+
+            } else {
+              document.getElementById('QualidadeMuitoBoa').checked = true;
               document.getElementById('QualidadeMuitoBoa').parentNode.parentNode.parentNode.style.display = "";
             }
-            }
+          }
 
           document.getElementById('estruturaSuporteMateriais').value = this.state.data[0].resposta.materiaisEstruturaSuporte;
           document.getElementById('SuperficieMateriais').value = this.state.data[0].resposta.materiaisSuperficies;
@@ -236,27 +236,27 @@ class Create extends Component {
           for (let i = 0; i < this.state.data[1].length; i++) {
             if (this.state.data[1][i].Objectivo === "identMateriais") {
               document.getElementById("identMateriais").parentNode.parentNode.parentNode.style.display = "";
-              document.getElementById("identMateriais").checked=true;
+              document.getElementById("identMateriais").checked = true;
             }
             if (this.state.data[1][i].Objectivo === "identIntervencoes") {
               document.getElementById("identIntervencoes").parentNode.parentNode.parentNode.style.display = "";
-              document.getElementById("identIntervencoes").checked=true;
+              document.getElementById("identIntervencoes").checked = true;
             }
             if (this.state.data[1][i].Objectivo === "caracterizacao") {
               document.getElementById("caracterizacao").parentNode.parentNode.parentNode.style.display = "";
-              document.getElementById("caracterizacao").checked=true;
+              document.getElementById("caracterizacao").checked = true;
             }
             if (this.state.data[1][i].Objectivo === "identPatologias") {
               document.getElementById("identPatologias").parentNode.parentNode.parentNode.style.display = "";
-              document.getElementById("identPatologias").checked=true;
+              document.getElementById("identPatologias").checked = true;
             }
             if (this.state.data[1][i].Objectivo === "datacao") {
               document.getElementById("datacao").parentNode.parentNode.parentNode.style.display = "";
-              document.getElementById("datacao").checked=true;
+              document.getElementById("datacao").checked = true;
             }
             if (this.state.data[1][i].Objectivo === "ensaio") {
               document.getElementById("ensaio").parentNode.parentNode.parentNode.style.display = "";
-              document.getElementById("ensaio").checked=true;
+              document.getElementById("ensaio").checked = true;
             }
           }
           //Realizar a inserção na tabela
@@ -284,23 +284,23 @@ class Create extends Component {
           document.getElementById('superficieIntervAnter').value = this.state.data[0].resposta.superficieIntervAnter;
           document.getElementById('elementosAcessoriosIntervAnter').value = this.state.data[0].resposta.elementosAcessoriosIntervAnter;
           document.getElementById('observaçoesConclusoesPag6').value = this.state.data[0].resposta.observaçoesConclusoesPag6;
-          
+
           document.getElementById('intervPrevencao').parentNode.parentNode.parentNode.style.display = "none";
           document.getElementById('intervConvercao').parentNode.parentNode.parentNode.style.display = "none";
           document.getElementById('intervRestauro').parentNode.parentNode.parentNode.style.display = "none";
 
           if (this.state.data[0].resposta.tipoInterv !== "Prevenção") {
-            document.getElementById('intervConvercao').checked=true;
+            document.getElementById('intervConvercao').checked = true;
             if (this.state.data[0].resposta.tipoInterv !== "Conservação") {
-              document.getElementById('intervRestauro').checked=true;
+              document.getElementById('intervRestauro').checked = true;
               if (this.state.data[0].resposta.tipoInterv === "Restauro") {
                 document.getElementById('intervRestauro').parentNode.parentNode.parentNode.style.display = "";
               }
-  
-            }else{
+
+            } else {
               document.getElementById('intervConvercao').parentNode.parentNode.parentNode.style.display = "";
             }
-          }else{
+          } else {
             document.getElementById('intervPrevencao').parentNode.parentNode.parentNode.style.display = "";
           }
 
@@ -314,16 +314,16 @@ class Create extends Component {
           document.getElementById('intervRestauroConsRes').parentNode.parentNode.parentNode.style.display = "none";
 
           if (this.state.data[0].resposta.tipoInterv !== "Prevenção") {
-            document.getElementById('intervConvercaoConsRes').checked=true;
+            document.getElementById('intervConvercaoConsRes').checked = true;
             if (this.state.data[0].resposta.tipoInterv !== "Conservação") {
-              document.getElementById('intervRestauroConsRes').checked=true;
+              document.getElementById('intervRestauroConsRes').checked = true;
               if (this.state.data[0].resposta.tipoInterv === "Restauro") {
                 document.getElementById('intervRestauroConsRes').parentNode.parentNode.parentNode.style.display = "";
               }
-            }else{
+            } else {
               document.getElementById('intervConvercaoConsRes').parentNode.parentNode.parentNode.style.display = "";
             }
-          }else{
+          } else {
             document.getElementById('intervPrevencaoConsRes').parentNode.parentNode.parentNode.style.display = "";
           }
 
@@ -457,8 +457,8 @@ class Create extends Component {
     formData.append("mecenas", this.state.data[0].resposta.mecenas);
     formData.append("codPostalMecenas", this.state.data[0].resposta.codPostalMecenas);
     formData.append("contactoMecenas", this.state.data[0].resposta.contactoMecenas);
-    for(let i = 0; i < this.state.files.length; i++){
-      formData.append("files["+i+"]", this.state.files[i]);
+    for (let i = 0; i < this.state.files.length; i++) {
+      formData.append("files[" + i + "]", this.state.files[i]);
     }
     formData.append("imgGraph", this.state.filesG[0]);
     //Pag 2
@@ -511,20 +511,20 @@ class Create extends Component {
     formData.append("poluicaoResultados", this.state.data[0].resposta.poluicaoResultados);
     formData.append("poluicaoObservacoesConclusoes", this.state.data[0].resposta.poluicaoObservacoesConclusoes);
     // //Pag 4
-     let objGerais = [];
-     if(document.getElementById("identMateriais").checked) objGerais.push(document.getElementById("identMateriais").value);
-     if(document.getElementById("identIntervencoes").checked) objGerais.push(document.getElementById("identIntervencoes").value);
-     if(document.getElementById("caracterizacao").checked) objGerais.push(document.getElementById("caracterizacao").value);
-     if(document.getElementById("identPatologias").checked) objGerais.push(document.getElementById("identPatologias").value);
-     if(document.getElementById("datacao").checked) objGerais.push(document.getElementById("datacao").value);
-     if(document.getElementById("ensaio").checked) objGerais.push(document.getElementById("ensaio").value);
-     formData.append("objGerais", objGerais);
-     let tab = [];
-     for(let i = 0 ; i < document.getElementById("tabela").children[1].childElementCount; i++){
-         let content = document.getElementById("tabela").children[1].children[i];
-         tab.push({tipoRef: content.children[0].children[0].value, lap: content.children[1].children[0].value, objEsp: content.children[2].children[0].value, reslt: content.children[3].children[0].value, data: content.children[5].children[0].value });
-     }
-     formData.append("tabobjGerais", tab);
+    let objGerais = [];
+    if (document.getElementById("identMateriais").checked) objGerais.push(document.getElementById("identMateriais").value);
+    if (document.getElementById("identIntervencoes").checked) objGerais.push(document.getElementById("identIntervencoes").value);
+    if (document.getElementById("caracterizacao").checked) objGerais.push(document.getElementById("caracterizacao").value);
+    if (document.getElementById("identPatologias").checked) objGerais.push(document.getElementById("identPatologias").value);
+    if (document.getElementById("datacao").checked) objGerais.push(document.getElementById("datacao").value);
+    if (document.getElementById("ensaio").checked) objGerais.push(document.getElementById("ensaio").value);
+    formData.append("objGerais", JSON.stringify(objGerais));
+    let tab = [];
+    for (let i = 0; i < document.getElementById("tabela").children[1].childElementCount; i++) {
+      let content = document.getElementById("tabela").children[1].children[i];
+      tab.push({ tipoRef: content.children[0].children[0].value, lap: content.children[1].children[0].value, objEsp: content.children[2].children[0].value, reslt: content.children[3].children[0].value, data: content.children[5].children[0].value });
+    }
+    formData.append("tabobjGerais", JSON.stringify(tab));
     formData.append("examesAnalisesInterpResultados", this.state.data[0].resposta.examesAnalisesInterpResultados);
     formData.append("examesAnalisesObsConclusoes", this.state.data[0].resposta.examesAnalisesObsConclusoes);
     //Pag 5
@@ -540,13 +540,13 @@ class Create extends Component {
     formData.append("superficieIntervAnter", this.state.data[0].resposta.superficieIntervAnter);
     formData.append("elementosAcessoriosIntervAnter", this.state.data[0].resposta.elementosAcessoriosIntervAnter);
     formData.append("observaçoesConclusoesPag6", this.state.data[0].resposta.observaçoesConclusoesPag6);
-    if(document.getElementById('intervPrevencao').checked) formData.append("tipoInterv", document.getElementById('intervPrevencao').value);
-    else if(document.getElementById('intervConvercao').checked) formData.append("tipoInterv", document.getElementById('intervConvercao').value);
+    if (document.getElementById('intervPrevencao').checked) formData.append("tipoInterv", document.getElementById('intervPrevencao').value);
+    else if (document.getElementById('intervConvercao').checked) formData.append("tipoInterv", document.getElementById('intervConvercao').value);
     else formData.append("tipoInterv", document.getElementById('intervRestauro').value);
     formData.append("aspetosEspecificosPag6", this.state.data[0].resposta.aspetosEspecificosPag6);
     //Pag7
-    if(document.getElementById('intervPrevencaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervPrevencaoConsRes').value);
-    else if(document.getElementById('intervConvercaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervConvercaoConsRes').value);
+    if (document.getElementById('intervPrevencaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervPrevencaoConsRes').value);
+    else if (document.getElementById('intervConvercaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervConvercaoConsRes').value);
     else formData.append("tipoIntervCR", document.getElementById('intervRestauroConsRes').value);
     formData.append("EstruturaPropPag6", this.state.data[0].resposta.EstruturaPropPag6);
     formData.append("EstruturaPropRecPag6", this.state.data[0].resposta.EstruturaPropRecPag6);
@@ -590,18 +590,18 @@ class Create extends Component {
     formData.append("tipoOutras", this.state.data[0].resposta.tipoOutras);
     formData.append("localOutras", this.state.data[0].resposta.localOutras);
     formData.append("cotaOutras", this.state.data[0].resposta.cotaOutras);
-     let table = [];
-     for(let j = 0 ; j < document.getElementById("table").children[1].childElementCount; j++){
-         let cont = document.getElementById("table").children[1].children[j];
-         table.push(
-           {
-             constEq: cont.children[0].children[0].value,
-             funcDes: cont.children[1].children[0].value,
-             habPro: cont.children[2].children[0].value
-           }
-         );
-     }
-     formData.append("tabel10", table);    
+    let table = [];
+    for (let j = 0; j < document.getElementById("table").children[1].childElementCount; j++) {
+      let cont = document.getElementById("table").children[1].children[j];
+      table.push(
+        {
+          constEq: cont.children[0].children[0].value,
+          funcDes: cont.children[1].children[0].value,
+          habPro: cont.children[2].children[0].value
+        }
+      );
+    }
+    formData.append("tabel10", JSON.stringify(table));
     //Final
     formData.append("fichaRegistoFK", this.state.id);
     //Enviar pedidos
@@ -670,8 +670,8 @@ class Create extends Component {
     formData.append("mecenas", document.getElementById('mecenas').value);
     formData.append("codPostalMecenas", document.getElementById('codPostalMecenas').value);
     formData.append("contactoMecenas", document.getElementById('contactoMecenas').value);
-    for(let i = 0; i < this.state.files.length; i++){
-      formData.append("files["+i+"]", this.state.files[i]);
+    for (let i = 0; i < this.state.files.length; i++) {
+      formData.append("files[" + i + "]", this.state.files[i]);
     }
     formData.append("imgGraph", this.state.filesG[0]);
     //Pag 2

@@ -553,6 +553,7 @@ class Create extends Component {
     formData.append("SuperficiePropPag6", this.state.data[0].resposta.SuperficiePropPag6);
     formData.append("SuperficiePropRecPag6", this.state.data[0].resposta.SuperficiePropRecPag6);
     formData.append("ElementosAcessPropRecPag6", this.state.data[0].resposta.ElementosAcessPropRecPag6);
+    formData.append("ElementosAcessPropPag6", this.state.data[0].resposta.ElementosAcessPropPag6);
     formData.append("observaçoesConclusoesPag7", this.state.data[0].resposta.observaçoesConclusoesPag7);
     // //Pag 8
     formData.append("estruturaPag8", this.state.data[0].resposta.estruturaPag8);

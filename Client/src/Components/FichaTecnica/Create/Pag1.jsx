@@ -19,12 +19,11 @@ export class Pag1 extends Component {
   //Recebe os dados do filho Upload
   async getData(data) {
     await this.setState({ files: data });
-    this.sendFiles(1);
+    this.sendFiles();
   }
   
-  sendFiles(type) {
-    if(type === 1) this.props.sendData(this.state.files);
-    this.props.sendData(this.state.filesG);
+  sendFiles() {
+    this.props.sendData(this.state.files);
   }
 
   render() {

@@ -4,13 +4,13 @@ var multer = require("multer");
 var mkdirp = require("mkdirp");
 const path = require("path");
 
-mkdirp("../images/fichaTecnicaGrafico", function (err) {
+mkdirp("../images/fichaTecnica", function (err) {
   if (err) console.error(err);
 });
 
 var storage = multer.diskStorage({
   destination: function (req, file, callback) {
-    callback(null, "../images/fichaTecnicaGrafico");
+    callback(null, "../images/fichaTecnica");
   },
   filename: function (req, file, callback) {
     callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
@@ -25,7 +25,7 @@ const upload = multer({ storage: storage });
 exports.createFichaTecnicaRoute = async (app, bd) => {
   app.post(
     "/api/fichaTecnica/create",
-    upload.single("imgGraph"),
+    upload.any(),
     async (req, resp) => {
       let resposta_servidor = { stat: "Authenticated", resposta: {} };
 
@@ -50,11 +50,17 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
         //admin
         if (token.roleFK === 1) {
           var imgGrafico = "";
-          console.log(req.file);
-          if (req.file) {
-            imgGrafico = req.file.path;
+          var imgArray = [];
+          if (req.files) {
+            for (let i = 0; i < req.files.length; i++) {
+              if (req.files[i].fieldname == "imgGraph") {
+                imgGrafico = req.files[i].path;
+              } else {
+                imgArray.push(req.files[i].path);
+              }
+            }
+
           }
-          console.log("IMG: " + imgGrafico);
           let ficha = {
             visible: true,
             localizacao: req.body.localizacao,
@@ -69,6 +75,7 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
             codPostalMecenas: req.body.codPostalMecenas,
             contactoMecenas: req.body.contactoMecenas,
             imgGrafico: imgGrafico,
+            imgArray: imgArray,
             bemIntegradoEmConjunto: req.body.bemIntegradoEmConjunto,
             tipoBensConjunto: req.body.tipoBensConjunto,
             elemConstConj: req.body.elemConstConj,
@@ -325,9 +332,11 @@ exports.updateFichaTecnicaRoute = async (app, bd) => {
           if (req.file) {
             imgGrafico = req.file.path;
           }
+
           let ficha = req.body;
           ficha.id = req.params.id;
           ficha.imgGrafico = imgGrafico;
+          ficha.imgArray = imgArray;
 
           //console.log(ficha);
           //alterar os campos
@@ -473,7 +482,7 @@ exports.getTodasFichasTecnicasRoute = async (app, bd) => {
     }
     //query para saber o numero de paginas que existem
     let totalpagesquery = await bd.query(
-      "select count(*) as total from tbl_fichasTecnicas where fichaRegistoFK = ? and visible = 1",[req.params.id]
+      "select count(*) as total from tbl_fichasTecnicas where fichaRegistoFK = ? and visible = 1", [req.params.id]
     );
     // numero de paginas que existe na base de dados
     let totalpages = totalpagesquery.resposta[0];

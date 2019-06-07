@@ -486,6 +486,15 @@ create table tbl_testespagina4objectivosGerais(
      FOREIGN key (fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
  );
 
+drop table if exists tbl_imagensFichaTecnica;
+create table tbl_imagensFichaTecnica(
+    id int not null AUTO_INCREMENT,
+    imagem TEXT,
+    fichaTecnicaFK int not null,
+    PRIMARY key (id),
+    FOREIGN key (fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
+);
+
 INSERT INTO tbl_roles (role) values("Admin");
 INSERT INTO tbl_roles (role) values("Aluno");
 INSERT INTO tbl_roles (role) values("Tecnicos");

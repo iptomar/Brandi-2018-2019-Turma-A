@@ -333,7 +333,8 @@ class Create extends Component {
           document.getElementById('EstruturaPropRecPag6').value = this.state.data[0].resposta.EstruturaPropRecPag6;
           document.getElementById('SuperficiePropPag6').value = this.state.data[0].resposta.SuperficiePropPag6;
           document.getElementById('SuperficiePropRecPag6').value = this.state.data[0].resposta.SuperficiePropRecPag6;
-          document.getElementById('ElementosAcessPropPag6').value = this.state.data[0].resposta.ElementosAcessPropRecPag6;
+          document.getElementById('ElementosAcessPropPag6').value = this.state.data[0].resposta.ElementosAcessPropPag6;
+          document.getElementById('ElementosAcessPropRecPag6').value = this.state.data[0].resposta.ElementosAcessPropRecPag6;
           //document.getElementById('observaçoesConclusoesPag7').value = this.state.data[0].resposta.observaçoesConclusoesPag7;
           document.getElementById('observaçoesConclusoesPag7').value = "a aguardar";
 
@@ -759,6 +760,7 @@ class Create extends Component {
     formData.append("EstruturaPropRecPag6", document.getElementById('EstruturaPropRecPag6').value);
     formData.append("SuperficiePropPag6", document.getElementById('SuperficiePropPag6').value);
     formData.append("SuperficiePropRecPag6", document.getElementById('SuperficiePropRecPag6').value);
+    formData.append("ElementosAcessPropPag6", document.getElementById('ElementosAcessPropPag6').value);
     formData.append("ElementosAcessPropRecPag6", document.getElementById('ElementosAcessPropRecPag6').value);
     formData.append("observaçoesConclusoesPag7", document.getElementById('observaçoesConclusoesPag7').value);
     //Pag 8

@@ -318,40 +318,70 @@ exports.createFichaTecnica = async (bd, dados) => {
         );
 
         if (resposta_bd4.stat === 0) {
-          resultadofinal.stat = 0;
-          resultadofinal.resposta = resposta_bd.resposta;
-          resultadofinal.resposta2 = resposta_bd2.resposta;
-          resultadofinal.resposta3 = resposta_bd3.resposta;
-          resultadofinal.resposta4 = resposta_bd4.resposta;
-          return resultadofinal;
-        } else {
-          let apagartabelaobjectivosgerais = await bd.query(
-            "Delete from tbl_testespagina4tabelas where fichaTecnicaFK = ?",
-            resposta_bd.resposta.insertId
-          );
-          let apagarobjectivosgerais = await bd.query(
-            "Delete from tbl_testespagina4objectivosGerais where fichaTecnicaFK = ?",
-            resposta_bd.resposta.insertId
-          );
-          let apagarfichatecnica = await bd.query(
-            "Delete from tbl_fichasTecnicas where fichaTecnicaID = ?",
-            resposta_bd.resposta.insertId
-          );
-          if (
-            apagarobjectivosgerais.stat === 0 &&
-            apagarfichatecnica.stat === 0 &&
-            apagartabelaobjectivosgerais.stat === 0
-          ) {
-            resultadofinal.stat = 1;
-            resultadofinal.resposta = "não foi possivel criar ficha tecnica";
-            return resultadofinal;
+          let resposta_bd5 = { stat: 1, resposta: {} };
+
+          let auxiliar = "";
+          for (let i = 0; i < dados.imgArray.length; i++) {
+            auxiliar += "(?,?),";
           }
-          //ocorreu um erro ao apagar os objectivos e a ficha tecnica
-          else {
-            resultadofinal.stat = 1;
-            resultadofinal.resposta = apagarfichatecnica.resposta;
-            resultadofinal.resposta2 = apagarobjectivosgerais.resposta;
-            resultadofinal.resposta3 = apagartabelaobjectivosgerais.resposta;
+          auxiliar = auxiliar.substring(0, auxiliar.length - 1); //tira ultima virgula
+          //array auxiliar que contem todos os objectivosGerais num só array
+          let array2 = [];
+          for (let i = 0; i < dados.imgArray.length; i++) {
+            array2.push(dados.imgArray[i]);
+            //id da ficha tecnica criada
+            array2.push(resposta_bd.resposta.insertId);
+          }
+          resposta_bd5 = await bd.query(
+            "Insert into tbl_imagensFichaTecnica(imagem ,fichaTecnicaFK ) values " +
+            auxiliar,
+            array2
+          );
+
+
+          if (resposta_bd5.stat === 0) {
+            resultadofinal.stat = 0;
+            resultadofinal.resposta = resposta_bd.resposta;
+            resultadofinal.resposta2 = resposta_bd2.resposta;
+            resultadofinal.resposta3 = resposta_bd3.resposta;
+            resultadofinal.resposta4 = resposta_bd4.resposta;
+            resultadofinal.resposta5 = resposta_bd5.resposta;
+            return resultadofinal;
+          } else {
+            let apagartabelaobjectivosgerais = await bd.query(
+              "Delete from tbl_testespagina4tabelas where fichaTecnicaFK = ?",
+              resposta_bd.resposta.insertId
+            );
+            let apagarobjectivosgerais = await bd.query(
+              "Delete from tbl_testespagina4objectivosGerais where fichaTecnicaFK = ?",
+              resposta_bd.resposta.insertId
+            );
+            let apagarfichatecnica = await bd.query(
+              "Delete from tbl_fichasTecnicas where fichaTecnicaID = ?",
+              resposta_bd.resposta.insertId
+            );
+            let apagarimagens = await bd.query(
+              "Delete from tbl_imagensFichaTecnica where fichaTecnicaID = ?",
+              resposta_bd.resposta.insertId
+            );
+            if (
+              apagarobjectivosgerais.stat === 0 &&
+              apagarfichatecnica.stat === 0 &&
+              apagartabelaobjectivosgerais.stat === 0 &&
+              apagarimagens.stat === 0
+            ) {
+              resultadofinal.stat = 1;
+              resultadofinal.resposta = "não foi possivel criar ficha tecnica";
+              return resultadofinal;
+            }
+            //ocorreu um erro ao apagar os objectivos e a ficha tecnica
+            else {
+              resultadofinal.stat = 1;
+              resultadofinal.resposta = apagarfichatecnica.resposta;
+              resultadofinal.resposta2 = apagarobjectivosgerais.resposta;
+              resultadofinal.resposta3 = apagartabelaobjectivosgerais.resposta;
+              resultadofinal.resposta4 = apagarimagens.resposta;
+            }
           }
         }
       }
@@ -440,6 +470,13 @@ exports.getFichaTecnica = async (bd, id) => {
 
     resposta_aux = await bd.query(
       "select * from tbl_constituicaoequipa where fichaTecnicaFK = ?",
+      [id]
+    );
+    resultadofinalteste.push(resposta_aux.resposta);
+
+    //todos os dados da tabela imagensFichaTecnica relacionados com 1 ficha tecnica
+    resposta_aux = await bd.query(
+      "select * from tbl_imagensFichaTecnica where fichaTecnicaFK = ?",
       [id]
     );
     resultadofinalteste.push(resposta_aux.resposta);

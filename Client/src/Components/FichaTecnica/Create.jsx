@@ -665,7 +665,9 @@ class Create extends Component {
     formData.append("mecenas", document.getElementById('mecenas').value);
     formData.append("codPostalMecenas", document.getElementById('codPostalMecenas').value);
     formData.append("contactoMecenas", document.getElementById('contactoMecenas').value);
-    formData.append("files", this.state.files);
+    for(let i = 0; i < this.state.files.length; i++){
+      formData.append("files["+i+"]", this.state.files[i]);
+    }
     formData.append("imgGraph", this.state.filesG[0]);
     //Pag 2
     //Verificações de radiobutton

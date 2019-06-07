@@ -336,7 +336,7 @@ class Create extends Component {
           document.getElementById('ElementosAcessPropPag6').value = this.state.data[0].resposta.ElementosAcessPropPag6;
           document.getElementById('ElementosAcessPropRecPag6').value = this.state.data[0].resposta.ElementosAcessPropRecPag6;
           //document.getElementById('observaçoesConclusoesPag7').value = this.state.data[0].resposta.observaçoesConclusoesPag7;
-          document.getElementById('observaçoesConclusoesPag7').value = "a aguardar";
+          document.getElementById('observaçoesConclusoesPag7').value = this.state.data[0].resposta.observaçoesConclusoesPag7;
 
           //Pag 8
           document.getElementById('estruturaPag8').value = this.state.data[0].resposta.estruturaPag8;
@@ -457,6 +457,10 @@ class Create extends Component {
     formData.append("mecenas", this.state.data[0].resposta.mecenas);
     formData.append("codPostalMecenas", this.state.data[0].resposta.codPostalMecenas);
     formData.append("contactoMecenas", this.state.data[0].resposta.contactoMecenas);
+    for(let i = 0; i < this.state.files.length; i++){
+      formData.append("files["+i+"]", this.state.files[i]);
+    }
+    formData.append("imgGraph", this.state.filesG[0]);
     //Pag 2
     //Verificações de radiobutton
     if (document.getElementById('bemIntegradoSim').checked) formData.append("bemIntegradoEmConjunto", true);

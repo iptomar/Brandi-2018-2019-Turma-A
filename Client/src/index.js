@@ -26,7 +26,8 @@ import EditInteressados from './MasterComponents/Interessados/EditInteressados';
 import DetailsInteressados from './MasterComponents/Interessados/DetailsInteressados';
 // FOLHAS DE OBRA
 import CreateFolhaDeObra from './MasterComponents/FolhaDeObra/CreateFolhaDeObra';
-
+// TESTES DE SOLUBULIZAÇÃO
+import CreateTestesSolubilizacao from './MasterComponents/TestesSolubilizacao/CreateTestesSolubilizacao';
 
 ReactDOM.render(
     <BrowserRouter>
@@ -55,6 +56,8 @@ ReactDOM.render(
             <Route path="/interessados" component={IndexInteressados} />
             {/* Folha de Obra */}
             <Route path="/folhaDeObra/:id/criar" component={(r) => <CreateFolhaDeObra id={r.match.params.id} />} />
+            {/* Testes de Solubilização */}
+            <Route path="/testesSolubilizacao/:id/criar" component={(r) => <CreateTestesSolubilizacao id={r.match.params.id} />} />
             {/* Default */}
             <Route component={LoginPage} />
         </Switch>

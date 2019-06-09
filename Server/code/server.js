@@ -16,9 +16,9 @@ const iluminacao = require("./modulos/Routers/IluminacaoRouter");
 const interessadosContactos = require("./modulos/Routers/InteressadosContactosRouter");
 const solventes = require("./modulos/Routers/SolventesRouter");
 const testesEficacia = require("./modulos/Routers/TestesEficaciaRouter");
-const tecnicas = require('./modulos/Routers/TecnicasRouter');
-const interessados = require('./modulos/Routers/InteressadosRouter');
-const fichaTecnica = require('./modulos/Routers/FichaTecnicaRouter');
+const tecnicas = require("./modulos/Routers/TecnicasRouter");
+const interessados = require("./modulos/Routers/InteressadosRouter");
+const fichaTecnica = require("./modulos/Routers/FichaTecnicaRouter");
 
 //cria ligacao à base de dados
 //LIGAÇÃO SERVIDOR
@@ -40,7 +40,6 @@ let bd = new _basedeDados.BasedeDados(
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 
 //port de escuta
 const port = process.env.PORT || 8081;
@@ -121,11 +120,11 @@ especificacoesExames.updateEspecificacaoExame(app, bd);
 
 //rota que devolve todas os exames analises
 examesAnalises.getAllExamesAnalises(app, bd);
-//rota que devolve um exame analise 
+//rota que devolve um exame analise
 examesAnalises.getExameAnalise(app, bd);
-//rota que cria um exame analise 
+//rota que cria um exame analise
 examesAnalises.createExameAnalise(app, bd);
-//rota que dá update de um exame analise 
+//rota que dá update de um exame analise
 examesAnalises.updateExameAnalise(app, bd);
 
 //rota que devolve todos os graus de eficacia e solubilizacao
@@ -156,13 +155,13 @@ interessadosContactos.createInteressadoContactos(app, bd);
 interessadosContactos.updateInteressadoContactos(app, bd);
 
 //rota que devolve todos os solventes
-solventes.getAllSolventes(app, bd);
+solventes.getAllTestesSolventes(app, bd);
 //rota que devolve um solvente
-solventes.getSolvente(app, bd);
+solventes.getTestesSolvente(app, bd);
 //rota que cria um solvente
-solventes.createSolvente(app, bd);
+solventes.createTesteSolvente(app, bd);
 //rota que dá update de um solvente
-solventes.updateSolvente(app, bd);
+solventes.updateTestesSolventes(app, bd);
 
 //rota que devolve todos os testes de Eficacia
 testesEficacia.getAllTestesEficacia(app, bd);
@@ -199,12 +198,5 @@ fichaTecnica.updateFichaTecnicaRoute(app, bd);
 fichaTecnica.readFichaTecnicaRoute(app, bd);
 //rota para apagar uma ficha tecnica
 fichaTecnica.deleteFichaTecnicaRoute(app, bd);
-
-
-
-
-
-
-
 
 app.listen(port, () => console.log("Listening na porta", port));

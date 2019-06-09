@@ -476,7 +476,7 @@ create table tbl_testespagina4objectivosGerais(
         PRIMARY key (id),
         FOREIGN key (fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
     );
- -- esta tabela representa a tabela onde o utilizador pode insere a constituição da equipa na página 10
+ -- esta tabela representa a tabela onde o utilizador pode inserir a constituição da equipa na página 10
  drop table if exists tbl_constituicaoequipa;
  create table tbl_constituicaoequipa(
      id int not null AUTO_INCREMENT,
@@ -487,6 +487,28 @@ create table tbl_testespagina4objectivosGerais(
      PRIMARY key (id),
      FOREIGN key (fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
  );
+ -- esta tabela representa a tabela onde o utilizador pode inserir os testes de solubilidade
+drop table if exists tbl_testessolventes;
+create table tbl_testessolventes (
+     id int not null AUTO_INCREMENT,
+     idEstratoSujidade TEXT,
+     caracteristicas TEXT,
+     fichaRIFK int not null,
+     FOREIGN key (fichaRIFK) REFERENCES tbl_fichaRegistoIdentificacao(fichaRegistoID)
+)
+
+ -- tabela que complementa a informação da página dos testes de solubilidade
+drop table if exists tbl_testesSolventesComplementar;
+create table tbl_testesSolventesComplementar(
+    id int not null AUTO_INCREMENT,
+    solvente TEXT,
+    grauDeEficacia TEXT,
+    observacoes TEXT,
+    testeSolventFK int,
+    FOREIGN key (testeSolventFK) REFERENCES tbl_testessolventes(id)
+)
+
+
 
 drop table if exists tbl_imagensFichaTecnica;
 create table tbl_imagensFichaTecnica(

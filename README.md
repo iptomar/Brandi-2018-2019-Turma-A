@@ -1,4 +1,4 @@
-# Brandi-2018-2019-Turma-A
+# Brandi
 Projeto no âmbito da disciplina de Projeto de Sistemas de Informação, lecionada pelos docentes Paulo Santos e Paulo Monteiro, do curso de eng. informática, na Escola Superior de Tecnologia de Tomar, do Instituto Politécnico de Tomar (ESTT-IPT).
 O Brandi é uma aplicação web que dá suporte ao curso de conservação e restauro e que moderniza e melhora o sistema de workflow das peças para restauro.
 ## Membros

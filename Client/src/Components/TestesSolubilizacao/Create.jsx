@@ -38,19 +38,32 @@ class Create extends Component {
         param.className = "form-control input";
         param.style.resize = "none";
         param.setAttribute("rows", "1");
+        param.placeholder = "Solvente ou mistura de solventes";
         novaCelula.appendChild(param);
-        // Coluna 2
-        param = document.createElement('input');
+        // Coluna 2         
+        var div = document.createElement('div');
+        div.className = "form-check form-check-inline pt-1";
         novaCelula = row.insertCell(1);
-        param.setAttribute('type', 'radio');
-        param.className = "EficaciaOptions";
-        novaCelula.appendChild(param);
+        for (let i = 1; i <= 5; i++) {
+            // Input
+            param = document.createElement("input");
+            param.className = "form-check-input";
+            param.setAttribute("type", "radio");
+            div.appendChild(param);
+            // Label
+            param = document.createElement("label");
+            param.className = "form-check-label";
+            param.value=i;
+            div.appendChild(param);
+            novaCelula.appendChild(div);
+        }
         // Coluna 3
         novaCelula = row.insertCell(2);
         param = document.createElement('textarea');
         param.className = "form-control input";
         param.style.resize = "none";
         param.setAttribute("rows", "1");
+        param.placeholder = "Observações";
         novaCelula.appendChild(param);
 
     }
@@ -63,80 +76,64 @@ class Create extends Component {
             <div className="container mb-3">
                 {/* Título */}
                 <div className="pt-3 py-3 text-center">
-                    <h2>TESTE DE EFICÁCIA DOS SOLVENTES NA LIMPEZA E SOLUBILIZAÇÃO DE ESTRATOS E SUJIDADES</h2>
+                    <h2>Teste de Solventes </h2>
+                    <h5>Teste de eficácia dos solventes na limpeza e solubilização de estratos e sujidades</h5>
                 </div>
-                <hr />
-
-                <label>Identificação do Estrato/Sujidade: </label>
-                <input type="text" className="form-control mb-3" id="idEstratoSujidade" placeholder="Localização da obra" required />
-                <hr />
-
-                <label>Características: </label>
-                <input type="text" className="form-control mb-3" id="caracteristicas" placeholder="Localização da obra" required />
-                <hr />
+                <div className="row">
+                    <div className="col-md-12">
+                        <label>Identificação do Estrato / Sujidade: </label>
+                        <input type="text" className="form-control mb-3" id="idEstratoSujidade" placeholder="Identificação do Estrato / Sujidade" required />
+                    </div>
+                    <div className="col-md-12 mb-3">
+                        <label>Características: </label>
+                        <input type="text" className="form-control mb-3" id="caracteristicas" placeholder="Características" required />
+                    </div>
+                </div>
 
                 {/* Tabela */}
                 <table className="table table-bordered table-secondary text-center" id="table">
                     <thead>
                         <tr>
-                            <th className="align-middle">Solvente ou Mistura de Solventes</th>
-                            <th className="align-middle">Grau de Eficácia Na Solubilização                            </th>
+                            <th className="align-middle">Solvente ou mistura de solventes</th>
+                            <th className="align-middle">Grau de eficácia na solubilização</th>
                             <th className="align-middle">Observações</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><textarea className="form-control input" style={{ resize: "none" }} rows="1" /></td>
-                            <td>                            
-                                <div className="row text-center">
-                                    {/* RADIO BUTTONS */}
-                                    <div className="input-group mb-3 col-md-2">
-                                        <div className="input-group-prepend">
-                                            <div className="input-group-text">
-                                                <input type="radio" name="EficaciaOptions" id="um" value="1" />
-                                            </div>
-                                        </div>
-                                        <label className="form-control" htmlFor="EficaciaUm">1</label>
-                                    </div>
+                            <td>
+                                <textarea className="form-control input" style={{ resize: "none" }} rows="1" placeholder="Solvente ou mistura de solventes" />
+                            </td>
+                            <td>
+                                {/* RADIO BUTTONS */}
+                                <div className="form-check form-check-inline pt-1">
+                                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio11" value="option1" />
+                                    <label className="form-check-label" htmlFor="inlineRadio11">1</label>
+                                </div>
 
-                                    <div className="input-group mb-3 col-md-2">
-                                        <div className="input-group-prepend">
-                                            <div className="input-group-text">
-                                                <input type="radio" name="EficaciaOptions" id="dois" value="2" />
-                                            </div>
-                                        </div>
-                                        <label className="form-control" htmlFor="EficaciaDois">2</label>
-                                    </div>
+                                <div className="form-check form-check-inline pt-1">
+                                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio12" value="option1" />
+                                    <label className="form-check-label" htmlFor="inlineRadio12">2</label>
+                                </div>
 
-                                    <div className="input-group mb-3 col-md-2">
-                                        <div className="input-group-prepend">
-                                            <div className="input-group-text">
-                                                <input type="radio" name="EficaciaOptions" id="tres" value="3" />
-                                            </div>
-                                        </div>
-                                        <label className="form-control" htmlFor="EficaciaTres">3</label>
-                                    </div>
+                                <div className="form-check form-check-inline pt-1">
+                                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio13" value="option1" />
+                                    <label className="form-check-label" htmlFor="inlineRadio13">3</label>
+                                </div>
 
-                                    <div className="input-group mb-3 col-md-2">
-                                        <div className="input-group-prepend">
-                                            <div className="input-group-text">
-                                                <input type="radio" name="EficaciaOptions" id="quatro" value="4" />
-                                            </div>
-                                        </div>
-                                        <label className="form-control" htmlFor="EficaciaQuatro">4</label>
-                                    </div>
+                                <div className="form-check form-check-inline pt-1">
+                                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio14" value="option1" />
+                                    <label className="form-check-label" htmlFor="inlineRadio14">4</label>
+                                </div>
 
-                                    <div className="input-group mb-3 col-md-2">
-                                        <div className="input-group-prepend">
-                                            <div className="input-group-text">
-                                                <input type="radio" name="EficaciaOptions" id="cinco" value="5" />
-                                            </div>
-                                        </div>
-                                        <label className="form-control" htmlFor="EficaciaCinco">5</label>
-                                    </div>
+                                <div className="form-check form-check-inline pt-1">
+                                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio15" value="option1" />
+                                    <label className="form-check-label" htmlFor="inlineRadio15">5</label>
                                 </div>
                             </td>
-                            <td><textarea className="form-control input" style={{ resize: "none" }} rows="1" /></td>
+                            <td>
+                                <textarea className="form-control input" style={{ resize: "none" }} rows="1" placeholder="Observações" />
+                            </td>
                         </tr>
                     </tbody>
 
@@ -151,7 +148,7 @@ class Create extends Component {
                             <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
                         </div>
                     </div>
-                </div>              
+                </div>
             </div>
         );
     }

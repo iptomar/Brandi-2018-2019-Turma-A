@@ -19,6 +19,8 @@ class Details extends Component {
     this.toggleEdit = this.toggleEdit.bind(this);
     this.delete = this.delete.bind(this);
     this.addFT = this.addFT.bind(this);
+    this.addTS = this.addTS.bind(this);
+    this.addFO = this.addFO.bind(this);
   }
 
   async componentDidMount() {
@@ -46,6 +48,13 @@ class Details extends Component {
 
   async addFT(){
     window.location = "/fichaTecnica/criar/"+this.props.id;
+  }
+
+  async addTS(){
+    window.location = "/testesSolubilizacao/" + this.props.id + "/criar";
+  }
+  async addFO(){
+    window.location = "/folhaDeObra/" + this.props.id + "/criar";
   }
 
   toggleEdit() {
@@ -96,7 +105,13 @@ class Details extends Component {
           <div className="text-right mr-3 mb-3">
           <button className="btn btn-success" onClick={this.addFT}>
               <i className="fas fa-plus"/> Adicionar Ficha Técnica
-            </button>
+          </button>
+          <button className="btn btn-success ml-2" onClick={this.addTS}>
+              <i className="fas fa-plus"/> Adicionar Teste de Solventes
+          </button>
+          <button className="btn btn-success ml-2" onClick={this.addFO}>
+              <i className="fas fa-plus"/> Adicionar Folha de Obra
+          </button>
             <button 
               className="btn btn-warning ml-2" 
               onClick={() => {

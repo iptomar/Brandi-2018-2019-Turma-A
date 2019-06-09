@@ -103,7 +103,7 @@ class Create extends Component {
             /* Se os inputs estiverem vazios */
             if(inputs[i].value === ""){
                 this.setState({
-                    alertText: "Existem campos da Folha de Obra que não estão preenchidos!",
+                    alertText: "Existem campos da Folha de Obra que não foram preenchidos!",
                     alertisNotVisible: false,
                     alertColor: "warning"
                 });
@@ -128,7 +128,7 @@ class Create extends Component {
                 }
             );
         }
-        /* Enviar para a API o formData */
+        /* Enviar para a API */
         const response = await fetch("/api/folhaDeObra/criar", {
             method: "POST",
             headers: {

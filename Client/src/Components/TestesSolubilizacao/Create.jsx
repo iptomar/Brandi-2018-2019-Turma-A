@@ -132,6 +132,24 @@ class Create extends Component {
             },
             body: JSON.stringify(tab)
         });
+        /* Aguardar a resposta da API e avaliar o que fazer */
+        await response.json().then(resp => {
+            let status = resp.status;
+            switch (status) {
+                case "Success":
+                    window.location = "/testesSolubilizacao"
+                    break;
+                case "Error":
+                    this.setState({
+                        alertText: "Erro",
+                        alertisNotVisible: false,
+                        alertColor: "warning"
+                    });
+                    break;
+                default:
+                    console.log("Ocorreu um erro, contacte o administrador do sistema");
+            }
+        });
     }
 
     /**

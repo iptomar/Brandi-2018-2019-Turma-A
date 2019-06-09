@@ -8,7 +8,7 @@ import AlertMsg from "../Globais/AlertMsg";
 class Create extends Component {
 
     /**
-    *  Contém apenas o container AlertMsg no this.state 
+    *  Contém apenas os atributos do container AlertMsg no this.state 
     */
     constructor(props) {
         super(props);
@@ -19,41 +19,46 @@ class Create extends Component {
         };
     }
 
-    eliminaUltimaLinha = () => {
-        var table = document.getElementById("table");
-        var numRows = table.rows.length;
-        if (numRows > 2) {
-            table.deleteRow(-1);
-        }
-    }
-
+    /**
+     * Adiciona uma nova linha no fim da tabela da folha de obra
+     */
     adicionaNovaLinha = () => {
-        var table = document.getElementById('table');
+        var table = document.getElementById('tabela');
         var row = table.insertRow(-1);
         var novaCelula = row.insertCell(0);
         // Coluna 1
         var param = document.createElement('input');
-        novaCelula = row.insertCell(0);
         param = document.createElement('textarea');
         param.className = "form-control input";
         param.style.resize = "none";
         param.setAttribute("rows", "1");
         param.placeholder = "Solvente ou mistura de solventes";
         novaCelula.appendChild(param);
-        // Coluna 2         
-        var div = document.createElement('div');
-        div.className = "form-check form-check-inline pt-1";
+        // Coluna 2      
+        // Quantas linhas tem a tabela?
+        var linhas = table.rows.length - 1;
+        var div = null;
         novaCelula = row.insertCell(1);
         for (let i = 1; i <= 5; i++) {
+            // Div
+            div = document.createElement('div');
+            div.className = "form-check form-check-inline";
             // Input
             param = document.createElement("input");
-            param.className = "form-check-input";
+            param.className = "form-check-input p-1 input";
             param.setAttribute("type", "radio");
+            param.name = "inlineRadioOptions";
+            param.id = "inlineRadio" + linhas + i;
+            param.value = i + "";
+            // Pendurar o input no div
             div.appendChild(param);
             // Label
+            param = null;
             param = document.createElement("label");
-            param.className = "form-check-label";
-            param.value=i;
+            param.className = "form-check-label p-1";
+            param.htmlFor = "inlineRadio" + linhas + i;
+            param.innerHTML = i;
+            // Pendurar a label no div
             div.appendChild(param);
             novaCelula.appendChild(div);
         }
@@ -65,7 +70,33 @@ class Create extends Component {
         param.setAttribute("rows", "1");
         param.placeholder = "Observações";
         novaCelula.appendChild(param);
+    }
 
+    /**
+     * Elimina a última linha na tabela dos testes de solubilidade
+     */
+    eliminaUltimaLinha = () => {
+        var table = document.getElementById("tabela");
+        var numRows = table.rows.length;
+        if (numRows > 2) {
+            table.deleteRow(-1);
+        }
+    }
+
+    /**
+     * Verifica se a tabela está preenchida. Cria um array com os conteúdos da tabela e submete-o. Trata a resposta do servidor
+     */
+    submit = async e => {
+        e.preventDefault();
+        var inputs = document.querySelectorAll(".input");
+        // Verificação de se todos os inputs estão preenchidos
+
+        // Criação do form
+        let tab = [];
+        let idEstratoSujidade = document.querySelector("#idEstratoSujidade").value;
+        let caracteristicas = document.querySelector("#caracteristicas").value;
+        for (let i = 0; i < document.querySelector("#tabela").children[1].childElementCount; i++) {
+        }
     }
 
     /**
@@ -76,22 +107,22 @@ class Create extends Component {
             <div className="container mb-3">
                 {/* Título */}
                 <div className="pt-3 py-3 text-center">
-                    <h2>Teste de Solventes </h2>
+                    <h2>Testes de Solventes</h2>
                     <h5>Teste de eficácia dos solventes na limpeza e solubilização de estratos e sujidades</h5>
                 </div>
                 <div className="row">
                     <div className="col-md-12">
-                        <label>Identificação do Estrato / Sujidade: </label>
-                        <input type="text" className="form-control mb-3" id="idEstratoSujidade" placeholder="Identificação do Estrato / Sujidade" required />
+                        <label>Identificação do Estrato / Sujidade</label>
+                        <input type="text" className="form-control mb-3 input" id="idEstratoSujidade" placeholder="Identificação do Estrato / Sujidade" required />
                     </div>
                     <div className="col-md-12 mb-3">
-                        <label>Características: </label>
-                        <input type="text" className="form-control mb-3" id="caracteristicas" placeholder="Características" required />
+                        <label>Características</label>
+                        <input type="text" className="form-control mb-3 input" id="caracteristicas" placeholder="Características" required />
                     </div>
                 </div>
 
                 {/* Tabela */}
-                <table className="table table-bordered table-secondary text-center" id="table">
+                <table className="table table-bordered table-secondary text-center" id="tabela">
                     <thead>
                         <tr>
                             <th className="align-middle">Solvente ou mistura de solventes</th>
@@ -106,29 +137,29 @@ class Create extends Component {
                             </td>
                             <td>
                                 {/* RADIO BUTTONS */}
-                                <div className="form-check form-check-inline pt-1">
-                                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio11" value="option1" />
-                                    <label className="form-check-label" htmlFor="inlineRadio11">1</label>
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input p-1 input" type="radio" name="inlineRadioOptions" id="inlineRadio11" value="1" />
+                                    <label className="form-check-label p-1" htmlFor="inlineRadio11">1</label>
                                 </div>
 
-                                <div className="form-check form-check-inline pt-1">
-                                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio12" value="option1" />
-                                    <label className="form-check-label" htmlFor="inlineRadio12">2</label>
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input p-1 input" type="radio" name="inlineRadioOptions" id="inlineRadio12" value="2" />
+                                    <label className="form-check-label p-1" htmlFor="inlineRadio12">2</label>
                                 </div>
 
-                                <div className="form-check form-check-inline pt-1">
-                                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio13" value="option1" />
-                                    <label className="form-check-label" htmlFor="inlineRadio13">3</label>
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input p-1 input" type="radio" name="inlineRadioOptions" id="inlineRadio13" value="3" />
+                                    <label className="form-check-label p-1" htmlFor="inlineRadio13">3</label>
                                 </div>
 
-                                <div className="form-check form-check-inline pt-1">
-                                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio14" value="option1" />
-                                    <label className="form-check-label" htmlFor="inlineRadio14">4</label>
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input p-1 input" type="radio" name="inlineRadioOptions" id="inlineRadio14" value="4" />
+                                    <label className="form-check-label p-1" htmlFor="inlineRadio14">4</label>
                                 </div>
 
-                                <div className="form-check form-check-inline pt-1">
-                                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio15" value="option1" />
-                                    <label className="form-check-label" htmlFor="inlineRadio15">5</label>
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input p-1 input" type="radio" name="inlineRadioOptions" id="inlineRadio15" value="5" />
+                                    <label className="form-check-label p-1" htmlFor="inlineRadio15">5</label>
                                 </div>
                             </td>
                             <td>
@@ -136,8 +167,6 @@ class Create extends Component {
                             </td>
                         </tr>
                     </tbody>
-
-
                 </table>
                 {/*botões*/}
                 <div className="row">
@@ -147,6 +176,9 @@ class Create extends Component {
                             <button type="button" className="btn m-1 btn-secondary" onClick={this.eliminaUltimaLinha}>Remover linha</button>
                             <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
                         </div>
+                    </div>
+                    <div className="col-md-12 mt-2">
+                        <button type="button" className="btn btn-success btn-lg btn-block mb-5" onClick={this.submit}>Criar</button>
                     </div>
                 </div>
             </div>

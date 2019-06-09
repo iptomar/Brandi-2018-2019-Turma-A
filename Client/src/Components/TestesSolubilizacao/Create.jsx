@@ -45,9 +45,12 @@ class Create extends Component {
             div.className = "form-check form-check-inline";
             // Input
             param = document.createElement("input");
+            if (i === 1) {
+                param.defaultChecked = "true";
+            }
             param.className = "form-check-input p-1 input";
             param.setAttribute("type", "radio");
-            param.name = "inlineRadioOptions";
+            param.name = "inlineRadioOptions" + linhas;
             param.id = "inlineRadio" + linhas + i;
             param.value = i + "";
             // Pendurar o input no div
@@ -84,19 +87,51 @@ class Create extends Component {
     }
 
     /**
-     * Verifica se a tabela está preenchida. Cria um array com os conteúdos da tabela e submete-o. Trata a resposta do servidor
+     * Verifica se a tabela está preenchida. Cria um array com os conteúdos do formulário. 
+     * Trata a resposta do servidor
      */
     submit = async e => {
         e.preventDefault();
         var inputs = document.querySelectorAll(".input");
         // Verificação de se todos os inputs estão preenchidos
-
+        for (let i = 0; i < inputs.length; i++) {
+            if (inputs[i].value === "") {
+                this.setState({
+                    alertText: "Existem campos dos Testes de Solventes que não foram preenchidos!",
+                    alertisNotVisible: false,
+                    alertColor: "warning"
+                });
+                return;
+            }
+        }
         // Criação do form
         let tab = [];
-        let idEstratoSujidade = document.querySelector("#idEstratoSujidade").value;
-        let caracteristicas = document.querySelector("#caracteristicas").value;
+        tab.push(
+            {
+                "idEstratoSujidade": document.querySelector("#idEstratoSujidade").value,
+                "caracteristicas": document.querySelector("#caracteristicas").value,
+            }
+        );
         for (let i = 0; i < document.querySelector("#tabela").children[1].childElementCount; i++) {
+            let content = document.getElementById("tabela").children[1].children[i];
+            tab.push(
+                {
+                    "solvente": content.children[0].children[0].value,
+                    "grauDeEficacia": document.querySelector('input[name=inlineRadioOptions' + (i + 1) + ']:checked').value,
+                    "observacoes": content.children[2].children[0].value
+                }
+            )
         }
+        /* Enviar para a API */
+        const response = await fetch("/api/testesSolubilizacao/criar", {
+            method: "POST",
+            headers: {
+                "Content-Type": 'application/json',
+                "Accept": 'application/json',
+                "x-auth-token": sessionStorage.getItem("token")
+            },
+            body: JSON.stringify(tab)
+        });
     }
 
     /**
@@ -138,27 +173,27 @@ class Create extends Component {
                             <td>
                                 {/* RADIO BUTTONS */}
                                 <div className="form-check form-check-inline">
-                                    <input className="form-check-input p-1 input" type="radio" name="inlineRadioOptions" id="inlineRadio11" value="1" />
+                                    <input className="form-check-input p-1" type="radio" name="inlineRadioOptions1" id="inlineRadio11" value="1" defaultChecked />
                                     <label className="form-check-label p-1" htmlFor="inlineRadio11">1</label>
                                 </div>
 
                                 <div className="form-check form-check-inline">
-                                    <input className="form-check-input p-1 input" type="radio" name="inlineRadioOptions" id="inlineRadio12" value="2" />
+                                    <input className="form-check-input p-1" type="radio" name="inlineRadioOptions1" id="inlineRadio12" value="2" />
                                     <label className="form-check-label p-1" htmlFor="inlineRadio12">2</label>
                                 </div>
 
                                 <div className="form-check form-check-inline">
-                                    <input className="form-check-input p-1 input" type="radio" name="inlineRadioOptions" id="inlineRadio13" value="3" />
+                                    <input className="form-check-input p-1" type="radio" name="inlineRadioOptions1" id="inlineRadio13" value="3" />
                                     <label className="form-check-label p-1" htmlFor="inlineRadio13">3</label>
                                 </div>
 
                                 <div className="form-check form-check-inline">
-                                    <input className="form-check-input p-1 input" type="radio" name="inlineRadioOptions" id="inlineRadio14" value="4" />
+                                    <input className="form-check-input p-1" type="radio" name="inlineRadioOptions1" id="inlineRadio14" value="4" />
                                     <label className="form-check-label p-1" htmlFor="inlineRadio14">4</label>
                                 </div>
 
                                 <div className="form-check form-check-inline">
-                                    <input className="form-check-input p-1 input" type="radio" name="inlineRadioOptions" id="inlineRadio15" value="5" />
+                                    <input className="form-check-input p-1" type="radio" name="inlineRadioOptions1" id="inlineRadio15" value="5" />
                                     <label className="form-check-label p-1" htmlFor="inlineRadio15">5</label>
                                 </div>
                             </td>

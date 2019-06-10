@@ -16,6 +16,7 @@ class Create extends Component {
             alertText: '',
             alertisNotVisible: true,
             alertColor: '',
+            id: this.props.id,
         };
     }
 
@@ -123,7 +124,7 @@ class Create extends Component {
             )
         }
         /* Enviar para a API */
-        const response = await fetch("/api/testesSolubilizacao/criar", {
+        const response = await fetch("/api/testesSolubilizacao/"+this.state.id+"/criar", {
             method: "POST",
             headers: {
                 "Content-Type": 'application/json',

@@ -96,6 +96,27 @@ class Create extends Component {
           document.getElementById('mecenas').value = this.state.data[0].resposta.mecenas;
           document.getElementById('codPostalMecenas').value = this.state.data[0].resposta.codPostalMecenas;
           document.getElementById('contactoMecenas').value = this.state.data[0].resposta.contactoMecenas;
+          //Colocar a imagem do gráfico
+          document.getElementById('imgGraph').src = this.state.data[0].resposta.imgGrafico;
+          document.getElementById('imgGraph').style.display = "block";
+          //Colocar a imagem ativa no carrousel
+          document.getElementById('carouselExampleControls').style.display = "block";
+          document.querySelector('#actImage').src = this.state.data[4][0].imagem;
+          document.querySelector('#actImage').alt = this.state.data[4][0].imagem.split("_")[this.state.data[4][0].imagem.split("_").length-1];
+          //Colocar as outras imagens
+          let contentor = document.querySelector("#otherImage");
+          for(let i = 1; i < this.state.data[4].length; i++){
+            let div = document.createElement('div');
+            div.className = "carousel-item";
+            let img = document.createElement('img');
+            img.setAttribute('src', this.state.data[4][i].imagem);
+            img.className = "d-block w-100";
+            img.style.height = "500px";
+            img.alt = this.state.data[4][i].imagem.split("_")[this.state.data[4][i].imagem.split("_").length-1];
+            div.appendChild(img);
+            contentor.appendChild(div);
+          }
+
           //Pag 2
           if (this.state.data[0].resposta.bemIntegradoEmConjunto === 0) {
             document.getElementById('bemIntegradoSim').parentNode.parentNode.parentNode.style.display = "none";
@@ -386,23 +407,6 @@ class Create extends Component {
             tr.innerHTML = '<tr><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Constituição da Equipa / Nome do Técnico" readonly="readonly">' + this.state.data[3][i].constEq + '</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Funções Desempenhadas" readonly="readonly">' + this.state.data[3][i].funcDes + '</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Habilitações Escolares / Nível Profissional (1-8)" readonly="readonly">' + this.state.data[3][i].habPro + '</textarea></td></tr>';
             cont.append(tr);
           }
-
-          //Enviar pedido para as imagens
-          // const response = await fetch(`/api/fichaTecnica/${this.props.id}/imagens`, {
-          //   method: "GET",
-          //   headers: {
-          //     "x-auth-token": sessionStorage.getItem("token")
-          //   }
-          // });
-
-          // //Aguardar API
-          // await response.json().then(async resp => {
-          // let status = resp.stat;
-          //console.log(resp);
-
-          // });
-
-
           break;
         default:
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
@@ -844,7 +848,7 @@ class Create extends Component {
             alertColor: "danger"
           });
           break;
-        case "Ficha inserida":
+        case "Registed":
           this.setState({
             alertisNotVisible: false
           });
@@ -896,6 +900,7 @@ class Create extends Component {
                   <hr />
                   <label>Gráfico:</label>
                   <FileUpload sendData={this.getDataG} type="image" />
+                  <img id="imgGraph" alt="Imagem Gráfico" style={{display:"none", height:"500px", width:"100%"}}/>
                 </div>
               </div>
             </div>

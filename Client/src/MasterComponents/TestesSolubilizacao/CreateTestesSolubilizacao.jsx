@@ -9,7 +9,7 @@ class CreateTestesSolubilizacao extends Component {
         return (
             <div>
                 <Header />
-                <Create />
+                <Create id={this.props.id}/>
                 <Footer />
             </div>
         );

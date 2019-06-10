@@ -64,6 +64,22 @@ export class Pag1 extends Component {
         <br />
         <label>Fotografia(s) do objeto:</label>
         <FileUpload sendData={this.getData} type="image" isMultiple />
+        {/* Carrousel para apresentação das imagens */}
+        <div id="carouselExampleControls" className="carousel slide" data-ride="carousel" style={{display:"none"}}>
+          <div id="otherImage" className="carousel-inner">
+            <div className="carousel-item active">
+                <img id="actImage" alt="" className="d-block w-100" style={{height:"500px"}}/>
+            </div>
+        </div>
+        <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span className="sr-only">Anterior</span>
+        </a>
+        <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <span className="sr-only">Proximo</span>
+        </a>
+        </div>
       </div>
     );
   }

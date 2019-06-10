@@ -37,10 +37,10 @@ class Header extends Component {
       switch (status) {
         case "Authenticated":
           this.setState({ data: resp.resposta });
-          console.log(this.state.data.role)
+          //console.log(this.state.data.role)
           break;
         default:
-          console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
+          console.log("Ocorreu um problema técnico.");
       }
     });
   }

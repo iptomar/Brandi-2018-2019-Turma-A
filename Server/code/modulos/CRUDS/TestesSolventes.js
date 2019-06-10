@@ -27,11 +27,13 @@ exports.getSingleTestesSolventes = async (bd, id) => {
       "Select * from tbl_testesSolventesComplementar where testeSolventFK = ? ",
       id
     );
-    resultadofinal.resposta = resposta_bd.resposta;
+    resultadofinal.complementar = resposta_bd.resposta;
   } else if (resposta_bd.stat === 1) {
     resultadofinal.resposta = "DBConnectionError";
   } else if (resposta_bd.stat >= 2) {
     resultadofinal.resposta = resposta_bd.resposta;
+  } else if (resposta_bd.stat === 0) {
+    resultadofinal.stat = 0;
   }
   return resultadofinal;
 };
@@ -48,7 +50,7 @@ exports.createTesteSolvente = async (bd, dados) => {
     resultadofinal.stat = 0;
     // adicionar os campos da tabela da página
     let auxiliar = "";
-    for (let i = 0; i < dados.tabela; i++) {
+    for (let i = 1; i < dados.length; i++) {
       auxiliar += "(?,?,?,?),";
     }
     auxiliar = auxiliar.substring(0, auxiliar.length - 1); //tira ultima virgula
@@ -102,7 +104,7 @@ exports.updateTestesSolventes = async (bd, dados) => {
     resultadofinal.stat = 0;
     // adicionar os campos da tabela da página
     let auxiliar = "";
-    for (let i = 0; i < dados.tabela; i++) {
+    for (let i = 1; i < dados.length; i++) {
       auxiliar += "(?,?,?,?),";
     }
     auxiliar = auxiliar.substring(0, auxiliar.length - 1); //tira ultima virgula

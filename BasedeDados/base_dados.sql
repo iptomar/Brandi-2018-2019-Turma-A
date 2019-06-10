@@ -494,8 +494,9 @@ create table tbl_testessolventes (
      idEstratoSujidade TEXT,
      caracteristicas TEXT,
      fichaRIFK int not null,
+     PRIMARY key (id),
      FOREIGN key (fichaRIFK) REFERENCES tbl_fichaRegistoIdentificacao(fichaRegistoID)
-)
+);
 
  -- tabela que complementa a informação da página dos testes de solubilidade
 drop table if exists tbl_testesSolventesComplementar;
@@ -505,8 +506,9 @@ create table tbl_testesSolventesComplementar(
     grauDeEficacia TEXT,
     observacoes TEXT,
     testeSolventFK int,
+    PRIMARY key(id),
     FOREIGN key (testeSolventFK) REFERENCES tbl_testessolventes(id)
-)
+);
 
 
 

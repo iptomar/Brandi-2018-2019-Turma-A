@@ -43,15 +43,14 @@ public class TestarEliminUser {
         //submeter o login
         passField.submit();
         Thread.sleep(2000);
-        // agrupar elementos do tipo nav-link numa lista  
+        //Selecionar a opção "utilizadores"
         List<WebElement> users =  driver.findElements(By.className("nav-link"));
-        //efectuar o click no primeiro elemento, sendo este "utilizadores"
-        users.get(0).click();
+        users.get(2).click();
         Thread.sleep(2000);
-        // agrupar as opcoes apresentadas, apos o click, numa lista 
+        //selecionar o dropdown-item "listar" que se encontra depois de selecionar a opção "utilizadores"
         List<WebElement> options =  driver.findElements(By.className("dropdown-item"));
-        //selecionar o segundo elemento desta lista sendo este "Listar"
-        options.get(1).click();
+        //selecionar a opção 4 pois apesar de nao estarem visiveis, a lista "options" irá ter todos (6) os dropdown-items 
+        options.get(4).click();
         Thread.sleep(2000);
     }
     
@@ -69,10 +68,8 @@ public class TestarEliminUser {
         //caso a variavel dologout estetja a true, é efetuado o logout selecionando 
         //esta opçao na pagina "IndexFichaRIPage"
         if (dologout) {
-        List<WebElement> sair =  driver.findElements(By.className("nav-link"));
-        sair.get(3).click();
-        sair =  driver.findElements(By.className("dropdown-item"));
-        sair.get(3).click();
+        WebElement sair =  driver.findElement(By.className("nav-sair"));
+        sair.click();
         } 
     }
 

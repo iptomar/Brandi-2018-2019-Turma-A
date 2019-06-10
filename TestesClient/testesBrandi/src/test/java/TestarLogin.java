@@ -53,10 +53,8 @@ public class TestarLogin {
         //caso a variavel dologout estetja a true, é efetuado o logout selecionando 
         //esta opçao na pagina "IndexFichaRIPage"
         if (dologout) {
-        List<WebElement> sair =  driver.findElements(By.className("nav-link"));
-        sair.get(3).click();
-        sair =  driver.findElements(By.className("dropdown-item"));
-        sair.get(3).click();
+        List<WebElement> sair =  driver.findElements(By.className("nav-sair"));
+        sair.get(sair.size()-1).click();
         } 
     }
 
@@ -69,9 +67,9 @@ public class TestarLogin {
         driver.get("brandi.ipt.pt:81");
         //preencher campos de login
         WebElement userField = driver.findElement(By.id("user"));
-        userField.sendKeys("aluno");
+        userField.sendKeys("admin");
         WebElement passField = driver.findElement(By.id("pass"));
-        passField.sendKeys("aluno");
+        passField.sendKeys("admin");
         //eperar para deixar mostrar o input de dados
         Thread.sleep(2000);
         passField.submit();

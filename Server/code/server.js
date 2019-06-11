@@ -198,5 +198,9 @@ fichaTecnica.updateFichaTecnicaRoute(app, bd);
 fichaTecnica.readFichaTecnicaRoute(app, bd);
 //rota para apagar uma ficha tecnica
 fichaTecnica.deleteFichaTecnicaRoute(app, bd);
+//rota que devolve a imagem do grafico
+fichaTecnica.readFichaTecnicaImagemGraficoRoute(app, bd);
+//rota que devolve as fotografias
+fichaTecnica.readFichaTecnicaFotografiasRoute(app, bd);
 
 app.listen(port, () => console.log("Listening na porta", port));

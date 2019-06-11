@@ -30,6 +30,7 @@ class Pag4 extends Component {
             var param = document.createElement('textarea');
             param.className = "form-control";
             param.setAttribute("type", "text");
+            param.required = true;
             param.style.resize = "none";
             param.setAttribute("rows", "2");
             novaCelula.appendChild(param);
@@ -45,6 +46,7 @@ class Pag4 extends Component {
         paramTecnico.value = "Técnico";
         paramTecnico.style.resize = "none";
         paramTecnico.setAttribute("rows", "2");
+        paramTecnico.required = true;
 
         cellTecnico.appendChild(paramTecnico);
 
@@ -56,6 +58,7 @@ class Pag4 extends Component {
         paramData.style.width = "170px";
         paramData.style.height = "63px"
         paramData.setAttribute("type", "date")
+        paramData.required = true;
 
         cellDate.appendChild(paramData);
 
@@ -137,12 +140,12 @@ class Pag4 extends Component {
                         </thead>
                         <tbody>
                             <tr>
-                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Tipo-Referência"></textarea></td>
-                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Localização / Área / Ponto"></textarea></td>
-                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Objetivos Específicos"></textarea></td>
-                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Resultados"></textarea></td>
-                                <td><textarea className="form-control" type="text" readOnly value="Técnico" style={{ resize: "none" }} rows="2"></textarea></td>
-                                <td><input className="form-control" style={{ width: "170px", height: "63px" }} type="date"></input></td>
+                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Tipo-Referência" required></textarea></td>
+                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Localização / Área / Ponto" required></textarea></td>
+                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Objetivos Específicos" required></textarea></td>
+                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Resultados" required></textarea></td>
+                                <td><textarea className="form-control" type="text" readOnly value="Técnico" style={{ resize: "none" }} rows="2" required></textarea></td>
+                                <td><input className="form-control" style={{ width: "170px", height: "63px" }} type="date" required></input></td>
                             </tr>
                         </tbody>
                     </table>

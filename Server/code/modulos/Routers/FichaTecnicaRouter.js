@@ -55,6 +55,7 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
             for (let i = 0; i < req.files.length; i++) {
               if (req.files[i].fieldname == "imgGraph") {
                 imgGrafico = req.files[i].path;
+                console.log(imgGrafico);
               } else {
                 imgArray.push(req.files[i].path);
               }
@@ -525,5 +526,100 @@ exports.getTodasFichasTecnicasRoute = async (app, bd) => {
       .header("x-auth-token", token)
       .header("totalpages", totalpages.total) //envio de total de paginas
       .json(resposta_servidor);
+  });
+};
+
+/**
+ * Rota para enviar a imagem do grafico
+ */
+exports.readFichaTecnicaImagemGraficoRoute = async (app, bd) => {
+  app.get("/api/fichaTecnica/imagemgrafico/:id", async (req, resp) => {
+    let resposta_servidor = { stat: "Authenticated", resposta: {} };
+    //HTTP CODE ACCEPTED
+    let code = 200;
+    //token
+    let token;
+    //getToken
+    token = await getToken.getToken(req);
+    //nao existe token/sessao
+    if (token === null) {
+      code = 400;
+      resposta_servidor.stat = "NotAuthenticated";
+    }
+    //token corrompido
+    else if (token.name) {
+      code = 400;
+      resposta_servidor.stat = "InvalidToken";
+    }
+    //existe token/sessao
+    else {
+      let resposta_bd = await fichaRegistoIdentificacao.getFichaTecnicaImagemGrafico(
+        bd,
+        req.params.id
+      );
+      if (resposta_bd.stat === 0) {
+        code = 200;
+        resposta_servidor.stat = "Authenticated";
+        resposta_servidor.resposta = resposta_bd.resposta;
+      } else if (resposta_bd.stat === 1) {
+        code = 500;
+        resposta_servidor.stat = "Authenticated";
+        resposta_servidor.resposta = "DBConnectionError";
+      }
+      //nao e administrador
+      token = await getToken.generateToken(token);
+    }
+    resp
+      .status(code)
+      .header("x-auth-token", token)
+      .sendFile(
+        path.join(__dirname, "../../", resposta_servidor.resposta.imagem)
+      );
+  });
+};
+
+exports.readFichaTecnicaFotografiasRoute = async (app, bd) => {
+  app.get("/api/fichaTecnica/fotografias/:id", async (req, resp) => {
+    let resposta_servidor = { stat: "Authenticated", resposta: {} };
+    //HTTP CODE ACCEPTED
+    let code = 200;
+    //token
+    let token;
+    //getToken
+    token = await getToken.getToken(req);
+    //nao existe token/sessao
+    if (token === null) {
+      code = 400;
+      resposta_servidor.stat = "NotAuthenticated";
+    }
+    //token corrompido
+    else if (token.name) {
+      code = 400;
+      resposta_servidor.stat = "InvalidToken";
+    }
+    //existe token/sessao
+    else {
+      let resposta_bd = await fichaRegistoIdentificacao.getFichaTecnicaFotografiasGrafico(
+        bd,
+        req.params.id
+      );
+      if (resposta_bd.stat === 0) {
+        code = 200;
+        resposta_servidor.stat = "Authenticated";
+        resposta_servidor.resposta = resposta_bd.resposta;
+      } else if (resposta_bd.stat === 1) {
+        code = 500;
+        resposta_servidor.stat = "Authenticated";
+        resposta_servidor.resposta = "DBConnectionError";
+      }
+      //nao e administrador
+      token = await getToken.generateToken(token);
+    }
+    resp
+      .status(code)
+      .header("x-auth-token", token)
+      .sendFile(
+        path.join(__dirname, "../../", resposta_servidor.resposta.imagem)
+      );
   });
 };

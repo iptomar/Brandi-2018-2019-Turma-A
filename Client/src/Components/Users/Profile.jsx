@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import '../../CssComponents/profile.css';
+var jwt = require('jsonwebtoken');
 
 class Profile extends Component {
   constructor(props) {
@@ -14,16 +15,29 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    var name = sessionStorage.getItem('id');
-    this.getUser(name);
-    if (this.state.data.role === "Admin") {
-      this.fetchRoles();
+    try {
+      var decoded = jwt.decode(sessionStorage.getItem('token'));
+      var userId = decoded.userID;
+      this.getUser(userId);
+      if (this.state.data.role === "Admin") {
+        this.fetchRoles();
+      }
+      } catch (error) {
+      this.out();
     }
   }
 
-  editar() {
+  out() {
+    //Eliminar os dados armazenados da conta
+    sessionStorage.removeItem('token');
+    //Redirect
+    window.location = '/';
+  }  
+  
 
-    var id = sessionStorage.getItem('id');
+  editar() {
+    var decoded = jwt.decode(sessionStorage.getItem('token'));
+    var id = decoded.userID;
     window.location = "/utilizadores/" + id + "/editar";
   }
   async getUser(id) {
@@ -37,11 +51,9 @@ class Profile extends Component {
     });
     //Aguardar API
     await response.json().then(resp => {
-      console.log(resp);
       let status = resp.status;
       switch (status) {
         case "Authenticated":
-          console.log(resp.resposta);
           this.setState({ data: resp.resposta });
           this.setState({ dataTecnico: resp.resposta.tecnicos[0] });
           break;

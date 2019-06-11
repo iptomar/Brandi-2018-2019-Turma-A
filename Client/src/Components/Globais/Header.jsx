@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import favicon from "../../Images/favicon.ico";
 import '../../CssComponents/header.css';
+var jwt = require('jsonwebtoken');
 
 class Header extends Component {
   constructor(props) {
@@ -9,15 +10,29 @@ class Header extends Component {
       data: []
     };
   }
-  
+
+  nomeUser () {
+    try {
+      var decoded = jwt.decode(sessionStorage.getItem('token'));
+      var name = decoded.login;
+      return name;
+       } catch (error) {
+      this.out();
+    }
+ }
  
   componentDidMount() {
-    this.getUser(sessionStorage.getItem('id'));
+    try {
+      var decoded = jwt.decode(sessionStorage.getItem('token'));
+      var userId = decoded.userID;
+      this.getUser(userId)
+      } catch (error) {
+      this.out();
+    }
   }
   out() {
     //Eliminar os dados armazenados da conta
     sessionStorage.removeItem('token');
-    sessionStorage.removeItem('nome');
     //Redirect
     window.location = '/';
   }  
@@ -39,6 +54,9 @@ class Header extends Component {
           this.setState({ data: resp.resposta });
           //console.log(this.state.data.role)
           break;
+          case "InvalidToken":
+            this.out();
+            break;
         default:
           console.log("Ocorreu um problema técnico.");
       }
@@ -103,8 +121,8 @@ class Header extends Component {
             </li>
           </ul>
           <hr />
-          {/* <span className="sessionName">{sessionStorage.getItem('nome')}</span> */}
-          <a className="sessionName" href="/perfil"><i className="far fa-user"></i>&nbsp;{sessionStorage.getItem('nome')}</a>
+
+          <a className="sessionName" href="/perfil"><i className="far fa-user"></i>&nbsp;{this.nomeUser()}</a>
           <div className="divConta">
             <ul className="navbar-nav">
               {/* <li className="nav-item">

@@ -32,6 +32,7 @@ class Pag10 extends Component {
             param.setAttribute("type", "text");
             param.style.resize = "none";
             param.setAttribute("rows", "2");
+            param.required = true;
             novaCelula.appendChild(param);
         }
 
@@ -145,9 +146,9 @@ class Pag10 extends Component {
                         </thead>
                         <tbody>
                             <tr>
-                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Constituição da Equipa / Nome do Técnico"></textarea></td>
-                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Funções Desempenhadas"></textarea></td>
-                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Habilitações Escolares / Nível Profissional (1-8)"></textarea></td>
+                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Constituição da Equipa / Nome do Técnico" required></textarea></td>
+                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Funções Desempenhadas" required></textarea></td>
+                                <td><textarea className="form-control" type="text" style={{ resize: "none" }} rows="2" placeholder="Habilitações Escolares / Nível Profissional (1-8)" required></textarea></td>
                             </tr>
                         </tbody>
                     </table>

@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.3.1",
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.1",
     "jsonwebtoken": "^8.5.1",
     "popper.js": "^1.14.7",
     "react": "^16.8.4",

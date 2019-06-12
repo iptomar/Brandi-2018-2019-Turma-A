@@ -45,8 +45,6 @@ class Edit extends Component {
 
   //Receber os roles
   async fetchRoles() {
-    console.log(this.state.data);
-    console.log(this.state.dataTecnicos)
     //Enviar pedidos
     const response = await fetch("/api/roles", {
       method: "GET",
@@ -60,7 +58,6 @@ class Edit extends Component {
       .then(resp => {
         switch (resp.status) {
           default:
-            console.log("entrou");
             this.setState({ rolesList: resp.resposta })
             break;
         }
@@ -68,12 +65,9 @@ class Edit extends Component {
   }
 
   async editaDados() {
-    console.log(this.state.data);
-    console.log(this.state.dataTecnicos)
     //Armazenar o valor selecionado na dropdownlist
     var dataUsers;
     var dataTecn;
-
     //Dados do Utilizador
     if (this.state.data.role === "Admin") {
       var select = document.getElementById("DDLRoles");
@@ -141,7 +135,6 @@ class Edit extends Component {
 
     //Aguardar API
     await response.json().then(resp => {
-      console.log(resp);
       let status = resp.status;
       switch (status) {
         case 'Updated':

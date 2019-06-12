@@ -48,9 +48,6 @@ class Login extends Component {
         case "Authenticated":
           //Armazenar o token
           sessionStorage.setItem('token', response.headers.get('x-auth-token'));
-          //Armazenar os dados do utilizador
-          sessionStorage.setItem('nome', resp.resposta.login);
-          sessionStorage.setItem('id', resp.resposta.userID);
 
           //Redirect
           window.location = '/fichaRI';

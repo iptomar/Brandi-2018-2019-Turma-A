@@ -576,7 +576,7 @@ exports.readFichaTecnicaImagemGraficoRoute = async (app, bd) => {
     }
     resp
       .status(code)
-      .send(resposta_servidor.resposta.imgGrafico);
+      .json(resposta_servidor.resposta.imgGrafico);
   });
 };
 

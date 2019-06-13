@@ -399,8 +399,10 @@ class Create extends Component {
           });
 
           //Aguardar API
-
-          await respGrafico.then(resp => document.getElementById("imgGraph").src = resp);
+          await respGrafico.json().then(resp => {
+            console.log(resp);
+            document.querySelector('#imgGraph').src = resp;
+          });
 
 
           //Colocar a imagem ativa no carrousel
@@ -415,26 +417,22 @@ class Create extends Component {
               }
             });
 
-            //Aguardar API
-            await respImage.then(resp => resp.blob()).then(blob => {
-              let reader = new FileReader();
-              reader.onload = function () {
-                if (i === 0) {
-                  document.querySelector('#actImage').src = reader.result.toString();
-                } else {
-                  let div = document.createElement('div');
-                  div.className = "carousel-item";
-                  let img = document.createElement('img');
-                  img.setAttribute('src', reader.result.toString());
-                  img.className = "d-block w-100";
-                  img.style.height = "500px";
-                  div.appendChild(img);
-                  contentor.appendChild(div);
-                }
-              }
-              reader.readAsDataURL(blob);
-            }
-            );
+          //Aguardar API
+             await respImage.json().then(resp => {
+                 if (i === 0) {
+                   document.querySelector('#actImage').src = resp;
+                 } else {
+                   let div = document.createElement('div');
+                   div.className = "carousel-item";
+                   let img = document.createElement('img');
+                   img.setAttribute('src', resp);
+                   img.className = "d-block w-100";
+                   img.style.height = "500px";
+                   div.appendChild(img);
+                   contentor.appendChild(div);
+                 }
+               }
+             );
           }
           break;
         default:

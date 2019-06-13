@@ -4,15 +4,15 @@ var multer = require("multer");
 var mkdirp = require("mkdirp");
 const path = require("path");
 
-mkdirp("../images/registoIdentificacao", function(err) {
+mkdirp("../images/registoIdentificacao", function (err) {
   if (err) console.error(err);
 });
 
 var storage = multer.diskStorage({
-  destination: function(req, file, callback) {
+  destination: function (req, file, callback) {
     callback(null, "../images/registoIdentificacao");
   },
-  filename: function(req, file, callback) {
+  filename: function (req, file, callback) {
     callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
   }
 });
@@ -408,6 +408,7 @@ exports.readfichaRegistoIdentificacaoImagemRoute = async (app, bd) => {
         code = 200;
         resposta_servidor.stat = "Authenticated";
         resposta_servidor.resposta = resposta_bd.resposta;
+        console.log(resposta_servidor.resposta.imagem);
       } else if (resposta_bd.stat === 1) {
         code = 500;
         resposta_servidor.stat = "Authenticated";

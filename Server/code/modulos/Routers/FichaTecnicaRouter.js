@@ -576,7 +576,7 @@ exports.readFichaTecnicaImagemGraficoRoute = async (app, bd) => {
     }
     resp
       .status(code)
-      .send(resposta_servidor.resposta.imgGrafico);
+      .json(resposta_servidor.resposta.imgGrafico);
   });
 };
 
@@ -609,6 +609,7 @@ exports.readFichaTecnicaFotografiasRoute = async (app, bd) => {
         code = 200;
         resposta_servidor.stat = "Authenticated";
         resposta_servidor.resposta = resposta_bd.resposta;
+        resposta_servidor.resposta.imagem = base64Img.base64Sync(path.join(__dirname, "../../", resposta_servidor.resposta.imagem));
       } else if (resposta_bd.stat === 1) {
         code = 500;
         resposta_servidor.stat = "Authenticated";
@@ -618,8 +619,6 @@ exports.readFichaTecnicaFotografiasRoute = async (app, bd) => {
     }
     resp
       .status(code)
-      .sendFile(
-        path.join(__dirname, "../../", resposta_servidor.resposta.imagem)
-      );
+      .json(resposta_servidor.resposta.imagem);
   });
 };

@@ -411,8 +411,6 @@ class Create extends Component {
 
           //Colocar a imagem ativa no carrousel
           document.getElementById('carouselExampleControls').style.display = "block";
-          //document.querySelector('#actImage').src = this.state.data[4][0].imagem;
-          //document.querySelector('#actImage').alt = this.state.data[4][0].imagem.split("_")[this.state.data[4][0].imagem.split("_").length-1];
             //Colocar as outras imagens
             let contentor = document.querySelector("#otherImage");
             for(let i = 0; i < this.state.data[4].length; i++){
@@ -427,15 +425,18 @@ class Create extends Component {
               await respImage.then(resp => resp.blob()).then(blob =>{
                   let reader = new FileReader();
                    reader.onload = function () {
+                     if(i === 0) {
+                       document.querySelector('#actImage').src = reader.result.toString();
+                     }else{
                       let div = document.createElement('div');
                       div.className = "carousel-item";
                       let img = document.createElement('img');
                       img.setAttribute('src', reader.result.toString());
                       img.className = "d-block w-100";
                       img.style.height = "500px";
-                      img.alt = this.state.data[4][i].imagem.split("_")[this.state.data[4][i].imagem.split("_").length-1];
                       div.appendChild(img);
                       contentor.appendChild(div);
+                    }
                    }
                    reader.readAsDataURL(blob);
                }

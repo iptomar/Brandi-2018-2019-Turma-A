@@ -561,6 +561,7 @@ exports.readFichaTecnicaImagemGraficoRoute = async (app, bd) => {
         code = 200;
         resposta_servidor.stat = "Authenticated";
         resposta_servidor.resposta = resposta_bd.resposta;
+        console.log(resposta_servidor.resposta.imgGrafico);
       } else if (resposta_bd.stat === 1) {
         code = 500;
         resposta_servidor.stat = "Authenticated";
@@ -573,7 +574,7 @@ exports.readFichaTecnicaImagemGraficoRoute = async (app, bd) => {
       .status(code)
       .header("x-auth-token", token)
       .sendFile(
-        path.join(__dirname, "../../", resposta_servidor.resposta.imagem)
+        path.join(__dirname, "../../", resposta_servidor.resposta.imgGrafico)
       );
   });
 };

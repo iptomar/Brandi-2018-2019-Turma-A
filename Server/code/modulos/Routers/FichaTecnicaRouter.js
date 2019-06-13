@@ -553,7 +553,7 @@ exports.readFichaTecnicaImagemGraficoRoute = async (app, bd) => {
     }
     //existe token/sessao
     else {
-      let resposta_bd = await fichaRegistoIdentificacao.getFichaTecnicaImagemGrafico(
+      let resposta_bd = await fichaTecnica.getFichaTecnicaImagemGrafico(
         bd,
         req.params.id
       );

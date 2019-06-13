@@ -566,7 +566,7 @@ exports.readFichaTecnicaImagemGraficoRoute = async (app, bd) => {
         //resposta_servidor.resposta.imgGrafico = base64Img.base64(path.join(__dirname, "../../", resposta_servidor.resposta.imgGrafico), function (err, data) { });
 
 
-        console.log(resposta_servidor.resposta.imgGrafico);
+        //console.log(resposta_servidor.resposta.imgGrafico);
       } else if (resposta_bd.stat === 1) {
         code = 500;
         resposta_servidor.stat = "Authenticated";
@@ -605,6 +605,7 @@ exports.readFichaTecnicaFotografiasRoute = async (app, bd) => {
         bd,
         req.params.id
       );
+      console.log(resposta_bd);
       if (resposta_bd.stat === 0) {
         code = 200;
         resposta_servidor.stat = "Authenticated";

@@ -1009,7 +1009,7 @@ exports.getAllFichasTecnicas = async (bd, limit, pagenumber, id) => {
 exports.getFichaTecnicaImagemGrafico = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: {} };
   let resposta_bd = await bd.query(
-    "Select imgGrafico from tbl_fichastecnicas where fichaTecnicaID = ? and visible = true limit 1",
+    "Select imgGrafico from tbl_fichasTecnicas where fichaTecnicaID = ? and visible = true limit 1",
     [id]
   );
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
@@ -1029,7 +1029,7 @@ exports.getFichaTecnicaImagemGrafico = async (bd, id) => {
 exports.getFichaTecnicaFotografias = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: {} };
   let resposta_bd = await bd.query(
-    "Select imagem from tbl_imagensfichatecnica where id = ? limit 1",
+    "Select imagem from tbl_imagensFichaTecnica where id = ? limit 1",
     [id]
   );
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {

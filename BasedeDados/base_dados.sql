@@ -494,8 +494,9 @@ create table tbl_testessolventes (
      idEstratoSujidade TEXT,
      caracteristicas TEXT,
      fichaRIFK int not null,
+     PRIMARY key (id),
      FOREIGN key (fichaRIFK) REFERENCES tbl_fichaRegistoIdentificacao(fichaRegistoID)
-)
+);
 
  -- tabela que complementa a informação da página dos testes de solubilidade
 drop table if exists tbl_testesSolventesComplementar;
@@ -505,8 +506,9 @@ create table tbl_testesSolventesComplementar(
     grauDeEficacia TEXT,
     observacoes TEXT,
     testeSolventFK int,
+    PRIMARY key (id),
     FOREIGN key (testeSolventFK) REFERENCES tbl_testessolventes(id)
-)
+);
 
 
 
@@ -553,10 +555,6 @@ INSERT INTO tbl_registoTecnicos (fichaRegistoFK, tecnicoFK) values (4, 4);
 INSERT INTO tbl_registoTecnicos (fichaRegistoFK, tecnicoFK) values (5, 5);
 INSERT INTO tbl_registoTecnicos (fichaRegistoFK, tecnicoFK) values (6, 1);
 
-/*
-INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas,codPostalMecenas,contactoMecenas,bemIntegradoEmConjunto,tipoBensConjunto,elemConstConj,materiasElementosAcessorios,marcasInscricoesAssinaturas,marcasInscricoesMontagem,marcasInscricoesConstrucao,classPatrimonial,epoca,qualidade,materiaisEstruturaSuporte,materiaisSuperficies,tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio,condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo,ilumArtValorIluminancia,ilumArtValurUV,ilumArtValorRealUV,ilumNatOrigem,ilumNatValorIluminancia,ilumNatValorUV,ilumNatValorRealUV,poluicaoAgentes,poluicaoFontesOrigem,poluicaoResultados,poluicaoObservacoesConclusoes,fichaRegistoFK) VALUES (true, "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", true, "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", 1);
-*/
-
 INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas,codPostalMecenas,contactoMecenas,bemIntegradoEmConjunto,tipoBensConjunto,elemConstConj,materiasElementosAcessorios,marcasInscricoesAssinaturas,marcasInscricoesMontagem,marcasInscricoesConstrucao,classPatrimonial,epoca,qualidade,materiaisEstruturaSuporte,materiaisSuperficies,tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio,condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo,ilumArtValorIluminancia,ilumArtValurUV,ilumArtValorRealUV,ilumNatOrigem,ilumNatValorIluminancia,ilumNatValorUV,ilumNatValorRealUV,poluicaoAgentes,poluicaoFontesOrigem,poluicaoResultados,poluicaoObservacoesConclusoes, examesAnalisesInterpResultados,examesAnalisesObsConclusoes,estadoConservFQMestrutura,estadoConservFQMsuperficie,estadoConservFQMelementosAcess,estadoConservBioEstrutura,estadoConservBioSuperficie,estadoConservBioElementosAcess,estadoConservObsConclusoes,estruturaIntervAnter,superficieIntervAnter,elementosAcessoriosIntervAnter,observaçoesConclusoesPag6,tipoInterv,aspetosEspecificosPag6,tipoIntervCR,EstruturaPropPag6,EstruturaPropRecPag6,SuperficiePropPag6,SuperficiePropRecPag6,ElementosAcessPropRecPag6,estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8,elementosAcessoriosPag8,recursosElementosAcPag8,observaçoesConclusoesPag8,relTecInterLCRM,tipoDesigOrig,refOrig,entidadeOrig,tipoDesigDocGraf,refDocGraf,entidadeDocGraf,tipoDesigExames,refExames,entidadeExames,atledpArqDoc,tipoArqDoc,localArqDoc,cotaArqDoc,atledpIcon,tipoIcon,localIcon,cotaIcon,atledpBiblio,tipoBiblio,localBiblio,cotaBiblio,atledpOutras,tipoOutras,localOutras,cotaOutras,fichaRegistoFK) VALUES (true, "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", true, "a", "a", "a", "a", "a", "a", "a", "Tardio", "Boa", "a", "a", "a", "a", "a", "50", "50", "10", "12", "50", "50", "10", "12", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", 1);
 INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas,codPostalMecenas,contactoMecenas,bemIntegradoEmConjunto,tipoBensConjunto,elemConstConj,materiasElementosAcessorios,marcasInscricoesAssinaturas,marcasInscricoesMontagem,marcasInscricoesConstrucao,classPatrimonial,epoca,qualidade,materiaisEstruturaSuporte,materiaisSuperficies,tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio,condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo,ilumArtValorIluminancia,ilumArtValurUV,ilumArtValorRealUV,ilumNatOrigem,ilumNatValorIluminancia,ilumNatValorUV,ilumNatValorRealUV,poluicaoAgentes,poluicaoFontesOrigem,poluicaoResultados,poluicaoObservacoesConclusoes, examesAnalisesInterpResultados,examesAnalisesObsConclusoes,estadoConservFQMestrutura,estadoConservFQMsuperficie,estadoConservFQMelementosAcess,estadoConservBioEstrutura,estadoConservBioSuperficie,estadoConservBioElementosAcess,estadoConservObsConclusoes,estruturaIntervAnter,superficieIntervAnter,elementosAcessoriosIntervAnter,observaçoesConclusoesPag6,tipoInterv,aspetosEspecificosPag6,tipoIntervCR,EstruturaPropPag6,EstruturaPropRecPag6,SuperficiePropPag6,SuperficiePropRecPag6,ElementosAcessPropRecPag6,estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8,elementosAcessoriosPag8,recursosElementosAcPag8,observaçoesConclusoesPag8,relTecInterLCRM,tipoDesigOrig,refOrig,entidadeOrig,tipoDesigDocGraf,refDocGraf,entidadeDocGraf,tipoDesigExames,refExames,entidadeExames,atledpArqDoc,tipoArqDoc,localArqDoc,cotaArqDoc,atledpIcon,tipoIcon,localIcon,cotaIcon,atledpBiblio,tipoBiblio,localBiblio,cotaBiblio,atledpOutras,tipoOutras,localOutras,cotaOutras,fichaRegistoFK) VALUES (true, "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", true, "b", "b", "b", "b", "b", "b", "b", "Tardio", "Boa", "b", "b", "b", "b", "b", "50", "50", "10", "12", "50", "50", "10", "12", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", 1);
 INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas,codPostalMecenas,contactoMecenas,bemIntegradoEmConjunto,tipoBensConjunto,elemConstConj,materiasElementosAcessorios,marcasInscricoesAssinaturas,marcasInscricoesMontagem,marcasInscricoesConstrucao,classPatrimonial,epoca,qualidade,materiaisEstruturaSuporte,materiaisSuperficies,tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio,condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo,ilumArtValorIluminancia,ilumArtValurUV,ilumArtValorRealUV,ilumNatOrigem,ilumNatValorIluminancia,ilumNatValorUV,ilumNatValorRealUV,poluicaoAgentes,poluicaoFontesOrigem,poluicaoResultados,poluicaoObservacoesConclusoes, examesAnalisesInterpResultados,examesAnalisesObsConclusoes,estadoConservFQMestrutura,estadoConservFQMsuperficie,estadoConservFQMelementosAcess,estadoConservBioEstrutura,estadoConservBioSuperficie,estadoConservBioElementosAcess,estadoConservObsConclusoes,estruturaIntervAnter,superficieIntervAnter,elementosAcessoriosIntervAnter,observaçoesConclusoesPag6,tipoInterv,aspetosEspecificosPag6,tipoIntervCR,EstruturaPropPag6,EstruturaPropRecPag6,SuperficiePropPag6,SuperficiePropRecPag6,ElementosAcessPropRecPag6,estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8,elementosAcessoriosPag8,recursosElementosAcPag8,observaçoesConclusoesPag8,relTecInterLCRM,tipoDesigOrig,refOrig,entidadeOrig,tipoDesigDocGraf,refDocGraf,entidadeDocGraf,tipoDesigExames,refExames,entidadeExames,atledpArqDoc,tipoArqDoc,localArqDoc,cotaArqDoc,atledpIcon,tipoIcon,localIcon,cotaIcon,atledpBiblio,tipoBiblio,localBiblio,cotaBiblio,atledpOutras,tipoOutras,localOutras,cotaOutras,fichaRegistoFK) VALUES (true, "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", true, "c", "c", "c", "c", "c", "c", "c", "Tardio", "Boa", "c", "c", "c", "c", "c", "50", "50", "10", "12", "50", "50", "10", "12", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", 1);
@@ -581,3 +579,78 @@ INSERT INTO tbl_testespagina4objectivosGerais (Objectivo, fichaTecnicaFK) VALUES
 INSERT INTO tbl_testespagina4objectivosGerais (Objectivo, fichaTecnicaFK) VALUES ("identMateriais",  3);
 INSERT INTO tbl_testespagina4objectivosGerais (Objectivo, fichaTecnicaFK) VALUES ("identMateriais",  4);
 INSERT INTO tbl_testespagina4objectivosGerais (Objectivo, fichaTecnicaFK) VALUES ("identMateriais",  5);
+
+-- Objeto 1
+INSERT INTO tbl_testessolventes(idEstratoSujidade, caracteristicas, fichaRIFK) VALUES ("IdentificacaoExtrato1", "Caracteristicas1", 1); -- testesSolventes 1
+INSERT INTO tbl_testessolventes(idEstratoSujidade, caracteristicas, fichaRIFK) VALUES ("IdentificacaoExtrato2", "Caracteristicas2", 1); -- testesSolventes 2
+INSERT INTO tbl_testessolventes(idEstratoSujidade, caracteristicas, fichaRIFK) VALUES ("IdentificacaoExtrato3", "Caracteristicas3", 1); -- testesSolventes 3
+INSERT INTO tbl_testessolventes(idEstratoSujidade, caracteristicas, fichaRIFK) VALUES ("IdentificacaoExtrato4", "Caracteristicas4", 1); -- testesSolventes 4
+INSERT INTO tbl_testessolventes(idEstratoSujidade, caracteristicas, fichaRIFK) VALUES ("IdentificacaoExtrato5", "Caracteristicas5", 1); -- testesSolventes 5
+
+-- testesSolventes 1 para Objeto 1
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente1", "3", "Observações1", 1);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente2", "2", "Observações2", 1);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente3", "1", "Observações3", 1);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente4", "5", "Observações4", 1);
+
+-- testesSolventes 2 para Objeto 1
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente1", "3", "Observações1", 2);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente2", "2", "Observações2", 2);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente3", "1", "Observações3", 2);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente4", "5", "Observações4", 2);
+
+-- testesSolventes 3 para Objeto 1
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente1", "3", "Observações1", 3);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente2", "2", "Observações2", 3);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente3", "1", "Observações3", 3);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente4", "5", "Observações4", 3);
+
+-- testesSolventes 4 para Objeto 1
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente1", "3", "Observações1", 4);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente2", "2", "Observações2", 4);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente3", "1", "Observações3", 4);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente4", "5", "Observações4", 4);
+
+-- testesSolventes 5 para Objeto 1
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente1", "3", "Observações1", 5);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente2", "2", "Observações2", 5);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente3", "1", "Observações3", 5);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente4", "5", "Observações4", 5);
+
+
+-- Objeto 2
+INSERT INTO tbl_testessolventes(idEstratoSujidade, caracteristicas, fichaRIFK) VALUES ("IdentificacaoExtrato1", "Caracteristicas1", 2); -- testesSolventes 6
+INSERT INTO tbl_testessolventes(idEstratoSujidade, caracteristicas, fichaRIFK) VALUES ("IdentificacaoExtrato2", "Caracteristicas2", 2); -- testesSolventes 7
+INSERT INTO tbl_testessolventes(idEstratoSujidade, caracteristicas, fichaRIFK) VALUES ("IdentificacaoExtrato3", "Caracteristicas3", 2); -- testesSolventes 8
+INSERT INTO tbl_testessolventes(idEstratoSujidade, caracteristicas, fichaRIFK) VALUES ("IdentificacaoExtrato4", "Caracteristicas4", 2); -- testesSolventes 9
+INSERT INTO tbl_testessolventes(idEstratoSujidade, caracteristicas, fichaRIFK) VALUES ("IdentificacaoExtrato5", "Caracteristicas5", 2); -- testesSolventes 10
+
+-- testesSolventes 1 para Objeto 2
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente1", "3", "Observações1", 6);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente2", "2", "Observações2", 6);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente3", "1", "Observações3", 6);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente4", "5", "Observações4", 6);
+
+-- testesSolventes 2 para Objeto 2
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente1", "3", "Observações1", 7);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente2", "2", "Observações2", 7);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente3", "1", "Observações3", 7);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente4", "5", "Observações4", 7);
+
+-- testesSolventes 3 para Objeto 2
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente1", "3", "Observações1", 8);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente2", "2", "Observações2", 8);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente3", "1", "Observações3", 8);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente4", "5", "Observações4", 8);
+
+-- testesSolventes 4 para Objeto 2
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente1", "3", "Observações1", 9);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente2", "2", "Observações2", 9);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente3", "1", "Observações3", 9);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente4", "5", "Observações4", 9);
+
+-- testesSolventes 5 para Objeto 2
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente1", "3", "Observações1", 10);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente2", "2", "Observações2", 10);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente3", "1", "Observações3", 10);
+INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente4", "5", "Observações4", 10);

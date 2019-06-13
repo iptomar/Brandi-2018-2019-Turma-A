@@ -605,7 +605,6 @@ exports.readFichaTecnicaFotografiasRoute = async (app, bd) => {
         bd,
         req.params.id
       );
-      console.log(resposta_bd);
       if (resposta_bd.stat === 0) {
         code = 200;
         resposta_servidor.stat = "Authenticated";

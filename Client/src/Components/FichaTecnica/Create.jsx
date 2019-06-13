@@ -397,35 +397,50 @@ class Create extends Component {
               'x-auth-token': sessionStorage.getItem('token')
             }
           });
-      
+
           //Aguardar API
-          respGrafico.then(resp => resp.blob()).then(blob => {
+          await respGrafico.then(resp => resp.blob())
+          .then(blob =>{
             let reader = new FileReader();
-            reader.onload = function () {
-              document.getElementById('imgGraph').src = reader.result.toString();
+                reader.onload = function () {
+                  document.getElementById("imgGraph").src = reader.result.toString();
+                }
+                reader.readAsDataURL(blob);
             }
-            reader.readAsDataURL(blob);
-          });
-          
+          );
+
           //Colocar a imagem ativa no carrousel
-          //document.getElementById('carouselExampleControls').style.display = "block";
+          document.getElementById('carouselExampleControls').style.display = "block";
+          //document.querySelector('#actImage').src = this.state.data[4][0].imagem;
           //document.querySelector('#actImage').alt = this.state.data[4][0].imagem.split("_")[this.state.data[4][0].imagem.split("_").length-1];
-          //  document.querySelector('#actImage').src = this.state.data[4][0].imagem;
-          //  //Colocar as outras imagens
-          //  let contentor = document.querySelector("#otherImage");
-          //  for(let i = 1; i < this.state.data[4].length; i++){
-          //    let div = document.createElement('div');
-          //    div.className = "carousel-item";
-          //    let img = document.createElement('img');
-          //    img.setAttribute('src', this.state.data[4][i].imagem);
-          //    img.className = "d-block w-100";
-          //    img.style.height = "500px";
-          //    img.alt = this.state.data[4][i].imagem.split("_")[this.state.data[4][i].imagem.split("_").length-1];
-          //    div.appendChild(img);
-          //    contentor.appendChild(div);
-          //  }
-
-
+            //Colocar as outras imagens
+            let contentor = document.querySelector("#otherImage");
+            for(let i = 0; i < this.state.data[4].length; i++){
+              const respImage = await fetch("/api/fichaTecnica/fotografias/"+this.state.data[4][i].id, {
+                method: "GET",
+                headers: {
+                  'x-auth-token': sessionStorage.getItem('token')
+                }
+              });
+    
+              //Aguardar API
+              await respImage.then(resp => resp.blob()).then(blob =>{
+                  let reader = new FileReader();
+                   reader.onload = function () {
+                      let div = document.createElement('div');
+                      div.className = "carousel-item";
+                      let img = document.createElement('img');
+                      img.setAttribute('src', reader.result.toString());
+                      img.className = "d-block w-100";
+                      img.style.height = "500px";
+                      img.alt = this.state.data[4][i].imagem.split("_")[this.state.data[4][i].imagem.split("_").length-1];
+                      div.appendChild(img);
+                      contentor.appendChild(div);
+                   }
+                   reader.readAsDataURL(blob);
+               }
+              );
+            }
           break;
         default:
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");

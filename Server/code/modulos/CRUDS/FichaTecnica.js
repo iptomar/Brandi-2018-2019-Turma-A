@@ -450,7 +450,7 @@ exports.getFichaTecnica = async (bd, id) => {
   // é necessário array por causa de overflow da variavel resultadofinal
   let resultadofinalteste = [];
   let resposta_bd = await bd.query(
-    "Select * from tbl_fichasTecnicas where fichaTecnicaID = ? and visible = true limit 1",
+    "Select *  from tbl_fichasTecnicas where fichaTecnicaID = ? and visible = true limit 1",
     [id]
   );
   if (resposta_bd.stat == 0 && resposta_bd.resposta.length > 0) {
@@ -479,10 +479,11 @@ exports.getFichaTecnica = async (bd, id) => {
 
     //todos os dados da tabela imagensFichaTecnica relacionados com 1 ficha tecnica
     resposta_aux = await bd.query(
-      "select * from tbl_imagensFichaTecnica where fichaTecnicaFK = ?",
+      "select id from tbl_imagensFichaTecnica where fichaTecnicaFK = ?",
       [id]
     );
     resultadofinalteste.push(resposta_aux.resposta);
+
   } else if (resposta_bd.stat === 0) {
     resultadofinal.stat = resposta_bd.stat;
     resultadofinal.resposta = "FichaNaoExistente";
@@ -1025,7 +1026,7 @@ exports.getFichaTecnicaImagemGrafico = async (bd, id) => {
   return resultadofinal;
 };
 
-exports.getFichaTecnicaFotografiasGrafico = async (bd, id) => {
+exports.getFichaTecnicaFotografias = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: {} };
   let resposta_bd = await bd.query(
     "Select imagem from tbl_imagensfichatecnica where id = ? and visible = true limit 1",

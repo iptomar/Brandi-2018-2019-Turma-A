@@ -3,6 +3,7 @@ const getToken = require("../Auxiliares/Token");
 var multer = require("multer");
 var mkdirp = require("mkdirp");
 const path = require("path");
+var base64Img = require('base64-img');
 
 mkdirp("../images/fichaTecnica", function (err) {
   if (err) console.error(err);
@@ -561,6 +562,10 @@ exports.readFichaTecnicaImagemGraficoRoute = async (app, bd) => {
         code = 200;
         resposta_servidor.stat = "Authenticated";
         resposta_servidor.resposta = resposta_bd.resposta;
+        resposta_servidor.resposta.imgGrafico = base64Img.base64Sync(path.join(__dirname, "../../", resposta_servidor.resposta.imgGrafico));
+        //resposta_servidor.resposta.imgGrafico = base64Img.base64(path.join(__dirname, "../../", resposta_servidor.resposta.imgGrafico), function (err, data) { });
+
+
         console.log(resposta_servidor.resposta.imgGrafico);
       } else if (resposta_bd.stat === 1) {
         code = 500;
@@ -568,14 +573,10 @@ exports.readFichaTecnicaImagemGraficoRoute = async (app, bd) => {
         resposta_servidor.resposta = "DBConnectionError";
       }
       //nao e administrador
-      token = await getToken.generateToken(token);
     }
     resp
       .status(code)
-      .header("x-auth-token", token)
-      .sendFile(
-        path.join(__dirname, "../../", resposta_servidor.resposta.imgGrafico)
-      );
+      .send(resposta_servidor.resposta.imgGrafico);
   });
 };
 
@@ -614,11 +615,9 @@ exports.readFichaTecnicaFotografiasRoute = async (app, bd) => {
         resposta_servidor.resposta = "DBConnectionError";
       }
       //nao e administrador
-      token = await getToken.generateToken(token);
     }
     resp
       .status(code)
-      .header("x-auth-token", token)
       .sendFile(
         path.join(__dirname, "../../", resposta_servidor.resposta.imagem)
       );

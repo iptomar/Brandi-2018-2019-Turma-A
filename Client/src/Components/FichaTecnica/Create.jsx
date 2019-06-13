@@ -391,7 +391,7 @@ class Create extends Component {
 
           //Colocar a imagem do gráfico
           document.getElementById('imgGraph').style.display = "block";
-          const respGrafico = await fetch("/api/fichaTecnica/imagemgrafico/"+this.state.id, {
+          const respGrafico = await fetch("/api/fichaTecnica/imagemgrafico/" + this.state.id, {
             method: "GET",
             headers: {
               'x-auth-token': sessionStorage.getItem('token')
@@ -399,49 +399,43 @@ class Create extends Component {
           });
 
           //Aguardar API
-          await respGrafico.then(resp => resp.blob())
-          .then(blob =>{
-            let reader = new FileReader();
-                reader.onload = function () {
-                  document.getElementById("imgGraph").src = reader.result.toString();
-                }
-                reader.readAsDataURL(blob);
-            }
-          );
+
+          await respGrafico.then(resp => document.getElementById("imgGraph").src = resp);
+
 
           //Colocar a imagem ativa no carrousel
           document.getElementById('carouselExampleControls').style.display = "block";
-            //Colocar as outras imagens
-            let contentor = document.querySelector("#otherImage");
-            for(let i = 0; i < this.state.data[4].length; i++){
-              const respImage = await fetch("/api/fichaTecnica/fotografias/"+this.state.data[4][i].id, {
-                method: "GET",
-                headers: {
-                  'x-auth-token': sessionStorage.getItem('token')
+          //Colocar as outras imagens
+          let contentor = document.querySelector("#otherImage");
+          for (let i = 0; i < this.state.data[4].length; i++) {
+            const respImage = await fetch("/api/fichaTecnica/fotografias/" + this.state.data[4][i].id, {
+              method: "GET",
+              headers: {
+                'x-auth-token': sessionStorage.getItem('token')
+              }
+            });
+
+            //Aguardar API
+            await respImage.then(resp => resp.blob()).then(blob => {
+              let reader = new FileReader();
+              reader.onload = function () {
+                if (i === 0) {
+                  document.querySelector('#actImage').src = reader.result.toString();
+                } else {
+                  let div = document.createElement('div');
+                  div.className = "carousel-item";
+                  let img = document.createElement('img');
+                  img.setAttribute('src', reader.result.toString());
+                  img.className = "d-block w-100";
+                  img.style.height = "500px";
+                  div.appendChild(img);
+                  contentor.appendChild(div);
                 }
-              });
-    
-              //Aguardar API
-              await respImage.then(resp => resp.blob()).then(blob =>{
-                  let reader = new FileReader();
-                   reader.onload = function () {
-                     if(i === 0) {
-                       document.querySelector('#actImage').src = reader.result.toString();
-                     }else{
-                      let div = document.createElement('div');
-                      div.className = "carousel-item";
-                      let img = document.createElement('img');
-                      img.setAttribute('src', reader.result.toString());
-                      img.className = "d-block w-100";
-                      img.style.height = "500px";
-                      div.appendChild(img);
-                      contentor.appendChild(div);
-                    }
-                   }
-                   reader.readAsDataURL(blob);
-               }
-              );
+              }
+              reader.readAsDataURL(blob);
             }
+            );
+          }
           break;
         default:
           console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
@@ -935,7 +929,7 @@ class Create extends Component {
                   <hr />
                   <label>Gráfico:</label>
                   <FileUpload sendData={this.getDataG} type="image" />
-                  <img id="imgGraph" alt="Imagem Gráfico" style={{display:"none", height:"500px", width:"100%"}}/>
+                  <img id="imgGraph" alt="Imagem Gráfico" style={{ display: "none", height: "500px", width: "100%" }} />
                 </div>
               </div>
             </div>

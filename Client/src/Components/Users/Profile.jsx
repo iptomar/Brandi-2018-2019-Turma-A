@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import '../../CssComponents/profile.css';
+import AlertMsg from "../Globais/AlertMsg";
 var jwt = require('jsonwebtoken');
 
 class Profile extends Component {
@@ -10,7 +11,8 @@ class Profile extends Component {
       alertisNotVisible: true,
       alertColor: "",
       data: [],
-      dataTecnico: []
+      dataTecnico: [],
+
     };
   }
 
@@ -22,7 +24,7 @@ class Profile extends Component {
       if (this.state.data.role === "Admin") {
         this.fetchRoles();
       }
-      } catch (error) {
+    } catch (error) {
       this.out();
     }
   }
@@ -32,14 +34,31 @@ class Profile extends Component {
     sessionStorage.removeItem('token');
     //Redirect
     window.location = '/';
-  }  
-  
+  }
 
   editar() {
     var decoded = jwt.decode(sessionStorage.getItem('token'));
     var id = decoded.userID;
     window.location = "/utilizadores/" + id + "/editar";
   }
+  handleSubmit = async e => {
+    e.preventDefault();
+    if (
+      document.getElementById("pass").value !==
+      document.getElementById("passConfirmer").value
+    ) {
+      this.setState({
+        alertText: "As palavras-passe não são iguais",
+        alertisNotVisible: false,
+        alertColor: "warning"
+      });
+      return null;
+    }
+    alert("Esta funcionalidade estará brevemente a funcionar")
+    window.location = "/perfil"
+  };
+
+
   async getUser(id) {
     //Enviar pedido
     const response = await fetch(`/api/users/${id}`, {
@@ -77,7 +96,6 @@ class Profile extends Component {
       .then(resp => {
         switch (resp.stat) {
           default:
-            console.log(resp.resposta);
             this.setState({ rolesList: resp.resposta })
             break;
         }
@@ -163,6 +181,56 @@ class Profile extends Component {
             )}
         </div>
         <div className="pt-3 py-3 text-center">
+          <button data-toggle="modal" data-target="#exampleModal" className="btn btn-danger btn-lg btn-block mb-5" type="submit">
+            <i className="fas fa-key" /> Alterar Password
+        </button>
+          <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                </div>
+                <div className="modal-body">
+                  <form onSubmit={this.handleSubmit}>
+                    <h2>Alterar Password</h2>
+                    <div className="row">
+                      <div className="col-md-12 mb-3">
+                        <label>Palavra-passe</label>
+                        <input
+                          type="password"
+                          className="form-control"
+                          id="pass"
+                          placeholder="Palavra-passe"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-12 mb-3">
+                        <label>Confirmar palavra-passe</label>
+                        <input
+                          type="password"
+                          className="form-control"
+                          id="passConfirmer"
+                          placeholder="Confirmar palavra-passe"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <AlertMsg
+                      text={this.state.alertText}
+                      isNotVisible={this.state.alertisNotVisible}
+                      alertColor={this.state.alertColor}
+                    />
+                    <div className="modal-footer">
+                      <button className="btn btn-success" type="search">Alterar Password</button>
+                      <button type="button" className="btn btn-danger" data-dismiss="modal">Fechar</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <button onClick={this.editar} className="btn btn-success btn-lg btn-block mb-5" type="submit">
             <i className="fas fa-edit" /> Editar perfil
         </button>

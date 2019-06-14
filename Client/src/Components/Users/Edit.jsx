@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+var jwt = require('jsonwebtoken');
 
 class Edit extends Component {
   constructor(props) {
@@ -6,14 +7,23 @@ class Edit extends Component {
     this.state = {
       data: [],
       rolesList: [],
-      dataTecnicos: []
+      dataTecnicos: [],
     };
     this.editaDados = this.editaDados.bind(this);
   }
 
   componentDidMount() {
-    this.getUser(this.props.id);
-
+    var decoded = jwt.decode(sessionStorage.getItem('token'));
+    //se for administrador
+    if (decoded.role === "Admin") {
+      //consegue ver os dados dos restantes utilizadores
+      this.getUser(this.props.id);
+    }
+    //caso não seja administrador
+    else {
+      //apenas consegue ver os seus dados mesmo que altere o id no URL
+      this.getUser(decoded.userID);
+    }
 
   }
 
@@ -33,7 +43,7 @@ class Edit extends Component {
         case "Authenticated":
           this.setState({ data: resp.resposta });
           this.setState({ dataTecnicos: resp.resposta.tecnicos[0] });
-          if (this.state.data.role === "Admin") {
+          if (jwt.decode(sessionStorage.getItem('token')).role === "Admin") {
             this.fetchRoles();
           }
           break;
@@ -68,8 +78,11 @@ class Edit extends Component {
     //Armazenar o valor selecionado na dropdownlist
     var dataUsers;
     var dataTecn;
+    var decoded = jwt.decode(sessionStorage.getItem('token'));
+    var response;
+
     //Dados do Utilizador
-    if (this.state.data.role === "Admin") {
+    if (decoded.role === "Admin") {
       var select = document.getElementById("DDLRoles");
       var option = select.options[select.selectedIndex];
 
@@ -84,6 +97,7 @@ class Edit extends Component {
       dataUsers = {
         login: document.getElementById("user").value,
         email: document.getElementById("email").value,
+        roleFK: this.state.data.roleFK,
         visible: 1
       }
     }
@@ -119,27 +133,52 @@ class Edit extends Component {
       );
       //Aguardar API
       await responseTecnicos.json().then(resp => {
+
       });
     }
-    //Enviar pedidos pata alterar os dados do utilizador
-    const response = await fetch(`/api/users/${this.props.id}/edit`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-auth-token": sessionStorage.getItem("token")
-        },
-        body: JSON.stringify(dataUsers)
-      }
-    );
+    if (decoded.role === "Admin") {
+      //Enviar pedidos pata alterar os dados do utilizador
+      response = await fetch(`/api/users/${this.props.id}/edit`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": sessionStorage.getItem("token")
+          },
+          body: JSON.stringify(dataUsers)
+        }
+      );
+    }
+    else {
+      //Enviar pedidos pata alterar os dados do utilizador
+      response = await fetch(`/api/users/${decoded.userID}/edit`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": sessionStorage.getItem("token")
+          },
+          body: JSON.stringify(dataUsers)
+        }
+      );
+
+    }
 
     //Aguardar API
     await response.json().then(resp => {
       let status = resp.status;
       switch (status) {
         case 'Updated':
-          window.location = "/perfil";
-          break;
+          if (decoded.role === "Admin") {
+            window.location = "/utilizadores/listar";
+            break;
+          }
+          else {
+            window.location = "/perfil";
+            alert("Os dados de técnico ainda não estão a ser editados da maneira correta para utilizadores que não sejam admin")
+            break;
+          }
+
         default:
           console.log("A API ESTÁ A ARDER: " + status);
       }
@@ -183,7 +222,7 @@ class Edit extends Component {
                   </div>
                 </div>
 
-                {this.state.data.role === "Admin" ? (
+                {jwt.decode(sessionStorage.getItem('token')).role === "Admin" ? (
 
                   <div>
 

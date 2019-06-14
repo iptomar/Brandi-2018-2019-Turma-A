@@ -47,18 +47,6 @@ class Create extends Component {
     }
   }
 
-  // Controla as alterações nos inputs (Necessidade do React)
-  handleChange(event) {
-    let name = event.target.id;
-    let value = event.target.value;
-    this.setState(prevState => ({
-      data: {
-        ...prevState.data,
-        [name]: value
-      }
-    }));
-  }
-
   /**
    * Atualiza os campos com os dados de uma ficha técnica
    * para o utilizador poder verificar os seus detalhes
@@ -449,6 +437,24 @@ class Create extends Component {
       }))
     });
   }
+
+    // Controla as alterações nos inputs (Necessidade do React)
+    handleChange(event) {
+      let name =  event.target.id;
+      let value = event.target.value;
+      this.setState(({data}) => ({
+        data: [
+              {
+                  resposta: {
+                    ...data[0].resposta,
+                    [name]: value,
+                  }
+              },
+              ...data.slice(1)
+          ]
+      }));
+      console.log(this.state.data);
+    }
 
   /**
    * Método que transforma a página dos detalhes para a página da edição

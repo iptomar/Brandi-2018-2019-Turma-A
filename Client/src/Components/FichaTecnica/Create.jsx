@@ -123,7 +123,7 @@ class Create extends Component {
                   document.getElementById('EpocaReproducao').checked = true;
                   if (this.state.data[0].resposta.epoca !== "Reproducao") {
                     document.getElementById('EpocaFalsificacao').checked = true;
-                    if (this.state.data[0].resposta.epoca !== "Falsificacao") {
+                    if (this.state.data[0].resposta.epoca !== "Falsificação") {
                       document.getElementById('EpocaFalsificacao').checked = false;
                     } else {
                       document.getElementById('EpocaFalsificacao').checked = true;
@@ -405,22 +405,22 @@ class Create extends Component {
               }
             });
 
-          //Aguardar API
-             await respImage.json().then(resp => {
-                 if (i === 0) {
-                   document.querySelector('#actImage').src = resp;
-                 } else {
-                   let div = document.createElement('div');
-                   div.className = "carousel-item";
-                   let img = document.createElement('img');
-                   img.setAttribute('src', resp);
-                   img.className = "d-block w-100";
-                   img.style.height = "500px";
-                   div.appendChild(img);
-                   contentor.appendChild(div);
-                 }
-               }
-             );
+            //Aguardar API
+            await respImage.json().then(resp => {
+              if (i === 0) {
+                document.querySelector('#actImage').src = resp;
+              } else {
+                let div = document.createElement('div');
+                div.className = "carousel-item";
+                let img = document.createElement('img');
+                img.setAttribute('src', resp);
+                img.className = "d-block w-100";
+                img.style.height = "500px";
+                div.appendChild(img);
+                contentor.appendChild(div);
+              }
+            }
+            );
           }
           break;
         default:
@@ -438,22 +438,22 @@ class Create extends Component {
     });
   }
 
-    // Controla as alterações nos inputs (Necessidade do React)
-    handleChange(event) {
-      let name =  event.target.id;
-      let value = event.target.value;
-      this.setState(({data}) => ({
-        data: [
-              {
-                  resposta: {
-                    ...data[0].resposta,
-                    [name]: value,
-                  }
-              },
-              ...data.slice(1)
-          ]
-      }));
-    }
+  // Controla as alterações nos inputs (Necessidade do React)
+  handleChange(event) {
+    let name = event.target.id;
+    let value = event.target.value;
+    this.setState(({ data }) => ({
+      data: [
+        {
+          resposta: {
+            ...data[0].resposta,
+            [name]: value,
+          }
+        },
+        ...data.slice(1)
+      ]
+    }));
+  }
 
   /**
    * Método que transforma a página dos detalhes para a página da edição

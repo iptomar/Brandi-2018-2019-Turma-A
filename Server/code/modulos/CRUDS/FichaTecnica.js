@@ -589,7 +589,7 @@ exports.updateFichaTecnica = async (bd, dados) => {
     // dados.observaçoesConclusoesPag8 &&
     // dados.fichaRegistoFK
   ) {
-    if (dados.imgGrafico == "" && dados.imgArray.length == 0) {
+    if (dados.imgGrafico == "") {
       resposta_bd = await bd.query(
         "update tbl_fichasTecnicas set " +
         "visible = ?,localizacao= ?,proprietario= ?,codPostalProprietario= ?,emailProprietario= ?,contactoProprietario= ?,donoObra= ?,codPostalDonoObra= ?,contactoDonoObra= ?,mecenas= ?,codPostalMecenas= ?,contactoMecenas= ?, " +
@@ -726,8 +726,7 @@ exports.updateFichaTecnica = async (bd, dados) => {
         "Select imgGrafico from tbl_fichasTecnicas where fichaTecnicaID = ?",
         [dados.fichaTecnicaID]
       );
-      imagemVelha = imagemVelha.resposta[0].imagem;
-
+      imagemVelha = imagemVelha.resposta[0].imgGrafico;
       if (fs.existsSync(imagemVelha + "")) {
         fs.unlink(imagemVelha + "", err => {
           if (err) throw err;
@@ -743,7 +742,7 @@ exports.updateFichaTecnica = async (bd, dados) => {
         "tipoInterv= ?,aspetosEspecificosPag6= ?,tipoIntervCR= ?,EstruturaPropPag6= ?,EstruturaPropRecPag6= ?,SuperficiePropPag6= ?,SuperficiePropRecPag6= ?, ElementosAcessPropPag6=?, ElementosAcessPropRecPag6= ?, observaçoesConclusoesPag6=?, estruturaPag8= ?,recursosEstruturaPag8= ?,superficiePag8= ?,recursosSuperficiePag8= ?," +
         "elementosAcessoriosPag8= ?,recursosElementosAcPag8= ?,observaçoesConclusoesPag8= ?, relTecInterLCRM= ?,tipoDesigOrig= ?,refOrig= ?,entidadeOrig= ?,tipoDesigDocGraf= ?,refDocGraf= ?,entidadeDocGraf= ?,tipoDesigExames= ?,refExames= ?," +
         "entidadeExames= ?,atledpArqDoc= ?,tipoArqDoc= ?,localArqDoc= ?,cotaArqDoc= ?,atledpIcon= ?,tipoIcon= ?,localIcon= ?,cotaIcon= ?,atledpBiblio= ?,tipoBiblio= ?,localBiblio= ?," +
-        "cotaBiblio= ?,atledpOutras= ?,tipoOutras= ?,localOutras= ?,cotaOutras= ?,fichaRegistoFK= ? where fichaTecnicaID=?",
+        "cotaBiblio= ?,atledpOutras= ?,tipoOutras= ?,localOutras= ?,cotaOutras= ? where fichaTecnicaID=?",
         [
           dados.visible,
           dados.localizacao,
@@ -862,11 +861,11 @@ exports.updateFichaTecnica = async (bd, dados) => {
           dados.tipoOutras,
           dados.localOutras,
           dados.cotaOutras,
-          dados.fichaRegistoFK,
           dados.fichaTecnicaID
         ]
       );
     }
+
   }
 
   //inseriu na base de dados
@@ -927,8 +926,6 @@ exports.updateFichaTecnica = async (bd, dados) => {
       auxiliar,
       array2
     );
-    console.log(resposta_bd3);
-    let resposta_bd4 = { stat: 1, resposta: {} };
     auxiliar = "";
     for (let i = 0; i < dados.tabel10.length; i++) {
       auxiliar += "(?,?,?,?),";
@@ -947,6 +944,45 @@ exports.updateFichaTecnica = async (bd, dados) => {
       auxiliar,
       array2
     );
+
+    //array de imagens
+    if (dados.imgArray.length != 0) {
+      let imagensVelhas = await bd.query(
+        "Select imagem from tbl_imagensFichaTecnica where fichaTecnicaFK = ?",
+        [dados.fichaTecnicaID]
+      );
+      for (let i = 0; i < imagensVelhas.resposta.length; i++) {
+        var imagemVelha = imagensVelhas.resposta[i].imagem;
+        if (fs.existsSync(imagemVelha + "")) {
+          fs.unlink(imagemVelha + "", err => {
+            if (err) throw err;
+          });
+        }
+      }
+      let resposta_aux = await bd.query(
+        "delete from tbl_imagensFichaTecnica where fichaTecnicaFK = ?",
+        [dados.fichaTecnicaID]
+      );
+
+      auxiliar = "";
+      for (let i = 0; i < dados.imgArray.length; i++) {
+        auxiliar += "(?,?),";
+      }
+      auxiliar = auxiliar.substring(0, auxiliar.length - 1); //tira ultima virgula
+      //array auxiliar que contem todos os objectivosGerais num só array
+      array2 = [];
+      for (let i = 0; i < dados.imgArray.length; i++) {
+        array2.push(dados.imgArray[i]);
+        array2.push(dados.fichaTecnicaID);
+      }
+      resposta_bd4 = await bd.query(
+        "Insert into tbl_imagensFichaTecnica(imagem, fichaTecnicaFK ) values " +
+        auxiliar,
+        array2
+      );
+    }
+
+
   } else {
     resultadofinal.stat = resposta_bd.stat;
     resultadofinal.resposta = resposta_bd.resposta;

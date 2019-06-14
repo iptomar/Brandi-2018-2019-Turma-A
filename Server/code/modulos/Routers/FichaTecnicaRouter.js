@@ -260,7 +260,7 @@ exports.updateFichaTecnicaRoute = async (app, bd) => {
 
           let ficha = req.body;
           ficha.visible = 1;
-          if (ficha.bemIntegradoEmConjunto == false) {
+          if (ficha.bemIntegradoEmConjunto == "false") {
             ficha.bemIntegradoEmConjunto = 0;
           } else {
             ficha.bemIntegradoEmConjunto = 1;

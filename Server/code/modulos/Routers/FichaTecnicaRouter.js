@@ -56,7 +56,6 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
             for (let i = 0; i < req.files.length; i++) {
               if (req.files[i].fieldname == "imgGraph") {
                 imgGrafico = req.files[i].path;
-                console.log(imgGrafico);
               } else {
                 imgArray.push(req.files[i].path);
               }
@@ -251,7 +250,6 @@ exports.updateFichaTecnicaRoute = async (app, bd) => {
             for (let i = 0; i < req.files.length; i++) {
               if (req.files[i].fieldname == "imgGraph") {
                 imgGrafico = req.files[i].path;
-                console.log(imgGrafico);
               } else {
                 imgArray.push(req.files[i].path);
               }

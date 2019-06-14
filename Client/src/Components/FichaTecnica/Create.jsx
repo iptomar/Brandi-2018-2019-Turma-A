@@ -148,6 +148,8 @@ class Create extends Component {
               document.getElementById('EpocaTardio').checked = true;
               document.getElementById('EpocaTardio').parentNode.parentNode.parentNode.style.display = "";
             }
+          }else{
+            document.getElementById('EpocaCoevo').parentNode.parentNode.parentNode.style.display = "";
           }
 
           document.getElementById('QualidadeExcelente').parentNode.parentNode.parentNode.style.display = "none";
@@ -185,6 +187,8 @@ class Create extends Component {
               document.getElementById('QualidadeMuitoBoa').checked = true;
               document.getElementById('QualidadeMuitoBoa').parentNode.parentNode.parentNode.style.display = "";
             }
+          }else{
+            document.getElementById('QualidadeExcelente').parentNode.parentNode.parentNode.style.display = "";
           }
 
           document.getElementById('materiaisEstruturaSuporte').value = this.state.data[0].resposta.materiaisEstruturaSuporte;
@@ -659,11 +663,11 @@ class Create extends Component {
           });
           alert("Não tem permissões")
           break;
-        case "Registed":
+        case "Updated":
           this.setState({
             alertisNotVisible: false
           });
-          window.location = "/fichaRI/" + this.state.id + "/detalhes";
+          window.location = "/fichaTecnica/" + this.state.id + "/detalhes";
           break;
         case "NotUpdated":
           this.setState({

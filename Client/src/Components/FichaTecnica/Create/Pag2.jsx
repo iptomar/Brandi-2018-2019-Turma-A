@@ -41,27 +41,27 @@ class Pag2 extends Component {
                         <div className="row">
                             <div className="col-md-12 mb-3">
                                 <label>Tipo de Conjunto / Bens do Conjunto:</label>
-                                <input type="text" className="form-control" id="tipoConjunto" placeholder="Tipo de Conjunto / Bens do Conjunto" required />
+                                <input type="text" className="form-control" id="tipoBensConjunto" placeholder="Tipo de Conjunto / Bens do Conjunto" required />
                             </div>
                             <div className="col-md-12 mb-3">
                                 <label>Elementos Constituintes do Bem Cultural:</label>
-                                <input type="text" className="form-control" id="elementosConst" placeholder="Elementos Constituintes do Bem Cultural" required />
+                                <input type="text" className="form-control" id="elemConstConj" placeholder="Elementos Constituintes do Bem Cultural" required />
                             </div>
                             <div className="col-md-12 mb-3">
                                 <label>Materiais / Elementos Acessórios:</label>
-                                <input type="text" className="form-control" id="elementosAcess" placeholder="Materiais / Elementos Acessórios" required />
+                                <input type="text" className="form-control" id="materiasElementosAcessorios" placeholder="Materiais / Elementos Acessórios" required />
                             </div>
                             <div className="col-md-12 mb-3">
                                 <label>Marcas / Inscrições / Assinaturas de Autoria:</label>
-                                <input type="text" className="form-control" id="assinaturasAutoria" placeholder="Marcas / Inscrições / Assinaturas de Autoria" required />
+                                <input type="text" className="form-control" id="marcasInscricoesAssinaturas" placeholder="Marcas / Inscrições / Assinaturas de Autoria" required />
                             </div>
                             <div className="col-md-12 mb-3">
                                 <label>Marcas / Inscrições de Montagem de Elementos:</label>
-                                <input type="text" className="form-control" id="inscricoesMontagem" placeholder="Marcas / Inscrições de Montagem de Elementos" required />
+                                <input type="text" className="form-control" id="marcasInscricoesMontagem" placeholder="Marcas / Inscrições de Montagem de Elementos" required />
                             </div>
                             <div className="col-md-12 mb-3">
                                 <label>Marcas / Inscrições de Construção:</label>
-                                <input type="text" className="form-control" id="inscricoesConstrucao" placeholder="Marcas / Inscrições de Construção:" required />
+                                <input type="text" className="form-control" id="marcasInscricoesConstrucao" placeholder="Marcas / Inscrições de Construção:" required />
                             </div>
                             <div className="col-md-12 mb-3">
                                 <label>Classificação Patrimonial:</label>
@@ -186,11 +186,11 @@ class Pag2 extends Component {
                             </div>
                             <div className="col-md-6 mb-3">
                                 <label>Estrutura / Suporte:</label>
-                                <textarea type="text" id="estruturaSuporteMateriais" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Estrutura / Suporte" />
+                                <textarea type="text" id="materiaisEstruturaSuporte" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Estrutura / Suporte" />
                             </div>
                             <div className="col-md-6 mb-3">
                                 <label>Superfície:</label>
-                                <textarea type="text" id="SuperficieMateriais" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Superfície" />
+                                <textarea type="text" id="materiaisSuperficies" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Superfície" />
                             </div>
 
                             {/* TÉCNICAS */}
@@ -199,11 +199,11 @@ class Pag2 extends Component {
                             </div>
                             <div className="col-md-6 mb-3">
                                 <label>Estrutura / Suporte:</label>
-                                <textarea type="text" id="estruturaSuporteTecnicas" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Estrutura / Suporte" />
+                                <textarea type="text" id="tecnicasEstruturaSuporte" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Estrutura / Suporte" />
                             </div>
                             <div className="col-md-6 mb-3">
                                 <label>Superfície:</label>
-                                <textarea type="text" id="SuperficieTecnicas" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Superfície" />
+                                <textarea type="text" id="tecnicasSuperficie" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Superfície" />
                             </div>
                         </div>
                     </div>

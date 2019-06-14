@@ -46,18 +46,18 @@ class Pag5 extends Component {
 
                 <div className="row">
                     <div className="col d-flex justify-content-center">
-                        <textarea id="estruturaPag5" type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="" />
+                        <textarea id="estadoConservFQMestrutura" type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="" />
 
 
                     </div>
                     <div className="col d-flex justify-content-center">
-                        <textarea id="superficiePag5" type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="" />
+                        <textarea id="estadoConservFQMsuperficie" type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="" />
 
 
                     </div>
 
                     <div className="col d-flex justify-content-center">
-                        <textarea id="elementosAcessoriosPag5" type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="" />
+                        <textarea id="estadoConservFQMelementosAcess" type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="" />
 
 
                     </div>
@@ -90,18 +90,18 @@ class Pag5 extends Component {
 
                 <div className="row">
                     <div className="col d-flex justify-content-center">
-                        <textarea id="estruturaPag5diag" type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="" />
+                        <textarea id="estadoConservBioEstrutura" type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="" />
 
 
                     </div>
                     <div className="col d-flex justify-content-center">
-                        <textarea id="superficiePag5diag" type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="" />
+                        <textarea id="estadoConservBioSuperficie" type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="" />
 
 
                     </div>
 
                     <div className="col d-flex justify-content-center">
-                        <textarea id="elementosAcessoriosPag5diag" type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="" />
+                        <textarea id="estadoConservBioElementosAcess" type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="" />
 
 
                     </div>
@@ -110,7 +110,7 @@ class Pag5 extends Component {
                 <div className="pt-3 py-3 text-center">
                     <h5>Observações / Conclusões:</h5>
                 </div>
-                <textarea id="observaçoesConclusoesPag5" type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="" />
+                <textarea id="estadoConservObsConclusoes" type="text" style={{ resize: "none" }} rows="3" className="form-control" placeholder="" />
 
             </div>
         );

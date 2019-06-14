@@ -165,13 +165,13 @@ class Pag4 extends Component {
                 <div className="row">
                     <div className="col-md-12 mb-3">
                         <label>Interpretação dos Resultados:</label>
-                        <textarea type="text" id="interpretacaoResul" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Interpretação dos Resultados" />
+                        <textarea type="text" id="examesAnalisesInterpResultados" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Interpretação dos Resultados" />
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-md-12 mb-3">
                         <label>Observações / Conclusões:</label>
-                        <textarea type="text" id="observaConclusoes" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Observações / Conclusões" />
+                        <textarea type="text" id="examesAnalisesObsConclusoes" style={{ resize: "none" }} rows="2" className="form-control" placeholder="Observações / Conclusões" />
                     </div>
                 </div>
                 <hr />

@@ -96,12 +96,12 @@ class Create extends Component {
             document.getElementById('bemIntegradoSim').checked = true;
 
           }
-          document.getElementById('tipoConjunto').value = this.state.data[0].resposta.tipoBensConjunto;
-          document.getElementById('elementosConst').value = this.state.data[0].resposta.elemConstConj;
-          document.getElementById('elementosAcess').value = this.state.data[0].resposta.materiasElementosAcessorios;
-          document.getElementById('assinaturasAutoria').value = this.state.data[0].resposta.marcasInscricoesAssinaturas;
-          document.getElementById('inscricoesMontagem').value = this.state.data[0].resposta.marcasInscricoesMontagem;
-          document.getElementById('inscricoesConstrucao').value = this.state.data[0].resposta.marcasInscricoesConstrucao;
+          document.getElementById('tipoBensConjunto').value = this.state.data[0].resposta.tipoBensConjunto;
+          document.getElementById('elemConstConj').value = this.state.data[0].resposta.elemConstConj;
+          document.getElementById('materiasElementosAcessorios').value = this.state.data[0].resposta.materiasElementosAcessorios;
+          document.getElementById('marcasInscricoesAssinaturas').value = this.state.data[0].resposta.marcasInscricoesAssinaturas;
+          document.getElementById('marcasInscricoesMontagem').value = this.state.data[0].resposta.marcasInscricoesMontagem;
+          document.getElementById('marcasInscricoesConstrucao').value = this.state.data[0].resposta.marcasInscricoesConstrucao;
           document.getElementById('classPatrimonial').value = this.state.data[0].resposta.classPatrimonial;
 
           //Radio
@@ -187,10 +187,10 @@ class Create extends Component {
             }
           }
 
-          document.getElementById('estruturaSuporteMateriais').value = this.state.data[0].resposta.materiaisEstruturaSuporte;
-          document.getElementById('SuperficieMateriais').value = this.state.data[0].resposta.materiaisSuperficies;
-          document.getElementById('estruturaSuporteTecnicas').value = this.state.data[0].resposta.tecnicasEstruturaSuporte;
-          document.getElementById('SuperficieTecnicas').value = this.state.data[0].resposta.tecnicasSuperficie;
+          document.getElementById('materiaisEstruturaSuporte').value = this.state.data[0].resposta.materiaisEstruturaSuporte;
+          document.getElementById('materiaisSuperficies').value = this.state.data[0].resposta.materiaisSuperficies;
+          document.getElementById('tecnicasEstruturaSuporte').value = this.state.data[0].resposta.tecnicasEstruturaSuporte;
+          document.getElementById('tecnicasSuperficie').value = this.state.data[0].resposta.tecnicasSuperficie;
           //Pag 3
           document.getElementById('condAmbDescricao').value = this.state.data[0].resposta.condAmbDescricao;
           document.getElementById('condAmbFrioTemperatura').value = this.state.data[0].resposta.condAmbFrioTemperatura;
@@ -256,17 +256,17 @@ class Create extends Component {
             tr.innerHTML = '<tr><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Tipo-Referência" readonly="readonly">' + this.state.data[2][i].tipoReferencia + '</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Localização / Área / Ponto" readonly="readonly">' + this.state.data[2][i].LocalizacaoAreaPonto + '</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Objetivos Específicos" readonly="readonly">' + this.state.data[2][i].ObjectivosEspecificos + '</textarea></td><td><textarea class="form-control" type="text" style="resize: none;" rows="2" placeholder="Resultados" readonly="readonly">' + this.state.data[2][i].Resultados + '</textarea></td><td><textarea class="form-control" type="text" readonly="readonly" style="resize: none;" rows="2">Name</textarea></td><td><input class="form-control" style="width: 170px; height: 63px;" type="date" value="' + this.state.data[2][i].DataDePreenchimento.split("T")[0] + '" readonly="readonly"></td></tr>';
             content.append(tr);
           }
-          document.getElementById('interpretacaoResul').value = this.state.data[0].resposta.examesAnalisesInterpResultados;
-          document.getElementById('observaConclusoes').value = this.state.data[0].resposta.examesAnalisesObsConclusoes;
+          document.getElementById('examesAnalisesInterpResultados').value = this.state.data[0].resposta.examesAnalisesInterpResultados;
+          document.getElementById('examesAnalisesObsConclusoes').value = this.state.data[0].resposta.examesAnalisesObsConclusoes;
 
           //Pag 5
-          document.getElementById('estruturaPag5').value = this.state.data[0].resposta.estadoConservFQMestrutura;
-          document.getElementById('superficiePag5').value = this.state.data[0].resposta.estadoConservFQMsuperficie;
-          document.getElementById('elementosAcessoriosPag5').value = this.state.data[0].resposta.estadoConservFQMelementosAcess;
-          document.getElementById('estruturaPag5diag').value = this.state.data[0].resposta.estadoConservBioEstrutura;
-          document.getElementById('superficiePag5diag').value = this.state.data[0].resposta.estadoConservBioSuperficie;
-          document.getElementById('elementosAcessoriosPag5diag').value = this.state.data[0].resposta.estadoConservBioElementosAcess;
-          document.getElementById('observaçoesConclusoesPag5').value = this.state.data[0].resposta.estadoConservObsConclusoes;
+          document.getElementById('estadoConservFQMestrutura').value = this.state.data[0].resposta.estadoConservFQMestrutura;
+          document.getElementById('estadoConservFQMsuperficie').value = this.state.data[0].resposta.estadoConservFQMsuperficie;
+          document.getElementById('estadoConservFQMelementosAcess').value = this.state.data[0].resposta.estadoConservFQMelementosAcess;
+          document.getElementById('estadoConservBioEstrutura').value = this.state.data[0].resposta.estadoConservBioEstrutura;
+          document.getElementById('estadoConservBioSuperficie').value = this.state.data[0].resposta.estadoConservBioSuperficie;
+          document.getElementById('estadoConservBioElementosAcess').value = this.state.data[0].resposta.estadoConservBioElementosAcess;
+          document.getElementById('estadoConservObsConclusoes').value = this.state.data[0].resposta.estadoConservObsConclusoes;
 
           //Pag 6
           document.getElementById('estruturaIntervAnter').value = this.state.data[0].resposta.estruturaIntervAnter;
@@ -453,7 +453,6 @@ class Create extends Component {
               ...data.slice(1)
           ]
       }));
-      console.log(this.state.data);
     }
 
   /**
@@ -716,12 +715,12 @@ class Create extends Component {
     //Verificações de radiobutton
     if (document.getElementById('bemIntegradoSim').checked) formData.append("bemIntegradoEmConjunto", 1);
     else formData.append("bemIntegradoEmConjunto", 0);
-    formData.append("tipoBensConjunto", document.getElementById('tipoConjunto').value);
-    formData.append("elemConstConj", document.getElementById('elementosConst').value);
-    formData.append("materiasElementosAcessorios", document.getElementById('elementosAcess').value);
-    formData.append("marcasInscricoesAssinaturas", document.getElementById('assinaturasAutoria').value);
-    formData.append("marcasInscricoesMontagem", document.getElementById('inscricoesMontagem').value);
-    formData.append("marcasInscricoesConstrucao", document.getElementById('inscricoesConstrucao').value);
+    formData.append("tipoBensConjunto", document.getElementById('tipoBensConjunto').value);
+    formData.append("elemConstConj", document.getElementById('elemConstConj').value);
+    formData.append("materiasElementosAcessorios", document.getElementById('materiasElementosAcessorios').value);
+    formData.append("marcasInscricoesAssinaturas", document.getElementById('marcasInscricoesAssinaturas').value);
+    formData.append("marcasInscricoesMontagem", document.getElementById('marcasInscricoesMontagem').value);
+    formData.append("marcasInscricoesConstrucao", document.getElementById('marcasInscricoesConstrucao').value);
     formData.append("classPatrimonial", document.getElementById('classPatrimonial').value);
     if (document.getElementById('EpocaCoevo').checked) formData.append("epoca", document.getElementById('EpocaCoevo').value);
     else if (document.getElementById('EpocaTardio').checked) formData.append("epoca", document.getElementById('EpocaTardio').value);
@@ -734,10 +733,10 @@ class Create extends Component {
     else if (document.getElementById('QualidadeBoa').checked) formData.append("qualidade", document.getElementById('QualidadeBoa').value);
     else if (document.getElementById('QualidadeRegular').checked) formData.append("qualidade", document.getElementById('QualidadeRegular').value);
     else formData.append("qualidade", document.getElementById('QualidadeFraca').value);
-    formData.append("materiaisEstruturaSuporte", document.getElementById('estruturaSuporteMateriais').value);
-    formData.append("materiaisSuperficies", document.getElementById('SuperficieMateriais').value);
-    formData.append("tecnicasEstruturaSuporte", document.getElementById('estruturaSuporteTecnicas').value);
-    formData.append("tecnicasSuperficie", document.getElementById('SuperficieTecnicas').value);
+    formData.append("materiaisEstruturaSuporte", document.getElementById('materiaisEstruturaSuporte').value);
+    formData.append("materiaisSuperficies", document.getElementById('materiaisSuperficies').value);
+    formData.append("tecnicasEstruturaSuporte", document.getElementById('tecnicasEstruturaSuporte').value);
+    formData.append("tecnicasSuperficie", document.getElementById('tecnicasSuperficie').value);
     //Pag 3
     formData.append("condAmbDescricao", document.getElementById('condAmbDescricao').value);
     formData.append("condAmbFrioTemperatura", document.getElementById('condAmbFrioTemperatura').value);
@@ -776,16 +775,16 @@ class Create extends Component {
     }
     //Têm de ser enviado em JSON para a equipa de backend retirar os dados
     formData.append("tabobjGerais", JSON.stringify(tab));
-    formData.append("examesAnalisesInterpResultados", document.getElementById('interpretacaoResul').value);
-    formData.append("examesAnalisesObsConclusoes", document.getElementById('observaConclusoes').value);
+    formData.append("examesAnalisesInterpResultados", document.getElementById('examesAnalisesInterpResultados').value);
+    formData.append("examesAnalisesObsConclusoes", document.getElementById('examesAnalisesObsConclusoes').value);
     //Pag 5
-    formData.append("estadoConservFQMestrutura", document.getElementById('estruturaPag5').value);
-    formData.append("estadoConservFQMsuperficie", document.getElementById('superficiePag5').value);
-    formData.append("estadoConservFQMelementosAcess", document.getElementById('elementosAcessoriosPag5').value);
-    formData.append("estadoConservBioEstrutura", document.getElementById('estruturaPag5diag').value);
-    formData.append("estadoConservBioSuperficie", document.getElementById('superficiePag5diag').value);
-    formData.append("estadoConservBioElementosAcess", document.getElementById('elementosAcessoriosPag5diag').value);
-    formData.append("estadoConservObsConclusoes", document.getElementById('observaçoesConclusoesPag5').value);
+    formData.append("estadoConservFQMestrutura", document.getElementById('estadoConservFQMestrutura').value);
+    formData.append("estadoConservFQMsuperficie", document.getElementById('estadoConservFQMsuperficie').value);
+    formData.append("estadoConservFQMelementosAcess", document.getElementById('estadoConservFQMelementosAcess').value);
+    formData.append("estadoConservBioEstrutura", document.getElementById('estadoConservBioEstrutura').value);
+    formData.append("estadoConservBioSuperficie", document.getElementById('estadoConservBioSuperficie').value);
+    formData.append("estadoConservBioElementosAcess", document.getElementById('estadoConservBioElementosAcess').value);
+    formData.append("estadoConservObsConclusoes", document.getElementById('estadoConservObsConclusoes').value);
     //Pag 6
     formData.append("estruturaIntervAnter", document.getElementById('estruturaIntervAnter').value);
     formData.append("superficieIntervAnter", document.getElementById('superficieIntervAnter').value);

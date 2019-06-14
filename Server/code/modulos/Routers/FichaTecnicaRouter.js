@@ -61,7 +61,6 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
                 imgArray.push(req.files[i].path);
               }
             }
-
           }
           let ficha = {
             visible: true,
@@ -224,7 +223,7 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
  */
 exports.updateFichaTecnicaRoute = async (app, bd) => {
   app.post("/api/fichaTecnica/:id/edit",
-    upload.single("imgGraph"), async (req, resp) => {
+    upload.any(), async (req, resp) => {
       let resposta_servidor = { stat: "Authenticated", resposta: {} };
       //HTTP CODE ACCEPTED
       let code = 201;
@@ -246,101 +245,32 @@ exports.updateFichaTecnicaRoute = async (app, bd) => {
       else {
         //se tiver role
         if (token.roleFK) {
-          /*let ficha = {
-            visible: true,
-            localizacao: req.body.localizacao,
-            proprietario: req.body.proprietario,
-            codPostalProprietario: req.body.codPostalProprietario,
-            emailProprietario: req.body.emailProprietario,
-            contactoProprietario: req.body.contactoProprietario,
-            donoObra: req.body.donoObra,
-            codPostalDonoObra: req.body.codPostalDonoObra,
-            contactoDonoObra: contactoDonoObra,
-            mecenas: req.body.mecenas,
-            codPostalMecenas: req.body.codPostalMecenas,
-            contactoMecenas: req.body.contactoMecenas,
-            bemIntegradoEmConjunto: req.body.bemIntegradoEmConjunto,
-            tipoBensConjunto: req.body.tipoBensConjunto,
-            elemConstConj: req.body.elemConstConj,
-            materiasElementosAcessorios: req.body.materiasElementosAcessorios,
-            marcasInscricoesAssinaturas: req.marcasInscricoesAssinaturas,
-            marcasInscricoesMontagem: req.body.marcasInscricoesMontagem,
-            marcasInscricoesConstrucao: req.body.marcasInscricoesConstrucao,
-            classPatrimonial: req.body.classPatrimonial,
-            epoca: req.body.epoca,
-            qualidade: req.body.qualidade,
-            materiaisEstruturaSuporte: req.body.materiaisEstruturaSuporte,
-            materiaisSuperficies: req.body.materiaisSuperficies,
-            tecnicasEstruturaSuporte: req.body.tecnicasEstruturaSuporte,
-            tecnicasSuperficie: req.body.tecnicasSuperficie,
-            condAmbDescricao: req.body.condAmbDescricao,
-            condAmbFrioTemperatura: req.body.condAmbFrioTemperatura,
-            condAmbFrioHumidade: req.body.condAmbFrioHumidade,
-            condAmbFrioPeriodoInicio: req.condAmbFrioPeriodoInicio,
-            condAmbFrioPeriodoFim: req.body.condAmbFrioPeriodoFim,
-            condAmbQuenteTemperatura: req.body.condAmbQuenteTemperatura,
-            condAmbQuenteHumidade: req.body.condAmbQuenteHumidade,
-            condAmbQuentePeriodoInicio: req.body.condAmbQuentePeriodoInicio,
-            condAmbQuentePeriodoFim: req.body.condAmbQuentePeriodoFim,
-            ilumArtTipo: req.body.ilumArtTipo,
-            ilumArtValorIluminancia: req.body.ilumArtValorIluminancia,
-            ilumArtValurUV: req.body.ilumArtValurUV,
-            ilumArtValorRealUV: req.body.ilumArtValorRealUV,
-            ilumNatOrigem: req.body.ilumNatOrigem,
-            ilumNatValorIluminancia: req.body.ilumNatValorIluminancia,
-            ilumNatValorUV: req.body.ilumNatValorUV,
-            ilumNatValorRealUV: req.body.ilumNatValorRealUV,
-            poluicaoAgentes: req.body.poluicaoAgentes,
-            poluicaoFontesOrigem: req.body.poluicaoFontesOrigem,
-            poluicaoResultados: req.body.poluicaoResultados,
-            poluicaoObservacoesConclusoes: req.body.poluicaoObservacoesConclusoes,
-            examesAnalisesInterpResultados:
-              req.body.examesAnalisesInterpResultados,
-            examesAnalisesObsConclusoes: req.body.examesAnalisesObsConclusoes,
-            estadoConservFQMestrutura: req.body.estadoConservFQMestrutura,
-            estadoConservFQMsuperficie: req.body.estadoConservFQMsuperficie,
-            estadoConservFQMelementosAcess:
-              req.body.estadoConservFQMelementosAcess,
-            estadoConservBioEstrutura: req.body.estadoConservBioEstrutura,
-            estadoConservBioSuperficie: req.body.estadoConservBioSuperficie,
-            estadoConservBioElementosAcess:
-              req.body.estadoConservBioElementosAcess,
-            estadoConservObsConclusoes: req.body.estadoConservObsConclusoes,
-            //pagina 6 e 7
-            estruturaIntervAnter: req.body.estruturaIntervAnter,
-            superficieIntervAnter: req.body.superficieIntervAnter,
-            elementosAcessoriosIntervAnter:
-              req.body.elementosAcessoriosIntervAnter,
-            observaçoesConclusoesPag6: req.body.observaçoesConclusoesPag6,
-            tipoInterv: req.body.tipoInterv,
-            aspetosEspecificosPag6: req.body.aspetosEspecificosPag6,
-            tipoIntervCR: req.body.tipoIntervCR,
-            EstruturaPropPag6: req.body.EstruturaPropPag6,
-            EstruturaPropRecPag6: req.body.EstruturaPropRecPag6,
-            SuperficiePropPag6: req.body.SuperficiePropPag6,
-            SuperficiePropRecPag6: req.body.SuperficiePropRecPag6,
-            ElementosAcessPropRecPag6: req.body.ElementosAcessPropRecPag6,
-            observaçoesConclusoesPag6: req.body.observaçoesConclusoesPag6,
-            //pagina 8
-            estruturaPag8: req.body.estruturaPag8,
-            recursosEstruturaPag8: req.body.recursosEstruturaPag8,
-            superficiePag8: req.body.superficiePag8,
-            recursosSuperficiePag8: req.body.recursosSuperficiePag8,
-            elementosAcessoriosPag8: req.body.elementosAcessoriosPag8,
-            recursosElementosAcPag8: req.body.recursosElementosAcPag8,
-            observaçoesConclusoesPag8: req.body.observaçoesConclusoesPag8,
-            fichaRegistoFK: req.body.fichaRegistoFK
-          };*/
           var imgGrafico = "";
-          if (req.file) {
-            imgGrafico = req.file.path;
+          var imgArray = [];
+          if (req.files) {
+            for (let i = 0; i < req.files.length; i++) {
+              if (req.files[i].fieldname == "imgGraph") {
+                imgGrafico = req.files[i].path;
+                console.log(imgGrafico);
+              } else {
+                imgArray.push(req.files[i].path);
+              }
+            }
           }
 
           let ficha = req.body;
           ficha.visible = 1;
-          ficha.id = req.params.id;
+          if (ficha.bemIntegradoEmConjunto == false) {
+            ficha.bemIntegradoEmConjunto = 0;
+          } else {
+            ficha.bemIntegradoEmConjunto = 1;
+          }
+          ficha.tabobjGerais = JSON.parse(req.body.tabobjGerais);
+          ficha.objGerais = JSON.parse(req.body.objGerais);
+          ficha.tabel10 = JSON.parse(req.body.tabel10);
+          ficha.fichaTecnicaID = req.params.id - 0;
           ficha.imgGrafico = imgGrafico;
-          //ficha.imgArray = imgArray;
+          ficha.imgArray = imgArray;
 
           //console.log(ficha);
           //alterar os campos

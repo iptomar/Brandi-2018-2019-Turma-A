@@ -408,7 +408,6 @@ exports.readfichaRegistoIdentificacaoImagemRoute = async (app, bd) => {
         code = 200;
         resposta_servidor.stat = "Authenticated";
         resposta_servidor.resposta = resposta_bd.resposta;
-        console.log(resposta_servidor.resposta.imagem);
       } else if (resposta_bd.stat === 1) {
         code = 500;
         resposta_servidor.stat = "Authenticated";

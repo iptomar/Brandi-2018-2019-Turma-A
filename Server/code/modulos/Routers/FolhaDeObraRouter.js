@@ -1,129 +1,125 @@
 const folhaDeObra = require("../CRUDS/FolhaDeObra");
 const getToken = require("../Auxiliares/Token");
 exports.createFolhaDeObraRoute = async (app, bd) => {
-  app.post(
-    "/api/folhaDeObra/:id/criar",
-    async (req, resp) => {
-      let resposta_servidor = { stat: "Authenticated", resposta: {} };
-   
-      //HTTP CODE ACCEPTED
-      let code = 201;
-      //token
-      let token;
-      //getToken
-      token = await getToken.getToken(req);
-      //nao existe token/sessao
-      if (token === null) {
-        code = 400;
-        resposta_servidor.stat = "NotAuthenticated";
-      }
-      //token corrompido
-      else if (token.name) {
-        code = 400;
-        resposta_servidor.stat = "InvalidToken";
-      }
-      //existe token/sessao
-      else {
-        //admin
-        if (token) {
-          let dados = req.body;
-          let id = req.params.id-0;
-          let resposta_bd = { stat: 0, resposta: {} };
-           resposta_bd = await folhaDeObra.createFolhaDeObra(bd, dados, id);
-         
-          if (resposta_bd.stat === 0) {
-            resposta_servidor.stat = "Registed";
-            resposta_servidor.resposta = resposta_bd.resposta;
-          } else {
-            code = 400;
-            resposta_servidor.stat = "NotRegisted";
-            //erro de datas
-            if (resposta_bd.stat >= 2) {
-              resposta_servidor.resposta = await bd.tratamentoErros(
-                resposta_bd.stat,
-                resposta_bd.resposta.sqlMessage
-              );
-            } else {
-              code = 500;
-              resposta_servidor.resposta = "DBConnectionError";
-            }
-          }
-        }
-        //nao e administrador
-        else {
-          code = 400;
-          resposta_servidor.stat = "NotAuthenticated";
-        }
-        token = await getToken.generateToken(token);
-      }
+  app.post("/api/folhaDeObra/:id/criar", async (req, resp) => {
+    let resposta_servidor = { stat: "Authenticated", resposta: {} };
 
-      resp
-        .status(code)
-        .header("x-auth-token", token)
-        .json(resposta_servidor);
+    //HTTP CODE ACCEPTED
+    let code = 201;
+    //token
+    let token;
+    //getToken
+    token = await getToken.getToken(req);
+    //nao existe token/sessao
+    if (token === null) {
+      code = 400;
+      resposta_servidor.stat = "NotAuthenticated";
     }
-  );
-};
-/**
- * Rota para alterar uma ficha tecnica
- */
-exports.updateFolhaDeObraRoute = async (app, bd) => {
-  app.post("/api/folhaDeObra/:id/edit",
-    async (req, resp) => {
-      let resposta_servidor = { stat: "Authenticated", resposta: {} };
-      //HTTP CODE ACCEPTED
-      let code = 201;
-      //token
-      let token;
-      //getToken
-      token = await getToken.getToken(req);
-      //nao existe token/sessao
-      if (token === null) {
-        code = 400;
-        resposta_servidor.stat = "NotAuthenticated";
-      }
-      //token corrompido
-      else if (token.name) {
-        code = 400;
-        resposta_servidor.stat = "InvalidToken";
-      }
-      //existe token/sessao
-      else {
-        //se tiver role
-        if (token.roleFK) {
-          let dados = req.body;
-          let id = req.params.id;
-          resposta_bd = await folhaDeObra.updateFolhaDeObra(bd, dados, id);
-          //alterar os campos
-          let resposta_bd = { stat: 1, resposta: {} };
-          if (resposta_bd.stat === 0) {
-            resposta_servidor.stat = "Updated";
-            resposta_servidor.resposta = resposta_bd.resposta;
-          } else if (resposta_bd.stat >= 2) {
-            resposta_servidor.stat = "NotUpdated";
-            code = 400;
+    //token corrompido
+    else if (token.name) {
+      code = 400;
+      resposta_servidor.stat = "InvalidToken";
+    }
+    //existe token/sessao
+    else {
+      //admin
+      if (token) {
+        let dados = req.body;
+        let id = req.params.id - 0;
+        let resposta_bd = { stat: 0, resposta: {} };
+        resposta_bd = await folhaDeObra.createFolhaDeObra(bd, dados, id);
+
+        if (resposta_bd.stat === 0) {
+          resposta_servidor.stat = "Registed";
+          resposta_servidor.resposta = resposta_bd.resposta;
+        } else {
+          code = 400;
+          resposta_servidor.stat = "NotRegisted";
+          //erro de datas
+          if (resposta_bd.stat >= 2) {
             resposta_servidor.resposta = await bd.tratamentoErros(
               resposta_bd.stat,
               resposta_bd.resposta.sqlMessage
             );
           } else {
             code = 500;
-            resposta_servidor.stat = "NotUpdated";
             resposta_servidor.resposta = "DBConnectionError";
           }
         }
-        //nao e administrador
-        else {
-          code = 400;
-          resposta_servidor.stat = "NoPermissions";
-        }
-        token = await getToken.generateToken(token);
       }
-      resp
-        .status(code)
-        .header("x-auth-token", token)
-        .json(resposta_servidor);
-    });
+      //nao e administrador
+      else {
+        code = 400;
+        resposta_servidor.stat = "NotAuthenticated";
+      }
+      token = await getToken.generateToken(token);
+    }
+
+    resp
+      .status(code)
+      .header("x-auth-token", token)
+      .json(resposta_servidor);
+  });
+};
+/**
+ * Rota para alterar uma ficha tecnica
+ */
+exports.updateFolhaDeObraRoute = async (app, bd) => {
+  app.post("/api/folhaDeObra/:id/edit", async (req, resp) => {
+    let resposta_servidor = { stat: "Authenticated", resposta: {} };
+    //HTTP CODE ACCEPTED
+    let code = 201;
+    //token
+    let token;
+    //getToken
+    token = await getToken.getToken(req);
+    //nao existe token/sessao
+    if (token === null) {
+      code = 400;
+      resposta_servidor.stat = "NotAuthenticated";
+    }
+    //token corrompido
+    else if (token.name) {
+      code = 400;
+      resposta_servidor.stat = "InvalidToken";
+    }
+    //existe token/sessao
+    else {
+      //se tiver role
+      if (token.roleFK) {
+        let dados = req.body;
+        let id = req.params.id;
+        let resposta_bd = { stat: 1, resposta: {} };
+        resposta_bd = await folhaDeObra.updateFolhaDeObra(bd, dados, id);
+        //alterar os campos
+        if (resposta_bd.stat === 0) {
+          resposta_servidor.stat = "Updated";
+          resposta_servidor.resposta = resposta_bd.resposta;
+        } else if (resposta_bd.stat >= 2) {
+          resposta_servidor.stat = "NotUpdated";
+          code = 400;
+          resposta_servidor.resposta = await bd.tratamentoErros(
+            resposta_bd.stat,
+            resposta_bd.resposta.sqlMessage
+          );
+        } else {
+          code = 500;
+          resposta_servidor.stat = "NotUpdated";
+          resposta_servidor.resposta = "DBConnectionError";
+        }
+      }
+      //nao e administrador
+      else {
+        code = 400;
+        resposta_servidor.stat = "NoPermissions";
+      }
+      token = await getToken.generateToken(token);
+    }
+    resp
+      .status(code)
+      .header("x-auth-token", token)
+      .json(resposta_servidor);
+  });
 };
 
 /**
@@ -180,7 +176,7 @@ exports.getTodasFolhasDeObraRoute = async (app, bd) => {
     let token;
     let resposta_servidor = { status: "NotAuthenticated", resposta: {} };
     let resposta_bd = { stat: 1, resposta: {} };
-   
+
     let code = 200;
     token = await getToken.getToken(req);
     if (token === null) {

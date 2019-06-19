@@ -1,6 +1,9 @@
 exports.getAllFolhasDeObra = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: "" };
-  let resposta_bd = await bd.query("Select * from tbl_folhasDeObra where fichaRIFK = ? ", id);
+  let resposta_bd = await bd.query(
+    "Select * from tbl_folhasDeObra where fichaRIFK = ? ",
+    id
+  );
   if (resposta_bd.stat === 0) {
     resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;
@@ -14,7 +17,10 @@ exports.getAllFolhasDeObra = async (bd, id) => {
 
 exports.getSingleFolhaDeObra = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: "" };
-  let resposta_bd = await bd.query("Select * from tbl_folhaDeObraLinha where folhaDeObraFK = ? ", id);
+  let resposta_bd = await bd.query(
+    "Select * from tbl_folhaDeObraLinha where folhaDeObraFK = ? ",
+    id
+  );
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
     resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;
@@ -29,8 +35,11 @@ exports.getSingleFolhaDeObra = async (bd, id) => {
 exports.createFolhaDeObra = async (bd, dados, id) => {
   let resultadofinal = { stat: 1, resposta: "Campos Inválidos" };
   let auxiliar = "";
-  let resposta_bd_aux = await bd.query("Insert into tbl_folhasDeObra (fichaRIFK) values(?) ",id);
- 
+  let resposta_bd_aux = await bd.query(
+    "Insert into tbl_folhasDeObra (fichaRIFK) values(?) ",
+    id
+  );
+
   for (let i = 0; i < dados.length; i++) {
     auxiliar += "(?,?,?,?,?,?,?,?),";
   }
@@ -60,7 +69,11 @@ exports.createFolhaDeObra = async (bd, dados, id) => {
     }
   }
 
-  let resposta_bd = await bd.query("Insert into tbl_folhaDeObraLinha( data, designacaoProcedimento,materiais,quantidades, duracao,tecnico, observacoes, folhaDeObraFK) values" + auxiliar, array2);
+  let resposta_bd = await bd.query(
+    "Insert into tbl_folhaDeObraLinha( data, designacaoProcedimento,materiais,quantidades, duracao,tecnico, observacoes, folhaDeObraFK) values" +
+      auxiliar,
+    array2
+  );
   console.log(resposta_bd);
   if (resposta_bd.stat === 0) {
     resultadofinal.resposta = resposta_bd.resposta;
@@ -75,12 +88,16 @@ exports.createFolhaDeObra = async (bd, dados, id) => {
 
 exports.updateFolhaDeObra = async (bd, dados, id) => {
   let resultadofinal = { stat: 1, resposta: "Campos Inválidos" };
-  let resposta_bd = await bd.query("Delete from tbl_folhasDeObra where processoCEARCFK = ?", dados.id);
-  if(resposta_bd.stat===1){
+
+  let resposta_bd = await bd.query(
+    "Delete from tbl_folhaDeObraLinha where folhaDeObraFK = ?",
+    id
+  );
+  if (resposta_bd.stat === 1) {
     resultadofinal.resposta = resposta_bd.resposta;
     return resultadofinal;
   }
-   
+  let auxiliar = "";
   for (let i = 0; i < dados.length; i++) {
     auxiliar += "(?,?,?,?,?,?,?,?),";
   }
@@ -94,7 +111,7 @@ exports.updateFolhaDeObra = async (bd, dados, id) => {
       dados[i].designacaoDoProcedimento &&
       dados[i].duracao &&
       dados[i].observacoes &&
-      dados[i].id
+      id
     ) {
       array2.push(dados[i].data);
       array2.push(dados[i].designacaoDoProcedimento);
@@ -103,13 +120,18 @@ exports.updateFolhaDeObra = async (bd, dados, id) => {
       array2.push(dados[i].duracao);
       array2.push(dados[i].tecnico);
       array2.push(dados[i].observacoes);
-      array2.push(dados[i].id);
+      array2.push(id);
     } else {
       return resultadofinal;
     }
   }
 
-  resposta_bd = await bd.query("Insert into tbl_folhaDeObraLinha( data, designacaoProcedimento,materiais,quantidades, duracao,tecnico, observacoes, folhaDeObraFK) values" + auxiliar, array2);
+  resposta_bd = await bd.query(
+    "Insert into tbl_folhaDeObraLinha( data, designacaoProcedimento,materiais,quantidades, duracao,tecnico, observacoes, folhaDeObraFK) values" +
+      auxiliar,
+    array2
+  );
+  console.log(resposta_bd);
   if (resposta_bd.stat === 0) {
     resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;
@@ -118,6 +140,6 @@ exports.updateFolhaDeObra = async (bd, dados, id) => {
   } else if (resposta_bd.stat >= 2) {
     resultadofinal.resposta = resposta_bd.resposta;
   }
-  return resultadofinal;
 
+  return resultadofinal;
 };

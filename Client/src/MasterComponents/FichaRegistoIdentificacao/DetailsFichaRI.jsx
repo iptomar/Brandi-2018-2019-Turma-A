@@ -12,7 +12,7 @@ class DetailsFichaTecnica extends Component {
         <Footer />
       </div>
     );
-  }
+  } 
 }
 
 export default DetailsFichaTecnica;

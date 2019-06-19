@@ -465,7 +465,6 @@ class Create extends Component {
   changeToEdit() {
     //Remove o atributo readonly nos input e nas textarea
     $('input, textarea').removeAttr('readonly');
-    //$('#btBar').html('<button class="btn btn-success btn-lg btn-block mb-5" type="button">Guardar</button>');
     const btEditar = document.getElementById('btEditar');
     btEditar.style.display = "none";
     const btGuardar = document.getElementById('btGuardar');
@@ -888,7 +887,7 @@ class Create extends Component {
           this.setState({
             alertisNotVisible: false
           });
-          window.location = "/fichaRI/" + this.state.id + "/detalhes";
+          window.location = "/fichaRI/" + this.state.id + "/detalhes/&criarfichatecnica";
           break;
         case "Erro na criação":
           this.setState({

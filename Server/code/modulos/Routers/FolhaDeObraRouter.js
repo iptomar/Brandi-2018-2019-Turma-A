@@ -1,10 +1,11 @@
 const folhaDeObra = require("../CRUDS/FolhaDeObra");
+const getToken = require("../Auxiliares/Token");
 exports.createFolhaDeObraRoute = async (app, bd) => {
   app.post(
     "/api/folhaDeObra/:id/criar",
     async (req, resp) => {
       let resposta_servidor = { stat: "Authenticated", resposta: {} };
-
+   
       //HTTP CODE ACCEPTED
       let code = 201;
       //token
@@ -26,9 +27,10 @@ exports.createFolhaDeObraRoute = async (app, bd) => {
         //admin
         if (token) {
           let dados = req.body;
-          let id = req.params.id;
-          resposta_bd = await folhaDeObra.createFolhaDeObra(bd, dados, id);
+          let id = req.params.id-0;
           let resposta_bd = { stat: 0, resposta: {} };
+           resposta_bd = await folhaDeObra.createFolhaDeObra(bd, dados, id);
+         
           if (resposta_bd.stat === 0) {
             resposta_servidor.stat = "Registed";
             resposta_servidor.resposta = resposta_bd.resposta;
@@ -130,8 +132,6 @@ exports.updateFolhaDeObraRoute = async (app, bd) => {
 exports.readFolhaDeObraRoute = async (app, bd) => {
   app.get("/api/folhaDeObra/:id", async (req, resp) => {
     let resposta_servidor = { stat: "Authenticated", resposta: {} };
-    var teste1;
-    var teste2;
     //HTTP CODE ACCEPTED
     let code = 200;
     //token
@@ -152,17 +152,16 @@ exports.readFolhaDeObraRoute = async (app, bd) => {
     else {
       let resposta_bd = { stat: 1, resposta: {} };
       resposta_bd = await folhaDeObra.getSingleFolhaDeObra(bd, req.params.id);
-      if (resposta_bd[0].stat === 0) {
+      if (resposta_bd.stat === 0) {
         code = 200;
         resposta_servidor.stat = "Authenticated";
-        resposta_bd[0].stat = undefined;
-        resposta_servidor.resposta = resposta_bd;
+        resposta_bd.stat = undefined;
+        resposta_servidor.resposta = resposta_bd.resposta;
       } else if (resposta_bd.stat === 1) {
         code = 500;
         resposta_servidor.stat = "Authenticated";
         resposta_servidor.resposta = "DBConnectionError";
       }
-
       //nao e administrador
       token = await getToken.generateToken(token);
     }

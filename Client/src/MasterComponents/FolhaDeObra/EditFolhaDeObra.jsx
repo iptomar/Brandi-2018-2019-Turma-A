@@ -1,19 +1,18 @@
 import React, { Component } from "react";
 import Header from "../../Components/Globais/Header";
 import Footer from "../../Components/Globais/Footer";
-import Create from "../../Components/FolhaDeObra/Create";
+import Edit from "../../Components/FolhaDeObra/Details/Edit";
 
-class CreateFolhaDeObra extends Component {
+class EditFolhaDeObra extends Component {
 
     render() {
         return (
             <div>
                 <Header />
-                <Create id={this.props.id}/>
+                <Edit id={this.props.id}/>
                 <Footer />
             </div>
         );
     }
 }
-
-export default CreateFolhaDeObra;
+export default EditFolhaDeObra;

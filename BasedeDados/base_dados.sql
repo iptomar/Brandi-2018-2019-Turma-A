@@ -83,14 +83,25 @@ DROP TABLE IF EXISTS tbl_folhasDeObra;
 CREATE TABLE tbl_folhasDeObra
 (
     folhaDeObraID INT NOT NULL AUTO_INCREMENT,
-    designacaoProcesso VARCHAR(255) NOT NULL,
+    fichaRIFK INT NOT NULL,
+    PRIMARY KEY(folhaDeObraID),
+    FOREIGN KEY(fichaRIFK) REFERENCES tbl_fichaRegistoIdentificacao(fichaRegistoID)
+);
+
+DROP TABLE IF EXISTS tbl_folhaDeObraLinha;
+CREATE TABLE tbl_folhaDeObraLinha
+(
+    folhaDeObraLinhaID INT NOT NULL AUTO_INCREMENT,
     data DATE NOT NULL,
     designacaoProcedimento VARCHAR(255) NOT NULL,
+    materiais varchar(255) not NULL,
+    quantidades varchar(255) not null,
     duracao VARCHAR(255) NOT NULL,
+    tecnico varchar(255) not null,
     observacoes VARCHAR(255),
-	processoCEARCFK VARCHAR(255) NOT NULL UNIQUE,	
-    PRIMARY KEY(folhaDeObraID),
-    FOREIGN KEY(processoCEARCFK) REFERENCES tbl_fichaRegistoIdentificacao(processoCEARC)
+    folhaDeObraFK INT NOT NULL,	
+    PRIMARY KEY(folhaDeObraLinhaID),
+    FOREIGN KEY(folhaDeObraFK) REFERENCES tbl_folhasDeObra(folhaDeObraID)
 );
 
 DROP TABLE IF EXISTS tbl_tecnicosFolhasDeObra;
@@ -654,3 +665,10 @@ INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoe
 INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente2", "2", "Observações2", 10);
 INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente3", "1", "Observações3", 10);
 INSERT INTO tbl_testesSolventesComplementar(solvente, grauDeEficacia, observacoes, testeSolventFK) VALUES ("Solvente4", "5", "Observações4", 10);
+
+INSERT INTO tbl_folhasDeObra(folhaDeObraID, fichaRIFK) VALUES(1, 1);
+
+-- LINHAS DA FOLHA DE OBRA FICHARI1
+INSERT INTO tbl_folhaDeObraLinha(folhaDeObraLinhaID,  data, designacaoProcedimento,materiais,quantidades, duracao,tecnico, observacoes, folhaDeObraFK) VALUES (1,  '1993-10-19', 'designacaoProcedimento',"materiais","quantidades", '01:20',  "tecnico",'Observado', 1);
+INSERT INTO tbl_folhaDeObraLinha(folhaDeObraLinhaID,  data, designacaoProcedimento,materiais,quantidades, duracao,tecnico, observacoes, folhaDeObraFK) VALUES (2,  '1993-10-20', 'designacaoProcedimento',"materiais","quantidades", '01:30', "tecnico", 'Observado', 1);
+INSERT INTO tbl_folhaDeObraLinha(folhaDeObraLinhaID,  data, designacaoProcedimento,materiais,quantidades, duracao,tecnico, observacoes, folhaDeObraFK) VALUES (3,  '1993-10-22', 'designacaoProcedimento',"materiais","quantidades", '01:37', "tecnico",'Observado', 1);

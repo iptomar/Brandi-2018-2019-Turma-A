@@ -30,10 +30,28 @@ class Details extends Component {
   async queryState(query) {
     if (query !== undefined) {
       switch (query) {
-        case '&showConfirmEdited':
+        case '&createobra':
           this.setState({
             alert: {
-              text: "Utilizador editado com sucesso",
+              text: "Folha de obra criada com sucesso",
+              notVisible: false,
+              color: "success"
+            }
+          });
+          break;
+        case '&editarobra':
+          this.setState({
+            alert: {
+              text: "Folha de obra editada com sucesso",
+              notVisible: false,
+              color: "success"
+            }
+          });
+          break;
+        case '&criarfichatecnica':
+          this.setState({
+            alert: {
+              text: "Ficha técnica criada com sucesso",
               notVisible: false,
               color: "success"
             }
@@ -46,14 +64,14 @@ class Details extends Component {
     }
   }
 
-  async addFT(){
-    window.location = "/fichaTecnica/criar/"+this.props.id;
+  async addFT() {
+    window.location = "/fichaTecnica/criar/" + this.props.id;
   }
 
-  async addTS(){
+  async addTS() {
     window.location = "/testesSolubilizacao/" + this.props.id + "/criar";
   }
-  async addFO(){
+  async addFO() {
     window.location = "/folhaDeObra/" + this.props.id + "/criar";
   }
 
@@ -103,50 +121,50 @@ class Details extends Component {
             <h2>Detalhes da Ficha de Registo e Identificação</h2>
           </div>
           <div className="text-right mr-3 mb-3">
-          <button className="btn btn-success" onClick={this.addFT}>
-              <i className="fas fa-plus"/> Adicionar Ficha Técnica
+            <button className="btn btn-success" onClick={this.addFT}>
+              <i className="fas fa-plus" /> Adicionar Ficha Técnica
           </button>
-          <button className="btn btn-success ml-2" onClick={this.addTS}>
-              <i className="fas fa-plus"/> Adicionar Teste de Solventes
+            <button className="btn btn-success ml-2" onClick={this.addTS}>
+              <i className="fas fa-plus" /> Adicionar Teste de Solventes
           </button>
-          <button className="btn btn-success ml-2" onClick={this.addFO}>
-              <i className="fas fa-plus"/> Adicionar Folha de Obra
+            <button className="btn btn-success ml-2" onClick={this.addFO}>
+              <i className="fas fa-plus" /> Adicionar Folha de Obra
           </button>
-            <button 
-              className="btn btn-warning ml-2" 
+            <button
+              className="btn btn-warning ml-2"
               onClick={() => {
-                if(this.state.edit){
-                  this.setState({ modal: 'Edit'});
-                }else{
+                if (this.state.edit) {
+                  this.setState({ modal: 'Edit' });
+                } else {
                   this.toggleEdit();
                 }
               }}
-              data-toggle={this.state.edit? "modal" : ""} 
-              data-target={this.state.edit? "#modal" : ""} 
+              data-toggle={this.state.edit ? "modal" : ""}
+              data-target={this.state.edit ? "#modal" : ""}
               align="right">
               {
-                this.state.edit?
+                this.state.edit ?
                   <i className="fas fa-undo"></i>
-                :
+                  :
                   <i className="fas fa-edit"></i>
               }
             </button>
-            <button 
-              type="button" 
-              className="ml-2 btn btn-danger" 
+            <button
+              type="button"
+              className="ml-2 btn btn-danger"
               onClick={() => {
-                this.setState({ 
-                  modal: 'Delete' 
+                this.setState({
+                  modal: 'Delete'
                 })
               }}
-              data-toggle="modal" 
+              data-toggle="modal"
               data-target="#modal">
               <i className="far fa-trash-alt"></i>
             </button>
           </div>
           <AlertMsg text={this.state.alert.text} isNotVisible={this.state.alert.notVisible} alertColor={this.state.alert.color} />
           {
-            this.state.edit?
+            this.state.edit ?
               <Edit id={this.props.id} />
               :
               <Read id={this.props.id} />
@@ -158,32 +176,32 @@ class Details extends Component {
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title" id="exampleModalLabel">
-                  {this.state.modal==='Delete'?
-                    'Apagar Ficha de Registo e Identificação'
-                  :
-                    'Editar Ficha de Registo e Identificação'
-                  }
+                    {this.state.modal === 'Delete' ?
+                      'Apagar Ficha de Registo e Identificação'
+                      :
+                      'Editar Ficha de Registo e Identificação'
+                    }
                   </h5>
                   <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div className="modal-body">
-                  {this.state.modal==='Delete'? 
+                  {this.state.modal === 'Delete' ?
                     'Tem a certeza que pretende apagar a Ficha de Registo e Identificação?'
-                  :
+                    :
                     'Todas as alterações realizadas não serão guardadas. Tem a certeza que pretende sair do editar?'
                   }
-                  </div>
+                </div>
                 <div className="modal-footer">
                   <button type="button" className="btn btn-secondary" data-dismiss="modal">Não</button>
-                  <button type="button" className="btn btn-primary" 
-                  onClick={
-                    this.state.modal==='Delete'? 
-                      this.delete
-                    : 
-                      this.toggleEdit
-                    } 
+                  <button type="button" className="btn btn-primary"
+                    onClick={
+                      this.state.modal === 'Delete' ?
+                        this.delete
+                        :
+                        this.toggleEdit
+                    }
                     data-dismiss="modal">Sim</button>
                 </div>
               </div>

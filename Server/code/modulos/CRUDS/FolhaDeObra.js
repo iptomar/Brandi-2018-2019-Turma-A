@@ -1,6 +1,6 @@
 exports.getAllFolhasDeObra = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: "" };
-  let resposta_bd = await bd.query("Select * from tbl_folhasDeObra where processoCEARCFK = ? ", id);
+  let resposta_bd = await bd.query("Select * from tbl_folhasDeObra where fichaRIFK = ? ", id);
   if (resposta_bd.stat === 0) {
     resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;
@@ -14,9 +14,9 @@ exports.getAllFolhasDeObra = async (bd, id) => {
 
 exports.getSingleFolhaDeObra = async (bd, id) => {
   let resultadofinal = { stat: 1, resposta: "" };
-  let resposta_bd = await bd.query("Select * from tbl_folhasDeObra where folhaDeObraID = ? ", id);
+  let resposta_bd = await bd.query("Select * from tbl_folhaDeObraLinha where folhaDeObraFK = ? ", id);
   if (resposta_bd.stat === 0 && resposta_bd.resposta.length > 0) {
-    resultadofinal.resposta = resposta_bd.resposta[0];
+    resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;
   } else if (resposta_bd.stat === 1) {
     resultadofinal.resposta = "DBConnectionError";
@@ -29,31 +29,39 @@ exports.getSingleFolhaDeObra = async (bd, id) => {
 exports.createFolhaDeObra = async (bd, dados, id) => {
   let resultadofinal = { stat: 1, resposta: "Campos Inválidos" };
   let auxiliar = "";
+  let resposta_bd_aux = await bd.query("Insert into tbl_folhasDeObra (fichaRIFK) values(?) ",id);
+ 
   for (let i = 0; i < dados.length; i++) {
-    auxiliar += "(?,?,?,?,?,?),";
+    auxiliar += "(?,?,?,?,?,?,?,?),";
   }
   auxiliar = auxiliar.substring(0, auxiliar.length - 1); //tira ultima virgula
   let array2 = [];
+
   for (let i = 0; i < dados.length; i++) {
     if (
-      dados[i].designacaoProcesso &&
+      dados[i].quantidades &&
+      dados[i].materiaisProdutos &&
       dados[i].data &&
-      dados[i].designacaoProcedimento &&
+      dados[i].designacaoDoProcedimento &&
       dados[i].duracao &&
       dados[i].observacoes &&
-      id
+      resposta_bd_aux.resposta.insertId
     ) {
-      array2.push(dados[i].designacaoProcesso);
       array2.push(dados[i].data);
-      array2.push(dados[i].designacaoProcedimento);
+      array2.push(dados[i].designacaoDoProcedimento);
+      array2.push(dados[i].materiaisProdutos);
+      array2.push(dados[i].quantidades);
       array2.push(dados[i].duracao);
+      array2.push(dados[i].tecnico);
       array2.push(dados[i].observacoes);
-      array2.push(id);
+      array2.push(resposta_bd_aux.resposta.insertId);
     } else {
       return resultadofinal;
     }
   }
-  let resposta_bd = await bd.query("Insert into tbl_folhasDeObra (designacaoProcesso, data, designacaoProcedimento, duracao, observacoes, processoCEARCFK) values" + auxiliar, array2);
+
+  let resposta_bd = await bd.query("Insert into tbl_folhaDeObraLinha( data, designacaoProcedimento,materiais,quantidades, duracao,tecnico, observacoes, folhaDeObraFK) values" + auxiliar, array2);
+  console.log(resposta_bd);
   if (resposta_bd.stat === 0) {
     resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;
@@ -72,32 +80,36 @@ exports.updateFolhaDeObra = async (bd, dados, id) => {
     resultadofinal.resposta = resposta_bd.resposta;
     return resultadofinal;
   }
-  let auxiliar = "";
+   
   for (let i = 0; i < dados.length; i++) {
-    auxiliar += "(?,?,?,?,?,?),";
+    auxiliar += "(?,?,?,?,?,?,?,?),";
   }
   auxiliar = auxiliar.substring(0, auxiliar.length - 1); //tira ultima virgula
   let array2 = [];
   for (let i = 0; i < dados.length; i++) {
     if (
-      dados[i].designacaoProcesso &&
+      dados[i].quantidades &&
+      dados[i].materiaisProdutos &&
       dados[i].data &&
-      dados[i].designacaoProcedimento &&
+      dados[i].designacaoDoProcedimento &&
       dados[i].duracao &&
       dados[i].observacoes &&
-      id
+      dados[i].id
     ) {
-      array2.push(dados[i].designacaoProcesso);
       array2.push(dados[i].data);
-      array2.push(dados[i].designacaoProcedimento);
+      array2.push(dados[i].designacaoDoProcedimento);
+      array2.push(dados[i].materiaisProdutos);
+      array2.push(dados[i].quantidades);
       array2.push(dados[i].duracao);
+      array2.push(dados[i].tecnico);
       array2.push(dados[i].observacoes);
-      array2.push(id);
+      array2.push(dados[i].id);
     } else {
       return resultadofinal;
     }
   }
-  resposta_bd = await bd.query("Insert into tbl_folhasDeObra (designacaoProcesso, data, designacaoProcedimento, duracao, observacoes, processoCEARCFK) values" + auxiliar, array2);
+
+  resposta_bd = await bd.query("Insert into tbl_folhaDeObraLinha( data, designacaoProcedimento,materiais,quantidades, duracao,tecnico, observacoes, folhaDeObraFK) values" + auxiliar, array2);
   if (resposta_bd.stat === 0) {
     resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;

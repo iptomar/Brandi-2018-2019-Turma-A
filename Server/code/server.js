@@ -19,6 +19,7 @@ const testesEficacia = require("./modulos/Routers/TestesEficaciaRouter");
 const tecnicas = require("./modulos/Routers/TecnicasRouter");
 const interessados = require("./modulos/Routers/InteressadosRouter");
 const fichaTecnica = require("./modulos/Routers/FichaTecnicaRouter");
+const folhaDeObra = require("./modulos/Routers/FolhaDeObraRouter");
 
 //cria ligacao à base de dados
 //LIGAÇÃO SERVIDOR
@@ -202,5 +203,14 @@ fichaTecnica.deleteFichaTecnicaRoute(app, bd);
 fichaTecnica.readFichaTecnicaImagemGraficoRoute(app, bd);
 //rota que devolve as fotografias
 fichaTecnica.readFichaTecnicaFotografiasRoute(app, bd);
+
+//Folha de obra
+folhaDeObra.readFolhaDeObraRoute(app, bd);
+
+folhaDeObra.createFolhaDeObraRoute(app, bd);
+
+folhaDeObra.updateFolhaDeObraRoute(app, bd);
+
+folhaDeObra.getTodasFolhasDeObraRoute(app, bd);
 
 app.listen(port, () => console.log("Listening na porta", port));

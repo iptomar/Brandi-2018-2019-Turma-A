@@ -105,24 +105,24 @@ exports.createFichaTecnica = async (bd, dados) => {
   ) {
     resposta_bd = await bd.query(
       "INSERT INTO tbl_fichasTecnicas (" +
-      "visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas,codPostalMecenas,contactoMecenas,imgGrafico," +
-      "tipoBensConjunto,bemIntegradoEmConjunto,elemConstConj,materiasElementosAcessorios,marcasInscricoesAssinaturas,marcasInscricoesMontagem,marcasInscricoesConstrucao,classPatrimonial,epoca,qualidade,materiaisEstruturaSuporte,materiaisSuperficies," +
-      "tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio,condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo," +
-      "ilumArtValorIluminancia,ilumArtValurUV,ilumArtValorRealUV,ilumNatOrigem,ilumNatValorIluminancia,ilumNatValorUV,ilumNatValorRealUV,poluicaoAgentes,poluicaoFontesOrigem,poluicaoResultados, poluicaoObservacoesConclusoes,examesAnalisesInterpResultados," +
-      "examesAnalisesObsConclusoes,estadoConservFQMestrutura,estadoConservFQMsuperficie,estadoConservFQMelementosAcess,estadoConservBioEstrutura,      estadoConservBioSuperficie,estadoConservBioElementosAcess,estadoConservObsConclusoes,estruturaIntervAnter,superficieIntervAnter,elementosAcessoriosIntervAnter,observaçoesConclusoesPag6," +
-      "tipoInterv,aspetosEspecificosPag6,tipoIntervCR,EstruturaPropPag6,EstruturaPropRecPag6,SuperficiePropPag6,SuperficiePropRecPag6, ElementosAcessPropPag6, ElementosAcessPropRecPag6, observaçoesConclusoesPag7, estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8," +
-      "elementosAcessoriosPag8,recursosElementosAcPag8,observaçoesConclusoesPag8, relTecInterLCRM,tipoDesigOrig,refOrig,entidadeOrig,tipoDesigDocGraf,refDocGraf,entidadeDocGraf,tipoDesigExames,refExames," +
-      "entidadeExames,atledpArqDoc,tipoArqDoc,localArqDoc,cotaArqDoc,atledpIcon,tipoIcon,localIcon,cotaIcon,atledpBiblio,tipoBiblio,localBiblio," +
-      "cotaBiblio,atledpOutras,tipoOutras,localOutras,cotaOutras,fichaRegistoFK)" +
-      "values (?,?,?,?,?,?,?,?,?,?,?,?," +
-      "?,?,?,?,?,?,?,?,?,?,?,?," +
-      "?,?,?,?,?,?,?,?,?,?,?,?," +
-      "?,?,?,?,?,?,?,?,?,?,?,?," +
-      "?,?,?,?,?,?,?,?,?,?,?,?," +
-      "?,?,?,?,?,?,?,?,?,?,?,?," +
-      "?,?,?,?,?,?,?,?,?,?,?,?," +
-      "?,?,?,?,?,?,?,?,?,?,?,?," +
-      "?,?,?,?,?,?,?,?,?)",
+        "visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas,codPostalMecenas,contactoMecenas,imgGrafico," +
+        "tipoBensConjunto,bemIntegradoEmConjunto,elemConstConj,materiasElementosAcessorios,marcasInscricoesAssinaturas,marcasInscricoesMontagem,marcasInscricoesConstrucao,classPatrimonial,epoca,qualidade,materiaisEstruturaSuporte,materiaisSuperficies," +
+        "tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio,condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo," +
+        "ilumArtValorIluminancia,ilumArtValurUV,ilumArtValorRealUV,ilumNatOrigem,ilumNatValorIluminancia,ilumNatValorUV,ilumNatValorRealUV,poluicaoAgentes,poluicaoFontesOrigem,poluicaoResultados, poluicaoObservacoesConclusoes,examesAnalisesInterpResultados," +
+        "examesAnalisesObsConclusoes,estadoConservFQMestrutura,estadoConservFQMsuperficie,estadoConservFQMelementosAcess,estadoConservBioEstrutura,      estadoConservBioSuperficie,estadoConservBioElementosAcess,estadoConservObsConclusoes,estruturaIntervAnter,superficieIntervAnter,elementosAcessoriosIntervAnter,observaçoesConclusoesPag6," +
+        "tipoInterv,aspetosEspecificosPag6,tipoIntervCR,EstruturaPropPag6,EstruturaPropRecPag6,SuperficiePropPag6,SuperficiePropRecPag6, ElementosAcessPropPag6, ElementosAcessPropRecPag6, observaçoesConclusoesPag7, estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8," +
+        "elementosAcessoriosPag8,recursosElementosAcPag8,observaçoesConclusoesPag8, relTecInterLCRM,tipoDesigOrig,refOrig,entidadeOrig,tipoDesigDocGraf,refDocGraf,entidadeDocGraf,tipoDesigExames,refExames," +
+        "entidadeExames,atledpArqDoc,tipoArqDoc,localArqDoc,cotaArqDoc,atledpIcon,tipoIcon,localIcon,cotaIcon,atledpBiblio,tipoBiblio,localBiblio," +
+        "cotaBiblio,atledpOutras,tipoOutras,localOutras,cotaOutras,fichaRegistoFK)" +
+        "values (?,?,?,?,?,?,?,?,?,?,?,?," +
+        "?,?,?,?,?,?,?,?,?,?,?,?," +
+        "?,?,?,?,?,?,?,?,?,?,?,?," +
+        "?,?,?,?,?,?,?,?,?,?,?,?," +
+        "?,?,?,?,?,?,?,?,?,?,?,?," +
+        "?,?,?,?,?,?,?,?,?,?,?,?," +
+        "?,?,?,?,?,?,?,?,?,?,?,?," +
+        "?,?,?,?,?,?,?,?,?,?,?,?," +
+        "?,?,?,?,?,?,?,?,?)",
       [
         dados.visible,
         dados.localizacao,
@@ -266,7 +266,7 @@ exports.createFichaTecnica = async (bd, dados) => {
     let resposta_bd2 = { stat: 1, resposta: {} };
     resposta_bd2 = await bd.query(
       "Insert into tbl_testespagina4objectivosGerais(Objectivo,fichaTecnicaFK) values " +
-      auxiliar,
+        auxiliar,
       array2
     );
     // não ocorreu nenhum erro na inserção
@@ -292,7 +292,7 @@ exports.createFichaTecnica = async (bd, dados) => {
       let resposta_bd3 = { stat: 1, resposta: {} };
       resposta_bd3 = await bd.query(
         "Insert into tbl_testespagina4tabelas(tipoReferencia ,LocalizacaoAreaPonto ,ObjectivosEspecificos ,Resultados,DataDePreenchimento ,fichaTecnicaFK) values " +
-        auxiliar,
+          auxiliar,
         array2
       );
 
@@ -316,7 +316,7 @@ exports.createFichaTecnica = async (bd, dados) => {
         }
         resposta_bd4 = await bd.query(
           "Insert into tbl_constituicaoequipa(constEq ,funcDes ,habPro ,fichaTecnicaFK ) values " +
-          auxiliar,
+            auxiliar,
           array2
         );
 
@@ -337,10 +337,9 @@ exports.createFichaTecnica = async (bd, dados) => {
           }
           resposta_bd5 = await bd.query(
             "Insert into tbl_imagensFichaTecnica(imagem ,fichaTecnicaFK ) values " +
-            auxiliar,
+              auxiliar,
             array2
           );
-
 
           if (resposta_bd5.stat === 0) {
             resultadofinal.stat = 0;
@@ -445,10 +444,11 @@ exports.createFichaTecnica = async (bd, dados) => {
  * @param id - id da ficha RegistoIdentificacao
  * @param bd - base de dados para querys
  */
-exports.getFichaTecnica = async (bd, id) => {
+exports.getFichaTecnica = async (bd, id, idRI) => {
   let resultadofinal = { stat: 1, resposta: {} };
   // é necessário array por causa de overflow da variavel resultadofinal
   let resultadofinalteste = [];
+  let var1 = { folhaobra: {}, testessolubilizacao: {} };
   let resposta_bd = await bd.query(
     "Select *  from tbl_fichasTecnicas where fichaTecnicaID = ? and visible = true limit 1",
     [id]
@@ -483,7 +483,20 @@ exports.getFichaTecnica = async (bd, id) => {
       [id]
     );
     resultadofinalteste.push(resposta_aux.resposta);
+    //todas as folhas de obra
+    resposta_aux = await bd.query(
+      "Select folhaDeObraID from tbl_folhasDeObra where fichaRIFK = ? ",
+      resposta_bd.resposta[0].fichaRegistoFK
+    );
+    var1.folhaobra = resposta_aux.resposta;
 
+    //todos os testes de solubilidade
+    resposta_aux = await bd.query(
+      "Select id from tbl_testessolventes where fichaRIFK = ? ",
+      resposta_bd.resposta[0].fichaRegistoFK
+    );
+    var1.testessolubilizacao = resposta_aux.resposta;
+    resultadofinalteste.push(var1);
   } else if (resposta_bd.stat === 0) {
     resultadofinal.stat = resposta_bd.stat;
     resultadofinal.resposta = "FichaNaoExistente";
@@ -501,7 +514,8 @@ exports.updateFichaTecnica = async (bd, dados) => {
   let resultadofinal = { stat: 1, resposta: "Missing Fields" };
   let resposta_bd;
   //verificar se os campos estao preenchidos
-  if (true
+  if (
+    true
     // dados.visible &&
     // dados.localizacao &&
     // dados.proprietario &&
@@ -592,15 +606,15 @@ exports.updateFichaTecnica = async (bd, dados) => {
     if (dados.imgGrafico == "") {
       resposta_bd = await bd.query(
         "update tbl_fichasTecnicas set " +
-        "visible = ?,localizacao= ?,proprietario= ?,codPostalProprietario= ?,emailProprietario= ?,contactoProprietario= ?,donoObra= ?,codPostalDonoObra= ?,contactoDonoObra= ?,mecenas= ?,codPostalMecenas= ?,contactoMecenas= ?, " +
-        "tipoBensConjunto= ?,bemIntegradoEmConjunto= ?,elemConstConj= ?,materiasElementosAcessorios= ?,marcasInscricoesAssinaturas= ?,marcasInscricoesMontagem= ?,marcasInscricoesConstrucao= ?,classPatrimonial= ?,epoca= ?,qualidade= ?,materiaisEstruturaSuporte= ?,materiaisSuperficies= ?," +
-        "tecnicasEstruturaSuporte= ?,tecnicasSuperficie= ?,condAmbDescricao= ?,condAmbFrioTemperatura= ?,condAmbFrioHumidade= ?,condAmbFrioPeriodoInicio= ?,condAmbFrioPeriodoFim= ?,condAmbQuenteTemperatura= ?,condAmbQuenteHumidade= ?,condAmbQuentePeriodoInicio= ?,condAmbQuentePeriodoFim= ?,ilumArtTipo= ?," +
-        "ilumArtValorIluminancia= ?,ilumArtValurUV= ?,ilumArtValorRealUV= ?,ilumNatOrigem= ?,ilumNatValorIluminancia= ?,ilumNatValorUV= ?,ilumNatValorRealUV= ?,poluicaoAgentes= ?,poluicaoFontesOrigem= ?,poluicaoResultados= ?, poluicaoObservacoesConclusoes= ?,examesAnalisesInterpResultados= ?," +
-        "examesAnalisesObsConclusoes= ?,estadoConservFQMestrutura= ?,estadoConservFQMsuperficie= ?,estadoConservFQMelementosAcess= ?,estadoConservBioEstrutura= ?, estadoConservBioSuperficie= ?,estadoConservBioElementosAcess= ?,estadoConservObsConclusoes= ?,estruturaIntervAnter= ?,superficieIntervAnter= ?,elementosAcessoriosIntervAnter= ?,observaçoesConclusoesPag6= ?," +
-        "tipoInterv= ?,aspetosEspecificosPag6= ?,tipoIntervCR= ?,EstruturaPropPag6= ?,EstruturaPropRecPag6= ?,SuperficiePropPag6= ?,SuperficiePropRecPag6= ?, ElementosAcessPropPag6= ?, ElementosAcessPropRecPag6= ?, observaçoesConclusoesPag7= ?, estruturaPag8= ?,recursosEstruturaPag8= ?,superficiePag8= ?,recursosSuperficiePag8= ?," +
-        "elementosAcessoriosPag8= ?,recursosElementosAcPag8= ?,observaçoesConclusoesPag8= ?, relTecInterLCRM= ?,tipoDesigOrig= ?,refOrig= ?,entidadeOrig= ?,tipoDesigDocGraf= ?,refDocGraf= ?,entidadeDocGraf= ?,tipoDesigExames= ?,refExames= ?," +
-        "entidadeExames= ?,atledpArqDoc= ?,tipoArqDoc= ?,localArqDoc= ?,cotaArqDoc= ?,atledpIcon= ?,tipoIcon= ?,localIcon= ?,cotaIcon= ?,atledpBiblio= ?,tipoBiblio= ?,localBiblio= ?," +
-        "cotaBiblio= ?,atledpOutras= ?,tipoOutras= ?,localOutras= ?,cotaOutras= ? where fichaTecnicaID=?",
+          "visible = ?,localizacao= ?,proprietario= ?,codPostalProprietario= ?,emailProprietario= ?,contactoProprietario= ?,donoObra= ?,codPostalDonoObra= ?,contactoDonoObra= ?,mecenas= ?,codPostalMecenas= ?,contactoMecenas= ?, " +
+          "tipoBensConjunto= ?,bemIntegradoEmConjunto= ?,elemConstConj= ?,materiasElementosAcessorios= ?,marcasInscricoesAssinaturas= ?,marcasInscricoesMontagem= ?,marcasInscricoesConstrucao= ?,classPatrimonial= ?,epoca= ?,qualidade= ?,materiaisEstruturaSuporte= ?,materiaisSuperficies= ?," +
+          "tecnicasEstruturaSuporte= ?,tecnicasSuperficie= ?,condAmbDescricao= ?,condAmbFrioTemperatura= ?,condAmbFrioHumidade= ?,condAmbFrioPeriodoInicio= ?,condAmbFrioPeriodoFim= ?,condAmbQuenteTemperatura= ?,condAmbQuenteHumidade= ?,condAmbQuentePeriodoInicio= ?,condAmbQuentePeriodoFim= ?,ilumArtTipo= ?," +
+          "ilumArtValorIluminancia= ?,ilumArtValurUV= ?,ilumArtValorRealUV= ?,ilumNatOrigem= ?,ilumNatValorIluminancia= ?,ilumNatValorUV= ?,ilumNatValorRealUV= ?,poluicaoAgentes= ?,poluicaoFontesOrigem= ?,poluicaoResultados= ?, poluicaoObservacoesConclusoes= ?,examesAnalisesInterpResultados= ?," +
+          "examesAnalisesObsConclusoes= ?,estadoConservFQMestrutura= ?,estadoConservFQMsuperficie= ?,estadoConservFQMelementosAcess= ?,estadoConservBioEstrutura= ?, estadoConservBioSuperficie= ?,estadoConservBioElementosAcess= ?,estadoConservObsConclusoes= ?,estruturaIntervAnter= ?,superficieIntervAnter= ?,elementosAcessoriosIntervAnter= ?,observaçoesConclusoesPag6= ?," +
+          "tipoInterv= ?,aspetosEspecificosPag6= ?,tipoIntervCR= ?,EstruturaPropPag6= ?,EstruturaPropRecPag6= ?,SuperficiePropPag6= ?,SuperficiePropRecPag6= ?, ElementosAcessPropPag6= ?, ElementosAcessPropRecPag6= ?, observaçoesConclusoesPag7= ?, estruturaPag8= ?,recursosEstruturaPag8= ?,superficiePag8= ?,recursosSuperficiePag8= ?," +
+          "elementosAcessoriosPag8= ?,recursosElementosAcPag8= ?,observaçoesConclusoesPag8= ?, relTecInterLCRM= ?,tipoDesigOrig= ?,refOrig= ?,entidadeOrig= ?,tipoDesigDocGraf= ?,refDocGraf= ?,entidadeDocGraf= ?,tipoDesigExames= ?,refExames= ?," +
+          "entidadeExames= ?,atledpArqDoc= ?,tipoArqDoc= ?,localArqDoc= ?,cotaArqDoc= ?,atledpIcon= ?,tipoIcon= ?,localIcon= ?,cotaIcon= ?,atledpBiblio= ?,tipoBiblio= ?,localBiblio= ?," +
+          "cotaBiblio= ?,atledpOutras= ?,tipoOutras= ?,localOutras= ?,cotaOutras= ? where fichaTecnicaID=?",
         [
           dados.visible,
           dados.localizacao,
@@ -734,15 +748,15 @@ exports.updateFichaTecnica = async (bd, dados) => {
       }
       resposta_bd = await bd.query(
         "update tbl_fichasTecnicas set " +
-        "visible = ?,localizacao= ?,proprietario= ?,codPostalProprietario= ?,emailProprietario= ?,contactoProprietario= ?,donoObra= ?,codPostalDonoObra= ?,contactoDonoObra= ?,mecenas= ?,codPostalMecenas= ?,contactoMecenas= ?, imgGrafico= ?, " +
-        "tipoBensConjunto= ?,bemIntegradoEmConjunto= ?,elemConstConj= ?,materiasElementosAcessorios= ?,marcasInscricoesAssinaturas= ?,marcasInscricoesMontagem= ?,marcasInscricoesConstrucao= ?,classPatrimonial= ?,epoca= ?,qualidade= ?,materiaisEstruturaSuporte= ?,materiaisSuperficies= ?," +
-        "tecnicasEstruturaSuporte= ?,tecnicasSuperficie= ?,condAmbDescricao= ?,condAmbFrioTemperatura= ?,condAmbFrioHumidade= ?,condAmbFrioPeriodoInicio= ?,condAmbFrioPeriodoFim= ?,condAmbQuenteTemperatura= ?,condAmbQuenteHumidade= ?,condAmbQuentePeriodoInicio= ?,condAmbQuentePeriodoFim= ?,ilumArtTipo= ?," +
-        "ilumArtValorIluminancia= ?,ilumArtValurUV= ?,ilumArtValorRealUV= ?,ilumNatOrigem= ?,ilumNatValorIluminancia= ?,ilumNatValorUV= ?,ilumNatValorRealUV= ?,poluicaoAgentes= ?,poluicaoFontesOrigem= ?,poluicaoResultados= ?, poluicaoObservacoesConclusoes= ?,examesAnalisesInterpResultados= ?," +
-        "examesAnalisesObsConclusoes= ?,estadoConservFQMestrutura= ?,estadoConservFQMsuperficie= ?,estadoConservFQMelementosAcess= ?,estadoConservBioEstrutura= ?, estadoConservBioSuperficie= ?,estadoConservBioElementosAcess= ?,estadoConservObsConclusoes= ?,estruturaIntervAnter= ?,superficieIntervAnter= ?,elementosAcessoriosIntervAnter= ?,observaçoesConclusoesPag6= ?," +
-        "tipoInterv= ?,aspetosEspecificosPag6= ?,tipoIntervCR= ?,EstruturaPropPag6= ?,EstruturaPropRecPag6= ?,SuperficiePropPag6= ?,SuperficiePropRecPag6= ?, ElementosAcessPropPag6=?, ElementosAcessPropRecPag6= ?, observaçoesConclusoesPag6=?, estruturaPag8= ?,recursosEstruturaPag8= ?,superficiePag8= ?,recursosSuperficiePag8= ?," +
-        "elementosAcessoriosPag8= ?,recursosElementosAcPag8= ?,observaçoesConclusoesPag8= ?, relTecInterLCRM= ?,tipoDesigOrig= ?,refOrig= ?,entidadeOrig= ?,tipoDesigDocGraf= ?,refDocGraf= ?,entidadeDocGraf= ?,tipoDesigExames= ?,refExames= ?," +
-        "entidadeExames= ?,atledpArqDoc= ?,tipoArqDoc= ?,localArqDoc= ?,cotaArqDoc= ?,atledpIcon= ?,tipoIcon= ?,localIcon= ?,cotaIcon= ?,atledpBiblio= ?,tipoBiblio= ?,localBiblio= ?," +
-        "cotaBiblio= ?,atledpOutras= ?,tipoOutras= ?,localOutras= ?,cotaOutras= ? where fichaTecnicaID=?",
+          "visible = ?,localizacao= ?,proprietario= ?,codPostalProprietario= ?,emailProprietario= ?,contactoProprietario= ?,donoObra= ?,codPostalDonoObra= ?,contactoDonoObra= ?,mecenas= ?,codPostalMecenas= ?,contactoMecenas= ?, imgGrafico= ?, " +
+          "tipoBensConjunto= ?,bemIntegradoEmConjunto= ?,elemConstConj= ?,materiasElementosAcessorios= ?,marcasInscricoesAssinaturas= ?,marcasInscricoesMontagem= ?,marcasInscricoesConstrucao= ?,classPatrimonial= ?,epoca= ?,qualidade= ?,materiaisEstruturaSuporte= ?,materiaisSuperficies= ?," +
+          "tecnicasEstruturaSuporte= ?,tecnicasSuperficie= ?,condAmbDescricao= ?,condAmbFrioTemperatura= ?,condAmbFrioHumidade= ?,condAmbFrioPeriodoInicio= ?,condAmbFrioPeriodoFim= ?,condAmbQuenteTemperatura= ?,condAmbQuenteHumidade= ?,condAmbQuentePeriodoInicio= ?,condAmbQuentePeriodoFim= ?,ilumArtTipo= ?," +
+          "ilumArtValorIluminancia= ?,ilumArtValurUV= ?,ilumArtValorRealUV= ?,ilumNatOrigem= ?,ilumNatValorIluminancia= ?,ilumNatValorUV= ?,ilumNatValorRealUV= ?,poluicaoAgentes= ?,poluicaoFontesOrigem= ?,poluicaoResultados= ?, poluicaoObservacoesConclusoes= ?,examesAnalisesInterpResultados= ?," +
+          "examesAnalisesObsConclusoes= ?,estadoConservFQMestrutura= ?,estadoConservFQMsuperficie= ?,estadoConservFQMelementosAcess= ?,estadoConservBioEstrutura= ?, estadoConservBioSuperficie= ?,estadoConservBioElementosAcess= ?,estadoConservObsConclusoes= ?,estruturaIntervAnter= ?,superficieIntervAnter= ?,elementosAcessoriosIntervAnter= ?,observaçoesConclusoesPag6= ?," +
+          "tipoInterv= ?,aspetosEspecificosPag6= ?,tipoIntervCR= ?,EstruturaPropPag6= ?,EstruturaPropRecPag6= ?,SuperficiePropPag6= ?,SuperficiePropRecPag6= ?, ElementosAcessPropPag6=?, ElementosAcessPropRecPag6= ?, observaçoesConclusoesPag6=?, estruturaPag8= ?,recursosEstruturaPag8= ?,superficiePag8= ?,recursosSuperficiePag8= ?," +
+          "elementosAcessoriosPag8= ?,recursosElementosAcPag8= ?,observaçoesConclusoesPag8= ?, relTecInterLCRM= ?,tipoDesigOrig= ?,refOrig= ?,entidadeOrig= ?,tipoDesigDocGraf= ?,refDocGraf= ?,entidadeDocGraf= ?,tipoDesigExames= ?,refExames= ?," +
+          "entidadeExames= ?,atledpArqDoc= ?,tipoArqDoc= ?,localArqDoc= ?,cotaArqDoc= ?,atledpIcon= ?,tipoIcon= ?,localIcon= ?,cotaIcon= ?,atledpBiblio= ?,tipoBiblio= ?,localBiblio= ?," +
+          "cotaBiblio= ?,atledpOutras= ?,tipoOutras= ?,localOutras= ?,cotaOutras= ? where fichaTecnicaID=?",
         [
           dados.visible,
           dados.localizacao,
@@ -865,7 +879,6 @@ exports.updateFichaTecnica = async (bd, dados) => {
         ]
       );
     }
-
   }
 
   //inseriu na base de dados
@@ -900,7 +913,7 @@ exports.updateFichaTecnica = async (bd, dados) => {
     let resposta_bd2 = { stat: 1, resposta: {} };
     resposta_bd2 = await bd.query(
       "Insert into tbl_testespagina4objectivosGerais(Objectivo,fichaTecnicaFK) values " +
-      auxiliar,
+        auxiliar,
       array2
     );
     auxiliar = "";
@@ -923,7 +936,7 @@ exports.updateFichaTecnica = async (bd, dados) => {
     let resposta_bd3 = { stat: 1, resposta: {} };
     resposta_bd3 = await bd.query(
       "Insert into tbl_testespagina4tabelas(tipoReferencia ,LocalizacaoAreaPonto ,ObjectivosEspecificos ,Resultados,DataDePreenchimento ,fichaTecnicaFK) values " +
-      auxiliar,
+        auxiliar,
       array2
     );
     auxiliar = "";
@@ -941,7 +954,7 @@ exports.updateFichaTecnica = async (bd, dados) => {
     }
     resposta_bd4 = await bd.query(
       "Insert into tbl_constituicaoequipa(constEq ,funcDes ,habPro ,fichaTecnicaFK ) values " +
-      auxiliar,
+        auxiliar,
       array2
     );
 
@@ -977,12 +990,10 @@ exports.updateFichaTecnica = async (bd, dados) => {
       }
       resposta_bd4 = await bd.query(
         "Insert into tbl_imagensFichaTecnica(imagem, fichaTecnicaFK ) values " +
-        auxiliar,
+          auxiliar,
         array2
       );
     }
-
-
   } else {
     resultadofinal.stat = resposta_bd.stat;
     resultadofinal.resposta = resposta_bd.resposta;
@@ -1069,4 +1080,3 @@ exports.getFichaTecnicaFotografias = async (bd, id) => {
 
   return resultadofinal;
 };
-

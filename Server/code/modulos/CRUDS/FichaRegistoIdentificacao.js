@@ -251,6 +251,19 @@ exports.getFichaRegistoIdentificacao = async (bd, id) => {
     //encontrou tecnicos associados a ficha e a ficha e visivel
     if (resposta_bd4.stat == 0 && resposta_bd.resposta[0] !== undefined) {
       resultadofinal.resposta.fichatecnicas = resposta_bd4.resposta;
+
+      //todas as folhas de obra
+      let resposta_aux = await bd.query(
+        "Select folhaDeObraID from tbl_folhasDeObra where fichaRIFK = ? ",
+        id
+      );
+      resultadofinal.resposta.folhasObra = resposta_aux.resposta;
+      //todos os testes de solubilidade
+      resposta_aux = await bd.query(
+        "Select id from tbl_testessolventes where fichaRIFK = ? ",
+        id
+      );
+      resultadofinal.resposta.testesSolventes = resposta_aux.resposta;
     }
     //erro de conecao com a base de dados
     else if (resposta_bd4.stat === 1) {

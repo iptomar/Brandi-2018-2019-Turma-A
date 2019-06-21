@@ -361,9 +361,10 @@ class Read extends Component {
                     </div>
                 }
               </div>
-              <div>
+            </div>
+            <div>
               <hr></hr>
-              <h4>Testes de Solventes</h4>
+              <h4>Testes de Solventes Associados</h4>
               <div>
                 {
                   //Verifica se existem ficha técnicas associadas a esta ficha de registo
@@ -392,16 +393,17 @@ class Read extends Component {
                     :
                     <div>
                       {/* Se não, apresenta uma mensagem informativa */}
-                      <p>Ainda não existem testes de solventes associadas a este objeto.</p>
+                      <p>Ainda não existem testes de solventes associados a este objeto.</p>
                       {
-                        <a href={"/testesSolubilizacao/" + getThis.props.id+"/criar"}>Crie um novo teste de solvente</a>
+                        <a href={"/testesSolubilizacao/" + getThis.props.id+ "/criar"}>Crie uma nova teste de solventes</a>
                       }
                     </div>
                 }
               </div>
-              <div>
+            </div>
+            <div>
               <hr></hr>
-              <h4>Folhas de Obra</h4>
+              <h4>Folhas de Obra Associadas</h4>
               <div>
                 {
                   //Verifica se existem ficha técnicas associadas a esta ficha de registo
@@ -432,12 +434,12 @@ class Read extends Component {
                       {/* Se não, apresenta uma mensagem informativa */}
                       <p>Ainda não existem folhas de obra associadas a este objeto.</p>
                       {
-                        <a href={"/folhaDeObra/" + getThis.props.id+"/criar"}>Crie uma nova folha de obra</a>
+                        <a href={"/folhaDeObra/" + getThis.props.id + "/criar"}>Crie uma nova folha de obra</a>
                       }
                     </div>
                 }
               </div>
-            </div>
+            </div>s
           </div>
         );
       } else {

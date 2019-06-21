@@ -365,24 +365,23 @@ class Read extends Component {
               <h4>Testes de Solventes Associados</h4>
               <div>
                 {
-                  //Verifica se existem ficha técnicas associadas a esta ficha de registo
+                  //Verifica se existem testes de solventes associados a esta ficha de registo
                   // e identificação
-                  getThis.state.data.fichatecnicas.length !== 0 ?
+                  getThis.state.data.testessolubilizacao.length !== 0 ?
                     <table className="table">
                       <tbody>
                         {
-                          //Percorre todas fichas técnicas e apresenta-as
-                          // getThis.state.data.fichatecnicas.forEach(element => 
-                          getThis.state.data.fichatecnicas.map(function (obj) {
+                          //Percorre todos os testes de solventes e apresenta-os 
+                          getThis.state.data.testessolubilizacao.map(function (obj) {
                             return (
-                              <tr key={obj.fichaTecnicaID}>
+                              <tr key={obj.id}>
                                 <th>
-                                  <a href={"/fichaTecnica/" + obj.fichaTecnicaID + "/detalhes"}>
-                                    Ficha Técnica Nº
-                                      {obj.fichaTecnicaID}
+                                  <a href={"/fichaTecnica/" + obj.id + "/detalhes"}>
+                                    Teste de Solvente Nº
+                                      {obj.id}
                                   </a>
                                 </th>
-                              </tr>
+                              </tr> 
                             );
                           })
                         }
@@ -404,21 +403,20 @@ class Read extends Component {
               <h4>Folhas de Obra Associadas</h4>
               <div>
                 {
-                  //Verifica se existem ficha técnicas associadas a esta ficha de registo
+                  //Verifica se existem folha de obra associadas a esta ficha de registo
                   // e identificação
-                  getThis.state.data.fichatecnicas.length !== 0 ?
+                  getThis.state.data.folhaobra.length !== 0 ?
                     <table className="table">
                       <tbody>
                         {
-                          //Percorre todas fichas técnicas e apresenta-as
-                          // getThis.state.data.fichatecnicas.forEach(element => 
-                          getThis.state.data.fichatecnicas.map(function (obj) {
+                          //Percorre todas as folhas de obra e apresenta-as 
+                          getThis.state.data.folhaobra.map(function (obj) {
                             return (
-                              <tr key={obj.fichaTecnicaID}>
+                              <tr key={obj.folhaobraID}>
                                 <th>
-                                  <a href={"/fichaTecnica/" + obj.fichaTecnicaID + "/detalhes"}>
-                                    Ficha Técnica Nº
-                                      {obj.fichaTecnicaID}
+                                  <a href={"/fichaTecnica/" + obj.folhaobraID + "/detalhes"}>
+                                    Folha de Obra Nº
+                                      {obj.folhaobraID}
                                   </a>
                                 </th>
                               </tr>
@@ -437,7 +435,7 @@ class Read extends Component {
                     </div>
                 }
               </div>
-            </div>s
+            </div>
           </div>
         );
       } else {

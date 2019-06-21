@@ -72,7 +72,9 @@ class Read extends Component {
       .then(blob => {
         let reader = new FileReader();
         reader.onload = function () {
-          document.querySelector("#imgPrev").src = reader.result.toString();
+          let img = document.querySelector("#imgPrev");
+          img.src =  reader.result.toString();
+          img.style.height = "300px";
         }
         reader.readAsDataURL(blob);
       });

@@ -921,7 +921,7 @@ class Create extends Component {
             </div>
           </div>
           <div className="accordion" id="accordionExample">
-            <div className="card bg-light">
+            <div className="card bg-light" style={{ cursor: "pointer" }}>
               <div className="card-header" id="headingOne">
                 <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseOne">
                   <button className="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -940,7 +940,7 @@ class Create extends Component {
               </div>
             </div>
 
-            <div className="card bg-light">
+            <div className="card bg-light" style={{ cursor: "pointer" }}>
               <div className="card-header" id="headingTwo">
                 <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseTwo">
                   <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -955,7 +955,7 @@ class Create extends Component {
               </div>
             </div>
 
-            <div className="card bg-light">
+            <div className="card bg-light" style={{ cursor: "pointer" }}>
               <div className="card-header" id="headingThree">
                 <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseThree">
                   <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -970,7 +970,7 @@ class Create extends Component {
               </div>
             </div>
 
-            <div className="card bg-light">
+            <div className="card bg-light" style={{ cursor: "pointer" }}>
               <div className="card-header" id="headingFour">
                 <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseFour">
                   <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
@@ -985,7 +985,7 @@ class Create extends Component {
               </div>
             </div>
 
-            <div className="card bg-light">
+            <div className="card bg-light" style={{ cursor: "pointer" }}>
               <div className="card-header" id="headingFive">
                 <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseFive">
                   <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
@@ -1000,7 +1000,7 @@ class Create extends Component {
               </div>
             </div>
 
-            <div className="card bg-light">
+            <div className="card bg-light" style={{ cursor: "pointer" }}>
               <div className="card-header" id="headingSix">
                 <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseSix">
                   <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
@@ -1015,7 +1015,7 @@ class Create extends Component {
               </div>
             </div>
 
-            <div className="card bg-light">
+            <div className="card bg-light" style={{ cursor: "pointer" }}>
               <div className="card-header" id="headingSeven">
                 <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseSeven">
                   <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSix">
@@ -1031,7 +1031,7 @@ class Create extends Component {
             </div>
 
 
-            <div className="card bg-light">
+            <div className="card bg-light" style={{ cursor: "pointer" }}>
               <div className="card-header" id="headingEight">
                 <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseEight">
                   <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
@@ -1046,7 +1046,7 @@ class Create extends Component {
               </div>
             </div>
 
-            <div className="card bg-light">
+            <div className="card bg-light" style={{ cursor: "pointer" }}>
               <div className="card-header" id="headingNine">
                 <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseNine">
                   <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
@@ -1061,7 +1061,7 @@ class Create extends Component {
               </div>
             </div>
 
-            <div className="card bg-light">
+            <div className="card bg-light" style={{ cursor: "pointer" }}>
               <div className="card-header" id="headingTen">
                 <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseTen">
                   <button className="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">

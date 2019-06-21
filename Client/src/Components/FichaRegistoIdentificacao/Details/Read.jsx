@@ -387,7 +387,7 @@ class Read extends Component {
                             return (
                               <tr key={obj.id}>
                                 <th>
-                                  <a href={"/fichaTecnica/" + obj.id + "/detalhes"}>
+                                  <a href={"/testesSolubilizacao/" + obj.id + "/detalhes"}>
                                     Teste de Solvente Nº
                                       {obj.id}
                                   </a>
@@ -416,16 +416,16 @@ class Read extends Component {
                 {
                   //Verifica se existem folha de obra associadas a esta ficha de registo
                   // e identificação
-                  getThis.state.data.folhaObra.length !== 0 ?
+                  getThis.state.data.folhasObra.length !== 0 ?
                     <table className="table">
                       <tbody>
                         {
                           //Percorre todas as folhas de obra e apresenta-as 
-                          getThis.state.data.folhaObra.map(function (obj) {
+                          getThis.state.data.folhasObra.map(function (obj) {
                             return (
                               <tr key={obj.folhaObraID}>
                                 <th>
-                                  <a href={"/fichaTecnica/" + obj.folhaObraID + "/detalhes"}>
+                                  <a href={"/folhaDeObra/" + obj.folhaObraID + "/editar"}>
                                     Folha de Obra Nº
                                       {obj.folhaObraID}
                                   </a>

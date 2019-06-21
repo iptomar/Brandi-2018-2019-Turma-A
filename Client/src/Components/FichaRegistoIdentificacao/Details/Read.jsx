@@ -72,7 +72,9 @@ class Read extends Component {
       .then(blob => {
         let reader = new FileReader();
         reader.onload = function () {
-          document.querySelector("#imgPrev").src = reader.result.toString();
+          let img = document.querySelector("#imgPrev");
+          img.src =  reader.result.toString();
+          img.style.height = "300px";
         }
         reader.readAsDataURL(blob);
       });
@@ -146,26 +148,35 @@ class Read extends Component {
                       readOnly
                     />
                   </div>
-                  <div className="col-md-4 mb-3">
-                    <label className="font-weight-bold">Data de Conclusão</label>
-                    <input
-                      type="date"
-                      className="form-control"
-                      id="dateConclusão"
-                      value={this.state.data.dataConclusao != null ? this.state.data.dataConclusao.substring(0, 10) : ""}
-                      readOnly
-                    />
-                  </div>
-                  <div className="col-md-4 mb-3">
-                    <label className="font-weight-bold">Data de Entrega</label>
-                    <input
-                      type="date"
-                      className="form-control"
-                      id="dateEntrega"
-                      value={this.state.data.dataEntrega != null ? this.state.data.dataEntrega.substring(0, 10) : ""}
-                      readOnly
-                    />
-                  </div>
+                  {this.state.data.dataConclusao == null? 
+                      <div></div> 
+                    :
+                      <div className="col-md-4 mb-3">
+                      <label className="font-weight-bold">Data de Conclusão</label>
+                      <input
+                        type="date"
+                        className="form-control"
+                        id="dateConclusão"
+                        value={this.state.data.dataConclusao != null ? this.state.data.dataConclusao.substring(0, 10) : ""}
+                        readOnly
+                      />
+                    </div>
+                  }
+
+                  {this.state.data.dataEntrega == null? 
+                      <div></div> 
+                    :
+                      <div className="col-md-4 mb-3">
+                        <label className="font-weight-bold">Data de Entrega</label>
+                        <input
+                          type="date"
+                          className="form-control"
+                          id="dateEntrega"
+                          value={this.state.data.dataEntrega != null ? this.state.data.dataEntrega.substring(0, 10) : ""}
+                          readOnly
+                        />
+                      </div>
+                  }
                 </div>
                 <div className="row">
                   <div className="col-md-6 mb-3">

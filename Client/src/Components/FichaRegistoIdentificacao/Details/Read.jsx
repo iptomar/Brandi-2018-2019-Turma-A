@@ -423,11 +423,11 @@ class Read extends Component {
                           //Percorre todas as folhas de obra e apresenta-as 
                           getThis.state.data.folhasObra.map(function (obj) {
                             return (
-                              <tr key={obj.folhaObraID}>
+                              <tr key={obj.folhaDeObraID}>
                                 <th>
-                                  <a href={"/folhaDeObra/" + obj.folhaObraID + "/editar"}>
+                                  <a href={"/folhaDeObra/" + obj.folhaDeObraID + "/editar"}>
                                     Folha de Obra Nº
-                                      {obj.folhaObraID}
+                                      {obj.folhaDeObraID}
                                   </a>
                                 </th>
                               </tr>

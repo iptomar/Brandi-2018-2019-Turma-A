@@ -378,12 +378,12 @@ class Read extends Component {
                 {
                   //Verifica se existem testes de solventes associados a esta ficha de registo
                   // e identificação
-                  getThis.state.data.testessolubilizacao.length !== 0 ?
+                  getThis.state.data.testesSolventes.length !== 0 ?
                     <table className="table">
                       <tbody>
                         {
                           //Percorre todos os testes de solventes e apresenta-os 
-                          getThis.state.data.testessolubilizacao.map(function (obj) {
+                          getThis.state.data.testesSolventes.map(function (obj) {
                             return (
                               <tr key={obj.id}>
                                 <th>
@@ -416,18 +416,18 @@ class Read extends Component {
                 {
                   //Verifica se existem folha de obra associadas a esta ficha de registo
                   // e identificação
-                  getThis.state.data.folhaobra.length !== 0 ?
+                  getThis.state.data.folhaObra.length !== 0 ?
                     <table className="table">
                       <tbody>
                         {
                           //Percorre todas as folhas de obra e apresenta-as 
-                          getThis.state.data.folhaobra.map(function (obj) {
+                          getThis.state.data.folhaObra.map(function (obj) {
                             return (
-                              <tr key={obj.folhaobraID}>
+                              <tr key={obj.folhaObraID}>
                                 <th>
-                                  <a href={"/fichaTecnica/" + obj.folhaobraID + "/detalhes"}>
+                                  <a href={"/fichaTecnica/" + obj.folhaObraID + "/detalhes"}>
                                     Folha de Obra Nº
-                                      {obj.folhaobraID}
+                                      {obj.folhaObraID}
                                   </a>
                                 </th>
                               </tr>

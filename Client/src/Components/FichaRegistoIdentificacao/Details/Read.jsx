@@ -359,6 +359,82 @@ class Read extends Component {
                     </div>
                 }
               </div>
+              <div>
+              <hr></hr>
+              <h4>Testes de Solventes</h4>
+              <div>
+                {
+                  //Verifica se existem ficha técnicas associadas a esta ficha de registo
+                  // e identificação
+                  getThis.state.data.fichatecnicas.length !== 0 ?
+                    <table className="table">
+                      <tbody>
+                        {
+                          //Percorre todas fichas técnicas e apresenta-as
+                          // getThis.state.data.fichatecnicas.forEach(element => 
+                          getThis.state.data.fichatecnicas.map(function (obj) {
+                            return (
+                              <tr key={obj.fichaTecnicaID}>
+                                <th>
+                                  <a href={"/fichaTecnica/" + obj.fichaTecnicaID + "/detalhes"}>
+                                    Ficha Técnica Nº
+                                      {obj.fichaTecnicaID}
+                                  </a>
+                                </th>
+                              </tr>
+                            );
+                          })
+                        }
+                      </tbody>
+                    </table>
+                    :
+                    <div>
+                      {/* Se não, apresenta uma mensagem informativa */}
+                      <p>Ainda não existem testes de solventes associadas a este objeto.</p>
+                      {
+                        <a href={"/testesSolubilizacao/" + getThis.props.id+"/criar"}>Crie um novo teste de solvente</a>
+                      }
+                    </div>
+                }
+              </div>
+              <div>
+              <hr></hr>
+              <h4>Folhas de Obra</h4>
+              <div>
+                {
+                  //Verifica se existem ficha técnicas associadas a esta ficha de registo
+                  // e identificação
+                  getThis.state.data.fichatecnicas.length !== 0 ?
+                    <table className="table">
+                      <tbody>
+                        {
+                          //Percorre todas fichas técnicas e apresenta-as
+                          // getThis.state.data.fichatecnicas.forEach(element => 
+                          getThis.state.data.fichatecnicas.map(function (obj) {
+                            return (
+                              <tr key={obj.fichaTecnicaID}>
+                                <th>
+                                  <a href={"/fichaTecnica/" + obj.fichaTecnicaID + "/detalhes"}>
+                                    Ficha Técnica Nº
+                                      {obj.fichaTecnicaID}
+                                  </a>
+                                </th>
+                              </tr>
+                            );
+                          })
+                        }
+                      </tbody>
+                    </table>
+                    :
+                    <div>
+                      {/* Se não, apresenta uma mensagem informativa */}
+                      <p>Ainda não existem folhas de obra associadas a este objeto.</p>
+                      {
+                        <a href={"/folhaDeObra/" + getThis.props.id+"/criar"}>Crie uma nova folha de obra</a>
+                      }
+                    </div>
+                }
+              </div>
             </div>
           </div>
         );

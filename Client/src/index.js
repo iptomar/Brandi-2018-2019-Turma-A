@@ -55,7 +55,7 @@ ReactDOM.render(
             <Route path="/interessados" component={IndexInteressados} />
             {/* Folha de Obra */}
             <Route path="/folhaDeObra/:id/criar" component={(r) => <CreateFolhaDeObra id={r.match.params.id} />} />
-            <Route path="/folhaDeObra/:id/editar" component={(r) => <EditFolhaDeObra id={r.match.params.id} />} />
+            <Route path="/folhaDeObra/:id/detalhes" component={(r) => <EditFolhaDeObra id={r.match.params.id} />} />
             {/* Testes de Solubilização */}
             <Route path="/testesSolubilizacao/:id/criar" component={(r) => <CreateTestesSolubilizacao id={r.match.params.id} />} />
             {/* Default */}

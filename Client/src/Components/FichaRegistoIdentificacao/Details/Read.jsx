@@ -425,7 +425,7 @@ class Read extends Component {
                             return (
                               <tr key={obj.folhaDeObraID}>
                                 <th>
-                                  <a href={"/folhaDeObra/" + obj.folhaDeObraID + "/editar"}>
+                                  <a href={"/folhaDeObra/" + obj.folhaDeObraID + "/detalhes"}>
                                     Folha de Obra Nº
                                       {obj.folhaDeObraID}
                                   </a>

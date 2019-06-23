@@ -81,24 +81,14 @@ class Edit extends Component {
   };
 
   preencheLinha = i => {
-    document
-      .querySelectorAll("#linha")
-      [i].setAttribute("data-id", this.state.data[i].folhaDeObraLinhaID);
-    document.querySelectorAll("#dataL")[i].value = this.state.data[
-      i
-    ].data.substring(0, 10);
-    document.querySelectorAll("#dpL")[i].value = this.state.data[
-      i
-    ].designacaoProcedimento;
+    document.querySelectorAll("#linha")[i].setAttribute("data-id", this.state.data[i].folhaDeObraLinhaID);
+    document.querySelectorAll("#dataL")[i].value = this.state.data[i].data.substring(0, 10);
+    document.querySelectorAll("#dpL")[i].value = this.state.data[i].designacaoProcedimento;
     document.querySelectorAll("#mpL")[i].value = this.state.data[i].materiais;
     document.querySelectorAll("#qL")[i].value = this.state.data[i].quantidades;
     document.querySelectorAll("#durL")[i].value = this.state.data[i].duracao;
-    document.querySelectorAll("#tecnicoL")[i].value = this.state.data[
-      i
-    ].tecnico;
-    document.querySelectorAll("#obsL")[i].value = this.state.data[
-      i
-    ].observacoes;
+    document.querySelectorAll("#tecnicoL")[i].value = this.state.data[i].tecnico;
+    document.querySelectorAll("#obsL")[i].value = this.state.data[i].observacoes;
   };
 
   preencheTabela = () => {

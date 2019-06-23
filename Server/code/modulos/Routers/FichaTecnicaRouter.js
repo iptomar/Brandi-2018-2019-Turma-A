@@ -490,7 +490,13 @@ exports.readFichaTecnicaImagemGraficoRoute = async (app, bd) => {
         code = 200;
         resposta_servidor.stat = "Authenticated";
         resposta_servidor.resposta = resposta_bd.resposta;
-        resposta_servidor.resposta.imgGrafico = base64Img.base64Sync(path.join(__dirname, "../../", resposta_servidor.resposta.imgGrafico));
+        try {
+          resposta_servidor.resposta.imgGrafico = base64Img.base64Sync(path.join(__dirname, "../../", resposta_servidor.resposta.imgGrafico));
+        }
+        catch{
+          console.log('erro por corrigir');
+        }
+        
         //resposta_servidor.resposta.imgGrafico = base64Img.base64(path.join(__dirname, "../../", resposta_servidor.resposta.imgGrafico), function (err, data) { });
 
 

@@ -2,6 +2,7 @@
 CREATE DATABASE brandi_a;
 USE brandi_a;
 
+-- fica
 DROP TABLE IF EXISTS tbl_roles;
 CREATE TABLE tbl_roles
 (
@@ -10,7 +11,7 @@ CREATE TABLE tbl_roles
     PRIMARY KEY(roleID)
 );
 
-
+-- fica
 DROP TABLE IF EXISTS tbl_utilizadores;
 CREATE TABLE tbl_utilizadores
 (
@@ -25,6 +26,7 @@ CREATE TABLE tbl_utilizadores
     FOREIGN KEY(roleFK) REFERENCES tbl_roles(roleID)
 );
 
+-- fica
 DROP TABLE IF EXISTS tbl_tecnicos;
 CREATE TABLE tbl_tecnicos
 (
@@ -37,6 +39,7 @@ CREATE TABLE tbl_tecnicos
     FOREIGN KEY(userFK) REFERENCES tbl_utilizadores(userID)
 );
 
+-- fica
 DROP TABLE IF EXISTS tbl_interessados;
 CREATE TABLE tbl_interessados
 (
@@ -48,6 +51,7 @@ CREATE TABLE tbl_interessados
     PRIMARY KEY(interessadoID)
 );
 
+-- fica
 DROP TABLE IF EXISTS tbl_fichaRegistoIdentificacao;
 CREATE TABLE tbl_fichaRegistoIdentificacao
 (
@@ -79,6 +83,7 @@ CREATE TABLE tbl_fichaRegistoIdentificacao
     FOREIGN KEY(interessadoFK) REFERENCES tbl_interessados(interessadoID)
 );
 
+-- fica
 DROP TABLE IF EXISTS tbl_folhasDeObra;
 CREATE TABLE tbl_folhasDeObra
 (
@@ -88,6 +93,7 @@ CREATE TABLE tbl_folhasDeObra
     FOREIGN KEY(fichaRIFK) REFERENCES tbl_fichaRegistoIdentificacao(fichaRegistoID)
 );
 
+-- fica
 DROP TABLE IF EXISTS tbl_folhaDeObraLinha;
 CREATE TABLE tbl_folhaDeObraLinha
 (
@@ -104,6 +110,7 @@ CREATE TABLE tbl_folhaDeObraLinha
     FOREIGN KEY(folhaDeObraFK) REFERENCES tbl_folhasDeObra(folhaDeObraID)
 );
 
+-- fica
 DROP TABLE IF EXISTS tbl_tecnicosFolhasDeObra;
 CREATE TABLE tbl_tecnicosFolhasDeObra
 (
@@ -115,6 +122,7 @@ CREATE TABLE tbl_tecnicosFolhasDeObra
     FOREIGN KEY(folhaDeObraFK) REFERENCES tbl_folhasDeObra(folhaDeObraID)
 );
 
+-- fica
 DROP TABLE IF EXISTS tbl_registoTecnicos;
 CREATE TABLE tbl_registoTecnicos
 (
@@ -126,37 +134,7 @@ CREATE TABLE tbl_registoTecnicos
     FOREIGN KEY(tecnicoFK) REFERENCES tbl_tecnicos(tecnicoID)
 );
 
-DROP TABLE IF EXISTS tbl_materiaisFolhaObra;
-CREATE TABLE tbl_materiaisFolhaObra
-(
-    materialID INT NOT NULL AUTO_INCREMENT,
-    nome VARCHAR(255) NOT NULL,
-    PRIMARY KEY(materialID)
-);
-
-DROP TABLE IF EXISTS tbl_folhasDeObraMateriais;
-CREATE TABLE tbl_folhasDeObraMateriais
-(
-    folhaDeObraMaterialID INT NOT NULL AUTO_INCREMENT,
-    quantidade DOUBLE NOT NULL,
-    folhaDeObraFK INT NOT NULL,
-    materialFK INT NOT NULL,
-    PRIMARY KEY(folhaDeObraMaterialID),
-    FOREIGN KEY(folhaDeObraFK) REFERENCES tbl_folhasDeObra(folhaDeObraID),
-    FOREIGN KEY(materialFK) REFERENCES tbl_materiaisFolhaObra(materialID)
-);
-
-DROP TABLE IF EXISTS tbl_interessadosContactos;
-CREATE TABLE tbl_interessadosContactos
-(
-    interessadoContactoID INT NOT NULL AUTO_INCREMENT,
-    contacto VARCHAR(255) NOT NULL,
-    interessadoFK INT NOT NULL,
-    PRIMARY KEY(interessadoContactoID),
-    FOREIGN KEY(interessadoFK) REFERENCES tbl_interessados(interessadoID)
-);
-
-
+-- fica
 DROP TABLE IF EXISTS tbl_fichasTecnicas;
 CREATE TABLE tbl_fichasTecnicas
 (
@@ -277,194 +255,6 @@ CREATE TABLE tbl_fichasTecnicas
     REFERENCES tbl_fichaRegistoIdentificacao(fichaRegistoID)
 );
 
-DROP TABLE IF EXISTS tbl_documentacaoFotografica;
-CREATE TABLE tbl_documentacaoFotografica
-(
-    documentacaoFotograficaID INT NOT NULL AUTO_INCREMENT,
-    nome VARCHAR(255) NOT NULL,
-    fichaTecnicaFK INT NOT NULL,
-    PRIMARY KEY(documentacaoFotograficaID),
-	FOREIGN KEY(fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
-);
-
-DROP TABLE IF EXISTS tbl_documentacaoGrafica;
-CREATE TABLE tbl_documentacaoGrafica
-(
-    documentacaoGraficaID INT NOT NULL AUTO_INCREMENT,
-    nome VARCHAR(255) NOT NULL,
-    fichaTecnicaFK INT NOT NULL,
-    PRIMARY KEY(documentacaoGraficaID),
-	FOREIGN KEY(fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
-);
-
-DROP TABLE IF EXISTS tbl_detalhesFotografia;
-CREATE TABLE tbl_detalhesFotografia
-(
-    detalhesFotografiaID INT NOT NULL AUTO_INCREMENT,
-    tipoRegisto VARCHAR(255),
-    resolucao VARCHAR(255),
-    referencia VARCHAR(255),
-    formato VARCHAR(255),
-	fichaTecnicaFK INT NOT NULL,
-    PRIMARY KEY(detalhesFotografiaID),
-	FOREIGN KEY(fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
-);
-
-DROP TABLE IF EXISTS tbl_fotografias;
-CREATE TABLE tbl_fotografias
-(
-    fotografiaID INT NOT NULL AUTO_INCREMENT,
-    fotografia VARCHAR(255),
-	detalhesFotografiaFK INT NOT NULL,
-    PRIMARY KEY(fotografiaID),
-	FOREIGN KEY(detalhesFotografiaFK) REFERENCES tbl_detalhesFotografia(detalhesFotografiaID)
-);
-
-
-DROP TABLE IF EXISTS tbl_examesAnalises;
-CREATE TABLE tbl_examesAnalises
-(
-    exameAnaliseID INT NOT NULL AUTO_INCREMENT,
-    identificacaoMateriais VARCHAR(255),
-    identificacaoIntervencoes VARCHAR(255),
-	caracterizacaoEstadoConservacao VARCHAR(255),
-	identificacaoPatologias VARCHAR(255),
-    datacaoObjeto VARCHAR(255),
-	ensaioProdutos VARCHAR(255),
-	interpretacaoResultados VARCHAR(255),
-    conclusoes VARCHAR(255),
-	fichaTecnicaFK INT NOT NULL,
-    PRIMARY KEY(exameAnaliseID),
-	FOREIGN KEY(fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
-);
-
-DROP TABLE IF EXISTS tbl_especificacoesExames;
-CREATE TABLE tbl_especificacoesExames
-(
-    especificacoesExamesID INT NOT NULL AUTO_INCREMENT,
-	tipo VARCHAR(255),
-	localizacao VARCHAR(255),
-    objetosEspecificos VARCHAR(255),
-	resultados VARCHAR(255),
-	entidadeTecnica VARCHAR(255),
-	data DATE,
-	exameAnaliseFK INT NOT NULL,
-    PRIMARY KEY(especificacoesExamesID),
-    FOREIGN KEY(exameAnaliseFK) REFERENCES tbl_examesAnalises(exameAnaliseID)
-);
-
-DROP TABLE IF EXISTS tbl_testesEficacia;
-CREATE TABLE tbl_testesEficacia
-(
-    testeEficaciaID INT NOT NULL AUTO_INCREMENT,
-    identificacaoExtrato VARCHAR(255),
-    caracteristicas VARCHAR(255),
-    tecnicoResponsavel VARCHAR(255),
-    data DATE,
-    especificacoesExamesFK INT NOT NULL,
-    PRIMARY KEY(testeEficaciaID),
-    FOREIGN KEY(especificacoesExamesFK) REFERENCES tbl_especificacoesExames(especificacoesExamesID)
-);
-
-DROP TABLE IF EXISTS tbl_solventes;
-CREATE TABLE tbl_solventes
-(
-    solventeID INT NOT NULL AUTO_INCREMENT,
-    nome VARCHAR(255),
-    observacoes VARCHAR(255),
-    testeEficaciaFK INT NOT NULL,
-    PRIMARY KEY(solventeID),
-    FOREIGN KEY(testeEficaciaFK) REFERENCES tbl_testesEficacia(testeEficaciaID)
-);
-
-DROP TABLE IF EXISTS tbl_grausEficaciaSolubilizacao;
-CREATE TABLE tbl_grausEficaciaSolubilizacao
-(
-    grauID INT NOT NULL AUTO_INCREMENT,
-    numero INT,
-    nome VARCHAR(255),
-    solventeFK INT NOT NULL UNIQUE,
-    PRIMARY KEY(grauID),
-    FOREIGN KEY(solventeFK) REFERENCES tbl_solventes(solventeID)
-);
-
-DROP TABLE IF EXISTS tbl_materiais;
-CREATE TABLE tbl_materiais( 
-    materiaisID INT NOT NULL AUTO_INCREMENT,
-    estrutura VARCHAR(255) NOT NULL,
-    superficie VARCHAR(255) NOT NULL,
-    fichaTecnicaFK INT NOT NULL,
-    PRIMARY KEY(materiaisID), 
-    FOREIGN KEY (fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
-);
-
-DROP TABLE IF EXISTS tbl_condicoesAmbientaisLocal;
-CREATE TABLE tbl_condicoesAmbientaisLocal( 
-    condicoesAmbientaisLocalID INT NOT NULL AUTO_INCREMENT,
-	condicoesAmbientaisDescricao VARCHAR(255),
-    temperaturaFrioHumido INT,
-    temperaturaQuenteSeco INT,
-    humidadeFrioHumido INT,
-	humidadeQuenteSeco INT,
-	periodoFrioHumidoInicio VARCHAR(255),
-	periodoQuenteSecoInicio VARCHAR(255),
-	periodoFrioHumidoFim VARCHAR(255),
-	periodoQuenteSecoFim VARCHAR(255),
-	poluicaoAgentesPoluidores VARCHAR(255),
-	poluicaoFontes VARCHAR(255),
-	poluicaoResultados VARCHAR(255),
-	conclusoes VARCHAR(255),
-	fichaTecnicaFK INT NOT NULL,
-    PRIMARY KEY(condicoesAmbientaisLocalID), 
-    FOREIGN KEY (fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
-);
-
-DROP TABLE IF EXISTS tbl_iluminacao;
-CREATE TABLE tbl_iluminacao( 
-	iluminacaoID INT NOT NULL AUTO_INCREMENT,
-	radiacao VARCHAR(255),
-	origem VARCHAR(255),
-	valorIluminancia VARCHAR(255),
-	valorUVmedidos VARCHAR(255),
-	valorRealUV VARCHAR(255),
-	condicoesAmbientaisLocalFK INT NOT NULL,
-    PRIMARY KEY(iluminacaoID), 
-    FOREIGN KEY (condicoesAmbientaisLocalFK) REFERENCES tbl_condicoesAmbientaisLocal(condicoesAmbientaisLocalID)
-);
-
-DROP TABLE IF EXISTS tbl_Tecnicas;
-CREATE TABLE tbl_Tecnicas(
-        tecnicasID INT NOT NULL AUTO_INCREMENT,
-        estrutura VARCHAR(255) NOT NULL,
-        superficie VARCHAR(255) NOT NULL,
-        fichaTecnicaFK INT NOT NULL,
-        PRIMARY KEY (tecnicasID),
-        FOREIGN KEY (fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
-);
-
-DROP TABLE IF EXISTS tbl_equipasFichasTecnicas;
-CREATE TABLE tbl_equipasFichasTecnicas
-(
-    equipaTecnicoID INT NOT NULL AUTO_INCREMENT,
-    funcaoDesempenhada VARCHAR(255) NOT NULL,
-    tecnicoFK INT NOT NULL,
-    fichaTecnicaFK INT NOT NULL,
-    PRIMARY KEY(equipaTecnicoID),
-    FOREIGN KEY(tecnicoFK) REFERENCES tbl_tecnicos(tecnicoID),
-    FOREIGN KEY(fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
-);
-
-DROP TABLE IF EXISTS tbl_interessadosFichasTecnicas;
-CREATE TABLE tbl_interessadosFichasTecnicas
-(
-    interessadoFichaTecnicaID INT NOT NULL AUTO_INCREMENT,
-    interessadoFK INT NOT NULL, 
-	fichaTecnicaFK INT NOT NULL,
-    PRIMARY KEY(interessadoFichaTecnicaID),
-    FOREIGN KEY(interessadoFK) REFERENCES tbl_interessados(interessadoID),
-	FOREIGN KEY(fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
-);
-
 -- Adicionei estas tabelas para testes da pagina 4
 Drop table if exists tbl_testespagina4objectivosGerais;
 create table tbl_testespagina4objectivosGerais(
@@ -532,6 +322,9 @@ create table tbl_imagensFichaTecnica(
     FOREIGN key (fichaTecnicaFK) REFERENCES tbl_fichasTecnicas(fichaTecnicaID)
 );
 
+--           INSERTS           --
+
+
 INSERT INTO tbl_roles (role) values("Admin");
 INSERT INTO tbl_roles (role) values("Aluno");
 INSERT INTO tbl_roles (role) values("Tecnicos");
@@ -566,11 +359,11 @@ INSERT INTO tbl_registoTecnicos (fichaRegistoFK, tecnicoFK) values (4, 4);
 INSERT INTO tbl_registoTecnicos (fichaRegistoFK, tecnicoFK) values (5, 5);
 INSERT INTO tbl_registoTecnicos (fichaRegistoFK, tecnicoFK) values (6, 1);
 
-INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas,codPostalMecenas,contactoMecenas,bemIntegradoEmConjunto,tipoBensConjunto,elemConstConj,materiasElementosAcessorios,marcasInscricoesAssinaturas,marcasInscricoesMontagem,marcasInscricoesConstrucao,classPatrimonial,epoca,qualidade,materiaisEstruturaSuporte,materiaisSuperficies,tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio,condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo,ilumArtValorIluminancia,ilumArtValurUV,ilumArtValorRealUV,ilumNatOrigem,ilumNatValorIluminancia,ilumNatValorUV,ilumNatValorRealUV,poluicaoAgentes,poluicaoFontesOrigem,poluicaoResultados,poluicaoObservacoesConclusoes, examesAnalisesInterpResultados,examesAnalisesObsConclusoes,estadoConservFQMestrutura,estadoConservFQMsuperficie,estadoConservFQMelementosAcess,estadoConservBioEstrutura,estadoConservBioSuperficie,estadoConservBioElementosAcess,estadoConservObsConclusoes,estruturaIntervAnter,superficieIntervAnter,elementosAcessoriosIntervAnter,observaçoesConclusoesPag6,tipoInterv,aspetosEspecificosPag6,tipoIntervCR,EstruturaPropPag6,EstruturaPropRecPag6,SuperficiePropPag6,SuperficiePropRecPag6,ElementosAcessPropRecPag6,estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8,elementosAcessoriosPag8,recursosElementosAcPag8,observaçoesConclusoesPag8,relTecInterLCRM,tipoDesigOrig,refOrig,entidadeOrig,tipoDesigDocGraf,refDocGraf,entidadeDocGraf,tipoDesigExames,refExames,entidadeExames,atledpArqDoc,tipoArqDoc,localArqDoc,cotaArqDoc,atledpIcon,tipoIcon,localIcon,cotaIcon,atledpBiblio,tipoBiblio,localBiblio,cotaBiblio,atledpOutras,tipoOutras,localOutras,cotaOutras,fichaRegistoFK) VALUES (true, "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", true, "a", "a", "a", "a", "a", "a", "a", "Tardio", "Boa", "a", "a", "a", "a", "a", "50", "50", "10", "12", "50", "50", "10", "12", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", 1);
-INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas,codPostalMecenas,contactoMecenas,bemIntegradoEmConjunto,tipoBensConjunto,elemConstConj,materiasElementosAcessorios,marcasInscricoesAssinaturas,marcasInscricoesMontagem,marcasInscricoesConstrucao,classPatrimonial,epoca,qualidade,materiaisEstruturaSuporte,materiaisSuperficies,tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio,condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo,ilumArtValorIluminancia,ilumArtValurUV,ilumArtValorRealUV,ilumNatOrigem,ilumNatValorIluminancia,ilumNatValorUV,ilumNatValorRealUV,poluicaoAgentes,poluicaoFontesOrigem,poluicaoResultados,poluicaoObservacoesConclusoes, examesAnalisesInterpResultados,examesAnalisesObsConclusoes,estadoConservFQMestrutura,estadoConservFQMsuperficie,estadoConservFQMelementosAcess,estadoConservBioEstrutura,estadoConservBioSuperficie,estadoConservBioElementosAcess,estadoConservObsConclusoes,estruturaIntervAnter,superficieIntervAnter,elementosAcessoriosIntervAnter,observaçoesConclusoesPag6,tipoInterv,aspetosEspecificosPag6,tipoIntervCR,EstruturaPropPag6,EstruturaPropRecPag6,SuperficiePropPag6,SuperficiePropRecPag6,ElementosAcessPropRecPag6,estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8,elementosAcessoriosPag8,recursosElementosAcPag8,observaçoesConclusoesPag8,relTecInterLCRM,tipoDesigOrig,refOrig,entidadeOrig,tipoDesigDocGraf,refDocGraf,entidadeDocGraf,tipoDesigExames,refExames,entidadeExames,atledpArqDoc,tipoArqDoc,localArqDoc,cotaArqDoc,atledpIcon,tipoIcon,localIcon,cotaIcon,atledpBiblio,tipoBiblio,localBiblio,cotaBiblio,atledpOutras,tipoOutras,localOutras,cotaOutras,fichaRegistoFK) VALUES (true, "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", true, "b", "b", "b", "b", "b", "b", "b", "Tardio", "Boa", "b", "b", "b", "b", "b", "50", "50", "10", "12", "50", "50", "10", "12", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", 1);
-INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas,codPostalMecenas,contactoMecenas,bemIntegradoEmConjunto,tipoBensConjunto,elemConstConj,materiasElementosAcessorios,marcasInscricoesAssinaturas,marcasInscricoesMontagem,marcasInscricoesConstrucao,classPatrimonial,epoca,qualidade,materiaisEstruturaSuporte,materiaisSuperficies,tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio,condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo,ilumArtValorIluminancia,ilumArtValurUV,ilumArtValorRealUV,ilumNatOrigem,ilumNatValorIluminancia,ilumNatValorUV,ilumNatValorRealUV,poluicaoAgentes,poluicaoFontesOrigem,poluicaoResultados,poluicaoObservacoesConclusoes, examesAnalisesInterpResultados,examesAnalisesObsConclusoes,estadoConservFQMestrutura,estadoConservFQMsuperficie,estadoConservFQMelementosAcess,estadoConservBioEstrutura,estadoConservBioSuperficie,estadoConservBioElementosAcess,estadoConservObsConclusoes,estruturaIntervAnter,superficieIntervAnter,elementosAcessoriosIntervAnter,observaçoesConclusoesPag6,tipoInterv,aspetosEspecificosPag6,tipoIntervCR,EstruturaPropPag6,EstruturaPropRecPag6,SuperficiePropPag6,SuperficiePropRecPag6,ElementosAcessPropRecPag6,estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8,elementosAcessoriosPag8,recursosElementosAcPag8,observaçoesConclusoesPag8,relTecInterLCRM,tipoDesigOrig,refOrig,entidadeOrig,tipoDesigDocGraf,refDocGraf,entidadeDocGraf,tipoDesigExames,refExames,entidadeExames,atledpArqDoc,tipoArqDoc,localArqDoc,cotaArqDoc,atledpIcon,tipoIcon,localIcon,cotaIcon,atledpBiblio,tipoBiblio,localBiblio,cotaBiblio,atledpOutras,tipoOutras,localOutras,cotaOutras,fichaRegistoFK) VALUES (true, "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", true, "c", "c", "c", "c", "c", "c", "c", "Tardio", "Boa", "c", "c", "c", "c", "c", "50", "50", "10", "12", "50", "50", "10", "12", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", 1);
-INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas,codPostalMecenas,contactoMecenas,bemIntegradoEmConjunto,tipoBensConjunto,elemConstConj,materiasElementosAcessorios,marcasInscricoesAssinaturas,marcasInscricoesMontagem,marcasInscricoesConstrucao,classPatrimonial,epoca,qualidade,materiaisEstruturaSuporte,materiaisSuperficies,tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio,condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo,ilumArtValorIluminancia,ilumArtValurUV,ilumArtValorRealUV,ilumNatOrigem,ilumNatValorIluminancia,ilumNatValorUV,ilumNatValorRealUV,poluicaoAgentes,poluicaoFontesOrigem,poluicaoResultados,poluicaoObservacoesConclusoes, examesAnalisesInterpResultados,examesAnalisesObsConclusoes,estadoConservFQMestrutura,estadoConservFQMsuperficie,estadoConservFQMelementosAcess,estadoConservBioEstrutura,estadoConservBioSuperficie,estadoConservBioElementosAcess,estadoConservObsConclusoes,estruturaIntervAnter,superficieIntervAnter,elementosAcessoriosIntervAnter,observaçoesConclusoesPag6,tipoInterv,aspetosEspecificosPag6,tipoIntervCR,EstruturaPropPag6,EstruturaPropRecPag6,SuperficiePropPag6,SuperficiePropRecPag6,ElementosAcessPropRecPag6,estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8,elementosAcessoriosPag8,recursosElementosAcPag8,observaçoesConclusoesPag8,relTecInterLCRM,tipoDesigOrig,refOrig,entidadeOrig,tipoDesigDocGraf,refDocGraf,entidadeDocGraf,tipoDesigExames,refExames,entidadeExames,atledpArqDoc,tipoArqDoc,localArqDoc,cotaArqDoc,atledpIcon,tipoIcon,localIcon,cotaIcon,atledpBiblio,tipoBiblio,localBiblio,cotaBiblio,atledpOutras,tipoOutras,localOutras,cotaOutras,fichaRegistoFK) VALUES (true, "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", true, "d", "d", "d", "d", "d", "d", "d", "Tardio", "Boa", "d", "d", "d", "d", "d", "50", "50", "10", "12", "50", "50", "10", "12", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", 1);
-INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas,codPostalMecenas,contactoMecenas,bemIntegradoEmConjunto,tipoBensConjunto,elemConstConj,materiasElementosAcessorios,marcasInscricoesAssinaturas,marcasInscricoesMontagem,marcasInscricoesConstrucao,classPatrimonial,epoca,qualidade,materiaisEstruturaSuporte,materiaisSuperficies,tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio,condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo,ilumArtValorIluminancia,ilumArtValurUV,ilumArtValorRealUV,ilumNatOrigem,ilumNatValorIluminancia,ilumNatValorUV,ilumNatValorRealUV,poluicaoAgentes,poluicaoFontesOrigem,poluicaoResultados,poluicaoObservacoesConclusoes, examesAnalisesInterpResultados,examesAnalisesObsConclusoes,estadoConservFQMestrutura,estadoConservFQMsuperficie,estadoConservFQMelementosAcess,estadoConservBioEstrutura,estadoConservBioSuperficie,estadoConservBioElementosAcess,estadoConservObsConclusoes,estruturaIntervAnter,superficieIntervAnter,elementosAcessoriosIntervAnter,observaçoesConclusoesPag6,tipoInterv,aspetosEspecificosPag6,tipoIntervCR,EstruturaPropPag6,EstruturaPropRecPag6,SuperficiePropPag6,SuperficiePropRecPag6,ElementosAcessPropRecPag6,estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8,elementosAcessoriosPag8,recursosElementosAcPag8,observaçoesConclusoesPag8,relTecInterLCRM,tipoDesigOrig,refOrig,entidadeOrig,tipoDesigDocGraf,refDocGraf,entidadeDocGraf,tipoDesigExames,refExames,entidadeExames,atledpArqDoc,tipoArqDoc,localArqDoc,cotaArqDoc,atledpIcon,tipoIcon,localIcon,cotaIcon,atledpBiblio,tipoBiblio,localBiblio,cotaBiblio,atledpOutras,tipoOutras,localOutras,cotaOutras,fichaRegistoFK) VALUES (true, "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", true, "e", "e", "e", "e", "e", "e", "e", "Tardio", "Boa", "e", "e", "e", "e", "e", "50", "50", "10", "12", "50", "50", "10", "12", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", 1);
+INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas,codPostalMecenas,contactoMecenas,bemIntegradoEmConjunto,tipoBensConjunto,elemConstConj,materiasElementosAcessorios,marcasInscricoesAssinaturas,marcasInscricoesMontagem,marcasInscricoesConstrucao,classPatrimonial,epoca,qualidade,materiaisEstruturaSuporte,materiaisSuperficies,tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio,condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo,ilumArtValorIluminancia,ilumArtValurUV,ilumArtValorRealUV,ilumNatOrigem,ilumNatValorIluminancia,ilumNatValorUV,ilumNatValorRealUV,poluicaoAgentes,poluicaoFontesOrigem,poluicaoResultados,poluicaoObservacoesConclusoes, examesAnalisesInterpResultados,examesAnalisesObsConclusoes,estadoConservFQMestrutura,estadoConservFQMsuperficie,estadoConservFQMelementosAcess,estadoConservBioEstrutura,estadoConservBioSuperficie,estadoConservBioElementosAcess,estadoConservObsConclusoes,estruturaIntervAnter,superficieIntervAnter,elementosAcessoriosIntervAnter,observaçoesConclusoesPag6,tipoInterv,aspetosEspecificosPag6,tipoIntervCR,EstruturaPropPag6,EstruturaPropRecPag6,SuperficiePropPag6,SuperficiePropRecPag6,ElementosAcessPropRecPag6,observaçoesConclusoesPag7,estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8,elementosAcessoriosPag8,recursosElementosAcPag8,observaçoesConclusoesPag8,relTecInterLCRM,tipoDesigOrig,refOrig,entidadeOrig,tipoDesigDocGraf,refDocGraf,entidadeDocGraf,tipoDesigExames,refExames,entidadeExames,atledpArqDoc,tipoArqDoc,localArqDoc,cotaArqDoc,atledpIcon,tipoIcon,localIcon,cotaIcon,atledpBiblio,tipoBiblio,localBiblio,cotaBiblio,atledpOutras,tipoOutras,localOutras,cotaOutras,fichaRegistoFK) VALUES (true, "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", true, "a", "a", "a", "a", "a", "a", "a", "Tardio", "Boa", "a", "a", "a", "a", "a", "50", "50", "10", "12", "50", "50", "10", "12", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", 1);
+INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas,codPostalMecenas,contactoMecenas,bemIntegradoEmConjunto,tipoBensConjunto,elemConstConj,materiasElementosAcessorios,marcasInscricoesAssinaturas,marcasInscricoesMontagem,marcasInscricoesConstrucao,classPatrimonial,epoca,qualidade,materiaisEstruturaSuporte,materiaisSuperficies,tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio,condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo,ilumArtValorIluminancia,ilumArtValurUV,ilumArtValorRealUV,ilumNatOrigem,ilumNatValorIluminancia,ilumNatValorUV,ilumNatValorRealUV,poluicaoAgentes,poluicaoFontesOrigem,poluicaoResultados,poluicaoObservacoesConclusoes, examesAnalisesInterpResultados,examesAnalisesObsConclusoes,estadoConservFQMestrutura,estadoConservFQMsuperficie,estadoConservFQMelementosAcess,estadoConservBioEstrutura,estadoConservBioSuperficie,estadoConservBioElementosAcess,estadoConservObsConclusoes,estruturaIntervAnter,superficieIntervAnter,elementosAcessoriosIntervAnter,observaçoesConclusoesPag6,tipoInterv,aspetosEspecificosPag6,tipoIntervCR,EstruturaPropPag6,EstruturaPropRecPag6,SuperficiePropPag6,SuperficiePropRecPag6,ElementosAcessPropRecPag6,observaçoesConclusoesPag7,estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8,elementosAcessoriosPag8,recursosElementosAcPag8,observaçoesConclusoesPag8,relTecInterLCRM,tipoDesigOrig,refOrig,entidadeOrig,tipoDesigDocGraf,refDocGraf,entidadeDocGraf,tipoDesigExames,refExames,entidadeExames,atledpArqDoc,tipoArqDoc,localArqDoc,cotaArqDoc,atledpIcon,tipoIcon,localIcon,cotaIcon,atledpBiblio,tipoBiblio,localBiblio,cotaBiblio,atledpOutras,tipoOutras,localOutras,cotaOutras,fichaRegistoFK) VALUES (true, "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", true, "b", "b", "b", "b", "b", "b", "b", "Tardio", "Boa", "b", "b", "b", "b", "b", "50", "50", "10", "12", "50", "50", "10", "12", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", 1);
+INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas,codPostalMecenas,contactoMecenas,bemIntegradoEmConjunto,tipoBensConjunto,elemConstConj,materiasElementosAcessorios,marcasInscricoesAssinaturas,marcasInscricoesMontagem,marcasInscricoesConstrucao,classPatrimonial,epoca,qualidade,materiaisEstruturaSuporte,materiaisSuperficies,tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio,condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo,ilumArtValorIluminancia,ilumArtValurUV,ilumArtValorRealUV,ilumNatOrigem,ilumNatValorIluminancia,ilumNatValorUV,ilumNatValorRealUV,poluicaoAgentes,poluicaoFontesOrigem,poluicaoResultados,poluicaoObservacoesConclusoes, examesAnalisesInterpResultados,examesAnalisesObsConclusoes,estadoConservFQMestrutura,estadoConservFQMsuperficie,estadoConservFQMelementosAcess,estadoConservBioEstrutura,estadoConservBioSuperficie,estadoConservBioElementosAcess,estadoConservObsConclusoes,estruturaIntervAnter,superficieIntervAnter,elementosAcessoriosIntervAnter,observaçoesConclusoesPag6,tipoInterv,aspetosEspecificosPag6,tipoIntervCR,EstruturaPropPag6,EstruturaPropRecPag6,SuperficiePropPag6,SuperficiePropRecPag6,ElementosAcessPropRecPag6,observaçoesConclusoesPag7,estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8,elementosAcessoriosPag8,recursosElementosAcPag8,observaçoesConclusoesPag8,relTecInterLCRM,tipoDesigOrig,refOrig,entidadeOrig,tipoDesigDocGraf,refDocGraf,entidadeDocGraf,tipoDesigExames,refExames,entidadeExames,atledpArqDoc,tipoArqDoc,localArqDoc,cotaArqDoc,atledpIcon,tipoIcon,localIcon,cotaIcon,atledpBiblio,tipoBiblio,localBiblio,cotaBiblio,atledpOutras,tipoOutras,localOutras,cotaOutras,fichaRegistoFK) VALUES (true, "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", true, "c", "c", "c", "c", "c", "c", "c", "Tardio", "Boa", "c", "c", "c", "c", "c", "50", "50", "10", "12", "50", "50", "10", "12", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", "c", 1);
+INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas,codPostalMecenas,contactoMecenas,bemIntegradoEmConjunto,tipoBensConjunto,elemConstConj,materiasElementosAcessorios,marcasInscricoesAssinaturas,marcasInscricoesMontagem,marcasInscricoesConstrucao,classPatrimonial,epoca,qualidade,materiaisEstruturaSuporte,materiaisSuperficies,tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio,condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo,ilumArtValorIluminancia,ilumArtValurUV,ilumArtValorRealUV,ilumNatOrigem,ilumNatValorIluminancia,ilumNatValorUV,ilumNatValorRealUV,poluicaoAgentes,poluicaoFontesOrigem,poluicaoResultados,poluicaoObservacoesConclusoes, examesAnalisesInterpResultados,examesAnalisesObsConclusoes,estadoConservFQMestrutura,estadoConservFQMsuperficie,estadoConservFQMelementosAcess,estadoConservBioEstrutura,estadoConservBioSuperficie,estadoConservBioElementosAcess,estadoConservObsConclusoes,estruturaIntervAnter,superficieIntervAnter,elementosAcessoriosIntervAnter,observaçoesConclusoesPag6,tipoInterv,aspetosEspecificosPag6,tipoIntervCR,EstruturaPropPag6,EstruturaPropRecPag6,SuperficiePropPag6,SuperficiePropRecPag6,ElementosAcessPropRecPag6,observaçoesConclusoesPag7,estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8,elementosAcessoriosPag8,recursosElementosAcPag8,observaçoesConclusoesPag8,relTecInterLCRM,tipoDesigOrig,refOrig,entidadeOrig,tipoDesigDocGraf,refDocGraf,entidadeDocGraf,tipoDesigExames,refExames,entidadeExames,atledpArqDoc,tipoArqDoc,localArqDoc,cotaArqDoc,atledpIcon,tipoIcon,localIcon,cotaIcon,atledpBiblio,tipoBiblio,localBiblio,cotaBiblio,atledpOutras,tipoOutras,localOutras,cotaOutras,fichaRegistoFK) VALUES (true, "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", true, "d", "d", "d", "d", "d", "d", "d", "Tardio", "Boa", "d", "d", "d", "d", "d", "50", "50", "10", "12", "50", "50", "10", "12", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", 1);
+INSERT INTO tbl_fichasTecnicas (visible,localizacao,proprietario,codPostalProprietario,emailProprietario,contactoProprietario,donoObra,codPostalDonoObra,contactoDonoObra,mecenas,codPostalMecenas,contactoMecenas,bemIntegradoEmConjunto,tipoBensConjunto,elemConstConj,materiasElementosAcessorios,marcasInscricoesAssinaturas,marcasInscricoesMontagem,marcasInscricoesConstrucao,classPatrimonial,epoca,qualidade,materiaisEstruturaSuporte,materiaisSuperficies,tecnicasEstruturaSuporte,tecnicasSuperficie,condAmbDescricao,condAmbFrioTemperatura,condAmbFrioHumidade,condAmbFrioPeriodoInicio,condAmbFrioPeriodoFim,condAmbQuenteTemperatura,condAmbQuenteHumidade,condAmbQuentePeriodoInicio,condAmbQuentePeriodoFim,ilumArtTipo,ilumArtValorIluminancia,ilumArtValurUV,ilumArtValorRealUV,ilumNatOrigem,ilumNatValorIluminancia,ilumNatValorUV,ilumNatValorRealUV,poluicaoAgentes,poluicaoFontesOrigem,poluicaoResultados,poluicaoObservacoesConclusoes, examesAnalisesInterpResultados,examesAnalisesObsConclusoes,estadoConservFQMestrutura,estadoConservFQMsuperficie,estadoConservFQMelementosAcess,estadoConservBioEstrutura,estadoConservBioSuperficie,estadoConservBioElementosAcess,estadoConservObsConclusoes,estruturaIntervAnter,superficieIntervAnter,elementosAcessoriosIntervAnter,observaçoesConclusoesPag6,tipoInterv,aspetosEspecificosPag6,tipoIntervCR,EstruturaPropPag6,EstruturaPropRecPag6,SuperficiePropPag6,SuperficiePropRecPag6,ElementosAcessPropRecPag6,observaçoesConclusoesPag7,estruturaPag8,recursosEstruturaPag8,superficiePag8,recursosSuperficiePag8,elementosAcessoriosPag8,recursosElementosAcPag8,observaçoesConclusoesPag8,relTecInterLCRM,tipoDesigOrig,refOrig,entidadeOrig,tipoDesigDocGraf,refDocGraf,entidadeDocGraf,tipoDesigExames,refExames,entidadeExames,atledpArqDoc,tipoArqDoc,localArqDoc,cotaArqDoc,atledpIcon,tipoIcon,localIcon,cotaIcon,atledpBiblio,tipoBiblio,localBiblio,cotaBiblio,atledpOutras,tipoOutras,localOutras,cotaOutras,fichaRegistoFK) VALUES (true, "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", true, "e", "e", "e", "e", "e", "e", "e", "Tardio", "Boa", "e", "e", "e", "e", "e", "50", "50", "10", "12", "50", "50", "10", "12", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", "e", 1);
 
 INSERT INTO tbl_constituicaoequipa (constEq, funcDes, habPro, fichaTecnicaFK) VALUES ("a", "a", "a", 1);
 INSERT INTO tbl_constituicaoequipa (constEq, funcDes, habPro, fichaTecnicaFK) VALUES ("b", "b", "b", 2);

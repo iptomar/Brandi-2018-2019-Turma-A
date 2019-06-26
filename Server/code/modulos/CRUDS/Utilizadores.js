@@ -151,7 +151,7 @@ exports.changePassword = async(bd,dados) =>{
     //encriptar password
     let password = await bcrypt.hash(dados.password, salt);
     if(dados.password){
-      let resposta_bd = await bd.query("Update tbl_utilizadores set password = ? , salt = ?",[password,salt]);
+      let resposta_bd = await bd.query("Update tbl_utilizadores set password = ? , salt = ? WHERE userID = ?",[password,salt,dados.id]);
       if(resposta_bd.stat===0){
         resultadofinal.stat=0;
         resultadofinal.resposta = "Updated";

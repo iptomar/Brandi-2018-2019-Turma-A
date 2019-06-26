@@ -56,6 +56,8 @@ userRouter.getUserDetailsRoute(app, bd);
 userRouter.changeUserDetailsRoute(app, bd);
 //rota para apagar um utilizador
 userRouter.deleteUserRoute(app, bd);
+//rota para alterar a password de um utilizador
+userRouter.changePassword(app, bd);
 //rota para todas as roles de utilizadores, testes
 roleRouter.listAllRolesRoute(app, bd);
 //rota para criacao de umam ficha tecnica

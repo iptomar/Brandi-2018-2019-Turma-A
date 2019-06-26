@@ -1,6 +1,5 @@
 const authentication = require("../CRUDS/Utilizadores");
 const getToken = require("../Auxiliares/Token");
-
 /**
  * Rota para registar utilizador
  * @param req -dados que são enviados para o servidor
@@ -8,6 +7,7 @@ const getToken = require("../Auxiliares/Token");
  * @param app -express app
  * @param bd -bd para fazer querys
  */
+
 exports.loginRoute = async (app, bd) => {
   app.post("/auth/login", async (req, resp) => {
     let token;
@@ -333,7 +333,7 @@ exports.changeUserDetailsRoute = async (app, bd) => {
   });
 };
 /**
- * Rota que permite apagar um utilizador
+ * Rota que permite alterar a password de um utilizador
  */
 exports.changePassword = async (app, bd) => {
   app.post("/api/users/:id/password", async (req, resp) => {
@@ -350,10 +350,11 @@ exports.changePassword = async (app, bd) => {
       code = 400;
       resposta_servidor.status = "InvalidToken";
     } else {
+      //Não seria melhor verificar aqui também se as passwords inseridas são iguais?????
       //verificar se e administrador
       if (token.roleFK === 1) {
         //tentar alterar os de um utilizador
-        let dados = {password: req.body.password};
+        let dados = {id: req.params.id, password: req.body.password};
         let resposta_bd = await authentication.changePassword(bd,dados);
         //alterações  com sucesso
         if (resposta_bd.stat === 0) {

@@ -142,6 +142,27 @@ exports.changeUser = async (bd, dados) => {
   return resultadofinal;
 };
 /**
+ * Método que permite alterar password to utilizador
+ */
+exports.changePassword = async(bd,dados) =>{
+  let resultadofinal={stat:1,resposta:{}};
+    //gerar salt
+    let salt = await bcrypt.genSalt(10);
+    //encriptar password
+    let password = await bcrypt.hash(dados.password, salt);
+    if(dados.password){
+      let resposta_bd = await bd.query("Update tbl_utilizadores set password = ? , salt = ?",[password,salt]);
+      if(resposta_bd.stat===0){
+        resultadofinal.stat=0;
+        resultadofinal.resposta = "Updated";
+      }else{
+        resultadofinal.stat===1;
+        resultadofinal.resposta= resposta_bd.resposta;
+      }
+    }
+  return resultadofinal;
+}
+/**
  * Método que permite ir buscar os dados de um utilizador
  */
 exports.getUser = async (bd, id) => {

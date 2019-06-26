@@ -286,3 +286,94 @@ exports.deleteUserRoute = async (app, bd) => {
     resp.status(code).json(resposta_servidor);
   });
 };
+/**
+ * Rota de alterar dados de um utilizador
+ */
+exports.changeUserDetailsRoute = async (app, bd) => {
+  app.post("/api/users/:id/edit", async (req, resp) => {
+    let code = 201;
+    let token;
+    let resposta_servidor = { status: "NotAuthenticated", resposta: {} };
+    token = await getToken.getToken(req);
+    if (token === null) {
+      //HTTP CODE BAD REQUEST
+      code = 400;
+      resposta_servidor.status = "NotAuthenticated";
+    } else if (token.name) {
+      //HTTP CODE BAD REQUEST
+      code = 400;
+      resposta_servidor.status = "InvalidToken";
+    } else {
+      //criar um utilizador
+      let utilizador = {
+        login: req.body.login,
+        email: req.body.email,
+        userID: req.params.id,
+        roleFK: req.body.roleFK,
+        visible: req.body.visible
+      };
+      //tentar alterar os de um utilizador
+      let resposta_bd = await authentication.changeUser(bd, utilizador);
+
+      //alterações  com sucesso
+      if (resposta_bd.stat === 0) {
+        resposta_servidor.status = "Updated";
+        resposta_servidor.resposta = resposta_bd.resposta;
+      }
+      //algum erro com a base de dados
+      else {
+        //HTTP BAD REQUEST
+        code = 400;
+        resposta_servidor.status = "NotUpdated";
+        resposta_servidor.resposta = resposta_bd.resposta;
+      }
+    }
+    //resposta do servidor
+    resp.status(code).json(resposta_servidor);
+  });
+};
+/**
+ * Rota que permite apagar um utilizador
+ */
+exports.changePassword = async (app, bd) => {
+  app.post("/api/users/:id/password", async (req, resp) => {
+    let code = 201;
+    let token;
+    let resposta_servidor = { status: "NotAuthenticated", resposta: {} };
+    token = await getToken.getToken(req);
+    if (token === null) {
+      //HTTP CODE BAD REQUEST
+      code = 400;
+      resposta_servidor.status = "NotAuthenticated";
+    } else if (token.name) {
+      //HTTP CODE BAD REQUEST
+      code = 400;
+      resposta_servidor.status = "InvalidToken";
+    } else {
+      //verificar se e administrador
+      if (token.roleFK === 1) {
+        //tentar alterar os de um utilizador
+        let dados = {password: req.body.password};
+        let resposta_bd = await authentication.changePassword(bd,dados);
+        //alterações  com sucesso
+        if (resposta_bd.stat === 0) {
+          resposta_servidor.status = resposta_bd.stat;
+          resposta_servidor.resposta = resposta_bd.resposta;
+        }
+        //algum erro com a base de dados
+        else {
+          //HTTP BAD REQUEST
+          code = 400;
+          resposta_servidor.status = "Not updated";
+          resposta_servidor.resposta = resposta_bd.resposta;
+        }
+      }
+      //nao tem permissoes
+      else {
+        resposta_servidor.status = "NotAuthorized";
+      }
+    }
+    //resposta do servidor
+    resp.status(code).json(resposta_servidor);
+  });
+};

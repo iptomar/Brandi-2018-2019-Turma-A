@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import Header from "../../Components/Globais/Header";
 import Footer from "../../Components/Globais/Footer";
-import Edit from "../../Components/TestesSolubilizacao/Details/Edit";
+import Details from "../../Components/TestesSolubilizacao/Details/Read";
 
-class EditTestesSolubilizacao extends Component {
+class DetailsTestesSolubilizacao extends Component {
 
     render() {
         return (
             <div>
                 <Header />
-                <Edit id={this.props.id}/>
+                <Details id={this.props.id}/>
                 <Footer />
             </div>
         );
     }
 }
 
-export default EditTestesSolubilizacao;
+export default DetailsTestesSolubilizacao;

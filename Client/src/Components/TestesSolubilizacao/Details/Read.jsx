@@ -20,20 +20,97 @@ class Read extends Component {
     this.getTesteSolub(this.props.id);
   }
 
+  submit = async e => {
+    e.preventDefault();
+    /* Seleciona todos os inputs da tabela */
+    let inputs = document.querySelectorAll("textarea");
+    for (let i = 0; i < inputs.length; i++) {
+      /* Se os inputs estiverem vazios */
+      if (inputs[i].value === "") {
+        this.setState({
+          alertText:
+            "Existem campos dos Teste de Solubilização que não foram preenchidos!",
+          alertisNotVisible: false,
+          alertColor: "warning"
+        });
+        return;
+      }
+    }
+    /* Neste momento, todos os inputs estão preenchidos */
+    let tab = [];
+    /* Iterar da 2.ª linha da tabela até ao fim */
+    for (let i = 0; i < document.getElementById("tabela").children[1].childElementCount;i++) {
+      let content = document.getElementById("tabela").children[1].children[i];
+      for(let k=0; k<content.children[1].childElementCount;k++){
+          //if()
+      }
+      tab.push({
+
+      });
+    }
+    /* Enviar para a API */
+    const response = await fetch(`/api/testesSolubilizacao/${this.props.id}/edit`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "x-auth-token": sessionStorage.getItem("token")
+      },
+      body: JSON.stringify(tab)
+    });
+    /* Aguardar a resposta da API e avaliar o que fazer */
+    await response.json().then(resp => {
+      let status = resp.status;
+      switch (status) {
+        case "Success":
+          window.location = `/testesSolubilizacao/${this.props.id}/detalhes`;
+          break;
+        case "Error":
+          this.setState({
+            alertText: "Erro",
+            alertisNotVisible: false,
+            alertColor: "warning"
+          });
+          break;
+        default:
+          console.log("Ocorreu um erro, contacte o administrador do sistema");
+      }
+    });
+  };
+
+
+
       /**
      * Adiciona uma nova linha no fim da tabela dos solventes
      */
-    adicionaNovaLinha = k => {
+    adicionaNovaLinha = (k, nova) => {
       let linha = $('#linha').clone(this);
       linha.find("input").get(0).value = "";
-      let radio = linha.find('input:radio');
+      let radio = linha.find('input:radio');    
+      let textArea = linha.find("textarea");
+      for (let i = 0; i < textArea.length; i++) {
+        textArea.get(i).value = "";
+      }
       for(let i=0; i<radio.length; i++){
           radio.get(i).setAttribute('name',radio.get(i).getAttribute("name").substring(0,18)+k);
-          radio.get(i).disabled = true;
+          if(nova){
+            radio.get(i).disabled = true;
+          }
       }
       $('tbody').append(linha);
   };
 
+  /**
+   * Elimina a última linha na tabela dos testes de solubilidade
+   */
+
+  eliminaUltimaLinha = () => {
+    var table = document.getElementById("tabela");
+    var numRows = table.rows.length;
+    if (numRows >= 3) {
+      table.deleteRow(-1);
+    }
+  };
 
   preencheLinha = i => {
     document.querySelectorAll("#linha")[i].setAttribute("data-id", this.state.data.complementar[i].id);
@@ -67,11 +144,22 @@ class Read extends Component {
   preencheTabela = () => {
     this.preencheLinha(0);
     for (let i = 1; i < this.state.data.complementar.length; i++) {
-      this.adicionaNovaLinha(i);
+      this.adicionaNovaLinha(i, true);
       this.preencheLinha(i);
     }
   };
-
+   /**
+   * Método que transforma a página dos detalhes para a página da edição
+   */
+  changeToEdit() {
+    $("input:radio").attr("disabled", false);
+    //Remove o atributo readonly nos input e nas textarea
+    $("input, textarea").removeAttr("readonly");
+    const btEditar = document.getElementById("btEditar");
+    btEditar.style.display = "none";
+    // Apresentar todo o conteudo que foi escondido na apresentação
+    $("#editarF").show();
+  }
 
   async getTesteSolub(id) {
 
@@ -118,10 +206,22 @@ class Read extends Component {
       if (!this.state.loading) {
         return (
             <div className="container mb-4">
-                <div className="pt-3 py-3 text-center">
+            <div className="row mb-5">
+                <div className="col-md-10 mr-0 text-center">
                     <h2>Testes de Solventes</h2>
                     <h5>Teste de eficácia dos solventes na limpeza e solubilização de estratos e sujidades</h5>
                 </div>
+                <div className="mt-3 col-md-2">
+                <button
+                  id="btEditar"
+                  className="btn btn-success"
+                  onClick={this.changeToEdit}
+                  style={{bottom:0, right:15, position:"absolute"}}
+                >
+                  Editar
+                </button>
+              </div>
+              </div>
                 <div className="row">
                     <div className="col-md-12">
                         <label>Identificação do Estrato / Sujidade</label>
@@ -134,7 +234,6 @@ class Read extends Component {
                          value={this.state.data.resposta[0].caracteristicas} />
                     </div>
                 </div>
-                {/* em falta: tabela de solventes e os graus de eficácia */}
                 <table className="table table-bordered table-secondary text-center" id="tabela">
                     <thead>
                         <tr>
@@ -152,27 +251,27 @@ class Read extends Component {
                             <td>
                                 {/* RADIO BUTTONS */}
                                 <div className="form-check form-check-inline">
-                                    <input id="radio1" disabled='true' className="form-check-input p-1" type="radio" name="inlineRadioOptions0" value="1" />
+                                    <input id="radio1" disabled={true} className="form-check-input p-1" type="radio" name="inlineRadioOptions0" value="1" />
                                     <label className="form-check-label p-1" htmlFor="inlineRadio11">1</label>
                                 </div>
 
                                 <div className="form-check form-check-inline">
-                                    <input id="radio2" disabled='true' className="form-check-input p-1" type="radio" name="inlineRadioOptions0" value="2" />
+                                    <input id="radio2" disabled={true} className="form-check-input p-1" type="radio" name="inlineRadioOptions0" value="2" />
                                     <label className="form-check-label p-1" htmlFor="inlineRadio12">2</label>
                                 </div>
 
                                 <div className="form-check form-check-inline">
-                                    <input id="radio3" disabled='true' className="form-check-input p-1" type="radio" name="inlineRadioOptions0" value="3" />
+                                    <input id="radio3" disabled={true} className="form-check-input p-1" type="radio" name="inlineRadioOptions0" value="3" />
                                     <label className="form-check-label p-1" htmlFor="inlineRadio13">3</label>
                                 </div>
 
                                 <div className="form-check form-check-inline">
-                                    <input id="radio4" disabled='true' className="form-check-input p-1" type="radio" name="inlineRadioOptions0"  value="4" />
+                                    <input id="radio4" disabled={true} className="form-check-input p-1" type="radio" name="inlineRadioOptions0"  value="4" />
                                     <label className="form-check-label p-1" htmlFor="inlineRadio14">4</label>
                                 </div>
 
                                 <div className="form-check form-check-inline">
-                                    <input id="radio5" disabled='true' className="form-check-input p-1" type="radio" name="inlineRadioOptions0" value="5" />
+                                    <input id="radio5" disabled={true} className="form-check-input p-1" type="radio" name="inlineRadioOptions0" value="5" />
                                     <label className="form-check-label p-1" htmlFor="inlineRadio15">5</label>
                                 </div>
                             </td>
@@ -183,8 +282,43 @@ class Read extends Component {
 
                     </tbody>
                 </table>
-
+        {/* Botões */}
+        <div id="editarF" className="row" style={{ display: "none" }}>
+          <div className="col-md-12">
+            <div className="col-md-x">
+              <button
+                type="button"
+                className="btn m-1 btn-primary"
+                onClick={this.adicionaNovaLinha}
+              >
+                Adicionar linha
+              </button>
+              <button
+                type="button"
+                className="btn m-1 btn-secondary"
+                onClick={this.eliminaUltimaLinha}
+              >
+                Remover linha
+              </button>
+              <AlertMsg
+                text={this.state.alertText}
+                isNotVisible={this.state.alertisNotVisible}
+                alertColor={this.state.alertColor}
+              />
             </div>
+          </div>
+          <div className="col-md-12 mt-2">
+            <button
+              type="button"
+              className="btn btn-success btn-lg btn-block mb-5"
+              onClick={this.submit}
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+            
         );
       } else {
         return (

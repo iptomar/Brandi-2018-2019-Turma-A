@@ -50,7 +50,7 @@ class Read extends Component {
             
         });
     }
-    let total = [tab, document.querySelector("idEstratoSujidade").value, document.querySelector("caracteristicas").value]
+    let total = [tab, document.querySelector("#idEstratoSujidade").value, document.querySelector("#caracteristicas").value]
     /* Enviar para a API */
     const response = await fetch(`/api/testesSolubilizacao/${this.props.id}/edit`, {
       method: "POST",

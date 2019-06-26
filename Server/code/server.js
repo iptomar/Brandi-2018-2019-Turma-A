@@ -14,7 +14,7 @@ const examesAnalises = require("./modulos/Routers/ExamesAnalisesRouter");
 const grausEficaciaSolubilizacao = require("./modulos/Routers/GrausEficaciaSolubilizacaoRouter");
 const iluminacao = require("./modulos/Routers/IluminacaoRouter");
 const interessadosContactos = require("./modulos/Routers/InteressadosContactosRouter");
-const solventes = require("./modulos/Routers/SolventesRouter");
+const testesdeSolubilidade = require("./modulos/Routers/TestesdeSolubilidadeRouter");
 const testesEficacia = require("./modulos/Routers/TestesEficaciaRouter");
 const tecnicas = require("./modulos/Routers/TecnicasRouter");
 const interessados = require("./modulos/Routers/InteressadosRouter");
@@ -156,13 +156,13 @@ interessadosContactos.createInteressadoContactos(app, bd);
 interessadosContactos.updateInteressadoContactos(app, bd);
 
 //rota que devolve todos os solventes
-solventes.getAllTestesSolventes(app, bd);
+testesdeSolubilidade.getAllTestesSolventes(app, bd);
 //rota que devolve um solvente
-solventes.getTestesSolvente(app, bd);
+testesdeSolubilidade.getTestesSolvente(app, bd);
 //rota que cria um solvente
-solventes.createTesteSolvente(app, bd);
+testesdeSolubilidade.createTesteSolvente(app, bd);
 //rota que dá update de um solvente
-solventes.updateTestesSolventes(app, bd);
+testesdeSolubilidade.updateTestesSolventes(app, bd);
 
 //rota que devolve todos os testes de Eficacia
 testesEficacia.getAllTestesEficacia(app, bd);

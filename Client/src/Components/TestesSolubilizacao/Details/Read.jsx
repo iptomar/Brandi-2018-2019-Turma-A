@@ -41,22 +41,24 @@ class Read extends Component {
     /* Iterar da 2.ª linha da tabela até ao fim */
     for (let i = 0; i < document.getElementById("tabela").children[1].childElementCount;i++) {
       let content = document.getElementById("tabela").children[1].children[i];
-      for(let k=0; k<content.children[1].childElementCount;k++){
-          //if()
-      }
-      tab.push({
-
-      });
+        tab.push({
+              /* Campos da tabela */
+              testeSolubilizacaoID: content.getAttribute("data-id"),
+              solventeMistura: content.children[0].children[0].value,
+              grauEficacia: $('input[name=inlineRadioOptions'+i+']:checked').val(),
+              obsevações: content.children[2].children[0].value,
+            
+        });
     }
+    let total = [tab, document.querySelector("idEstratoSujidade").value, document.querySelector("caracteristicas").value]
     /* Enviar para a API */
     const response = await fetch(`/api/testesSolubilizacao/${this.props.id}/edit`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
         "x-auth-token": sessionStorage.getItem("token")
       },
-      body: JSON.stringify(tab)
+      body: JSON.stringify(total)
     });
     /* Aguardar a resposta da API e avaliar o que fazer */
     await response.json().then(resp => {
@@ -83,17 +85,18 @@ class Read extends Component {
       /**
      * Adiciona uma nova linha no fim da tabela dos solventes
      */
-    adicionaNovaLinha = (k, nova) => {
+    adicionaNovaLinha = (nova) => {
       let linha = $('#linha').clone(this);
-      linha.find("input").get(0).value = "";
+      linha.attr("data-id", "");
       let radio = linha.find('input:radio');    
       let textArea = linha.find("textarea");
       for (let i = 0; i < textArea.length; i++) {
         textArea.get(i).value = "";
       }
+      let k = document.querySelector("#tabela").children[1].childElementCount+2;
       for(let i=0; i<radio.length; i++){
           radio.get(i).setAttribute('name',radio.get(i).getAttribute("name").substring(0,18)+k);
-          if(nova){
+          if(!nova){
             radio.get(i).disabled = true;
           }
       }
@@ -144,7 +147,7 @@ class Read extends Component {
   preencheTabela = () => {
     this.preencheLinha(0);
     for (let i = 1; i < this.state.data.complementar.length; i++) {
-      this.adicionaNovaLinha(i, true);
+      this.adicionaNovaLinha(true);
       this.preencheLinha(i);
     }
   };
@@ -185,7 +188,7 @@ class Read extends Component {
           this.preencheTabela();
           break;
         default:
-          console.log("A API ESTÁ A ARDER, DARIOOOOOOOOOOOOOOOOOOOOOO");
+          console.log("Occoreu um problema técnica, contacte a equipa de IT");
       }
     }).catch(resp => {
       this.setState(prevState => ({

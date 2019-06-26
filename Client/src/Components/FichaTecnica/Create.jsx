@@ -392,7 +392,7 @@ class Create extends Component {
 
           //Aguardar API
           await respGrafico.json().then(resp => {
-            console.log(resp);
+            //console.log(resp);
             document.querySelector('#imgGraph').src = resp;
           });
 

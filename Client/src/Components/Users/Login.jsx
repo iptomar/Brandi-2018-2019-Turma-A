@@ -48,7 +48,6 @@ class Login extends Component {
         case "Authenticated":
           //Armazenar o token
           sessionStorage.setItem('token', response.headers.get('x-auth-token'));
-
           //Redirect
           window.location = '/fichaRI';
           break;

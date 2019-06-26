@@ -85,7 +85,7 @@ class Read extends Component {
       /**
      * Adiciona uma nova linha no fim da tabela dos solventes
      */
-    adicionaNovaLinha = (nova) => {
+    adicionaNovaLinha = (k, nova) => {
       let linha = $('#linha').clone(this);
       linha.attr("data-id", "");
       let radio = linha.find('input:radio');    
@@ -93,9 +93,10 @@ class Read extends Component {
       for (let i = 0; i < textArea.length; i++) {
         textArea.get(i).value = "";
       }
-      let k = document.querySelector("#tabela").children[1].childElementCount+2;
+      let a = document.querySelector("#tabela").children[1].childElementCount+2;
       for(let i=0; i<radio.length; i++){
-          radio.get(i).setAttribute('name',radio.get(i).getAttribute("name").substring(0,18)+k);
+        if(k != null) radio.get(i).setAttribute('name',radio.get(i).getAttribute("name").substring(0,18)+k); 
+        else radio.get(i).setAttribute('name',radio.get(i).getAttribute("name").substring(0,18)+a);
           if(!nova){
             radio.get(i).disabled = true;
           }
@@ -147,7 +148,7 @@ class Read extends Component {
   preencheTabela = () => {
     this.preencheLinha(0);
     for (let i = 1; i < this.state.data.complementar.length; i++) {
-      this.adicionaNovaLinha(true);
+      this.adicionaNovaLinha(i, true);
       this.preencheLinha(i);
     }
   };

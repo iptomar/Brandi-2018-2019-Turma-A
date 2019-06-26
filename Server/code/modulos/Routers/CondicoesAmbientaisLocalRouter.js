@@ -156,7 +156,7 @@ exports.updateCondicaoAmbientalLocal = async (app, bd) => {
             resposta_servidor.status = "InvalidToken";
         } else {
             let resposta_bd = await condicoesAmbientaisLocal.updateCondicoesAmbientaisLocal(bd, dados);
-            console.log(resposta_bd);
+            //console.log(resposta_bd);
             if (resposta_bd.stat === 0) {
                 resposta_servidor.status = "Updated";
                 resposta_servidor.resposta = resposta_bd.resposta;

@@ -32,7 +32,7 @@ class Details extends Component {
                     this.setState({ data: resp.resposta });
                     break;
                 default:
-                    console.log(this.alertText)
+                    //console.log(this.alertText)
             }
         });
     }

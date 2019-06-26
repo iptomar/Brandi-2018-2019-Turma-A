@@ -51,7 +51,7 @@ exports.getAllInteressados = async (bd, limit, pagenumber) => {
         auxiliar,
       array2
     );
-    console.log(resposta_bd);
+    //console.log(resposta_bd);
     if (resposta_bd.stat === 0) {
       resultadofinal.resposta = resposta_bd.resposta;
       resultadofinal.stat = 0;
@@ -82,7 +82,7 @@ exports.getAllInteressados = async (bd, limit, pagenumber) => {
       " UPDATE tbl_interessados SET nome=?, enderecoPostal=?, email=?, tipo=? WHERE interessadoID=? ",
       array2
     );
-    console.log(resposta_bd);
+    //console.log(resposta_bd);
     if (resposta_bd.stat === 0) {
       resultadofinal.resposta = resposta_bd.resposta;
       resultadofinal.stat = 0;

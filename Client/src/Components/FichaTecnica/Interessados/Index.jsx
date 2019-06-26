@@ -32,7 +32,7 @@ class Index extends Component {
           this.setState({ data: resp.resposta });
           break;
         default:
-          console.log(this.state.alertText);
+          //console.log(this.state.alertText);
       }
     })
   }

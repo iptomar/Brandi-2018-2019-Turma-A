@@ -50,7 +50,7 @@ exports.createMateriais = async (bd, dados) => {
       auxiliar,
     array2
   );
-  console.log(resposta_bd);
+  //console.log(resposta_bd);
   if (resposta_bd.stat === 0) {
     resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;

@@ -20,9 +20,9 @@ class About extends Component {
             usemap="#Map"
           />
           <map name="Map" id="Map">
-            <area shape="poly" coords="409,1,409,83,535,83,535,53,689,53,689,82,796,82,797,2" href="http://www.estt.ipt.pt" target="_blank"/>
-            <area shape="rect" coords="447,84,761,120" href="http://portal2.ipt.pt/pt/cursos/licenciaturas/l_-_cr"/>
-            <area shape="rect" coords="537,54,688,80" href="http://www.ipt.pt" target="_blank"/>
+            <area alt="" shape="poly" coords="409,1,409,83,535,83,535,53,689,53,689,82,796,82,797,2" href="http://www.estt.ipt.pt" target="_blank"/>
+            <area alt="" shape="rect" coords="447,84,761,120" href="http://portal2.ipt.pt/pt/cursos/licenciaturas/l_-_cr"/>
+            <area alt="" shape="rect" coords="537,54,688,80" href="http://www.ipt.pt" target="_blank"/>
           </map>
         </div>
         <br/>

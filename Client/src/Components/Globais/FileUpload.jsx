@@ -78,7 +78,7 @@ class FileUpload extends Component {
   }
 
   /**
-   * Método que apaga um ficheiro pela alção do 
+   * Método que apaga um ficheiro pela ação do 
    * click do rato no botão de apagar do ficheiro
    * @param {*} event 
    * Evento do click do rato no botão
@@ -87,6 +87,8 @@ class FileUpload extends Component {
     await this.setState({
       file: this.state.file.filter(position => position.name !== event.target.id)
     });
+    //Reenvia os dados que já foram filtrados
+    this.sendFiles();
   }
 
   render() {

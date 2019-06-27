@@ -21,10 +21,26 @@ export class Pag1 extends Component {
     await this.setState({ files: data });
     this.sendFiles();
   }
-  
+
   sendFiles() {
     this.props.sendData(this.state.files);
   }
+
+  opacidadeOnImg(e) {
+    var img = document.getElementById(e.target.id);
+    img.style.opacity = "0.5"
+  }
+
+  opacidadeOffImg(e) {
+    var img = document.getElementById(e.target.id);
+    img.style.opacity = "1"
+  }
+
+  closeModel() {
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+  }
+
 
   render() {
     return (
@@ -65,20 +81,21 @@ export class Pag1 extends Component {
         <label>Fotografia(s) do objeto:</label>
         <FileUpload sendData={this.getData} type="image" isMultiple />
         {/* Carrousel para apresentação das imagens */}
-        <div id="carouselExampleControls" className="carousel slide" data-ride="carousel" style={{display:"none"}}>
+        <div id="carouselExampleControls" className="carousel slide" data-ride="carousel" style={{ display: "none" }}>
           <div id="otherImage" className="carousel-inner">
             <div className="carousel-item active">
-                <img id="actImage" alt="" className="d-block w-100" style={{height:"500px"}}/>
+              <img id="actImage" alt="" className="d-block w-100" data-toggle="modal" data-target="#exampleModal" onMouseOver={this.opacidadeOnImg} onMouseOut={this.opacidadeOffImg}
+                style={{ height: "750px", objectFit: "cover", borderRadius: "5px", cursor: "pointer", transition: "0.3s" }} />
             </div>
-        </div>
-        <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span className="sr-only">Anterior</span>
-        </a>
-        <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          <span className="sr-only">Proximo</span>
-        </a>
+          </div>
+          <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span className="sr-only">Anterior</span>
+          </a>
+          <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+            <span className="sr-only">Proximo</span>
+          </a>
         </div>
       </div>
     );

@@ -44,6 +44,43 @@ class Create extends Component {
       $('.btn.btn-dark').hide();
       //Atualiza todos os valores necessários para apresentação da ficha técnica
       this.fetchAndSetData(this.state.id);
+      this.modalImage();
+    }
+  }
+
+  opacidadeOnImg(e){
+    var img = document.getElementById(e.target.id);
+    img.style.opacity="0.5"
+  }
+
+  opacidadeOffImg(e){
+    var img = document.getElementById(e.target.id);
+    img.style.opacity="1"
+  }
+
+  closeModel(){
+    var modal = document.getElementById("myModal");
+    modal.style.display="none";
+  }
+
+
+  modalImage() {
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementById("imgGraph");
+    var modalImg = document.getElementById("img01");
+    img.onclick = function () {
+      modal.style.display = "block";
+      modalImg.src = this.src;
+    }
+
+    var img01 = document.getElementById('actImage');
+
+    img01.onclick = function () {
+      modal.style.display = "block";
+      modalImg.src = this.src;
     }
   }
 
@@ -148,7 +185,7 @@ class Create extends Component {
               document.getElementById('EpocaTardio').checked = true;
               document.getElementById('EpocaTardio').parentNode.parentNode.parentNode.style.display = "";
             }
-          }else{
+          } else {
             document.getElementById('EpocaCoevo').parentNode.parentNode.parentNode.style.display = "";
           }
 
@@ -187,7 +224,7 @@ class Create extends Component {
               document.getElementById('QualidadeMuitoBoa').checked = true;
               document.getElementById('QualidadeMuitoBoa').parentNode.parentNode.parentNode.style.display = "";
             }
-          }else{
+          } else {
             document.getElementById('QualidadeExcelente').parentNode.parentNode.parentNode.style.display = "";
           }
 
@@ -417,9 +454,29 @@ class Create extends Component {
                 let div = document.createElement('div');
                 div.className = "carousel-item";
                 let img = document.createElement('img');
+                img.setAttribute('id', 'carrousselImg' + i);
                 img.setAttribute('src', resp);
                 img.className = "d-block w-100";
-                img.style.height = "500px";
+                img.style.height = "750px";
+                img.style.objectFit = "cover";
+                img.style.borderRadius = "5px";
+                img.style.cursor = "pointer";
+                img.style.transition = "0.3s";
+                var modal = document.getElementById("myModal");
+                var modalImg = document.getElementById('img01');
+                img.onclick = function () {
+                  modal.style.display = "block";
+                  modalImg.src = this.src;
+                }
+                img.addEventListener("mouseover", function(event) {
+                  var img = document.getElementById(event.target.id);
+                  img.style.opacity="0.5"
+               })
+               img.addEventListener("mouseout", function(event) {
+                var img = document.getElementById(event.target.id);
+                img.style.opacity="1"
+             })
+
                 div.appendChild(img);
                 contentor.appendChild(div);
               }
@@ -935,10 +992,12 @@ class Create extends Component {
                   <hr />
                   <label>Gráfico:</label>
                   <FileUpload sendData={this.getDataG} type="image" />
-                  <img id="imgGraph" alt="Imagem Gráfico" style={{ display: "none", height: "500px", width: "100%" }} />
+                  <img id="imgGraph" alt="Imagem Gráfico" className="d-block w-100" data-toggle="modal" data-target="#exampleModal" onMouseOver={this.opacidadeOnImg} onMouseOut={this.opacidadeOffImg}
+                   style={{ height:"750px", objectFit:"cover", borderRadius: "5px", cursor: "pointer", transition: "0.3s"} } />
                 </div>
               </div>
             </div>
+
 
             <div className="card bg-light" style={{ cursor: "pointer" }}>
               <div className="card-header" id="headingTwo">
@@ -1076,7 +1135,18 @@ class Create extends Component {
               </div>
             </div>
 
+            {/*MODAL*/}
+
+            <div id="myModal" className="modal" style={{display: "none", position: "fixed", zIndex: "1",  paddingTop: "100px", 
+              left: "0", top: "0", width: "100%", height: "100%", overflow: "auto", backgroundColor: "rgba(0,0,0,0.9)", paddingBottom:"100px" }}>
+
+              <span className="close" onClick={this.closeModel} style={{  position: "absolute", top: "15px", right: "35px",  color: "#f1f1f1", fontSize: "40px",
+                fontWeight: "bold", transition: "0.3s", cursor:"pointer"}}>&times;</span>
+
+              <img className="modal-content" alt="" id="img01" style={{margin: "auto", display: "block", width: "80%", maxWidth: "700px"}}/>
+            </div>
           </div>
+
           {window.location.href.includes("/detalhes") && window.location.href.includes("/fichaTecnica/") ?
             <span></span>
             :

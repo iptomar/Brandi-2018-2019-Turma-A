@@ -54,8 +54,40 @@ class Profile extends Component {
       });
       return null;
     }
-    alert("Esta funcionalidade estará brevemente a funcionar")
-    window.location = "/perfil"
+    else {
+      var id = jwt.decode(sessionStorage.getItem('token')).userID;
+      const dadosPassword = {
+        
+        password: document.getElementById('pass').value
+        
+      };
+
+      const response = await fetch(`/api/users/${id}/password`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": sessionStorage.getItem("token")
+        },
+        body: JSON.stringify(dadosPassword)
+      });
+      await response.json().then(resp => {
+        let status = resp.resposta;
+
+        switch(status){
+          case "Updated":
+              this.setState({
+                alertText: "Password alterada com sucesso",
+                alertisNotVisible: false,
+                alertColor: "success"
+              });
+              this.out();
+              break;
+            default:
+        }
+
+      });
+    }
+
   };
 
 

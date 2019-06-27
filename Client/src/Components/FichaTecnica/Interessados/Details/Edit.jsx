@@ -61,7 +61,7 @@ class Edit extends Component {
     var select = document.getElementById("DDLTipo");
     var option = select.options[select.selectedIndex];
     var tipo = option.text;
-    console.log(option);
+    //console.log(option);
     let nome = this.state.data.nome;
     let email = this.state.data.email;
     let endPostal = this.state.data.enderecoPostal;

@@ -493,8 +493,8 @@ exports.readFichaTecnicaImagemGraficoRoute = async (app, bd) => {
         try {
           resposta_servidor.resposta.imgGrafico = base64Img.base64Sync(path.join(__dirname, "../../", resposta_servidor.resposta.imgGrafico));
         }
-        catch{
-          console.log('erro por corrigir');
+        catch(e){
+          console.log('erro por corrigir= '+e);
         }
         
         //resposta_servidor.resposta.imgGrafico = base64Img.base64(path.join(__dirname, "../../", resposta_servidor.resposta.imgGrafico), function (err, data) { });

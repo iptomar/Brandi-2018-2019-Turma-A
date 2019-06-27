@@ -28,6 +28,7 @@ import CreateFolhaDeObra from './MasterComponents/FolhaDeObra/CreateFolhaDeObra'
 // TESTES DE SOLUBULIZAÇÃO
 import CreateTestesSolubilizacao from './MasterComponents/TestesSolubilizacao/CreateTestesSolubilizacao';
 import EditFolhaDeObra from './MasterComponents/FolhaDeObra/EditFolhaDeObra';
+import DetailsTestesSolubilizacao from './MasterComponents/TestesSolubilizacao/DetailsTestesSolubilizacao';
 
 ReactDOM.render(
     <BrowserRouter>
@@ -58,6 +59,7 @@ ReactDOM.render(
             <Route path="/folhaDeObra/:id/detalhes" component={(r) => <EditFolhaDeObra id={r.match.params.id} />} />
             {/* Testes de Solubilização */}
             <Route path="/testesSolubilizacao/:id/criar" component={(r) => <CreateTestesSolubilizacao id={r.match.params.id} />} />
+            <Route path="/testesSolubilizacao/:id/detalhes" component={(r) => <DetailsTestesSolubilizacao id={r.match.params.id} />} />
             {/* Default */}
             <Route component={LoginPage} />
         </Switch>

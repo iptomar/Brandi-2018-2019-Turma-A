@@ -154,7 +154,7 @@ class Edit extends Component {
       let status = resp.status;
       switch (status) {
         case "Success":
-          window.location = `/folhaDeObra/${this.props.id}/editar`;
+          window.location = `/folhaDeObra/${this.props.id}/detalhes`;
           break;
         case "Error":
           this.setState({

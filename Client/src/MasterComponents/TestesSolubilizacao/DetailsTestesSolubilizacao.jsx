@@ -9,7 +9,8 @@ class DetailsTestesSolubilizacao extends Component {
         return (
             <div>
                 <Header />
-                <Details id={this.props.id}/>
+                <Details id={this.props.id}  query={this.props.query}/>
+
                 <Footer />
             </div>
         );

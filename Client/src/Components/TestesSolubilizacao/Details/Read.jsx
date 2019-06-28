@@ -14,10 +14,54 @@ class Read extends Component {
       loading: true,
       alert: false,
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.voltar = this.voltar.bind(this);
   }
+
+
+  async queryState(query) {
+    if (query !== undefined) {
+      switch (query) {
+        case '&atualizado':
+          this.setState({
+            alertText: "Teste de solubilização atualizado com sucesso!",
+            alertisNotVisible: false,
+            alertColor: "success"
+          });
+          console.log(query);
+          break;
+        default:
+          window.location = `/testesSolubilizacao/${this.props.id}/detalhes`;
+          break;
+      }
+    }
+  }
+
+
+
+    // Controla as alterações nos inputs (Necessidade do React)
+    handleChange(e) {
+      let name = e.target.name;
+      let value = e.target.value;
+      this.setState(prevState => ({
+        data: {
+          resposta : [
+            {
+              ...prevState.data.resposta[0],
+              [name]: value
+            }
+          ]
+        }
+      }));
+    }
 
   componentDidMount() {
     this.getTesteSolub(this.props.id);
+    this.queryState(this.props.query);
+  }
+
+  voltar(){
+    window.location = `/testesSolubilizacao/${this.props.id}/detalhes`;
   }
 
   submit = async e => {
@@ -46,11 +90,11 @@ class Read extends Component {
               testeSolubilizacaoID: content.getAttribute("data-id"),
               solventeMistura: content.children[0].children[0].value,
               grauEficacia: $('input[name=inlineRadioOptions'+i+']:checked').val(),
-              obsevacoes: content.children[2].children[0].value,
+              observacoes: content.children[2].children[0].value,
             
         });
     }
-    let dados = {caracteristicas: document.querySelector("#caracteristicas").value, idEstratoSujidade: document.querySelector("#idEstratoSujidade").value};
+    let dados = {caracteristicas: this.state.data.resposta[0].caracteristicas, idEstratoSujidade: this.state.data.resposta[0].idEstratoSujidade};
     let total = [dados, tab];
     /* Enviar para a API */
     const response = await fetch(`/api/testesSolubilizacao/${this.props.id}/edit`, {
@@ -65,8 +109,8 @@ class Read extends Component {
     await response.json().then(resp => {
       let status = resp.status;
       switch (status) {
-        case "Success":
-          window.location = `/testesSolubilizacao/${this.props.id}/detalhes`;
+        case "Updated":
+          window.location = `/testesSolubilizacao/${this.props.id}/detalhes/&atualizado`;
           break;
         case "Error":
           this.setState({
@@ -162,6 +206,8 @@ class Read extends Component {
     $("input, textarea").removeAttr("readonly");
     const btEditar = document.getElementById("btEditar");
     btEditar.style.display = "none";
+    
+    $("#btVoltar").removeAttr("hidden");
     // Apresentar todo o conteudo que foi escondido na apresentação
     $("#editarF").show();
   }
@@ -211,9 +257,9 @@ class Read extends Component {
       if (!this.state.loading) {
         return (
             <div className="container mb-4">
-            <div className="row mb-5">
+            <div className="row mb-3">
                 <div className="col-md-10 mr-0 text-center">
-                    <h2>Testes de Solventes</h2>
+                    <h2>Testes de Solubilização</h2>
                     <h5>Teste de eficácia dos solventes na limpeza e solubilização de estratos e sujidades</h5>
                 </div>
                 <div className="mt-3 col-md-2">
@@ -225,18 +271,35 @@ class Read extends Component {
                 >
                   Editar
                 </button>
+                <button
+                  id="btVoltar" hidden
+                  className="btn btn-success"
+                  onClick={this.voltar}
+                  style={{bottom:0, right:15, position:"absolute"}}
+                >
+                  Voltar
+                </button>
+                
               </div>
+              <div className="col-md-12 w-100">
+              <AlertMsg
+                text={this.state.alertText}
+                isNotVisible={this.state.alertisNotVisible}
+                alertColor={this.state.alertColor}
+              /></div>
               </div>
                 <div className="row">
                     <div className="col-md-12">
                         <label>Identificação do Estrato / Sujidade</label>
                         <input type="text" readOnly className="form-control mb-3 input" name="idEstratoSujidade" id="idEstratoSujidade" 
-                         value={this.state.data.resposta[0].idEstratoSujidade} />
+                         value={this.state.data.resposta[0].idEstratoSujidade} 
+                         onChange={this.handleChange}/>
                     </div>
                     <div className="col-md-12 mb-3">
                         <label>Características</label>
-                        <input type="text" readOnly className="form-control mb-3 input" name="caracteristicas" id="caracteristicas" 
-                         value={this.state.data.resposta[0].caracteristicas} />
+                        <input type="text" readOnly  className="form-control mb-3 input" name="caracteristicas" id="caracteristicas" 
+                         value={this.state.data.resposta[0].caracteristicas} 
+                         onChange={this.handleChange} />
                     </div>
                 </div>
                 <table className="table table-bordered table-secondary text-center" id="tabela">
@@ -306,11 +369,6 @@ class Read extends Component {
               >
                 Remover linha
               </button>
-              <AlertMsg
-                text={this.state.alertText}
-                isNotVisible={this.state.alertisNotVisible}
-                alertColor={this.state.alertColor}
-              />
             </div>
           </div>
           <div className="col-md-12 mt-2">

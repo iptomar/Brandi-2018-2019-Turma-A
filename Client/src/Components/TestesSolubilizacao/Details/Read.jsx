@@ -21,7 +21,7 @@ class Read extends Component {
   }
 
   submit = async e => {
-    e.preventDefault();
+      e.preventDefault();
     /* Seleciona todos os inputs da tabela */
     let inputs = document.querySelectorAll("textarea");
     for (let i = 0; i < inputs.length; i++) {
@@ -46,11 +46,12 @@ class Read extends Component {
               testeSolubilizacaoID: content.getAttribute("data-id"),
               solventeMistura: content.children[0].children[0].value,
               grauEficacia: $('input[name=inlineRadioOptions'+i+']:checked').val(),
-              obsevações: content.children[2].children[0].value,
+              obsevacoes: content.children[2].children[0].value,
             
         });
     }
-    let total = [tab, document.querySelector("#idEstratoSujidade").value, document.querySelector("#caracteristicas").value]
+    let dados = {caracteristicas: document.querySelector("#caracteristicas").value, idEstratoSujidade: document.querySelector("#idEstratoSujidade").value};
+    let total = [tab, dados];
     /* Enviar para a API */
     const response = await fetch(`/api/testesSolubilizacao/${this.props.id}/edit`, {
       method: "POST",
@@ -97,7 +98,7 @@ class Read extends Component {
       for(let i=0; i<radio.length; i++){
         if(k != null) radio.get(i).setAttribute('name',radio.get(i).getAttribute("name").substring(0,18)+k); 
         else radio.get(i).setAttribute('name',radio.get(i).getAttribute("name").substring(0,18)+a);
-          if(!nova){
+          if(nova){
             radio.get(i).disabled = true;
           }
       }
@@ -229,12 +230,12 @@ class Read extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         <label>Identificação do Estrato / Sujidade</label>
-                        <input type="text" readOnly className="form-control mb-3 input" id="idEstratoSujidade" 
+                        <input type="text" readOnly className="form-control mb-3 input" name="idEstratoSujidade" id="idEstratoSujidade" 
                          value={this.state.data.resposta[0].idEstratoSujidade} />
                     </div>
                     <div className="col-md-12 mb-3">
                         <label>Características</label>
-                        <input type="text" readOnly className="form-control mb-3 input" id="caracteristicas" 
+                        <input type="text" readOnly className="form-control mb-3 input" name="caracteristicas" id="caracteristicas" 
                          value={this.state.data.resposta[0].caracteristicas} />
                     </div>
                 </div>
@@ -297,6 +298,7 @@ class Read extends Component {
               >
                 Adicionar linha
               </button>
+              
               <button
                 type="button"
                 className="btn m-1 btn-secondary"

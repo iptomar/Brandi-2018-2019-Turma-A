@@ -143,7 +143,7 @@ exports.createTesteSolvente = async (app, bd) => {
  * Rota que dá update numa condição ambiental local
  */
 exports.updateTestesSolventes = async (app, bd) => {
-  app.post("/api/testesSolubilizacao/:id/:idteste/edit", async (req, resp) => {
+  app.post("/api/testesSolubilizacao/:id/edit", async (req, resp) => {
     //console.log(req.body);
     resp.json("testes");
     // let dados = req.body;

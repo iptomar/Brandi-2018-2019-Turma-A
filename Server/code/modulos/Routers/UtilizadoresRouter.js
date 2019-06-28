@@ -352,7 +352,7 @@ exports.changePassword = async (app, bd) => {
     } else {
       //Não seria melhor verificar aqui também se as passwords inseridas são iguais?????
       //verificar se e administrador
-      if (token.roleFK === 1) {
+      if (token.roleFK) {
         //tentar alterar os de um utilizador
         let dados = {id: req.params.id, password: req.body.password};
         let resposta_bd = await authentication.changePassword(bd,dados);

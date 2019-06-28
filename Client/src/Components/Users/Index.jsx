@@ -55,6 +55,13 @@ class Index extends Component {
             alertColor: "success"
           });
           break;
+        case "&passwordchanged":
+          this.setState({
+            alertText: "Password alterada com sucesso",
+            alertisNotVisible: false,
+            alertColor: "success"
+          });
+          break;
         default:
           window.location = "/utilizadores/listar"
           break;

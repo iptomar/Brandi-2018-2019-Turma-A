@@ -75,11 +75,6 @@ class Profile extends Component {
 
         switch(status){
           case "Updated":
-              this.setState({
-                alertText: "Password alterada com sucesso",
-                alertisNotVisible: false,
-                alertColor: "success"
-              });
               this.out();
               break;
             default:

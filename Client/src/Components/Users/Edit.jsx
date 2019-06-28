@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import AlertMsg from "../Globais/AlertMsg";
 var jwt = require('jsonwebtoken');
+
+
 
 class Edit extends Component {
   constructor(props) {
@@ -8,6 +11,9 @@ class Edit extends Component {
       data: [],
       rolesList: [],
       dataTecnicos: [],
+      alertText: "",
+      alertisNotVisible: true,
+      alertColor: ""
     };
     this.editaDados = this.editaDados.bind(this);
   }
@@ -101,13 +107,12 @@ class Edit extends Component {
         visible: 1
       }
     }
-
     //Verifica se não foi preenchido algum campo
     if (dataUsers.login === "") dataUsers.login = document.getElementById("user").placeholder;
     if (dataUsers.email === "") dataUsers.email = document.getElementById("email").placeholder;
 
     //Dados do técnico
-    if (this.state.dataTecnicos !== undefined) {
+    if (this.state.dataTecnicos !== undefined && decoded.role==="Admin") {
       dataTecn = {
         nome: document.getElementById('nomeTecnico').value,
         habilitacoes: document.getElementById('habilitacoes').value,
@@ -136,7 +141,7 @@ class Edit extends Component {
 
       });
     }
-    if (decoded.role === "Admin") {
+    if (decoded.role === "Admin" ) {
       //Enviar pedidos pata alterar os dados do utilizador
       response = await fetch(`/api/users/${this.props.id}/edit`,
         {
@@ -175,7 +180,6 @@ class Edit extends Component {
           }
           else {
             window.location = "/perfil";
-            alert("Os dados de técnico ainda não estão a ser editados da maneira correta para utilizadores que não sejam admin")
             break;
           }
 
@@ -184,7 +188,49 @@ class Edit extends Component {
       }
     });
   };
+  //alteração da password de qualquer utilizador
+  handleSubmit = async e => {
+    e.preventDefault();
+    if (
+      document.getElementById("pass").value !==
+      document.getElementById("passConfirmer").value
+    ) {
+      this.setState({
+        alertText: "As palavras-passe não são iguais",
+        alertisNotVisible: false,
+        alertColor: "warning"
+      });
+      return null;
+    }
+    else {
+      const dadosPassword = {
 
+        password: document.getElementById('pass').value
+
+      };
+
+      const response = await fetch(`/api/users/${this.state.data.userID}/password`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": sessionStorage.getItem("token")
+        },
+        body: JSON.stringify(dadosPassword)
+      });
+      await response.json().then(resp => {
+        let status = resp.resposta;
+
+        switch (status) {
+          case "Updated":
+            window.location = "/utilizadores/listar/&passwordchanged";
+            break;
+          default:
+        }
+
+      });
+    }
+
+  };
   render() {
     //Verifica se existe o token
     if (sessionStorage.getItem("token") == null) {
@@ -195,7 +241,15 @@ class Edit extends Component {
           <div className="container">
             <div className="py-3 text-center">
               <h2>Utilizador {this.state.data.login}</h2>
+              {jwt.decode(sessionStorage.getItem('token')).role === "Admin" ? (
+              <button data-toggle="modal" data-target="#exampleModal" className="btn btn-danger" type="submit">
+                <i className="fas fa-key" /> Alterar Password
+        </button>
+              ):(
+                <button></button>
+              )}
             </div>
+
             <div className="row">
               <div className="col-md-12 order-md-1">
                 <div className="row">
@@ -225,7 +279,6 @@ class Edit extends Component {
                 {jwt.decode(sessionStorage.getItem('token')).role === "Admin" ? (
 
                   <div>
-
                     <label>Tipo de utilizador</label>
                     <select id="DDLRoles" className="form-control mb-4"
                     >
@@ -241,14 +294,6 @@ class Edit extends Component {
                         );
                       })}
                     </select>
-                  </div>
-                ) : (
-
-                    <div></div>
-                  )}
-
-                {this.state.dataTecnicos !== undefined ? (
-                  <div>
                     <div className="row">
                       <div className="col-md-12 mb-3">
                         <label>Nome</label>
@@ -286,6 +331,55 @@ class Edit extends Component {
                 ) : (
                     <div></div>
                   )}
+
+                <div className="pt-3 py-3 text-center">
+                  <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                        </div>
+                        <div className="modal-body">
+                          <form onSubmit={this.handleSubmit}>
+                            <h2>Alterar Password</h2>
+                            <div className="row">
+                              <div className="col-md-12 mb-3">
+                                <label>Palavra-passe</label>
+                                <input
+                                  type="password"
+                                  className="form-control"
+                                  id="pass"
+                                  placeholder="Palavra-passe"
+                                  required
+                                />
+                              </div>
+                            </div>
+                            <div className="row">
+                              <div className="col-md-12 mb-3">
+                                <label>Confirmar palavra-passe</label>
+                                <input
+                                  type="password"
+                                  className="form-control"
+                                  id="passConfirmer"
+                                  placeholder="Confirmar palavra-passe"
+                                  required
+                                />
+                              </div>
+                            </div>
+                            <AlertMsg
+                              text={this.state.alertText}
+                              isNotVisible={this.state.alertisNotVisible}
+                              alertColor={this.state.alertColor}
+                            />
+                            <div className="modal-footer">
+                              <button className="btn btn-success" type="search">Alterar Password</button>
+                              <button type="button" className="btn btn-danger" data-dismiss="modal">Fechar</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <button onClick={this.editaDados} className="btn btn-success btn-lg btn-block mb-5" type="submit"> Editar </button>
               </div>
             </div>

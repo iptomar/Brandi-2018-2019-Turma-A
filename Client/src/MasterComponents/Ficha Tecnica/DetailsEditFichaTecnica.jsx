@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import Header from "../../Components/Globais/Header";
 import Footer from "../../Components/Globais/Footer";
-import Create from "../../Components/FichaTecnica/Create";
+import DetailsEdit from "../../Components/FichaTecnica/DetailsEdit";
 
-class CreateFichaTecnica extends Component {
+class DetailsEditFichaTecnica extends Component {
   render() {
     return (
       <div className="LoginPage">
         <Header />
-        <Create id={this.props.id} query={this.props.query}/>
+        <DetailsEdit id={this.props.id} query={this.props.query}/>
         <Footer />
       </div>
     );
   }
 }
 
-export default CreateFichaTecnica;
+export default DetailsEditFichaTecnica;

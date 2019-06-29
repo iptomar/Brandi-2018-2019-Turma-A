@@ -14,7 +14,7 @@ class Contacts extends Component {
               </div>
               <div class="row2">
                 <span class="fa fa-phone btn_edit " aria-hidden="true">
-                  <label><a href="tel:+1-829-395-2064" target="_blank" rel="noopener noreferrer">+1-829-395-2064</a></label>
+                  <label><a href="+351 249 328 100" target="_blank" rel="noopener noreferrer">+351 249 328 100</a></label>
                 </span>
               </div>
               <div class="row2">
@@ -29,6 +29,7 @@ class Contacts extends Component {
                 width="750" 
                 height="350" 
                 frameBorder="0" 
+                title="Local"
                 allowFullScreen>
               </iframe>
             </div>

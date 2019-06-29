@@ -13,15 +13,14 @@ class Footer extends Component {
                 <div className="colum1">
                     <h1>Informação da aplicação</h1>
 
-                    <p>Esta aplicação foi criada para o Laboratório de Conservação e Restauro
-						do Instituto Politécnico de Tomar</p>
+                    <p>Projeto no âmbito da disciplina de Projeto de Sistemas de Informação, lecionada pelos docentes Paulo Santos e Paulo Monteiro, do curso de eng. informática, na Escola Superior de Tecnologia de Tomar, do Instituto Politécnico de Tomar (ESTT-IPT). O Brandi é uma aplicação web que dá suporte ao curso de conservação e restauro e que moderniza e melhora o sistema de workflow das peças para restauro.</p>
 
                 </div>
 
                 <div className="colum2">
 
                     <h1>Redes Sociais</h1>
-				<div className="column2_n">
+				<div className="column2_n" style={{textAlign:"center"}}>
                     <div className="row-footer">
 					<a href="https://www.facebook.com/iptomar" target="_blank" rel="noopener noreferrer"  className="btn btn-block btn-social btn-twitter btn_edit">
     					<span className="fa fa-facebook"> Segue o IPT no Facebook</span> 
@@ -48,8 +47,8 @@ class Footer extends Component {
                 <div className="colum3">
 
                     <h1>Informações de Contacto</h1>
-					<div className="column2_n">
-						<div className="row2">
+					<div className="column2_n" style={{textAlign:"center"}}>
+						<div className="row2" style={{textAlign:"center"}}>
 							<span className="fa fa-home btn_edit" aria-hidden="true"><label>Quinta do Contador . 
 							Estrada da Serra . 2300-313 . 
 							Tomar . Portugal</label></span>
@@ -57,7 +56,7 @@ class Footer extends Component {
 
                    		<div className="row2">
                        
-                        	<span className="fa fa-phone btn_edit " aria-hidden="true" ><label>+1-829-395-2064</label></span>
+                        	<span className="fa fa-phone btn_edit " aria-hidden="true" ><label>+351 249 328 100</label></span>
                     	</div>
 
                     	<div className="row2">

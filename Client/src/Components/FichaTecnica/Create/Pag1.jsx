@@ -49,12 +49,12 @@ export class Pag1 extends Component {
           {/* COLUNA 1 */}
           <div className="col-md-6 mb-3">
             <label>Localização:</label>
-            <input type="text" className="form-control mb-3" id="localizacao" placeholder="Localização da obra" required />
+            <input type="text" className="form-control mb-3" id="localizacao" placeholder="Localização da obra" required/>
             <hr />
             <label>Proprietário:</label>
-            <input type="text" className="form-control mb-3" id="proprietario" placeholder="Proprietário" required />
+            <input type="text" className="form-control mb-3" id="proprietario" placeholder="Proprietário" required/>
             <label>Código postal:</label>
-            <input type="text" className="form-control mb-3" id="codPostalProprietario" placeholder="Endereço postal" required />
+            <input type="text" className="form-control mb-3" id="codPostalProprietario" placeholder="Endereço postal" required/>
             <label>Email:</label>
             <input type="text" className="form-control mb-3" id="emailProprietario" placeholder="Email" required />
             <label>Contactos telefónicos:</label>

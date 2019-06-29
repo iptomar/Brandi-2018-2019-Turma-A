@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import Pag1 from "../../Components/FichaTecnica/Create/Pag1";
-import Pag2 from "../../Components/FichaTecnica/Create/Pag2";
-import Pag3 from "../../Components/FichaTecnica/Create/Pag3";
-import Pag4 from "../../Components/FichaTecnica/Create/Pag4";
-import Pag5 from "../../Components/FichaTecnica/Create/Pag5";
-import Pag6 from "../../Components/FichaTecnica/Create/Pag6";
-import Pag7 from "../../Components/FichaTecnica/Create/Pag7";
-import Pag8 from "../../Components/FichaTecnica/Create/Pag8";
-import Pag9 from "../../Components/FichaTecnica/Create/Pag9";
-import Pag10 from "../../Components/FichaTecnica/Create/Pag10";
+import Pag1 from "./Create/Pag1";
+import Pag2 from "./Create/Pag2";
+import Pag3 from "./Create/Pag3";
+import Pag4 from "./Create/Pag4";
+import Pag5 from "./Create/Pag5";
+import Pag6 from "./Create/Pag6";
+import Pag7 from "./Create/Pag7";
+import Pag8 from "./Create/Pag8";
+import Pag9 from "./Create/Pag9";
+import Pag10 from "./Create/Pag10";
 import $ from 'jquery';
 import FileUpload from "../Globais/FileUpload";
 import AlertMsg from '../Globais/AlertMsg';
@@ -35,21 +35,16 @@ class Create extends Component {
   }
 
   componentDidMount() {
-    //Verifica se esta página é usada para verificar os detalhes de uma ficha técnica
-    if (window.location.href.includes("/detalhes") && window.location.href.includes("/fichaTecnica/")) {
-      //Coloca todas as textarea e input com readonly
-      $('input, textarea').attr('readonly', 'readonly');
-      //Ocultar input do tipo checkbox
-      $('input[type=checkbox], input[type=radio]').hide();
-      //Ocultar os componentes FileUpload
-      $('.custom-file').hide();
-      $('.btn.btn-dark').hide();
-      //Atualiza todos os valores necessários para apresentação da ficha técnica
-      this.fetchAndSetData(this.state.id);
-      this.modalImage();
-    }else{
-      this.openAccordion();
-    }
+    //Coloca todas as textarea e input com readonly
+    $('input, textarea').attr('readonly', 'readonly');
+    //Ocultar input do tipo checkbox
+    $('input[type=checkbox], input[type=radio]').hide();
+    //Ocultar os componentes FileUpload
+    $('.custom-file').hide();
+    $('.btn.btn-dark').hide();
+    //Atualiza todos os valores necessários para apresentação da ficha técnica
+    this.fetchAndSetData(this.state.id);
+    this.modalImage();
     this.queryState(this.props.query);
   }
 
@@ -76,6 +71,7 @@ class Create extends Component {
       }
     }
   }
+
   refreshPage(){
     window.location = "/fichaTecnica/"+this.props.id+"/detalhes";
   }
@@ -784,215 +780,6 @@ class Create extends Component {
   }
 
 
-  //Submeter o form da criação da página
-  handleSubmit = async e => {
-    e.preventDefault();
-    //Form
-    let formData = new FormData();
-    //Pag 1
-    formData.append("localizacao", document.getElementById('localizacao').value);
-    formData.append("proprietario", document.getElementById('proprietario').value);
-    formData.append("codPostalProprietario", document.getElementById('codPostalProprietario').value);
-    formData.append("emailProprietario", document.getElementById('emailProprietario').value);
-    formData.append("contactoProprietario", document.getElementById('contactoProprietario').value);
-    formData.append("donoObra", document.getElementById('donoObra').value);
-    formData.append("codPostalDonoObra", document.getElementById('codPostalDonoObra').value);
-    formData.append("contactoDonoObra", document.getElementById('contactoDonoObra').value);
-    formData.append("mecenas", document.getElementById('mecenas').value);
-    formData.append("codPostalMecenas", document.getElementById('codPostalMecenas').value);
-    formData.append("contactoMecenas", document.getElementById('contactoMecenas').value);
-    for (let i = 0; i < this.state.files.length; i++) {
-      formData.append("files[" + i + "]", this.state.files[i]);
-    }
-    formData.append("imgGraph", this.state.filesG[0]);
-    //Pag 2
-    //Verificações de radiobutton
-    if (document.getElementById('bemIntegradoSim').checked) formData.append("bemIntegradoEmConjunto", 1);
-    else formData.append("bemIntegradoEmConjunto", 0);
-    formData.append("tipoBensConjunto", document.getElementById('tipoBensConjunto').value);
-    formData.append("elemConstConj", document.getElementById('elemConstConj').value);
-    formData.append("materiasElementosAcessorios", document.getElementById('materiasElementosAcessorios').value);
-    formData.append("marcasInscricoesAssinaturas", document.getElementById('marcasInscricoesAssinaturas').value);
-    formData.append("marcasInscricoesMontagem", document.getElementById('marcasInscricoesMontagem').value);
-    formData.append("marcasInscricoesConstrucao", document.getElementById('marcasInscricoesConstrucao').value);
-    formData.append("classPatrimonial", document.getElementById('classPatrimonial').value);
-    if (document.getElementById('EpocaCoevo').checked) formData.append("epoca", document.getElementById('EpocaCoevo').value);
-    else if (document.getElementById('EpocaTardio').checked) formData.append("epoca", document.getElementById('EpocaTardio').value);
-    else if (document.getElementById('EpocaOutra').checked) formData.append("epoca", document.getElementById('EpocaOutra').value);
-    else if (document.getElementById('EpocaReplica').checked) formData.append("epoca", document.getElementById('EpocaReplica').value);
-    else if (document.getElementById('EpocaReproducao').checked) formData.append("epoca", document.getElementById('EpocaReproducao').value);
-    else formData.append("epoca", document.getElementById('EpocaFalsificacao').value);
-    if (document.getElementById('QualidadeExcelente').checked) formData.append("qualidade", document.getElementById('QualidadeExcelente').value);
-    else if (document.getElementById('QualidadeMuitoBoa').checked) formData.append("qualidade", document.getElementById('QualidadeMuitoBoa').value);
-    else if (document.getElementById('QualidadeBoa').checked) formData.append("qualidade", document.getElementById('QualidadeBoa').value);
-    else if (document.getElementById('QualidadeRegular').checked) formData.append("qualidade", document.getElementById('QualidadeRegular').value);
-    else formData.append("qualidade", document.getElementById('QualidadeFraca').value);
-    formData.append("materiaisEstruturaSuporte", document.getElementById('materiaisEstruturaSuporte').value);
-    formData.append("materiaisSuperficies", document.getElementById('materiaisSuperficies').value);
-    formData.append("tecnicasEstruturaSuporte", document.getElementById('tecnicasEstruturaSuporte').value);
-    formData.append("tecnicasSuperficie", document.getElementById('tecnicasSuperficie').value);
-    //Pag 3
-    formData.append("condAmbDescricao", document.getElementById('condAmbDescricao').value);
-    formData.append("condAmbFrioTemperatura", document.getElementById('condAmbFrioTemperatura').value);
-    formData.append("condAmbFrioHumidade", document.getElementById('condAmbFrioHumidade').value);
-    formData.append("condAmbFrioPeriodoInicio", document.getElementById('condAmbFrioPeriodoInicio').value);
-    formData.append("condAmbFrioPeriodoFim", document.getElementById('condAmbFrioPeriodoFim').value);
-    formData.append("condAmbQuenteTemperatura", document.getElementById('condAmbQuenteTemperatura').value);
-    formData.append("condAmbQuenteHumidade", document.getElementById('condAmbQuenteHumidade').value);
-    formData.append("condAmbQuentePeriodoInicio", document.getElementById('condAmbQuentePeriodoInicio').value);
-    formData.append("condAmbQuentePeriodoFim", document.getElementById('condAmbQuentePeriodoFim').value);
-    formData.append("ilumArtTipo", document.getElementById('ilumArtTipo').value);
-    formData.append("ilumArtValorIluminancia", document.getElementById('ilumArtValorIluminancia').value);
-    formData.append("ilumArtValurUV", document.getElementById('ilumArtValurUV').value);
-    formData.append("ilumArtValorRealUV", document.getElementById('ilumArtValorRealUV').value);
-    formData.append("ilumNatOrigem", document.getElementById('ilumNatOrigem').value);
-    formData.append("ilumNatValorIluminancia", document.getElementById('ilumNatValorIluminancia').value);
-    formData.append("ilumNatValorUV", document.getElementById('ilumNatValorUV').value);
-    formData.append("ilumNatValorRealUV", document.getElementById('ilumNatValorRealUV').value);
-    formData.append("poluicaoAgentes", document.getElementById('poluicaoAgentes').value);
-    formData.append("poluicaoFontesOrigem", document.getElementById('poluicaoFontesOrigem').value);
-    formData.append("poluicaoResultados", document.getElementById('poluicaoResultados').value);
-    formData.append("poluicaoObservacoesConclusoes", document.getElementById('poluicaoObservacoesConclusoes').value);
-    //Pag 4
-    let objGerais = [];
-    if (document.getElementById("identMateriais").checked) objGerais.push(document.getElementById("identMateriais").value);
-    if (document.getElementById("identIntervencoes").checked) objGerais.push(document.getElementById("identIntervencoes").value);
-    if (document.getElementById("caracterizacao").checked) objGerais.push(document.getElementById("caracterizacao").value);
-    if (document.getElementById("identPatologias").checked) objGerais.push(document.getElementById("identPatologias").value);
-    if (document.getElementById("datacao").checked) objGerais.push(document.getElementById("datacao").value);
-    if (document.getElementById("ensaio").checked) objGerais.push(document.getElementById("ensaio").value);
-    formData.append("objGerais", JSON.stringify(objGerais));
-    let tab = [];
-    for (let i = 0; i < document.getElementById("tabela").children[1].childElementCount; i++) {
-      let content = document.getElementById("tabela").children[1].children[i];
-      tab.push({ tipoRef: content.children[0].children[0].value, lap: content.children[1].children[0].value, objEsp: content.children[2].children[0].value, reslt: content.children[3].children[0].value, data: content.children[5].children[0].value });
-    }
-    //Têm de ser enviado em JSON para a equipa de backend retirar os dados
-    formData.append("tabobjGerais", JSON.stringify(tab));
-    formData.append("examesAnalisesInterpResultados", document.getElementById('examesAnalisesInterpResultados').value);
-    formData.append("examesAnalisesObsConclusoes", document.getElementById('examesAnalisesObsConclusoes').value);
-    //Pag 5
-    formData.append("estadoConservFQMestrutura", document.getElementById('estadoConservFQMestrutura').value);
-    formData.append("estadoConservFQMsuperficie", document.getElementById('estadoConservFQMsuperficie').value);
-    formData.append("estadoConservFQMelementosAcess", document.getElementById('estadoConservFQMelementosAcess').value);
-    formData.append("estadoConservBioEstrutura", document.getElementById('estadoConservBioEstrutura').value);
-    formData.append("estadoConservBioSuperficie", document.getElementById('estadoConservBioSuperficie').value);
-    formData.append("estadoConservBioElementosAcess", document.getElementById('estadoConservBioElementosAcess').value);
-    formData.append("estadoConservObsConclusoes", document.getElementById('estadoConservObsConclusoes').value);
-    //Pag 6
-    formData.append("estruturaIntervAnter", document.getElementById('estruturaIntervAnter').value);
-    formData.append("superficieIntervAnter", document.getElementById('superficieIntervAnter').value);
-    formData.append("elementosAcessoriosIntervAnter", document.getElementById('elementosAcessoriosIntervAnter').value);
-    formData.append("observaçoesConclusoesPag6", document.getElementById('observaçoesConclusoesPag6').value);
-    if (document.getElementById('intervPrevencao').checked) formData.append("tipoInterv", document.getElementById('intervPrevencao').value);
-    else if (document.getElementById('intervConvercao').checked) formData.append("tipoInterv", document.getElementById('intervConvercao').value);
-    else formData.append("tipoInterv", document.getElementById('intervRestauro').value);
-    formData.append("aspetosEspecificosPag6", document.getElementById('aspetosEspecificosPag6').value);
-    if (document.getElementById('intervPrevencaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervPrevencaoConsRes').value);
-    else if (document.getElementById('intervConvercaoConsRes').checked) formData.append("tipoIntervCR", document.getElementById('intervConvercaoConsRes').value);
-    else formData.append("tipoIntervCR", document.getElementById('intervRestauroConsRes').value);
-    formData.append("EstruturaPropPag6", document.getElementById('EstruturaPropPag6').value);
-    formData.append("EstruturaPropRecPag6", document.getElementById('EstruturaPropRecPag6').value);
-    formData.append("SuperficiePropPag6", document.getElementById('SuperficiePropPag6').value);
-    formData.append("SuperficiePropRecPag6", document.getElementById('SuperficiePropRecPag6').value);
-    formData.append("ElementosAcessPropPag6", document.getElementById('ElementosAcessPropPag6').value);
-    formData.append("ElementosAcessPropRecPag6", document.getElementById('ElementosAcessPropRecPag6').value);
-    formData.append("observaçoesConclusoesPag7", document.getElementById('observaçoesConclusoesPag7').value);
-    //Pag 8
-    formData.append("estruturaPag8", document.getElementById('estruturaPag8').value);
-    formData.append("recursosEstruturaPag8", document.getElementById('recursosEstruturaPag8').value);
-    formData.append("superficiePag8", document.getElementById('superficiePag8').value);
-    formData.append("recursosSuperficiePag8", document.getElementById('recursosSuperficiePag8').value);
-    formData.append("elementosAcessoriosPag8", document.getElementById('elementosAcessoriosPag8').value);
-    formData.append("recursosElementosAcPag8", document.getElementById('recursosElementosAcPag8').value);
-    formData.append("observaçoesConclusoesPag8", document.getElementById('observaçoesConclusoesPag8').value);
-    //Pag 9
-    formData.append("relTecInterLCRM", document.getElementById('relTecInterLCRM').value);
-    formData.append("tipoDesigOrig", document.getElementById('tipoDesigOrig').value);
-    formData.append("refOrig", document.getElementById('refOrig').value);
-    formData.append("entidadeOrig", document.getElementById('entidadeOrig').value);
-    formData.append("tipoDesigDocGraf", document.getElementById('tipoDesigDocGraf').value);
-    formData.append("refDocGraf", document.getElementById('refDocGraf').value);
-    formData.append("entidadeDocGraf", document.getElementById('entidadeDocGraf').value);
-    formData.append("tipoDesigExames", document.getElementById('tipoDesigExames').value);
-    formData.append("refExames", document.getElementById('refExames').value);
-    formData.append("entidadeExames", document.getElementById('entidadeExames').value);
-    //Pag10
-    formData.append("atledpArqDoc", document.getElementById('atledpArqDoc').value);
-    formData.append("tipoArqDoc", document.getElementById('tipoArqDoc').value);
-    formData.append("localArqDoc", document.getElementById('localArqDoc').value);
-    formData.append("cotaArqDoc", document.getElementById('cotaArqDoc').value);
-    formData.append("atledpIcon", document.getElementById('atledpIcon').value);
-    formData.append("tipoIcon", document.getElementById('tipoIcon').value);
-    formData.append("localIcon", document.getElementById('localIcon').value);
-    formData.append("cotaIcon", document.getElementById('cotaIcon').value);
-    formData.append("atledpBiblio", document.getElementById('atledpBiblio').value);
-    formData.append("tipoBiblio", document.getElementById('tipoBiblio').value);
-    formData.append("localBiblio", document.getElementById('localBiblio').value);
-    formData.append("cotaBiblio", document.getElementById('cotaBiblio').value);
-    formData.append("atledpOutras", document.getElementById('atledpOutras').value);
-    formData.append("tipoOutras", document.getElementById('tipoOutras').value);
-    formData.append("localOutras", document.getElementById('localOutras').value);
-    formData.append("cotaOutras", document.getElementById('cotaOutras').value);
-    //Array a ser colocado os dados da tabela
-    let table = [];
-    for (let j = 0; j < document.getElementById("table").children[1].childElementCount; j++) {
-      //Encontra o objeto "pai" da tabela onde se irá retirar os dados
-      let cont = document.getElementById("table").children[1].children[j];
-      //Insere um objeto com os dados da tabela no array que irá ser enviado para o backend
-      table.push(
-        {
-          constEq: cont.children[0].children[0].value,
-          funcDes: cont.children[1].children[0].value,
-          habPro: cont.children[2].children[0].value
-        }
-      );
-    }
-    //Têm de ser enviado em JSON para a equipa de backend retirar os dados
-    formData.append("tabel10", JSON.stringify(table));
-
-
-    //Final
-    formData.append("fichaRegistoFK", this.state.id);
-    //Enviar pedidos
-    const response = await fetch("/api/fichaTecnica/create", {
-      method: "POST",
-      headers: {
-        'x-auth-token': sessionStorage.getItem('token')
-      },
-      body: formData
-    });
-    console.log(response.body);
-    //Aguardar API
-    await response.json().then(resp => {
-      let status = resp.stat;
-      switch (status) {
-        case "DatabaseError":
-          this.setState({
-            alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
-            alertisNotVisible: false,
-            alertColor: "danger"
-          });
-          break;
-        case "Registed":
-          this.setState({
-            alertisNotVisible: false
-          });
-          window.location = "/fichaRI/" + this.state.id + "/detalhes/&criarfichatecnica";
-          break;
-        case "Erro na criação":
-          this.setState({
-            alertText: "Ocorreu um erro técnico. Tente novamente mais tarde",
-            alertisNotVisible: false,
-            alertColor: "danger"
-          });
-          break;
-        default:
-          console.log("Ocorreu um erro técnico. Tente novamente mais tarde.");
-      }
-    });
-  };
-
   openAccordion = () =>{
     var inputs = document.querySelectorAll("form .form-control[type='text']");
     [].forEach.call(inputs, function (input) {
@@ -1024,7 +811,7 @@ class Create extends Component {
                 <div>
                   <button id="btEditar" className="btn btn-success btn-lg btn-block mb-5" type="button" onClick={this.changeToEdit}>Editar</button>
                   <button id="btGuardar" className="btn btn-success btn-lg btn-block" type="button" style={{ display: "none" }} onClick={this.submitEdit}>Guardar</button>
-                  <button id="btVoltar" className="btn btn-success btn-lg btn-block mb-5" type="button" style={{ display: "none" }} onClick={this.refreshPage}>Voltar</button>
+                  <button id="btVoltar" className="btn btn-success btn-lg btn-block mb-5" data-toggle="modal" data-target="#exampleModal" type="button" style={{ display: "none" }}>Voltar</button>
                 </div> :
                 <span></span>
               }
@@ -1190,6 +977,26 @@ class Create extends Component {
             </div>
 
             {/* MODAL */}
+            <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">Voltar sem guardar?</h5>
+                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div className="modal-body">
+                    Se voltar sem guardar, perderá todas as alterações realizadas!
+                    Têm a certeza que deseja voltar?
+                  </div>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Não</button>
+                  <button type="button" className="btn btn-primary" onClick={this.refreshPage}>Sim</button>
+              </div>
+          </div>
+        </div>
+      </div>
             
 
             {/*MODAL IMAGENS*/}

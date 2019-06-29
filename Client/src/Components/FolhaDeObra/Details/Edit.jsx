@@ -25,6 +25,10 @@ class Edit extends Component {
     this.fetchDetalhes(this.props.id);
   }
 
+  refreshPage = () => {
+    window.location.reload();
+  }
+
   /**
    * Adiciona uma nova linha no fim da tabela da folha de obra
    */
@@ -151,9 +155,9 @@ class Edit extends Component {
     });
     /* Aguardar a resposta da API e avaliar o que fazer */
     await response.json().then(resp => {
-      let status = resp.status;
+      let status = resp.stat;
       switch (status) {
-        case "Success":
+        case "Updated":
           window.location = `/folhaDeObra/${this.props.id}/detalhes`;
           break;
         case "Error":
@@ -179,6 +183,7 @@ class Edit extends Component {
     btEditar.style.display = "none";
     // Apresentar todo o conteudo que foi escondido na apresentação
     $("#editarF").show();
+    $("#btVoltar").show();
   }
 
   /**
@@ -199,6 +204,15 @@ class Edit extends Component {
               onClick={this.changeToEdit}
             >
               Editar
+            </button>
+            <button
+              id="btVoltar"
+              className="btn btn-success my-3"
+              style={{display:"none"}}
+              data-toggle="modal" 
+              data-target="#exampleModal"
+            >
+              Voltar
             </button>
           </div>
         </div>
@@ -328,6 +342,27 @@ class Edit extends Component {
             </button>
           </div>
         </div>
+        {/* MODAL */}
+        <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">Voltar sem guardar?</h5>
+                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div className="modal-body">
+                    Se voltar sem guardar, perderá todas as alterações realizadas!
+                    Têm a certeza que deseja voltar?
+                  </div>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Não</button>
+                  <button type="button" className="btn btn-primary" onClick={this.refreshPage}>Sim</button>
+              </div>
+          </div>
+        </div>
+      </div>
       </div>
     );
   }

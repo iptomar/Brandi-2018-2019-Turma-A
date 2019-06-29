@@ -11,7 +11,8 @@ footer{
     width: 100%;
     max-width: 1200px;
     margin: auto;
-    padding: 40px;
+    padding: 30px;
+    padding-bottom: 15px;
 }
 
 .container-body-footer{
@@ -44,7 +45,7 @@ footer{
 
 
 .column2_n{
-	align-content: initial;
+	align-content: center;
 }
 
 .row-footer{
@@ -61,6 +62,11 @@ footer{
     margin-top: 10px;
     margin-left: 20px;
     color: #C7C7C7;
+}
+
+.btn-twitter:hover{
+    color:green;
+    font-weight: bold;
 }
 
 .colum3{

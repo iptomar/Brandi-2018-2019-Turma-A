@@ -14,6 +14,7 @@ import ContactPage from './MasterComponents/ContactPage';
 import ProfilePage from './MasterComponents/ProfilePage';
 // FICHAS TÉCNICAS
 import CreateFichaTecnica from './MasterComponents/Ficha Tecnica/CreateFichaTecnica';
+import DetailsEditFichaTecnica from './MasterComponents/Ficha Tecnica/DetailsEditFichaTecnica';
 // FICHAS RI
 import IndexFichaRI from './MasterComponents/FichaRegistoIdentificacao/IndexFichaRI';
 import CreateFichaRI from './MasterComponents/FichaRegistoIdentificacao/CreateFichaRI';
@@ -43,8 +44,8 @@ ReactDOM.render(
             <Route path="/utilizadores/:id/detalhes" component={(r) => <DetailsUserPage id={r.match.params.id} />} />
             <Route path="/utilizadores/listar/:query?" component={(r) => <IndexPage query={r.match.params.query} />} />
             {/* Ficha Técnica */}
-            <Route path="/fichaTecnica/:id/detalhes" component={(r) => <CreateFichaTecnica id={r.match.params.id} />} />
-            <Route path="/fichaTecnica/criar/:id" component={(r) => <CreateFichaTecnica id={r.match.params.id} />} />
+            <Route path="/fichaTecnica/:id/detalhes/:query?" component={(r) => <DetailsEditFichaTecnica id={r.match.params.id} query={r.match.params.query}/>} />
+            <Route path="/fichaTecnica/criar/:id/:query?" component={(r) => <CreateFichaTecnica id={r.match.params.id} query={r.match.params.query}/>} />
             {/* Ficha Registo Identificacao */}
             <Route path="/fichaRI/criar" component={CreateFichaRI} />
             <Route path="/fichaRI/:id/detalhes/:query?" component={(r) => <DetailsFichaRI id={r.match.params.id} query={r.match.params.query} />}/>

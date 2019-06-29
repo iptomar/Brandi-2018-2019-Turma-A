@@ -95,41 +95,44 @@ exports.createTesteSolvente = async (bd, dados) => {
 exports.updateTestesSolventes = async (bd, dados) => {
   let resultadofinal = { stat: 1, resposta: "Campos Inválidos" };
   let resposta_bd = await bd.query(
-    "update tbl_testessolventes (idEstratoSujidade,caracteristicas) values (?,?,?) where id =",
+    "update tbl_testessolventes set idEstratoSujidade =?,caracteristicas = ? where id = ?",
     [dados[0].idEstratoSujidade, dados[0].caracteristicas, dados.id]
   );
   //verificar se foi bem actualizado
   if (resposta_bd.stat === 0) {
     resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;
+
+    let array2 = [];
+    let tabela = dados[1];
     // adicionar os campos da tabela da página
     let auxiliar = "";
-    for (let i = 1; i < dados.length; i++) {
+    for (let i = 0; i < tabela.length; i++) {
       auxiliar += "(?,?,?,?),";
     }
     auxiliar = auxiliar.substring(0, auxiliar.length - 1); //tira ultima virgula
-    let array2 = [];
-    for (let i = 1; i < dados.length; i++) {
+    for (let i = 0; i < tabela.length; i++) {
       if (
-        dados[i].solvente &&
-        dados[i].grauDeEficacia &&
-        dados[i].observacoes
+        tabela[i].solventeMistura &&
+        tabela[i].grauEficacia &&
+        tabela[i].obsevacoes
       ) {
-        array2.push(dados[i].solvente);
-        array2.push(dados[i].grauDeEficacia);
-        array2.push(dados[i].observacoes);
+        array2.push(tabela[i].solventeMistura);
+        array2.push(tabela[i].grauEficacia);
+        array2.push(tabela[i].obsevacoes);
         array2.push(dados.id);
       } else {
         return resultadofinal;
       }
     }
     //apagar a informação que já existe sobre o teste de solvente da tabela complementar
-    let apagarTestesSolventes = await bd.query(
-      "Delete from tbl_testesSolventesComplementar where testeSolventeFK = ?",
+    let resposta_bd2 = await bd.query(
+      "Delete from tbl_testesSolventesComplementar where testeSolventFK = ?",
       dados.id
     );
-    //inserir os novos dados
-    let resposta_bd2 = await bd.query(
+
+    // inserir os novos dados
+    resposta_bd2 = await bd.query(
       "Insert into tbl_testesSolventesComplementar (solvente,grauDeEficacia,observacoes,testeSolventFK) values " +
         auxiliar,
       array2

@@ -144,46 +144,45 @@ exports.createTesteSolvente = async (app, bd) => {
  */
 exports.updateTestesSolventes = async (app, bd) => {
   app.post("/api/testesSolubilizacao/:id/edit", async (req, resp) => {
-    //console.log(req.body);
-    resp.json("testes");
-    // let dados = req.body;
-    // let code = 200;
-    // let resposta_servidor = {
-    //   status: "Not Authenticated",
-    //   resposta: {}
-    // };
-    // token = await getToken.getToken(req);
-    // if (token === null) {
-    //   code = 400;
-    // } else if (token.name) {
-    //   code = 400;
-    //   resposta_servidor.status = "InvalidToken";
-    // } else {
-    //   let resposta_bd = await solventes.updateTestesSolventes(bd, dados);
-    //   console.log(resposta_bd);
-    //   if (resposta_bd.stat === 0) {
-    //     resposta_servidor.status = "Updated";
-    //     resposta_servidor.resposta = resposta_bd.resposta;
-    //   }
-    //   //database down
-    //   else if (resposta_bd.stat === 1) {
-    //     code = 500;
-    //     resposta_servidor.status = "NotUpdated";
-    //     resposta_servidor.resposta = "DBConnectionError";
-    //   }
-    //   //erro ao criar objeto
-    //   else if (resposta_bd.stat >= 2) {
-    //     code = 400;
-    //     resposta_servidor.resposta = await bd.tratamentoErros(
-    //       resposta_bd.stat,
-    //       resposta_bd.resposta.sqlMessage
-    //     );
-    //   }
-    //   token = await getToken.generateToken(token);
-    // }
-    // resp
-    //   .status(code)
-    //   .header("x-auth-token", token)
-    //   .json(resposta_servidor);
+    let dados = req.body;
+    dados.id = req.params.id;
+    let code = 200;
+    let resposta_servidor = {
+      status: "Not Authenticated",
+      resposta: {}
+    };
+    token = await getToken.getToken(req);
+    if (token === null) {
+      code = 400;
+    } else if (token.name) {
+      code = 400;
+      resposta_servidor.status = "InvalidToken";
+    } else {
+      let resposta_bd = await solventes.updateTestesSolventes(bd, dados);
+      // console.log(resposta_bd);
+      if (resposta_bd.stat === 0) {
+        resposta_servidor.status = "Updated";
+        resposta_servidor.resposta = resposta_bd.resposta;
+      }
+      //database down
+      else if (resposta_bd.stat === 1) {
+        code = 500;
+        resposta_servidor.status = "NotUpdated";
+        resposta_servidor.resposta = "DBConnectionError";
+      }
+      //erro ao criar objeto
+      else if (resposta_bd.stat >= 2) {
+        code = 400;
+        resposta_servidor.resposta = await bd.tratamentoErros(
+          resposta_bd.stat,
+          resposta_bd.resposta.sqlMessage
+        );
+      }
+      token = await getToken.generateToken(token);
+    }
+    resp
+      .status(code)
+      .header("x-auth-token", token)
+      .json(resposta_servidor);
   });
 };

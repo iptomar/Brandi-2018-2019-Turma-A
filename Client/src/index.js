@@ -60,7 +60,7 @@ ReactDOM.render(
             <Route path="/folhaDeObra/:id/detalhes" component={(r) => <EditFolhaDeObra id={r.match.params.id} />} />
             {/* Testes de Solubilização */}
             <Route path="/testesSolubilizacao/:id/criar" component={(r) => <CreateTestesSolubilizacao id={r.match.params.id} />} />
-            <Route path="/testesSolubilizacao/:id/detalhes" component={(r) => <DetailsTestesSolubilizacao id={r.match.params.id} />} />
+            <Route path="/testesSolubilizacao/:id/detalhes/:query?" component={(r) => <DetailsTestesSolubilizacao id={r.match.params.id} query={r.match.params.query}  />} />
             {/* Default */}
             <Route component={LoginPage} />
         </Switch>

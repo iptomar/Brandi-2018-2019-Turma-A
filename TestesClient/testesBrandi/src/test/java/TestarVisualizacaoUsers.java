@@ -56,16 +56,17 @@ public class TestarVisualizacaoUsers {
 
     @Test
     public void TestVisualizacaoUsers() throws InterruptedException {
-        //Selecionar a opção "utilizadores"
-        List<WebElement> users =  driver.findElements(By.className("nav-link"));
-        users.get(1).click();
+        Thread.sleep(1000);
+//Selecionar a opção "utilizadores"
+        List<WebElement> users =  driver.findElements(By.className("dropdown-toggle"));
+        users.get(2).click();
         Thread.sleep(2000);
         //selecionar o dropdown-item "listar" que se encontra depois de selecionar a opção "utilizadores"
         List<WebElement> options =  driver.findElements(By.className("dropdown-item"));
-        options.get(2).click();
+        options.get(4).click();
         Thread.sleep(2000);
         //compara se nos encontramos na página que pretendiamos com o teste
-        WebElement userList = driver.findElement(By.className("interessadosIndex"));
+        WebElement userList = driver.findElement(By.className("RegisterPage"));
         assertEquals(true, userList.isDisplayed());
 }
 }

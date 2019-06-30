@@ -310,7 +310,17 @@ exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
     dados.interessadoFK &&
     dados.fichaRegistoID
   ) {
-    if (dados.imagem == "") {
+    //verificar se dataConclusao e dataEntrega est#ao preenchidas
+    if (dados.dataConclusao == "null" && dados.dataEntrega == "null") {
+      dados.dataConclusao = null;
+      dados.dataEntrega = null;
+    } else if (dados.dataEntrega == "null") {
+      dados.dataEntrega = null;
+    } else if (dados.dataConclusao == "null") {
+      dados.dataConclusao = null;
+    }
+
+    if (dados.imagem == "empty") {
       resposta_bd = await bd.query(
         "update tbl_fichaRegistoIdentificacao set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataEntrega=?, coordenacao =?, direcaoTecnica =?, tipologia =?, analogias =?, dimensoes =?, outrasDimensoes =?, breveDescricao =?, conclusoes =?, oficina =?, datacao =?, localOrigem =?, superCategorias =?, categorias =?, subCategorias =?, interessadoFK =? where fichaRegistoID = ? ",
         [
@@ -351,6 +361,7 @@ exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
           if (err) throw err;
         });
       }
+
       resposta_bd = await bd.query(
         "update tbl_fichaRegistoIdentificacao set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataEntrega=?, coordenacao =? , direcaoTecnica =?,imagem=?, tipologia =?, analogias =?, dimensoes =?, outrasDimensoes =?, breveDescricao =?, conclusoes =?, oficina =?, datacao =?, localOrigem =?, superCategorias =?, categorias =?, subCategorias =?, interessadoFK =? where fichaRegistoID = ? ",
         [

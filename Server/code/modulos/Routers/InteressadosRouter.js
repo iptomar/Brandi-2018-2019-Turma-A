@@ -63,7 +63,6 @@ exports.getInteressadoRoute = async (app, bd) => {
             resposta_servidor.status = "InvalidToken";
         } else {
             let resposta_bd = await interessados.getSingleInteressado(bd, req.params.id);
-            console.log(resposta_bd);
             if (
                 resposta_bd.stat === 1 &&
                 resposta_bd.resposta === "DBConnectionError"
@@ -107,9 +106,7 @@ exports.createInteressadoRoute = async (app, bd) => {
         } else {
             let dados = [];
             dados.push(req.body);
-            console.log(dados);
             let resposta_bd = await interessados.createInteressado(bd, dados);
-            console.log(resposta_bd);
             if (resposta_bd.stat === 0) {
                 resposta_servidor.status = "Created";
                 resposta_servidor.resposta = resposta_bd.resposta;

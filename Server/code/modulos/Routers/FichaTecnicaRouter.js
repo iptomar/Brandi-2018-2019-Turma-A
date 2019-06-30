@@ -270,7 +270,6 @@ exports.updateFichaTecnicaRoute = async (app, bd) => {
           ficha.imgGrafico = imgGrafico;
           ficha.imgArray = imgArray;
 
-          //console.log(ficha);
           //alterar os campos
           let resposta_bd = await fichaTecnica.updateFichaTecnica(bd, ficha);
           if (resposta_bd.stat === 0) {
@@ -493,14 +492,10 @@ exports.readFichaTecnicaImagemGraficoRoute = async (app, bd) => {
         try {
           resposta_servidor.resposta.imgGrafico = base64Img.base64Sync(path.join(__dirname, "../../", resposta_servidor.resposta.imgGrafico));
         }
-        catch(e){
-          console.log('erro por corrigir= '+e);
+        catch (e) {
+          console.log('erro por corrigir= ' + e);
         }
-        
-        //resposta_servidor.resposta.imgGrafico = base64Img.base64(path.join(__dirname, "../../", resposta_servidor.resposta.imgGrafico), function (err, data) { });
 
-
-        //console.log(resposta_servidor.resposta.imgGrafico);
       } else if (resposta_bd.stat === 1) {
         code = 500;
         resposta_servidor.stat = "Authenticated";

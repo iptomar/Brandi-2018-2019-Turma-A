@@ -201,13 +201,13 @@ exports.updatefichaRegistoIdentificacaoRoute = async (app, bd) => {
       else {
         //se tiver role
         if (token.roleFK) {
-          var imagem = "";
+          var imagem = "empty";
           if (req.file) {
             imagem = req.file.path;
           }
           let ficha = {
             visible: true,
-            designacao: req.body.designacao,
+            designacao: req.body.designação,
             processoLCRM: req.body.processoLCRM,
             processoCEARC: req.body.processoCEARC,
             dataEntrada: req.body.dataEntrada,
@@ -222,7 +222,7 @@ exports.updatefichaRegistoIdentificacaoRoute = async (app, bd) => {
             breveDescricao: req.body.breveDescricao,
             conclusoes: req.body.conclusoes,
             oficina: req.body.oficina,
-            datacao: req.bodydatacao,
+            datacao: req.body.datacao,
             localOrigem: req.body.localOrigem,
             superCategorias: req.body.superCategorias,
             categorias: req.body.categorias,
@@ -232,20 +232,13 @@ exports.updatefichaRegistoIdentificacaoRoute = async (app, bd) => {
             tecnicosFK: req.body.tecnicosFK,
             fichaRegistoID: req.params.id
           };
-          //verificar se dataConclusao e dataEntrega est#ao preenchidas
-          if (ficha.dataConclusao === "" && ficha.dataEntrega === "") {
-            ficha.dataConclusao = undefined;
-            ficha.dataEntrega = undefined;
-          } else if (ficha.dataEntrega === "") {
-            ficha.dataEntrega = undefined;
-          } else if (ficha.dataConclusao === "") {
-            ficha.dataConclusao = undefined;
-          }
+
           //alterar os campos
           let resposta_bd = await fichaRegistoIdentificacao.updateFichaRegistoIdentificacao(
             bd,
             ficha
           );
+
           if (resposta_bd.stat === 0) {
             resposta_servidor.stat = "Updated";
             resposta_servidor.resposta = resposta_bd.resposta;

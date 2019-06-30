@@ -71,10 +71,9 @@ exports.createFolhaDeObra = async (bd, dados, id) => {
 
   let resposta_bd = await bd.query(
     "Insert into tbl_folhaDeObraLinha( data, designacaoProcedimento,materiais,quantidades, duracao,tecnico, observacoes, folhaDeObraFK) values" +
-      auxiliar,
+    auxiliar,
     array2
   );
-  //console.log(resposta_bd);
   if (resposta_bd.stat === 0) {
     resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;
@@ -128,10 +127,9 @@ exports.updateFolhaDeObra = async (bd, dados, id) => {
 
   resposta_bd = await bd.query(
     "Insert into tbl_folhaDeObraLinha( data, designacaoProcedimento,materiais,quantidades, duracao,tecnico, observacoes, folhaDeObraFK) values" +
-      auxiliar,
+    auxiliar,
     array2
   );
-  //console.log(resposta_bd);
   if (resposta_bd.stat === 0) {
     resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;

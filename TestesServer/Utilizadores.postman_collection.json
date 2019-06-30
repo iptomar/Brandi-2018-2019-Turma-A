@@ -30,10 +30,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://brandi.ipt.pt:81/api/users",
 					"protocol": "http",
@@ -91,7 +87,10 @@
 						"type": "text"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
 				"url": {
 					"raw": "http://brandi.ipt.pt:81/api/users/:id",
 					"protocol": "http",
@@ -106,10 +105,18 @@
 						"users",
 						":id"
 					],
+					"query": [
+						{
+							"key": "id",
+							"value": "3",
+							"disabled": true
+						}
+					],
 					"variable": [
 						{
 							"key": "id",
-							"value": "1"
+							"value": "5",
+							"type": "string"
 						}
 					]
 				},
@@ -177,7 +184,8 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "1"
+							"value": "1",
+							"type": "string"
 						}
 					]
 				}
@@ -220,7 +228,10 @@
 						"type": "text"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
 				"url": {
 					"raw": "http://brandi.ipt.pt:81/api/users/:id/delete",
 					"protocol": "http",
@@ -239,7 +250,8 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "1"
+							"value": "1",
+							"type": "string"
 						}
 					]
 				}

@@ -44,8 +44,15 @@ public class TestAdicionarFTecnica {
     }
     
     @Before
-    public void setUp() {
-        
+    public void setUp() throws InterruptedException {
+     driver.get("brandi.ipt.pt:81");
+        WebElement userField = driver.findElement(By.id("user"));
+        userField.sendKeys("admin");
+        Thread.sleep(2000);  // Let the user actually see something!
+        WebElement passField = driver.findElement(By.id("pass"));
+        passField.sendKeys("admin");
+        passField.submit();
+        Thread.sleep(2000);  // Let the user actually see something!     
     }
     
     @After

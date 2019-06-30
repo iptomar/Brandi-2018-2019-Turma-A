@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -24,8 +25,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class TestEditarTecnica {
     
     static WebDriver driver = new ChromeDriver();
-    //variavel utilizada para fazer o logout no final do teste
-    boolean dologout = true;
+    
     
     public TestEditarTecnica() {
     
@@ -35,7 +35,14 @@ public class TestEditarTecnica {
     
     @BeforeClass
     public static void setUpClass() throws InterruptedException {
-      
+        driver.get("brandi.ipt.pt:81");
+        WebElement userField = driver.findElement(By.id("user"));
+        userField.sendKeys("admin");
+        Thread.sleep(2000);  // Let the user actually see something!
+        WebElement passField = driver.findElement(By.id("pass"));
+        passField.sendKeys("admin");
+        passField.submit();
+        Thread.sleep(3000);
     }
     
     @AfterClass
@@ -45,44 +52,37 @@ public class TestEditarTecnica {
     
     @Before
     public void setUp() {
-        
+        driver.get("brandi.ipt.pt:81/fichaRI");
     }
     
     @After
     public void tearDown() {
-        //caso a variavel dologout estetja a true, é efetuado o logout selecionando 
-        //esta opçao na pagina "IndexFichaRIPage"
-        if (dologout) {
-        WebElement sair =  driver.findElement(By.className("nav-sair"));
-        sair.click();
+        
         } 
-    }
+    
     
     
     
     @Test
-    public void TestEditarTecnica() throws Exception {
-        // Create a new instance of the Firefox driver
-        // Notice that the remainder of the code relies on the interface, 
-        // not the implementation.
-        WebDriver driver = new FirefoxDriver();
-
-        // And now use this to visit NetBeans
-        driver.get("http://www.netbeans.org");
-        // Alternatively the same thing can be done like this
-        // driver.navigate().to("http://www.netbeans.org");
-
-        // Check the title of the page
-        // Wait for the page to load, timeout after 10 seconds
-        (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver d) {
-                return d.getTitle().contains("NetBeans");
-            }
-        });
-
-        //Close the browser
-        driver.quit();
+    public void TestEditarTecnica() throws InterruptedException {
+        Thread.sleep(2000);
+        List<WebElement> lista  = driver.findElements(By.className("card"));
+        lista.get(1).click();
+        Thread.sleep(3000);
+        WebElement edit  = driver.findElement(By.className("btn-warning"));
+        edit.click();
+        Thread.sleep(2000);
+        //alteração do campo "Nome"
+        WebElement nomeField = driver.findElement(By.className("form-control"));
+        nomeField.clear();
+        Thread.sleep(2000);
+        nomeField.sendKeys("Esdrubal Teste Testado");
+        Thread.sleep(2000);
+        //confirmar edição
+        List<WebElement> editConfirm =  driver.findElements(By.className("mb-4"));
+        editConfirm.get(0).click();
+        Thread.sleep(2000);
     }
     
+
 }

@@ -41,10 +41,6 @@
 						"disabled": true
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://brandi.ipt.pt:81/api/fichaRegistoIdentificacao/:id",
 					"protocol": "http",
@@ -62,7 +58,8 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "2"
+							"value": "6",
+							"type": "string"
 						}
 					]
 				}
@@ -99,10 +96,6 @@
 						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "brandi.ipt.pt:81/api/fichaRegistoIdentificacao",
 					"host": [
@@ -176,12 +169,12 @@
 						},
 						{
 							"key": "processoLCRM",
-							"value": "12345",
+							"value": "9999",
 							"type": "text"
 						},
 						{
 							"key": "processoCEARC",
-							"value": "12345",
+							"value": "9999",
 							"type": "text"
 						},
 						{
@@ -291,29 +284,31 @@
 							"disabled": true
 						},
 						{
-							"key": "designacao",
+							"key": "designação",
 							"value": "designacaoUpdated",
 							"type": "text"
 						},
 						{
 							"key": "processoLCRM",
-							"value": "54321",
+							"value": "87654321",
 							"type": "text"
 						},
 						{
 							"key": "processoCEARC",
-							"value": "54321",
+							"value": "87654321",
 							"type": "text"
 						},
 						{
 							"key": "dataEntrada",
 							"value": "2019-01-03",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "dataConclusao",
 							"value": "2019-01-04",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "dataEntrega",
@@ -338,17 +333,89 @@
 						{
 							"key": "interessadoFK",
 							"value": "1",
-							"type": "text"
+							"type": "text",
+							"disabled": true
 						},
 						{
 							"key": "tecnicosFK",
 							"value": "1",
 							"type": "text"
+						},
+						{
+							"key": "tipologia",
+							"value": "testeUpdated",
+							"type": "text"
+						},
+						{
+							"key": "imagem",
+							"value": "testeUpdated.jpeg",
+							"type": "text"
+						},
+						{
+							"key": "analogias",
+							"value": "testeUpdated",
+							"type": "text"
+						},
+						{
+							"key": "dimensoes",
+							"value": "testeUpdated",
+							"type": "text"
+						},
+						{
+							"key": "outrasDimensoes",
+							"value": "testeUpdated",
+							"type": "text"
+						},
+						{
+							"key": "breveDescricao",
+							"value": "testeUpdated",
+							"type": "text"
+						},
+						{
+							"key": "conclusoes",
+							"value": "testeUpdated",
+							"type": "text"
+						},
+						{
+							"key": "oficina",
+							"value": "testeUpdated",
+							"type": "text"
+						},
+						{
+							"key": "datacao",
+							"value": "testeUpdated",
+							"type": "text"
+						},
+						{
+							"key": "localOrigem",
+							"value": "testeUpdated",
+							"type": "text"
+						},
+						{
+							"key": "superCategorias",
+							"value": "testeUpdated",
+							"type": "text"
+						},
+						{
+							"key": "categorias",
+							"value": "testeUpdated",
+							"type": "text"
+						},
+						{
+							"key": "subCategorias",
+							"value": "testeUpdated",
+							"type": "text"
+						},
+						{
+							"key": "interessadoFK",
+							"value": "2",
+							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "brandi.ipt.pt:81/api/fichaRegistoIdentificacao/:id/edit",
+					"raw": "http://brandi.ipt.pt:81/api/fichaRegistoIdentificacao/:id/edit",
+					"protocol": "http",
 					"host": [
 						"brandi",
 						"ipt",
@@ -364,7 +431,8 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "2"
+							"value": "6",
+							"type": "string"
 						}
 					]
 				}
@@ -401,10 +469,6 @@
 						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "brandi.ipt.pt:81/api/fichaRegistoIdentificacao/:id/delete",
 					"host": [
@@ -422,7 +486,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "2"
+							"value": "6"
 						}
 					]
 				}

@@ -798,7 +798,9 @@ class Create extends Component {
         alertisNotVisible: false,
         alertColor: "danger"
       });
-      document.querySelector('#collO').click();
+      if(!document.querySelector('#collapseOne').classList.include('show')){
+        document.querySelector('#collO').click();
+      }
       window.scrollTo(0,0);
       return null;
     }
@@ -808,7 +810,9 @@ class Create extends Component {
         alertisNotVisible: false,
         alertColor: "danger"
       });
-      document.querySelector('#collO').click();
+      if(!document.querySelector('#collapseOne').classList.include('show')){
+        document.querySelector('#collO').click();
+      }
       window.scrollTo(0,0);
       return null;
     }

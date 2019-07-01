@@ -833,7 +833,7 @@ class Create extends Component {
                   <hr />
                   <label>Gráfico:</label>
                   <FileUpload sendData={this.getDataG} type="image" />
-                  <img id="imgGraph" alt="Imagem Gráfico" className="w-100" data-toggle="modal" data-target="#exampleModal" onMouseOver={this.opacidadeOnImg} onMouseOut={this.opacidadeOffImg}
+                  <img id="imgGraph" alt="Imagem Gráfico" className="w-100"  data-target="#myModal" onMouseOver={this.opacidadeOnImg} onMouseOut={this.opacidadeOffImg}
                    style={{ height:"750px", objectFit:"cover", borderRadius: "5px", cursor: "pointer", transition: "0.3s", display:"none"} } />
                 </div>
               </div>
@@ -1000,19 +1000,13 @@ class Create extends Component {
             
 
             {/*MODAL IMAGENS*/}
-            <div id="myModal" className="modal" style={{display: "none", position: "fixed", zIndex: "1",  paddingTop: "100px", 
+            <div id="myModal" className="modalIMG" aria-labelledby="modalIMG" style={{display: "none", position: "fixed", zIndex: "1",  paddingTop: "100px", 
               left: "0", top: "0", width: "100%", height: "100%", overflow: "auto", backgroundColor: "rgba(0,0,0,0.9)", paddingBottom:"100px" }}>
               <span className="close" onClick={this.closeModel} style={{  position: "absolute", top: "15px", right: "35px",  color: "#f1f1f1", fontSize: "40px",
                 fontWeight: "bold", transition: "0.3s", cursor:"pointer"}}>&times;</span>
               <img className="modal-content" alt="" id="img01" style={{margin: "auto", display: "block", width: "80%", maxWidth: "700px"}}/>
             </div>
           </div>
-
-          {window.location.href.includes("/detalhes") && window.location.href.includes("/fichaTecnica/") ?
-            <span></span>
-            :
-            <button className="btn btn-success btn-lg btn-block mb-5" type="submit">Criar</button>
-          }
         </form>
       </div>
     );

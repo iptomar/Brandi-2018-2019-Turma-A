@@ -84,7 +84,7 @@ export class Pag1 extends Component {
         <div id="carouselExampleControls" className="carousel slide" data-ride="carousel" style={{ display: "none" }}>
           <div id="otherImage" className="carousel-inner">
             <div className="carousel-item active">
-              <img id="actImage" alt="" className="d-block w-100" data-toggle="modal" data-target="#exampleModal" onMouseOver={this.opacidadeOnImg} onMouseOut={this.opacidadeOffImg}
+              <img id="actImage" alt="" className="d-block w-100" data-target="#exampleModal" onMouseOver={this.opacidadeOnImg} onMouseOut={this.opacidadeOffImg}
                 style={{ height: "750px", objectFit: "cover", borderRadius: "5px", cursor: "pointer", transition: "0.3s" }} />
             </div>
           </div>

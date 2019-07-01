@@ -2,7 +2,6 @@
 CREATE DATABASE brandi_a;
 USE brandi_a;
 
--- fica
 DROP TABLE IF EXISTS tbl_roles;
 CREATE TABLE tbl_roles
 (
@@ -11,7 +10,6 @@ CREATE TABLE tbl_roles
     PRIMARY KEY(roleID)
 );
 
--- fica
 DROP TABLE IF EXISTS tbl_utilizadores;
 CREATE TABLE tbl_utilizadores
 (
@@ -26,7 +24,6 @@ CREATE TABLE tbl_utilizadores
     FOREIGN KEY(roleFK) REFERENCES tbl_roles(roleID)
 );
 
--- fica
 DROP TABLE IF EXISTS tbl_tecnicos;
 CREATE TABLE tbl_tecnicos
 (
@@ -39,7 +36,6 @@ CREATE TABLE tbl_tecnicos
     FOREIGN KEY(userFK) REFERENCES tbl_utilizadores(userID)
 );
 
--- fica
 DROP TABLE IF EXISTS tbl_interessados;
 CREATE TABLE tbl_interessados
 (
@@ -51,7 +47,6 @@ CREATE TABLE tbl_interessados
     PRIMARY KEY(interessadoID)
 );
 
--- fica
 DROP TABLE IF EXISTS tbl_fichaRegistoIdentificacao;
 CREATE TABLE tbl_fichaRegistoIdentificacao
 (
@@ -83,7 +78,6 @@ CREATE TABLE tbl_fichaRegistoIdentificacao
     FOREIGN KEY(interessadoFK) REFERENCES tbl_interessados(interessadoID)
 );
 
--- fica
 DROP TABLE IF EXISTS tbl_folhasDeObra;
 CREATE TABLE tbl_folhasDeObra
 (
@@ -93,7 +87,6 @@ CREATE TABLE tbl_folhasDeObra
     FOREIGN KEY(fichaRIFK) REFERENCES tbl_fichaRegistoIdentificacao(fichaRegistoID)
 );
 
--- fica
 DROP TABLE IF EXISTS tbl_folhaDeObraLinha;
 CREATE TABLE tbl_folhaDeObraLinha
 (
@@ -110,7 +103,6 @@ CREATE TABLE tbl_folhaDeObraLinha
     FOREIGN KEY(folhaDeObraFK) REFERENCES tbl_folhasDeObra(folhaDeObraID)
 );
 
--- fica
 DROP TABLE IF EXISTS tbl_tecnicosFolhasDeObra;
 CREATE TABLE tbl_tecnicosFolhasDeObra
 (
@@ -122,7 +114,6 @@ CREATE TABLE tbl_tecnicosFolhasDeObra
     FOREIGN KEY(folhaDeObraFK) REFERENCES tbl_folhasDeObra(folhaDeObraID)
 );
 
--- fica
 DROP TABLE IF EXISTS tbl_registoTecnicos;
 CREATE TABLE tbl_registoTecnicos
 (
@@ -134,7 +125,6 @@ CREATE TABLE tbl_registoTecnicos
     FOREIGN KEY(tecnicoFK) REFERENCES tbl_tecnicos(tecnicoID)
 );
 
--- fica
 DROP TABLE IF EXISTS tbl_fichasTecnicas;
 CREATE TABLE tbl_fichasTecnicas
 (

@@ -7,7 +7,7 @@ class About extends Component {
     return (
       <div>
         <h2 className="container">Sobre</h2>
-        <h6 className="container">No âmbito da unidade curricular Projeto de Sistemas de Informação, do 2º Semestre, do 3º ano, inserida na licenciatura em Engenharia Informática, foi requesitada uma aplicação para o Laboratório de Conservação e Restauro do Instituto Politécnico de Tomar.</h6>
+        <h6 className="container">No âmbito da unidade curricular Projeto de Sistemas de Informação, do 2º Semestre, do 3º ano, inserida na licenciatura em Engenharia Informática, foi requisitada uma aplicação para o Laboratório de Conservação e Restauro do Instituto Politécnico de Tomar.</h6>
         <h6 className="container">Esta aplicação tem o intuito de gerir todo o trabalho realizado no Laboratório de Conservação e Restauro</h6>
         <br/>
         <div align="center"> 

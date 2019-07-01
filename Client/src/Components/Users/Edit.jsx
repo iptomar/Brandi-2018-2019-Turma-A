@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import AlertMsg from "../Globais/AlertMsg";
+import AlertMsg1 from "../Globais/AlertMsg";
+import AlertMsg2 from "../Globais/AlertMsg";
+
 var jwt = require('jsonwebtoken');
 
 
@@ -112,7 +114,7 @@ class Edit extends Component {
     if (dataUsers.email === "") dataUsers.email = document.getElementById("email").placeholder;
 
     //Dados do técnico
-    if (this.state.dataTecnicos !== undefined && decoded.role==="Admin") {
+    if (this.state.dataTecnicos !== undefined && decoded.role === "Admin") {
       dataTecn = {
         nome: document.getElementById('nomeTecnico').value,
         habilitacoes: document.getElementById('habilitacoes').value,
@@ -141,7 +143,7 @@ class Edit extends Component {
 
       });
     }
-    if (decoded.role === "Admin" ) {
+    if (decoded.role === "Admin") {
       //Enviar pedidos pata alterar os dados do utilizador
       response = await fetch(`/api/users/${this.props.id}/edit`,
         {
@@ -172,6 +174,7 @@ class Edit extends Component {
     //Aguardar API
     await response.json().then(resp => {
       let status = resp.status;
+      console.log(status);
       switch (status) {
         case 'Updated':
           if (decoded.role === "Admin") {
@@ -182,7 +185,13 @@ class Edit extends Component {
             window.location = "/perfil";
             break;
           }
-
+        case 'NotUpdated':
+          this.setState({
+            alertText: resp.resposta,
+            alertisNotVisible: false,
+            alertColor: "warning"
+          });
+          break;
         default:
           console.log("A API ESTÁ A ARDER: " + status);
       }
@@ -242,12 +251,12 @@ class Edit extends Component {
             <div className="py-3 text-center">
               <h2>Utilizador {this.state.data.login}</h2>
               {jwt.decode(sessionStorage.getItem('token')).role === "Admin" ? (
-              <button data-toggle="modal" data-target="#exampleModal" className="btn btn-danger" type="submit">
-                <i className="fas fa-key" /> Alterar Password
+                <button data-toggle="modal" data-target="#exampleModal" className="btn btn-danger" type="submit">
+                  <i className="fas fa-key" /> Alterar Password
         </button>
-              ):(
-                <button></button>
-              )}
+              ) : (
+                  <button></button>
+                )}
             </div>
 
             <div className="row">
@@ -365,7 +374,7 @@ class Edit extends Component {
                                 />
                               </div>
                             </div>
-                            <AlertMsg
+                            <AlertMsg1
                               text={this.state.alertText}
                               isNotVisible={this.state.alertisNotVisible}
                               alertColor={this.state.alertColor}
@@ -380,6 +389,11 @@ class Edit extends Component {
                     </div>
                   </div>
                 </div>
+                <AlertMsg2
+                  text={this.state.alertText}
+                  isNotVisible={this.state.alertisNotVisible}
+                  alertColor={this.state.alertColor}
+                />
                 <button onClick={this.editaDados} className="btn btn-success btn-lg btn-block mb-5" type="submit"> Editar </button>
               </div>
             </div>

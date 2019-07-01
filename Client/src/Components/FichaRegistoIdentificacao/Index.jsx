@@ -22,6 +22,7 @@ class Index extends Component {
     this.changePage = this.changePage.bind(this);
     this.createPagination = this.createPagination.bind(this);
     this.stateImage = this.stateImage.bind(this);
+    this.pesquisa = this.pesquisa.bind(this);
     this.stateImage();
   }
 
@@ -56,8 +57,14 @@ class Index extends Component {
   }
 
   async getFichasRI(nPage) {
+    let pesq;
+    try {
+      pesq = document.querySelector('#pesquisaBar').value;
+    } catch (error) {
+      pesq = ""; 
+    }
     //Enviar pedido
-    const response = await fetch("/api/fichaRegistoIdentificacao?pagenumber="+nPage, {
+    const response = await fetch("/api/fichaRegistoIdentificacao?pagenumber="+nPage+"&pesquisa="+pesq, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -101,12 +108,18 @@ class Index extends Component {
     //Aguardar API
     response.then(resp => resp.blob())
     .then(blob =>{
-        let reader = new FileReader();
-        reader.onload = function () {
+      let reader = new FileReader();
+      reader.onload = function () {
+        try {
           document.getElementById(id+"img").src = reader.result.toString();
-        }
-        reader.readAsDataURL(blob);
+        } catch (error) {}  
+      }
+      reader.readAsDataURL(blob);          
     });
+  }
+
+  pesquisa(){
+      this.getFichasRI(1);
   }
 
   render() {
@@ -135,7 +148,10 @@ class Index extends Component {
               <LoadingAnimation />
               :
               <div className="row">
-                {!this.state.list.length !== 0 ? (
+                <div className="input-group mb-3">
+                  <input id="pesquisaBar" onChange={this.pesquisa} type="text" className="form-control" placeholder="Pesquisa" aria-label="Recipient's username" aria-describedby="button-addon2"/>
+                </div>
+                {this.state.list.length !== 0 ? (
                   this.state.list.map(function (obj) {
                     let href = "/fichaRI/" + obj.fichaRegistoID + "/detalhes";
                     return (
@@ -154,7 +170,7 @@ class Index extends Component {
                     );
                   })
                 ) : (
-                    <div>
+                    <div style={{margin:"10px"}}>
                       <h5>Ainda não existe nenhuma ficha técnica</h5>
                       <h6>
                         <a href="/fichaRI/criar">Adicione</a> já uma ficha

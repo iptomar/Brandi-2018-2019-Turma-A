@@ -109,6 +109,8 @@ class Details extends Component {
                     />
                   </div>
                 </div>
+                {this.state.dataTecnico !== undefined ? (                
+                <div>
                 <div className="row">
                   <div className="col-md-12 mb-3">
                     <label>Nome</label>
@@ -145,6 +147,10 @@ class Details extends Component {
                     />
                   </div>
                 </div>
+                </div>
+                ):(
+                  <div></div>
+                )}
                 <label>Tipo de utilizador</label>
                 <select id="DDLRoles" className="form-control" disabled>
                   <option className="dropdown-item">

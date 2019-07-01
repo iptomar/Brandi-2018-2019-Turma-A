@@ -49,7 +49,7 @@ exports.createFichaTecnicaRoute = async (app, bd) => {
       //existe token/sessao
       else {
         //admin
-        if (token.roleFK === 1) {
+        if (token) {
           var imgGrafico = "";
           var imgArray = [];
           if (req.files) {

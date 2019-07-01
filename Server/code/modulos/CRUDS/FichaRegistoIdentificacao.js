@@ -7,14 +7,20 @@ var fs = require("file-system");
  * Método que devolve todas as fichas RegistoIdentificacao
  * @param bd - base de dados para fazer query
  */
-exports.getAllFichasRegistoIdentificacao = async (bd, limit, pagenumber) => {
+exports.getAllFichasRegistoIdentificacao = async (
+  bd,
+  limit,
+  pagenumber,
+  pesquisa
+) => {
+  let resposta_bd;
   let resultadofinal = { stat: 1, resposta: {} };
-
-  let resposta_bd = await bd.query(
-    "Select * from tbl_fichaRegistoIdentificacao where visible = true limit ?,?",
+  resposta_bd = await bd.query(
+    "Select * from tbl_fichaRegistoIdentificacao where visible = true  and designacao LIKE " +
+      pesquisa +
+      " limit ?,?",
     [limit, pagenumber]
   );
-
   if (resposta_bd.stat === 0) {
     resultadofinal.resposta = resposta_bd.resposta;
     resultadofinal.stat = 0;

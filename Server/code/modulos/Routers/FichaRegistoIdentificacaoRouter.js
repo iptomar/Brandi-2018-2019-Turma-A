@@ -4,15 +4,15 @@ var multer = require("multer");
 var mkdirp = require("mkdirp");
 const path = require("path");
 
-mkdirp("../images/registoIdentificacao", function (err) {
+mkdirp("../images/registoIdentificacao", function(err) {
   if (err) console.error(err);
 });
 
 var storage = multer.diskStorage({
-  destination: function (req, file, callback) {
+  destination: function(req, file, callback) {
     callback(null, "../images/registoIdentificacao");
   },
-  filename: function (req, file, callback) {
+  filename: function(req, file, callback) {
     callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
   }
 });
@@ -30,6 +30,7 @@ exports.getTodasFichasRegistoIdentificacaoRoute = async (app, bd) => {
       limit = req.query.pagenumber * numpage - 12;
       numpage = req.query.pagenumber - 0;
     }
+    let pesquisa = "'%" + req.query.pesquisa + "%'";
     //query para saber o numero de paginas que existem
     let totalpagesquery = await bd.query(
       "select count(*) as total from tbl_fichaRegistoIdentificacao where visible=1"
@@ -41,9 +42,9 @@ exports.getTodasFichasRegistoIdentificacaoRoute = async (app, bd) => {
     let resposta_bd = await fichaRegistoIdentificacao.getAllFichasRegistoIdentificacao(
       bd,
       limit,
-      numpage
+      numpage,
+      pesquisa
     );
-
     let code = 200;
     token = await getToken.getToken(req);
     if (token === null) {

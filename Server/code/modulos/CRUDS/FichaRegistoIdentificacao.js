@@ -351,7 +351,7 @@ exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
       );
     } else {
       let imagemVelha = await bd.query(
-        "Select imagem from tbl_ficharegistoidentificacao where fichaRegistoID = ?",
+        "Select imagem from tbl_fichaRegistoIdentificacao where fichaRegistoID = ?",
         [dados.fichaRegistoID]
       );
       imagemVelha = imagemVelha.resposta[0].imagem;

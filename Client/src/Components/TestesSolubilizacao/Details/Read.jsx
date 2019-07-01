@@ -138,7 +138,7 @@ class Read extends Component {
       for (let i = 0; i < textArea.length; i++) {
         textArea.get(i).value = "";
       }
-      let a = document.querySelector("#tabela").children[1].childElementCount+2;
+      let a = document.querySelector("#tabela").children[1].childElementCount;
       for(let i=0; i<radio.length; i++){
         if(k != null) radio.get(i).setAttribute('name',radio.get(i).getAttribute("name").substring(0,18)+a); 
         else radio.get(i).setAttribute('name',radio.get(i).getAttribute("name").substring(0,18)+a.toString());

@@ -25,16 +25,36 @@ class Pag10 extends Component {
         //inserir nova linha
         var row = table.insertRow(-1);
         //parametros textArea
-        for (var i = 0; i < 3; i++) {
-            var novaCelula = row.insertCell(i);
+            // Coluna 1
+            var novaCelula = row.insertCell(0);
             var param = document.createElement('textarea');
             param.className = "form-control";
             param.setAttribute("type", "text");
             param.style.resize = "none";
             param.setAttribute("rows", "2");
+            param.placeholder = "Constituição da Equipa / Nome do Técnico";
             param.required = true;
             novaCelula.appendChild(param);
-        }
+
+            // Coluna 2
+            novaCelula = row.insertCell(1);
+            var param = document.createElement('textarea');
+            param.className = "form-control";
+            param.setAttribute("type", "text");
+            param.style.resize = "none";
+            param.setAttribute("rows", "2");
+            param.placeholder = "Funções Desempenhadas";
+            param.required = true;
+            novaCelula.appendChild(param);
+
+            // Coluna 3
+            novaCelula = row.insertCell(2);
+            param = document.createElement('textarea');
+            param.className = "form-control input";
+            param.style.resize = "none";
+            param.setAttribute("rows", "2");
+            param.placeholder = "Habilitações Escolares / Nível Profissional (1-8)";
+            novaCelula.appendChild(param);
 
     }
 

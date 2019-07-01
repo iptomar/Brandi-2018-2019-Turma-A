@@ -58,6 +58,7 @@ public class TestarVisualizacao {
     //
     @Test
     public void TestVisualizacao() throws InterruptedException {
+        Thread.sleep(2000);
         WebElement ficha = driver.findElement(By.className("card"));
         ficha.click();
         Thread.sleep(2000);

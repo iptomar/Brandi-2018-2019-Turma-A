@@ -30,6 +30,7 @@ public class TesteCriarUser {
     
     @BeforeClass
     public static void setUpClass() throws InterruptedException {
+        driver.manage().window().maximize();
         driver.get("brandi.ipt.pt:81");
         WebElement userField = driver.findElement(By.id("user"));
         userField.sendKeys("admin");

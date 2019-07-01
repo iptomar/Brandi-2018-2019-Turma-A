@@ -201,7 +201,7 @@ exports.updatefichaRegistoIdentificacaoRoute = async (app, bd) => {
       else {
         //se tiver role
         if (token.roleFK) {
-          var imagem = "empty";
+          var imagem = "";
           if (req.file) {
             imagem = req.file.path;
           }

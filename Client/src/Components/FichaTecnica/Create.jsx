@@ -792,7 +792,7 @@ class Create extends Component {
   //Submeter o form da criação da página
   handleSubmit = async e => {
     e.preventDefault();
-    if(this.state.files.length == 0){
+    if(this.state.files.length === 0){
       this.setState({
         alertText: "Deverá inserir pelo menos uma imagem no campo 'Fotografia(s) do objecto'",
         alertisNotVisible: false,
@@ -802,7 +802,7 @@ class Create extends Component {
       window.scrollTo(0,0);
       return null;
     }
-    if(this.state.filesG.length == 0){
+    if(this.state.filesG.length === 0){
       this.setState({
         alertText: "Deverá inserir pelo menos uma imagem no campo 'Gráfico'",
         alertisNotVisible: false,

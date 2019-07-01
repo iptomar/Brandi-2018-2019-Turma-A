@@ -320,7 +320,7 @@ exports.updateFichaRegistoIdentificacao = async (bd, dados) => {
       dados.dataConclusao = null;
     }
 
-    if (dados.imagem == "empty") {
+    if (dados.imagem == "") {
       resposta_bd = await bd.query(
         "update tbl_fichaRegistoIdentificacao set visible=?,designacao=?,processoLCRM=?,processoCEARC=?,dataEntrada =?, dataConclusao=?, dataEntrega=?, coordenacao =?, direcaoTecnica =?, tipologia =?, analogias =?, dimensoes =?, outrasDimensoes =?, breveDescricao =?, conclusoes =?, oficina =?, datacao =?, localOrigem =?, superCategorias =?, categorias =?, subCategorias =?, interessadoFK =? where fichaRegistoID = ? ",
         [

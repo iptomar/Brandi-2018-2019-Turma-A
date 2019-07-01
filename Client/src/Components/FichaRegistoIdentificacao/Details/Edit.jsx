@@ -201,7 +201,7 @@ class Edit extends Component {
 
     if(this.state.files.length!==0){
       formData.delete("imagem");
-      formData.append("imagem", this.state.files);
+      formData.append("imagem", this.state.files[0]);
     }
 
     formData.append("tipologia", this.state.data.tipologia);

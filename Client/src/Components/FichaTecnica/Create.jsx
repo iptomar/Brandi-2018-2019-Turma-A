@@ -32,24 +32,25 @@ class Create extends Component {
     this.fetchAndSetData = this.fetchAndSetData.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.refreshPage = this.refreshPage.bind(this);
+    this.changeStatus = this.changeStatus.bind(this);
   }
 
   componentDidMount() {
-    //Verifica se esta página é usada para verificar os detalhes de uma ficha técnica
-    if (window.location.href.includes("/detalhes") && window.location.href.includes("/fichaTecnica/")) {
-      //Coloca todas as textarea e input com readonly
-      $('input, textarea').attr('readonly', 'readonly');
-      //Ocultar input do tipo checkbox
-      $('input[type=checkbox], input[type=radio]').hide();
-      //Ocultar os componentes FileUpload
-      $('.custom-file').hide();
-      $('.btn.btn-dark').hide();
-      //Atualiza todos os valores necessários para apresentação da ficha técnica
-      this.fetchAndSetData(this.state.id);
-      this.modalImage();
-    }else{
+    // //Verifica se esta página é usada para verificar os detalhes de uma ficha técnica
+    // if (window.location.href.includes("/detalhes") && window.location.href.includes("/fichaTecnica/")) {
+    //   //Coloca todas as textarea e input com readonly
+    //   $('input, textarea').attr('readonly', 'readonly');
+    //   //Ocultar input do tipo checkbox
+    //   $('input[type=checkbox], input[type=radio]').hide();
+    //   //Ocultar os componentes FileUpload
+    //   $('.custom-file').hide();
+    //   $('.btn.btn-dark').hide();
+    //   //Atualiza todos os valores necessários para apresentação da ficha técnica
+    //   this.fetchAndSetData(this.state.id);
+    //   this.modalImage();
+    // }else{
       this.openAccordion();
-    }
+    // }
     this.queryState(this.props.query);
   }
 
@@ -782,11 +783,35 @@ class Create extends Component {
   getDataG(data) {
     this.setState({ filesG: data });
   }
-
+  
+  //Altera o estado conforme o Alert
+  changeStatus(){
+    this.setState({ alertisNotVisible: true });
+  }
 
   //Submeter o form da criação da página
   handleSubmit = async e => {
     e.preventDefault();
+    if(this.state.files.length == 0){
+      this.setState({
+        alertText: "Deverá inserir pelo menos uma imagem no campo 'Fotografia(s) do objecto'",
+        alertisNotVisible: false,
+        alertColor: "danger"
+      });
+      document.querySelector('#collO').click();
+      window.scrollTo(0,0);
+      return null;
+    }
+    if(this.state.filesG.length == 0){
+      this.setState({
+        alertText: "Deverá inserir pelo menos uma imagem no campo 'Gráfico'",
+        alertisNotVisible: false,
+        alertColor: "danger"
+      });
+      document.querySelector('#collO').click();
+      window.scrollTo(0,0);
+      return null;
+    }
     //Form
     let formData = new FormData();
     //Pag 1
@@ -1002,6 +1027,7 @@ class Create extends Component {
           teste.forEach(element => {
             if(element.contains(e.target)){
               element.parentElement.parentElement.childNodes[0].childNodes[0].click();
+              console.log(element.parentElement.parentElement.childNodes[0].childNodes[0]);
             }
           });
         } catch (error) {
@@ -1019,22 +1045,12 @@ class Create extends Component {
             <div className="col-md-10 py-3 text-center">
               <h2>Ficha Técnica</h2>
             </div>
-            <div className="col-md-2" >
-              {window.location.href.includes("/detalhes") && window.location.href.includes("/fichaTecnica/") ?
-                <div>
-                  <button id="btEditar" className="btn btn-success btn-lg btn-block mb-5" type="button" onClick={this.changeToEdit}>Editar</button>
-                  <button id="btGuardar" className="btn btn-success btn-lg btn-block" type="button" style={{ display: "none" }} onClick={this.submitEdit}>Guardar</button>
-                  <button id="btVoltar" className="btn btn-success btn-lg btn-block mb-5" type="button" style={{ display: "none" }} onClick={this.refreshPage}>Voltar</button>
-                </div> :
-                <span></span>
-              }
-            </div>
           </div>
-          <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} />
+          <AlertMsg text={this.state.alertText} isNotVisible={this.state.alertisNotVisible} alertColor={this.state.alertColor} status={this.changeStatus}/>
           <div className="accordion" id="accordionExample">
             <div className="card bg-light" style={{ cursor: "pointer" }}>
               <div className="card-header" id="headingOne">
-                <h2 className="mb-0 text-center" data-toggle="collapse" data-target="#collapseOne">
+                <h2 className="mb-0 text-center" id="collO" data-toggle="collapse" data-target="#collapseOne">
                   <button className="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     Página #1
                     </button>
@@ -1200,12 +1216,7 @@ class Create extends Component {
               <img className="modal-content" alt="" id="img01" style={{margin: "auto", display: "block", width: "80%", maxWidth: "700px"}}/>
             </div>
           </div>
-
-          {window.location.href.includes("/detalhes") && window.location.href.includes("/fichaTecnica/") ?
-            <span></span>
-            :
             <button className="btn btn-success btn-lg btn-block mb-5" type="submit">Criar</button>
-          }
         </form>
       </div>
     );

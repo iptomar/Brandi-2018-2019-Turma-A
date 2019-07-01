@@ -154,27 +154,26 @@
 					}
 				],
 				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
+					"mode": "formdata",
+					"formdata": [
 						{
 							"key": "visible",
-							"value": "true",
-							"type": "text",
-							"disabled": true
+							"value": "1",
+							"type": "text"
 						},
 						{
 							"key": "designacao",
-							"value": "designacaoTeste",
+							"value": "designacaoTesteNova",
 							"type": "text"
 						},
 						{
 							"key": "processoLCRM",
-							"value": "9999",
+							"value": "91999",
 							"type": "text"
 						},
 						{
 							"key": "processoCEARC",
-							"value": "9999",
+							"value": "99199",
 							"type": "text"
 						},
 						{
@@ -216,6 +215,77 @@
 							"key": "tecnicosFK",
 							"value": "1",
 							"type": "text"
+						},
+						{
+							"key": "imagem",
+							"type": "file",
+							"src": "/C:/Users/Leandro/Pictures/_89716241_thinkstockphotos-523060154.jpg"
+						},
+						{
+							"key": "tipologia",
+							"value": "teste",
+							"type": "text"
+						},
+						{
+							"key": "analogias",
+							"value": "teste",
+							"type": "text"
+						},
+						{
+							"key": "dimensoes",
+							"value": "teste",
+							"type": "text"
+						},
+						{
+							"key": "outrasDimensoes",
+							"value": "teste",
+							"type": "text"
+						},
+						{
+							"key": "breveDescricao",
+							"value": "teste",
+							"type": "text"
+						},
+						{
+							"key": "conclusoes",
+							"value": "teste",
+							"type": "text"
+						},
+						{
+							"key": "oficina",
+							"value": "teste",
+							"type": "text"
+						},
+						{
+							"key": "datacao",
+							"value": "teste",
+							"type": "text"
+						},
+						{
+							"key": "localOrigem",
+							"value": "teste",
+							"type": "text"
+						},
+						{
+							"key": "superCategorias",
+							"value": "teste",
+							"type": "text"
+						},
+						{
+							"key": "categorias",
+							"value": "teste",
+							"type": "text"
+						},
+						{
+							"key": "subCategorias",
+							"value": "teste",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"type": "file",
+							"src": [],
+							"disabled": true
 						}
 					]
 				},

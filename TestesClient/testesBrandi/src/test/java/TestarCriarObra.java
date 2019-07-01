@@ -5,6 +5,12 @@
  */
 
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,6 +35,7 @@ public class TestarCriarObra {
 
     @BeforeClass
     public static void setUpClass() throws InterruptedException {
+        driver.manage().window().maximize();
         driver.get("brandi.ipt.pt:81");
         WebElement userField = driver.findElement(By.id("user"));
         userField.sendKeys("admin");
@@ -56,11 +63,11 @@ public class TestarCriarObra {
     // The methods must be annotated with annotation @Test. For example:
     //
     @Test
-    public void testarCriarObra() throws InterruptedException {
+    public void testarCriarObra() throws InterruptedException, AWTException, IOException {
         driver.get("brandi.ipt.pt:81");
         WebElement btnAddFicha = driver.findElement(By.className("btn-success"));
         btnAddFicha.click();
-        
+
         WebElement dObjeto = driver.findElement(By.id("dObjeto"));
         dObjeto.sendKeys("Reliquia");
         WebElement procLCRM = driver.findElement(By.id("procLCRM"));
@@ -79,19 +86,41 @@ public class TestarCriarObra {
         dirTecn.sendKeys("someone");
         WebElement tecnicosCheckbox = driver.findElement(By.id("tecnicosCheckbox"));
         tecnicosCheckbox.click();
-        WebElement propDonObra = driver.findElement(By.id("propDonObra"));
-        propDonObra.sendKeys("someone");
-        WebElement contact = driver.findElement(By.id("contact"));
-        contact.sendKeys("912345678");
-        WebElement endPostLocal = driver.findElement(By.id("endPostLocal"));
+        WebElement tipologias = driver.findElement(By.id("tipologia"));
+        tipologias.sendKeys("IPT");
+        WebElement analogias = driver.findElement(By.id("analogias"));
+        analogias.sendKeys("IPT");
+        WebElement endPostLocal = driver.findElement(By.id("dimensoes"));
         endPostLocal.sendKeys("IPT");
+        WebElement outrasDimensoes = driver.findElement(By.id("outrasDimensoes"));
+        outrasDimensoes.sendKeys("IPT");
+        WebElement breveDescricao = driver.findElement(By.id("breveDescricao"));
+        breveDescricao.sendKeys("IPT");
+        WebElement conclusoes = driver.findElement(By.id("conclusoes"));
+        conclusoes.sendKeys("IPT");
+        WebElement oficina = driver.findElement(By.id("oficina"));
+        oficina.sendKeys("IPT");
+        WebElement datacao = driver.findElement(By.id("datacao"));
+        datacao.sendKeys("IPT");
+        WebElement localOrigem = driver.findElement(By.id("localOrigem"));
+        localOrigem.sendKeys("IPT");
+        WebElement superCategorias = driver.findElement(By.id("superCategorias"));
+        superCategorias.sendKeys("IPT");
+        WebElement categorias = driver.findElement(By.id("categorias"));
+        categorias.sendKeys("IPT");
+        WebElement subCategorias = driver.findElement(By.id("subCategorias"));
+        subCategorias.sendKeys("IPT");
         
+        Thread.sleep(2000);
+
         WebElement chooseFoto = driver.findElement(By.className("custom-file-input"));
         chooseFoto.click();
-//        chooseFoto.sendKeys("C:\\Brandi-2018-2019-Turma-A\\TestesClient\\testesBrandi\\img\\img2.jepg");
+        
+        
         
         WebElement btnCriar = driver.findElement(By.className("btn-success"));
         btnCriar.click();
+
         
     }
     

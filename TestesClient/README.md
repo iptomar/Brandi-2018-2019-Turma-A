@@ -40,10 +40,6 @@ Testes Concluidos:
 	- Teste de Eliminação de Testes
 		Resultado: (Sucesso)
 
-Teste previstos/por Concluir:
-	
-	-
-	-	
-	-
+
 
 

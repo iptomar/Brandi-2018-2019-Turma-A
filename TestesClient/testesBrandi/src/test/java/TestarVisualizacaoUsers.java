@@ -57,7 +57,7 @@ public class TestarVisualizacaoUsers {
     @Test
     public void TestVisualizacaoUsers() throws InterruptedException {
         Thread.sleep(1000);
-//Selecionar a opção "utilizadores"
+        //Selecionar a opção "utilizadores"
         List<WebElement> users =  driver.findElements(By.className("dropdown-toggle"));
         users.get(2).click();
         Thread.sleep(2000);

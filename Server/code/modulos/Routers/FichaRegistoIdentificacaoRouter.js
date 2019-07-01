@@ -30,7 +30,10 @@ exports.getTodasFichasRegistoIdentificacaoRoute = async (app, bd) => {
       limit = req.query.pagenumber * numpage - 12;
       numpage = req.query.pagenumber - 0;
     }
-    let pesquisa = "'%" + req.query.pesquisa + "%'";
+    let pesquisa = "'%%'";
+    if (req.query.pesquisa !== undefined) {
+      pesquisa = "'%" + req.query.pesquisa + "%'";
+    }
     //query para saber o numero de paginas que existem
     let totalpagesquery = await bd.query(
       "select count(*) as total from tbl_fichaRegistoIdentificacao where visible=1"

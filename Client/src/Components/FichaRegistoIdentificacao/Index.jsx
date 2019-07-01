@@ -27,9 +27,9 @@ class Index extends Component {
   }
 
   stateImage(num){
-    var min = 12*(this.state.atualPage-1)+1;
-    var max = 12*this.state.atualPage - (12-num);
-    for(var i = min; i <= max; i++ ) this.getImage(i);
+    var min = 12*(this.state.atualPage-1);
+    var max = 12*this.state.atualPage - (12-num)-1;
+    for(var i = min; i <= max; i++ ) this.getImage(this.state.list[i].fichaRegistoID);
   }
 
   queryState(query) {
@@ -74,8 +74,8 @@ class Index extends Component {
     //Aguardar API
     await response.json().then(resp => {
       this.setState({ list: resp.resposta, loading: false, atualPage: nPage, numPage: Math.ceil(response.headers.get('totalpages') / 12)});
-      this.stateImage(this.state.list.length);
     });
+    this.stateImage(this.state.list.length);
   }
 
   async changePage(e){
@@ -98,7 +98,6 @@ class Index extends Component {
   }
 
   getImage(id) {
-    // alert("A CARREGAR A IMAGEM "+ id);
     const response = fetch("/api/fichaRegistoIdentificacao/imagem/"+id, {
       method: "GET",
       headers: {

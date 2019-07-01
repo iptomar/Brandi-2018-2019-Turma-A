@@ -105,6 +105,7 @@ exports.updateTestesSolventes = async (bd, dados) => {
 
     let array2 = [];
     let tabela = dados[1];
+    
     // adicionar os campos da tabela da página
     let auxiliar = "";
     for (let i = 0; i < tabela.length; i++) {
@@ -115,13 +116,14 @@ exports.updateTestesSolventes = async (bd, dados) => {
       if (
         tabela[i].solventeMistura &&
         tabela[i].grauEficacia &&
-        tabela[i].obsevacoes
+        tabela[i].observacoes
       ) {
         array2.push(tabela[i].solventeMistura);
         array2.push(tabela[i].grauEficacia);
-        array2.push(tabela[i].obsevacoes);
+        array2.push(tabela[i].observacoes);
         array2.push(dados.id);
       } else {
+        console.log(tabela[i])
         return resultadofinal;
       }
     }
@@ -130,7 +132,7 @@ exports.updateTestesSolventes = async (bd, dados) => {
       "Delete from tbl_testesSolventesComplementar where testeSolventFK = ?",
       dados.id
     );
-
+    console.log(array2);
     // inserir os novos dados
     resposta_bd2 = await bd.query(
       "Insert into tbl_testesSolventesComplementar (solvente,grauDeEficacia,observacoes,testeSolventFK) values " +

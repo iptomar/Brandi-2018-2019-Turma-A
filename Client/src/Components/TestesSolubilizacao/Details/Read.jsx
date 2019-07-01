@@ -140,8 +140,8 @@ class Read extends Component {
       }
       let a = document.querySelector("#tabela").children[1].childElementCount+2;
       for(let i=0; i<radio.length; i++){
-        if(k != null) radio.get(i).setAttribute('name',radio.get(i).getAttribute("name").substring(0,18)+k); 
-        else radio.get(i).setAttribute('name',radio.get(i).getAttribute("name").substring(0,18)+a);
+        if(k != null) radio.get(i).setAttribute('name',radio.get(i).getAttribute("name").substring(0,18)+a); 
+        else radio.get(i).setAttribute('name',radio.get(i).getAttribute("name").substring(0,18)+a.toString());
           if(nova){
             radio.get(i).disabled = true;
           }
